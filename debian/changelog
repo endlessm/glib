@@ -1,3 +1,11 @@
+glib2.0 (2.4.5-2) unstable; urgency=low
+
+  * debian/patches/000_glib-link.patch:
+    - patch from Jurij Smakov <jurij@wooyd.org> to link with all the libs 
+      (Closes: #263130).
+
+ -- Sebastien Bacher <seb128@debian.org>  Tue,  3 Aug 2004 18:03:53 +0200
+
 glib2.0 (2.4.5-1) unstable; urgency=low
 
   * New upstream release.

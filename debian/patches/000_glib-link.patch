@@ -1,0 +1,14 @@
+diff -Nur glib-2.4.5.orig/tests/Makefile.in glib-2.4.5/tests/Makefile.in
+--- glib-2.4.5.orig/tests/Makefile.in	2004-07-30 21:04:44.000000000 +0200
++++ glib-2.4.5/tests/Makefile.in	2004-08-04 10:01:10.000000000 +0200
+@@ -234,8 +234,8 @@
+ libgmodule = $(top_builddir)/gmodule/libgmodule-2.0.la
+ libgobject = $(top_builddir)/gobject/libgobject-2.0.la
+ 
+-@PLATFORM_WIN32_TRUE@libadd_libgmodule = $(libgmodule)
+-@PLATFORM_WIN32_TRUE@libadd_libglib = $(libglib)
++libadd_libgmodule = $(libgmodule)
++libadd_libglib = $(libglib)
+ @PLATFORM_WIN32_TRUE@no_undefined = -no-undefined
+ 
+ @PLATFORM_WIN32_TRUE@module_test_exp = module-test.exp
