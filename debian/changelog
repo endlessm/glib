@@ -1,3 +1,9 @@
+glib2.0 (2.4.6-1) unstable; urgency=medium
+
+  * New upstream bugfix release.
+
+ -- J.H.M. Dassen (Ray) <jdassen@debian.org>  Sun, 15 Aug 2004 18:34:27 +0200
+
 glib2.0 (2.4.5-2) unstable; urgency=low
 
   * debian/patches/000_glib-link.patch:
