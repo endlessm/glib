@@ -103,7 +103,8 @@ $(STAMP_DIR)/configure-udeb-stamp:
 
 	# Add here commands to configure the package.
 	cd $(BUILD_UDEB_DIR) && \
-	./configure	--host=$(DEB_HOST_GNU_TYPE) \
+	env LDFLAGS="$(LDFLAGS)" ./configure \
+			--host=$(DEB_HOST_GNU_TYPE) \
 			--build=$(DEB_BUILD_GNU_TYPE) \
 			--prefix=/usr \
 			--mandir=\$${prefix}/share/man \
