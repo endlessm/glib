@@ -1,3 +1,11 @@
+glib2.0 (2.4.6-3) unstable; urgency=medium
+
+  Colin Watson <cjwatson@debian.org>: (Closes: #274053)
+  * [debian/rules] binary-arch depends on binary-arch-udeb.
+  * [debian/rules] Strip udeb!
+
+ -- J.H.M. Dassen (Ray) <jdassen@debian.org>  Wed, 29 Sep 2004 19:39:22 +0200
+
 glib2.0 (2.4.6-2) unstable; urgency=medium
 
   * [debian/patches/001_translations.patch] Updated translations from CVS.
