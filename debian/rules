@@ -46,7 +46,7 @@ gtkver=2.0
 shver=2.4.6
 libpath=$(CURDIR)/$(BUILD_DEB_DIR)/glib/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gmodule/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gobject/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gthread/.libs
 udeblibpath=$(CURDIR)/$(BUILD_UDEB_DIR)/glib/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gmodule/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gobject/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gthread/.libs
-udebname=libglib$(apiver)-udeb_$(debversion)_$(shell dpkg-architecture -qDEB_BUILD_GNU_CPU).udeb
+udebname=libglib$(apiver)-udeb_$(debversion)_$(shell dpkg-architecture -qDEB_BUILD_ARCH).udeb
 
 _echo_cfiles = for f in ${1}; do if [ -f $$f ]; then echo $$f; fi; done
 cfiles := $(shell $(call _echo_cfiles, $(wildcard debian/libglib$(apiver)-@SONAME@.*)))
