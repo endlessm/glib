@@ -1,3 +1,12 @@
+glib2.0 (2.4.6-2) unstable; urgency=medium
+
+  * [debian/patches/001_translations.patch] Updated translations from CVS.
+  * [debian/rules] Tightened "shver" to tighten shlibs, as some
+    incompatibilities with older versions turned up with gconf.
+    (Closes: #265659)
+
+ -- J.H.M. Dassen (Ray) <jdassen@debian.org>  Tue, 24 Aug 2004 18:50:04 +0200
+
 glib2.0 (2.4.6-1) unstable; urgency=medium
 
   * New upstream bugfix release.
