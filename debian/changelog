@@ -1,3 +1,10 @@
+glib2.0 (2.4.1-2) unstable; urgency=low
+
+  * Upload in unstable.
+  * GNOME Team Upload.
+
+ -- Sebastien Bacher <seb128@debian.org>  Sat, 22 May 2004 14:18:23 +0200
+
 glib2.0 (2.4.1-1) experimental; urgency=low
 
   * New upstream release.
