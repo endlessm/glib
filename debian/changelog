@@ -1,3 +1,9 @@
+glib2.0 (2.4.8-1) unstable; urgency=medium
+
+  * New upstream bugfix release.
+
+ -- J.H.M. Dassen (Ray) <jdassen@debian.org>  Sat,  4 Dec 2004 18:52:44 +0100
+
 glib2.0 (2.4.7-1) unstable; urgency=medium
 
   * New upstream bugfix release.
