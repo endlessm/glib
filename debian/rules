@@ -191,13 +191,6 @@ install-udeb: build-udeb install-test
 	-find $(CURDIR)/debian/ -type d -empty ! -regex '.*/var.*' -prune | xargs rmdir -p 2>&1 > /dev/null
 
 install: install-deb
-	# for -dbg
-	mkdir -p $(CURDIR)/debian/libglib$(apiver)-$(soname)/usr/lib/debug
-	for l in `find $(CURDIR)/debian/libglib$(apiver)-$(soname)/usr/lib -name '*.so*'`; do \
-		cp -vdf $$l \
-			$(CURDIR)/debian/libglib$(apiver)-$(soname)/usr/lib/debug/; \
-	done
-
 	dh_movefiles --sourcedir=debian/libglib$(apiver)-$(soname) -Nlibglib$(apiver)-udeb
 	-find $(CURDIR)/debian/ -type d -empty | xargs rmdir -p 2>&1 > /dev/null
 
@@ -240,11 +233,11 @@ binary-arch: build install binary-arch-udeb
 
 	dh_installdocs -a
 
-	rm -rf $(CURDIR)/debian/libglib$(apiver)-dbg/usr/share/doc/libglib$(apiver)-dbg
+	rm -rf $(CURDIR)/debian/libglib$(apiver)-$(soname)-dbg/usr/share/doc/libglib$(apiver)-$(soname)-dbg
 	rm -rf $(CURDIR)/debian/libglib$(apiver)-dev/usr/share/doc/libglib$(apiver)-dev
-	dh_link -plibglib$(apiver)-dbg \
+	dh_link -plibglib$(apiver)-$(soname)-dbg \
 		usr/share/doc/libglib$(apiver)-$(soname) \
-		usr/share/doc/libglib$(apiver)-dbg
+		usr/share/doc/libglib$(apiver)-$(soname)-dbg
 	dh_link -plibglib$(apiver)-dev \
 		usr/share/doc/libglib$(apiver)-$(soname) \
 		usr/share/doc/libglib$(apiver)-dev
@@ -254,10 +247,10 @@ binary-arch: build install binary-arch-udeb
 	dh_installman -plibglib$(apiver)-dev
 	dh_installinfo -a
 	dh_installchangelogs -a $(BUILD_DIR)/ChangeLog
-	dh_strip -a -Nlibglib$(apiver)-dbg
+	dh_strip -a --dbg-package=libglib$(apiver)-$(soname)
 	dh_compress -a
 	dh_fixperms -a
-	dh_makeshlibs -a -Nlibglib$(apiver)-dbg
+	dh_makeshlibs -a -Nlibglib$(apiver)-$(soname)-dbg
 	dh_makeshlibs	-plibglib$(apiver)-$(soname) \
 			-V "libglib${apiver}-${soname} (>= ${shver})"
 	dh_installdeb -a
