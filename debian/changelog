@@ -1,3 +1,11 @@
+glib2.0 (2.4.0-2) experimental; urgency=low
+
+  * Akira TAGOH <tagoh@debian.org>
+  - debian/rules:
+    - bumped shlib version to 2.4.0.
+
+ -- Akira TAGOH <tagoh@debian.org>  Wed, 24 Mar 2004 09:12:31 +0900
+
 glib2.0 (2.4.0-1) experimental; urgency=low
 
   * New upstream release.
