@@ -26,6 +26,13 @@ ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
 	INSTALL_PROGRAM += -s
 endif
 
+# Ensure the build aborts when there are still references to undefined
+# symbols.
+LDFLAGS += -Wl,-z,defs
+
+# Make the linker work a bit harder so dynamic loading can be done faster
+LDFLAGS += -Wl,-O1
+
 ##
 debversion=$(shell dpkg-parsechangelog | grep '^Version: ' | sed -e 's/^Version: //')
 version=$(shell echo ${debversion} | sed -e 's/-[A-Za-z0-9\.]*$$//g' -e 's/+[A-Za-z0-9\.]*$$//g')
@@ -71,7 +78,8 @@ $(STAMP_DIR)/configure-deb-stamp:
 
 	# Add here commands to configure the package.
 	cd $(BUILD_DEB_DIR) && \
-	./configure	--host=$(DEB_HOST_GNU_TYPE) \
+	env LDFLAGS="$(LDFLAGS)" ./configure \
+			--host=$(DEB_HOST_GNU_TYPE) \
 			--build=$(DEB_BUILD_GNU_TYPE) \
 			--prefix=/usr \
 			--mandir=\$${prefix}/share/man \

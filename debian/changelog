@@ -1,3 +1,12 @@
+glib2.0 (2.4.1-3) UNRELEASED; urgency=low
+
+  J.H.M. Dassen (Ray) <jdassen@debian.org>:
+  * [debian/rules] Make the linker work a bit harder so dynamic loading can be
+    done faster; safety measure: ensure the build aborts when the library
+    still has references to undefined symbols. 
+
+ -- Sebastien Bacher <seb128@debian.org>  Sun, 23 May 2004 12:49:32 +0200
+
 glib2.0 (2.4.1-2) unstable; urgency=low
 
   * Upload in unstable.
