@@ -1,3 +1,16 @@
+glib2.0 (2.4.5-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Sebastien Bacher <seb128@debian.org>  Sun,  1 Aug 2004 17:31:43 +0200
+
+glib2.0 (2.4.4-1) unstable; urgency=low
+
+  * New upstream release.
+    - remove spaces before "#pragma alloca" (Closes: #250667).
+
+ -- Sebastien Bacher <seb128@debian.org>  Fri, 16 Jul 2004 18:44:31 +0200
+
 glib2.0 (2.4.2-1) unstable; urgency=low
 
   * New upstream release.
