@@ -1,12 +1,15 @@
-glib2.0 (2.2.3-2) NOT-UPLOADED-YET; urgency=low
+glib2.0 (2.4.0-1) experimental; urgency=low
 
+  * New upstream release.
   * debian/rules:
     - doh. don't claim the newer shlibs.
   * debian/control:
     - added Uploaders to maintain as team.
     - added gnome-pkg-tools to Build-Depends.
+  * debian/docs:
+    - added old ChangeLog and NEWS files.
 
- -- Akira TAGOH <tagoh@debian.org>  Fri, 24 Oct 2003 22:27:53 +0900
+ -- Akira TAGOH <tagoh@debian.org>  Wed, 17 Mar 2004 21:18:00 +0900
 
 glib2.0 (2.2.3-1) unstable; urgency=low
 

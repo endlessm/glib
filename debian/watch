@@ -1,4 +1,4 @@
 version=2
-ftp://ftp.gnome.org/pub/GNOME/sources/glib/2.2/ \
+ftp://ftp.gnome.org/pub/GNOME/sources/glib/2.4/ \
 	glib-(.*)\.tar\.gz \
 	debian uupdate

@@ -6,4 +6,6 @@ usr/share/aclocal/*
 usr/share/glib-2.0/*
 usr/share/man/man1/glib-genmarshal.1*
 usr/share/man/man1/glib-mkenums.1*
+usr/share/man/man1/gobject-query.1*
+usr/share/man/man1/glib-gettextize.1*
 usr/bin/*
