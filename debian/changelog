@@ -1,0 +1,145 @@
+glib2.0 (2.2.3-1pre2v1) unstable; urgency=low
+
+  * debian/rules:
+    - doh. don't claim the newer shlibs.
+  * debian/control:
+    - added Uploaders to maintain as team.
+    - added gnome-pkg-tools to Build-Depends.
+
+ -- Akira TAGOH <tagoh@debian.org>  Fri, 24 Oct 2003 22:27:53 +0900
+
+glib2.0 (2.2.3-1) unstable; urgency=low
+
+  * "Welcome back my laptop PC!" release.
+  * New upstream release.
+  * debian/control:
+    - bumped Standards-Version to 3.6.1.0.
+
+ -- Akira TAGOH <tagoh@debian.org>  Mon,  1 Sep 2003 02:29:14 +0900
+
+glib2.0 (2.2.2-1) unstable; urgency=low
+
+  * New upstream release.
+    - Fix portability problems with G_MIN/MAX_INT64 (closes: Bug#195302)
+  * debian/control:
+    - bumped Standards-Version to 3.5.10.0.
+    - changed the sections for libglib2.0-dev and libglib2.0-dbg to libdevel.
+  * debian/compat:
+    - use it instead of DH_COMPAT.
+
+ -- Akira TAGOH <tagoh@debian.org>  Tue, 10 Jun 2003 18:44:01 +0900
+
+glib2.0 (2.2.1-3) unstable; urgency=low
+
+  * debian/control:
+    - rename libglib2.0-0-udeb to libglib2.0-udeb.
+    - delete Recommends line from libglib2.0-udeb. (closes: Bug#183749)
+    - add Provides: libglib2.0-0 for libglib2.0-udeb.
+  * debian/libglib2.0-udeb.files:
+    - contain the libraries and locale data.
+
+ -- Akira TAGOH <tagoh@debian.org>  Sat,  8 Mar 2003 02:46:19 +0900
+
+glib2.0 (2.2.1-2) unstable; urgency=low
+
+  * debian/rules:
+    - create the symlinks on /usr/share/gtk-doc/html. (closes: Bug#183504)
+    - changed DH_COMPAT to 4.
+  * debian/control:
+    - add libglib2.0-0-udeb package for debian-installer.
+
+ -- Akira TAGOH <tagoh@debian.org>  Thu,  6 Mar 2003 01:14:44 +0900
+
+glib2.0 (2.2.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control:
+    - needed pkg-config (>= 0.14.0).
+    - add autotools-dev to Build-Depends.
+
+ -- Akira TAGOH <tagoh@debian.org>  Tue,  4 Feb 2003 01:02:20 +0900
+
+glib2.0 (2.2.0-2) unstable; urgency=low
+
+  * close to be fixed in the upstream release. (closes: Bug#173508)
+
+ -- Akira TAGOH <tagoh@debian.org>  Tue,  7 Jan 2003 17:22:20 +0900
+
+glib2.0 (2.2.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control:
+    bumped Standards-Version to 3.5.8.
+
+ -- Akira TAGOH <tagoh@debian.org>  Wed, 25 Dec 2002 13:46:08 +0900
+
+glib2.0 (2.0.7-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control:
+    - changed libc6-dev to libc6-dev | libc-dev in -dev's Depends.
+    - bumped Standards-Version and depends debhelper (>> 4).
+    - add libgtk2.0-doc to Suggests for -doc.
+  * debian/rules:
+    - add symlink to fix the missing symlink for gtk. but this release doesn't
+      include the hyperlink for gtk+ (closes: Bug#162845)
+    - support noopt option for DEB_BUILD_OPTIONS.
+
+ -- Akira TAGOH <tagoh@debian.org>  Tue,  5 Nov 2002 17:06:50 +0900
+
+glib2.0 (2.0.6-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/rules: removed --enable-debug option. conform to the default value
+    now. (closes: Bug#151815)
+  * debian/patches/000_glib2.0-garray.patch: removed because it's merged by
+    the upstream.
+
+ -- Akira TAGOH <tagoh@debian.org>  Sun,  4 Aug 2002 16:05:03 +0900
+
+glib2.0 (2.0.4-3) unstable; urgency=low
+
+  * debian/patches/000_glib2.0-garray.patch:
+    applied to fix g_ptr_array_index() macro. (closes: Bug#150521)
+
+ -- Akira TAGOH <tagoh@debian.org>  Sat, 29 Jun 2002 19:46:51 +0900
+
+glib2.0 (2.0.4-2) unstable; urgency=low
+
+  * debian/libglib2.0-doc.doc-base.gobject: fix the dupplicated title.
+    (closes: Bug#150040)
+
+ -- Akira TAGOH <tagoh@debian.org>  Sun, 16 Jun 2002 23:27:38 +0900
+
+glib2.0 (2.0.4-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Akira TAGOH <tagoh@debian.org>  Sun, 16 Jun 2002 03:33:22 +0900
+
+glib2.0 (2.0.3-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Akira TAGOH <tagoh@debian.org>  Wed, 29 May 2002 00:49:56 +0900
+
+glib2.0 (2.0.1-2) unstable; urgency=low
+
+  * debian/scripts/vars.build: fix bashism.
+  * debian/README.Debian: add static link issue.
+  * debian/rules: add --enable-static. (closes: Bug#142198)
+
+ -- Akira TAGOH <tagoh@debian.org>  Thu, 11 Apr 2002 19:25:17 +0900
+
+glib2.0 (2.0.1-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Akira TAGOH <tagoh@debian.org>  Sat, 30 Mar 2002 16:23:54 +0900
+
+glib2.0 (2.0.0-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Akira TAGOH <tagoh@debian.org>  Tue, 12 Mar 2002 02:32:11 +0900
+

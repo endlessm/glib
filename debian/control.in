@@ -1,0 +1,95 @@
+Source: glib2.0
+Section: libs
+Priority: optional
+Maintainer: Akira TAGOH <tagoh@debian.org>
+Uploaders: @GNOME_TEAM@
+Build-Depends: debhelper (>> 4.0.0), pkg-config (>= 0.14.0), gettext, autotools-dev, gnome-pkg-tools
+Standards-Version: 3.6.1.0
+
+Package: libglib2.0-@SONAME@
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}
+Recommends: libglib2.0-data
+Description: The GLib library of C routines
+ GLib is a library containing many useful C routines for things such
+ as trees, hashes, lists, and strings.  It is a useful general-purpose
+ C library used by projects such as GTK+, GIMP, and GNOME.
+ .
+ This package contains the shared libraries.
+
+Package: libglib2.0-udeb
+Section: debian-installer
+Priority: optional
+Architecture: any
+Depends: ${shlibs:Depends}
+Provides: libglib2.0-@SONAME@
+Description: The GLib library of C routines
+ This is a udeb, or a microdeb, for the debian-installer.
+ .
+ GLib is a library containing many useful C routines for things such
+ as trees, hashes, lists, and strings.  It is a useful general-purpose
+ C library used by projects such as GTK+, GIMP, and GNOME.
+
+Package: libglib2.0-dev
+Section: libdevel
+Architecture: any
+Depends: libglib2.0-@SONAME@ (= ${Source-Version}), libc6-dev | libc-dev, pkg-config (>= 0.14.0)
+Suggests: libglib2.0-doc
+Replaces: libglib1.3-dev
+Conflicts: libglib1.3-dev
+Description: Development files for the GLib library
+ GLib is a library containing many useful C routines for things such
+ as trees, hashes, lists, and strings.  It is a useful general-purpose
+ C library used by projects such as GTK+, GIMP, and GNOME.
+ .
+ This package is needed to compile programs against libglib2.0-@SONAME@,
+ as only it includes the header files and static libraries (optionally)
+ needed for compiling.
+
+Package: libglib2.0-dbg
+Section: libdevel
+Priority: extra
+Architecture: any
+Depends: libglib2.0-@SONAME@ (= ${Source-Version})
+Description: The GLib libraries and debugging symbols
+ GLib is a library containing many useful C routines for things such
+ as trees, hashes, lists, and strings.  It is a useful general-purpose
+ C library used by projects such as GTK+, GIMP, and GNOME.
+ .
+ This package contains unstripped shared libraries. it is provided
+ primarily to provide a backtrace with names in a debugger, this makes
+ it somewhat easier to interpret core dumps.  The libraries are installed
+ in /usr/lib/debug and can be used by placing that directory in
+ LD_LIBRARY_PATH.
+ Most people will not need this package.
+
+Package: libglib2.0-data
+Section: misc
+Architecture: all
+Depends: libglib2.0-@SONAME@ (= ${Source-Version})
+Replaces: libglib1.3, libglib1.3-data
+Conflicts: libglib1.3-data
+Description: Common files for GLib library
+ GLib is a library containing many useful C routines for things such
+ as trees, hashes, lists, and strings.  It is a useful general-purpose
+ C library used by projects such as GTK+, GIMP, and GNOME.
+ .
+ This package contains the common files which the runtime libraries
+ need.
+
+Package: libglib2.0-doc
+Section: doc
+Architecture: all
+Depends: lynx | www-browser
+Replaces: libglib1.3-doc
+Conflicts: libglib1.3-doc
+Suggests: libgtk2.0-doc
+Description: Documentation files for the GLib library
+ GLib is a library containing many useful C routines for things such
+ as trees, hashes, lists, and strings.  It is a useful general-purpose
+ C library used by projects such as GTK+, GIMP, and GNOME.
+ .
+ This package contains the HTML documentation for the GLib library
+ in /usr/share/doc/libglib2.0-doc/ .
+

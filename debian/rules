@@ -1,0 +1,281 @@
+#!/usr/bin/make -f
+# Sample debian/rules that uses debhelper.
+# GNU copyright 1997 to 1999 by Joey Hess.
+
+include debian/scripts/vars
+include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
+BUILD_DIR=$(SOURCE_DIR)/$(TAR_DIR)
+BUILD_DEB_DIR=$(SOURCE_DIR)/$(TAR_DIR)-deb
+BUILD_UDEB_DIR=$(SOURCE_DIR)/$(TAR_DIR)-udeb
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# These are used for cross-compiling and for saving the configure script
+# from having to guess our platform (since we know it already)
+DEB_HOST_GNU_TYPE	?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE	?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -O0
+else
+	CFLAGS += -O2
+endif
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+	INSTALL_PROGRAM += -s
+endif
+
+##
+debversion=$(shell dpkg-parsechangelog | grep '^Version: ' | sed -e 's/^Version: //')
+version=$(shell echo ${debversion} | sed -e 's/-[A-Za-z0-9\.]*$$//g' -e 's/+[A-Za-z0-9\.]*$$//g')
+major=$(shell echo ${version} | sed -e 's/\(^[0-9]*\)\.[0-9]*\.[0-9]*$$/\1/')
+minor=$(shell echo ${version} | sed -e 's/^[0-9]*\.\([0-9]*\)\.[0-9]*$$/\1/')
+rel=$(shell echo ${version} | sed -e 's/^[0-9]*\.[0-9]*\.\([0-9]*\)$$/\1/')
+shortver=$(major).$(minor)
+apiver=2.0
+soname=0
+gtkver=2.0
+shver=2.2.3
+libpath=$(CURDIR)/$(BUILD_DEB_DIR)/glib/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gmodule/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gobject/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gthread/.libs
+udeblibpath=$(CURDIR)/$(BUILD_UDEB_DIR)/glib/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gmodule/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gobject/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gthread/.libs
+udebname=libglib$(apiver)-udeb_$(debversion)_$(shell dpkg-architecture -qDEB_BUILD_GNU_CPU).udeb
+
+_echo_cfiles = for f in ${1}; do if [ -f $$f ]; then echo $$f; fi; done
+cfiles := $(shell $(call _echo_cfiles, $(wildcard debian/libglib$(apiver)-@SONAME@.*)))
+
+
+debian/control:
+	dh_testdir
+
+	sed -e 's/@SONAME@/${soname}/g' -e 's/@VERSION@/${version}/g' -e 's/@GNOME_TEAM@/${uploaders}/' $@.in > $@
+
+extract: $(STAMP_DIR)/extract-stamp
+$(STAMP_DIR)/extract-stamp:
+	dh_testdir
+
+	$(MAKE) -f debian/sys-build.mk source.make
+
+	-test -r /usr/share/misc/config.sub && \
+	   cp -f /usr/share/misc/config.sub $(BUILD_DIR)/config.sub
+	-test -r /usr/share/misc/config.guess && \
+	   cp -f /usr/share/misc/config.guess $(BUILD_DIR)/config.guess
+
+	touch $@
+
+configure-deb: extract $(STAMP_DIR)/configure-deb-stamp
+$(STAMP_DIR)/configure-deb-stamp:
+	dh_testdir
+
+	cp -ar $(BUILD_DIR) $(BUILD_DEB_DIR)
+
+	# Add here commands to configure the package.
+	cd $(BUILD_DEB_DIR) && \
+	./configure	--host=$(DEB_HOST_GNU_TYPE) \
+			--build=$(DEB_BUILD_GNU_TYPE) \
+			--prefix=/usr \
+			--mandir=\$${prefix}/share/man \
+			--infodir=\$${prefix}/share/info \
+			--with-html-dir=\$${prefix}/share/doc/libglib$(apiver)-doc \
+			--enable-static
+
+	cd $(BUILD_DEB_DIR) && \
+	sed < libtool > libtool-2 \
+	 -e 's/^hardcode_libdir_flag_spec.*$$/hardcode_libdir_flag_spec=" -D__LIBTOOL_IS_A_FOOL__ "/' \
+	 -e '/^archive_cmds="/s/"$$/ \\$$deplibs"/' && \
+	mv libtool-2 libtool
+
+	touch $@
+
+configure-udeb: extract $(STAMP_DIR)/configure-udeb-stamp
+$(STAMP_DIR)/configure-udeb-stamp:
+	dh_testdir
+
+	cp -ar $(BUILD_DIR) $(BUILD_UDEB_DIR)
+
+	# Add here commands to configure the package.
+	cd $(BUILD_UDEB_DIR) && \
+	./configure	--host=$(DEB_HOST_GNU_TYPE) \
+			--build=$(DEB_BUILD_GNU_TYPE) \
+			--prefix=/usr \
+			--mandir=\$${prefix}/share/man \
+			--infodir=\$${prefix}/share/info
+
+	cd $(BUILD_UDEB_DIR) && \
+	sed < libtool > libtool-2 \
+	 -e 's/^hardcode_libdir_flag_spec.*$$/hardcode_libdir_flag_spec=" -D__LIBTOOL_IS_A_FOOL__ "/' \
+	 -e '/^archive_cmds="/s/"$$/ \\$$deplibs"/' && \
+	mv libtool-2 libtool
+
+	touch $@
+
+configure: configure-deb configure-udeb
+
+build-deb: debian/control configure-deb $(STAMP_DIR)/build-deb-stamp
+$(STAMP_DIR)/build-deb-stamp:
+	dh_testdir
+
+	# Add here commands to compile the package.
+	$(MAKE) -C $(BUILD_DEB_DIR) \
+		LD_LIBRARY_PATH=$(libpath):$(LD_LIBRARY_PATH)
+
+	touch $@
+
+build-udeb: debian/control configure-udeb $(STAMP_DIR)/build-udeb-stamp
+$(STAMP_DIR)/build-udeb-stamp:
+	dh_testdir
+
+	# Add here commands to compile the package.
+	$(MAKE) -C $(BUILD_UDEB_DIR) \
+		LD_LIBRARY_PATH=$(udeblibpath):$(LD_LIBRARY_PATH)
+
+	touch $@
+
+build: build-deb
+
+clean:: debian/control
+	dh_testdir
+	dh_testroot
+
+	# Add here commands to clean up after the build process.
+	$(MAKE) -f debian/sys-build.mk source.clean
+	-rm -rf $(BUILD_DEB_DIR)
+	-rm -rf $(BUILD_UDEB_DIR)
+	-rm -rf $(STAMP_DIR)
+
+	dh_clean
+
+install-test: $(STAMP_DIR)/install-test-stamp
+$(STAMP_DIR)/install-test-stamp:
+	dh_testdir
+	dh_testroot
+	dh_clean -k
+	dh_installdirs
+
+	# generating debian files from .in
+	for f in ${cfiles}; do \
+		cp $$f `echo $$f | sed -e 's/@SONAME@/${soname}/g'`; \
+	done
+
+	for f in `find debian/ -name "[^c]*.in"`; do \
+		sed -e 's/@VERSION@/${version}/g' $$f > `echo $$f | sed -e 's/\.in//'`; \
+	done
+
+	touch $@
+
+install-deb: build-deb install-test
+	# Add here commands to install the package into debian/tmp
+	$(MAKE) -C $(BUILD_DEB_DIR) install \
+		prefix=$(CURDIR)/debian/libglib$(apiver)-$(soname)/usr
+
+install-udeb: build-udeb install-test
+	# Add here commands to install the package into debian/tmp
+	$(MAKE) -C $(BUILD_UDEB_DIR) install \
+		prefix=$(CURDIR)/debian/tmp/usr
+
+	# clean the unnecessary files up
+	rm -rf debian/tmp/usr/share/gtk-doc
+
+	dh_movefiles
+	-rm -rf $(CURDIR)/debian/libglib$(apiver)-udeb/usr/share/doc
+
+	-find $(CURDIR)/debian/ -type d -empty ! -regex '.*/var.*' -prune | xargs rmdir -p 2>&1 > /dev/null
+
+install: install-deb
+	# for -dbg
+	mkdir -p $(CURDIR)/debian/libglib$(apiver)-$(soname)/usr/lib/debug
+	for l in `find $(CURDIR)/debian/libglib$(apiver)-$(soname)/usr/lib -name '*.so*'`; do \
+		cp -vdf $$l \
+			$(CURDIR)/debian/libglib$(apiver)-$(soname)/usr/lib/debug/; \
+	done
+
+	dh_movefiles --sourcedir=debian/libglib$(apiver)-$(soname) -Nlibglib$(apiver)-udeb
+	-find $(CURDIR)/debian/ -type d -empty | xargs rmdir -p 2>&1 > /dev/null
+
+# Build architecture-independent files here.
+binary-indep: build install
+	dh_testdir -i
+	dh_testroot -i
+
+	dh_installdocs -i
+
+	rm -rf $(CURDIR)/debian/libglib$(apiver)-data/usr/share/doc/libglib$(apiver)-data
+	dh_link -plibglib$(apiver)-data \
+		usr/share/doc/libglib$(apiver)-$(soname) \
+		usr/share/doc/libglib$(apiver)-data
+	dh_link -plibglib$(apiver)-doc \
+		usr/share/doc/libgtk$(gtkver)-doc/gtk \
+		usr/share/doc/libglib$(apiver)-doc/gtk
+
+	# create the symlinks on /usr/share/gtk-doc/html
+	for i in glib gobject; do				\
+		dh_link -plibglib$(apiver)-doc			\
+			usr/share/doc/libglib$(apiver)-doc/$$i	\
+			usr/share/gtk-doc/html/$$i;		\
+	done
+
+	dh_installexamples -i
+	dh_installinfo -i
+	dh_installchangelogs -i $(BUILD_DIR)/ChangeLog
+	dh_compress -i
+	dh_fixperms -i
+	dh_installdeb -i
+	dh_gencontrol -i
+	dh_md5sums -i
+	dh_builddeb -i
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir -a
+	dh_testroot -a
+
+	dh_installdocs -a
+
+	rm -rf $(CURDIR)/debian/libglib$(apiver)-dbg/usr/share/doc/libglib$(apiver)-dbg
+	rm -rf $(CURDIR)/debian/libglib$(apiver)-dev/usr/share/doc/libglib$(apiver)-dev
+	dh_link -plibglib$(apiver)-dbg \
+		usr/share/doc/libglib$(apiver)-$(soname) \
+		usr/share/doc/libglib$(apiver)-dbg
+	dh_link -plibglib$(apiver)-dev \
+		usr/share/doc/libglib$(apiver)-$(soname) \
+		usr/share/doc/libglib$(apiver)-dev
+
+	dh_installexamples -a
+	dh_installmenu -a
+	dh_installman -plibglib$(apiver)-dev
+	dh_installinfo -a
+	dh_installchangelogs -a $(BUILD_DIR)/ChangeLog
+	dh_strip -a -Nlibglib$(apiver)-dbg
+	dh_compress -a
+	dh_fixperms -a
+	dh_makeshlibs -a -Nlibglib$(apiver)-dbg
+	dh_makeshlibs	-plibglib$(apiver)-$(soname) \
+			-V "libglib${apiver}-${soname} (>= ${shver})"
+	dh_installdeb -a
+	dh_shlibdeps -l$(libpath) -a
+	cat debian/*/DEBIAN/shlibs > debian/shlibs.local
+	dh_gencontrol -a -Nlibglib$(apiver)-udeb
+	dh_md5sums -a -Nlibglib$(apiver)-udeb
+	dh_builddeb -a -Nlibglib$(apiver)-udeb
+
+binary-arch-udeb: build-udeb install-udeb
+	dh_testdir -a
+	dh_testroot -a
+
+	dh_installdebconf -a
+	dh_compress -a
+	dh_fixperms -a
+	dh_installdeb -a
+	-rm -f $(CURDIR)/debian/shlibs.local
+	dh_shlibdeps -l$(udeblibpath) -plibglib$(apiver)-udeb
+	# hmm, I don't know but need to fix the self dependency.
+	sed -e 's/, libglib$(apiver)-$(soname) (>= [.0-9]*)//' $(CURDIR)/debian/libglib$(apiver)-udeb.substvars > $(CURDIR)/debian/libglib$(apiver)-udeb.substvars.new
+	mv $(CURDIR)/debian/libglib$(apiver)-udeb.substvars.new \
+	   $(CURDIR)/debian/libglib$(apiver)-udeb.substvars
+	dh_gencontrol -a -plibglib$(apiver)-udeb -- -fdebian/files~
+	dpkg-distaddfile $(udebname) debian-installer optional
+
+	dh_builddeb -plibglib$(apiver)-udeb --filename=$(udebname)
+
+binary: binary-indep binary-arch binary-arch-udeb
+.PHONY: build build-deb build-udeb clean binary-indep binary-arch binary-arch-udeb binary install install-deb install-udeb install-test configure configure-deb configure-udeb extract debian/control
