@@ -234,7 +234,7 @@ binary-indep: build install
 	dh_builddeb -i
 
 # Build architecture-dependent files here.
-binary-arch: build install
+binary-arch: build install binary-arch-udeb
 	dh_testdir -a
 	dh_testroot -a
 
@@ -272,6 +272,7 @@ binary-arch-udeb: build-udeb install-udeb
 	dh_testroot -a
 
 	dh_installdebconf -a
+	dh_strip -a
 	dh_compress -a
 	dh_fixperms -a
 	dh_installdeb -a
