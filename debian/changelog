@@ -1,3 +1,11 @@
+glib2.0 (2.4.6-4) unstable; urgency=medium
+
+  * [debian/patches/001_translations.patch] Updated translations from CVS and
+    relibtoolise to use new translations.
+  * [debian/rules] Fixed udeb naming on Hurd.
+
+ -- J.H.M. Dassen (Ray) <jdassen@debian.org>  Fri,  8 Oct 2004 12:43:09 +0200
+
 glib2.0 (2.4.6-3) unstable; urgency=medium
 
   Colin Watson <cjwatson@debian.org>: (Closes: #274053)
