@@ -1,3 +1,9 @@
+glib2.0 (2.4.2-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Sebastien Bacher <seb128@debian.org>  Sat,  5 Jun 2004 00:51:01 +0200
+
 glib2.0 (2.4.1-2) unstable; urgency=low
 
   * Upload in unstable.
