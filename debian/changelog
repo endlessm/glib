@@ -1,4 +1,4 @@
-glib2.0 (2.2.3-1pre2v1) unstable; urgency=low
+glib2.0 (2.2.3-2) NOT-UPLOADED-YET; urgency=low
 
   * debian/rules:
     - doh. don't claim the newer shlibs.
