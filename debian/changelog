@@ -1,3 +1,12 @@
+glib2.0 (2.4.1-1) experimental; urgency=low
+
+  * New upstream release.
+  * GNOME Team Upload.
+  * debian/rules:
+    - updated shlib version to 2.4.1.
+  
+ -- Sebastien Bacher <seb128@debian.org>  Sun,  2 May 2004 12:47:25 +0200
+
 glib2.0 (2.4.0-2) experimental; urgency=low
 
   * Akira TAGOH <tagoh@debian.org>
