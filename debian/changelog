@@ -1,3 +1,13 @@
+glib2.0 (2.6.0-1) experimental; urgency=low
+
+  * New upstream release.
+  * debian/rules:
+    - updated the shlibs.
+  * debian/watch:
+    - updated.
+
+ -- Sebastien Bacher <seb128@debian.org>  Mon, 27 Dec 2004 16:15:36 +0100
+
 glib2.0 (2.4.8-1) unstable; urgency=medium
 
   * New upstream bugfix release.
