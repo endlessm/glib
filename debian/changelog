@@ -1,3 +1,43 @@
+glib2.0 (2.7.0-1) experimental; urgency=low
+
+  * New upstream version:
+    * GKeyFile:
+    - add unit tests.
+    - accept \r\n as line end.
+    - don't interpret leading zeros as octal numbers.
+    - make key and group removal work.
+    * GOption:
+    - improve formatting of --help output.
+    - accept -?.
+    - warn about duplicate main groups.
+    - treat '-' as non-option argument.
+    - report missing arguments as errors.
+    - add a boxed type for GDate.
+    * GTree:
+    - g_tree_remove() and g_tree_steal() return status information.
+    * Stdio wrappers:
+    - work regardless of large file support.
+    - add g_access(), g_chmod(), g_creat(), g_chdir.
+    * GObject:
+    - implement "toggle references" to help language bindings.
+    - allow to mark names, nicks and blurbs of pspecs as static.
+    - make pspec lookup a bit faster.
+    * add g_listenv() to list all set environment variables.
+    * add g_file_set_contents() to atomically write a file.
+    * add g_try_malloc(), g_try_new(), g_try_new0() and g_try_renew().
+    * add g_utf8_collate_key_for_filename() to sort filenames taking
+      extensions and numeric suffixes into account.
+    * add G_GNUC_NULL_TERMINATED to mark varargs function with
+      NULL-terminated argument lists.
+    * documentation improvements.
+    * new and updated translations.
+  * debian/rules:
+    - updated the shlibs.
+  * debian/watch:
+    - updated.
+
+ -- Sebastien Bacher <seb128@debian.org>  Tue, 21 Jun 2005 12:15:47 +0200
+
 glib2.0 (2.6.5-1) unstable; urgency=low
 
   * New upstream release again bringing a number of bugfixes, improved
