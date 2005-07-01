@@ -1,3 +1,11 @@
+glib2.0 (2.7.1-1) experimental; urgency=low
+
+  * New upstream version.
+  * debian/rules:
+    - updated the shlib.
+
+ -- Sebastien Bacher <seb128@debian.org>  Fri,  1 Jul 2005 19:43:05 +0200
+
 glib2.0 (2.7.0-1) experimental; urgency=low
 
   * New upstream version:
