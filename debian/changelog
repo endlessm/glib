@@ -1,3 +1,15 @@
+glib2.0 (2.7.3-1) experimental; urgency=low
+
+  * New upstream version.
+
+ -- Sebastien Bacher <seb128@debian.org>  Fri, 15 Jul 2005 23:42:37 +0200
+
+glib2.0 (2.7.2-1) experimental; urgency=low
+
+  * New upstream version.
+
+ -- Sebastien Bacher <seb128@debian.org>  Fri,  8 Jul 2005 22:07:59 +0200
+
 glib2.0 (2.7.1-1) experimental; urgency=low
 
   * New upstream version.
