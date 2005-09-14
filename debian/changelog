@@ -1,3 +1,11 @@
+glib2.0 (2.8.0-1) unstable; urgency=low
+
+  * New upstream version.
+  * debian/rules:
+    - updated the shlibs.
+
+ -- Sebastien Bacher <seb128@debian.org>  Sat, 13 Aug 2005 14:14:00 +0200
+
 glib2.0 (2.7.3-1) experimental; urgency=low
 
   * New upstream version.
