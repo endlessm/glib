@@ -1,3 +1,9 @@
+glib2.0 (2.8.0-2) UNRELEASED; urgency=low
+
+  * [debian/watch] Updated.
+
+ -- J.H.M. Dassen (Ray) <jdassen@debian.org>  Sat, 24 Sep 2005 13:12:45 +0200
+
 glib2.0 (2.8.0-1) unstable; urgency=low
 
   * New upstream version.
