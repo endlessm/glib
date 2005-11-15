@@ -1,3 +1,9 @@
+glib2.0 (2.8.4-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Sebastien Bacher <seb128@debian.org>  Tue, 15 Nov 2005 16:22:08 +0100
+
 glib2.0 (2.8.3-1) unstable; urgency=medium
 
   * New upstream release (fix an error that crept in with a change to 
