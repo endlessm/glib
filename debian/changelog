@@ -1,3 +1,23 @@
+glib2.0 (2.8.4-2) unstable; urgency=high
+
+  * Fix shlibs deps that crept in the amd64 package, thanks Kurt Roeckx for
+    all the fish. (Closes: #339685)
+    - Cleanup and clarify upstream version calculations.
+    - Drop dh_makeshlibs -a call as only one package ships shlibs and already
+      has a separate call.
+    - Drop useless shlibs.local generation.
+    - Call dh_shlibdeps with cleaner arguments.
+    [debian/rules]
+  * Fix "fakeroot debian/rules clean" by following find calls with a .svn
+    filter.
+    [debian/scripts/lib]
+  * Fix quoting of unfix.source.patch:START and FAILED messages.
+    [debian/scripts/messages]
+  * Clarify Copyright versus License and update upstream URL.
+    [debian/copyright]
+
+ -- Loic Minier <lool@dooz.org>  Sun, 20 Nov 2005 10:36:26 +0100
+
 glib2.0 (2.8.4-1) unstable; urgency=low
 
   * New upstream version.

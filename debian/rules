@@ -34,8 +34,8 @@ LDFLAGS += -Wl,-z,defs
 LDFLAGS += -Wl,-O1
 
 ##
-debversion=$(shell dpkg-parsechangelog | grep '^Version: ' | sed -e 's/^Version: //')
-version=$(shell echo ${debversion} | sed -e 's/-[A-Za-z0-9\.]*$$//g' -e 's/+[A-Za-z0-9\.]*$$//g')
+debversion=$(shell dpkg-parsechangelog | sed -n -e 's/^Version: //p')
+version=$(shell echo ${debversion} | sed -e 's/-[^-]*$$//')
 major=$(shell echo ${version} | sed -e 's/\(^[0-9]*\)\.[0-9]*\.[0-9]*$$/\1/')
 minor=$(shell echo ${version} | sed -e 's/^[0-9]*\.\([0-9]*\)\.[0-9]*$$/\1/')
 rel=$(shell echo ${version} | sed -e 's/^[0-9]*\.[0-9]*\.\([0-9]*\)$$/\1/')
@@ -250,12 +250,10 @@ binary-arch: build install binary-arch-udeb
 	dh_strip -a --dbg-package=libglib$(apiver)-$(soname)
 	dh_compress -a
 	dh_fixperms -a
-	dh_makeshlibs -a -Nlibglib$(apiver)-$(soname)-dbg
 	dh_makeshlibs	-plibglib$(apiver)-$(soname) \
 			-V "libglib${apiver}-${soname} (>= ${shver})"
 	dh_installdeb -a
-	dh_shlibdeps -l$(libpath) -a
-	cat debian/*/DEBIAN/shlibs > debian/shlibs.local
+	dh_shlibdeps -a -ldebian/libglib$(apiver)-$(soname)/usr/lib -Llibglib$(apiver)-$(soname)
 	dh_gencontrol -a -Nlibglib$(apiver)-udeb
 	dh_md5sums -a -Nlibglib$(apiver)-udeb
 	dh_builddeb -a -Nlibglib$(apiver)-udeb
