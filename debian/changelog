@@ -1,3 +1,9 @@
+glib2.0 (2.8.6-1) unstable; urgency=medium
+
+  * New upstream release (bugfixes, translation updates).
+
+ -- J.H.M. Dassen (Ray) <jdassen@debian.org>  Wed, 18 Jan 2006 20:30:26 +0100
+
 glib2.0 (2.8.5-1) unstable; urgency=low
 
   * New upstream release (bugfixes, translation updates,
