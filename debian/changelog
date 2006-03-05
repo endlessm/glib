@@ -1,3 +1,9 @@
+glib2.0 (2.10.0-1) experimental; urgency=low
+
+  * New upstream release.
+
+ -- Josselin Mouette <joss@debian.org>  Mon,  6 Mar 2006 00:32:27 +0100
+
 glib2.0 (2.8.6-1) unstable; urgency=medium
 
   * New upstream release (bugfixes, translation updates).
