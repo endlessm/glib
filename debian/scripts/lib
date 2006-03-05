@@ -148,7 +148,7 @@ do.patching() {
 			continue
 		fi
 		eval mkdir -p $dirprep
-		for f in `(cd $d;find -type f ! -name 'chk-*' 2>/dev/null )|sort $reversesort`;do
+		for f in `(cd $d;find -type f ! -name 'chk-*' 2>/dev/null | grep -v .svn )|sort $reversesort`;do
 			eval stampfile=$stampfiletmpl
 			eval log=$logtmpl
 			eval file=$filetmpl
@@ -181,8 +181,8 @@ source.clean() {
 	rm -f $STAMP_DIR/{source.{clean,build,make}}
 	return
 if [ x$SOURCE_DIR = x ];then
-	files=`find -type f -maxdepth 1 -mindepth 1`
-	dirs=`find -type d -maxdepth 1 -mindepth 1 ! -name 'debian' ! -name 'upstream'`
+	files=`find -type f -maxdepth 1 -mindepth 1 | grep -v .svn`
+	dirs=`find -type d -maxdepth 1 -mindepth 1 ! -name 'debian' ! -name 'upstream' | grep -v .svn`
         echo files=\"$files\"
         echo dirs=\"$dirs\"
 fi

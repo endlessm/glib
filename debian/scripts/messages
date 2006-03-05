@@ -3,9 +3,9 @@ fix.source.patch:OK:"successful."
 fix.source.patch:FAILED:"failed!"
 fix.source.patch:ALREADY_DONE:"upstream patch fixup $1 already applied!"
 
-unfix.source.patch:START:"Unfixing upstream patch $1
+unfix.source.patch:START:"Unfixing upstream patch $1"
 unfix.source.patch:OK:"successful."
-unfix.source.patch:FAILED:"failed!
+unfix.source.patch:FAILED:"failed!"
 unfix.source.patch:ALREADY_DONE:"upstream patch fixup $1 already reversed!"
 
 patch.unapply:START:"Reversing patch $1"
