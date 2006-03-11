@@ -274,7 +274,7 @@ binary-arch-udeb: build-udeb install-udeb
 	mv $(CURDIR)/debian/libglib$(apiver)-udeb.substvars.new \
 	   $(CURDIR)/debian/libglib$(apiver)-udeb.substvars
 	dh_gencontrol -plibglib$(apiver)-udeb -- -fdebian/files~
-	dpkg-distaddfile $(udebname) debian-installer optional
+	dpkg-distaddfile $(udebname) debian-installer extra
 
 	dh_builddeb -plibglib$(apiver)-udeb --filename=$(udebname)
 
