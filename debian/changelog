@@ -1,3 +1,9 @@
+glib2.0 (2.10.1-2) UNRELEASED; urgency=low
+
+  * Set the conflict with pango < 1.11, that's where the breakage lies.
+
+ -- Josselin Mouette <joss@debian.org>  Thu, 16 Mar 2006 00:17:02 +0100
+
 glib2.0 (2.10.1-1) experimental; urgency=low
 
   * New upstream release (bugfixes, translation updates).
