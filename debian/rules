@@ -43,7 +43,7 @@ shortver=$(major).$(minor)
 apiver=2.0
 soname=0
 gtkver=2.0
-shver=2.8.5
+shver=2.10.0
 libpath=$(CURDIR)/$(BUILD_DEB_DIR)/glib/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gmodule/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gobject/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gthread/.libs
 udeblibpath=$(CURDIR)/$(BUILD_UDEB_DIR)/glib/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gmodule/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gobject/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gthread/.libs
 udebname=libglib$(apiver)-udeb_$(debversion)_$(shell dpkg-architecture -qDEB_BUILD_ARCH).udeb
@@ -274,7 +274,7 @@ binary-arch-udeb: build-udeb install-udeb
 	mv $(CURDIR)/debian/libglib$(apiver)-udeb.substvars.new \
 	   $(CURDIR)/debian/libglib$(apiver)-udeb.substvars
 	dh_gencontrol -plibglib$(apiver)-udeb -- -fdebian/files~
-	dpkg-distaddfile $(udebname) debian-installer optional
+	dpkg-distaddfile $(udebname) debian-installer extra
 
 	dh_builddeb -plibglib$(apiver)-udeb --filename=$(udebname)
 
