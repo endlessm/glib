@@ -1,16 +1,19 @@
-glib2.0 (2.10.1-2) UNRELEASED; urgency=low
+glib2.0 (2.10.1-2) unstable; urgency=low
 
   [ Sjoerd Simons ]
   * Document udeb changes that Josselin did in an earlier experimental
     package.
+  * debian/patches/999_ia64_atomic_ops_broken.patch
+    + Added. Uses atomic builtins that gcc-4.0 know on ia64, instead of those
+    for gcc-4.1. (Patch by LaMont Jones from the ubuntu package)
+  * Upload to unstable
 
   [ Josselin Mouette ]
   * Set the conflict with pango < 1.11, that's where the breakage lies.
   * Add a XC-Package-Type header to the udeb and set the priority to extra.
     [debian/control.in]
 
-
- -- Sjoerd Simons <sjoerd@debian.org>  Sun, 19 Mar 2006 12:19:51 +0100
+ -- Sjoerd Simons <sjoerd@debian.org>  Sun, 19 Mar 2006 12:34:43 +0100
 
 glib2.0 (2.10.1-1) experimental; urgency=low
 
