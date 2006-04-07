@@ -22,6 +22,9 @@ glib2.0 (2.10.2-1) unstable; urgency=low
     - g_timer_elapsed docs should mention that microseconds may be NULL
     - goption + error out params
     - Documentation should not reference G_HAVE_GINT64, as it's deprecated.
+  * debian/patches/010_glib2.0.kfreebsd-amd64.patch:
+    - patch by Aurelien Jarno <aurel32@debian.org>, fix build on kfreebsd-amd64
+      (Closes: #355953)
   * debian/rules:
     - use "-g" for CFLAGS, makes -dbg package useful again
     change by Fabio M. Di Nitto <fabbione@ubuntu.com> on the Ubuntu package:
