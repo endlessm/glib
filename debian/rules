@@ -15,12 +15,12 @@ BUILD_UDEB_DIR=$(SOURCE_DIR)/$(TAR_DIR)-udeb
 # from having to guess our platform (since we know it already)
 DEB_HOST_GNU_TYPE	?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 DEB_BUILD_GNU_TYPE	?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
-
+DEB_BUILD_ARCH         ?= $(shell dpkg-architecture -qDEB_BUILD_ARCH)
 
 ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-	CFLAGS += -O0
+	CFLAGS += -g -O0
 else
-	CFLAGS += -O2
+	CFLAGS += -g -O2
 endif
 ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
 	INSTALL_PROGRAM += -s
@@ -78,7 +78,7 @@ $(STAMP_DIR)/configure-deb-stamp:
 
 	# Add here commands to configure the package.
 	cd $(BUILD_DEB_DIR) && \
-	env LDFLAGS="$(LDFLAGS)" ./configure \
+	env LDFLAGS="$(LDFLAGS)" CFLAGS="$(CFLAGS)" ./configure \
 			--host=$(DEB_HOST_GNU_TYPE) \
 			--build=$(DEB_BUILD_GNU_TYPE) \
 			--prefix=/usr \
@@ -103,7 +103,7 @@ $(STAMP_DIR)/configure-udeb-stamp:
 
 	# Add here commands to configure the package.
 	cd $(BUILD_UDEB_DIR) && \
-	env LDFLAGS="$(LDFLAGS)" ./configure \
+	env LDFLAGS="$(LDFLAGS)" CFLAGS="$(CFLAGS)" ./configure \
 			--host=$(DEB_HOST_GNU_TYPE) \
 			--build=$(DEB_BUILD_GNU_TYPE) \
 			--prefix=/usr \

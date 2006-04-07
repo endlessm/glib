@@ -1,3 +1,35 @@
+glib2.0 (2.10.2-1) unstable; urgency=low
+
+  * New upstream version:
+    - Missing check for .dylib
+    - Segmentation Fault when %llu is passed to vasnprintf and HAVE_SNPRINTF
+      is not defined
+    - Add support for write FDs to GIOChannel
+    - Memleak in goption.c::parse_short_option
+    - g_parse_debug_string reads beyond buffer
+    - g_option_context_parse() should not set program name to '<Unknown>' if
+      it is already set
+    - g_main_context_unref calls g_source_destroy_internal with incorrect
+      arguments
+    - Slight performance gains (GList, GAsyncQueue)
+    - Use of unitialised memory in g_mem_profile
+    - make check FAIL: threadpool-test
+    - g_option_context_new parameter lacks better explanation
+    - Some breakages with GThreadPool
+    - gthread/gthread-win32.c: IsDebuggerPresent needs
+      '#define _WIN32_WINDOWS 0x0401'
+    - dlerror() portability issue causes crash on (old) a.out NetBSD platform
+    - g_timer_elapsed docs should mention that microseconds may be NULL
+    - goption + error out params
+    - Documentation should not reference G_HAVE_GINT64, as it's deprecated.
+  * debian/rules:
+    - use "-g" for CFLAGS, makes -dbg package useful again
+    change by Fabio M. Di Nitto <fabbione@ubuntu.com> on the Ubuntu package:
+    * Make sure to pass CFLAGS to configure.
+    * Generalize DEB_BUILD_ARCH.   
+
+ -- Sebastien Bacher <seb128@debian.org>  Fri,  7 Apr 2006 23:23:14 +0200
+
 glib2.0 (2.10.1-2) unstable; urgency=low
 
   [ Sjoerd Simons ]
