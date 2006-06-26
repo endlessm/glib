@@ -46,7 +46,6 @@ gtkver=2.0
 shver=2.10.0
 libpath=$(CURDIR)/$(BUILD_DEB_DIR)/glib/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gmodule/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gobject/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gthread/.libs
 udeblibpath=$(CURDIR)/$(BUILD_UDEB_DIR)/glib/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gmodule/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gobject/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gthread/.libs
-udebname=libglib$(apiver)-udeb_$(debversion)_$(shell dpkg-architecture -qDEB_BUILD_ARCH).udeb
 
 _echo_cfiles = for f in ${1}; do if [ -f $$f ]; then echo $$f; fi; done
 cfiles := $(shell $(call _echo_cfiles, $(wildcard debian/libglib$(apiver)-@SONAME@.*)))
@@ -227,7 +226,7 @@ binary-indep: build install
 	dh_builddeb -i
 
 # Build architecture-dependent files here.
-binary-arch: build install binary-arch-udeb
+binary-arch: build build-udeb install install-udeb
 	dh_testdir -a
 	dh_testroot -a
 
@@ -251,32 +250,15 @@ binary-arch: build install binary-arch-udeb
 	dh_compress -a
 	dh_fixperms -a
 	dh_makeshlibs	-plibglib$(apiver)-$(soname) \
-			-V "libglib${apiver}-${soname} (>= ${shver})"
+			-V "libglib${apiver}-${soname} (>= ${shver})" \
+			--add-udeb="libglib${apiver}-udeb"
 	dh_installdeb -a
 	dh_shlibdeps -a -ldebian/libglib$(apiver)-$(soname)/usr/lib -Llibglib$(apiver)-$(soname)
-	dh_gencontrol -a -Nlibglib$(apiver)-udeb
-	dh_md5sums -a -Nlibglib$(apiver)-udeb
-	dh_builddeb -a -Nlibglib$(apiver)-udeb
+	# hmm, I don't know but need to fix the self dependency for the udeb.
+	sed -i 's/, libglib$(apiver)-udeb (>= [.0-9]*)//' $(CURDIR)/debian/libglib$(apiver)-udeb.substvars
+	dh_gencontrol -a
+	dh_md5sums -a
+	dh_builddeb -a
 
-binary-arch-udeb: build-udeb install-udeb
-	dh_testdir -plibglib$(apiver)-udeb
-	dh_testroot -plibglib$(apiver)-udeb
-
-	dh_installdebconf -plibglib$(apiver)-udeb
-	dh_strip -plibglib$(apiver)-udeb
-	dh_compress -plibglib$(apiver)-udeb
-	dh_fixperms -plibglib$(apiver)-udeb
-	dh_installdeb -plibglib$(apiver)-udeb
-	-rm -f $(CURDIR)/debian/shlibs.local
-	dh_shlibdeps -l$(udeblibpath) -plibglib$(apiver)-udeb
-	# hmm, I don't know but need to fix the self dependency.
-	sed -e 's/, libglib$(apiver)-$(soname) (>= [.0-9]*)//' $(CURDIR)/debian/libglib$(apiver)-udeb.substvars > $(CURDIR)/debian/libglib$(apiver)-udeb.substvars.new
-	mv $(CURDIR)/debian/libglib$(apiver)-udeb.substvars.new \
-	   $(CURDIR)/debian/libglib$(apiver)-udeb.substvars
-	dh_gencontrol -plibglib$(apiver)-udeb -- -fdebian/files~
-	dpkg-distaddfile $(udebname) debian-installer extra
-
-	dh_builddeb -plibglib$(apiver)-udeb --filename=$(udebname)
-
-binary: binary-indep binary-arch binary-arch-udeb
-.PHONY: build build-deb build-udeb clean binary-indep binary-arch binary-arch-udeb binary install install-deb install-udeb install-test configure configure-deb configure-udeb extract debian/control
+binary: binary-indep binary-arch
+.PHONY: build build-deb build-udeb clean binary-indep binary-arch binary install install-deb install-udeb install-test configure configure-deb configure-udeb extract debian/control

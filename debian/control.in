@@ -3,7 +3,7 @@ Section: libs
 Priority: optional
 Maintainer: Sebastien Bacher <seb128@debian.org>
 Uploaders: @GNOME_TEAM@
-Build-Depends: debhelper (>> 4.0.0), pkg-config (>= 0.14.0), gettext, autotools-dev, gnome-pkg-tools
+Build-Depends: debhelper (>> 5.0.22), pkg-config (>= 0.14.0), gettext, autotools-dev, gnome-pkg-tools
 Standards-Version: 3.6.2
 
 Package: libglib2.0-@SONAME@
@@ -25,7 +25,6 @@ XC-Package-Type: udeb
 Priority: extra
 Architecture: any
 Depends: ${shlibs:Depends}
-Provides: libglib2.0-@SONAME@
 Description: The GLib library of C routines
  This is a udeb, or a microdeb, for the debian-installer.
  .
@@ -79,8 +78,8 @@ Description: Common files for GLib library
  as trees, hashes, lists, and strings.  It is a useful general-purpose
  C library used by projects such as GTK+, GIMP, and GNOME.
  .
- This package contains the common files which the runtime libraries
- need.
+ This package is needed for the runtime libraries to display messages in
+ languages other than English.
 
 Package: libglib2.0-doc
 Section: doc

@@ -2,8 +2,8 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Sebastien Bacher <seb128@debian.org>
-Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Akira TAGOH <tagoh@debian.org>, Andreas Rottmann <rotty@debian.org>, Andrew Lau <netsnipe@users.sourceforge.net>, Carlos Perelló Marín <carlos@pemas.net>, Clément Stenac <zorglub@debian.org>, Ed Boraas <ed@debian.org>, Edd Dumbill <ejad@debian.org>, Emil Soleyman-Zomalan <emil@nishra.com>, Guilherme de S. Pastore <guilherme.pastore@terra.com.br>, Gustavo Noronha Silva <kov@debian.org>, J.H.M. Dassen (Ray) <jdassen@debian.org>, Joe Drew <drew@debian.org>, Johannes Rohr <jr.debian@rohr.org>, Jordi Mallach <jordi@debian.org>, Jose Carlos Garcia Sogo <jsogo@debian.org>, Josselin Mouette <joss@debian.org>, Loic Minier <lool@dooz.org>, Marc HE Brockschmidt <he@debian.org>, Ondřej Surý <ondrej@debian.org>, Rob Bradford <rob@debianplanet.org>, Robert McQueen <robot101@debian.org>, Ross Burton <ross@debian.org>, Sjoerd Simons <sjoerd@debian.org>, Takuo KITAME <kitame@debian.org>
-Build-Depends: debhelper (>> 4.0.0), pkg-config (>= 0.14.0), gettext, autotools-dev, gnome-pkg-tools
+Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Akira TAGOH <tagoh@debian.org>, Andreas Rottmann <rotty@debian.org>, Andrew Lau <netsnipe@users.sourceforge.net>, Clément Stenac <zorglub@debian.org>, Dafydd Harries <daf@debian.org>, Guilherme de S. Pastore <gpastore@debian.org>, Gustavo Franco <stratus@debian.org>, Gustavo Noronha Silva <kov@debian.org>, J.H.M. Dassen (Ray) <jdassen@debian.org>, Jordi Mallach <jordi@debian.org>, Jose Carlos Garcia Sogo <jsogo@debian.org>, Josselin Mouette <joss@debian.org>, Loic Minier <lool@dooz.org>, Marc HE Brockschmidt <he@debian.org>, Marco Cabizza <marco87@gmail.com>, Ondřej Surý <ondrej@debian.org>, Ross Burton <ross@debian.org>, Sjoerd Simons <sjoerd@debian.org>, Takuo KITAME <kitame@debian.org>
+Build-Depends: debhelper (>> 5.0.22), pkg-config (>= 0.14.0), gettext, autotools-dev, gnome-pkg-tools
 Standards-Version: 3.6.2
 
 Package: libglib2.0-0
@@ -25,7 +25,6 @@ XC-Package-Type: udeb
 Priority: extra
 Architecture: any
 Depends: ${shlibs:Depends}
-Provides: libglib2.0-0
 Description: The GLib library of C routines
  This is a udeb, or a microdeb, for the debian-installer.
  .
@@ -79,8 +78,8 @@ Description: Common files for GLib library
  as trees, hashes, lists, and strings.  It is a useful general-purpose
  C library used by projects such as GTK+, GIMP, and GNOME.
  .
- This package contains the common files which the runtime libraries
- need.
+ This package is needed for the runtime libraries to display messages in
+ languages other than English.
 
 Package: libglib2.0-doc
 Section: doc
