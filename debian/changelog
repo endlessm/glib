@@ -1,3 +1,9 @@
+glib2.0 (2.10.3-3) UNRELEASED; urgency=low
+
+  * Sync with overrides and set udeb's Priority to optional instead of extra.
+
+ -- Loic Minier <lool@dooz.org>  Sat,  8 Jul 2006 22:37:40 +0200
+
 glib2.0 (2.10.3-2) unstable; urgency=medium
 
   * Re-add changes from 2.10.2-2 that were lost in the wild

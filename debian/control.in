@@ -22,7 +22,7 @@ Description: The GLib library of C routines
 Package: libglib2.0-udeb
 Section: debian-installer
 XC-Package-Type: udeb
-Priority: extra
+Priority: optional
 Architecture: any
 Depends: ${shlibs:Depends}
 Description: The GLib library of C routines
