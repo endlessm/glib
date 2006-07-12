@@ -1,17 +1,13 @@
-glib2.0 (2.10.3-3) UNRELEASED; urgency=low
+glib2.0 (2.10.3-3) unstable; urgency=low
 
+  * debian/patches/999_ia64_atomic_ops_broken.patch:
+    - dropped, it's not required with the new gcc and it was breaking the build
+      (Closes: #376260)
+  
+  [ Loic Minier ]
   * Sync with overrides and set udeb's Priority to optional instead of extra.
-  * Merge diff from 2.10.3-2.1 NMU. (Closes: #376260)
 
- -- Loic Minier <lool@dooz.org>  Wed, 12 Jul 2006 10:38:13 +0200
-
-glib2.0 (2.10.3-2.1) unstable; urgency=low
-
-  * Non-maintainer upload.
-  * Drop 999_ia64_atomic_ops_broken.patch, no longer needed w/ gcc-4.1
-    (closes: #376260).
-
- -- dann frazier <dannf@debian.org>  Tue, 11 Jul 2006 18:58:46 -0600
+ -- Sebastien Bacher <seb128@debian.org>  Wed, 12 Jul 2006 19:09:21 +0200
 
 glib2.0 (2.10.3-2) unstable; urgency=medium
 
