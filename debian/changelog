@@ -1,8 +1,17 @@
 glib2.0 (2.10.3-3) UNRELEASED; urgency=low
 
   * Sync with overrides and set udeb's Priority to optional instead of extra.
+  * Merge diff from 2.10.3-2.1 NMU. (Closes: #376260)
 
- -- Loic Minier <lool@dooz.org>  Sat,  8 Jul 2006 22:37:40 +0200
+ -- Loic Minier <lool@dooz.org>  Wed, 12 Jul 2006 10:38:13 +0200
+
+glib2.0 (2.10.3-2.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Drop 999_ia64_atomic_ops_broken.patch, no longer needed w/ gcc-4.1
+    (closes: #376260).
+
+ -- dann frazier <dannf@debian.org>  Tue, 11 Jul 2006 18:58:46 -0600
 
 glib2.0 (2.10.3-2) unstable; urgency=medium
 
