@@ -2,6 +2,7 @@ glib2.0 (2.12.1-1) UNRELEASED; urgency=low
 
   * New upstream release.
   * Sync with overrides and set udeb's Priority to optional instead of extra.
+  * Bump up Standards-Version to 3.7.2.
 
  -- Loic Minier <lool@dooz.org>  Mon,  7 Aug 2006 22:08:21 +0200
 
