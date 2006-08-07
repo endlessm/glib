@@ -1,8 +1,9 @@
-glib2.0 (2.12.0-2) UNRELEASED; urgency=low
+glib2.0 (2.12.1-1) UNRELEASED; urgency=low
 
+  * New upstream release.
   * Sync with overrides and set udeb's Priority to optional instead of extra.
 
- -- Loic Minier <lool@dooz.org>  Sat,  8 Jul 2006 22:36:51 +0200
+ -- Loic Minier <lool@dooz.org>  Mon,  7 Aug 2006 22:08:21 +0200
 
 glib2.0 (2.12.0-1) experimental; urgency=low
 
