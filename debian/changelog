@@ -1,4 +1,4 @@
-glib2.0 (2.12.1-1) UNRELEASED; urgency=low
+glib2.0 (2.12.1-1) experimental; urgency=low
 
   * New upstream release.
   * Sync with overrides and set udeb's Priority to optional instead of extra.
