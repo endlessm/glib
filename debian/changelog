@@ -1,3 +1,9 @@
+glib2.0 (2.12.2-1) experimental; urgency=low
+
+  * New upstream release; no API changes.
+
+ -- Loic Minier <lool@dooz.org>  Mon, 21 Aug 2006 12:30:24 +0200
+
 glib2.0 (2.12.1-1) experimental; urgency=low
 
   * New upstream release.
