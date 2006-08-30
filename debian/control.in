@@ -70,7 +70,7 @@ Description: The GLib libraries and debugging symbols
 Package: libglib2.0-data
 Section: misc
 Architecture: all
-Depends: libglib2.0-@SONAME@ (= ${Source-Version})
+Depends: libglib2.0-@SONAME@ (>= ${Source-Version})
 Replaces: libglib1.3, libglib1.3-data
 Conflicts: libglib1.3-data
 Description: Common files for GLib library

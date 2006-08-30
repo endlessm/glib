@@ -1,8 +1,9 @@
 glib2.0 (2.12.3-1) experimental; urgency=low
 
   * New upstream release; no public API changes.
+  * Broaden the -data dep on the lib to permit bin NMUs.
 
- -- Loic Minier <lool@dooz.org>  Wed, 30 Aug 2006 21:53:56 +0200
+ -- Loic Minier <lool@dooz.org>  Wed, 30 Aug 2006 22:12:02 +0200
 
 glib2.0 (2.12.2-1) experimental; urgency=low
 
