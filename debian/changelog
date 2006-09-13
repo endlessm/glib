@@ -1,8 +1,11 @@
-glib2.0 (2.12.3-2) UNRELEASED; urgency=low
+glib2.0 (2.12.3-2) unstable; urgency=low
 
+  * Upload to unstable
+
+  [ Loic Minier]
   * Merge 2.10.3-3.
 
- -- Loic Minier <lool@dooz.org>  Mon, 11 Sep 2006 13:12:39 +0200
+ -- Sebastien Bacher <seb128@debian.org>  Wed, 13 Sep 2006 13:16:29 +0200
 
 glib2.0 (2.12.3-1) experimental; urgency=low
 
