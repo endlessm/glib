@@ -1,9 +1,6 @@
 glib2.0 (2.12.4-1) unstable; urgency=low
 
   * New upstream release; no API changes.
-    - Packages exposing types in their API will see ABI additions and should
-      bump their shlibs due to a new exported symbol,
-      g_implement_interface_info.
 
  -- Loic Minier <lool@dooz.org>  Mon,  2 Oct 2006 10:39:57 +0200
 
