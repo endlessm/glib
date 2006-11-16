@@ -1,3 +1,10 @@
+glib2.0 (2.12.4-2) unstable; urgency=low
+
+  * New patch, 011_glib-gettext-datarootdir, to compute datarootdir
+    appropriately for AM_GLIB_DEFINE_LOCALEDIR; closes: #370282.
+
+ -- Loic Minier <lool@dooz.org>  Thu, 16 Nov 2006 10:14:52 +0100
+
 glib2.0 (2.12.4-1) unstable; urgency=low
 
   * New upstream release; no API changes.
