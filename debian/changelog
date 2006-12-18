@@ -1,3 +1,23 @@
+glib2.0 (2.12.4-3) UNRELEASED; urgency=low
+
+  * Add cross-reference in 2.12.4-2.
+
+ -- Loic Minier <lool@dooz.org>  Thu, 16 Nov 2006 10:28:13 +0100
+
+glib2.0 (2.12.4-2) unstable; urgency=low
+
+  * New patch, 011_glib-gettext-datarootdir, to compute datarootdir
+    appropriately for AM_GLIB_DEFINE_LOCALEDIR; GNOME #343825;
+    closes: #370282.
+
+ -- Loic Minier <lool@dooz.org>  Thu, 16 Nov 2006 10:14:52 +0100
+
+glib2.0 (2.12.4-1) unstable; urgency=low
+
+  * New upstream release; no API changes.
+
+ -- Loic Minier <lool@dooz.org>  Mon,  2 Oct 2006 10:39:57 +0200
+
 glib2.0 (2.12.3-2) unstable; urgency=low
 
   * Upload to unstable
