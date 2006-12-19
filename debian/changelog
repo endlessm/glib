@@ -4,8 +4,10 @@ glib2.0 (2.12.5-1) experimental-WIP; urgency=low
   * New upstream release; no API or ABI change.
     - Target at experimental for now.
     - Drop patch 011_glib-gettext-datarootdir, merged upstream.
+  * Drop patch 010_glib2.0.kfreebsd-amd64, is not needed anymore and seems to
+    have been at the wrong level anyway.
 
- -- Loic Minier <lool@dooz.org>  Mon, 18 Dec 2006 23:13:47 +0100
+ -- Loic Minier <lool@dooz.org>  Tue, 19 Dec 2006 08:11:24 +0100
 
 glib2.0 (2.12.4-2) unstable; urgency=low
 
