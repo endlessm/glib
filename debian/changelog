@@ -6,10 +6,9 @@ glib2.0 (2.12.5-1) experimental; urgency=low
     - Drop patch 011_glib-gettext-datarootdir, merged upstream.
   * Drop patch 010_glib2.0.kfreebsd-amd64, is not needed anymore and seems to
     have been at the wrong level anyway.
-  * Drop patch 000_glib-link, which solved a FTBFS on some arches in august
-    2004, but which I suspect has been fixed.
+  * Review and comment on the usefulness of patch 000_glib-link.
 
- -- Loic Minier <lool@dooz.org>  Tue, 19 Dec 2006 08:13:12 +0100
+ -- Loic Minier <lool@dooz.org>  Tue, 19 Dec 2006 08:52:26 +0100
 
 glib2.0 (2.12.4-2) unstable; urgency=low
 

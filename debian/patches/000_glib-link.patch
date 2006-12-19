@@ -1,0 +1,43 @@
+As of 2006/12/19, this patch is still useful. -- lool
+This patch helps building the tests with --enable-static; without the patch,
+these fail to build with:
+/bin/sh ../libtool --mode=link i486-linux-gnu-gcc  -g -O2 -Wall  -Wl,-z,defs -Wl,-O1 -o libmoduletestplugin_a.la -rpath /usr/lib -Wl,--export-dynamic -avoid-version -module  -rpath /usr/lib libmoduletestplugin_a.lo -ldl   -lrt
+i486-linux-gnu-gcc -shared  .libs/libmoduletestplugin_a.o  -ldl -lrt  -Wl,-z -Wl,defs -Wl,-O1 -Wl,--export-dynamic -Wl,-soname -Wl,libmoduletestplugin_a.so -o .libs/libmoduletestplugin_a.so  -ldl -lrt
+.libs/libmoduletestplugin_a.o: In function `gplugin_a_module_func':
+/tmp/buildd/glib2.0-2.12.5/build-tree/glib-2.12.5-deb/tests/libmoduletestplugin_a.c:64: undefined reference to `g_module_symbol'
+/tmp/buildd/glib2.0-2.12.5/build-tree/glib-2.12.5-deb/tests/libmoduletestplugin_a.c:66: undefined reference to `g_module_error'
+/tmp/buildd/glib2.0-2.12.5/build-tree/glib-2.12.5-deb/tests/libmoduletestplugin_a.c:66: undefined reference to `g_print'
+collect2: ld returned 1 exit status
+make[4]: *** [libmoduletestplugin_a.la] Error 1
+make[4]: Leaving directory `/tmp/buildd/glib2.0-2.12.5/build-tree/glib-2.12.5-deb/tests'
+diff -ruN glib-2.6.5.old/tests/Makefile.am glib-2.6.5/tests/Makefile.am
+--- glib-2.6.5.old/tests/Makefile.am	2005-02-08 15:15:16.000000000 +0000
++++ glib-2.6.5/tests/Makefile.am	2005-06-10 18:48:34.000000000 +0000
+@@ -9,10 +9,10 @@
+ libgmodule = $(top_builddir)/gmodule/libgmodule-2.0.la
+ libgobject = $(top_builddir)/gobject/libgobject-2.0.la
+ 
+-if PLATFORM_WIN32
+ libadd_libgmodule = $(libgmodule)
+ libadd_libglib = $(libglib)
+ no_undefined = -no-undefined
++if PLATFORM_WIN32
+ 
+ module_test_exp = module-test.exp
+ 
+diff -ruN glib-2.6.5.old/tests/Makefile.in glib-2.6.5/tests/Makefile.in
+--- glib-2.6.5.old/tests/Makefile.in	2005-06-10 16:18:46.000000000 +0000
++++ glib-2.6.5/tests/Makefile.in	2005-06-10 18:48:59.000000000 +0000
+@@ -249,9 +249,9 @@
+ libgmodule = $(top_builddir)/gmodule/libgmodule-2.0.la
+ libgobject = $(top_builddir)/gobject/libgobject-2.0.la
+ 
+-@PLATFORM_WIN32_TRUE@libadd_libgmodule = $(libgmodule)
+-@PLATFORM_WIN32_TRUE@libadd_libglib = $(libglib)
+-@PLATFORM_WIN32_TRUE@no_undefined = -no-undefined
++libadd_libgmodule = $(libgmodule)
++libadd_libglib = $(libglib)
++no_undefined = -no-undefined
+ 
+ @PLATFORM_WIN32_TRUE@module_test_exp = module-test.exp
+ 
