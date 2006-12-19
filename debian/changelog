@@ -1,8 +1,11 @@
-glib2.0 (2.12.4-3) UNRELEASED; urgency=low
+glib2.0 (2.12.5-1) experimental-WIP; urgency=low
 
   * Add cross-reference in 2.12.4-2.
+  * New upstream release; no API or ABI change.
+    - Target at experimental for now.
+    - Drop patch 011_glib-gettext-datarootdir, merged upstream.
 
- -- Loic Minier <lool@dooz.org>  Thu, 16 Nov 2006 10:28:13 +0100
+ -- Loic Minier <lool@dooz.org>  Mon, 18 Dec 2006 23:13:47 +0100
 
 glib2.0 (2.12.4-2) unstable; urgency=low
 
