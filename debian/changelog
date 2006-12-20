@@ -1,3 +1,9 @@
+glib2.0 (2.12.5-3) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Loic Minier <lool@dooz.org>  Wed, 20 Dec 2006 17:27:25 +0100
+
 glib2.0 (2.12.5-2) experimental; urgency=low
 
   * Upload to unstable.
