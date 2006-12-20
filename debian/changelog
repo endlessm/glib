@@ -1,8 +1,20 @@
-glib2.0 (2.12.4-3) UNRELEASED; urgency=low
+glib2.0 (2.12.5-2) experimental; urgency=low
+
+  * Upload to unstable.
+
+ -- Loic Minier <lool@dooz.org>  Wed, 20 Dec 2006 08:50:56 +0100
+
+glib2.0 (2.12.5-1) experimental; urgency=low
 
   * Add cross-reference in 2.12.4-2.
+  * New upstream release; no API or ABI change.
+    - Target at experimental for now.
+    - Drop patch 011_glib-gettext-datarootdir, merged upstream.
+  * Drop patch 010_glib2.0.kfreebsd-amd64, is not needed anymore and seems to
+    have been at the wrong level anyway.
+  * Review and comment on the usefulness of patch 000_glib-link.
 
- -- Loic Minier <lool@dooz.org>  Thu, 16 Nov 2006 10:28:13 +0100
+ -- Loic Minier <lool@dooz.org>  Tue, 19 Dec 2006 08:52:26 +0100
 
 glib2.0 (2.12.4-2) unstable; urgency=low
 
