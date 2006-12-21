@@ -1,3 +1,10 @@
+glib2.0 (2.12.6-1) unstable; urgency=low
+
+  * New upstream release; no API or ABI change.
+    - Fixes file-type detection in nautilus; closes: #404015.
+
+ -- Loic Minier <lool@dooz.org>  Thu, 21 Dec 2006 09:46:30 +0100
+
 glib2.0 (2.12.5-3) unstable; urgency=low
 
   * Upload to unstable.
