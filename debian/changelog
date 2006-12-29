@@ -1,3 +1,10 @@
+glib2.0 (2.12.6-2) UNRELEASED; urgency=low
+
+  * 001_gkeyfile_gnucash.patch: allow spaces in key names, so that 
+    gnucash can re-read old files it has generated (closes: #404888).
+
+ -- Josselin Mouette <joss@debian.org>  Fri, 29 Dec 2006 03:13:09 +0100
+
 glib2.0 (2.12.6-1) unstable; urgency=low
 
   * New upstream release; no API or ABI change.
