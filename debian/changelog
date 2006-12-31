@@ -3,10 +3,12 @@ glib2.0 (2.12.6-2) unstable; urgency=low
   * New patch, 010_restore-old-key-file-syntax-support, reverts strict group
     names and key names checks introduced between glib 2.12.4 and 2.12.6;
     instead of failing, critical warnings are output; updates the relevant
-    tests as well; adds a new test with a space in the key name;
-    closes: #404888.
+    tests as well; closes: #404888.
+  * New patch, 009_accept-space-in-key-names, adds support for space in key
+    names (independently of 010_restore-old-key-file-syntax-support); updates
+    and add relevant tests as well; closes: #404888 as well.
 
- -- Loic Minier <lool@dooz.org>  Sun, 31 Dec 2006 19:38:06 +0100
+ -- Loic Minier <lool@dooz.org>  Sun, 31 Dec 2006 20:43:23 +0100
 
 glib2.0 (2.12.6-1) unstable; urgency=low
 

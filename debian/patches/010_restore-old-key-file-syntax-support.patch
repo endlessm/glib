@@ -374,14 +374,3 @@
  
    keyfile = g_key_file_new ();
    g_key_file_set_string (keyfile, "a", "x", "123");
-@@ -1121,6 +1169,10 @@ test_key_names (void)
-   g_key_file_set_string (keyfile, "a", "foo.bar", ".");
-   check_string_value (keyfile, "a", "foo.bar", ".");
- 
-+  /* Keys with space (as used by Gnucash) */
-+  g_key_file_set_string (keyfile, "a", "foo bar", " ");
-+  check_string_value (keyfile, "a", "foo bar", " ");
-+
-   g_key_file_free (keyfile);  
- }
- 
