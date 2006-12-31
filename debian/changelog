@@ -1,4 +1,4 @@
-glib2.0 (2.12.6-2) unstable; urgency=low
+glib2.0 (2.12.6-2) unstable; urgency=medium
 
   * New patch, 010_restore-old-key-file-syntax-support, reverts strict group
     names and key names checks introduced between glib 2.12.4 and 2.12.6;
