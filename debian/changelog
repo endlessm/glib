@@ -1,3 +1,13 @@
+glib2.0 (2.12.6-2) unstable; urgency=low
+
+  * New patch, 010_restore-old-key-file-syntax-support, reverts strict group
+    names and key names checks introduced between glib 2.12.4 and 2.12.6;
+    instead of failing, critical warnings are output; updates the relevant
+    tests as well; adds a new test with a space in the key name;
+    closes: #404888.
+
+ -- Loic Minier <lool@dooz.org>  Sun, 31 Dec 2006 19:38:06 +0100
+
 glib2.0 (2.12.6-1) unstable; urgency=low
 
   * New upstream release; no API or ABI change.
