@@ -1,0 +1,86 @@
+--- /home/lool/tarballs/gnome/glib/2.12/glib-2.12.6/glib/gkeyfile.c	2006-12-19 22:03:00.000000000 +0100
++++ glib-2.12.6/glib/gkeyfile.c	2006-12-31 20:38:52.000000000 +0100
+@@ -3229,17 +3229,23 @@ static gboolean
+ g_key_file_is_key_name (const gchar *name)
+ {
+   gchar *p, *q;
++  gchar prev_char;
+ 
+   if (name == NULL)
+     return FALSE;
+ 
+   p = q = (gchar *) name;
+   /* We accept a little more than the desktop entry spec says,
+-   * since gnome-vfs uses mime-types as keys in its cache.
++   * since gnome-vfs uses mime-types as keys in its cache, and since some apps
++   * such as Gnucash use space in the middle of key names.
+    */
+   while (*q && (g_unichar_isalnum (g_utf8_get_char (q)) || 
+-                *q == '-' || *q == '_' || *q == '/' || *q == '+' || *q == '.'))
++                *q == '-' || *q == '_' || *q == '/' || *q == '+' || *q == '.') || 
++                ((q != name) && *q == ' '))
++  {
++    prev_char = g_utf8_get_char (q);
+     q = g_utf8_next_char (q);
++  }
+   
+   if (*q == '[')
+     {
+@@ -3256,6 +3262,9 @@ g_key_file_is_key_name (const gchar *nam
+   if (*q != '\0' || q == p)
+     return FALSE;
+ 
++  if (prev_char == ' ')
++    return FALSE;
++
+   return TRUE;
+ }
+ 
+--- /home/lool/tarballs/gnome/glib/2.12/glib-2.12.6/tests/keyfile-test.c	2006-12-19 22:03:01.000000000 +0100
++++ glib-2.12.6/tests/keyfile-test.c	2006-12-31 20:38:24.000000000 +0100
+@@ -418,7 +418,9 @@ test_whitespace (void)
+     " [ group2 ] \n"
+     "key3  =  value3  \n"
+     "key4  =  value \t4\n"
+-    "  key5  =  value5\n";
++    "  key5  =  value5\n"
++    "[group 3]\n"
++    "key 6 = value6\n";
+   
+   keyfile = load_data (data, 0);
+ 
+@@ -427,6 +429,7 @@ test_whitespace (void)
+   check_string_value (keyfile, " group2 ", "key3", "value3  ");
+   check_string_value (keyfile, " group2 ", "key4", "value \t4");
+   check_string_value (keyfile, " group2 ", "key5", "value5");
++  check_string_value (keyfile, "group 3", "key 6", "value6");
+ 
+   g_key_file_free (keyfile);
+ }
+@@ -1108,6 +1111,15 @@ test_key_names (void)
+ 
+   keyfile = g_key_file_new ();
+   g_key_file_set_string (keyfile, "a", "x", "123");
++  g_key_file_set_string (keyfile, "a", "key ", "123");
++  value = g_key_file_get_string (keyfile, "a", "key ", &error);
++  check_error (&error, 
++               G_KEY_FILE_ERROR,
++               G_KEY_FILE_ERROR_KEY_NOT_FOUND);  
++  g_key_file_free (keyfile);  
++
++  keyfile = g_key_file_new ();
++  g_key_file_set_string (keyfile, "a", "x", "123");
+ 
+   /* Unicode key */
+   g_key_file_set_string (keyfile, "a", "\xc2\xbd", "123");
+@@ -1121,6 +1133,10 @@ test_key_names (void)
+   g_key_file_set_string (keyfile, "a", "foo.bar", ".");
+   check_string_value (keyfile, "a", "foo.bar", ".");
+ 
++  /* Keys with space (as used by Gnucash) */
++  g_key_file_set_string (keyfile, "a", "foo bar", "baz");
++  check_string_value (keyfile, "a", "foo bar", "baz");
++
+   g_key_file_free (keyfile);  
+ }
+ 

@@ -1,3 +1,34 @@
+glib2.0 (2.12.6-2) unstable; urgency=medium
+
+  * New patch, 010_restore-old-key-file-syntax-support, reverts strict group
+    names and key names checks introduced between glib 2.12.4 and 2.12.6;
+    instead of failing, critical warnings are output; updates the relevant
+    tests as well; closes: #404888.
+  * New patch, 009_accept-space-in-key-names, adds support for space in key
+    names (independently of 010_restore-old-key-file-syntax-support); updates
+    and add relevant tests as well; closes: #404888 as well.
+
+ -- Loic Minier <lool@dooz.org>  Sun, 31 Dec 2006 20:43:23 +0100
+
+glib2.0 (2.12.6-1) unstable; urgency=low
+
+  * New upstream release; no API or ABI change.
+    - Fixes file-type detection in nautilus; closes: #404015.
+
+ -- Loic Minier <lool@dooz.org>  Thu, 21 Dec 2006 09:46:30 +0100
+
+glib2.0 (2.12.5-3) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Loic Minier <lool@dooz.org>  Wed, 20 Dec 2006 17:27:25 +0100
+
+glib2.0 (2.12.5-2) experimental; urgency=low
+
+  * Upload to unstable.
+
+ -- Loic Minier <lool@dooz.org>  Wed, 20 Dec 2006 08:50:56 +0100
+
 glib2.0 (2.12.5-1) experimental; urgency=low
 
   * Add cross-reference in 2.12.4-2.
