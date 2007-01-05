@@ -1,3 +1,13 @@
+glib2.0 (2.12.7-1) experimental; urgency=low
+
+  * New upstream release; no API change; translation updates, bug fixes,
+    build fixes.
+    - Target at experimental for now.
+    - Drop patch 010_restore-old-key-file-syntax-support, merged and adapted
+      upstream.
+
+ -- Loic Minier <lool@dooz.org>  Fri,  5 Jan 2007 12:24:38 +0100
+
 glib2.0 (2.12.6-2) unstable; urgency=medium
 
   * New patch, 010_restore-old-key-file-syntax-support, reverts strict group
