@@ -1,8 +1,12 @@
-glib2.0 (2.12.7-2) UNRELEASED; urgency=low
+glib2.0 (2.12.8-1) experimental; urgency=low
 
   * Add a get-orig-source target to retrieve the upstream tarball.
+  * New upstream release.
+    - Fixes documentation of g_key_file_set_string_list(); closes: #405028.
+    - Avoids spewing warnings with gcc 2.95; closes: #303124.
+    - Drop patch 009_accept-space-in-key-names; merged and adapted upstream.
 
- -- Loic Minier <lool@dooz.org>  Sat, 13 Jan 2007 22:27:42 +0100
+ -- Loic Minier <lool@dooz.org>  Mon, 15 Jan 2007 11:17:50 +0100
 
 glib2.0 (2.12.7-1) experimental; urgency=low
 
