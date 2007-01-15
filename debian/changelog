@@ -1,8 +1,10 @@
 glib2.0 (2.12.6-3) UNRELEASED; urgency=low
 
   * Add a get-orig-source target to retrieve the upstream tarball.
+  * Update patch 009_accept-space-in-key-names to be slightly cleaner, closer
+    to the final upstream fix, simpler, and to not cause any performance hit.
 
- -- Loic Minier <lool@dooz.org>  Sat, 13 Jan 2007 23:28:16 +0100
+ -- Loic Minier <lool@dooz.org>  Mon, 15 Jan 2007 11:08:15 +0100
 
 glib2.0 (2.12.6-2) unstable; urgency=medium
 
