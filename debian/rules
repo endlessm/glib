@@ -48,7 +48,7 @@ shortver=$(major).$(minor)
 apiver=2.0
 soname=0
 gtkver=2.0
-shver=2.12.0
+shver=2.12.9
 libpath=$(CURDIR)/$(BUILD_DEB_DIR)/glib/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gmodule/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gobject/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gthread/.libs
 udeblibpath=$(CURDIR)/$(BUILD_UDEB_DIR)/glib/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gmodule/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gobject/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gthread/.libs
 
