@@ -184,13 +184,20 @@ install-deb: build-deb install-test
 install-udeb: build-udeb install-test
 	# Add here commands to install the package into debian/tmp
 	$(MAKE) -C $(BUILD_UDEB_DIR) install \
-		prefix=$(CURDIR)/debian/tmp/usr
+		prefix=$(CURDIR)/debian/libglib$(apiver)-udeb/usr
 
 	# clean the unnecessary files up
-	rm -rf debian/tmp/usr/share/gtk-doc
-
-	dh_movefiles
-	-rm -rf $(CURDIR)/debian/libglib$(apiver)-udeb/usr/share/doc
+	rm -rf debian/libglib$(apiver)-udeb/usr/bin
+	rm -rf debian/libglib$(apiver)-udeb/usr/include
+	rm -rf debian/libglib$(apiver)-udeb/usr/lib/glib-2.0
+	rm -rf debian/libglib$(apiver)-udeb/usr/lib/pkgconfig
+	rm -rf debian/libglib$(apiver)-udeb/usr/lib/*.la
+	rm -rf debian/libglib$(apiver)-udeb/usr/lib/*.so
+	rm -rf debian/libglib$(apiver)-udeb/usr/share/aclocal
+	rm -rf debian/libglib$(apiver)-udeb/usr/share/doc
+	rm -rf debian/libglib$(apiver)-udeb/usr/share/glib-2.0
+	rm -rf debian/libglib$(apiver)-udeb/usr/share/gtk-doc
+	rm -rf debian/libglib$(apiver)-udeb/usr/share/man
 
 	-find $(CURDIR)/debian/ -type d -empty ! -regex '.*/var.*' -prune | xargs rmdir -p 2>&1 > /dev/null
 
