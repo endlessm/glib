@@ -3,7 +3,7 @@ Section: libs
 Priority: optional
 Maintainer: Sebastien Bacher <seb128@debian.org>
 Uploaders: @GNOME_TEAM@
-Build-Depends: debhelper (>> 5.0.22), pkg-config (>= 0.14.0), gettext, autotools-dev, gnome-pkg-tools
+Build-Depends: debhelper (>> 5.0.22), pkg-config (>= 0.14.0), gettext, autotools-dev, gnome-pkg-tools (>= 0.10)
 Standards-Version: 3.7.2
 
 Package: libglib2.0-@SONAME@
