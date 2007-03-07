@@ -10,8 +10,9 @@ glib2.0 (2.12.10-1) UNRELEASED; urgency=low
       when necessary; switch from dh_movefiles and dh_installdirs to
       dh_install.
     - Rename patch 000_glib-link to 10_glib-link.
+  * Bump up Debhelper compatibility level to 5.
 
- -- Loic Minier <lool@dooz.org>  Wed,  7 Mar 2007 21:09:29 +0100
+ -- Loic Minier <lool@dooz.org>  Wed,  7 Mar 2007 22:48:28 +0100
 
 glib2.0 (2.12.9-2) experimental; urgency=low
 
