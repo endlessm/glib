@@ -1,0 +1,11 @@
+debian/install/deb/usr/include/* usr/include
+debian/install/deb/usr/lib/lib*.{so,la,a} usr/lib
+debian/install/deb/usr/lib/glib-2.0 usr/lib
+debian/install/deb/usr/lib/pkgconfig usr/lib
+debian/install/deb/usr/share/aclocal usr/share
+debian/install/deb/usr/share/glib-2.0 usr/share
+debian/install/deb/usr/share/man/man1/glib-genmarshal.1* usr/share/man/man1
+debian/install/deb/usr/share/man/man1/glib-mkenums.1* usr/share/man/man1
+debian/install/deb/usr/share/man/man1/gobject-query.1* usr/share/man/man1
+debian/install/deb/usr/share/man/man1/glib-gettextize.1* usr/share/man/man1
+debian/install/deb/usr/bin usr

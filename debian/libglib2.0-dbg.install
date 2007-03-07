@@ -1,0 +1,1 @@
+debian/install/deb/usr/lib/debug/lib*.so* usr/lib/debug

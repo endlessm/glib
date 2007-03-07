@@ -1,9 +1,17 @@
-glib2.0 (2.12.9-3) UNRELEASED; urgency=low
+glib2.0 (2.12.10-1) UNRELEASED; urgency=low
 
   * Include the new check-dist Makefile to prevent accidental uploads to
     unstable; bump build-dep on gnome-pkg-tools to >= 0.10.
+  * New upstream release; no API change.
+    - Rewrite and cleanup the build-system completely to build a set of
+      flavors; drop obsolete targets; drop obsolete files; switch from
+      tar-in-tar and sys-build to regular source and quilt patching;
+      build-depend on quilt; drop DEB_USE_DBS_TARBALL_LAYOUT; create stampdir
+      when necessary; switch from dh_movefiles and dh_installdirs to
+      dh_install.
+    - Rename patch 000_glib-link to 10_glib-link.
 
- -- Loic Minier <lool@dooz.org>  Mon, 22 Jan 2007 11:24:20 +0100
+ -- Loic Minier <lool@dooz.org>  Wed,  7 Mar 2007 21:09:29 +0100
 
 glib2.0 (2.12.9-2) experimental; urgency=low
 
