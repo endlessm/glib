@@ -13,7 +13,7 @@ glib2.0 (2.12.10-1) UNRELEASED; urgency=low
   * Bump up Debhelper compatibility level to 5.
   * Only ship README.Debian in libglib2.0-dev.
 
- -- Loic Minier <lool@dooz.org>  Thu,  8 Mar 2007 08:05:58 +0100
+ -- Loic Minier <lool@dooz.org>  Thu,  8 Mar 2007 16:42:44 +0100
 
 glib2.0 (2.12.9-2) experimental; urgency=low
 
