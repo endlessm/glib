@@ -17,8 +17,10 @@ glib2.0 (2.12.10-1) UNRELEASED; urgency=low
   * Use >= ${source:Version} and ${binary:Version} for inder-deps; build-dep
     on dpkg-dev >= 1.13.19.
   * Fix --dbg-package name.
+  * Use make vars for package names.
+  * Tune udeb description.
 
- -- Loic Minier <lool@dooz.org>  Thu,  8 Mar 2007 17:31:35 +0100
+ -- Loic Minier <lool@dooz.org>  Thu,  8 Mar 2007 18:13:16 +0100
 
 glib2.0 (2.12.9-2) experimental; urgency=low
 

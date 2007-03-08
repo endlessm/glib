@@ -38,8 +38,15 @@ DEBVERSION := $(shell dpkg-parsechangelog | sed -n -e 's/^Version: //p')
 VERSION := $(shell echo $(DEBVERSION) | sed -e 's/-[^-]*$$//')
 APIVER := 2.0
 SONAME := 0
-GTKVER := 2.0
 SHVER := 2.12.9
+
+# package names
+SHARED_PKG := libglib$(APIVER)-$(SONAME)
+DATA_PKG := libglib$(APIVER)-data
+DEV_PKG := libglib$(APIVER)-dev
+UDEB_PKG := libglib$(APIVER)-udeb
+DOC_PKG := libglib$(APIVER)-doc
+DEBUG_PKG := $(SHARED_PKG)-dbg
 
 # list of flavors we build; each gets a builddir, a configure pass (configure
 # args are defined below), a build pass, and an install pass (in two steps)
@@ -62,7 +69,7 @@ common_configure_flags := \
 			--prefix=/usr \
 			--mandir=\$${prefix}/share/man \
 			--infodir=\$${prefix}/share/info \
-			--with-html-dir=\$${prefix}/share/doc/libglib$(APIVER)-doc \
+			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG) \
 			--host=$(DEB_HOST_GNU_TYPE) \
 			--build=$(DEB_BUILD_GNU_TYPE)
 ifeq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
@@ -121,8 +128,16 @@ install: $(addprefix $(STAMP_DIR)/install-stamp-, $(FLAVORS))
 
 debian/control:
 	dh_testdir
-	sed -e "s#@SONAME@#$(SONAME)#g" \
+	sed \
+		-e "s#@SONAME@#$(SONAME)#g" \
+		-e "s#@APIVER@#$(APIVER)#g" \
 		-e "s#@VERSION@#$(VERSION)#g" \
+		-e "s#@SHARED_PKG@#$(SHARED_PKG)#g" \
+		-e "s#@DATA_PKG@#$(DATA_PKG)#g" \
+		-e "s#@DEV_PKG@#$(DEV_PKG)#g" \
+		-e "s#@UDEB_PKG@#$(UDEB_PKG)#g" \
+		-e "s#@DOC_PKG@#$(DOC_PKG)#g" \
+		-e "s#@DEBUG_PKG@#$(DEBUG_PKG)#g" \
 		-e "s#@GNOME_TEAM@#$(uploaders)#g" \
 		$@.in > $@
 
@@ -146,18 +161,18 @@ binary-indep: build install
 	dh_testroot
 	dh_install -i
 	dh_installdocs -i
-	rm -rf $(CURDIR)/debian/libglib$(APIVER)-data/usr/share/doc/libglib$(APIVER)-data
-	dh_link -plibglib$(APIVER)-data \
-		usr/share/doc/libglib$(APIVER)-$(SONAME) \
-		usr/share/doc/libglib$(APIVER)-data
-	dh_link -plibglib$(APIVER)-doc \
-		usr/share/doc/libgtk$(GTKVER)-doc/gtk \
-		usr/share/doc/libglib$(APIVER)-doc/gtk
+	rm -rf $(CURDIR)/debian/$(DATA_PKG)/usr/share/doc/$(DATA_PKG)
+	dh_link -p$(DATA_PKG) \
+		usr/share/doc/$(SHARED_PKG) \
+		usr/share/doc/$(DATA_PKG)
+	dh_link -p$(DOC_PKG) \
+		usr/share/doc/libgtk2.0-doc/gtk \
+		usr/share/doc/$(DOC_PKG)/gtk
 	# create the symlinks on /usr/share/gtk-doc/html
-	for i in glib gobject; do				\
-		dh_link -plibglib$(APIVER)-doc			\
-			usr/share/doc/libglib$(APIVER)-doc/$$i	\
-			usr/share/gtk-doc/html/$$i;		\
+	for i in glib gobject; do			\
+		dh_link -p$(DOC_PKG)			\
+			usr/share/doc/$(DOC_PKG)/$$i	\
+			usr/share/gtk-doc/html/$$i;	\
 	done
 	dh_installexamples -i
 	dh_installinfo -i
@@ -174,27 +189,27 @@ binary-arch: build install
 	dh_testroot
 	dh_install -a
 	# empty the dependency_libs in the *.la files
-	sed -i "/dependency_libs/ s/'.*'/''/" debian/libglib$(APIVER)-dev/usr/lib/*.la
+	sed -i "/dependency_libs/ s/'.*'/''/" debian/$(DEV_PKG)/usr/lib/*.la
 	dh_installdocs -a
-	rm -rf $(CURDIR)/debian/libglib$(APIVER)-$(SONAME)-dbg/usr/share/doc/libglib$(APIVER)-$(SONAME)-dbg
-	rm -rf $(CURDIR)/debian/libglib$(APIVER)-dev/usr/share/doc/libglib$(APIVER)-dev
-	dh_link -plibglib$(APIVER)-$(SONAME)-dbg \
-		usr/share/doc/libglib$(APIVER)-$(SONAME) \
-		usr/share/doc/libglib$(APIVER)-$(SONAME)-dbg
-	dh_link -plibglib$(APIVER)-dev \
-		usr/share/doc/libglib$(APIVER)-$(SONAME) \
-		usr/share/doc/libglib$(APIVER)-dev
+	rm -rf $(CURDIR)/debian/$(DEBUG_PKG)/usr/share/doc/$(DEBUG_PKG)
+	rm -rf $(CURDIR)/debian/$(DEV_PKG)/usr/share/doc/$(DEV_PKG)
+	dh_link -p$(DEBUG_PKG) \
+		usr/share/doc/$(SHARED_PKG) \
+		usr/share/doc/$(DEBUG_PKG)
+	dh_link -p$(DEV_PKG) \
+		usr/share/doc/$(SHARED_PKG) \
+		usr/share/doc/$(DEV_PKG)
 	dh_installexamples -a
 	dh_installmenu -a
-	dh_installman -plibglib$(APIVER)-dev
+	dh_installman -p$(DEV_PKG)
 	dh_installinfo -a
 	dh_installchangelogs -a ChangeLog
-	dh_strip -a --dbg-package=libglib$(APIVER)-$(SONAME)-dbg
+	dh_strip -a --dbg-package=$(DEBUG_PKG)
 	dh_compress -a
 	dh_fixperms -a
-	dh_makeshlibs	-plibglib$(APIVER)-$(SONAME) \
-			-V "libglib$(APIVER)-$(SONAME) (>= $(SHVER))" \
-			--add-udeb="libglib$(APIVER)-udeb"
+	dh_makeshlibs	-p$(SHARED_PKG) \
+			-V "$(SHARED_PKG) (>= $(SHVER))" \
+			--add-udeb="$(UDEB_PKG)"
 	dh_installdeb -a
 	# override shlibs for libraries from this source before computing
 	# dependencies of packages generated from this source; we already have
@@ -203,7 +218,7 @@ binary-arch: build install
 	cat debian/*/DEBIAN/shlibs | \
 		sed -n -r -e 's/(([^ ]+: )?([^ ]+) ([^ ]+)) .*/\1/p' \
 			> debian/shlibs.local
-	dh_shlibdeps -a -ldebian/libglib$(APIVER)-$(SONAME)/usr/lib -Llibglib$(APIVER)-$(SONAME)
+	dh_shlibdeps -a -ldebian/$(SHARED_PKG)/usr/lib -L$(SHARED_PKG)
 	-rm -f debian/shlibs.local
 	dh_gencontrol -a
 	dh_md5sums -a
