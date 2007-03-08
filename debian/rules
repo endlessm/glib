@@ -173,6 +173,8 @@ binary-arch: build install
 	dh_testdir
 	dh_testroot
 	dh_install -a
+	# empty the dependency_libs in the *.la files
+	sed -i "/dependency_libs/ s/'.*'/''/" debian/libglib$(APIVER)-dev/usr/lib/*.la
 	dh_installdocs -a
 	rm -rf $(CURDIR)/debian/libglib$(APIVER)-$(SONAME)-dbg/usr/share/doc/libglib$(APIVER)-$(SONAME)-dbg
 	rm -rf $(CURDIR)/debian/libglib$(APIVER)-dev/usr/share/doc/libglib$(APIVER)-dev
