@@ -1,4 +1,4 @@
-glib2.0 (2.12.10-1) UNRELEASED; urgency=low
+glib2.0 (2.12.10-1) experimental; urgency=low
 
   * Include the new check-dist Makefile to prevent accidental uploads to
     unstable; bump build-dep on gnome-pkg-tools to >= 0.10.
@@ -19,8 +19,11 @@ glib2.0 (2.12.10-1) UNRELEASED; urgency=low
   * Fix --dbg-package name.
   * Use make vars for package names.
   * Tune udeb description.
+  * Clean /usr/share/doc symlinks generation and move to dh_link generated
+    links.
+  * Cleanup list of invoked dh_* commands.
 
- -- Loic Minier <lool@dooz.org>  Thu,  8 Mar 2007 18:13:16 +0100
+ -- Loic Minier <lool@dooz.org>  Thu,  8 Mar 2007 18:51:27 +0100
 
 glib2.0 (2.12.9-2) experimental; urgency=low
 

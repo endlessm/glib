@@ -160,23 +160,9 @@ binary-indep: build install
 	dh_testdir
 	dh_testroot
 	dh_install -i
-	dh_installdocs -i
-	rm -rf $(CURDIR)/debian/$(DATA_PKG)/usr/share/doc/$(DATA_PKG)
-	dh_link -p$(DATA_PKG) \
-		usr/share/doc/$(SHARED_PKG) \
-		usr/share/doc/$(DATA_PKG)
-	dh_link -p$(DOC_PKG) \
-		usr/share/doc/libgtk2.0-doc/gtk \
-		usr/share/doc/$(DOC_PKG)/gtk
-	# create the symlinks on /usr/share/gtk-doc/html
-	for i in glib gobject; do			\
-		dh_link -p$(DOC_PKG)			\
-			usr/share/doc/$(DOC_PKG)/$$i	\
-			usr/share/gtk-doc/html/$$i;	\
-	done
-	dh_installexamples -i
-	dh_installinfo -i
-	dh_installchangelogs -i ChangeLog
+	dh_installchangelogs -i -N$(DATA_PKG) ChangeLog ChangeLog.*
+	dh_installdocs -N$(DATA_PKG) -i NEWS NEWS.* README
+	dh_link -i
 	dh_compress -i
 	dh_fixperms -i
 	dh_installdeb -i
@@ -189,21 +175,11 @@ binary-arch: build install
 	dh_testroot
 	dh_install -a
 	# empty the dependency_libs in the *.la files
-	sed -i "/dependency_libs/ s/'.*'/''/" debian/$(DEV_PKG)/usr/lib/*.la
-	dh_installdocs -a
-	rm -rf $(CURDIR)/debian/$(DEBUG_PKG)/usr/share/doc/$(DEBUG_PKG)
-	rm -rf $(CURDIR)/debian/$(DEV_PKG)/usr/share/doc/$(DEV_PKG)
-	dh_link -p$(DEBUG_PKG) \
-		usr/share/doc/$(SHARED_PKG) \
-		usr/share/doc/$(DEBUG_PKG)
-	dh_link -p$(DEV_PKG) \
-		usr/share/doc/$(SHARED_PKG) \
-		usr/share/doc/$(DEV_PKG)
-	dh_installexamples -a
-	dh_installmenu -a
-	dh_installman -p$(DEV_PKG)
-	dh_installinfo -a
-	dh_installchangelogs -a ChangeLog
+	sed -i "/dependency_libs/ s/'.*'/''/" \
+		debian/$(DEV_PKG)/usr/lib/*.la
+	dh_installchangelogs -a -N$(DEV_PKG) -N$(DEBUG_PKG) ChangeLog ChangeLog.*
+	dh_installdocs -a -N$(DEV_PKG) -N$(DEBUG_PKG) NEWS NEWS.* README
+	dh_link -a
 	dh_strip -a --dbg-package=$(DEBUG_PKG)
 	dh_compress -a
 	dh_fixperms -a
