@@ -2,8 +2,8 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Sebastien Bacher <seb128@debian.org>
-Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Andrew Lau <netsnipe@users.sourceforge.net>, Clément Stenac <zorglub@debian.org>, Dafydd Harries <daf@debian.org>, Guilherme de S. Pastore <gpastore@debian.org>, Gustavo Franco <stratus@debian.org>, Gustavo Noronha Silva <kov@debian.org>, J.H.M. Dassen (Ray) <jdassen@debian.org>, Jordi Mallach <jordi@debian.org>, Jose Carlos Garcia Sogo <jsogo@debian.org>, Josselin Mouette <joss@debian.org>, Kilian Krause <kilian@debian.org>, Loic Minier <lool@dooz.org>, Marc HE Brockschmidt <he@debian.org>, Marco Cabizza <marco87@gmail.com>, Oystein Gisnas <oystein@gisnas.net>, Ondřej Surý <ondrej@debian.org>, Ross Burton <ross@debian.org>, Sjoerd Simons <sjoerd@debian.org>
-Build-Depends: debhelper (>> 5.0.22), pkg-config (>= 0.14.0), gettext, autotools-dev, gnome-pkg-tools (>= 0.10), quilt
+Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Andrew Lau <netsnipe@users.sourceforge.net>, Clément Stenac <zorglub@debian.org>, Dafydd Harries <daf@debian.org>, Guilherme de S. Pastore <gpastore@debian.org>, Gustavo Franco <stratus@debian.org>, Gustavo Noronha Silva <kov@debian.org>, J.H.M. Dassen (Ray) <jdassen@debian.org>, Jordi Mallach <jordi@debian.org>, Jose Carlos Garcia Sogo <jsogo@debian.org>, Josselin Mouette <joss@debian.org>, Kilian Krause <kilian@debian.org>, Loic Minier <lool@dooz.org>, Marc 'HE' Brockschmidt <he@debian.org>, Marco Cabizza <marco87@gmail.com>, Oystein Gisnas <oystein@gisnas.net>, Ondřej Surý <ondrej@debian.org>, Ross Burton <ross@debian.org>, Sjoerd Simons <sjoerd@debian.org>
+Build-Depends: debhelper (>> 5.0.22), pkg-config (>= 0.14.0), gettext, autotools-dev, gnome-pkg-tools (>= 0.10), quilt, dpkg-dev (>= 1.13.19)
 Standards-Version: 3.7.2
 
 Package: libglib2.0-0
@@ -35,7 +35,7 @@ Description: The GLib library of C routines
 Package: libglib2.0-dev
 Section: libdevel
 Architecture: any
-Depends: libglib2.0-0 (= ${Source-Version}), libc6-dev | libc-dev, pkg-config (>= 0.14.0)
+Depends: libglib2.0-0 (= ${binary:Version}), pkg-config (>= 0.14.0)
 Suggests: libglib2.0-doc
 Replaces: libglib1.3-dev
 Conflicts: libglib1.3-dev
@@ -52,7 +52,7 @@ Package: libglib2.0-0-dbg
 Section: libdevel
 Priority: extra
 Architecture: any
-Depends: libglib2.0-0 (= ${Source-Version})
+Depends: libglib2.0-0 (= ${binary:Version})
 Conflicts: libglib2.0-dbg
 Replaces: libglib2.0-dbg
 Description: The GLib libraries and debugging symbols
@@ -70,7 +70,7 @@ Description: The GLib libraries and debugging symbols
 Package: libglib2.0-data
 Section: misc
 Architecture: all
-Depends: libglib2.0-0 (>= ${Source-Version})
+Depends: libglib2.0-0 (>= ${source:Version})
 Replaces: libglib1.3, libglib1.3-data
 Conflicts: libglib1.3-data
 Description: Common files for GLib library

@@ -189,16 +189,22 @@ binary-arch: build install
 	dh_installman -plibglib$(APIVER)-dev
 	dh_installinfo -a
 	dh_installchangelogs -a ChangeLog
-	dh_strip -a --dbg-package=libglib$(APIVER)-$(SONAME)
+	dh_strip -a --dbg-package=libglib$(APIVER)-$(SONAME)-dbg
 	dh_compress -a
 	dh_fixperms -a
 	dh_makeshlibs	-plibglib$(APIVER)-$(SONAME) \
 			-V "libglib$(APIVER)-$(SONAME) (>= $(SHVER))" \
 			--add-udeb="libglib$(APIVER)-udeb"
 	dh_installdeb -a
+	# override shlibs for libraries from this source before computing
+	# dependencies of packages generated from this source; we already have
+	# inter-dependencies expressed manually in the control file, we do not
+	# need the shlibs to add duplicates
+	cat debian/*/DEBIAN/shlibs | \
+		sed -n -r -e 's/(([^ ]+: )?([^ ]+) ([^ ]+)) .*/\1/p' \
+			> debian/shlibs.local
 	dh_shlibdeps -a -ldebian/libglib$(APIVER)-$(SONAME)/usr/lib -Llibglib$(APIVER)-$(SONAME)
-	# hmm, I don't know but need to fix the self dependency for the udeb.
-	sed -i 's/, libglib$(APIVER)-udeb (>= [.0-9]*)//' $(CURDIR)/debian/libglib$(APIVER)-udeb.substvars
+	-rm -f debian/shlibs.local
 	dh_gencontrol -a
 	dh_md5sums -a
 	dh_builddeb -a

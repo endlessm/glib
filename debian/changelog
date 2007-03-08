@@ -9,12 +9,16 @@ glib2.0 (2.12.10-1) UNRELEASED; urgency=low
       build-depend on quilt; drop DEB_USE_DBS_TARBALL_LAYOUT; create stampdir
       when necessary; switch from dh_movefiles and dh_installdirs to
       dh_install.
-    - Rename patch 000_glib-link to 10_glib-link.
+    - Drop patch 000_glib-link; merged upstream.
   * Bump up Debhelper compatibility level to 5.
   * Only ship README.Debian in libglib2.0-dev.
   * Empty dependency_libs in the *.la files of libglib2.0-dev.
+  * Override shlibs for the inter-shlibdeps before computing them.
+  * Use >= ${source:Version} and ${binary:Version} for inder-deps; build-dep
+    on dpkg-dev >= 1.13.19.
+  * Fix --dbg-package name.
 
- -- Loic Minier <lool@dooz.org>  Thu,  8 Mar 2007 16:53:34 +0100
+ -- Loic Minier <lool@dooz.org>  Thu,  8 Mar 2007 17:31:35 +0100
 
 glib2.0 (2.12.9-2) experimental; urgency=low
 
