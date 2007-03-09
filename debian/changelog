@@ -1,3 +1,9 @@
+glib2.0 (2.12.11-1) experimental; urgency=medium
+
+  * New upstream release; no API change.
+
+ -- Loic Minier <lool@dooz.org>  Fri,  9 Mar 2007 22:02:25 +0100
+
 glib2.0 (2.12.10-1) experimental; urgency=low
 
   * Include the new check-dist Makefile to prevent accidental uploads to
