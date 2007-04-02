@@ -210,4 +210,4 @@ binary-arch: build $(maybe_check) install
 	dh_builddeb -a
 
 binary: binary-indep binary-arch
-.PHONY: patch configure build install clean binary-indep binary-arch binary debian/control
+.PHONY: patch configure build check install clean binary-indep binary-arch binary debian/control
