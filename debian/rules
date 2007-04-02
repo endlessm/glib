@@ -53,6 +53,9 @@ DEBUG_PKG := $(SHARED_PKG)-dbg
 # Note: the shared flavor is required
 FLAVORS := deb udeb
 
+# list of flavors to run the test suite on
+CHECK_FLAVORS := $(filter deb, $(FLAVORS))
+
 # build dir for the current flavor; this is only expanded in flavor specific
 # targets
 # Note: dh_clean will rm -rf debian/tmp, hence all builds
@@ -118,6 +121,15 @@ $(STAMP_DIR)/build-stamp-%: $(STAMP_DIR)/configure-stamp-%
 
 build: $(addprefix $(STAMP_DIR)/build-stamp-, $(FLAVORS))
 
+$(STAMP_DIR)/check-stamp-%: $(STAMP_DIR)/build-stamp-%
+	dh_testdir
+	# testsuite failures are ignored
+	-LD_LIBRARY_PATH=$(builddir)/glib/.libs:$(builddir)/gmodule/.libs:$(builddir)/gobject/.libs:$(builddir)/gthread/.libs:$(LD_LIBRARY_PATH) \
+		$(MAKE) -C $(builddir) check
+	touch $@
+
+check: $(addprefix $(STAMP_DIR)/check-stamp-, $(CHECK_FLAVORS))
+
 $(STAMP_DIR)/install-stamp-%: $(STAMP_DIR)/build-stamp-%
 	mkdir -p $(installdir)
 	$(MAKE) -C $(builddir) install \
@@ -156,7 +168,9 @@ clean: debian/control
 	-rm -rf $(STAMP_DIR)
 	dh_clean
 
-binary-indep: build install
+maybe_check = $(if $(findstring nocheck,$(DEB_BUILD_OPTIONS)),,check)
+
+binary-indep: build $(maybe_check) install
 	dh_testdir
 	dh_testroot
 	dh_install -i
@@ -170,7 +184,7 @@ binary-indep: build install
 	dh_md5sums -i
 	dh_builddeb -i
 
-binary-arch: build install
+binary-arch: build $(maybe_check) install
 	dh_testdir
 	dh_testroot
 	dh_install -a
