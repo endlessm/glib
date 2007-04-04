@@ -29,8 +29,6 @@ LDFLAGS += -Wl,-z,defs
 # Make the linker work a bit harder so dynamic loading can be done faster
 LDFLAGS += -Wl,-O1
 
-DEBVERSION := $(shell dpkg-parsechangelog | sed -n -e 's/^Version: //p')
-VERSION := $(shell echo $(DEBVERSION) | sed -e 's/-[^-]*$$//')
 APIVER := 2.0
 SONAME := 0
 SHVER := 2.12.9
