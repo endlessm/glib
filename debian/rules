@@ -1,228 +1,182 @@
 #!/usr/bin/make -f
-# Sample debian/rules that uses debhelper.
-# GNU copyright 1997 to 1999 by Joey Hess.
 
-include debian/scripts/vars
+DISABLE_UPDATE_UPLOADERS := 1
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
+include /usr/share/gnome-pkg-tools/1/rules/check-dist.mk
 -include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
 
 GNOME_MODULE := glib
-DEB_USE_DBS_TARBALL_LAYOUT := 1
 
-BUILD_DIR=$(SOURCE_DIR)/$(TAR_DIR)
-BUILD_DEB_DIR=$(SOURCE_DIR)/$(TAR_DIR)-deb
-BUILD_UDEB_DIR=$(SOURCE_DIR)/$(TAR_DIR)-udeb
+STAMP_DIR := debian/stampdir
 
-# Uncomment this to turn on verbose mode.
-#export DH_VERBOSE=1
+PATCH_DIR := debian/patches
+
+# rules in this debian/rules Makefile can be built concurrently as well as
+# upstream rules in Makefile; all $(MAKE) invocations will inherit this flag,
+# if you recurse into debian/rules ($(MAKE)
+# -f debian/rules in rules), you need to pass a flag to avoid adding "-j2" when
+# the childs encounters this line
+MAKEFLAGS += $(if $(DEB_BUILD_OPTIONS_PARALLEL),-j2 $(DEB_BUILD_OPTIONS_PARALLEL))
 
 # These are used for cross-compiling and for saving the configure script
 # from having to guess our platform (since we know it already)
-DEB_HOST_GNU_TYPE	?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
-DEB_BUILD_GNU_TYPE	?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
-DEB_BUILD_ARCH         ?= $(shell dpkg-architecture -qDEB_BUILD_ARCH)
+DEB_HOST_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 
 ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
 	CFLAGS += -g -O0
 else
 	CFLAGS += -g -O2
 endif
-ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
-	INSTALL_PROGRAM += -s
-endif
 
 # Ensure the build aborts when there are still references to undefined
-# symbols.
+# symbols
 LDFLAGS += -Wl,-z,defs
 
 # Make the linker work a bit harder so dynamic loading can be done faster
 LDFLAGS += -Wl,-O1
 
-##
-debversion=$(shell dpkg-parsechangelog | sed -n -e 's/^Version: //p')
-version=$(shell echo ${debversion} | sed -e 's/-[^-]*$$//')
-major=$(shell echo ${version} | sed -e 's/\(^[0-9]*\)\.[0-9]*\.[0-9]*$$/\1/')
-minor=$(shell echo ${version} | sed -e 's/^[0-9]*\.\([0-9]*\)\.[0-9]*$$/\1/')
-rel=$(shell echo ${version} | sed -e 's/^[0-9]*\.[0-9]*\.\([0-9]*\)$$/\1/')
-shortver=$(major).$(minor)
-apiver=2.0
-soname=0
-gtkver=2.0
-shver=2.12.0
-libpath=$(CURDIR)/$(BUILD_DEB_DIR)/glib/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gmodule/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gobject/.libs:$(CURDIR)/$(BUILD_DEB_DIR)/gthread/.libs
-udeblibpath=$(CURDIR)/$(BUILD_UDEB_DIR)/glib/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gmodule/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gobject/.libs:$(CURDIR)/$(BUILD_UDEB_DIR)/gthread/.libs
+APIVER := 2.0
+SONAME := 0
+SHVER := 2.12.9
 
-_echo_cfiles = for f in ${1}; do if [ -f $$f ]; then echo $$f; fi; done
-cfiles := $(shell $(call _echo_cfiles, $(wildcard debian/libglib$(apiver)-@SONAME@.*)))
+# package names
+SHARED_PKG := libglib$(APIVER)-$(SONAME)
+DATA_PKG := libglib$(APIVER)-data
+DEV_PKG := libglib$(APIVER)-dev
+UDEB_PKG := libglib$(APIVER)-udeb
+DOC_PKG := libglib$(APIVER)-doc
+DEBUG_PKG := $(SHARED_PKG)-dbg
 
+# list of flavors we build; each gets a builddir, a configure pass (configure
+# args are defined below), a build pass, and an install pass (in two steps)
+# Note: the shared flavor is required
+FLAVORS := deb udeb
 
-debian/control:
-	dh_testdir
+# list of flavors to run the test suite on
+CHECK_FLAVORS := $(filter deb, $(FLAVORS))
 
-	sed -e 's/@SONAME@/${soname}/g' -e 's/@VERSION@/${version}/g' -e 's/@GNOME_TEAM@/${uploaders}/' $@.in > $@
+# build dir for the current flavor; this is only expanded in flavor specific
+# targets
+# Note: dh_clean will rm -rf debian/tmp, hence all builds
+builddir = $(buildbasedir)/$*
+buildbasedir = $(CURDIR)/debian/build
 
-extract: $(STAMP_DIR)/extract-stamp
-$(STAMP_DIR)/extract-stamp:
-	dh_testdir
+# install dir for the current flavor; this is only expanded in flavor specific
+# targets
+installdir = $(installbasedir)/$*
+installbasedir = $(CURDIR)/debian/install
 
-	$(MAKE) -f debian/sys-build.mk source.make
-
-	-test -r /usr/share/misc/config.sub && \
-	   cp -f /usr/share/misc/config.sub $(BUILD_DIR)/config.sub
-	-test -r /usr/share/misc/config.guess && \
-	   cp -f /usr/share/misc/config.guess $(BUILD_DIR)/config.guess
-
-	touch $@
-
-configure-deb: extract $(STAMP_DIR)/configure-deb-stamp
-$(STAMP_DIR)/configure-deb-stamp:
-	dh_testdir
-
-	cp -ar $(BUILD_DIR) $(BUILD_DEB_DIR)
-
-	# Add here commands to configure the package.
-	cd $(BUILD_DEB_DIR) && \
-	env LDFLAGS="$(LDFLAGS)" CFLAGS="$(CFLAGS)" ./configure \
-			--host=$(DEB_HOST_GNU_TYPE) \
-			--build=$(DEB_BUILD_GNU_TYPE) \
+# configure flags
+common_configure_flags := \
 			--prefix=/usr \
 			--mandir=\$${prefix}/share/man \
 			--infodir=\$${prefix}/share/info \
-			--with-html-dir=\$${prefix}/share/doc/libglib$(apiver)-doc \
-			--enable-static
-
-	cd $(BUILD_DEB_DIR) && \
-	sed < libtool > libtool-2 \
-	 -e 's/^hardcode_libdir_flag_spec.*$$/hardcode_libdir_flag_spec=" -D__LIBTOOL_IS_A_FOOL__ "/' \
-	 -e '/^archive_cmds="/s/"$$/ \\$$deplibs"/' && \
-	mv libtool-2 libtool
-
-	touch $@
-
-configure-udeb: extract $(STAMP_DIR)/configure-udeb-stamp
-$(STAMP_DIR)/configure-udeb-stamp:
-	dh_testdir
-
-	cp -ar $(BUILD_DIR) $(BUILD_UDEB_DIR)
-
-	# Add here commands to configure the package.
-	cd $(BUILD_UDEB_DIR) && \
-	env LDFLAGS="$(LDFLAGS)" CFLAGS="$(CFLAGS)" ./configure \
+			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG) \
 			--host=$(DEB_HOST_GNU_TYPE) \
-			--build=$(DEB_BUILD_GNU_TYPE) \
-			--prefix=/usr \
-			--mandir=\$${prefix}/share/man \
-			--infodir=\$${prefix}/share/info
+			--build=$(DEB_BUILD_GNU_TYPE)
+ifeq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
+	common_configure_flags += --build=$(DEB_BUILD_GNU_TYPE)
+else
+	common_configure_flags += --build=$(DEB_BUILD_GNU_TYPE) --host=$(DEB_HOST_GNU_TYPE)
+endif
+deb_configure_flags := $(common_configure_flags) \
+			--enable-static
+udeb_configure_flags := $(common_configure_flags)
 
-	cd $(BUILD_UDEB_DIR) && \
-	sed < libtool > libtool-2 \
-	 -e 's/^hardcode_libdir_flag_spec.*$$/hardcode_libdir_flag_spec=" -D__LIBTOOL_IS_A_FOOL__ "/' \
-	 -e '/^archive_cmds="/s/"$$/ \\$$deplibs"/' && \
-	mv libtool-2 libtool
+patch: $(STAMP_DIR)/patch-stamp
 
-	touch $@
-
-configure: configure-deb configure-udeb
-
-build-deb: debian/control configure-deb $(STAMP_DIR)/build-deb-stamp
-$(STAMP_DIR)/build-deb-stamp:
+$(STAMP_DIR)/patch-stamp:
 	dh_testdir
-
-	# Add here commands to compile the package.
-	$(MAKE) -C $(BUILD_DEB_DIR) \
-		LD_LIBRARY_PATH=$(libpath):$(LD_LIBRARY_PATH)
-
+	# backup the original files to restore them in the clean target
+	-test -r config.sub && cp config.sub config.sub.orig
+	-test -r config.guess && cp config.guess config.guess.orig
+	# apply patches
+	QUILT_PATCHES=$(PATCH_DIR) quilt --quiltrc /dev/null push -a || test $$? = 2
+	-test -r /usr/share/misc/config.sub && \
+		cp -f /usr/share/misc/config.sub config.sub
+	-test -r /usr/share/misc/config.guess && \
+		cp -f /usr/share/misc/config.guess config.guess
+	-mkdir -p $(STAMP_DIR)
 	touch $@
 
-build-udeb: debian/control configure-udeb $(STAMP_DIR)/build-udeb-stamp
-$(STAMP_DIR)/build-udeb-stamp:
+$(STAMP_DIR)/configure-stamp-%: $(STAMP_DIR)/patch-stamp
 	dh_testdir
-
-	# Add here commands to compile the package.
-	$(MAKE) -C $(BUILD_UDEB_DIR) \
-		LD_LIBRARY_PATH=$(udeblibpath):$(LD_LIBRARY_PATH)
-
+	mkdir -p $(builddir)
+	cd $(builddir) && \
+		$(CURDIR)/configure $($*_configure_flags)
+	sed -i \
+		-e 's/^hardcode_libdir_flag_spec.*$$/hardcode_libdir_flag_spec=" -D__LIBTOOL_IS_A_FOOL__ "/' \
+		-e '/^archive_cmds="/s/"$$/ \\$$deplibs"/' \
+		$(builddir)/libtool
 	touch $@
 
-build: build-deb
+configure: $(addprefix $(STAMP_DIR)/configure-stamp-, $(FLAVORS))
 
-clean:: debian/control
+$(STAMP_DIR)/build-stamp-%: $(STAMP_DIR)/configure-stamp-%
+	dh_testdir
+	LD_LIBRARY_PATH=$(builddir)/glib/.libs:$(builddir)/gmodule/.libs:$(builddir)/gobject/.libs:$(builddir)/gthread/.libs:$(LD_LIBRARY_PATH) \
+		$(MAKE) -C $(builddir)
+	touch $@
+
+build: $(addprefix $(STAMP_DIR)/build-stamp-, $(FLAVORS))
+
+$(STAMP_DIR)/check-stamp-%: $(STAMP_DIR)/build-stamp-%
+	dh_testdir
+	# testsuite failures are ignored
+	-LD_LIBRARY_PATH=$(builddir)/glib/.libs:$(builddir)/gmodule/.libs:$(builddir)/gobject/.libs:$(builddir)/gthread/.libs:$(LD_LIBRARY_PATH) \
+		$(MAKE) -C $(builddir) check
+	touch $@
+
+check: $(addprefix $(STAMP_DIR)/check-stamp-, $(CHECK_FLAVORS))
+
+$(STAMP_DIR)/install-stamp-%: $(STAMP_DIR)/build-stamp-%
+	mkdir -p $(installdir)
+	$(MAKE) -C $(builddir) install \
+		DESTDIR=$(installdir)
+	touch $@
+
+install: $(addprefix $(STAMP_DIR)/install-stamp-, $(FLAVORS))
+
+debian/control:
+	dh_testdir
+	sed \
+		-e "s#@SONAME@#$(SONAME)#g" \
+		-e "s#@APIVER@#$(APIVER)#g" \
+		-e "s#@VERSION@#$(VERSION)#g" \
+		-e "s#@SHARED_PKG@#$(SHARED_PKG)#g" \
+		-e "s#@DATA_PKG@#$(DATA_PKG)#g" \
+		-e "s#@DEV_PKG@#$(DEV_PKG)#g" \
+		-e "s#@UDEB_PKG@#$(UDEB_PKG)#g" \
+		-e "s#@DOC_PKG@#$(DOC_PKG)#g" \
+		-e "s#@DEBUG_PKG@#$(DEBUG_PKG)#g" \
+		-e "s#@GNOME_TEAM@#$(UPLOADERS)#g" \
+		$@.in > $@
+
+clean: debian/control
 	dh_testdir
 	dh_testroot
-
-	# Add here commands to clean up after the build process.
-	$(MAKE) -f debian/sys-build.mk source.clean
-	-rm -rf $(BUILD_DEB_DIR)
-	-rm -rf $(BUILD_UDEB_DIR)
+	# remove install and build dirs
+	rm -rf $(installbasedir)
+	rm -rf $(buildbasedir)
+	# restore files from backup (before unpatching)
+	-test -r config.sub.orig && mv -f config.sub.orig config.sub
+	-test -r config.guess.orig && mv -f config.guess.orig config.guess
+	# unapply patches, if any
+	QUILT_PATCHES=$(PATCH_DIR) quilt --quiltrc /dev/null pop -a -R || test $$? = 2
+	-rm -rf .pc
 	-rm -rf $(STAMP_DIR)
-
 	dh_clean
 
-install-test: $(STAMP_DIR)/install-test-stamp
-$(STAMP_DIR)/install-test-stamp:
+maybe_check = $(if $(findstring nocheck,$(DEB_BUILD_OPTIONS)),,check)
+
+binary-indep: build $(maybe_check) install
 	dh_testdir
 	dh_testroot
-	dh_clean -k
-	dh_installdirs
-
-	# generating debian files from .in
-	for f in ${cfiles}; do \
-		cp $$f `echo $$f | sed -e 's/@SONAME@/${soname}/g'`; \
-	done
-
-	for f in `find debian/ -name "[^c]*.in"`; do \
-		sed -e 's/@VERSION@/${version}/g' $$f > `echo $$f | sed -e 's/\.in//'`; \
-	done
-
-	touch $@
-
-install-deb: build-deb install-test
-	# Add here commands to install the package into debian/tmp
-	$(MAKE) -C $(BUILD_DEB_DIR) install \
-		prefix=$(CURDIR)/debian/libglib$(apiver)-$(soname)/usr
-
-install-udeb: build-udeb install-test
-	# Add here commands to install the package into debian/tmp
-	$(MAKE) -C $(BUILD_UDEB_DIR) install \
-		prefix=$(CURDIR)/debian/tmp/usr
-
-	# clean the unnecessary files up
-	rm -rf debian/tmp/usr/share/gtk-doc
-
-	dh_movefiles
-	-rm -rf $(CURDIR)/debian/libglib$(apiver)-udeb/usr/share/doc
-
-	-find $(CURDIR)/debian/ -type d -empty ! -regex '.*/var.*' -prune | xargs rmdir -p 2>&1 > /dev/null
-
-install: install-deb
-	dh_movefiles --sourcedir=debian/libglib$(apiver)-$(soname) -Nlibglib$(apiver)-udeb
-	-find $(CURDIR)/debian/ -type d -empty | xargs rmdir -p 2>&1 > /dev/null
-
-# Build architecture-independent files here.
-binary-indep: build install
-	dh_testdir -i
-	dh_testroot -i
-
-	dh_installdocs -i
-
-	rm -rf $(CURDIR)/debian/libglib$(apiver)-data/usr/share/doc/libglib$(apiver)-data
-	dh_link -plibglib$(apiver)-data \
-		usr/share/doc/libglib$(apiver)-$(soname) \
-		usr/share/doc/libglib$(apiver)-data
-	dh_link -plibglib$(apiver)-doc \
-		usr/share/doc/libgtk$(gtkver)-doc/gtk \
-		usr/share/doc/libglib$(apiver)-doc/gtk
-
-	# create the symlinks on /usr/share/gtk-doc/html
-	for i in glib gobject; do				\
-		dh_link -plibglib$(apiver)-doc			\
-			usr/share/doc/libglib$(apiver)-doc/$$i	\
-			usr/share/gtk-doc/html/$$i;		\
-	done
-
-	dh_installexamples -i
-	dh_installinfo -i
-	dh_installchangelogs -i $(BUILD_DIR)/ChangeLog
+	dh_install -i
+	dh_installchangelogs -i -N$(DATA_PKG) ChangeLog ChangeLog.*
+	dh_installdocs -N$(DATA_PKG) -i NEWS NEWS.* README
+	dh_link -i
 	dh_compress -i
 	dh_fixperms -i
 	dh_installdeb -i
@@ -230,40 +184,35 @@ binary-indep: build install
 	dh_md5sums -i
 	dh_builddeb -i
 
-# Build architecture-dependent files here.
-binary-arch: build build-udeb install install-udeb
-	dh_testdir -a
-	dh_testroot -a
-
-	dh_installdocs -a
-
-	rm -rf $(CURDIR)/debian/libglib$(apiver)-$(soname)-dbg/usr/share/doc/libglib$(apiver)-$(soname)-dbg
-	rm -rf $(CURDIR)/debian/libglib$(apiver)-dev/usr/share/doc/libglib$(apiver)-dev
-	dh_link -plibglib$(apiver)-$(soname)-dbg \
-		usr/share/doc/libglib$(apiver)-$(soname) \
-		usr/share/doc/libglib$(apiver)-$(soname)-dbg
-	dh_link -plibglib$(apiver)-dev \
-		usr/share/doc/libglib$(apiver)-$(soname) \
-		usr/share/doc/libglib$(apiver)-dev
-
-	dh_installexamples -a
-	dh_installmenu -a
-	dh_installman -plibglib$(apiver)-dev
-	dh_installinfo -a
-	dh_installchangelogs -a $(BUILD_DIR)/ChangeLog
-	dh_strip -a --dbg-package=libglib$(apiver)-$(soname)
+binary-arch: build $(maybe_check) install
+	dh_testdir
+	dh_testroot
+	dh_install -a
+	# empty the dependency_libs in the *.la files
+	sed -i "/dependency_libs/ s/'.*'/''/" \
+		debian/$(DEV_PKG)/usr/lib/*.la
+	dh_installchangelogs -a -N$(DEV_PKG) -N$(DEBUG_PKG) ChangeLog ChangeLog.*
+	dh_installdocs -a -N$(DEV_PKG) -N$(DEBUG_PKG) NEWS NEWS.* README
+	dh_link -a
+	dh_strip -a --dbg-package=$(DEBUG_PKG)
 	dh_compress -a
 	dh_fixperms -a
-	dh_makeshlibs	-plibglib$(apiver)-$(soname) \
-			-V "libglib${apiver}-${soname} (>= ${shver})" \
-			--add-udeb="libglib${apiver}-udeb"
+	dh_makeshlibs	-p$(SHARED_PKG) \
+			-V "$(SHARED_PKG) (>= $(SHVER))" \
+			--add-udeb="$(UDEB_PKG)"
 	dh_installdeb -a
-	dh_shlibdeps -a -ldebian/libglib$(apiver)-$(soname)/usr/lib -Llibglib$(apiver)-$(soname)
-	# hmm, I don't know but need to fix the self dependency for the udeb.
-	sed -i 's/, libglib$(apiver)-udeb (>= [.0-9]*)//' $(CURDIR)/debian/libglib$(apiver)-udeb.substvars
+	# override shlibs for libraries from this source before computing
+	# dependencies of packages generated from this source; we already have
+	# inter-dependencies expressed manually in the control file, we do not
+	# need the shlibs to add duplicates
+	cat debian/*/DEBIAN/shlibs | \
+		sed -n -r -e 's/(([^ ]+: )?([^ ]+) ([^ ]+)) .*/\1/p' \
+			> debian/shlibs.local
+	dh_shlibdeps -a -ldebian/$(SHARED_PKG)/usr/lib -L$(SHARED_PKG)
+	-rm -f debian/shlibs.local
 	dh_gencontrol -a
 	dh_md5sums -a
 	dh_builddeb -a
 
 binary: binary-indep binary-arch
-.PHONY: build build-deb build-udeb clean binary-indep binary-arch binary install install-deb install-udeb install-test configure configure-deb configure-udeb extract debian/control
+.PHONY: patch configure build check install clean binary-indep binary-arch binary debian/control

@@ -1,10 +1,75 @@
-glib2.0 (2.12.6-3) UNRELEASED; urgency=low
+glib2.0 (2.12.11-2) UNRELEASED; urgency=low
+
+  * Run "make check" test suite for the deb flavor except if DEB_BUILD_OPTIONS
+    contains the "nocheck" keyword; ignore failures.
+  * Include the new uploaders.mk from gnome-pkg-tools instead of duplicating
+    its logic; build-dep on gnome-pkg-tools >= 0.11.
+  * Drop useless version computations.
+  * Add support for DEB_BUILD_OPTIONS_PARALLEL.
+
+ -- Loic Minier <lool@dooz.org>  Thu, 05 Apr 2007 13:45:17 +0200
+
+glib2.0 (2.12.11-1) experimental; urgency=medium
+
+  * New upstream release; no API change.
+
+ -- Loic Minier <lool@dooz.org>  Fri,  9 Mar 2007 22:02:25 +0100
+
+glib2.0 (2.12.10-1) experimental; urgency=low
+
+  * Include the new check-dist Makefile to prevent accidental uploads to
+    unstable; bump build-dep on gnome-pkg-tools to >= 0.10.
+  * New upstream release; no API change.
+    - Rewrite and cleanup the build-system completely to build a set of
+      flavors; drop obsolete targets; drop obsolete files; switch from
+      tar-in-tar and sys-build to regular source and quilt patching;
+      build-depend on quilt; drop DEB_USE_DBS_TARBALL_LAYOUT; create stampdir
+      when necessary; switch from dh_movefiles and dh_installdirs to
+      dh_install.
+    - Drop patch 000_glib-link; merged upstream.
+  * Bump up Debhelper compatibility level to 5.
+  * Only ship README.Debian in libglib2.0-dev.
+  * Empty dependency_libs in the *.la files of libglib2.0-dev.
+  * Override shlibs for the inter-shlibdeps before computing them.
+  * Use >= ${source:Version} and ${binary:Version} for inder-deps; build-dep
+    on dpkg-dev >= 1.13.19.
+  * Fix --dbg-package name.
+  * Use make vars for package names.
+  * Tune udeb description.
+  * Clean /usr/share/doc symlinks generation and move to dh_link generated
+    links.
+  * Cleanup list of invoked dh_* commands.
+
+ -- Loic Minier <lool@dooz.org>  Thu,  8 Mar 2007 18:51:27 +0100
+
+glib2.0 (2.12.9-2) experimental; urgency=low
+
+  * Bump shlibs to >= 2.12.9.
+  * Avoir overwriting the *.la files of the main build with the *.la files of
+    the udeb build; fixes "old_library" in *.la files; thanks Tim Dijkstra;
+    closes: #297741.
+
+ -- Loic Minier <lool@dooz.org>  Sat, 20 Jan 2007 09:13:40 +0100
+
+glib2.0 (2.12.9-1) experimental; urgency=low
 
   * Add a get-orig-source target to retrieve the upstream tarball.
-  * Update patch 009_accept-space-in-key-names to be slightly cleaner, closer
-    to the final upstream fix, simpler, and to not cause any performance hit.
+  * New upstream releases; no API change.
+    - Fixes documentation of g_key_file_set_string_list(); closes: #405028.
+    - Avoids spewing warnings with gcc 2.95; closes: #303124.
+    - Drop patch 009_accept-space-in-key-names; merged and adapted upstream.
 
- -- Loic Minier <lool@dooz.org>  Mon, 15 Jan 2007 11:08:15 +0100
+ -- Loic Minier <lool@dooz.org>  Wed, 17 Jan 2007 08:55:27 +0100
+
+glib2.0 (2.12.7-1) experimental; urgency=low
+
+  * New upstream release; no API change; translation updates, bug fixes,
+    build fixes.
+    - Target at experimental for now.
+    - Drop patch 010_restore-old-key-file-syntax-support, merged and adapted
+      upstream.
+
+ -- Loic Minier <lool@dooz.org>  Fri,  5 Jan 2007 12:24:38 +0100
 
 glib2.0 (2.12.6-2) unstable; urgency=medium
 
