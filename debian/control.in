@@ -3,7 +3,13 @@ Section: libs
 Priority: optional
 Maintainer: Sebastien Bacher <seb128@debian.org>
 Uploaders: @GNOME_TEAM@
-Build-Depends: debhelper (>> 5.0.22), pkg-config (>= 0.14.0), gettext, autotools-dev, gnome-pkg-tools (>= 0.11), quilt, dpkg-dev (>= 1.13.19)
+Build-Depends: debhelper (>> 5.0.22),
+               pkg-config (>= 0.14.0),
+               gettext,
+               autotools-dev,
+               gnome-pkg-tools (>= 0.11),
+               quilt,
+               dpkg-dev (>= 1.13.19)
 Standards-Version: 3.7.2
 
 Package: @SHARED_PKG@
@@ -38,7 +44,8 @@ Description: The GLib library of C routines - minimal runtime
 Package: @DEV_PKG@
 Section: libdevel
 Architecture: any
-Depends: @SHARED_PKG@ (= ${binary:Version}), pkg-config (>= 0.14.0)
+Depends: @SHARED_PKG@ (= ${binary:Version}),
+         pkg-config (>= 0.14.0)
 Suggests: @DOC_PKG@
 Replaces: libglib1.3-dev
 Conflicts: libglib1.3-dev
@@ -74,7 +81,8 @@ Package: @DATA_PKG@
 Section: misc
 Architecture: all
 Depends: @SHARED_PKG@ (>= ${source:Version})
-Replaces: libglib1.3, libglib1.3-data
+Replaces: libglib1.3,
+          libglib1.3-data
 Conflicts: libglib1.3-data
 Description: Common files for GLib library
  GLib is a library containing many useful C routines for things such
