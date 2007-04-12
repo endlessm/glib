@@ -1,12 +1,15 @@
-glib2.0 (2.12.11-3) UNRELEASED; urgency=medium
+glib2.0 (2.12.11-3) unstable; urgency=medium
 
   * Initialize CFLAGS to -Wall -g; pass debian/rules' CFLAGS and LDFLAGS to
     configure, doh!
   * Track all stable versions in watch file.
   * Wrap build-deps and deps.
   * Add ${misc:Depends}.
+  * New patch 60_output-lines-during-tests, outputs newlines after thousand
+    iterations of the inner-loop of the closures test to avoid the timeout on
+    mips and mipsel buildds.
 
- -- Loic Minier <lool@dooz.org>  Thu, 12 Apr 2007 15:55:49 +0200
+ -- Loic Minier <lool@dooz.org>  Thu, 12 Apr 2007 16:13:46 +0200
 
 glib2.0 (2.12.11-2) unstable; urgency=low
 
