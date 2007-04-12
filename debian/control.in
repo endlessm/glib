@@ -15,7 +15,8 @@ Standards-Version: 3.7.2
 Package: @SHARED_PKG@
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
 Recommends: @DATA_PKG@
 Conflicts: libpango1.0-0 (<< 1.11)
 Description: The GLib library of C routines
@@ -30,7 +31,8 @@ Section: debian-installer
 XC-Package-Type: udeb
 Priority: optional
 Architecture: any
-Depends: ${shlibs:Depends}
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
 Description: The GLib library of C routines - minimal runtime
  This is a udeb, or a microdeb, for the debian-installer.
  .
@@ -44,7 +46,8 @@ Description: The GLib library of C routines - minimal runtime
 Package: @DEV_PKG@
 Section: libdevel
 Architecture: any
-Depends: @SHARED_PKG@ (= ${binary:Version}),
+Depends: ${misc:Depends},
+         @SHARED_PKG@ (= ${binary:Version}),
          pkg-config (>= 0.14.0)
 Suggests: @DOC_PKG@
 Replaces: libglib1.3-dev
@@ -62,7 +65,8 @@ Package: @DEBUG_PKG@
 Section: libdevel
 Priority: extra
 Architecture: any
-Depends: @SHARED_PKG@ (= ${binary:Version})
+Depends: ${misc:Depends},
+         @SHARED_PKG@ (= ${binary:Version})
 Conflicts: libglib2.0-dbg
 Replaces: libglib2.0-dbg
 Description: The GLib libraries and debugging symbols
@@ -80,7 +84,8 @@ Description: The GLib libraries and debugging symbols
 Package: @DATA_PKG@
 Section: misc
 Architecture: all
-Depends: @SHARED_PKG@ (>= ${source:Version})
+Depends: ${misc:Depends},
+         @SHARED_PKG@ (>= ${source:Version})
 Replaces: libglib1.3,
           libglib1.3-data
 Conflicts: libglib1.3-data
@@ -95,7 +100,8 @@ Description: Common files for GLib library
 Package: @DOC_PKG@
 Section: doc
 Architecture: all
-Depends: lynx | www-browser
+Depends: ${misc:Depends},
+         lynx | www-browser
 Replaces: libglib1.3-doc
 Conflicts: libglib1.3-doc
 Suggests: libgtk2.0-doc
