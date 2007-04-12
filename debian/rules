@@ -22,10 +22,12 @@ MAKEFLAGS += $(if $(DEB_BUILD_OPTIONS_PARALLEL),-j2 $(DEB_BUILD_OPTIONS_PARALLEL
 DEB_HOST_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 
+CFLAGS += -Wall -g
+
 ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-	CFLAGS += -g -O0
+	CFLAGS += -O0
 else
-	CFLAGS += -g -O2
+	CFLAGS += -O2
 endif
 
 # Ensure the build aborts when there are still references to undefined
@@ -103,7 +105,8 @@ $(STAMP_DIR)/configure-stamp-%: $(STAMP_DIR)/patch-stamp
 	dh_testdir
 	mkdir -p $(builddir)
 	cd $(builddir) && \
-		$(CURDIR)/configure $($*_configure_flags)
+		CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" \
+			$(CURDIR)/configure $($*_configure_flags)
 	sed -i \
 		-e 's/^hardcode_libdir_flag_spec.*$$/hardcode_libdir_flag_spec=" -D__LIBTOOL_IS_A_FOOL__ "/' \
 		-e '/^archive_cmds="/s/"$$/ \\$$deplibs"/' \

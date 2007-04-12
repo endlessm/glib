@@ -1,3 +1,10 @@
+glib2.0 (2.12.11-3) UNRELEASED; urgency=medium
+
+  * Initialize CFLAGS to -Wall -g; pass debian/rules' CFLAGS and LDFLAGS to
+    configure, doh!
+
+ -- Loic Minier <lool@dooz.org>  Thu, 12 Apr 2007 14:48:35 +0200
+
 glib2.0 (2.12.11-2) unstable; urgency=low
 
   * Run "make check" test suite for the deb flavor except if DEB_BUILD_OPTIONS
