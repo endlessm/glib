@@ -2,8 +2,9 @@ glib2.0 (2.12.11-3) UNRELEASED; urgency=medium
 
   * Initialize CFLAGS to -Wall -g; pass debian/rules' CFLAGS and LDFLAGS to
     configure, doh!
+  * Track all stable versions in watch file.
 
- -- Loic Minier <lool@dooz.org>  Thu, 12 Apr 2007 14:48:35 +0200
+ -- Loic Minier <lool@dooz.org>  Thu, 12 Apr 2007 15:53:08 +0200
 
 glib2.0 (2.12.11-2) unstable; urgency=low
 
