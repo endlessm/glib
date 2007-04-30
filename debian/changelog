@@ -1,3 +1,9 @@
+glib2.0 (2.12.11-4) UNRELEASED; urgency=low
+
+  * Fix description of the -dbg package.
+
+ -- Loic Minier <lool@dooz.org>  Mon, 30 Apr 2007 12:15:43 +0200
+
 glib2.0 (2.12.11-3) unstable; urgency=medium
 
   * Initialize CFLAGS to -Wall -g; pass debian/rules' CFLAGS and LDFLAGS to

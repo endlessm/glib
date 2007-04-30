@@ -74,11 +74,8 @@ Description: The GLib libraries and debugging symbols
  as trees, hashes, lists, and strings.  It is a useful general-purpose
  C library used by projects such as GTK+, GIMP, and GNOME.
  .
- This package contains unstripped shared libraries. it is provided
- primarily to provide a backtrace with names in a debugger, this makes
- it somewhat easier to interpret core dumps.  The libraries are installed
- in /usr/lib/debug and can be used by placing that directory in
- LD_LIBRARY_PATH.
+ This package contains detached debugging symbols.
+ .
  Most people will not need this package.
 
 Package: libglib2.0-data
