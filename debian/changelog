@@ -1,8 +1,9 @@
-glib2.0 (2.12.11-4) UNRELEASED; urgency=low
+glib2.0 (2.12.12-1) unstable; urgency=low
 
   * Fix description of the -dbg package.
+  * New upstream release.
 
- -- Loic Minier <lool@dooz.org>  Mon, 30 Apr 2007 12:15:43 +0200
+ -- Loic Minier <lool@dooz.org>  Thu, 03 May 2007 19:14:33 +0200
 
 glib2.0 (2.12.11-3) unstable; urgency=medium
 
