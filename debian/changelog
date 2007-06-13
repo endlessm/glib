@@ -1,8 +1,15 @@
-glib2.0 (2.12.12-2) UNRELEASED; urgency=low
+glib2.0 (2.13.4-1) experimental; urgency=low
 
   * Also honor parallel=n in DEB_BUILD_OPTIONS.
+  * New upstream release series; these are development releases, the new API
+    may still change incompatibly.
+    - Target at experimental; include check-dist.
+    - Bump up shlibs to >= 2.13.4.
+  * New patch but disabled, 01_gettext-desktopfiles, permits overriding the
+    gettext domain when desktop files have such a field; found in the Ubuntu
+    package.
 
- -- Loic Minier <lool@dooz.org>  Tue, 08 May 2007 11:44:03 +0200
+ -- Loic Minier <lool@dooz.org>  Wed, 13 Jun 2007 10:52:27 +0200
 
 glib2.0 (2.12.12-1) unstable; urgency=low
 
