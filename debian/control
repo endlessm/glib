@@ -3,13 +3,20 @@ Section: libs
 Priority: optional
 Maintainer: Sebastien Bacher <seb128@debian.org>
 Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Loic Minier <lool@dooz.org>
-Build-Depends: debhelper (>> 5.0.22), pkg-config (>= 0.14.0), gettext, autotools-dev, gnome-pkg-tools (>= 0.11), quilt, dpkg-dev (>= 1.13.19)
+Build-Depends: debhelper (>> 5.0.22),
+               pkg-config (>= 0.14.0),
+               gettext,
+               autotools-dev,
+               gnome-pkg-tools (>= 0.11),
+               quilt,
+               dpkg-dev (>= 1.13.19)
 Standards-Version: 3.7.2
 
 Package: libglib2.0-0
 Section: libs
 Architecture: any
-Depends: ${shlibs:Depends}
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
 Recommends: libglib2.0-data
 Conflicts: libpango1.0-0 (<< 1.11)
 Description: The GLib library of C routines
@@ -24,7 +31,8 @@ Section: debian-installer
 XC-Package-Type: udeb
 Priority: optional
 Architecture: any
-Depends: ${shlibs:Depends}
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
 Description: The GLib library of C routines - minimal runtime
  This is a udeb, or a microdeb, for the debian-installer.
  .
@@ -38,7 +46,9 @@ Description: The GLib library of C routines - minimal runtime
 Package: libglib2.0-dev
 Section: libdevel
 Architecture: any
-Depends: libglib2.0-0 (= ${binary:Version}), pkg-config (>= 0.14.0)
+Depends: ${misc:Depends},
+         libglib2.0-0 (= ${binary:Version}),
+         pkg-config (>= 0.14.0)
 Suggests: libglib2.0-doc
 Replaces: libglib1.3-dev
 Conflicts: libglib1.3-dev
@@ -55,7 +65,8 @@ Package: libglib2.0-0-dbg
 Section: libdevel
 Priority: extra
 Architecture: any
-Depends: libglib2.0-0 (= ${binary:Version})
+Depends: ${misc:Depends},
+         libglib2.0-0 (= ${binary:Version})
 Conflicts: libglib2.0-dbg
 Replaces: libglib2.0-dbg
 Description: The GLib libraries and debugging symbols
@@ -63,18 +74,17 @@ Description: The GLib libraries and debugging symbols
  as trees, hashes, lists, and strings.  It is a useful general-purpose
  C library used by projects such as GTK+, GIMP, and GNOME.
  .
- This package contains unstripped shared libraries. it is provided
- primarily to provide a backtrace with names in a debugger, this makes
- it somewhat easier to interpret core dumps.  The libraries are installed
- in /usr/lib/debug and can be used by placing that directory in
- LD_LIBRARY_PATH.
+ This package contains detached debugging symbols.
+ .
  Most people will not need this package.
 
 Package: libglib2.0-data
 Section: misc
 Architecture: all
-Depends: libglib2.0-0 (>= ${source:Version})
-Replaces: libglib1.3, libglib1.3-data
+Depends: ${misc:Depends},
+         libglib2.0-0 (>= ${source:Version})
+Replaces: libglib1.3,
+          libglib1.3-data
 Conflicts: libglib1.3-data
 Description: Common files for GLib library
  GLib is a library containing many useful C routines for things such
@@ -87,7 +97,8 @@ Description: Common files for GLib library
 Package: libglib2.0-doc
 Section: doc
 Architecture: all
-Depends: lynx | www-browser
+Depends: ${misc:Depends},
+         lynx | www-browser
 Replaces: libglib1.3-doc
 Conflicts: libglib1.3-doc
 Suggests: libgtk2.0-doc

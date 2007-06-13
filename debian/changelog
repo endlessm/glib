@@ -1,4 +1,30 @@
-glib2.0 (2.12.11-2) UNRELEASED; urgency=low
+glib2.0 (2.12.12-2) UNRELEASED; urgency=low
+
+  * Also honor parallel=n in DEB_BUILD_OPTIONS.
+
+ -- Loic Minier <lool@dooz.org>  Tue, 08 May 2007 11:44:03 +0200
+
+glib2.0 (2.12.12-1) unstable; urgency=low
+
+  * Fix description of the -dbg package.
+  * New upstream release.
+
+ -- Loic Minier <lool@dooz.org>  Thu, 03 May 2007 19:14:33 +0200
+
+glib2.0 (2.12.11-3) unstable; urgency=medium
+
+  * Initialize CFLAGS to -Wall -g; pass debian/rules' CFLAGS and LDFLAGS to
+    configure, doh!
+  * Track all stable versions in watch file.
+  * Wrap build-deps and deps.
+  * Add ${misc:Depends}.
+  * New patch 60_output-lines-during-tests, outputs newlines after thousand
+    iterations of the inner-loop of the closures test to avoid the timeout on
+    mips and mipsel buildds.
+
+ -- Loic Minier <lool@dooz.org>  Thu, 12 Apr 2007 16:13:46 +0200
+
+glib2.0 (2.12.11-2) unstable; urgency=low
 
   * Run "make check" test suite for the deb flavor except if DEB_BUILD_OPTIONS
     contains the "nocheck" keyword; ignore failures.
@@ -6,8 +32,9 @@ glib2.0 (2.12.11-2) UNRELEASED; urgency=low
     its logic; build-dep on gnome-pkg-tools >= 0.11.
   * Drop useless version computations.
   * Add support for DEB_BUILD_OPTIONS_PARALLEL.
+  * Upload to unstable; drop check-dist include.
 
- -- Loic Minier <lool@dooz.org>  Thu, 05 Apr 2007 13:45:17 +0200
+ -- Loic Minier <lool@dooz.org>  Wed, 11 Apr 2007 10:35:43 +0200
 
 glib2.0 (2.12.11-1) experimental; urgency=medium
 
