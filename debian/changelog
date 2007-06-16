@@ -1,3 +1,11 @@
+glib2.0 (2.13.4-2) experimental; urgency=low
+
+  * New patch, 67_gcc43-inline, fixes FTBFS of apps using glib with GCC 4.3
+    which uses C99 where the meaning of "inline" changed; patch was adapted
+    from patches in GNOME #315437 and Gentoo #156475; closes: #416863.
+
+ -- Loic Minier <lool@dooz.org>  Sat, 16 Jun 2007 18:49:57 +0200
+
 glib2.0 (2.13.4-1) experimental; urgency=low
 
   * Also honor parallel=n in DEB_BUILD_OPTIONS.
