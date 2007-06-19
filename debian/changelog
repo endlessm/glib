@@ -1,3 +1,10 @@
+glib2.0 (2.13.5-1) experimental; urgency=low
+
+  * New upstream release
+   - Bump shlibs to >= 2.13.5, as the API was changed
+
+ -- Marc 'HE' Brockschmidt <he@debian.org>  Tue, 19 Jun 2007 16:14:16 +0200
+
 glib2.0 (2.13.4-2) experimental; urgency=low
 
   * New patch, 67_gcc43-inline, fixes FTBFS of apps using glib with GCC 4.3
