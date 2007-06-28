@@ -24,6 +24,10 @@ MAKEFLAGS += $(if $(DEB_BUILD_OPTIONS_PARALLEL),-j$(DEB_BUILD_OPTIONS_PARALLEL))
 DEB_HOST_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 
+# Debian architectures
+DEB_BUILD_ARCH ?= $(shell dpkg-architecture -qDEB_BUILD_ARCH)
+DEB_HOST_ARCH  ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+
 CFLAGS += -Wall -g -O$(if $(findstring noopt,$(DEB_BUILD_OPTIONS)),0,2)
 
 # Ensure the build aborts when there are still references to undefined
@@ -52,6 +56,11 @@ FLAVORS := deb udeb
 
 # list of flavors to run the test suite on
 CHECK_FLAVORS := $(filter deb, $(FLAVORS))
+
+# list of arches on which testsuite failures are fatal
+CHECK_SUPPORTED_ARCHES := alpha amd64 arm hppa i386 ia64 mips powerpc s390
+# testsuite is known to fail on kfreebsd -- i386 and amd64 -- and hurd
+# testsuite status is unknown on m68k, mipsel, and sparc
 
 # build dir for the current flavor; this is only expanded in flavor specific
 # targets
@@ -120,11 +129,19 @@ $(STAMP_DIR)/build-stamp-%: $(STAMP_DIR)/configure-stamp-%
 
 build: $(addprefix $(STAMP_DIR)/build-stamp-, $(FLAVORS))
 
+maybe_ignore_check_failure = $(if $(filter ,$(CHECK_SUPPORTED_ARCHES)),-)
+
 $(STAMP_DIR)/check-stamp-%: $(STAMP_DIR)/build-stamp-%
 	dh_testdir
+ifeq ($(filter $(DEB_BUILD_ARCH),$(CHECK_SUPPORTED_ARCHES)),$(DEB_BUILD_ARCH))
+	# testsuite failures are fatal
+	LD_LIBRARY_PATH=$(builddir)/glib/.libs:$(builddir)/gmodule/.libs:$(builddir)/gobject/.libs:$(builddir)/gthread/.libs:$(LD_LIBRARY_PATH) \
+		$(MAKE) -C $(builddir) check
+else
 	# testsuite failures are ignored
 	-LD_LIBRARY_PATH=$(builddir)/glib/.libs:$(builddir)/gmodule/.libs:$(builddir)/gobject/.libs:$(builddir)/gthread/.libs:$(LD_LIBRARY_PATH) \
 		$(MAKE) -C $(builddir) check
+endif
 	touch $@
 
 check: $(addprefix $(STAMP_DIR)/check-stamp-, $(CHECK_FLAVORS))
@@ -167,7 +184,12 @@ clean: debian/control
 	-rm -rf $(STAMP_DIR)
 	dh_clean
 
+ifeq ($(DEB_BUILD_ARCH),$(DEB_HOST_ARCH))
 maybe_check = $(if $(findstring nocheck,$(DEB_BUILD_OPTIONS)),,check)
+else
+# can't run the testsuite when cross-compiling
+maybe_check =
+endif
 
 binary-indep: build $(maybe_check) install
 	dh_testdir

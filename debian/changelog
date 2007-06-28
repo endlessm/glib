@@ -4,8 +4,12 @@ glib2.0 (2.13.5-2) UNRELEASED; urgency=low
     can result in duplicate deps; closes: #317461.
   * Set myself as maintainer.
   * Cleanups.
+  * Make the testsuite failures fatal on arches which passed the testsuite
+    with 2.13.5 in experimental (currently: alpha amd64 arm hppa i386 ia64
+    mips powerpc s390); closes: #291486.
+  * Don't run the testsuite when cross-compiling.
 
- -- Loic Minier <lool@dooz.org>  Thu, 28 Jun 2007 16:15:44 +0200
+ -- Loic Minier <lool@dooz.org>  Thu, 28 Jun 2007 16:45:56 +0200
 
 glib2.0 (2.13.5-1) experimental; urgency=low
 
