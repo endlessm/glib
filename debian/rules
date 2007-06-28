@@ -167,7 +167,7 @@ clean: debian/control
 	-rm -rf $(STAMP_DIR)
 	dh_clean
 
-maybe_check := $(if $(findstring nocheck,$(DEB_BUILD_OPTIONS)),,check)
+maybe_check = $(if $(findstring nocheck,$(DEB_BUILD_OPTIONS)),,check)
 
 binary-indep: build $(maybe_check) install
 	dh_testdir
