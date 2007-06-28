@@ -212,7 +212,7 @@ binary-arch: build $(maybe_check) install
 	cat debian/*/DEBIAN/shlibs | \
 		sed -n -r -e 's/(([^ ]+: )?([^ ]+) ([^ ]+)) .*/\1/p' \
 			> debian/shlibs.local
-	dh_shlibdeps -a -ldebian/$(SHARED_PKG)/usr/lib -L$(SHARED_PKG)
+	dh_shlibdeps -a -ldebian/$(SHARED_PKG)/usr/lib
 	-rm -f debian/shlibs.local
 	dh_gencontrol -a
 	dh_md5sums -a
