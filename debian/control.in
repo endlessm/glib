@@ -1,7 +1,7 @@
 Source: glib@APIVER@
 Section: libs
 Priority: optional
-Maintainer: Sebastien Bacher <seb128@debian.org>
+Maintainer: Loic Minier <lool@dooz.org>
 Uploaders: @GNOME_TEAM@
 Build-Depends: debhelper (>> 5.0.22),
                pkg-config (>= 0.14.0),
