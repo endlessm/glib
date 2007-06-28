@@ -3,8 +3,9 @@ glib2.0 (2.13.5-2) UNRELEASED; urgency=low
   * Don't pass -L to dh_shlibdeps as the shlibs.local trick is enough and this
     can result in duplicate deps; closes: #317461.
   * Set myself as maintainer.
+  * Cleanups.
 
- -- Loic Minier <lool@dooz.org>  Thu, 28 Jun 2007 16:06:19 +0200
+ -- Loic Minier <lool@dooz.org>  Thu, 28 Jun 2007 16:15:44 +0200
 
 glib2.0 (2.13.5-1) experimental; urgency=low
 

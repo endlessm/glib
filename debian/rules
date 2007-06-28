@@ -24,13 +24,7 @@ MAKEFLAGS += $(if $(DEB_BUILD_OPTIONS_PARALLEL),-j$(DEB_BUILD_OPTIONS_PARALLEL))
 DEB_HOST_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 
-CFLAGS += -Wall -g
-
-ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-	CFLAGS += -O0
-else
-	CFLAGS += -O2
-endif
+CFLAGS += -Wall -g -O$(if $(findstring noopt,$(DEB_BUILD_OPTIONS)),0,2)
 
 # Ensure the build aborts when there are still references to undefined
 # symbols
@@ -87,21 +81,22 @@ deb_configure_flags := $(common_configure_flags) \
 			--enable-static
 udeb_configure_flags := $(common_configure_flags)
 
-patch: $(STAMP_DIR)/patch-stamp
-
 $(STAMP_DIR)/patch-stamp:
 	dh_testdir
 	# backup the original files to restore them in the clean target
 	-test -r config.sub && cp config.sub config.sub.orig
 	-test -r config.guess && cp config.guess config.guess.orig
 	# apply patches
-	QUILT_PATCHES=$(PATCH_DIR) quilt --quiltrc /dev/null push -a || test $$? = 2
+	QUILT_PATCHES=$(PATCH_DIR) \
+		quilt --quiltrc /dev/null push -a || test $$? = 2
 	-test -r /usr/share/misc/config.sub && \
 		cp -f /usr/share/misc/config.sub config.sub
 	-test -r /usr/share/misc/config.guess && \
 		cp -f /usr/share/misc/config.guess config.guess
 	-mkdir -p $(STAMP_DIR)
 	touch $@
+
+patch: $(STAMP_DIR)/patch-stamp
 
 $(STAMP_DIR)/configure-stamp-%: $(STAMP_DIR)/patch-stamp
 	dh_testdir
@@ -136,8 +131,7 @@ check: $(addprefix $(STAMP_DIR)/check-stamp-, $(CHECK_FLAVORS))
 
 $(STAMP_DIR)/install-stamp-%: $(STAMP_DIR)/build-stamp-%
 	mkdir -p $(installdir)
-	$(MAKE) -C $(builddir) install \
-		DESTDIR=$(installdir)
+	$(MAKE) -C $(builddir) install DESTDIR=$(installdir)
 	touch $@
 
 install: $(addprefix $(STAMP_DIR)/install-stamp-, $(FLAVORS))
@@ -155,7 +149,7 @@ debian/control:
 		-e "s#@DOC_PKG@#$(DOC_PKG)#g" \
 		-e "s#@DEBUG_PKG@#$(DEBUG_PKG)#g" \
 		-e "s#@GNOME_TEAM@#$(UPLOADERS)#g" \
-		$@.in > $@
+		$@.in >$@
 
 clean: debian/control
 	dh_testdir
@@ -167,12 +161,13 @@ clean: debian/control
 	-test -r config.sub.orig && mv -f config.sub.orig config.sub
 	-test -r config.guess.orig && mv -f config.guess.orig config.guess
 	# unapply patches, if any
-	QUILT_PATCHES=$(PATCH_DIR) quilt --quiltrc /dev/null pop -a -R || test $$? = 2
+	QUILT_PATCHES=$(PATCH_DIR) \
+		quilt --quiltrc /dev/null pop -a -R || test $$? = 2
 	-rm -rf .pc
 	-rm -rf $(STAMP_DIR)
 	dh_clean
 
-maybe_check = $(if $(findstring nocheck,$(DEB_BUILD_OPTIONS)),,check)
+maybe_check := $(if $(findstring nocheck,$(DEB_BUILD_OPTIONS)),,check)
 
 binary-indep: build $(maybe_check) install
 	dh_testdir
@@ -193,9 +188,9 @@ binary-arch: build $(maybe_check) install
 	dh_testroot
 	dh_install -a
 	# empty the dependency_libs in the *.la files
-	sed -i "/dependency_libs/ s/'.*'/''/" \
-		debian/$(DEV_PKG)/usr/lib/*.la
-	dh_installchangelogs -a -N$(DEV_PKG) -N$(DEBUG_PKG) ChangeLog ChangeLog.*
+	sed -i -e "/dependency_libs/ s/'.*'/''/" debian/$(DEV_PKG)/usr/lib/*.la
+	dh_installchangelogs -a -N$(DEV_PKG) -N$(DEBUG_PKG) \
+		ChangeLog ChangeLog.*
 	dh_installdocs -a -N$(DEV_PKG) -N$(DEBUG_PKG) NEWS NEWS.* README
 	dh_link -a
 	dh_strip -a --dbg-package=$(DEBUG_PKG)
@@ -209,9 +204,9 @@ binary-arch: build $(maybe_check) install
 	# dependencies of packages generated from this source; we already have
 	# inter-dependencies expressed manually in the control file, we do not
 	# need the shlibs to add duplicates
-	cat debian/*/DEBIAN/shlibs | \
-		sed -n -r -e 's/(([^ ]+: )?([^ ]+) ([^ ]+)) .*/\1/p' \
-			> debian/shlibs.local
+	sed -nr -e 's/(([^ ]+: )?([^ ]+) ([^ ]+)) .*/\1/p' \
+		debian/*/DEBIAN/shlibs \
+		>debian/shlibs.local
 	dh_shlibdeps -a -ldebian/$(SHARED_PKG)/usr/lib
 	-rm -f debian/shlibs.local
 	dh_gencontrol -a
