@@ -1,4 +1,4 @@
-glib2.0 (2.13.5-2) UNRELEASED; urgency=low
+glib2.0 (2.13.6-1) experimental; urgency=low
 
   * Don't pass -L to dh_shlibdeps as the shlibs.local trick is enough and this
     can result in duplicate deps; closes: #317461.
@@ -8,8 +8,10 @@ glib2.0 (2.13.5-2) UNRELEASED; urgency=low
     with 2.13.5 in experimental (currently: alpha amd64 arm hppa i386 ia64
     mips powerpc s390); closes: #291486.
   * Don't run the testsuite when cross-compiling.
+  * New upstream development release; only API change is to change back the
+    definition of GType for C++ to be gulong.
 
- -- Loic Minier <lool@dooz.org>  Thu, 28 Jun 2007 16:45:56 +0200
+ -- Loic Minier <lool@dooz.org>  Mon, 02 Jul 2007 10:21:34 +0200
 
 glib2.0 (2.13.5-1) experimental; urgency=low
 
