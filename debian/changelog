@@ -1,3 +1,10 @@
+glib2.0 (2.13.6-2) UNRELEASED; urgency=low
+
+  * Drop "libtool_is_fool" snippet patching hardcode_libdir_flag_spec and
+    archive_cmds which is probably dangerous with newer libtools.
+
+ -- Loic Minier <lool@dooz.org>  Mon, 02 Jul 2007 11:29:54 +0200
+
 glib2.0 (2.13.6-1) experimental; urgency=low
 
   * Don't pass -L to dh_shlibdeps as the shlibs.local trick is enough and this
