@@ -204,20 +204,20 @@ binary-indep: build $(maybe_check) install
 binary-arch: build $(maybe_check) install
 	dh_testdir
 	dh_testroot
-	dh_install -a
+	dh_install -s
 	# empty the dependency_libs in the *.la files
 	sed -i -e "/dependency_libs/ s/'.*'/''/" debian/$(DEV_PKG)/usr/lib/*.la
-	dh_installchangelogs -a -N$(DEV_PKG) -N$(DEBUG_PKG) \
+	dh_installchangelogs -s -N$(DEV_PKG) -N$(DEBUG_PKG) \
 		ChangeLog ChangeLog.*
-	dh_installdocs -a -N$(DEV_PKG) -N$(DEBUG_PKG) NEWS NEWS.* README
-	dh_link -a
-	dh_strip -a --dbg-package=$(DEBUG_PKG)
-	dh_compress -a
-	dh_fixperms -a
+	dh_installdocs -s -N$(DEV_PKG) -N$(DEBUG_PKG) NEWS NEWS.* README
+	dh_link -s
+	dh_strip -s --dbg-package=$(DEBUG_PKG)
+	dh_compress -s
+	dh_fixperms -s
 	dh_makeshlibs	-p$(SHARED_PKG) \
 			-V "$(SHARED_PKG) (>= $(SHVER))" \
 			--add-udeb="$(UDEB_PKG)"
-	dh_installdeb -a
+	dh_installdeb -s
 	# override shlibs for libraries from this source before computing
 	# dependencies of packages generated from this source; we already have
 	# inter-dependencies expressed manually in the control file, we do not
@@ -225,11 +225,11 @@ binary-arch: build $(maybe_check) install
 	sed -nr -e 's/(([^ ]+: )?([^ ]+) ([^ ]+)) .*/\1/p' \
 		debian/*/DEBIAN/shlibs \
 		>debian/shlibs.local
-	dh_shlibdeps -a -ldebian/$(SHARED_PKG)/usr/lib
+	dh_shlibdeps -s -ldebian/$(SHARED_PKG)/usr/lib
 	-rm -f debian/shlibs.local
-	dh_gencontrol -a
-	dh_md5sums -a
-	dh_builddeb -a
+	dh_gencontrol -s
+	dh_md5sums -s
+	dh_builddeb -s
 
 binary: binary-indep binary-arch
 .PHONY: patch configure build check install clean binary-indep binary-arch binary debian/control
