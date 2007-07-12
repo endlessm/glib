@@ -1,3 +1,2 @@
 #01_gettext_desktopfiles.patch
-60_output-lines-during-tests.patch
 67_gcc43-inline.patch
