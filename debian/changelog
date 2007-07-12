@@ -1,4 +1,4 @@
-glib2.0 (2.13.7-1) UNRELEASED; urgency=low
+glib2.0 (2.13.7-1) experimental; urgency=low
 
   * Drop "libtool_is_fool" snippet patching hardcode_libdir_flag_spec and
     archive_cmds which is probably dangerous with newer libtools.
@@ -9,8 +9,9 @@ glib2.0 (2.13.7-1) UNRELEASED; urgency=low
   * New patch, 60_wait-longer-for-threads-to-die, to wait 5 seconds instead of
     one for threads to die in the threadpool test; hopefully fixes hppa and
     kfreebsd testsuite failures; see #428674 and #431720.
+  * Don't make testsuite failures fatal on hppa; closes: #431720.
 
- -- Loic Minier <lool@dooz.org>  Thu, 12 Jul 2007 21:34:43 +0200
+ -- Loic Minier <lool@dooz.org>  Thu, 12 Jul 2007 21:37:47 +0200
 
 glib2.0 (2.13.6-1) experimental; urgency=low
 
