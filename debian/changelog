@@ -1,3 +1,9 @@
+glib2.0 (2.13.7-2) experimental; urgency=low
+
+  * Bump shlibs to 2.13.7.
+
+ -- Loic Minier <lool@dooz.org>  Wed, 25 Jul 2007 16:09:27 +0200
+
 glib2.0 (2.13.7-1) experimental; urgency=low
 
   * Drop "libtool_is_fool" snippet patching hardcode_libdir_flag_spec and
