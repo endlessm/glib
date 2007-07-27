@@ -1,3 +1,11 @@
+glib2.0 (2.13.7-3) experimental; urgency=low
+
+  * debian/patches/90_from_svn_fix_missing_pointer_casting.patch:
+    - patch from SVN, "fixed missing pointer casts when using atomic ops."
+      (Closes: #434853)
+
+ -- Sebastien Bacher <seb128@debian.org>  Fri, 27 Jul 2007 16:14:13 +0200
+
 glib2.0 (2.13.7-2) experimental; urgency=low
 
   * Bump shlibs to 2.13.7.
