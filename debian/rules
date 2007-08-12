@@ -78,9 +78,7 @@ common_configure_flags := \
 			--prefix=/usr \
 			--mandir=\$${prefix}/share/man \
 			--infodir=\$${prefix}/share/info \
-			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG) \
-			--host=$(DEB_HOST_GNU_TYPE) \
-			--build=$(DEB_BUILD_GNU_TYPE)
+			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG)
 ifeq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
 	common_configure_flags += --build=$(DEB_BUILD_GNU_TYPE)
 else

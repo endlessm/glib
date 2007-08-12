@@ -1,3 +1,9 @@
+glib2.0 (2.13.7-4) UNRELEASED; urgency=low
+
+  * Fix double --host/--build flags to configure.
+
+ -- Loic Minier <lool@dooz.org>  Sun, 12 Aug 2007 14:13:35 +0200
+
 glib2.0 (2.13.7-3) experimental; urgency=low
 
   * debian/patches/90_from_svn_fix_missing_pointer_casting.patch:
