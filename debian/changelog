@@ -1,8 +1,9 @@
 glib2.0 (2.13.7-4) UNRELEASED; urgency=low
 
   * Fix double --host/--build flags to configure.
+  * Update patch 67_gcc43-inline to also fix the headers for GCC 4.2.
 
- -- Loic Minier <lool@dooz.org>  Sun, 12 Aug 2007 14:13:35 +0200
+ -- Loic Minier <lool@dooz.org>  Thu, 16 Aug 2007 17:10:49 +0200
 
 glib2.0 (2.13.7-3) experimental; urgency=low
 

@@ -1,5 +1,5 @@
 GNOME #315437; Debian #416863; Gentoo #156475; fixes building of packages
-using glib against GCC 4.3
+using glib against GCC 4.2 and 4.3
 
 Index: glib2.0-2.13.4/glib/gutils.h
 ===================================================================
@@ -13,7 +13,7 @@ Index: glib2.0-2.13.4/glib/gutils.h
 -#  define G_INLINE_FUNC extern inline
 -#elif defined (G_CAN_INLINE) 
 +#elif defined (__GNUC__)
-+#  if __GNUC_PREREQ (4,3) && defined (__STDC_VERSION__) \
++#  if __GNUC_PREREQ (4,2) && defined (__STDC_VERSION__) \
 +   && __STDC_VERSION__ >= 199901L
 +#    define G_INLINE_FUNC extern __inline __attribute__ ((__gnu_inline__))
 +#  else
