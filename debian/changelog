@@ -1,9 +1,81 @@
-glib2.0 (2.12.13-1) unstable; urgency=low
+glib2.0 (2.13.7-4) UNRELEASED; urgency=low
+
+  * Fix double --host/--build flags to configure.
+  * Update patch 67_gcc43-inline to also fix the headers for GCC 4.2.
+
+ -- Loic Minier <lool@dooz.org>  Thu, 16 Aug 2007 17:10:49 +0200
+
+glib2.0 (2.13.7-3) experimental; urgency=low
+
+  * debian/patches/90_from_svn_fix_missing_pointer_casting.patch:
+    - patch from SVN, "fixed missing pointer casts when using atomic ops."
+      (Closes: #434853)
+
+ -- Sebastien Bacher <seb128@debian.org>  Fri, 27 Jul 2007 16:14:13 +0200
+
+glib2.0 (2.13.7-2) experimental; urgency=low
+
+  * Bump shlibs to 2.13.7.
+
+ -- Loic Minier <lool@dooz.org>  Wed, 25 Jul 2007 16:09:27 +0200
+
+glib2.0 (2.13.7-1) experimental; urgency=low
+
+  * Drop "libtool_is_fool" snippet patching hardcode_libdir_flag_spec and
+    archive_cmds which is probably dangerous with newer libtools.
+  * Fix flavor name in a comment of debian/rules.
+  * Use -s instead of -a in arch-specific dh_* calls.
+  * New upstream development release; some API additions.
+    - Drop patch 60_output-lines-during-tests, merged upstream.
+  * New patch, 60_wait-longer-for-threads-to-die, to wait 5 seconds instead of
+    one for threads to die in the threadpool test; hopefully fixes hppa and
+    kfreebsd testsuite failures; see #428674 and #431720.
+  * Don't make testsuite failures fatal on hppa; closes: #431720.
+
+ -- Loic Minier <lool@dooz.org>  Thu, 12 Jul 2007 21:37:47 +0200
+
+glib2.0 (2.13.6-1) experimental; urgency=low
+
+  * Don't pass -L to dh_shlibdeps as the shlibs.local trick is enough and this
+    can result in duplicate deps; closes: #317461.
+  * Set myself as maintainer.
+  * Cleanups.
+  * Make the testsuite failures fatal on arches which passed the testsuite
+    with 2.13.5 in experimental (currently: alpha amd64 arm hppa i386 ia64
+    mips powerpc s390); closes: #291486.
+  * Don't run the testsuite when cross-compiling.
+  * New upstream development release; only API change is to change back the
+    definition of GType for C++ to be gulong.
+
+ -- Loic Minier <lool@dooz.org>  Mon, 02 Jul 2007 10:21:34 +0200
+
+glib2.0 (2.13.5-1) experimental; urgency=low
+
+  * New upstream release
+   - Bump shlibs to >= 2.13.5, as the API was changed
+
+ -- Marc 'HE' Brockschmidt <he@debian.org>  Tue, 19 Jun 2007 16:14:16 +0200
+
+glib2.0 (2.13.4-2) experimental; urgency=low
+
+  * New patch, 67_gcc43-inline, fixes FTBFS of apps using glib with GCC 4.3
+    which uses C99 where the meaning of "inline" changed; patch was adapted
+    from patches in GNOME #315437 and Gentoo #156475; closes: #416863.
+
+ -- Loic Minier <lool@dooz.org>  Sat, 16 Jun 2007 18:49:57 +0200
+
+glib2.0 (2.13.4-1) experimental; urgency=low
 
   * Also honor parallel=n in DEB_BUILD_OPTIONS.
-  * New upstream stable release; no API change; bug fixes.
+  * New upstream release series; these are development releases, the new API
+    may still change incompatibly.
+    - Target at experimental; include check-dist.
+    - Bump up shlibs to >= 2.13.4.
+  * New patch but disabled, 01_gettext-desktopfiles, permits overriding the
+    gettext domain when desktop files have such a field; found in the Ubuntu
+    package.
 
- -- Loic Minier <lool@dooz.org>  Tue, 17 Jul 2007 17:30:47 +0100
+ -- Loic Minier <lool@dooz.org>  Wed, 13 Jun 2007 10:52:27 +0200
 
 glib2.0 (2.12.12-1) unstable; urgency=low
 

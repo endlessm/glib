@@ -2,6 +2,7 @@
 
 DISABLE_UPDATE_UPLOADERS := 1
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
+include /usr/share/gnome-pkg-tools/1/rules/check-dist.mk
 -include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
 
 GNOME_MODULE := glib
@@ -23,13 +24,11 @@ MAKEFLAGS += $(if $(DEB_BUILD_OPTIONS_PARALLEL),-j$(DEB_BUILD_OPTIONS_PARALLEL))
 DEB_HOST_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 
-CFLAGS += -Wall -g
+# Debian architectures
+DEB_BUILD_ARCH ?= $(shell dpkg-architecture -qDEB_BUILD_ARCH)
+DEB_HOST_ARCH  ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
-ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-	CFLAGS += -O0
-else
-	CFLAGS += -O2
-endif
+CFLAGS += -Wall -g -O$(if $(findstring noopt,$(DEB_BUILD_OPTIONS)),0,2)
 
 # Ensure the build aborts when there are still references to undefined
 # symbols
@@ -40,7 +39,7 @@ LDFLAGS += -Wl,-O1
 
 APIVER := 2.0
 SONAME := 0
-SHVER := 2.12.9
+SHVER := 2.13.7
 
 # package names
 SHARED_PKG := libglib$(APIVER)-$(SONAME)
@@ -52,11 +51,16 @@ DEBUG_PKG := $(SHARED_PKG)-dbg
 
 # list of flavors we build; each gets a builddir, a configure pass (configure
 # args are defined below), a build pass, and an install pass (in two steps)
-# Note: the shared flavor is required
+# Note: the "deb" flavor is required
 FLAVORS := deb udeb
 
 # list of flavors to run the test suite on
 CHECK_FLAVORS := $(filter deb, $(FLAVORS))
+
+# list of arches on which testsuite failures are fatal
+CHECK_SUPPORTED_ARCHES := alpha amd64 arm i386 ia64 mips powerpc s390
+# testsuite is known to fail on hppa, hurd, and kfreebsd -- -i386 and -amd64
+# testsuite status is unknown on m68k, mipsel, and sparc
 
 # build dir for the current flavor; this is only expanded in flavor specific
 # targets
@@ -74,9 +78,7 @@ common_configure_flags := \
 			--prefix=/usr \
 			--mandir=\$${prefix}/share/man \
 			--infodir=\$${prefix}/share/info \
-			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG) \
-			--host=$(DEB_HOST_GNU_TYPE) \
-			--build=$(DEB_BUILD_GNU_TYPE)
+			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG)
 ifeq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
 	common_configure_flags += --build=$(DEB_BUILD_GNU_TYPE)
 else
@@ -86,15 +88,14 @@ deb_configure_flags := $(common_configure_flags) \
 			--enable-static
 udeb_configure_flags := $(common_configure_flags)
 
-patch: $(STAMP_DIR)/patch-stamp
-
 $(STAMP_DIR)/patch-stamp:
 	dh_testdir
 	# backup the original files to restore them in the clean target
 	-test -r config.sub && cp config.sub config.sub.orig
 	-test -r config.guess && cp config.guess config.guess.orig
 	# apply patches
-	QUILT_PATCHES=$(PATCH_DIR) quilt --quiltrc /dev/null push -a || test $$? = 2
+	QUILT_PATCHES=$(PATCH_DIR) \
+		quilt --quiltrc /dev/null push -a || test $$? = 2
 	-test -r /usr/share/misc/config.sub && \
 		cp -f /usr/share/misc/config.sub config.sub
 	-test -r /usr/share/misc/config.guess && \
@@ -102,16 +103,14 @@ $(STAMP_DIR)/patch-stamp:
 	-mkdir -p $(STAMP_DIR)
 	touch $@
 
+patch: $(STAMP_DIR)/patch-stamp
+
 $(STAMP_DIR)/configure-stamp-%: $(STAMP_DIR)/patch-stamp
 	dh_testdir
 	mkdir -p $(builddir)
 	cd $(builddir) && \
 		CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" \
 			$(CURDIR)/configure $($*_configure_flags)
-	sed -i \
-		-e 's/^hardcode_libdir_flag_spec.*$$/hardcode_libdir_flag_spec=" -D__LIBTOOL_IS_A_FOOL__ "/' \
-		-e '/^archive_cmds="/s/"$$/ \\$$deplibs"/' \
-		$(builddir)/libtool
 	touch $@
 
 configure: $(addprefix $(STAMP_DIR)/configure-stamp-, $(FLAVORS))
@@ -124,19 +123,26 @@ $(STAMP_DIR)/build-stamp-%: $(STAMP_DIR)/configure-stamp-%
 
 build: $(addprefix $(STAMP_DIR)/build-stamp-, $(FLAVORS))
 
+maybe_ignore_check_failure = $(if $(filter ,$(CHECK_SUPPORTED_ARCHES)),-)
+
 $(STAMP_DIR)/check-stamp-%: $(STAMP_DIR)/build-stamp-%
 	dh_testdir
+ifeq ($(filter $(DEB_BUILD_ARCH),$(CHECK_SUPPORTED_ARCHES)),$(DEB_BUILD_ARCH))
+	# testsuite failures are fatal
+	LD_LIBRARY_PATH=$(builddir)/glib/.libs:$(builddir)/gmodule/.libs:$(builddir)/gobject/.libs:$(builddir)/gthread/.libs:$(LD_LIBRARY_PATH) \
+		$(MAKE) -C $(builddir) check
+else
 	# testsuite failures are ignored
 	-LD_LIBRARY_PATH=$(builddir)/glib/.libs:$(builddir)/gmodule/.libs:$(builddir)/gobject/.libs:$(builddir)/gthread/.libs:$(LD_LIBRARY_PATH) \
 		$(MAKE) -C $(builddir) check
+endif
 	touch $@
 
 check: $(addprefix $(STAMP_DIR)/check-stamp-, $(CHECK_FLAVORS))
 
 $(STAMP_DIR)/install-stamp-%: $(STAMP_DIR)/build-stamp-%
 	mkdir -p $(installdir)
-	$(MAKE) -C $(builddir) install \
-		DESTDIR=$(installdir)
+	$(MAKE) -C $(builddir) install DESTDIR=$(installdir)
 	touch $@
 
 install: $(addprefix $(STAMP_DIR)/install-stamp-, $(FLAVORS))
@@ -154,7 +160,7 @@ debian/control:
 		-e "s#@DOC_PKG@#$(DOC_PKG)#g" \
 		-e "s#@DEBUG_PKG@#$(DEBUG_PKG)#g" \
 		-e "s#@GNOME_TEAM@#$(UPLOADERS)#g" \
-		$@.in > $@
+		$@.in >$@
 
 clean: debian/control
 	dh_testdir
@@ -166,12 +172,18 @@ clean: debian/control
 	-test -r config.sub.orig && mv -f config.sub.orig config.sub
 	-test -r config.guess.orig && mv -f config.guess.orig config.guess
 	# unapply patches, if any
-	QUILT_PATCHES=$(PATCH_DIR) quilt --quiltrc /dev/null pop -a -R || test $$? = 2
+	QUILT_PATCHES=$(PATCH_DIR) \
+		quilt --quiltrc /dev/null pop -a -R || test $$? = 2
 	-rm -rf .pc
 	-rm -rf $(STAMP_DIR)
 	dh_clean
 
+ifeq ($(DEB_BUILD_ARCH),$(DEB_HOST_ARCH))
 maybe_check = $(if $(findstring nocheck,$(DEB_BUILD_OPTIONS)),,check)
+else
+# can't run the testsuite when cross-compiling
+maybe_check =
+endif
 
 binary-indep: build $(maybe_check) install
 	dh_testdir
@@ -190,32 +202,32 @@ binary-indep: build $(maybe_check) install
 binary-arch: build $(maybe_check) install
 	dh_testdir
 	dh_testroot
-	dh_install -a
+	dh_install -s
 	# empty the dependency_libs in the *.la files
-	sed -i "/dependency_libs/ s/'.*'/''/" \
-		debian/$(DEV_PKG)/usr/lib/*.la
-	dh_installchangelogs -a -N$(DEV_PKG) -N$(DEBUG_PKG) ChangeLog ChangeLog.*
-	dh_installdocs -a -N$(DEV_PKG) -N$(DEBUG_PKG) NEWS NEWS.* README
-	dh_link -a
-	dh_strip -a --dbg-package=$(DEBUG_PKG)
-	dh_compress -a
-	dh_fixperms -a
+	sed -i -e "/dependency_libs/ s/'.*'/''/" debian/$(DEV_PKG)/usr/lib/*.la
+	dh_installchangelogs -s -N$(DEV_PKG) -N$(DEBUG_PKG) \
+		ChangeLog ChangeLog.*
+	dh_installdocs -s -N$(DEV_PKG) -N$(DEBUG_PKG) NEWS NEWS.* README
+	dh_link -s
+	dh_strip -s --dbg-package=$(DEBUG_PKG)
+	dh_compress -s
+	dh_fixperms -s
 	dh_makeshlibs	-p$(SHARED_PKG) \
 			-V "$(SHARED_PKG) (>= $(SHVER))" \
 			--add-udeb="$(UDEB_PKG)"
-	dh_installdeb -a
+	dh_installdeb -s
 	# override shlibs for libraries from this source before computing
 	# dependencies of packages generated from this source; we already have
 	# inter-dependencies expressed manually in the control file, we do not
 	# need the shlibs to add duplicates
-	cat debian/*/DEBIAN/shlibs | \
-		sed -n -r -e 's/(([^ ]+: )?([^ ]+) ([^ ]+)) .*/\1/p' \
-			> debian/shlibs.local
-	dh_shlibdeps -a -ldebian/$(SHARED_PKG)/usr/lib -L$(SHARED_PKG)
+	sed -nr -e 's/(([^ ]+: )?([^ ]+) ([^ ]+)) .*/\1/p' \
+		debian/*/DEBIAN/shlibs \
+		>debian/shlibs.local
+	dh_shlibdeps -s -ldebian/$(SHARED_PKG)/usr/lib
 	-rm -f debian/shlibs.local
-	dh_gencontrol -a
-	dh_md5sums -a
-	dh_builddeb -a
+	dh_gencontrol -s
+	dh_md5sums -s
+	dh_builddeb -s
 
 binary: binary-indep binary-arch
 .PHONY: patch configure build check install clean binary-indep binary-arch binary debian/control

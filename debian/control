@@ -1,8 +1,8 @@
 Source: glib2.0
 Section: libs
 Priority: optional
-Maintainer: Sebastien Bacher <seb128@debian.org>
-Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Loic Minier <lool@dooz.org>
+Maintainer: Loic Minier <lool@dooz.org>
+Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Marc 'HE' Brockschmidt <he@debian.org>
 Build-Depends: debhelper (>> 5.0.22),
                pkg-config (>= 0.14.0),
                gettext,
