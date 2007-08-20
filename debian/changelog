@@ -1,9 +1,12 @@
-glib2.0 (2.13.7-4) UNRELEASED; urgency=low
+glib2.0 (2.14.0-1) experimental; urgency=low
 
   * Fix double --host/--build flags to configure.
   * Update patch 67_gcc43-inline to also fix the headers for GCC 4.2.
+  * New upstream major stable release; API additions.
+    - Bump up shlibs to >= 2.14.0.
+    - Drop patch 90_from_svn_fix_missing_pointer_casting, merged upstream.
 
- -- Loic Minier <lool@dooz.org>  Thu, 16 Aug 2007 17:10:49 +0200
+ -- Loic Minier <lool@dooz.org>  Mon, 20 Aug 2007 21:54:07 +0200
 
 glib2.0 (2.13.7-3) experimental; urgency=low
 

@@ -1,4 +1,4 @@
 #01_gettext_desktopfiles.patch
 60_wait-longer-for-threads-to-die.patch
 67_gcc43-inline.patch
-90_from_svn_fix_missing_pointer_casting.patch
+90_fix-abi-check-with-debug.patch -p0
