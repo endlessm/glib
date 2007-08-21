@@ -1,3 +1,9 @@
+glib2.0 (2.14.0-3) UNRELEASED; urgency=low
+
+  * Mention I added 90_fix-abi-check-with-debug in 2.14.0-1
+
+ -- Loic Minier <lool@dooz.org>  Tue, 21 Aug 2007 10:27:12 +0200
+
 glib2.0 (2.14.0-2) unstable; urgency=low
 
   * Upload to unstable; drop check-dist include.
@@ -11,6 +17,8 @@ glib2.0 (2.14.0-1) experimental; urgency=low
   * New upstream major stable release; API additions.
     - Bump up shlibs to >= 2.14.0.
     - Drop patch 90_from_svn_fix_missing_pointer_casting, merged upstream.
+    - New patch, 90_fix-abi-check-with-debug, fixes build of testsuite in
+      debug mode; from SVN.
 
  -- Loic Minier <lool@dooz.org>  Mon, 20 Aug 2007 21:54:07 +0200
 
