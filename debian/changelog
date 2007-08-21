@@ -1,3 +1,9 @@
+glib2.0 (2.14.0-2) unstable; urgency=low
+
+  * Upload to unstable; drop check-dist include.
+
+ -- Loic Minier <lool@dooz.org>  Tue, 21 Aug 2007 09:05:30 +0200
+
 glib2.0 (2.14.0-1) experimental; urgency=low
 
   * Fix double --host/--build flags to configure.
