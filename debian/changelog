@@ -1,8 +1,14 @@
-glib2.0 (2.14.0-3) UNRELEASED; urgency=low
+glib2.0 (2.14.1-1) unstable; urgency=low
 
+  [ Loic Minier ]
   * Mention I added 90_fix-abi-check-with-debug in 2.14.0-1
 
- -- Loic Minier <lool@dooz.org>  Tue, 21 Aug 2007 10:27:12 +0200
+  [ Sebastian Dröge ]
+  * New upstream major stable release, without API changes.
+  * debian/patches/90_fix-abi-check-with-debug.patch:
+    + Dropped, merged upstream.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 17 Sep 2007 06:35:29 +0200
 
 glib2.0 (2.14.0-2) unstable; urgency=low
 
