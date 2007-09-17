@@ -9,7 +9,8 @@ Build-Depends: debhelper (>> 5.0.22),
                autotools-dev,
                gnome-pkg-tools (>= 0.11),
                quilt,
-               dpkg-dev (>= 1.13.19)
+               dpkg-dev (>= 1.13.19),
+               libpcre3-dev (>= 7.2)
 Standards-Version: 3.7.2
 
 Package: @SHARED_PKG@
