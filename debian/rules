@@ -77,15 +77,15 @@ common_configure_flags := \
 			--prefix=/usr \
 			--mandir=\$${prefix}/share/man \
 			--infodir=\$${prefix}/share/info \
-			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG) \
-			--with-pcre=system
+			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG)
 ifeq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
 	common_configure_flags += --build=$(DEB_BUILD_GNU_TYPE)
 else
 	common_configure_flags += --build=$(DEB_BUILD_GNU_TYPE) --host=$(DEB_HOST_GNU_TYPE)
 endif
 deb_configure_flags := $(common_configure_flags) \
-			--enable-static
+			--enable-static \
+			--with-pcre=system
 udeb_configure_flags := $(common_configure_flags)
 
 $(STAMP_DIR)/patch-stamp:
