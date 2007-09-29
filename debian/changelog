@@ -1,3 +1,14 @@
+glib2.0 (2.14.1-4) unstable; urgency=low
+
+  * Document that testsuite failure aren't fatal on m68k due to GNOME #481575.
+  * Disable testsuite on arm, mips, powerpc; see GNOME #481573; mipsel was
+    already disabled because its testsuite results were unknown in
+    experimental.
+  * Document that testsuite failure is disabled on hppa, hurd, kfreebsd-amd64,
+    kfreebsd-i386 due to Debian #428674.
+
+ -- Loic Minier <lool@dooz.org>  Sat, 29 Sep 2007 13:56:18 +0200
+
 glib2.0 (2.14.1-3) unstable; urgency=medium
 
   * Only build the standards debs against the system PCRE, i.e. build the udeb
