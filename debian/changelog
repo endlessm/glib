@@ -1,3 +1,10 @@
+glib2.0 (2.14.1-5) unstable; urgency=low
+
+  * Add a relibtoolizing patch, 70_relibtoolize, to get some hurd-i386 fixes
+    in libtool; see Debian #445001.
+
+ -- Loic Minier <lool@dooz.org>  Sun, 07 Oct 2007 16:52:44 +0200
+
 glib2.0 (2.14.1-4) unstable; urgency=low
 
   * Document that testsuite failure aren't fatal on m68k due to GNOME #481575.
