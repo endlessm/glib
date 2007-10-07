@@ -1,5 +1,5 @@
-Debian #445001; relibtoolize to get an updated libtool with some hurd-i386
-fixes.  Generated with:
+GNOME #484424; Debian #445001; relibtoolize to get an updated libtool with some
+hurd-i386 fixes.  Generated with:
         libtoolize --force --copy &&
         aclocal-1.7 -I m4macros &&
         autoconf &&
