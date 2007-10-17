@@ -57,7 +57,7 @@ FLAVORS := deb udeb
 CHECK_FLAVORS := $(filter deb, $(FLAVORS))
 
 # list of arches on which testsuite failures are fatal
-CHECK_SUPPORTED_ARCHES := alpha amd64 i386 ia64 s390 sparc
+CHECK_SUPPORTED_ARCHES := alpha amd64 i386 ia64 lpia s390 sparc
 # testsuite is known to fail on hppa, hurd, kfreebsd-amd64, kfreebsd-i386; see
 # Debian #428674
 # testsuite is known to fail on arm, mips, mipsel, powerpc; see GNOME #481573
