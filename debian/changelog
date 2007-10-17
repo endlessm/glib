@@ -1,8 +1,9 @@
-glib2.0 (2.14.1-6) UNRELEASED; urgency=low
+glib2.0 (2.14.2-1) unstable; urgency=low
 
   * Add GNOME bug id to 70_relibtoolize.
+  * New upstream stable release; no API change.
 
- -- Loic Minier <lool@dooz.org>  Sun, 07 Oct 2007 17:11:01 +0200
+ -- Loic Minier <lool@dooz.org>  Wed, 17 Oct 2007 17:11:12 +0200
 
 glib2.0 (2.14.1-5) unstable; urgency=low
 
