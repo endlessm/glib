@@ -1,9 +1,17 @@
-glib2.0 (2.14.2-2) UNRELEASED; urgency=low
+glib2.0 (2.14.3-1) unstable; urgency=high
 
+  [ Sebastian Dröge ]
   * debian/shlibs.local:
     + Override libpcre3's shlibs to require at least pcre 7.2 (See: #449289).
 
- -- Sebastian Dröge <slomo@debian.org>  Sun, 04 Nov 2007 20:56:05 +0100
+  [ Loic Minier ]
+  * New upstream stable release; bug fixes and security update.
+    - SECURITY: Update the internal copy of PCRE to 7.4, fixes CVE-2007-4767;
+      the internal copy is used for the udeb.
+    - Drop relibtoolizing patch, 70_relibtoolize, as upstream prepared this
+      tarball with libtool 1.5.24.
+
+ -- Loic Minier <lool@dooz.org>  Sat, 10 Nov 2007 19:59:04 +0100
 
 glib2.0 (2.14.2-1) unstable; urgency=low
 

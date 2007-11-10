@@ -1,4 +1,3 @@
 #01_gettext_desktopfiles.patch
 60_wait-longer-for-threads-to-die.patch
 67_gcc43-inline.patch
-70_relibtoolize.patch
