@@ -1,4 +1,4 @@
-glib2.0 (2.14.3-1ubuntu1) UNRELEASED; urgency=low
+glib2.0 (2.14.3-1) UNRELEASED; urgency=low
 
   * Fix disabled patch name 01_gettext-desktopfiles in series.
 
