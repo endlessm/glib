@@ -1,8 +1,13 @@
 glib2.0 (2.14.3-2) UNRELEASED; urgency=low
 
+  [ Loic Minier ]
   * Fix disabled patch name 01_gettext-desktopfiles in series.
 
- -- Loic Minier <lool@dooz.org>  Sat, 10 Nov 2007 20:34:38 +0100
+  [ Josselin Mouette ]
+  * Conflict against nautilus < 2.20 according to
+    http://bugzilla.gnome.org/show_bug.cgi?id=440988#c182
+
+ -- Josselin Mouette <joss@debian.org>  Sun, 18 Nov 2007 22:22:44 +0100
 
 glib2.0 (2.14.3-1) unstable; urgency=high
 
