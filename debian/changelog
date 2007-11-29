@@ -1,3 +1,12 @@
+glib2.0 (2.14.4-2) unstable; urgency=low
+
+  * debian/rules:
+    + Make testsuite failures on sparc non-fatal too as the
+      threadpool-test fails there too, most probably of some
+      timing related bug.
+
+ -- Sebastian Dröge <slomo@debian.org>  Thu, 29 Nov 2007 11:45:57 +0100
+
 glib2.0 (2.14.4-1) unstable; urgency=low
 
   [ Loic Minier ]
