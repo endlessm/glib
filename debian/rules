@@ -60,9 +60,8 @@ CHECK_FLAVORS := $(filter deb, $(FLAVORS))
 CHECK_SUPPORTED_ARCHES := alpha amd64 i386 ia64 lpia s390
 # testsuite is known to fail on hppa, hurd, kfreebsd-amd64, kfreebsd-i386; see
 # Debian #428674
-# testsuite is known to fail on arm, mips, mipsel, powerpc; see GNOME #481573
+# testsuite is known to fail on arm, mips, mipsel, powerpc, sparc; see GNOME #481573
 # testsuite is known to fail on m68k; see GNOME #481575
-# testsuite fails on sparc in threadpool-test
 
 # build dir for the current flavor; this is only expanded in flavor specific
 # targets
