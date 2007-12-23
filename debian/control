@@ -11,8 +11,11 @@ Build-Depends: debhelper (>> 5.0.22),
                quilt,
                dpkg-dev (>= 1.13.19),
                libpcre3-dev (>= 7.2),
-               gtk-doc-tools
-Standards-Version: 3.7.2
+               gtk-doc-tools,
+               libselinux1-dev | not+linux-gnu,
+               linux-libc-dev | not+linux-gnu,
+               libfam-dev | libgamin-dev
+Standards-Version: 3.7.3
 
 Package: libglib2.0-0
 Section: libs
@@ -113,3 +116,10 @@ Description: Documentation files for the GLib library
  This package contains the HTML documentation for the GLib library
  in /usr/share/doc/libglib2.0-doc/ .
 
+Package: libgio-fam
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: GLib Input, Output and Streaming Library (fam module)
+ GIO is the input, output and streaming API of GLib. This package
+ provides a fam file and directory monitoring backend for it.
+ 
