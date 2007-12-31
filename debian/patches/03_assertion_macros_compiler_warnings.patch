@@ -1,0 +1,54 @@
+--- trunk/glib/glib.symbols	2007/12/31 04:45:19	6220
++++ trunk/glib/glib.symbols	2007/12/31 05:25:25	6221
+@@ -1278,10 +1278,10 @@
+ 
+ #if IN_HEADER(__G_TEST_UTILS_H__)
+ #if IN_FILE(__G_TEST_UTILS_C__)
+-g_assertion_message
+-g_assertion_message_cmpnum
+-g_assertion_message_cmpstr
+-g_assertion_message_expr
++g_assertion_message G_GNUC_NORETURN
++g_assertion_message_cmpnum G_GNUC_NORETURN
++g_assertion_message_cmpstr G_GNUC_NORETURN
++g_assertion_message_expr G_GNUC_NORETURN
+ g_strcmp0
+ g_test_add_data_func
+ g_test_add_func
+
+--- trunk/glib/gtestutils.h	2007/12/31 04:45:19	6220
++++ trunk/glib/gtestutils.h	2007/12/31 05:25:25	6221
+@@ -166,12 +166,12 @@
+                                          const char     *file,
+                                          int             line,
+                                          const char     *func,
+-                                         const char     *message);
++                                         const char     *message) G_GNUC_NORETURN;
+ void    g_assertion_message_expr        (const char     *domain,
+                                          const char     *file,
+                                          int             line,
+                                          const char     *func,
+-                                         const char     *expr);
++                                         const char     *expr) G_GNUC_NORETURN;
+ void    g_assertion_message_cmpstr      (const char     *domain,
+                                          const char     *file,
+                                          int             line,
+@@ -179,7 +179,7 @@
+                                          const char     *expr,
+                                          const char     *arg1,
+                                          const char     *cmp,
+-                                         const char     *arg2);
++                                         const char     *arg2) G_GNUC_NORETURN;
+ void    g_assertion_message_cmpnum      (const char     *domain,
+                                          const char     *file,
+                                          int             line,
+@@ -188,7 +188,7 @@
+                                          long double     arg1,
+                                          const char     *cmp,
+                                          long double     arg2,
+-                                         char            numtype);
++                                         char            numtype) G_GNUC_NORETURN;
+ void    g_test_add_vtable               (const char     *testpath,
+                                          gsize           data_size,
+                                          gconstpointer   test_data,
+

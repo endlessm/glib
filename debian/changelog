@@ -10,12 +10,15 @@ glib2.0 (2.15.0-1) experimental; urgency=low
     a GIO file/directory monitoring module that uses fam.
   * Add patch 02_fix_build_issue.patch, taken from the Ubuntu package to fix
     the build.
+  * Add patch 03_assertion_macros_compiler_warnings.patch from upstream SVN
+    to prevent several compiler warnings caused by a change with the assertion
+    macros.
 
   [Loic Minier]
   * Build-dep on gtk-doc-tools to prevent a spurious warning from
     gtk-doc.make: "/bin/sh: line 11: test: !=: unary operator expected".
 
- -- Sebastian Dröge <slomo@debian.org>  Sun, 23 Dec 2007 05:58:17 +0100
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 31 Dec 2007 11:01:04 +0100
 
 glib2.0 (2.14.4-2) unstable; urgency=low
 
