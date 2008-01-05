@@ -13,12 +13,18 @@ glib2.0 (2.15.0-1) experimental; urgency=low
   * Add patch 03_assertion_macros_compiler_warnings.patch from upstream SVN
     to prevent several compiler warnings caused by a change with the assertion
     macros.
+  * debian/rules,
+    debian/libglib2.0-0.symbols,
+    debian/control.in:
+    + Add a symbol file for GLib, generated from 2.12.4, 2.14.3, 2.15.0
+      and call dpkg-gensymbols at build time. Require dpkg-dev (>= 1.14.8)
+      for this.
 
   [Loic Minier]
   * Build-dep on gtk-doc-tools to prevent a spurious warning from
     gtk-doc.make: "/bin/sh: line 11: test: !=: unary operator expected".
 
- -- Sebastian Dröge <slomo@debian.org>  Mon, 31 Dec 2007 11:01:04 +0100
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 05 Jan 2008 17:27:00 +0100
 
 glib2.0 (2.14.4-2) unstable; urgency=low
 
