@@ -9,8 +9,9 @@ glib2.0 (2.14.4-3) UNRELEASED; urgency=low
     debian/libglib2.0-0.symbols,
     debian/control.in:
     + Add a symbol file for GLib, generated from 2.12.4, 2.14.3 and 2.14.4
-      and call dpkg-gensymbols at build time. Require dpkg-dev (>= 1.14.8)
-      for this.
+      and call dpkg-gensymbols at build time. The symbols file was edited
+      to give better minimal versions for the initial generation.
+      Require dpkg-dev (>= 1.14.8) for this.
   * debian/control.in:
     + Update Standards-Version to 3.7.3, no additional changes needed.
 
