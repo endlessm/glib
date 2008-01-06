@@ -1,4 +1,5 @@
 libglib-2.0.so.0 libglib2.0-0 #MINVER#
+* Build-Depends-Package: libglib2.0-dev
  g_access@Base 2.12.0
  g_allocator_free@Base 2.12.0
  g_allocator_new@Base 2.12.0
@@ -1079,6 +1080,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  glib_minor_version@Base 2.12.0
  glib_on_error_halt@Base 2.12.0
 libgmodule-2.0.so.0 libglib2.0-0 #MINVER#
+* Build-Depends-Package: libglib2.0-dev
  g_module_build_path@Base 2.12.0
  g_module_close@Base 2.12.0
  g_module_error@Base 2.12.0
@@ -1088,6 +1090,7 @@ libgmodule-2.0.so.0 libglib2.0-0 #MINVER#
  g_module_supported@Base 2.12.0
  g_module_symbol@Base 2.12.0
 libgobject-2.0.so.0 libglib2.0-0 #MINVER#
+* Build-Depends-Package: libglib2.0-dev
  g_boxed_copy@Base 2.12.0
  g_boxed_free@Base 2.12.0
  g_boxed_type_register_static@Base 2.12.0
@@ -1424,5 +1427,6 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_value_type_transformable@Base 2.12.0
  g_value_unset@Base 2.12.0
 libgthread-2.0.so.0 libglib2.0-0 #MINVER#
+* Build-Depends-Package: libglib2.0-dev
  g_thread_init@Base 2.12.0
  g_thread_init_with_errorcheck_mutexes@Base 2.12.0
