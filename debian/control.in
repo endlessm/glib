@@ -56,6 +56,7 @@ Architecture: any
 Depends: ${misc:Depends},
          @SHARED_PKG@ (= ${binary:Version}),
          pkg-config (>= 0.14.0)
+Recommends: python
 Suggests: @DOC_PKG@
 Replaces: libglib1.3-dev
 Conflicts: libglib1.3-dev
