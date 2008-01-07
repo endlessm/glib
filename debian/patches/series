@@ -1,4 +1,2 @@
 #01_gettext-desktopfiles.patch
-02_fix_build_issue.patch
 60_wait-longer-for-threads-to-die.patch
-67_gcc43-inline.patch

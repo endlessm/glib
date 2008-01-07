@@ -22,6 +22,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_app_info_set_as_default_for_extension@Base 2.15.0
  g_app_info_set_as_default_for_type@Base 2.15.0
  g_app_info_should_show@Base 2.15.0
+ g_app_info_supports_files@Base 2.15.1
  g_app_info_supports_uris@Base 2.15.0
  g_app_launch_context_get_display@Base 2.15.0
  g_app_launch_context_get_startup_notify_id@Base 2.15.0
@@ -103,11 +104,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_desktop_app_info_get_type@Base 2.15.0
  g_desktop_app_info_new@Base 2.15.0
  g_desktop_app_info_new_from_filename@Base 2.15.0
- g_directory_monitor_cancel@Base 2.15.0
- g_directory_monitor_emit_event@Base 2.15.0
- g_directory_monitor_get_type@Base 2.15.0
- g_directory_monitor_is_cancelled@Base 2.15.0
- g_directory_monitor_set_rate_limit@Base 2.15.0
+ g_desktop_app_info_set_desktop_env@Base 2.15.1
  g_drive_can_eject@Base 2.15.0
  g_drive_can_poll_for_media@Base 2.15.0
  g_drive_eject@Base 2.15.0
@@ -360,16 +357,14 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_loadable_icon_load_finish@Base 2.15.0
  g_local_directory_monitor_get_type@Base 2.15.0
  g_local_file_monitor_get_type@Base 2.15.0
- g_memory_input_stream_from_data@Base 2.15.0
- g_memory_input_stream_get_data@Base 2.15.0
- g_memory_input_stream_get_data_size@Base 2.15.0
+ g_memory_input_stream_add_data@Base 2.15.1
  g_memory_input_stream_get_type@Base 2.15.0
- g_memory_input_stream_set_free_data@Base 2.15.0
+ g_memory_input_stream_new@Base 2.15.1
+ g_memory_input_stream_new_from_data@Base 2.15.1
  g_memory_output_stream_get_data@Base 2.15.0
+ g_memory_output_stream_get_size@Base 2.15.1
  g_memory_output_stream_get_type@Base 2.15.0
  g_memory_output_stream_new@Base 2.15.0
- g_memory_output_stream_set_free_data@Base 2.15.0
- g_memory_output_stream_set_max_size@Base 2.15.0
  g_mount_can_eject@Base 2.15.0
  g_mount_can_unmount@Base 2.15.0
  g_mount_eject@Base 2.15.0
