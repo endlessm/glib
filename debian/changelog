@@ -1,10 +1,13 @@
-glib2.0 (2.14.4-3) UNRELEASED; urgency=low
+glib2.0 (2.14.5-1) UNRELEASED; urgency=low
 
   [ Loic Minier ]
   * Build-dep on gtk-doc-tools to prevent a spurious warning from
     gtk-doc.make: "/bin/sh: line 11: test: !=: unary operator expected".
 
   [ Sebastian Dröge ]
+  * New upstream bugfix release:
+    + debian/patches/67_gcc43-inline.patch:
+      - Dropped, merged upstream.
   * debian/rules,
     debian/libglib2.0-0.symbols,
     debian/control.in:
@@ -14,8 +17,12 @@ glib2.0 (2.14.4-3) UNRELEASED; urgency=low
       Require dpkg-dev (>= 1.14.8) for this.
   * debian/control.in:
     + Update Standards-Version to 3.7.3, no additional changes needed.
+  * debian/control.in,
+    debian/rules:
+    + Build depend on pcre >= 7.4-1 and use the system pcre for the udeb too
+      now that there is a pcre udeb.
 
- -- Sebastian Dröge <slomo@debian.org>  Sat, 05 Jan 2008 13:18:15 +0100
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 12 Jan 2008 07:05:14 +0100
 
 glib2.0 (2.14.4-2) unstable; urgency=low
 
