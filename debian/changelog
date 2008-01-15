@@ -20,9 +20,11 @@ glib2.0 (2.14.5-1) UNRELEASED; urgency=low
   * debian/control.in,
     debian/rules:
     + Build depend on pcre >= 7.4-1 and use the system pcre for the udeb too
-      now that there is a pcre udeb.
+      now that there is a pcre udeb (Closes: #443067).
+  * debian/shlibs.local:
+    + Drop shlibs.local hack as pcre is fixed now with 7.4-1 (Closes: #450796).
 
- -- Sebastian Dröge <slomo@debian.org>  Sat, 12 Jan 2008 07:05:14 +0100
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 15 Jan 2008 15:27:42 +0100
 
 glib2.0 (2.14.4-2) unstable; urgency=low
 
