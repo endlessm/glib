@@ -385,6 +385,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_mount_operation_get_username@Base 2.15.0
  g_mount_operation_new@Base 2.15.0
  g_mount_operation_reply@Base 2.15.0
+ g_mount_operation_result_get_type@Base 2.15.2
  g_mount_operation_set_anonymous@Base 2.15.0
  g_mount_operation_set_choice@Base 2.15.0
  g_mount_operation_set_domain@Base 2.15.0
@@ -448,6 +449,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_themed_icon_get_type@Base 2.15.0
  g_themed_icon_new@Base 2.15.0
  g_themed_icon_new_from_names@Base 2.15.0
+ g_themed_icon_new_with_default_fallbacks@Base 2.15.2
  g_unix_input_stream_get_type@Base 2.15.0
  g_unix_input_stream_new@Base 2.15.0
  g_unix_is_mount_path_system_internal@Base 2.15.0
@@ -460,6 +462,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_mount_guess_can_eject@Base 2.15.0
  g_unix_mount_guess_icon@Base 2.15.0
  g_unix_mount_guess_name@Base 2.15.0
+ g_unix_mount_guess_should_display@Base 2.15.2
  g_unix_mount_is_readonly@Base 2.15.0
  g_unix_mount_is_system_internal@Base 2.15.0
  g_unix_mount_monitor_get_type@Base 2.15.0
