@@ -12,9 +12,8 @@ glib2.0 (2.15.2-1) experimental; urgency=low
   * debian/rules,
     debian/libglib2.0-0.symbols,
     debian/control.in:
-    + Add a symbol file for GLib, generated from 2.12.4, 2.14.3, 2.15.0,
-      2.15.1, 2.15.2. This is handled by dh_makeshlibs. Require
-      dpkg-dev (>= 1.14.8) for this.
+    + Add a symbol file for GLib, generated from 2.12.4, 2.14.3, 2.15.2.
+      This is handled by dh_makeshlibs. Require dpkg-dev (>= 1.14.8) for this.
   * debian/control.in:
     + Recommend python on the -dev package for the gtester-report utility.
   * debian/shlibs.local:
