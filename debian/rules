@@ -217,8 +217,6 @@ binary-arch: build $(maybe_check) install
 	dh_makeshlibs	-p$(SHARED_PKG) \
 			-V "$(SHARED_PKG) (>= $(SHVER))" \
 			--add-udeb="$(UDEB_PKG)"
-	dpkg-gensymbols -p$(SHARED_PKG) -P$(CURDIR)/debian/$(SHARED_PKG) \
-	        -e$(CURDIR)/debian/$(SHARED_PKG)/usr/lib/libg*.so*
 	dh_installdeb -s
 	# override shlibs for libraries from this source before computing
 	# dependencies of packages generated from this source; we already have
