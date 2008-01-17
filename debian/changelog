@@ -2,6 +2,7 @@ glib2.0 (2.14.5-2) unstable; urgency=low
 
   * Bump up dpkg-dev build-dep to >= 1.14.13 for Build-Depends-Package; thanks
     Raphaël Hertzog.
+  * Drop duplicate dpkg-dev bdep.
 
  -- Loic Minier <lool@dooz.org>  Thu, 17 Jan 2008 16:09:20 +0100
 

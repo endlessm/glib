@@ -11,8 +11,7 @@ Build-Depends: debhelper (>> 5.0.22),
                quilt,
                dpkg-dev (>= 1.14.13),
                libpcre3-dev (>= 7.4-1),
-               gtk-doc-tools,
-               dpkg-dev (>= 1.14.8)
+               gtk-doc-tools
 Standards-Version: 3.7.3
 
 Package: libglib2.0-0
