@@ -1,3 +1,10 @@
+glib2.0 (2.15.2-2) experimental; urgency=low
+
+  * debian/rules:
+    + Disable selinux for the udeb until we have a libselinux1 udeb.
+
+ -- Sebastian Dröge <slomo@debian.org>  Thu, 17 Jan 2008 11:50:11 +0100
+
 glib2.0 (2.15.2-1) experimental; urgency=low
 
   [ Sebastian Dröge ]

@@ -90,7 +90,8 @@ else
 endif
 deb_configure_flags := $(common_configure_flags) \
 			--enable-static
-udeb_configure_flags := $(common_configure_flags)
+udeb_configure_flags := $(common_configure_flags) \
+			--disable-selinux
 
 $(STAMP_DIR)/patch-stamp:
 	dh_testdir
