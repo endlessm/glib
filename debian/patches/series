@@ -1,2 +1,3 @@
 #01_gettext-desktopfiles.patch
+02_fam-helper.patch
 60_wait-longer-for-threads-to-die.patch
