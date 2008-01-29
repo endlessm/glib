@@ -10,6 +10,9 @@ glib2.0 (2.15.4-1) experimental; urgency=low
       - Update symbols for 2.15.4.
     + debian/rules:
       - Update API version to 2.15.4.
+  * debian/patches/02_fam-helper.patch:
+    + Fix build failure when building with FAM and not gamin. See BGO #509419
+      and BGO #512384 for more details.
 
  -- Sebastian Dröge <slomo@debian.org>  Tue, 29 Jan 2008 12:14:08 +0100
 
