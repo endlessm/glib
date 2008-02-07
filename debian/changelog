@@ -1,3 +1,9 @@
+glib2.0 (2.14.6-1) unstable; urgency=low
+
+  * New upstream bugfix release with updated translations.
+
+ -- Sebastian Dröge <slomo@debian.org>  Thu, 07 Feb 2008 10:33:20 +0100
+
 glib2.0 (2.14.5-2) unstable; urgency=low
 
   * Bump up dpkg-dev build-dep to >= 1.14.13 for Build-Depends-Package; thanks
