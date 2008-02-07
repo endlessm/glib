@@ -50,6 +50,7 @@ Package: @DEV_PKG@
 Section: libdevel
 Architecture: any
 Depends: ${misc:Depends},
+         ${shlibs:Depends},
          @SHARED_PKG@ (= ${binary:Version}),
          pkg-config (>= 0.14.0)
 Suggests: @DOC_PKG@

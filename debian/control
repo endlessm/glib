@@ -50,6 +50,7 @@ Package: libglib2.0-dev
 Section: libdevel
 Architecture: any
 Depends: ${misc:Depends},
+         ${shlibs:Depends},
          libglib2.0-0 (= ${binary:Version}),
          pkg-config (>= 0.14.0)
 Suggests: libglib2.0-doc

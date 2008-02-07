@@ -1,6 +1,8 @@
 glib2.0 (2.14.6-1) unstable; urgency=low
 
   * New upstream bugfix release with updated translations.
+  * debian/control.in:
+    + Add ${shlibs:Depends} to the -dev package.
 
  -- Sebastian Dröge <slomo@debian.org>  Thu, 07 Feb 2008 10:33:20 +0100
 
