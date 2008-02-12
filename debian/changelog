@@ -1,3 +1,15 @@
+glib2.0 (2.15.5-1) experimental; urgency=low
+
+  * New upstream release:
+    + debian/patches/02_fam-helper.patch:
+      - Dropped, merged upstream.
+    + debian/patches/60_wait-longer-for-threads-to-die.patch:
+      - Updated to apply cleanly again.
+    + debian/libglib2.0-0.symbols:
+      - Update symbols for 2.15.5.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 12 Feb 2008 06:08:39 +0100
+
 glib2.0 (2.15.4-1) experimental; urgency=low
 
   [ Loic Minier ]
