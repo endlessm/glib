@@ -1,9 +1,12 @@
-glib2.0 (2.15.5-2) UNRELEASED; urgency=low
+glib2.0 (2.15.6-1) experimental; urgency=low
 
-  * debian/rules:
-    + Update shlibs version to 2.15.5.
+  * New upstream release:
+    + debian/rules:
+      - Update shlibs version to 2.15.6.
+    + debian/libglib2.0-0.symbols:
+      - Updated symbols for the new version.
 
- -- Sebastian Dröge <slomo@debian.org>  Tue, 12 Feb 2008 08:43:42 +0100
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 26 Feb 2008 06:22:28 +0100
 
 glib2.0 (2.15.5-1) experimental; urgency=low
 
