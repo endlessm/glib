@@ -11,7 +11,10 @@ Build-Depends: debhelper (>> 5.0.22),
                quilt,
                dpkg-dev (>= 1.14.13),
                libpcre3-dev (>= 7.4-1),
-               gtk-doc-tools
+               gtk-doc-tools,
+               libselinux1-dev | not+linux-gnu,
+               linux-libc-dev | not+linux-gnu,
+               libfam-dev | libgamin-dev
 Standards-Version: 3.7.3
 
 Package: @SHARED_PKG@
@@ -53,6 +56,7 @@ Depends: ${misc:Depends},
          ${shlibs:Depends},
          @SHARED_PKG@ (= ${binary:Version}),
          pkg-config (>= 0.14.0)
+Recommends: python
 Suggests: @DOC_PKG@
 Replaces: libglib1.3-dev
 Conflicts: libglib1.3-dev
@@ -114,3 +118,10 @@ Description: Documentation files for the GLib library
  This package contains the HTML documentation for the GLib library
  in /usr/share/doc/@DOC_PKG@/ .
 
+Package: libgio-fam
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: GLib Input, Output and Streaming Library (fam module)
+ GIO is the input, output and streaming API of GLib. This package
+ provides a fam file and directory monitoring backend for it.
+ 
