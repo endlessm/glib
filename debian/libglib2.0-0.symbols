@@ -143,7 +143,6 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_attribute_matcher_unref@Base 2.16.0
  g_file_attribute_status_get_type@Base 2.16.0
  g_file_attribute_type_get_type@Base 2.16.0
- g_file_contains_file@Base 2.16.0
  g_file_copy@Base 2.16.0
  g_file_copy_async@Base 2.16.0
  g_file_copy_attributes@Base 2.16.0
@@ -1334,7 +1333,6 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_slice_alloc0@Base 2.12.0
  g_slice_alloc@Base 2.12.0
  g_slice_copy@Base 2.14.0
- g_slice_debug_tree_statistics@Base 2.16.0
  g_slice_free1@Base 2.12.0
  g_slice_free_chain_with_offset@Base 2.12.0
  g_slice_get_config@Base 2.12.0
@@ -1640,7 +1638,6 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_unlink@Base 2.12.0
  g_unsetenv@Base 2.12.0
  g_uri_escape_string@Base 2.16.0
- g_uri_get_scheme@Base 2.16.0
  g_uri_list_extract_uris@Base 2.12.0
  g_uri_parse_scheme@Base 2.16.0
  g_uri_unescape_segment@Base 2.16.0
