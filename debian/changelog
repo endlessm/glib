@@ -1,3 +1,13 @@
+glib2.0 (2.16.0-1) unstable; urgency=low
+
+  * New upstream stable release:
+    + debian/rules:
+      - Update shlibs version to 2.16.0.
+    + debian/libglib2.0-0.symbols:
+      - Updated symbols for the new version.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 10 Mar 2008 19:23:55 +0100
+
 glib2.0 (2.15.6-1) experimental; urgency=low
 
   * New upstream release:
