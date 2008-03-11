@@ -1,3 +1,16 @@
+glib2.0 (2.16.1-2) UNRELEASED; urgency=low
+
+  * 02_usr_share_gnome_applications.patch: ported from GnomeVFS. Use 
+    /usr/share/gnome/applications/defaults.list to obtain the defaults 
+    for MIME mapping. Currently this file is still shipped by GnomeVFS.
+    Closes: #469504.
+  * 03_blacklist-directories.patch: ported from GnomeVFS. Blacklist more 
+    FHS directories that are commonly found as Unix mount points, 
+    including those necessary for live-initramfs.
+  * 04_nfs4.patch: ported from GnomeVFS. Support for nfs4 filesystems.
+
+ -- Josselin Mouette <joss@debian.org>  Tue, 11 Mar 2008 20:59:50 +0100
+
 glib2.0 (2.16.1-1) unstable; urgency=low
 
   * New upstream bugfix release.

@@ -1,0 +1,26 @@
+Index: glib-2.16.1/gio/gunixmounts.c
+===================================================================
+--- glib-2.16.1.orig/gio/gunixmounts.c	2008-03-11 21:06:15.332196503 +0100
++++ glib-2.16.1/gio/gunixmounts.c	2008-03-11 21:08:12.880197371 +0100
+@@ -220,6 +220,8 @@ g_unix_is_mount_path_system_internal (co
+     "/home",
+     "/lib",
+     "/lib64",
++    "/live/cow",
++    "/live/image",
+     "/media",
+     "/mnt",
+     "/opt",
+@@ -230,7 +232,12 @@ g_unix_is_mount_path_system_internal (co
+     "/usr",
+     "/usr/local",
+     "/var",
++    "/var/crash",
++    "/var/local",
++    "/var/log",
+     "/var/log/audit", /* https://bugzilla.redhat.com/show_bug.cgi?id=333041 */
++    "/var/mail",
++    "/var/run",
+     "/var/tmp",       /* https://bugzilla.redhat.com/show_bug.cgi?id=335241 */
+     "/proc",
+     "/sbin",
