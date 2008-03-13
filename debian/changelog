@@ -1,5 +1,6 @@
 glib2.0 (2.16.1-2) UNRELEASED; urgency=low
 
+  [ Josselin Mouette ]
   * 02_usr_share_gnome_applications.patch: ported from GnomeVFS. Use 
     /usr/share/gnome/applications/defaults.list to obtain the defaults 
     for MIME mapping. Currently this file is still shipped by GnomeVFS.
@@ -9,7 +10,15 @@ glib2.0 (2.16.1-2) UNRELEASED; urgency=low
     including those necessary for live-initramfs.
   * 04_nfs4.patch: ported from GnomeVFS. Support for nfs4 filesystems.
 
- -- Josselin Mouette <joss@debian.org>  Tue, 11 Mar 2008 20:59:50 +0100
+  [ Sebastian Dröge ]
+  * 80_static-mutex-aliasing-warnings.patch: Prevent warnings about
+    breaking strict-aliasing rules when using G_LOCK().
+    See http://bugzilla.gnome.org/show_bug.cgi?id=316221
+  * 81_c99-inline-warnings.patch: Fix warnings when using G_INLINE_FUNC
+    in C99 mode (Closes: #470796).
+    See http://bugzilla.gnome.org/show_bug.cgi?id=522292
+
+ -- Sebastian Dröge <slomo@debian.org>  Thu, 13 Mar 2008 20:39:35 +0100
 
 glib2.0 (2.16.1-1) unstable; urgency=low
 

@@ -3,3 +3,5 @@
 03_blacklist-directories.patch
 04_nfs4.patch
 60_wait-longer-for-threads-to-die.patch
+80_static-mutex-aliasing-warnings.patch
+81_c99-inline-warnings.patch
