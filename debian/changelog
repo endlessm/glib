@@ -4,6 +4,8 @@ glib2.0 (2.16.1-3) UNRELEASED; urgency=low
     dist-upgrade.
   * Update patch 01_gettext-desktopfiles with a newer version taken from the
     Ubuntu package.
+  * Update and enable patch 01_gettext-desktopfiles to also look for
+    X-Debian-Gettext-Domain if X-Ubuntu-Gettext-Domain isn't present.
 
  -- Loic Minier <lool@dooz.org>  Thu, 20 Mar 2008 16:42:00 +0100
 
