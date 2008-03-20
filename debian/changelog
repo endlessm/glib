@@ -2,6 +2,8 @@ glib2.0 (2.16.1-3) UNRELEASED; urgency=low
 
   * Drop nautilus conflicts as it triggers a bug in the APT resolver on
     dist-upgrade.
+  * Update patch 01_gettext-desktopfiles with a newer version taken from the
+    Ubuntu package.
 
  -- Loic Minier <lool@dooz.org>  Thu, 20 Mar 2008 16:42:00 +0100
 
