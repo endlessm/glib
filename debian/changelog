@@ -1,5 +1,6 @@
 glib2.0 (2.16.1-3) UNRELEASED; urgency=low
 
+  [ Loic Minier ]
   * Drop nautilus conflicts as it triggers a bug in the APT resolver on
     dist-upgrade.
   * Update patch 01_gettext-desktopfiles with a newer version taken from the
@@ -7,7 +8,11 @@ glib2.0 (2.16.1-3) UNRELEASED; urgency=low
   * Update and enable patch 01_gettext-desktopfiles to also look for
     X-Debian-Gettext-Domain if X-Ubuntu-Gettext-Domain isn't present.
 
- -- Loic Minier <lool@dooz.org>  Thu, 20 Mar 2008 16:42:00 +0100
+  [ Sebastian Dröge ]
+  * debian/patches/05_hurd-arg-max.patch:
+    + Patch by Samuel Thibault to fix FTBFS on hurd-i386 (Closes: #472129).
+
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 22 Mar 2008 13:43:37 +0100
 
 glib2.0 (2.16.1-2) unstable; urgency=low
 
