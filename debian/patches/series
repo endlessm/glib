@@ -2,3 +2,4 @@
 02_usr_share_gnome_applications.patch
 03_blacklist-directories.patch
 60_wait-longer-for-threads-to-die.patch
+70_g_timeout_seconds_fix.patch
