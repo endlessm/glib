@@ -1,10 +1,16 @@
-glib2.0 (2.16.2-2) UNRELEASED; urgency=low
+glib2.0 (2.16.3-1) unstable; urgency=low
 
+  [ Sjoerd Simons ]
   * debian/patches/70_g_timeout_seconds_fix.patch
     + Added. Fix a rare case where a timeout from g_timeout_add_seconds() is
     never triggered. See http://bugzilla.gnome.org/show_bug.cgi?id=448943
 
- -- Sjoerd Simons <sjoerd@debian.org>  Fri, 04 Apr 2008 11:54:34 +0200
+  [ Sebastian Dröge ]
+  * New upstream bugfix release:
+    + debian/patches/70_g_timeout_seconds_fix.patch:
+      - Dropped, merged upstream.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 08 Apr 2008 12:02:07 +0200
 
 glib2.0 (2.16.2-1) unstable; urgency=low
 
