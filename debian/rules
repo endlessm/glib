@@ -196,7 +196,7 @@ binary-indep: build $(maybe_check) install
 	dh_installchangelogs -i -N$(DATA_PKG) ChangeLog
 	dh_installdocs -N$(DATA_PKG) -i NEWS README
 	dh_link -i
-	dh_compress -i
+	dh_compress -i -X.sgml -X.devhelp
 	dh_fixperms -i
 	dh_installdeb -i
 	dh_gencontrol -i
@@ -215,7 +215,7 @@ binary-arch: build $(maybe_check) install
 	dh_link -s
 	dh_strip -s --dbg-package=$(DEBUG_PKG) -N$(UDEB_PKG)
 	dh_strip -s -p$(UDEB_PKG)
-	dh_compress -s
+	dh_compress -s -X.sgml -X.devhelp
 	dh_fixperms -s
 	dh_makeshlibs	-p$(SHARED_PKG) \
 			-V "$(SHARED_PKG) (>= $(SHVER))" \

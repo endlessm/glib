@@ -1,3 +1,9 @@
+glib2.0 (2.16.3-3) UNRELEASED; urgency=low
+
+  * debian/rules: don't compress .sgml and .devhelp files.
+
+ -- Josselin Mouette <joss@debian.org>  Sat, 26 Apr 2008 17:41:12 +0200
+
 glib2.0 (2.16.3-2) unstable; urgency=low
 
   * debian/rules: Don't add the debug symbols of the udeb in the -dbg package.
