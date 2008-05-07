@@ -1,6 +1,11 @@
 glib2.0 (2.16.3-3) UNRELEASED; urgency=low
 
+  [ Josselin Mouette ]
   * debian/rules: don't compress .sgml and .devhelp files.
+
+  [ Loic Minier ]
+  * Fix broken second dh_strip invocation which was not only acting on the
+    udeb but also on binary packages (-s -pUDEB should have been -pUDEB).
 
  -- Josselin Mouette <joss@debian.org>  Sat, 26 Apr 2008 17:41:12 +0200
 

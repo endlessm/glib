@@ -214,7 +214,7 @@ binary-arch: build $(maybe_check) install
 	dh_installdocs -s -N$(DEV_PKG) -N$(DEBUG_PKG) NEWS README
 	dh_link -s
 	dh_strip -s --dbg-package=$(DEBUG_PKG) -N$(UDEB_PKG)
-	dh_strip -s -p$(UDEB_PKG)
+	dh_strip -p$(UDEB_PKG)
 	dh_compress -s -X.sgml -X.devhelp
 	dh_fixperms -s
 	dh_makeshlibs	-p$(SHARED_PKG) \
