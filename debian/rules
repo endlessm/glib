@@ -220,7 +220,7 @@ binary-arch: build $(maybe_check) install
 	dh_fixperms -s
 	dh_makeshlibs	-p$(SHARED_PKG) \
 			-V "$(SHARED_PKG) (>= $(SHVER))" \
-			--add-udeb="$(UDEB_PKG)"
+			--add-udeb="$(UDEB_PKG)" -- -c4
 	dh_installdeb -s
 	# override shlibs for libraries from this source before computing
 	# dependencies of packages generated from this source; we already have

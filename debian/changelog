@@ -12,6 +12,7 @@ glib2.0 (2.17.0-1) experimental; urgency=low
   * debian/rules:
     + Include check-dist.mk to prevent accidental uploads to unstable.
     + Bump SHVER to 2.17.0.
+    + Pass -c4 to dh_makeshlibs.
   * debian/libglib2.0-0.symbols:
     + Update symbols.
 
