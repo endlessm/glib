@@ -1,4 +1,4 @@
-glib2.0 (2.16.3-3) UNRELEASED; urgency=low
+glib2.0 (2.17.0-1) experimental; urgency=low
 
   [ Josselin Mouette ]
   * debian/rules: don't compress .sgml and .devhelp files.
@@ -7,7 +7,15 @@ glib2.0 (2.16.3-3) UNRELEASED; urgency=low
   * Fix broken second dh_strip invocation which was not only acting on the
     udeb but also on binary packages (-s -pUDEB should have been -pUDEB).
 
- -- Josselin Mouette <joss@debian.org>  Sat, 26 Apr 2008 17:41:12 +0200
+  [ Sebastian Dröge ]
+  * New upstream development release, the new API might still change.
+  * debian/rules:
+    + Include check-dist.mk to prevent accidental uploads to unstable.
+    + Bump SHVER to 2.17.0.
+  * debian/libglib2.0-0.symbols:
+    + Update symbols.
+
+ -- Sebastian Dröge <slomo@debian.org>  Wed, 28 May 2008 10:40:30 +0200
 
 glib2.0 (2.16.3-2) unstable; urgency=low
 

@@ -65,6 +65,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_cancellable_set_error_if_cancelled@Base 2.16.0
  g_content_type_can_be_executable@Base 2.16.0
  g_content_type_equals@Base 2.16.0
+ g_content_type_from_mime_type@Base 2.17.0
  g_content_type_get_description@Base 2.16.0
  g_content_type_get_icon@Base 2.16.0
  g_content_type_get_mime_type@Base 2.16.0
@@ -283,6 +284,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_parse_name@Base 2.16.0
  g_file_query_default_handler@Base 2.16.0
  g_file_query_exists@Base 2.16.0
+ g_file_query_file_type@Base 2.17.0
  g_file_query_filesystem_info@Base 2.16.0
  g_file_query_filesystem_info_async@Base 2.16.0
  g_file_query_filesystem_info_finish@Base 2.16.0
@@ -379,6 +381,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_memory_input_stream_new@Base 2.16.0
  g_memory_input_stream_new_from_data@Base 2.16.0
  g_memory_output_stream_get_data@Base 2.16.0
+ g_memory_output_stream_get_data_size@Base 2.17.0
  g_memory_output_stream_get_size@Base 2.16.0
  g_memory_output_stream_get_type@Base 2.16.0
  g_memory_output_stream_new@Base 2.16.0
@@ -486,6 +489,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_mount_is_system_internal@Base 2.16.0
  g_unix_mount_monitor_get_type@Base 2.16.0
  g_unix_mount_monitor_new@Base 2.16.0
+ g_unix_mount_monitor_set_rate_limit@Base 2.17.0
  g_unix_mount_point_compare@Base 2.16.0
  g_unix_mount_point_free@Base 2.16.0
  g_unix_mount_point_get_device_path@Base 2.16.0
@@ -678,6 +682,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_checksum_get_digest@Base 2.16.0
  g_checksum_get_string@Base 2.16.0
  g_checksum_new@Base 2.16.0
+ g_checksum_reset@Base 2.17.0
  g_checksum_type_get_length@Base 2.16.0
  g_checksum_update@Base 2.16.0
  g_child_watch_add@Base 2.12.0
@@ -1333,6 +1338,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_slice_alloc0@Base 2.12.0
  g_slice_alloc@Base 2.12.0
  g_slice_copy@Base 2.14.0
+ g_slice_debug_tree_statistics@Base 2.17.0
  g_slice_free1@Base 2.12.0
  g_slice_free_chain_with_offset@Base 2.12.0
  g_slice_get_config@Base 2.12.0
