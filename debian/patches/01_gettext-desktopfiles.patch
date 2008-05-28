@@ -1,59 +1,63 @@
-diff -Nur glib-2.10.2/glib/gkeyfile.c glib-2.10.2.new/glib/gkeyfile.c
---- glib-2.10.2/glib/gkeyfile.c	2006-01-18 04:51:28.000000000 +0100
-+++ glib-2.10.2.new/glib/gkeyfile.c	2006-05-22 17:46:12.000000000 +0200
-@@ -21,6 +21,9 @@
+--- a/glib/gkeyfile.c	2008-03-11 01:31:57.000000000 +0100
++++ b/glib/gkeyfile.c	2008-03-20 16:49:25.000000000 +0100
+@@ -21,6 +21,10 @@
   *   Boston, MA 02111-1307, USA.
   */
  
-+#define X_GETTEXT_DOMAIN    "X-Ubuntu-Gettext-Domain"
++#define X_DEBIAN_GETTEXT_DOMAIN    "X-Debian-Gettext-Domain"
++#define X_UBUNTU_GETTEXT_DOMAIN    "X-Ubuntu-Gettext-Domain"
 +#define X_DESKTOP_ENTRY     "Desktop Entry"
 +
  #include "config.h"
  
  #include "gkeyfile.h"
-@@ -80,6 +83,7 @@
-   gchar list_separator;
- 
+@@ -83,6 +87,7 @@
    GKeyFileFlags flags;
+ 
+   gchar **locales;
 +  char          *gettext_domain;
  };
  
  typedef struct _GKeyFileKeyValuePair GKeyFileKeyValuePair;
-@@ -203,6 +207,7 @@
-   key_file->approximate_size = 0;
+@@ -209,6 +214,7 @@
    key_file->list_separator = ';';
    key_file->flags = 0;
+   key_file->locales = g_strdupv ((gchar **)g_get_language_names ());
 +  key_file->gettext_domain = NULL;
  }
  
  static void
-@@ -212,6 +217,7 @@
- 
-   if (key_file->parse_buffer)
-     g_string_free (key_file->parse_buffer, TRUE);
+@@ -227,6 +233,7 @@
+       g_string_free (key_file->parse_buffer, TRUE);
+       key_file->parse_buffer = NULL;
+     }
 +  g_free(key_file->gettext_domain);
  
    tmp = key_file->groups;
    while (tmp != NULL)
-@@ -429,6 +435,8 @@
+@@ -448,6 +455,10 @@
        return FALSE;
      }
  
-+  key_file->gettext_domain = g_key_file_get_string (key_file, X_DESKTOP_ENTRY, X_GETTEXT_DOMAIN, NULL);
++  key_file->gettext_domain = g_key_file_get_string (key_file, X_DESKTOP_ENTRY, X_UBUNTU_GETTEXT_DOMAIN, NULL);
++  if (!key_file->gettext_domain)
++      key_file->gettext_domain = g_key_file_get_string (key_file, X_DESKTOP_ENTRY, X_DEBIAN_GETTEXT_DOMAIN, NULL);
 +
    return TRUE;
  }
  
-@@ -533,6 +541,8 @@
+@@ -553,6 +564,10 @@
        g_propagate_error (error, key_file_error);
        return FALSE;
      }
 +  
-+  key_file->gettext_domain = g_key_file_get_string (key_file, X_DESKTOP_ENTRY, X_GETTEXT_DOMAIN, NULL);
++  key_file->gettext_domain = g_key_file_get_string (key_file, X_DESKTOP_ENTRY, X_UBUNTU_GETTEXT_DOMAIN, NULL);
++  if (!key_file->gettext_domain)
++      key_file->gettext_domain = g_key_file_get_string (key_file, X_DESKTOP_ENTRY, X_DEBIAN_GETTEXT_DOMAIN, NULL);
  
    return TRUE;
  }
-@@ -1581,6 +1591,32 @@
+@@ -1679,6 +1694,32 @@
        languages = (gchar **) g_get_language_names ();
        free_languages = FALSE;
      }
@@ -86,7 +90,7 @@ diff -Nur glib-2.10.2/glib/gkeyfile.c glib-2.10.2.new/glib/gkeyfile.c
    
    for (i = 0; languages[i]; i++)
      {
-@@ -1609,6 +1645,8 @@
+@@ -1707,6 +1748,8 @@
          g_propagate_error (error, key_file_error);
      }
  

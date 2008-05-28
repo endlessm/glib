@@ -1,0 +1,18 @@
+Index: glib-2.16.1/gio/gdesktopappinfo.c
+===================================================================
+--- glib-2.16.1.orig/gio/gdesktopappinfo.c	2008-03-11 20:58:33.600196803 +0100
++++ glib-2.16.1/gio/gdesktopappinfo.c	2008-03-11 20:59:26.728196738 +0100
+@@ -110,11 +110,12 @@ search_path_init (gpointer data)
+   data_dirs = g_get_system_data_dirs ();
+   length = g_strv_length ((char **) data_dirs);
+   
+-  args = g_new (char *, length + 2);
++  args = g_new (char *, length + 3);
+   
+   j = 0;
+   user_data_dir = g_get_user_data_dir ();
+   args[j++] = g_build_filename (user_data_dir, "applications", NULL);
++  args[j++] = g_strdup("/usr/share/gnome/applications");
+   for (i = 0; i < length; i++)
+     args[j++] = g_build_filename (data_dirs[i],
+ 				  "applications", NULL);

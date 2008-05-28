@@ -2,7 +2,6 @@
 
 DISABLE_UPDATE_UPLOADERS := 1
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
-include /usr/share/gnome-pkg-tools/1/rules/check-dist.mk
 -include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
 
 GNOME_MODULE := glib
@@ -39,7 +38,7 @@ LDFLAGS += -Wl,-O1
 
 APIVER := 2.0
 SONAME := 0
-SHVER := 2.15.6
+SHVER := 2.16.0
 
 # package names
 SHARED_PKG := libglib$(APIVER)-$(SONAME)
@@ -194,10 +193,10 @@ binary-indep: build $(maybe_check) install
 	dh_testdir
 	dh_testroot
 	dh_install -i
-	dh_installchangelogs -i -N$(DATA_PKG) ChangeLog ChangeLog.*
-	dh_installdocs -N$(DATA_PKG) -i NEWS NEWS.* README
+	dh_installchangelogs -i -N$(DATA_PKG) ChangeLog
+	dh_installdocs -N$(DATA_PKG) -i NEWS README
 	dh_link -i
-	dh_compress -i
+	dh_compress -i -X.sgml -X.devhelp
 	dh_fixperms -i
 	dh_installdeb -i
 	dh_gencontrol -i
@@ -211,11 +210,12 @@ binary-arch: build $(maybe_check) install
 	# empty the dependency_libs in the *.la files
 	sed -i -e "/dependency_libs/ s/'.*'/''/" debian/$(DEV_PKG)/usr/lib/*.la
 	dh_installchangelogs -s -N$(DEV_PKG) -N$(DEBUG_PKG) \
-		ChangeLog ChangeLog.*
-	dh_installdocs -s -N$(DEV_PKG) -N$(DEBUG_PKG) NEWS NEWS.* README
+		ChangeLog
+	dh_installdocs -s -N$(DEV_PKG) -N$(DEBUG_PKG) NEWS README
 	dh_link -s
-	dh_strip -s --dbg-package=$(DEBUG_PKG)
-	dh_compress -s
+	dh_strip -s --dbg-package=$(DEBUG_PKG) -N$(UDEB_PKG)
+	dh_strip -p$(UDEB_PKG)
+	dh_compress -s -X.sgml -X.devhelp
 	dh_fixperms -s
 	dh_makeshlibs	-p$(SHARED_PKG) \
 			-V "$(SHARED_PKG) (>= $(SHVER))" \

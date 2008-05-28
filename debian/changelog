@@ -1,3 +1,95 @@
+glib2.0 (2.16.3-3) UNRELEASED; urgency=low
+
+  [ Josselin Mouette ]
+  * debian/rules: don't compress .sgml and .devhelp files.
+
+  [ Loic Minier ]
+  * Fix broken second dh_strip invocation which was not only acting on the
+    udeb but also on binary packages (-s -pUDEB should have been -pUDEB).
+
+ -- Josselin Mouette <joss@debian.org>  Sat, 26 Apr 2008 17:41:12 +0200
+
+glib2.0 (2.16.3-2) unstable; urgency=low
+
+  * debian/rules: Don't add the debug symbols of the udeb in the -dbg package.
+    Makes the debugging info actually usefull again (Closes: #468093)
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Fri, 11 Apr 2008 22:58:03 +0200
+
+glib2.0 (2.16.3-1) unstable; urgency=low
+
+  [ Sjoerd Simons ]
+  * debian/patches/70_g_timeout_seconds_fix.patch
+    + Added. Fix a rare case where a timeout from g_timeout_add_seconds() is
+    never triggered. See http://bugzilla.gnome.org/show_bug.cgi?id=448943
+
+  [ Sebastian Dröge ]
+  * New upstream bugfix release:
+    + debian/patches/70_g_timeout_seconds_fix.patch:
+      - Dropped, merged upstream.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 08 Apr 2008 12:02:07 +0200
+
+glib2.0 (2.16.2-1) unstable; urgency=low
+
+  [ Loic Minier ]
+  * Drop nautilus conflicts as it triggers a bug in the APT resolver on
+    dist-upgrade.
+  * Update patch 01_gettext-desktopfiles with a newer version taken from the
+    Ubuntu package.
+  * Update and enable patch 01_gettext-desktopfiles to also look for
+    X-Debian-Gettext-Domain if X-Ubuntu-Gettext-Domain isn't present.
+
+  [ Sebastian Dröge ]
+  * New upstream bugfix release:
+    + Fixes FTBFS on hurd/i386 (Closes: #472129).
+    + debian/patches/04_nfs4.patch,
+      debian/patches/80_static-mutex-aliasing-warnings.patch,
+      debian/patches/81_c99-inline-warnings.patch:
+      - Dropped, merged upstream.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 01 Apr 2008 07:40:48 +0200
+
+glib2.0 (2.16.1-2) unstable; urgency=low
+
+  [ Josselin Mouette ]
+  * 02_usr_share_gnome_applications.patch: ported from GnomeVFS. Use 
+    /usr/share/gnome/applications/defaults.list to obtain the defaults 
+    for MIME mapping. Currently this file is still shipped by GnomeVFS.
+    Closes: #469504.
+  * 03_blacklist-directories.patch: ported from GnomeVFS. Blacklist more 
+    FHS directories that are commonly found as Unix mount points, 
+    including those necessary for live-initramfs.
+  * 04_nfs4.patch: ported from GnomeVFS. Support for nfs4 filesystems.
+
+  [ Sebastian Dröge ]
+  * 80_static-mutex-aliasing-warnings.patch: Prevent warnings about
+    breaking strict-aliasing rules when using G_LOCK().
+    See http://bugzilla.gnome.org/show_bug.cgi?id=316221
+  * 81_c99-inline-warnings.patch: Fix warnings when using G_INLINE_FUNC
+    in C99 mode (Closes: #470796).
+    See http://bugzilla.gnome.org/show_bug.cgi?id=522292
+  * Don't ship the old changelogs and news to save some space.
+
+ -- Sebastian Dröge <slomo@debian.org>  Fri, 14 Mar 2008 10:13:09 +0100
+
+glib2.0 (2.16.1-1) unstable; urgency=low
+
+  * New upstream bugfix release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 11 Mar 2008 04:41:30 +0100
+
+glib2.0 (2.16.0-1) unstable; urgency=low
+
+  * New upstream stable release:
+    + debian/rules:
+      - Update shlibs version to 2.16.0.
+      - Drop check-dist include, upload to unstable.
+    + debian/libglib2.0-0.symbols:
+      - Updated symbols for the new version.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 10 Mar 2008 19:23:55 +0100
+
 glib2.0 (2.15.6-1) experimental; urgency=low
 
   * New upstream release:
