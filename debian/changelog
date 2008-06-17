@@ -1,3 +1,12 @@
+glib2.0 (2.17.2-1) experimental; urgency=low
+
+  * New upstream development release, the new API might still change:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated for the new symbols.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 17 Jun 2008 09:18:10 +0200
+
 glib2.0 (2.17.0-1) experimental; urgency=low
 
   [ Josselin Mouette ]
