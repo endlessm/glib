@@ -15,7 +15,7 @@ Build-Depends: debhelper (>> 5.0.22),
                libselinux1-dev | not+linux-gnu,
                linux-libc-dev | not+linux-gnu,
                libfam-dev | libgamin-dev
-Standards-Version: 3.7.3
+Standards-Version: 3.8.0
 
 Package: libglib2.0-0
 Section: libs

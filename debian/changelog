@@ -1,3 +1,14 @@
+glib2.0 (2.17.3-1) experimental; urgency=low
+
+  * New upstream development release, the new API might still change:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated for the new symbols.
+  * debian/control.in:
+    + Updated Standards-Version to 3.8.0, no additional changes needed.
+
+ -- Sebastian Dröge <slomo@debian.org>  Thu, 03 Jul 2008 11:21:17 +0200
+
 glib2.0 (2.17.2-1) experimental; urgency=low
 
   * New upstream development release, the new API might still change:
