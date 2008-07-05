@@ -1,3 +1,10 @@
+glib2.0 (2.17.3-2) experimental; urgency=low
+
+  * debian/patches/90_gio-nautilus-crash.patch:
+    + Patch from upstream SVN to fix a crash in nautilus 2.22.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 05 Jul 2008 16:57:05 +0200
+
 glib2.0 (2.17.3-1) experimental; urgency=low
 
   * New upstream development release, the new API might still change:
