@@ -1,3 +1,10 @@
+glib2.0 (2.17.3-3) UNRELEASED; urgency=low
+
+  * List back m68k in arches where we could make the testsuite fatal,
+    following the update on GNOME #481575.
+
+ -- Loic Minier <lool@dooz.org>  Sun, 06 Jul 2008 12:58:32 +0200
+
 glib2.0 (2.17.3-2) experimental; urgency=low
 
   * debian/patches/90_gio-nautilus-crash.patch:
