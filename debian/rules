@@ -58,6 +58,8 @@ FLAVORS := deb udeb
 CHECK_FLAVORS := $(filter deb, $(FLAVORS))
 
 # list of arches on which testsuite failures are fatal
+# XXX testsuite failures currently disabled as testsuite fails everywhere when
+# $HOME isn't writable
 CHECK_SUPPORTED_ARCHES :=
 # CHECK_SUPPORTED_ARCHES := alpha amd64 i386 ia64 lpia m68k s390
 # testsuite is known to fail on hppa, hurd, kfreebsd-amd64, kfreebsd-i386; see
