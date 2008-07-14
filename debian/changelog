@@ -1,3 +1,14 @@
+glib2.0 (2.16.4-2) unstable; urgency=high
+
+  * debian/patches/04_big-endian.patch,
+    debian/patches/99_autoconf.patch:
+    + Fix endianness detection on big endian architectures like PPC. In
+      2.16.4-1 this was broken, resulting in essentially every package
+      built against it on big endian architectures to be potentially broken.
+      Set urgency=high for this.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 14 Jul 2008 14:45:15 +0200
+
 glib2.0 (2.16.4-1) unstable; urgency=low
 
   [ Josselin Mouette ]

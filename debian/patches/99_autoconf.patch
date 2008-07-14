@@ -1,0 +1,145 @@
+--- glib-2.16.4/configure.old	2008-07-14 14:42:13.000000000 +0200
++++ glib-2.16.4/configure	2008-07-14 14:42:43.000000000 +0200
+@@ -31836,6 +31836,100 @@
+    { (exit 1); exit 1; }; } ;;
+  esac
+ 
++if test x$ac_cv_c_bigendian = xuniversal ; then
++cat >conftest.$ac_ext <<_ACEOF
++/* confdefs.h.  */
++_ACEOF
++cat confdefs.h >>conftest.$ac_ext
++cat >>conftest.$ac_ext <<_ACEOF
++/* end confdefs.h.  */
++#include <endian.h>
++int
++main ()
++{
++#if __BYTE_ORDER == __BIG_ENDIAN
++#else
++#error Not a big endian.
++#endif
++  ;
++  return 0;
++}
++_ACEOF
++rm -f conftest.$ac_objext
++if { (ac_try="$ac_compile"
++case "(($ac_try" in
++  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
++  *) ac_try_echo=$ac_try;;
++esac
++eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
++$as_echo "$ac_try_echo") >&5
++  (eval "$ac_compile") 2>conftest.er1
++  ac_status=$?
++  grep -v '^ *+' conftest.er1 >conftest.err
++  rm -f conftest.er1
++  cat conftest.err >&5
++  $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); } && {
++	 test -z "$ac_c_werror_flag" ||
++	 test ! -s conftest.err
++       } && test -s conftest.$ac_objext; then
++  ac_cv_c_bigendian=yes
++
++else
++  $as_echo "$as_me: failed program was:" >&5
++sed 's/^/| /' conftest.$ac_ext >&5
++
++	cat >conftest.$ac_ext <<_ACEOF
++/* confdefs.h.  */
++_ACEOF
++cat confdefs.h >>conftest.$ac_ext
++cat >>conftest.$ac_ext <<_ACEOF
++/* end confdefs.h.  */
++#include <endian.h>
++int
++main ()
++{
++#if __BYTE_ORDER == __LITTLE_ENDIAN
++#else
++#error Not a little endian.
++#endif
++  ;
++  return 0;
++}
++_ACEOF
++rm -f conftest.$ac_objext
++if { (ac_try="$ac_compile"
++case "(($ac_try" in
++  *\"* | *\`* | *\\*) ac_try_echo=\$ac_try;;
++  *) ac_try_echo=$ac_try;;
++esac
++eval ac_try_echo="\"\$as_me:$LINENO: $ac_try_echo\""
++$as_echo "$ac_try_echo") >&5
++  (eval "$ac_compile") 2>conftest.er1
++  ac_status=$?
++  grep -v '^ *+' conftest.er1 >conftest.err
++  rm -f conftest.er1
++  cat conftest.err >&5
++  $as_echo "$as_me:$LINENO: \$? = $ac_status" >&5
++  (exit $ac_status); } && {
++	 test -z "$ac_c_werror_flag" ||
++	 test ! -s conftest.err
++       } && test -s conftest.$ac_objext; then
++  ac_cv_c_bigendian=no
++
++else
++  $as_echo "$as_me: failed program was:" >&5
++sed 's/^/| /' conftest.$ac_ext >&5
++
++	{ $as_echo "$as_me:$LINENO: WARNING: Could not determine endianness." >&5
++$as_echo "$as_me: WARNING: Could not determine endianness." >&2;}
++fi
++
++rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
++fi
++
++rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
++fi
+ 
+ # check for header files
+ 
+@@ -47144,18 +47238,15 @@
+ g_have_gnuc_visibility=$g_have_gnuc_visibility
+ g_have_sunstudio_visibility=$g_have_sunstudio_visibility
+ 
+-case xyes in
+-x$ac_cv_c_bigendian)
++if test x$ac_cv_c_bigendian = xyes; then
+   g_byte_order=G_BIG_ENDIAN
+   g_bs_native=BE
+   g_bs_alien=LE
+-  ;;
+-*)
++else
+   g_byte_order=G_LITTLE_ENDIAN
+   g_bs_native=LE
+   g_bs_alien=BE
+-  ;;
+-esac
++fi
+ 
+ g_pollin=$glib_cv_value_POLLIN
+ g_pollout=$glib_cv_value_POLLOUT
+@@ -47568,9 +47659,9 @@
+   }
+   split(mac1, mac2, "(") #)
+   macro = mac2[1]
+-  prefix = substr(line, 1, index(line, defundef) - 1)
+   if (D_is_set[macro]) {
+     # Preserve the white space surrounding the "#".
++    prefix = substr(line, 1, index(line, defundef) - 1)
+     print prefix "define", macro P[macro] D[macro]
+     next
+   } else {
+@@ -47578,7 +47669,7 @@
+     # in the case of _POSIX_SOURCE, which is predefined and required
+     # on some systems where configure will not decide to define it.
+     if (defundef == "undef") {
+-      print "/*", prefix defundef, macro, "*/"
++      print "/*", line, "*/"
+       next
+     }
+   }
