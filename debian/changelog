@@ -1,6 +1,6 @@
-glib2.0 (2.16.5-1) unstable; urgency=high
+glib2.0 (2.16.5-1) unstable; urgency=low
 
-  * New upstream bugfix release, urgency=high to get this into lenny:
+  * New upstream bugfix release:
     + debian/patches/04_big-endian.patch,
       debian/patches/99_autoconf.patch:
       - Dropped, merged upstream.
