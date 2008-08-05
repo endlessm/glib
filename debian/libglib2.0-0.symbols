@@ -127,7 +127,14 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_drive_is_media_removable@Base 2.16.0
  g_drive_poll_for_media@Base 2.16.0
  g_drive_poll_for_media_finish@Base 2.16.0
- g_emblemed_icon_get_emblem@Base 2.17.6
+ g_emblem_get_icon@Base 2.17.6
+ g_emblem_get_origin@Base 2.17.6
+ g_emblem_get_type@Base 2.17.6
+ g_emblem_new@Base 2.17.6
+ g_emblem_new_with_origin@Base 2.17.6
+ g_emblem_origin_get_type@Base 2.17.6
+ g_emblemed_icon_add_emblem@Base 2.17.6
+ g_emblemed_icon_get_emblems@Base 2.17.6
  g_emblemed_icon_get_icon@Base 2.17.6
  g_emblemed_icon_get_type@Base 2.17.6
  g_emblemed_icon_new@Base 2.17.6
