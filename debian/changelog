@@ -1,7 +1,9 @@
 glib2.0 (2.18.0-1) experimental; urgency=low
 
   * New upstream stable release, with API addition.
-    - Update symbols file for new g_object_get_type() symbol.
+    - Update symbols file for new g_object_get_type() symbol and drop
+      g_slice_debug_tree_statistics() which shouldn't have been exported in
+      the first place.
     - Refresh patches 01_gettext-desktopfiles,
       02_usr_share_gnome_applications, and 03_blacklist-directories to apply
       cleanly.
