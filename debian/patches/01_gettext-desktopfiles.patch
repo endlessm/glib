@@ -1,5 +1,5 @@
---- a/glib/gkeyfile.c	2008-03-11 01:31:57.000000000 +0100
-+++ b/glib/gkeyfile.c	2008-03-20 16:49:25.000000000 +0100
+--- glib2.0-2.18.0.orig/glib/gkeyfile.c	2008-09-02 17:09:41.000000000 +0200
++++ glib2.0-2.18.0/glib/gkeyfile.c	2008-09-03 00:53:13.000000000 +0200
 @@ -21,6 +21,10 @@
   *   Boston, MA 02111-1307, USA.
   */
@@ -57,7 +57,7 @@
  
    return TRUE;
  }
-@@ -1679,6 +1694,32 @@
+@@ -1682,6 +1697,32 @@
        languages = (gchar **) g_get_language_names ();
        free_languages = FALSE;
      }
@@ -90,7 +90,7 @@
    
    for (i = 0; languages[i]; i++)
      {
-@@ -1707,6 +1748,8 @@
+@@ -1710,6 +1751,8 @@
          g_propagate_error (error, key_file_error);
      }
  

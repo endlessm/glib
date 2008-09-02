@@ -1,8 +1,6 @@
-Index: glib-2.16.1/gio/gdesktopappinfo.c
-===================================================================
---- glib-2.16.1.orig/gio/gdesktopappinfo.c	2008-03-11 20:58:33.600196803 +0100
-+++ glib-2.16.1/gio/gdesktopappinfo.c	2008-03-11 20:59:26.728196738 +0100
-@@ -110,11 +110,12 @@ search_path_init (gpointer data)
+--- glib2.0-2.18.0.orig/gio/gdesktopappinfo.c	2008-09-02 17:09:19.000000000 +0200
++++ glib2.0-2.18.0/gio/gdesktopappinfo.c	2008-09-03 00:53:23.000000000 +0200
+@@ -112,11 +112,12 @@
    data_dirs = g_get_system_data_dirs ();
    length = g_strv_length ((char **) data_dirs);
    

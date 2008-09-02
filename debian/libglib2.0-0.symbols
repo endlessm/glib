@@ -1805,6 +1805,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_object_get_data@Base 2.12.0
  g_object_get_property@Base 2.12.0
  g_object_get_qdata@Base 2.12.0
+ g_object_get_type@Base 2.18.0
  g_object_get_valist@Base 2.12.0
  g_object_interface_find_property@Base 2.12.0
  g_object_interface_install_property@Base 2.12.0

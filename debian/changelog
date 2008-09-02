@@ -1,3 +1,13 @@
+glib2.0 (2.18.0-1) experimental; urgency=low
+
+  * New upstream stable release, with API addition.
+    - Update symbols file for new g_object_get_type() symbol.
+    - Refresh patches 01_gettext-desktopfiles,
+      02_usr_share_gnome_applications, and 03_blacklist-directories to apply
+      cleanly.
+
+ -- Loic Minier <lool@dooz.org>  Wed, 03 Sep 2008 00:51:29 +0200
+
 glib2.0 (2.17.7-1) experimental; urgency=low
 
   * New upstream development release, the new API might still change:

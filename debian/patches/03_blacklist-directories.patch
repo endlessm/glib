@@ -1,8 +1,6 @@
-Index: glib-2.16.1/gio/gunixmounts.c
-===================================================================
---- glib-2.16.1.orig/gio/gunixmounts.c	2008-03-11 21:06:15.332196503 +0100
-+++ glib-2.16.1/gio/gunixmounts.c	2008-03-11 21:08:12.880197371 +0100
-@@ -220,6 +220,8 @@ g_unix_is_mount_path_system_internal (co
+--- glib2.0-2.18.0.orig/gio/gunixmounts.c	2008-09-02 17:09:19.000000000 +0200
++++ glib2.0-2.18.0/gio/gunixmounts.c	2008-09-03 00:53:29.000000000 +0200
+@@ -221,6 +221,8 @@
      "/home",
      "/lib",
      "/lib64",
@@ -11,7 +9,7 @@ Index: glib-2.16.1/gio/gunixmounts.c
      "/media",
      "/mnt",
      "/opt",
-@@ -230,7 +232,12 @@ g_unix_is_mount_path_system_internal (co
+@@ -231,7 +233,12 @@
      "/usr",
      "/usr/local",
      "/var",
