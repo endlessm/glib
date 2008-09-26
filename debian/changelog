@@ -1,3 +1,12 @@
+glib2.0 (2.16.6-1) unstable; urgency=low
+
+  * New upstream stable release; bug fixes; no API changes, except you'll get
+    string.h #included by some glib headers as they are relying on string.h's
+    API anyway.
+    - Refresh patch 60_wait-longer-for-threads-to-die to apply cleanly.
+
+ -- Loic Minier <lool@dooz.org>  Fri, 26 Sep 2008 16:11:28 +0200
+
 glib2.0 (2.16.5-1) unstable; urgency=low
 
   * New upstream bugfix release:
