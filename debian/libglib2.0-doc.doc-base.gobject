@@ -8,7 +8,7 @@ Abstract: Most modern programming languages come with their own native object
  GLib Object System provides the required implementations of a
  flexible extensible and intentionally easy to map (into other
  languages) object oriented framework for C.
-Section: Apps/Programming
+Section: Programming/C
 
 Format: HTML
 Index: /usr/share/doc/libglib2.0-doc/gobject/index.html

@@ -7,7 +7,7 @@ Abstract: GIO is striving to provide a modern, easy-to-use VFS API that sits at
  raw POSIX calls. Among other things that means using GObject. It also means
  not cloning the POSIX API, but providing higher-level, document-centric
  interfaces.
-Section: Apps/Programming
+Section: Programming/C
 
 Format: HTML
 Index: /usr/share/doc/libglib2.0-doc/gio/index.html
