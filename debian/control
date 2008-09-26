@@ -2,7 +2,7 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Loic Minier <lool@dooz.org>
-Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Sebastian Dröge <slomo@debian.org>, Sjoerd Simons <sjoerd@debian.org>
+Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Sebastian Dröge <slomo@debian.org>
 Build-Depends: debhelper (>> 5.0.22),
                pkg-config (>= 0.14.0),
                gettext,
@@ -10,7 +10,7 @@ Build-Depends: debhelper (>> 5.0.22),
                gnome-pkg-tools (>= 0.11),
                quilt,
                dpkg-dev (>= 1.14.13),
-               libpcre3-dev (>= 7.4-1),
+               libpcre3-dev (>= 7.4-1~),
                gtk-doc-tools,
                libselinux1-dev | not+linux-gnu,
                linux-libc-dev | not+linux-gnu,
