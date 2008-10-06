@@ -5,6 +5,8 @@ glib2.0 (2.18.1-2) UNRELEASED; urgency=low
   * Update doc-base entries for new doc-base secttions: use Programming/C
     instead of Apps/Programming.
   * Use uppercase GNOME in doc-base description of glib.
+  * Recommend shared-mime-info for content-type guessing API; see
+    GNOME #554563.
 
  -- Loic Minier <lool@dooz.org>  Fri, 26 Sep 2008 16:34:54 +0200
 

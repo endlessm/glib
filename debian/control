@@ -22,7 +22,8 @@ Section: libs
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
-Recommends: libglib2.0-data
+Recommends: libglib2.0-data,
+            shared-mime-info
 Conflicts: libpango1.0-0 (<< 1.11)
 Description: The GLib library of C routines
  GLib is a library containing many useful C routines for things such
