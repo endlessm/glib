@@ -136,11 +136,11 @@ $(STAMP_DIR)/check-stamp-%: $(STAMP_DIR)/build-stamp-%
 ifeq ($(filter $(DEB_BUILD_ARCH),$(CHECK_SUPPORTED_ARCHES)),$(DEB_BUILD_ARCH))
 	# testsuite failures are fatal
 	LD_LIBRARY_PATH=$(builddir)/glib/.libs:$(builddir)/gmodule/.libs:$(builddir)/gobject/.libs:$(builddir)/gthread/.libs:$(LD_LIBRARY_PATH) \
-		$(MAKE) -C $(builddir) check
+		$(MAKE) -k -C $(builddir) check
 else
 	# testsuite failures are ignored
 	-LD_LIBRARY_PATH=$(builddir)/glib/.libs:$(builddir)/gmodule/.libs:$(builddir)/gobject/.libs:$(builddir)/gthread/.libs:$(LD_LIBRARY_PATH) \
-		$(MAKE) -C $(builddir) check
+		$(MAKE) -k -C $(builddir) check
 endif
 	touch $@
 
