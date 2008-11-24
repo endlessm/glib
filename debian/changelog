@@ -1,3 +1,9 @@
+glib2.0 (2.18.3-1) experimental; urgency=low
+
+  * New upstream bugfix release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 24 Nov 2008 10:07:47 +0100
+
 glib2.0 (2.18.2-1) experimental; urgency=low
 
   [ Loic Minier ]
