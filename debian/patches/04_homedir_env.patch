@@ -1,0 +1,59 @@
+Index: glib-2.18.3/docs/reference/glib/running.sgml
+===================================================================
+--- glib-2.18.3.orig/docs/reference/glib/running.sgml	2008-11-26 12:01:53.559365436 +0100
++++ glib-2.18.3/docs/reference/glib/running.sgml	2008-11-26 12:25:58.155366255 +0100
+@@ -194,6 +194,22 @@ variables like <envar>LANG</envar>, <env
+   </para>
+ </formalpara> 
+ 
++<formalpara id="G_HOME">
++  <title><envar>G_HOME</envar></title>
++
++  <para>
++    For various reasons, GLib applications ignore the <envar>HOME</envar>
++    environment variable on Unix systems and will use the user directory
++    as specified by the <filename>passwd</filename> entry, which is more
++    reliable.
++  </para>
++  <para>
++    The <envar>G_HOME</envar> environment variable will override any
++    other setting for the home directory. It is not meant for daily usage,
++    but it is useful in testing or building environments.
++  </para>
++</formalpara>
++
+ </refsect2>
+ 
+ <refsect2 id="setlocale">
+Index: glib-2.18.3/glib/gutils.c
+===================================================================
+--- glib-2.18.3.orig/glib/gutils.c	2008-11-26 11:50:38.607861683 +0100
++++ glib-2.18.3/glib/gutils.c	2008-11-26 12:00:29.035360081 +0100
+@@ -1520,11 +1520,14 @@ g_get_any_init_do (void)
+     }
+ #endif	/* !G_OS_WIN32 */
+   
++  g_home_dir = g_strdup (g_getenv ("G_HOME"));
++  
+ #ifdef G_OS_WIN32
+   /* We check $HOME first for Win32, though it is a last resort for Unix
+    * where we prefer the results of getpwuid().
+    */
+-  g_home_dir = g_strdup (g_getenv ("HOME"));
++  if (!g_home_dir)
++    g_home_dir = g_strdup (g_getenv ("HOME"));
+ 
+   /* Only believe HOME if it is an absolute path and exists */
+   if (g_home_dir)
+@@ -1820,6 +1823,11 @@ g_get_real_name (void)
+  *      homedir = g_get_home_dir (<!-- -->);
+  * ]|
+  *
++ * However, to allow changing this value for testing and development
++ * purposes, the value of the <envar>G_HOME</envar> environment 
++ * variable, if set, will override the <filename>passwd</filename>
++ * entry.
++ *
+  * Returns: the current user's home directory
+  */
+ G_CONST_RETURN gchar*
