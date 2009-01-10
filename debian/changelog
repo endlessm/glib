@@ -1,11 +1,15 @@
-glib2.0 (2.18.3-2) UNRELEASED; urgency=low
+glib2.0 (2.18.4-1) experimental; urgency=low
 
+  [ Josselin Mouette ]
   * 04_homedir_env.patch: new patch. Handle the G_HOME environment 
     variable, to override the passwd entry. This will allow to fix 
     various kinds of build failures due to restricted build 
     environments.
 
- -- Josselin Mouette <joss@debian.org>  Wed, 26 Nov 2008 12:26:38 +0100
+  [ Sebastian Dröge ]
+  * New upstream bugfix release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 10 Jan 2009 14:21:55 +0100
 
 glib2.0 (2.18.3-1) experimental; urgency=low
 
