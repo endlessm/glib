@@ -1,5 +1,6 @@
 #!/usr/bin/make -f
 
+ALLOWED_DISTS = unstable
 DISABLE_UPDATE_UPLOADERS := 1
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
 include /usr/share/gnome-pkg-tools/1/rules/check-dist.mk
@@ -39,7 +40,7 @@ LDFLAGS += -Wl,-O1
 
 APIVER := 2.0
 SONAME := 0
-SHVER := 2.17.7
+SHVER := 2.18.0
 
 # package names
 SHARED_PKG := libglib$(APIVER)-$(SONAME)
