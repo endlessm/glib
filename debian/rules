@@ -1,5 +1,6 @@
 #!/usr/bin/make -f
 
+ALLOWED_DISTS = unstable
 DISABLE_UPDATE_UPLOADERS := 1
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
 include /usr/share/gnome-pkg-tools/1/rules/check-dist.mk
