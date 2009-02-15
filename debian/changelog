@@ -1,33 +1,124 @@
-glib2.0 (2.16.6-1) unstable; urgency=low
+glib2.0 (2.18.4-1) experimental; urgency=low
 
-  * New upstream stable release; bug fixes; no API changes, except you'll get
-    string.h #included by some glib headers as they are relying on string.h's
-    API anyway.
-    - Refresh patch 60_wait-longer-for-threads-to-die to apply cleanly.
+  [ Josselin Mouette ]
+  * 04_homedir_env.patch: new patch. Handle the G_HOME environment 
+    variable, to override the passwd entry. This will allow to fix 
+    various kinds of build failures due to restricted build 
+    environments.
 
- -- Loic Minier <lool@dooz.org>  Fri, 26 Sep 2008 16:11:28 +0200
+  [ Sebastian Dröge ]
+  * New upstream bugfix release.
 
-glib2.0 (2.16.5-1) unstable; urgency=low
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 10 Jan 2009 14:21:55 +0100
 
-  * New upstream bugfix release:
-    + debian/patches/04_big-endian.patch,
-      debian/patches/99_autoconf.patch:
+glib2.0 (2.18.3-1) experimental; urgency=low
+
+  * New upstream bugfix release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 24 Nov 2008 10:07:47 +0100
+
+glib2.0 (2.18.2-1) experimental; urgency=low
+
+  [ Loic Minier ]
+  * Suffix the Debian specific pcre bdep with "~" to allow backports and make
+    lintian happy.
+  * Update doc-base entries for new doc-base secttions: use Programming/C
+    instead of Apps/Programming.
+  * Use uppercase GNOME in doc-base description of glib.
+  * Recommend shared-mime-info for content-type guessing API; see
+    GNOME #554563.
+  * Pass -k to make check.
+
+  [ Sebastian Dröge ]
+  * New upstream bugfix release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sun, 19 Oct 2008 13:26:48 +0200
+
+glib2.0 (2.18.1-1) experimental; urgency=low
+
+  * New upstream bugfix release.
+  * debian/libglib2.0-0.symbols:
+    + Updated all 2.17 symbols to 2.18.0 to get dependencies on the stable
+      versions.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sun, 21 Sep 2008 15:31:15 +0200
+
+glib2.0 (2.18.0-1) experimental; urgency=low
+
+  * New upstream stable release, with API addition.
+    - Update symbols file for new g_object_get_type() symbol and drop
+      g_slice_debug_tree_statistics() which shouldn't have been exported in
+      the first place.
+    - Refresh patches 01_gettext-desktopfiles,
+      02_usr_share_gnome_applications, and 03_blacklist-directories to apply
+      cleanly.
+
+ -- Loic Minier <lool@dooz.org>  Wed, 03 Sep 2008 00:51:29 +0200
+
+glib2.0 (2.17.7-1) experimental; urgency=low
+
+  * New upstream development release, the new API might still change:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated for the new symbols.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 18 Aug 2008 16:04:30 +0200
+
+glib2.0 (2.17.6-1) experimental; urgency=low
+
+  * New upstream development release, the new API might still change:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated for the new symbols.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 04 Aug 2008 19:54:44 +0200
+
+glib2.0 (2.17.4-1) experimental; urgency=low
+
+  [ Loic Minier ]
+  * List back m68k in arches where we could make the testsuite fatal,
+    following the update on GNOME #481575.
+  * Document why testsuite is currently completely disabled (fails when
+    there's no writable $HOME).
+
+  [ Sebastian Dröge ]
+  * New upstream development release, the new API might still change:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated for the new symbols.
+    + debian/patches/90_gio-nautilus-crash.patch:
       - Dropped, merged upstream.
 
- -- Sebastian Dröge <slomo@debian.org>  Mon, 21 Jul 2008 12:23:09 +0200
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 22 Jul 2008 11:17:05 +0200
 
-glib2.0 (2.16.4-2) unstable; urgency=high
+glib2.0 (2.17.3-2) experimental; urgency=low
 
-  * debian/patches/04_big-endian.patch,
-    debian/patches/99_autoconf.patch:
-    + Fix endianness detection on big endian architectures like PPC. In
-      2.16.4-1 this was broken, resulting in essentially every package
-      built against it on big endian architectures to be potentially broken.
-      Set urgency=high for this.
+  * debian/patches/90_gio-nautilus-crash.patch:
+    + Patch from upstream SVN to fix a crash in nautilus 2.22.
 
- -- Sebastian Dröge <slomo@debian.org>  Mon, 14 Jul 2008 14:45:15 +0200
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 05 Jul 2008 16:57:05 +0200
 
-glib2.0 (2.16.4-1) unstable; urgency=low
+glib2.0 (2.17.3-1) experimental; urgency=low
+
+  * New upstream development release, the new API might still change:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated for the new symbols.
+  * debian/control.in:
+    + Updated Standards-Version to 3.8.0, no additional changes needed.
+
+ -- Sebastian Dröge <slomo@debian.org>  Thu, 03 Jul 2008 11:21:17 +0200
+
+glib2.0 (2.17.2-1) experimental; urgency=low
+
+  * New upstream development release, the new API might still change:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated for the new symbols.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 17 Jun 2008 09:18:10 +0200
+
+glib2.0 (2.17.0-1) experimental; urgency=low
 
   [ Josselin Mouette ]
   * debian/rules: don't compress .sgml and .devhelp files.
@@ -37,11 +128,15 @@ glib2.0 (2.16.4-1) unstable; urgency=low
     udeb but also on binary packages (-s -pUDEB should have been -pUDEB).
 
   [ Sebastian Dröge ]
-  * New upstream bugfix release.
-  * debian/control.in:
-    + Updated Standards-Version to 3.8.0, no additional changes needed.
+  * New upstream development release, the new API might still change.
+  * debian/rules:
+    + Include check-dist.mk to prevent accidental uploads to unstable.
+    + Bump SHVER to 2.17.0.
+    + Pass -c4 to dh_makeshlibs.
+  * debian/libglib2.0-0.symbols:
+    + Update symbols.
 
- -- Sebastian Dröge <slomo@debian.org>  Wed, 02 Jul 2008 06:29:42 +0200
+ -- Sebastian Dröge <slomo@debian.org>  Wed, 28 May 2008 10:40:30 +0200
 
 glib2.0 (2.16.3-2) unstable; urgency=low
 
