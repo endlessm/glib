@@ -16,6 +16,9 @@ Build-Depends: debhelper (>> 5.0.22),
                linux-libc-dev | not+linux-gnu,
                libfam-dev | libgamin-dev
 Standards-Version: 3.8.0
+Homepage: http://www.gtk.org/
+Vcs-Browser: http://svn.debian.org/wsvn/pkg-gnome/desktop/unstable/glib2.0/
+Vcs-Svn: svn://svn.debian.org/svn/pkg-gnome/desktop/unstable/glib2.0/
 
 Package: libglib2.0-0
 Section: libs
