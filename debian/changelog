@@ -1,13 +1,8 @@
 glib2.0 (2.19.6-1) UNRELEASED; urgency=low
 
   * New development release
-  * debian/patches/05_hide_private_symbols.patch:
-  - hide many of the symbols that this version is exporting even though it
-    should not; some are still being exported incorrectly, such as the
-    xdgmime and libcharset related ones; patch sent upstream
   * debian/libglib2.0-0.symbols:
-  - updated with new symbols; there are some private symbols we should
-    remove in the near future, see comment above
+  - updated with new symbols
 
  -- Gustavo Noronha Silva <kov@debian.org>  Sun, 15 Feb 2009 23:58:22 -0300
 

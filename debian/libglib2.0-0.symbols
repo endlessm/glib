@@ -1,77 +1,5 @@
 libgio-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
- __gio_xdg_alias_list_dump@Base 2.19.6-1
- __gio_xdg_alias_list_free@Base 2.19.6-1
- __gio_xdg_alias_list_lookup@Base 2.19.6-1
- __gio_xdg_alias_list_new@Base 2.19.6-1
- __gio_xdg_alias_read_from_file@Base 2.19.6-1
- __gio_xdg_cache_get_generic_icon@Base 2.19.6-1
- __gio_xdg_cache_get_icon@Base 2.19.6-1
- __gio_xdg_cache_get_max_buffer_extents@Base 2.19.6-1
- __gio_xdg_cache_get_mime_type_for_data@Base 2.19.6-1
- __gio_xdg_cache_get_mime_type_for_file@Base 2.19.6-1
- __gio_xdg_cache_get_mime_type_from_file_name@Base 2.19.6-1
- __gio_xdg_cache_get_mime_types_from_file_name@Base 2.19.6-1
- __gio_xdg_cache_glob_dump@Base 2.19.6-1
- __gio_xdg_cache_list_mime_parents@Base 2.19.6-1
- __gio_xdg_cache_mime_type_subclass@Base 2.19.6-1
- __gio_xdg_cache_new_from_file@Base 2.19.6-1
- __gio_xdg_cache_ref@Base 2.19.6-1
- __gio_xdg_cache_unalias_mime_type@Base 2.19.6-1
- __gio_xdg_cache_unref@Base 2.19.6-1
- __gio_xdg_convert_to_ucs4@Base 2.19.6-1
- __gio_xdg_determine_type@Base 2.19.6-1
- __gio_xdg_get_base_name@Base 2.19.6-1
- __gio_xdg_glob_read_from_file@Base 2.19.6-1
- __gio_xdg_hash_append_glob@Base 2.19.6-1
- __gio_xdg_hash_dump@Base 2.19.6-1
- __gio_xdg_hash_free@Base 2.19.6-1
- __gio_xdg_hash_lookup_file_name@Base 2.19.6-1
- __gio_xdg_hash_new@Base 2.19.6-1
- __gio_xdg_magic_free@Base 2.19.6-1
- __gio_xdg_magic_get_buffer_extents@Base 2.19.6-1
- __gio_xdg_magic_lookup_data@Base 2.19.6-1
- __gio_xdg_magic_new@Base 2.19.6-1
- __gio_xdg_magic_read_from_file@Base 2.19.6-1
- __gio_xdg_mime_type_equal@Base 2.19.6-1
- __gio_xdg_mime_type_subclass@Base 2.19.6-1
- __gio_xdg_parent_list_dump@Base 2.19.6-1
- __gio_xdg_parent_list_free@Base 2.19.6-1
- __gio_xdg_parent_list_lookup@Base 2.19.6-1
- __gio_xdg_parent_list_new@Base 2.19.6-1
- __gio_xdg_parent_read_from_file@Base 2.19.6-1
- __gio_xdg_reverse_ucs4@Base 2.19.6-1
- __gio_xdg_ucs4_to_lower@Base 2.19.6-1
- __gio_xdg_unalias_mime_type@Base 2.19.6-1
- __gio_xdg_utf8_skip@Base 2.19.6-1
- __gio_xdg_utf8_to_ucs4@Base 2.19.6-1
- __gio_xdg_utf8_validate@Base 2.19.6-1
- __udivdi3@Base 2.19.6-1
- _caches@Base 2.19.6-1
- _gio_xdg_dump@Base 2.19.6-1
- _gio_xdg_get_generic_icon@Base 2.19.6-1
- _gio_xdg_get_icon@Base 2.19.6-1
- _gio_xdg_get_max_buffer_extents@Base 2.19.6-1
- _gio_xdg_get_mime_parents@Base 2.19.6-1
- _gio_xdg_get_mime_type_for_data@Base 2.19.6-1
- _gio_xdg_get_mime_type_for_file@Base 2.19.6-1
- _gio_xdg_get_mime_type_from_file_name@Base 2.19.6-1
- _gio_xdg_get_mime_types_from_file_name@Base 2.19.6-1
- _gio_xdg_icon_list_dump@Base 2.19.6-1
- _gio_xdg_icon_list_free@Base 2.19.6-1
- _gio_xdg_icon_list_lookup@Base 2.19.6-1
- _gio_xdg_icon_list_new@Base 2.19.6-1
- _gio_xdg_icon_read_from_file@Base 2.19.6-1
- _gio_xdg_is_valid_mime_type@Base 2.19.6-1
- _gio_xdg_list_mime_parents@Base 2.19.6-1
- _gio_xdg_media_type_equal@Base 2.19.6-1
- _gio_xdg_mime_type_equal@Base 2.19.6-1
- _gio_xdg_mime_type_subclass@Base 2.19.6-1
- _gio_xdg_register_reload_callback@Base 2.19.6-1
- _gio_xdg_remove_callback@Base 2.19.6-1
- _gio_xdg_shutdown@Base 2.19.6-1
- _gio_xdg_type_unknown@Base 2.19.6-1
- _gio_xdg_unalias_mime_type@Base 2.19.6-1
  end@Base 2.19.6-1
  g_app_info_add_supports_type@Base 2.16.0
  g_app_info_can_delete@Base 2.19.6-1
@@ -660,16 +588,6 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_volume_should_automount@Base 2.16.0
 libglib-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
- __divdi3@Base 2.19.6-1
- __moddi3@Base 2.19.6-1
- __udivdi3@Base 2.19.6-1
- __umoddi3@Base 2.19.6-1
- _g_debug_flags@Base 2.19.6-1
- _g_debug_initialized@Base 2.19.6-1
- _g_locale_charset_raw@Base 2.19.6-1
- _g_locale_charset_unalias@Base 2.19.6-1
- _g_locale_get_charset_aliases@Base 2.19.6-1
- end@Base 2.19.6-1
  g_access@Base 2.12.0
  g_allocator_free@Base 2.12.0
  g_allocator_new@Base 2.12.0

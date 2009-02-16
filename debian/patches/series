@@ -3,4 +3,3 @@
 03_blacklist-directories.patch
 04_homedir_env.patch
 60_wait-longer-for-threads-to-die.patch
-05_hide_private_symbols.patch
