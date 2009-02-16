@@ -1,17 +1,17 @@
 libgio-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
- end@Base 2.19.6-1
+ end@Base 2.19.6
  g_app_info_add_supports_type@Base 2.16.0
- g_app_info_can_delete@Base 2.19.6-1
+ g_app_info_can_delete@Base 2.19.6
  g_app_info_can_remove_supports_type@Base 2.16.0
  g_app_info_create_flags_get_type@Base 2.16.0
  g_app_info_create_from_commandline@Base 2.16.0
- g_app_info_delete@Base 2.19.6-1
+ g_app_info_delete@Base 2.19.6
  g_app_info_dup@Base 2.16.0
  g_app_info_equal@Base 2.16.0
  g_app_info_get_all@Base 2.16.0
  g_app_info_get_all_for_type@Base 2.16.0
- g_app_info_get_commandline@Base 2.19.6-1
+ g_app_info_get_commandline@Base 2.19.6
  g_app_info_get_default_for_type@Base 2.16.0
  g_app_info_get_default_for_uri_scheme@Base 2.16.0
  g_app_info_get_description@Base 2.16.0
@@ -24,7 +24,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_app_info_launch_default_for_uri@Base 2.16.0
  g_app_info_launch_uris@Base 2.16.0
  g_app_info_remove_supports_type@Base 2.16.0
- g_app_info_reset_type_associations@Base 2.19.6-1
+ g_app_info_reset_type_associations@Base 2.19.6
  g_app_info_set_as_default_for_extension@Base 2.16.0
  g_app_info_set_as_default_for_type@Base 2.16.0
  g_app_info_should_show@Base 2.16.0
@@ -63,7 +63,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_cancellable_get_fd@Base 2.16.0
  g_cancellable_get_type@Base 2.16.0
  g_cancellable_is_cancelled@Base 2.16.0
- g_cancellable_make_pollfd@Base 2.19.6-1
+ g_cancellable_make_pollfd@Base 2.19.6
  g_cancellable_new@Base 2.16.0
  g_cancellable_pop_current@Base 2.16.0
  g_cancellable_push_current@Base 2.16.0
@@ -89,14 +89,14 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_data_input_stream_read_int32@Base 2.16.0
  g_data_input_stream_read_int64@Base 2.16.0
  g_data_input_stream_read_line@Base 2.16.0
- g_data_input_stream_read_line_async@Base 2.19.6-1
- g_data_input_stream_read_line_finish@Base 2.19.6-1
+ g_data_input_stream_read_line_async@Base 2.19.6
+ g_data_input_stream_read_line_finish@Base 2.19.6
  g_data_input_stream_read_uint16@Base 2.16.0
  g_data_input_stream_read_uint32@Base 2.16.0
  g_data_input_stream_read_uint64@Base 2.16.0
  g_data_input_stream_read_until@Base 2.16.0
- g_data_input_stream_read_until_async@Base 2.19.6-1
- g_data_input_stream_read_until_finish@Base 2.19.6-1
+ g_data_input_stream_read_until_async@Base 2.19.6
+ g_data_input_stream_read_until_finish@Base 2.19.6
  g_data_input_stream_set_byte_order@Base 2.16.0
  g_data_input_stream_set_newline_type@Base 2.16.0
  g_data_output_stream_get_byte_order@Base 2.16.0
@@ -154,7 +154,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_attribute_info_flags_get_type@Base 2.16.0
  g_file_attribute_info_list_add@Base 2.16.0
  g_file_attribute_info_list_dup@Base 2.16.0
- g_file_attribute_info_list_get_type@Base 2.19.6-1
+ g_file_attribute_info_list_get_type@Base 2.19.6
  g_file_attribute_info_list_lookup@Base 2.16.0
  g_file_attribute_info_list_new@Base 2.16.0
  g_file_attribute_info_list_ref@Base 2.16.0
@@ -355,18 +355,18 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_filename_completer_set_dirs_only@Base 2.16.0
  g_filesystem_preview_type_get_type@Base 2.16.0
  g_filter_input_stream_get_base_stream@Base 2.16.0
- g_filter_input_stream_get_close_base_stream@Base 2.19.6-1
+ g_filter_input_stream_get_close_base_stream@Base 2.19.6
  g_filter_input_stream_get_type@Base 2.16.0
- g_filter_input_stream_set_close_base_stream@Base 2.19.6-1
+ g_filter_input_stream_set_close_base_stream@Base 2.19.6
  g_filter_output_stream_get_base_stream@Base 2.16.0
- g_filter_output_stream_get_close_base_stream@Base 2.19.6-1
+ g_filter_output_stream_get_close_base_stream@Base 2.19.6
  g_filter_output_stream_get_type@Base 2.16.0
- g_filter_output_stream_set_close_base_stream@Base 2.19.6-1
+ g_filter_output_stream_set_close_base_stream@Base 2.19.6
  g_icon_equal@Base 2.16.0
  g_icon_get_type@Base 2.16.0
  g_icon_hash@Base 2.16.0
- g_icon_new_for_string@Base 2.19.6-1
- g_icon_to_string@Base 2.19.6-1
+ g_icon_new_for_string@Base 2.19.6
+ g_icon_to_string@Base 2.19.6
  g_input_stream_clear_pending@Base 2.16.0
  g_input_stream_close@Base 2.16.0
  g_input_stream_close_async@Base 2.16.0
@@ -432,7 +432,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_mount_guess_content_type@Base 2.18.0
  g_mount_guess_content_type_finish@Base 2.18.0
  g_mount_guess_content_type_sync@Base 2.18.0
- g_mount_is_shadowed@Base 2.19.6-1
+ g_mount_is_shadowed@Base 2.19.6
  g_mount_mount_flags_get_type@Base 2.16.0
  g_mount_operation_get_anonymous@Base 2.16.0
  g_mount_operation_get_choice@Base 2.16.0
@@ -452,11 +452,11 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_mount_operation_set_username@Base 2.16.0
  g_mount_remount@Base 2.16.0
  g_mount_remount_finish@Base 2.16.0
- g_mount_shadow@Base 2.19.6-1
+ g_mount_shadow@Base 2.19.6
  g_mount_unmount@Base 2.16.0
  g_mount_unmount_finish@Base 2.16.0
  g_mount_unmount_flags_get_type@Base 2.16.0
- g_mount_unshadow@Base 2.19.6-1
+ g_mount_unshadow@Base 2.19.6
  g_native_volume_monitor_get_type@Base 2.16.0
  g_output_stream_clear_pending@Base 2.16.0
  g_output_stream_close@Base 2.16.0
@@ -493,7 +493,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_simple_async_result_get_op_res_gssize@Base 2.16.0
  g_simple_async_result_get_source_tag@Base 2.16.0
  g_simple_async_result_get_type@Base 2.16.0
- g_simple_async_result_is_valid@Base 2.19.6-1
+ g_simple_async_result_is_valid@Base 2.19.6
  g_simple_async_result_new@Base 2.16.0
  g_simple_async_result_new_error@Base 2.16.0
  g_simple_async_result_new_from_error@Base 2.16.0
@@ -513,11 +513,11 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_themed_icon_new_from_names@Base 2.16.0
  g_themed_icon_new_with_default_fallbacks@Base 2.16.0
  g_themed_icon_prepend_name@Base 2.18.0
- g_unix_input_stream_get_close_fd@Base 2.19.6-1
- g_unix_input_stream_get_fd@Base 2.19.6-1
+ g_unix_input_stream_get_close_fd@Base 2.19.6
+ g_unix_input_stream_get_fd@Base 2.19.6
  g_unix_input_stream_get_type@Base 2.16.0
  g_unix_input_stream_new@Base 2.16.0
- g_unix_input_stream_set_close_fd@Base 2.19.6-1
+ g_unix_input_stream_set_close_fd@Base 2.19.6
  g_unix_is_mount_path_system_internal@Base 2.16.0
  g_unix_mount_at@Base 2.16.0
  g_unix_mount_compare@Base 2.16.0
@@ -549,11 +549,11 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_mount_points_get@Base 2.16.0
  g_unix_mounts_changed_since@Base 2.16.0
  g_unix_mounts_get@Base 2.16.0
- g_unix_output_stream_get_close_fd@Base 2.19.6-1
- g_unix_output_stream_get_fd@Base 2.19.6-1
+ g_unix_output_stream_get_close_fd@Base 2.19.6
+ g_unix_output_stream_get_fd@Base 2.19.6
  g_unix_output_stream_get_type@Base 2.16.0
  g_unix_output_stream_new@Base 2.16.0
- g_unix_output_stream_set_close_fd@Base 2.19.6-1
+ g_unix_output_stream_set_close_fd@Base 2.19.6
  g_vfs_get_default@Base 2.16.0
  g_vfs_get_file_for_path@Base 2.16.0
  g_vfs_get_file_for_uri@Base 2.16.0
@@ -621,7 +621,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_assertion_message@Base 2.16.0
  g_assertion_message_cmpnum@Base 2.16.0
  g_assertion_message_cmpstr@Base 2.16.0
- g_assertion_message_error@Base 2.19.6-1
+ g_assertion_message_error@Base 2.19.6
  g_assertion_message_expr@Base 2.16.0
  g_async_queue_length@Base 2.12.0
  g_async_queue_length_unlocked@Base 2.12.0
@@ -655,7 +655,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_atomic_pointer_get@Base 2.12.0
  g_atomic_pointer_set@Base 2.12.0
  g_base64_decode@Base 2.12.0
- g_base64_decode_inplace@Base 2.19.6-1
+ g_base64_decode_inplace@Base 2.19.6
  g_base64_decode_step@Base 2.12.0
  g_base64_encode@Base 2.12.0
  g_base64_encode_close@Base 2.12.0
@@ -1210,7 +1210,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_pattern_spec_equal@Base 2.12.0
  g_pattern_spec_free@Base 2.12.0
  g_pattern_spec_new@Base 2.12.0
- g_poll@Base 2.19.6-1
+ g_poll@Base 2.19.6
  g_prefix_error@Base 2.16.0
  g_print@Base 2.12.0
  g_printerr@Base 2.12.0
@@ -1396,7 +1396,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_slice_alloc0@Base 2.12.0
  g_slice_alloc@Base 2.12.0
  g_slice_copy@Base 2.14.0
- g_slice_debug_tree_statistics@Base 2.19.6-1
+ g_slice_debug_tree_statistics@Base 2.19.6
  g_slice_free1@Base 2.12.0
  g_slice_free_chain_with_offset@Base 2.12.0
  g_slice_get_config@Base 2.12.0
@@ -1604,7 +1604,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_thread_exit@Base 2.12.0
  g_thread_foreach@Base 2.12.0
  g_thread_functions_for_glib_use@Base 2.12.0
- g_thread_get_initialized@Base 2.19.6-1
+ g_thread_get_initialized@Base 2.19.6
  g_thread_gettime@Base 2.14.0
  g_thread_init_glib@Base 2.12.0
  g_thread_join@Base 2.12.0
@@ -1752,7 +1752,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  glib_on_error_halt@Base 2.12.0
 libgmodule-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
- end@Base 2.19.6-1
+ end@Base 2.19.6
  g_module_build_path@Base 2.12.0
  g_module_close@Base 2.12.0
  g_module_error@Base 2.12.0
@@ -1763,7 +1763,7 @@ libgmodule-2.0.so.0 libglib2.0-0 #MINVER#
  g_module_symbol@Base 2.12.0
 libgobject-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
- end@Base 2.19.6-1
+ end@Base 2.19.6
  g_boxed_copy@Base 2.12.0
  g_boxed_free@Base 2.12.0
  g_boxed_type_register_static@Base 2.12.0
@@ -2105,6 +2105,6 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_value_unset@Base 2.12.0
 libgthread-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
- end@Base 2.19.6-1
+ end@Base 2.19.6
  g_thread_init@Base 2.12.0
  g_thread_init_with_errorcheck_mutexes@Base 2.12.0
