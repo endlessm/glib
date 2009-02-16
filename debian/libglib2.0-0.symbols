@@ -1,6 +1,5 @@
 libgio-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
- end@Base 2.19.6
  g_app_info_add_supports_type@Base 2.16.0
  g_app_info_can_delete@Base 2.19.6
  g_app_info_can_remove_supports_type@Base 2.16.0
@@ -1752,7 +1751,6 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  glib_on_error_halt@Base 2.12.0
 libgmodule-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
- end@Base 2.19.6
  g_module_build_path@Base 2.12.0
  g_module_close@Base 2.12.0
  g_module_error@Base 2.12.0
@@ -1763,7 +1761,6 @@ libgmodule-2.0.so.0 libglib2.0-0 #MINVER#
  g_module_symbol@Base 2.12.0
 libgobject-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
- end@Base 2.19.6
  g_boxed_copy@Base 2.12.0
  g_boxed_free@Base 2.12.0
  g_boxed_type_register_static@Base 2.12.0
@@ -2105,6 +2102,5 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_value_unset@Base 2.12.0
 libgthread-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
- end@Base 2.19.6
  g_thread_init@Base 2.12.0
  g_thread_init_with_errorcheck_mutexes@Base 2.12.0
