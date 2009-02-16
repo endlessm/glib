@@ -5,8 +5,11 @@ glib2.0 (2.19.6-1) UNRELEASED; urgency=low
   - hide many of the symbols that this version is exporting even though it
     should not; some are still being exported incorrectly, such as the
     xdgmime and libcharset related ones; patch sent upstream
+  * debian/libglib2.0-0.symbols:
+  - updated with new symbols; there are some private symbols we should
+    remove in the near future, see comment above
 
- -- Gustavo Noronha Silva <kov@debian.org>  Sun, 15 Feb 2009 23:56:19 -0300
+ -- Gustavo Noronha Silva <kov@debian.org>  Sun, 15 Feb 2009 23:58:22 -0300
 
 glib2.0 (2.18.4-2) unstable; urgency=low
 
