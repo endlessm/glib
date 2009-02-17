@@ -1,3 +1,10 @@
+glib2.0 (2.18.4-2.1) UNRELEASED; urgency=low
+
+  * Non-maintainer upload.
+  * NOT RELEASED YET
+
+ -- Gustavo Noronha Silva <kov@alface>  Sun, 15 Feb 2009 13:17:00 -0300
+
 glib2.0 (2.18.4-2) unstable; urgency=low
 
   * Release to unstable
