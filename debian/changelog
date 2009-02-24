@@ -1,3 +1,23 @@
+glib2.0 (2.19.8-2) experimental; urgency=low
+
+  * debian/patches/01_gettext-desktopfiles.patch,
+    debian/patches/02_gettext-desktopfiles-ubuntu.patch:
+    + Updated from the Ubuntu package, thanks to Martin Pitt for the changes:
+      - 01_gettext-desktopfiles.patch: Merge OpenSUSE's and our patch:
+        - Now prefers inline translations over gettext translations, which
+          fixes a few corner cases (like renaming .desktop files on the
+          user's desktop), is more in line with the recent gconf patch,
+          and more palatable for upstream inclusion.
+        - Use X-GNOME-Gettext-Domain, for preparing upstream inclusion.
+        - Forwarded upstream now.
+      - Add 02_gettext-desktopfiles-ubuntu.patch: Provide backwards
+        compatibility for 01_gettext-desktopfiles.patch for
+        X-{Debian,Ubuntu}-Gettext-Domain. The latter was changed to use
+        X-GNOME-, so this is necessary until all our .desktop files are
+        converted.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 24 Feb 2009 16:08:05 +0100
+
 glib2.0 (2.19.8-1) experimental; urgency=low
 
   * New upstream development release.
