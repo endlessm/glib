@@ -1,3 +1,9 @@
+glib2.0 (2.19.10-1) experimental; urgency=low
+
+  * New upstream development release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 02 Mar 2009 16:04:08 +0100
+
 glib2.0 (2.19.8-2) experimental; urgency=low
 
   * debian/patches/01_gettext-desktopfiles.patch,
