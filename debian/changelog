@@ -1,3 +1,14 @@
+glib2.0 (2.20.0-1) UNRELEASED; urgency=low
+
+  * WARNING: Don't upload to unstable until directfb, etc transitions are done.
+  * New upstream stable release.
+  * Upload to unstable, remove check-dist include.
+  * debian/libglib2.0-0.symbols,
+    debian/rules:
+    + Update for the API changes.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 14 Mar 2009 10:53:26 +0100
+
 glib2.0 (2.19.10-1) experimental; urgency=low
 
   * New upstream development release.
