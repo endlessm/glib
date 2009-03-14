@@ -1,4 +1,5 @@
 01_gettext-desktopfiles.patch
+02_gettext-desktopfiles-ubuntu.patch
 02_usr_share_gnome_applications.patch
 03_blacklist-directories.patch
 04_homedir_env.patch

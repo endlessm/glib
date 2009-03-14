@@ -1,9 +1,48 @@
-glib2.0 (2.18.4-2.1) UNRELEASED; urgency=low
+glib2.0 (2.19.10-1) experimental; urgency=low
 
-  * Non-maintainer upload.
-  * NOT RELEASED YET
+  * New upstream development release.
 
- -- Gustavo Noronha Silva <kov@alface>  Sun, 15 Feb 2009 13:17:00 -0300
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 02 Mar 2009 16:04:08 +0100
+
+glib2.0 (2.19.8-2) experimental; urgency=low
+
+  * debian/patches/01_gettext-desktopfiles.patch,
+    debian/patches/02_gettext-desktopfiles-ubuntu.patch:
+    + Updated from the Ubuntu package, thanks to Martin Pitt for the changes:
+      - 01_gettext-desktopfiles.patch: Merge OpenSUSE's and our patch:
+        - Now prefers inline translations over gettext translations, which
+          fixes a few corner cases (like renaming .desktop files on the
+          user's desktop), is more in line with the recent gconf patch,
+          and more palatable for upstream inclusion.
+        - Use X-GNOME-Gettext-Domain, for preparing upstream inclusion.
+        - Forwarded upstream now.
+      - Add 02_gettext-desktopfiles-ubuntu.patch: Provide backwards
+        compatibility for 01_gettext-desktopfiles.patch for
+        X-{Debian,Ubuntu}-Gettext-Domain. The latter was changed to use
+        X-GNOME-, so this is necessary until all our .desktop files are
+        converted.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 24 Feb 2009 16:08:05 +0100
+
+glib2.0 (2.19.8-1) experimental; urgency=low
+
+  * New upstream development release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Fri, 20 Feb 2009 10:38:44 +0100
+
+glib2.0 (2.19.7-1) experimental; urgency=low
+
+  * New development release
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Tue, 17 Feb 2009 01:43:04 -0300
+
+glib2.0 (2.19.6-1) experimental; urgency=low
+
+  * New development release
+  * debian/libglib2.0-0.symbols:
+  - updated with new symbols
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Sun, 15 Feb 2009 23:58:22 -0300
 
 glib2.0 (2.18.4-2) unstable; urgency=low
 
