@@ -1,8 +1,8 @@
-glib2.0 (2.20.0-1) UNRELEASED; urgency=low
+glib2.0 (2.20.0-1) unstable; urgency=low
 
-  * WARNING: Don't upload to unstable until directfb, etc transitions are done.
   * New upstream stable release.
   * Upload to unstable, remove check-dist include.
+    This won't block any transitions because of symbol files.
   * debian/libglib2.0-0.symbols,
     debian/rules:
     + Update for the API changes.
