@@ -1,3 +1,9 @@
+glib2.0 (2.20.0-3) UNRELEASED; urgency=low
+
+  * Fix debug package section.
+
+ -- Josselin Mouette <joss@debian.org>  Fri, 20 Mar 2009 00:26:54 +0100
+
 glib2.0 (2.20.0-2) unstable; urgency=low
 
   * Remove 02_usr_share_gnome_applications.patch, now gnome-session sets 

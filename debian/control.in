@@ -73,7 +73,7 @@ Description: Development files for the GLib library
  needed for compiling.
 
 Package: @DEBUG_PKG@
-Section: libdevel
+Section: debug
 Priority: extra
 Architecture: any
 Depends: ${misc:Depends},
