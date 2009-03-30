@@ -1,0 +1,35 @@
+Debian #520484
+GNOME #577137
+Upstream commit r8021
+
+Index: glib-2.20.0/glib/gmessages.c
+===================================================================
+--- glib-2.20.0.orig/glib/gmessages.c	2009-03-30 11:23:08.084908982 +0200
++++ glib-2.20.0/glib/gmessages.c	2009-03-30 11:23:13.572403900 +0200
+@@ -462,14 +462,23 @@ g_logv (const gchar   *log_domain,
+ 	       * in an out-of-memory situation
+ 	       */
+ 	      gchar buffer[1025];
+-	      gint size;
+-	      size = _g_vsnprintf (buffer, 1024, format, args1);
++              gsize size;
++              va_list args2;
++
++              G_VA_COPY (args2, args1);
++	      size = _g_vsnprintf (buffer, 1024, format, args2);
++              va_end (args2);
+ 
+ 	      log_func (log_domain, test_level, buffer, data);
+ 	    }
+ 	  else
+ 	    {
+-	      gchar *msg = g_strdup_vprintf (format, args1);
++	      gchar *msg;
++              va_list args2;
++
++              G_VA_COPY (args2, args1);
++              msg = g_strdup_vprintf (format, args2);
++              va_end (args2);
+ 
+ 	      log_func (log_domain, test_level, msg, data);
+ 

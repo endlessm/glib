@@ -1,6 +1,8 @@
 glib2.0 (2.20.0-3) UNRELEASED; urgency=low
 
   * Fix debug package section.
+  * 10_log_valist.patch: new patch, stolen upstream. Copy a va_list 
+    before using it twice. Closes: #520484.
 
  -- Josselin Mouette <joss@debian.org>  Fri, 20 Mar 2009 00:26:54 +0100
 
