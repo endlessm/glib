@@ -1,3 +1,9 @@
+glib2.0 (2.20.4-1) unstable; urgency=low
+
+  * New upstream bugfix release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 27 Jun 2009 09:56:08 +0200
+
 glib2.0 (2.20.3-1) unstable; urgency=low
 
   [ Josselin Mouette ]
