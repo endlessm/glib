@@ -2,7 +2,6 @@
 
 DISABLE_UPDATE_UPLOADERS := 1
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
-include /usr/share/gnome-pkg-tools/1/rules/check-dist.mk
 -include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
 
 GNOME_MODULE := glib
@@ -39,7 +38,7 @@ LDFLAGS += -Wl,-O1
 
 APIVER := 2.0
 SONAME := 0
-SHVER := 2.18.0
+SHVER := 2.20.0
 
 # package names
 SHARED_PKG := libglib$(APIVER)-$(SONAME)
@@ -48,11 +47,12 @@ DEV_PKG := libglib$(APIVER)-dev
 UDEB_PKG := libglib$(APIVER)-udeb
 DOC_PKG := libglib$(APIVER)-doc
 DEBUG_PKG := $(SHARED_PKG)-dbg
+REFDBG_PKG := libglib$(APIVER)-$(SONAME)-refdbg
 
 # list of flavors we build; each gets a builddir, a configure pass (configure
 # args are defined below), a build pass, and an install pass (in two steps)
 # Note: the "deb" flavor is required
-FLAVORS := deb udeb
+FLAVORS := deb udeb refdbg
 
 # list of flavors to run the test suite on
 CHECK_FLAVORS := $(filter deb, $(FLAVORS))
@@ -93,6 +93,9 @@ deb_configure_flags := $(common_configure_flags) \
 			--enable-static
 udeb_configure_flags := $(common_configure_flags) \
 			--disable-selinux
+refdbg_configure_flags := $(common_configure_flags) \
+			--disable-visibility \
+			--enable-debug=yes
 
 $(STAMP_DIR)/patch-stamp:
 	dh_testdir
@@ -166,6 +169,7 @@ debian/control:
 		-e "s#@DOC_PKG@#$(DOC_PKG)#g" \
 		-e "s#@DEBUG_PKG@#$(DEBUG_PKG)#g" \
 		-e "s#@GNOME_TEAM@#$(UPLOADERS)#g" \
+		-e "s#@REFDBG_PKG@#$(REFDBG_PKG)#g" \
 		$@.in >$@
 
 clean: debian/control
@@ -215,7 +219,7 @@ binary-arch: build $(maybe_check) install
 		ChangeLog
 	dh_installdocs -s -N$(DEV_PKG) -N$(DEBUG_PKG) NEWS README
 	dh_link -s
-	dh_strip -s --dbg-package=$(DEBUG_PKG) -N$(UDEB_PKG)
+	dh_strip -s --dbg-package=$(DEBUG_PKG) -N$(UDEB_PKG) -N$(REFDBG_PKG)
 	dh_strip -p$(UDEB_PKG)
 	dh_compress -s -X.sgml -X.devhelp
 	dh_fixperms -s

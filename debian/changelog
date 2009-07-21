@@ -1,3 +1,61 @@
+glib2.0 (2.20.4-1) unstable; urgency=low
+
+  * New upstream bugfix release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 27 Jun 2009 09:56:08 +0200
+
+glib2.0 (2.20.3-1) unstable; urgency=low
+
+  [ Josselin Mouette ]
+  * Only build the libgio-fam package for hurd and kfreebsd, it is 
+    totally useless under Linux.
+  * Make it recommend gamin for kqueue support.
+  * Make libgamin-dev the primary build-dependency. Closes: #526219.
+
+  [ Sebastian Dröge ]
+  * New upstream bugfix release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 01 Jun 2009 15:35:40 +0200
+
+glib2.0 (2.20.1-2) unstable; urgency=low
+
+  * Add refdbg package: libglib2.0-0-refdbg. (Closes: #525915)
+
+ -- Jonny Lamb <jonny@debian.org>  Tue, 28 Apr 2009 15:11:27 +0100
+
+glib2.0 (2.20.1-1) unstable; urgency=low
+
+  * New upstream bugfix release: 
+    + 10_log_valist.patch, dropped.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 11 Apr 2009 17:00:43 +0200
+
+glib2.0 (2.20.0-3) unstable; urgency=low
+
+  * Fix debug package section.
+  * 10_log_valist.patch: new patch, stolen upstream. Copy a va_list 
+    before using it twice. Closes: #520484.
+
+ -- Josselin Mouette <joss@debian.org>  Thu, 09 Apr 2009 20:11:52 +0200
+
+glib2.0 (2.20.0-2) unstable; urgency=low
+
+  * Remove 02_usr_share_gnome_applications.patch, now gnome-session sets 
+    XDG_DATA_DIRS accordingly.
+
+ -- Josselin Mouette <joss@debian.org>  Thu, 19 Mar 2009 22:59:34 +0100
+
+glib2.0 (2.20.0-1) unstable; urgency=low
+
+  * New upstream stable release.
+  * Upload to unstable, remove check-dist include.
+    This won't block any transitions because of symbol files.
+  * debian/libglib2.0-0.symbols,
+    debian/rules:
+    + Update for the API changes.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 14 Mar 2009 10:53:26 +0100
+
 glib2.0 (2.19.10-1) experimental; urgency=low
 
   * New upstream development release.

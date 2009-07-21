@@ -1,0 +1,2 @@
+debian/install/refdbg/usr/lib/libgobject*.so* usr/lib/refdbg
+debian/lintian-overrides/libglib2.0-0-refdbg usr/share/lintian/overrides
