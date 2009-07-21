@@ -1,3 +1,16 @@
+glib2.0 (2.21.4-1) experimental; urgency=low
+
+  * New upstream development release:
+    + debian/rules:
+      - Include check-dist.mk to prevent accidental uploads to unstable.
+      - Update shlib version to 2.21.4.
+    + debian/libglib2.0-0.symbols:
+      - Update for the API additions.
+  * debian/control.in:
+    + Updated Standards-Version to 3.8.1, no additional changes needed.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 21 Jul 2009 09:35:33 +0200
+
 glib2.0 (2.20.4-1) unstable; urgency=low
 
   * New upstream bugfix release.
