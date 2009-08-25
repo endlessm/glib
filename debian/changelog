@@ -1,3 +1,15 @@
+glib2.0 (2.21.5-1) experimental; urgency=low
+
+  * New upstream development release:
+    + debian/libglib2.0-0.symbols:
+      - Update for the new version.
+    + debian/rules:
+      - Update SHVER to 2.21.5.
+  * debian/control.in:
+    + Updated Standards-Version to 3.8.2, no additional changes needed.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 25 Aug 2009 18:38:51 +0200
+
 glib2.0 (2.21.4-1) experimental; urgency=low
 
   * New upstream development release:
