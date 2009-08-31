@@ -16,7 +16,7 @@ Build-Depends: debhelper (>> 5.0.22),
                libselinux1-dev | not+linux-gnu,
                linux-libc-dev | not+linux-gnu,
                libgamin-dev | libfam-dev | linux-gnu
-Standards-Version: 3.8.1
+Standards-Version: 3.8.3
 Homepage: http://www.gtk.org/
 Vcs-Browser: http://svn.debian.org/wsvn/pkg-gnome/desktop/unstable/glib2.0/
 Vcs-Svn: svn://svn.debian.org/svn/pkg-gnome/desktop/unstable/glib2.0/
