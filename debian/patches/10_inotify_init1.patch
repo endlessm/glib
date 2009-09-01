@@ -1,0 +1,19 @@
+Debian #544354
+GNOME #593775
+
+Index: glib-2.20.5/gio/inotify/inotify-kernel.c
+===================================================================
+--- glib-2.20.5.orig/gio/inotify/inotify-kernel.c	2009-09-01 11:45:53.760521652 +0200
++++ glib-2.20.5/gio/inotify/inotify-kernel.c	2009-09-01 11:49:41.214630129 +0200
+@@ -193,8 +193,10 @@
+ #ifdef HAVE_INOTIFY_INIT1
+   inotify_instance_fd = inotify_init1 (IN_CLOEXEC);
+ #else
+-  inotify_instance_fd = inotify_init ();
++  inotify_instance_fd = -1;
+ #endif
++  if (inotify_instance_fd < 0)
++    inotify_instance_fd = inotify_init ();
+ 
+   if (inotify_instance_fd < 0)
+     return FALSE;
