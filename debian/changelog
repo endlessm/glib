@@ -1,3 +1,11 @@
+glib2.0 (2.20.5-2) UNRELEASED; urgency=low
+
+  * 10_inotify_init1.patch: fall back on inotify_init when inotify_init1 
+    does not work, as happens with kernel versions < 2.6.27.
+    Closes: #544354.
+
+ -- Josselin Mouette <joss@debian.org>  Tue, 01 Sep 2009 11:56:52 +0200
+
 glib2.0 (2.20.5-1) unstable; urgency=low
 
   * New upstream bugfix release.
