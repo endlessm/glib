@@ -1,10 +1,20 @@
-glib2.0 (2.21.5-2) UNRELEASED; urgency=low
+glib2.0 (2.21.6-1) experimental; urgency=low
 
+  [ Josselin Mouette ]
   * 10_inotify_init1.patch: fall back on inotify_init when inotify_init1 
     does not work, as happens with kernel versions < 2.6.27.
     Closes: #544354.
 
- -- Josselin Mouette <joss@debian.org>  Tue, 01 Sep 2009 11:59:47 +0200
+  [ Sebastian Dröge ]
+  * New upstream development release:
+    + debian/libglib2.0-0.symbols:
+      - Update for the new version.
+    + debian/rules:
+      - Update SHVER to 2.21.6.
+  * debian/control.in:
+    + Updated Standards-Version to 3.8.3, no additional changes needed.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 05 Sep 2009 07:15:58 +0200
 
 glib2.0 (2.21.5-1) experimental; urgency=low
 
