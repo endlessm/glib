@@ -1406,7 +1406,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_mkdir@Base 2.12.0
  g_mkdir_with_parents@Base 2.12.0
  g_mkstemp@Base 2.12.0
- g_mkstemp_full 2.21.6
+ g_mkstemp_full@Base 2.21.6
  g_node_child_index@Base 2.12.0
  g_node_child_position@Base 2.12.0
  g_node_children_foreach@Base 2.12.0
