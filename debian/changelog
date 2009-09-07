@@ -1,3 +1,10 @@
+glib2.0 (2.21.6-2) UNRELEASED; urgency=low
+
+  * Move libglib-2.0.so.0 to /lib so that DeviceKit (and other potential 
+    sources) can work without having /usr mounted.
+
+ -- Josselin Mouette <joss@debian.org>  Mon, 07 Sep 2009 12:12:46 +0200
+
 glib2.0 (2.21.6-1) experimental; urgency=low
 
   [ Josselin Mouette ]
