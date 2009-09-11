@@ -3,6 +3,10 @@ glib2.0 (2.20.5-2) UNRELEASED; urgency=low
   * 10_inotify_init1.patch: fall back on inotify_init when inotify_init1 
     does not work, as happens with kernel versions < 2.6.27.
     Closes: #544354.
+  * 11_chmod_symlinks.patch: new patch. Fix potential security issue 
+    when manipulating symlink permissions. Thanks Arand Nash for the 
+    heads up.
+  * 90_autoconf.patch: re-run autoconf on top of it.
 
  -- Josselin Mouette <joss@debian.org>  Tue, 01 Sep 2009 11:56:52 +0200
 
