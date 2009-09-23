@@ -1,9 +1,16 @@
-glib2.0 (2.21.6-2) UNRELEASED; urgency=low
+glib2.0 (2.22.0-1) unstable; urgency=low
 
+  [ Josselin Mouette ]
   * Move libglib-2.0.so.0 to /lib so that DeviceKit (and other potential 
     sources) can work without having /usr mounted.
+  * 11_chmod_symlinks.patch: new patch. Fix potential security issue 
+    when manipulating symlink permissions. Thanks Arand Nash for the 
+    heads up.
 
- -- Josselin Mouette <joss@debian.org>  Mon, 07 Sep 2009 12:12:46 +0200
+  [ Sebastian Dröge ]
+  * New upstream stable release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Wed, 23 Sep 2009 05:04:37 +0200
 
 glib2.0 (2.21.6-1) experimental; urgency=low
 
