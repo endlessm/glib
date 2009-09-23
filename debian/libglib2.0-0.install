@@ -1,1 +1,2 @@
-debian/install/deb/usr/lib/lib*.so.* usr/lib
+debian/install/deb/usr/lib/libglib-*.so.* lib
+debian/install/deb/usr/lib/libg{object,module,thread,io}-*.so.* usr/lib

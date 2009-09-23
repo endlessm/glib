@@ -1,22 +1,59 @@
-glib2.0 (2.20.5-2) UNRELEASED; urgency=low
+glib2.0 (2.22.0-1) unstable; urgency=low
 
-  * 10_inotify_init1.patch: fall back on inotify_init when inotify_init1 
-    does not work, as happens with kernel versions < 2.6.27.
-    Closes: #544354.
+  [ Josselin Mouette ]
+  * Move libglib-2.0.so.0 to /lib so that DeviceKit (and other potential 
+    sources) can work without having /usr mounted.
   * 11_chmod_symlinks.patch: new patch. Fix potential security issue 
     when manipulating symlink permissions. Thanks Arand Nash for the 
     heads up.
-  * 90_autoconf.patch: re-run autoconf on top of it.
 
- -- Josselin Mouette <joss@debian.org>  Tue, 01 Sep 2009 11:56:52 +0200
+  [ Sebastian Dröge ]
+  * New upstream stable release.
 
-glib2.0 (2.20.5-1) unstable; urgency=low
+ -- Sebastian Dröge <slomo@debian.org>  Wed, 23 Sep 2009 05:04:37 +0200
 
-  * New upstream bugfix release.
+glib2.0 (2.21.6-1) experimental; urgency=low
+
+  [ Josselin Mouette ]
+  * 10_inotify_init1.patch: fall back on inotify_init when inotify_init1 
+    does not work, as happens with kernel versions < 2.6.27.
+    Closes: #544354.
+
+  [ Sebastian Dröge ]
+  * New upstream development release:
+    + debian/libglib2.0-0.symbols:
+      - Update for the new version.
+    + debian/rules:
+      - Update SHVER to 2.21.6.
   * debian/control.in:
-    + Updated Standards-Version to 3.8.3.
+    + Updated Standards-Version to 3.8.3, no additional changes needed.
 
- -- Sebastian Dröge <slomo@debian.org>  Mon, 31 Aug 2009 09:23:56 +0200
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 05 Sep 2009 07:15:58 +0200
+
+glib2.0 (2.21.5-1) experimental; urgency=low
+
+  * New upstream development release:
+    + debian/libglib2.0-0.symbols:
+      - Update for the new version.
+    + debian/rules:
+      - Update SHVER to 2.21.5.
+  * debian/control.in:
+    + Updated Standards-Version to 3.8.2, no additional changes needed.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 25 Aug 2009 18:38:51 +0200
+
+glib2.0 (2.21.4-1) experimental; urgency=low
+
+  * New upstream development release:
+    + debian/rules:
+      - Include check-dist.mk to prevent accidental uploads to unstable.
+      - Update shlib version to 2.21.4.
+    + debian/libglib2.0-0.symbols:
+      - Update for the API additions.
+  * debian/control.in:
+    + Updated Standards-Version to 3.8.1, no additional changes needed.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 21 Jul 2009 09:35:33 +0200
 
 glib2.0 (2.20.4-1) unstable; urgency=low
 
