@@ -1,3 +1,10 @@
+glib2.0 (2.22.0-2) UNRELEASED; urgency=low
+
+  * Don’t install Python GDB macros for now, they only work with an 
+    experimental GDB branch.
+
+ -- Josselin Mouette <joss@debian.org>  Wed, 23 Sep 2009 20:58:12 +0200
+
 glib2.0 (2.22.0-1) unstable; urgency=low
 
   [ Josselin Mouette ]
