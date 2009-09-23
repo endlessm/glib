@@ -8,7 +8,12 @@ glib2.0 (2.22.0-1) unstable; urgency=low
     heads up.
 
   [ Sebastian Dröge ]
-  * New upstream stable release.
+  * New upstream stable release:
+    + debian/patches/11_chmod_symlinks.patch:
+      - Dropped, merged upstream.
+    + debian/libglib2.0-0.symbols,
+      debian/rules:
+      - Update for the new version.
 
  -- Sebastian Dröge <slomo@debian.org>  Wed, 23 Sep 2009 05:04:37 +0200
 
