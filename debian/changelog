@@ -1,9 +1,11 @@
-glib2.0 (2.22.0-2) UNRELEASED; urgency=low
+glib2.0 (2.22.0-2) unstable; urgency=low
 
   * Don’t install Python GDB macros for now, they only work with an 
     experimental GDB branch.
+  * 30_metadata_symlinks.patch: stolen upstream. Get metadata to work 
+    with symbolic links. Closes: #548142.
 
- -- Josselin Mouette <joss@debian.org>  Wed, 23 Sep 2009 20:58:12 +0200
+ -- Josselin Mouette <joss@debian.org>  Wed, 30 Sep 2009 01:02:11 +0200
 
 glib2.0 (2.22.0-1) unstable; urgency=low
 

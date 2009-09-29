@@ -1,0 +1,40 @@
+From 6f1ce483eb136159f42b7dde3aa4466ba3e874c1 Mon Sep 17 00:00:00 2001
+From: Alexander Larsson <alexl@redhat.com>
+Date: Mon, 28 Sep 2009 13:55:44 +0000
+Subject: Always report metadata on the path, not symlink target
+
+Metadata are really part of the pathname, not the target file
+(as they are stored by pathname, and for many metadata like icon position
+etc make not sense using the target data). So, even if nofollow
+is not specified we should not follow links for metadata.
+
+Ideally this should be implemented in the metadata extension in gvfs,
+but the extension API does not allow this, so we do it in gio.
+
+See https://bugzilla.gnome.org/show_bug.cgi?id=593809
+---
+diff --git a/gio/glocalfileinfo.c b/gio/glocalfileinfo.c
+index 7076aac..0a063e9 100644
+--- a/gio/glocalfileinfo.c
++++ b/gio/glocalfileinfo.c
+@@ -1709,17 +1709,8 @@ _g_local_file_info_get (const char             *basename,
+   class = G_VFS_GET_CLASS (vfs);
+   if (class->local_file_add_info)
+     {
+-      const char *extra_target;
+-
+-      extra_target = path;
+-      if (!(flags & G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS) &&
+-          is_symlink &&
+-          !symlink_broken &&
+-          symlink_target != NULL)
+-        extra_target = symlink_target;
+-
+       class->local_file_add_info (vfs,
+-                                  extra_target,
++                                  path,
+                                   statbuf.st_dev,
+                                   attribute_matcher,
+                                   info,
+--
+cgit v0.8.2

@@ -3,4 +3,5 @@
 03_blacklist-directories.patch
 04_homedir_env.patch
 10_inotify_init1.patch
+30_metadata_symlinks.patch
 60_wait-longer-for-threads-to-die.patch
