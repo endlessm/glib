@@ -1,3 +1,12 @@
+glib2.0 (2.22.1-1) unstable; urgency=low
+
+  * New upstream bugfix release:
+    + debian/patches/10_inotify_init1.patch,
+      debian/patches/30_metadata_symlinks.patch:
+      - Dropped, merged upstream.
+
+ -- Sebastian Dröge <slomo@debian.org>  Wed, 30 Sep 2009 08:17:57 +0200
+
 glib2.0 (2.22.0-2) unstable; urgency=low
 
   * Don’t install Python GDB macros for now, they only work with an 
