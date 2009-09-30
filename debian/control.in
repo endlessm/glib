@@ -91,7 +91,6 @@ Description: The GLib libraries and debugging symbols
  Most people will not need this package.
 
 Package: @DATA_PKG@
-Section: misc
 Architecture: all
 Depends: ${misc:Depends},
          @SHARED_PKG@ (>= ${source:Version})
