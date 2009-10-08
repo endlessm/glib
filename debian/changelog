@@ -1,3 +1,11 @@
+glib2.0 (2.22.2-2) unstable; urgency=low
+
+  * debian/patches/90_mimetype-sorting.patch:
+    + Fix sorting of mimetypes by weight. Highest weight means most
+      important, not the other way around. Patch from upstream GIT.
+
+ -- Sebastian Dröge <slomo@debian.org>  Thu, 08 Oct 2009 18:34:23 +0200
+
 glib2.0 (2.22.2-1) unstable; urgency=low
 
   [ Emilio Pozuelo Monfort ]
