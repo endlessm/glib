@@ -130,6 +130,8 @@ Description: GLib Input, Output and Streaming Library (fam module)
  provides a fam file and directory monitoring backend for it.
 
 Package: @REFDBG_PKG@
+Section: debug
+Priority: extra
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
