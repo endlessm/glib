@@ -1,8 +1,12 @@
-glib2.0 (2.22.1-2) UNRELEASED; urgency=low
+glib2.0 (2.22.2-1) unstable; urgency=low
 
+  [ Emilio Pozuelo Monfort ]
   * Move libglib2.0-data to section libs. Closes: #549079.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 30 Sep 2009 20:31:23 +0200
+  [ Sebastian Dröge ]
+  * New upstream bugfix release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Thu, 08 Oct 2009 12:48:51 +0200
 
 glib2.0 (2.22.1-1) unstable; urgency=low
 
