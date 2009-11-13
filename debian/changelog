@@ -1,6 +1,8 @@
 glib2.0 (2.22.2-3) UNRELEASED; urgency=low
 
   * -refdbg package is section/prio debug/extra.
+  * Add note to NOT use -Wl,--as-needed as it might a critical -lpthread link
+    in gio (which dlopen()s gvfs); see <1257999019.21780.15.camel@marzipan>.
 
  -- Loïc Minier <lool@dooz.org>  Thu, 08 Oct 2009 19:15:33 +0200
 
