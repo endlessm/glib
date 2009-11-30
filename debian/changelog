@@ -1,3 +1,48 @@
+glib2.0 (2.22.2-3) UNRELEASED; urgency=low
+
+  * -refdbg package is section/prio debug/extra.
+  * Add note to NOT use -Wl,--as-needed as it might drop a critical -lpthread
+    link in gio (which dlopen()s gvfs); see
+    mid:<1257999019.21780.15.camel@marzipan>.
+
+ -- Loïc Minier <lool@dooz.org>  Thu, 08 Oct 2009 19:15:33 +0200
+
+glib2.0 (2.22.2-2) unstable; urgency=low
+
+  * debian/patches/90_mimetype-sorting.patch:
+    + Fix sorting of mimetypes by weight. Highest weight means most
+      important, not the other way around. Patch from upstream GIT.
+
+ -- Sebastian Dröge <slomo@debian.org>  Thu, 08 Oct 2009 18:34:23 +0200
+
+glib2.0 (2.22.2-1) unstable; urgency=low
+
+  [ Emilio Pozuelo Monfort ]
+  * Move libglib2.0-data to section libs. Closes: #549079.
+
+  [ Sebastian Dröge ]
+  * New upstream bugfix release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Thu, 08 Oct 2009 12:48:51 +0200
+
+glib2.0 (2.22.1-1) unstable; urgency=low
+
+  * New upstream bugfix release:
+    + debian/patches/10_inotify_init1.patch,
+      debian/patches/30_metadata_symlinks.patch:
+      - Dropped, merged upstream.
+
+ -- Sebastian Dröge <slomo@debian.org>  Wed, 30 Sep 2009 08:17:57 +0200
+
+glib2.0 (2.22.0-2) unstable; urgency=low
+
+  * Don’t install Python GDB macros for now, they only work with an 
+    experimental GDB branch.
+  * 30_metadata_symlinks.patch: stolen upstream. Get metadata to work 
+    with symbolic links. Closes: #548142.
+
+ -- Josselin Mouette <joss@debian.org>  Wed, 30 Sep 2009 01:02:11 +0200
+
 glib2.0 (2.22.0-1) unstable; urgency=low
 
   [ Josselin Mouette ]
@@ -8,7 +53,12 @@ glib2.0 (2.22.0-1) unstable; urgency=low
     heads up.
 
   [ Sebastian Dröge ]
-  * New upstream stable release.
+  * New upstream stable release:
+    + debian/patches/11_chmod_symlinks.patch:
+      - Dropped, merged upstream.
+    + debian/libglib2.0-0.symbols,
+      debian/rules:
+      - Update for the new version.
 
  -- Sebastian Dröge <slomo@debian.org>  Wed, 23 Sep 2009 05:04:37 +0200
 

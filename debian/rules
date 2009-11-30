@@ -33,12 +33,16 @@ CFLAGS += -Wall -g -O$(if $(findstring noopt,$(DEB_BUILD_OPTIONS)),0,2)
 # symbols
 LDFLAGS += -Wl,-z,defs
 
+# NB: do NOT use -Wl,--as-needed to build glib; for instance the link to
+# pthread is carefully crafted to allow dlopen()ing pthread-using libs; see
+# http://mid.gmane.org/1257999019.21780.15.camel@marzipan
+
 # Make the linker work a bit harder so dynamic loading can be done faster
 LDFLAGS += -Wl,-O1
 
 APIVER := 2.0
 SONAME := 0
-SHVER := 2.21.6
+SHVER := 2.22.0
 
 # package names
 SHARED_PKG := libglib$(APIVER)-$(SONAME)
