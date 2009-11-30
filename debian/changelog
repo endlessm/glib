@@ -15,6 +15,8 @@ glib2.0 (2.23.0-1) experimental; urgency=low
       - Update for new API.
     + debian/control.in:
       - Build depend on zlib.
+    + debian/rules:
+      - Include check-dist.mk to prevent accidental uploads to unstable.
 
  -- Sebastian Dröge <slomo@debian.org>  Mon, 30 Nov 2009 10:04:07 +0100
 
