@@ -14,6 +14,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_app_info_get_default_for_type@Base 2.16.0
  g_app_info_get_default_for_uri_scheme@Base 2.16.0
  g_app_info_get_description@Base 2.16.0
+ g_app_info_get_display_name@Base 2.23.0
  g_app_info_get_executable@Base 2.16.0
  g_app_info_get_icon@Base 2.16.0
  g_app_info_get_id@Base 2.16.0
@@ -78,6 +79,11 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_cancellable_release_fd@Base 2.22.0
  g_cancellable_reset@Base 2.16.0
  g_cancellable_set_error_if_cancelled@Base 2.16.0
+ g_charset_converter_get_num_fallbacks@Base 2.23.0
+ g_charset_converter_get_type@Base 2.23.0
+ g_charset_converter_get_use_fallback@Base 2.23.0
+ g_charset_converter_new@Base 2.23.0
+ g_charset_converter_set_use_fallback@Base 2.23.0
  g_content_type_can_be_executable@Base 2.16.0
  g_content_type_equals@Base 2.16.0
  g_content_type_from_mime_type@Base 2.18.0
@@ -89,6 +95,17 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_content_type_is_a@Base 2.16.0
  g_content_type_is_unknown@Base 2.16.0
  g_content_types_get_registered@Base 2.16.0
+ g_converter_convert@Base 2.23.0
+ g_converter_flags_get_type@Base 2.23.0
+ g_converter_get_type@Base 2.23.0
+ g_converter_input_stream_get_converter@Base 2.23.0
+ g_converter_input_stream_get_type@Base 2.23.0
+ g_converter_input_stream_new@Base 2.23.0
+ g_converter_output_stream_get_converter@Base 2.23.0
+ g_converter_output_stream_get_type@Base 2.23.0
+ g_converter_output_stream_new@Base 2.23.0
+ g_converter_reset@Base 2.23.0
+ g_converter_result_get_type@Base 2.23.0
  g_data_input_stream_get_byte_order@Base 2.16.0
  g_data_input_stream_get_newline_type@Base 2.16.0
  g_data_input_stream_get_type@Base 2.16.0
@@ -235,6 +252,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_get_type@Base 2.16.0
  g_file_get_uri@Base 2.16.0
  g_file_get_uri_scheme@Base 2.16.0
+ g_file_has_parent@Base 2.23.0
  g_file_has_prefix@Base 2.16.0
  g_file_has_uri_scheme@Base 2.16.0
  g_file_hash@Base 2.16.0
@@ -512,6 +530,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_mount_eject_finish@Base 2.16.0
  g_mount_eject_with_operation@Base 2.22.0
  g_mount_eject_with_operation_finish@Base 2.22.0
+ g_mount_get_default_location@Base 2.23.0
  g_mount_get_drive@Base 2.16.0
  g_mount_get_icon@Base 2.16.0
  g_mount_get_name@Base 2.16.0
@@ -570,6 +589,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_output_stream_get_type@Base 2.16.0
  g_output_stream_has_pending@Base 2.16.0
  g_output_stream_is_closed@Base 2.16.0
+ g_output_stream_is_closing@Base 2.23.0
  g_output_stream_set_pending@Base 2.16.0
  g_output_stream_splice@Base 2.16.0
  g_output_stream_splice_async@Base 2.16.0
@@ -696,6 +716,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_socket_listener_accept_socket_async@Base 2.22.0
  g_socket_listener_accept_socket_finish@Base 2.22.0
  g_socket_listener_add_address@Base 2.22.0
+ g_socket_listener_add_any_inet_port@Base 2.23.0
  g_socket_listener_add_inet_port@Base 2.22.0
  g_socket_listener_add_socket@Base 2.22.0
  g_socket_listener_close@Base 2.22.0
@@ -748,9 +769,19 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_connection_get_type@Base 2.22.0
  g_unix_connection_receive_fd@Base 2.22.0
  g_unix_connection_send_fd@Base 2.22.0
+ g_unix_fd_list_append@Base 2.23.0
+ g_unix_fd_list_get@Base 2.23.0
+ g_unix_fd_list_get_length@Base 2.23.0
+ g_unix_fd_list_get_type@Base 2.23.0
+ g_unix_fd_list_new@Base 2.23.0
+ g_unix_fd_list_new_from_array@Base 2.23.0
+ g_unix_fd_list_peek_fds@Base 2.23.0
+ g_unix_fd_list_steal_fds@Base 2.23.0
  g_unix_fd_message_append_fd@Base 2.22.0
+ g_unix_fd_message_get_fd_list@Base 2.23.0
  g_unix_fd_message_get_type@Base 2.22.0
  g_unix_fd_message_new@Base 2.22.0
+ g_unix_fd_message_new_with_fd_list@Base 2.23.0
  g_unix_fd_message_steal_fds@Base 2.22.0
  g_unix_input_stream_get_close_fd@Base 2.20.0
  g_unix_input_stream_get_fd@Base 2.20.0
@@ -835,6 +866,11 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_volume_mount@Base 2.16.0
  g_volume_mount_finish@Base 2.16.0
  g_volume_should_automount@Base 2.16.0
+ g_zlib_compressor_format_get_type@Base 2.23.0
+ g_zlib_compressor_get_type@Base 2.23.0
+ g_zlib_compressor_new@Base 2.23.0
+ g_zlib_decompressor_get_type@Base 2.23.0
+ g_zlib_decompressor_new@Base 2.23.0
 libglib-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
  g_access@Base 2.12.0
@@ -1671,6 +1707,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_slice_alloc0@Base 2.12.0
  g_slice_alloc@Base 2.12.0
  g_slice_copy@Base 2.14.0
+ g_slice_debug_tree_statistics@Base 2.23.0
  g_slice_free1@Base 2.12.0
  g_slice_free_chain_with_offset@Base 2.12.0
  g_slice_get_config@Base 2.12.0

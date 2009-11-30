@@ -2,7 +2,7 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Loic Minier <lool@dooz.org>
-Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Josselin Mouette <joss@debian.org>, Loïc Minier <lool@dooz.org>, Sebastian Dröge <slomo@debian.org>
+Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Josselin Mouette <joss@debian.org>, Sebastian Dröge <slomo@debian.org>
 Build-Depends: debhelper (>> 5.0.22),
                pkg-config (>= 0.14.0),
                gettext,
@@ -15,7 +15,8 @@ Build-Depends: debhelper (>> 5.0.22),
                type-handling,
                libselinux1-dev | not+linux-gnu,
                linux-libc-dev | not+linux-gnu,
-               libgamin-dev | libfam-dev | linux-gnu
+               libgamin-dev | libfam-dev | linux-gnu,
+               zlib1g-dev
 Standards-Version: 3.8.3
 Homepage: http://www.gtk.org/
 Vcs-Browser: http://svn.debian.org/wsvn/pkg-gnome/desktop/unstable/glib2.0/
