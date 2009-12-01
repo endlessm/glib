@@ -60,7 +60,8 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          @SHARED_PKG@ (= ${binary:Version}),
-         pkg-config (>= 0.14.0)
+         pkg-config (>= 0.14.0),
+         zlib1g-dev
 Recommends: python
 Suggests: @DOC_PKG@
 Replaces: libglib1.3-dev
