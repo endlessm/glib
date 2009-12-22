@@ -1,10 +1,17 @@
-glib2.0 (2.23.0-2) UNRELEASED; urgency=low
+glib2.0 (2.23.1-1) UNRELEASED; urgency=low
 
+  [ Sebastian Dröge ]
   * debian/control.in:
     + Let the -dev package depend on zlib1g-dev as it's required by
       the pkg-config file now.
 
- -- Sebastian Dröge <slomo@debian.org>  Tue, 01 Dec 2009 15:29:48 +0100
+  [ Emilio Pozuelo Monfort ]
+  * New upstream release.
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated for the new API.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 22 Dec 2009 09:04:27 +0100
 
 glib2.0 (2.23.0-1) experimental; urgency=low
 
