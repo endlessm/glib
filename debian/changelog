@@ -1,4 +1,4 @@
-glib2.0 (2.23.1-1) UNRELEASED; urgency=low
+glib2.0 (2.23.1-1) experimental; urgency=low
 
   [ Sebastian Dröge ]
   * debian/control.in:
@@ -11,7 +11,7 @@ glib2.0 (2.23.1-1) UNRELEASED; urgency=low
       debian/libglib2.0-0.symbols:
       - Updated for the new API.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 22 Dec 2009 09:04:27 +0100
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 22 Dec 2009 23:25:41 +0100
 
 glib2.0 (2.23.0-1) experimental; urgency=low
 
