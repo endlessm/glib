@@ -1,0 +1,51 @@
+From 84e791e580c3a16d628c8161a92a0652aa94b294 Mon Sep 17 00:00:00 2001
+From: Matthias Clasen <mclasen@redhat.com>
+Date: Mon, 21 Dec 2009 14:11:23 +0000
+Subject: Revert the g_set_prgname change
+
+This change breaks our API and causes warnings from essentially all applications.
+See bug 563627.
+---
+diff --git a/glib/gutils.c b/glib/gutils.c
+index b5e9c19..744663e 100644
+--- a/glib/gutils.c
++++ b/glib/gutils.c
+@@ -1968,17 +1968,10 @@ g_get_prgname (void)
+ void
+ g_set_prgname (const gchar *prgname)
+ {
+-  gboolean already_set = FALSE;
+-
+   G_LOCK (g_prgname);
+-  if (g_prgname)
+-    already_set = TRUE;
+-  else
+-    g_prgname = g_strdup (prgname);
++  g_free (g_prgname);
++  g_prgname = g_strdup (prgname);
+   G_UNLOCK (g_prgname);
+-
+-  if (already_set)
+-    g_warning ("g_set_prgname() called multiple times");
+ }
+ 
+ G_LOCK_DEFINE_STATIC (g_application_name);
+diff --git a/glib/tests/option-context.c b/glib/tests/option-context.c
+index ac1df67..913ad5c 100644
+--- a/glib/tests/option-context.c
++++ b/glib/tests/option-context.c
+@@ -1770,12 +1770,7 @@ main (int   argc,
+   g_test_add_func ("/context/add", add_test1);
+ 
+   /* Test parsing empty args */
+-#if 0
+-  /* This test relies on being able to call g_set_prgname() more
+-   * than once.
+-   */
+   g_test_add_func ("/context/empty1", empty_test1);
+-#endif
+   g_test_add_func ("/context/empty2", empty_test2);
+   g_test_add_func ("/context/empty3", empty_test3);
+ 
+--
+cgit v0.8.3.1
