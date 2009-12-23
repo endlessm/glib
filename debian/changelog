@@ -1,4 +1,4 @@
-glib2.0 (2.22.3-2) UNRELEASED; urgency=low
+glib2.0 (2.22.3-2) unstable; urgency=low
 
   * debian/patches/05_timeval_initialize_variable.patch:
     - Patch from upstream git, initialize a variable in
@@ -8,7 +8,7 @@ glib2.0 (2.22.3-2) UNRELEASED; urgency=low
     - Patch from upstream git, revert a change in g_set_prgname() that
       made it spit warnings if called more than once. Closes: #559407.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 23 Dec 2009 20:47:49 +0100
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 23 Dec 2009 22:46:50 +0100
 
 glib2.0 (2.22.3-1) unstable; urgency=low
 
