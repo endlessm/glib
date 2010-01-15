@@ -2,6 +2,4 @@
 02_gettext-desktopfiles-ubuntu.patch
 03_blacklist-directories.patch
 04_homedir_env.patch
-05_timeval_initialize_variable.patch
-06_revert_g_set_prgname_change.patch
 60_wait-longer-for-threads-to-die.patch

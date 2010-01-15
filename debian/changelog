@@ -1,3 +1,12 @@
+glib2.0 (2.22.4-1) unstable; urgency=low
+
+  * New upstream bugfix release:
+    + debian/patches/05_timeval_initialize_variable.patch,
+      debian/patches/06_revert_g_set_prgname_change.patch:
+      - Dropped, merged upstream.
+
+ -- Sebastian Dröge <slomo@debian.org>  Fri, 15 Jan 2010 10:07:14 +0100
+
 glib2.0 (2.22.3-2) unstable; urgency=low
 
   * debian/patches/05_timeval_initialize_variable.patch:
