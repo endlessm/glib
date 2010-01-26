@@ -495,6 +495,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_io_module_get_type@Base 2.16.0
  g_io_module_new@Base 2.16.0
  g_io_modules_load_all_in_directory@Base 2.16.0
+ g_io_modules_scan_all_in_directory@Base 2.23.2
  g_io_scheduler_cancel_all_jobs@Base 2.16.0
  g_io_scheduler_job_send_to_mainloop@Base 2.16.0
  g_io_scheduler_job_send_to_mainloop_async@Base 2.16.0
@@ -2051,6 +2052,35 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_utf8_to_utf16@Base 2.12.0
  g_utf8_validate@Base 2.12.0
  g_utime@Base 2.18.0
+ g_variant_type_checked_@Base 2.23.2
+ g_variant_type_copy@Base 2.23.2
+ g_variant_type_dup_string@Base 2.23.2
+ g_variant_type_element@Base 2.23.2
+ g_variant_type_equal@Base 2.23.2
+ g_variant_type_first@Base 2.23.2
+ g_variant_type_free@Base 2.23.2
+ g_variant_type_get_string_length@Base 2.23.2
+ g_variant_type_hash@Base 2.23.2
+ g_variant_type_is_array@Base 2.23.2
+ g_variant_type_is_basic@Base 2.23.2
+ g_variant_type_is_container@Base 2.23.2
+ g_variant_type_is_definite@Base 2.23.2
+ g_variant_type_is_dict_entry@Base 2.23.2
+ g_variant_type_is_maybe@Base 2.23.2
+ g_variant_type_is_subtype_of@Base 2.23.2
+ g_variant_type_is_tuple@Base 2.23.2
+ g_variant_type_key@Base 2.23.2
+ g_variant_type_n_items@Base 2.23.2
+ g_variant_type_new@Base 2.23.2
+ g_variant_type_new_array@Base 2.23.2
+ g_variant_type_new_dict_entry@Base 2.23.2
+ g_variant_type_new_maybe@Base 2.23.2
+ g_variant_type_new_tuple@Base 2.23.2
+ g_variant_type_next@Base 2.23.2
+ g_variant_type_peek_string@Base 2.23.2
+ g_variant_type_string_is_valid@Base 2.23.2
+ g_variant_type_string_scan@Base 2.23.2
+ g_variant_type_value@Base 2.23.2
  g_vasprintf@Base 2.12.0
  g_vfprintf@Base 2.12.0
  g_vprintf@Base 2.12.0

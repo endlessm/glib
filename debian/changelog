@@ -1,6 +1,9 @@
 glib2.0 (2.23.2-1) experimental; urgency=low
 
-  * New upstream development release.
+  * New upstream development release:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated for the new API.
 
  -- Sebastian Dröge <slomo@debian.org>  Tue, 26 Jan 2010 08:14:26 +0100
 
