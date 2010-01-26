@@ -1,3 +1,15 @@
+glib2.0 (2.23.2-2) experimental; urgency=low
+
+  * debian/control.in,
+    debian/libglib2.0-0.triggers,
+    debian/libglib2.0-0.install,
+    debian/libglib2.0-dev.install:
+    + Ship gio-querymodules in the shared library package
+      and triggers calls to every time /usr/lib/gio/modules
+      is touched by a package.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 26 Jan 2010 09:40:47 +0100
+
 glib2.0 (2.23.2-1) experimental; urgency=low
 
   * New upstream development release:
