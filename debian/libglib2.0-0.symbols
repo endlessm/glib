@@ -952,9 +952,12 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_base64_encode_close@Base 2.12.0
  g_base64_encode_step@Base 2.12.0
  g_basename@Base 2.12.0
+ g_bit_lock@Base 2.23.3
  g_bit_nth_lsf@Base 2.12.0
  g_bit_nth_msf@Base 2.12.0
  g_bit_storage@Base 2.12.0
+ g_bit_trylock@Base 2.23.3
+ g_bit_unlock@Base 2.23.3
  g_blow_chunks@Base 2.12.0
  g_bookmark_file_add_application@Base 2.12.0
  g_bookmark_file_add_group@Base 2.12.0
