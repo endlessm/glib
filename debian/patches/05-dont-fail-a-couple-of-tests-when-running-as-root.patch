@@ -1,0 +1,50 @@
+From 7e9b5759df9fd29c03d9eb0ee6ddf41321af13e3 Mon Sep 17 00:00:00 2001
+From: Emilio Pozuelo Monfort <pochu27@gmail.com>
+Date: Fri, 19 Feb 2010 19:00:02 +0100
+Subject: [PATCH] Don't fail a couple of tests when running as root
+
+root can access and write to a directory when it doesn't have
+exec and write permissions respectively. So expect the tests that
+check that to succeed rather than to fail when running as root.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=552912
+---
+ gio/tests/live-g-file.c |   15 +++++++++++++--
+ 1 files changed, 13 insertions(+), 2 deletions(-)
+
+diff --git a/gio/tests/live-g-file.c b/gio/tests/live-g-file.c
+index e0f9bff..cb548ac 100644
+--- a/gio/tests/live-g-file.c
++++ b/gio/tests/live-g-file.c
+@@ -23,6 +23,8 @@
+ #include <glib/glib.h>
+ #include <gio/gio.h>
+ #include <stdlib.h>
++#include <unistd.h>
++#include <sys/types.h>
+ #include <string.h>
+ #include <sys/stat.h>
+ 
+@@ -715,8 +717,17 @@ do_copy_move (GFile * root, struct StructureItem item, const char *target_dir,
+   else if (((item.extra_flags & TEST_NO_ACCESS) == TEST_NO_ACCESS) ||
+ 	   (extra_flags == TEST_NO_ACCESS))
+     {
+-      g_assert_cmpint (res, ==, FALSE);
+-      g_assert_error (error, G_IO_ERROR, G_IO_ERROR_PERMISSION_DENIED);
++      /* This works for root, see bug #552912 */
++      if (getuid () == 0)
++	{
++	  g_assert_cmpint (res, ==, TRUE);
++	  g_assert_no_error (error);
++	}
++      else
++	{
++	  g_assert_cmpint (res, ==, FALSE);
++	  g_assert_error (error, G_IO_ERROR, G_IO_ERROR_PERMISSION_DENIED);
++	}
+     }
+   /*  no error should be found, all exceptions defined above  */
+   else
+-- 
+1.7.0
+
