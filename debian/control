@@ -18,7 +18,7 @@ Build-Depends: debhelper (>> 5.0.22),
                linux-libc-dev | not+linux-gnu,
                libgamin-dev | libfam-dev | linux-gnu,
                zlib1g-dev
-Standards-Version: 3.8.3
+Standards-Version: 3.8.4
 Homepage: http://www.gtk.org/
 Vcs-Browser: http://svn.debian.org/wsvn/pkg-gnome/desktop/unstable/glib2.0/
 Vcs-Svn: svn://svn.debian.org/svn/pkg-gnome/desktop/unstable/glib2.0/
@@ -127,7 +127,8 @@ Description: Documentation files for the GLib library
 
 Package: libgio-fam
 Architecture: hurd-i386 kfreebsd-i386 kfreebsd-amd64
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
 Recommends: gamin
 Description: GLib Input, Output and Streaming Library (fam module)
  GIO is the input, output and streaming API of GLib. This package

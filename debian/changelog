@@ -5,6 +5,8 @@ glib2.0 (2.23.3-2) UNRELEASED; urgency=low
       to succeed when running as root.
   * debian/control.in:
     - Add desktop-file-utils to build depends to fix another test.
+    - Standards-Version is 3.8.4, no changes needed.
+    - Let libgio-fam depend on ${misc:Depends}.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 20 Feb 2010 10:26:32 +0100
 
