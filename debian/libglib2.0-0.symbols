@@ -219,6 +219,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_create_readwrite_async@Base 2.22.0
  g_file_create_readwrite_finish@Base 2.22.0
  g_file_delete@Base 2.16.0
+ g_file_descriptor_based_get_fd@Base 2.23.4
+ g_file_descriptor_based_get_type@Base 2.23.4
  g_file_dup@Base 2.16.0
  g_file_eject_mountable@Base 2.16.0
  g_file_eject_mountable_finish@Base 2.16.0
@@ -2055,6 +2057,60 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_utf8_to_utf16@Base 2.12.0
  g_utf8_validate@Base 2.12.0
  g_utime@Base 2.18.0
+ g_variant_classify@Base 2.23.4
+ g_variant_dup_string@Base 2.23.4
+ g_variant_dup_strv@Base 2.23.4
+ g_variant_equal@Base 2.23.4
+ g_variant_get_boolean@Base 2.23.4
+ g_variant_get_byte@Base 2.23.4
+ g_variant_get_child_value@Base 2.23.4
+ g_variant_get_data@Base 2.23.4
+ g_variant_get_double@Base 2.23.4
+ g_variant_get_fixed_array@Base 2.23.4
+ g_variant_get_handle@Base 2.23.4
+ g_variant_get_int16@Base 2.23.4
+ g_variant_get_int32@Base 2.23.4
+ g_variant_get_int64@Base 2.23.4
+ g_variant_get_maybe@Base 2.23.4
+ g_variant_get_size@Base 2.23.4
+ g_variant_get_string@Base 2.23.4
+ g_variant_get_strv@Base 2.23.4
+ g_variant_get_type@Base 2.23.4
+ g_variant_get_type_string@Base 2.23.4
+ g_variant_get_uint16@Base 2.23.4
+ g_variant_get_uint32@Base 2.23.4
+ g_variant_get_uint64@Base 2.23.4
+ g_variant_get_variant@Base 2.23.4
+ g_variant_hash@Base 2.23.4
+ g_variant_is_container@Base 2.23.4
+ g_variant_is_object_path@Base 2.23.4
+ g_variant_is_of_type@Base 2.23.4
+ g_variant_is_signature@Base 2.23.4
+ g_variant_n_children@Base 2.23.4
+ g_variant_new_array@Base 2.23.4
+ g_variant_new_boolean@Base 2.23.4
+ g_variant_new_byte@Base 2.23.4
+ g_variant_new_dict_entry@Base 2.23.4
+ g_variant_new_double@Base 2.23.4
+ g_variant_new_handle@Base 2.23.4
+ g_variant_new_int16@Base 2.23.4
+ g_variant_new_int32@Base 2.23.4
+ g_variant_new_int64@Base 2.23.4
+ g_variant_new_maybe@Base 2.23.4
+ g_variant_new_object_path@Base 2.23.4
+ g_variant_new_signature@Base 2.23.4
+ g_variant_new_string@Base 2.23.4
+ g_variant_new_strv@Base 2.23.4
+ g_variant_new_tuple@Base 2.23.4
+ g_variant_new_uint16@Base 2.23.4
+ g_variant_new_uint32@Base 2.23.4
+ g_variant_new_uint64@Base 2.23.4
+ g_variant_new_variant@Base 2.23.4
+ g_variant_print@Base 2.23.4
+ g_variant_print_string@Base 2.23.4
+ g_variant_ref@Base 2.23.4
+ g_variant_ref_sink@Base 2.23.4
+ g_variant_store@Base 2.23.4
  g_variant_type_checked_@Base 2.23.2
  g_variant_type_copy@Base 2.23.2
  g_variant_type_dup_string@Base 2.23.2
@@ -2084,6 +2140,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_variant_type_string_is_valid@Base 2.23.2
  g_variant_type_string_scan@Base 2.23.2
  g_variant_type_value@Base 2.23.2
+ g_variant_unref@Base 2.23.4
  g_vasprintf@Base 2.12.0
  g_vfprintf@Base 2.12.0
  g_vprintf@Base 2.12.0
@@ -2453,6 +2510,8 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_value_type_compatible@Base 2.12.0
  g_value_type_transformable@Base 2.12.0
  g_value_unset@Base 2.12.0
+ g_variant_get_gtype@Base 2.23.4
+ g_variant_type_get_gtype@Base 2.23.4
 libgthread-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
  g_thread_init@Base 2.12.0

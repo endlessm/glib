@@ -1,5 +1,6 @@
-glib2.0 (2.23.3-2) UNRELEASED; urgency=low
+glib2.0 (2.23.4-1) experimental; urgency=low
 
+  [ Emilio Pozuelo Monfort ]
   * debian/patches/05-dont-fail-a-couple-of-tests-when-running-as-root.patch:
     - Added, expect a couple of tests that play with file permissions
       to succeed when running as root.
@@ -8,7 +9,13 @@ glib2.0 (2.23.3-2) UNRELEASED; urgency=low
     - Standards-Version is 3.8.4, no changes needed.
     - Let libgio-fam depend on ${misc:Depends}.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 20 Feb 2010 10:26:32 +0100
+  [ Sebastian Dröge ]
+  * New upstream development release:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated for the new API.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 22 Feb 2010 09:04:48 +0100
 
 glib2.0 (2.23.3-1) experimental; urgency=low
 
