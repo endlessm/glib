@@ -6,6 +6,8 @@ glib2.0 (2.23.4-2) UNRELEASED; urgency=low
     - Added, don't look for an unexisting file in $HOME since it will
       fail with an unexpected result if it's not writable (which happens
       on some buildds). Look at $TMP instead.
+  * debian/rules:
+    - Make test suite failures fatal on amd64, i386 and s390.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Mon, 22 Feb 2010 17:50:16 +0100
 
