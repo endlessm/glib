@@ -1,0 +1,30 @@
+From ff454df9cd375d604e15373520fb2de04c2f8306 Mon Sep 17 00:00:00 2001
+From: Emilio Pozuelo Monfort <pochu27@gmail.com>
+Date: Tue, 23 Feb 2010 18:19:16 +0100
+Subject: [PATCH] Test for unexisting files in $TMP and not in $HOME
+
+Some buildd environments have an unwritable $HOME, which makes the
+test that looks for an unexisting file there fail. Use $TMP instead,
+which should be more reliable.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=610860
+---
+ gio/tests/readwrite.c |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/gio/tests/readwrite.c b/gio/tests/readwrite.c
+index 0d56185..2b1bd5e 100644
+--- a/gio/tests/readwrite.c
++++ b/gio/tests/readwrite.c
+@@ -140,7 +140,7 @@ test_g_file_open_readwrite (void)
+ 			     original_data, -1, NULL);
+   g_assert (res);
+ 
+-  path = g_build_filename (g_get_home_dir (), "g-a-nonexisting-file", NULL);
++  path = g_build_filename (g_get_tmp_dir (), "g-a-nonexisting-file", NULL);
+   file = g_file_new_for_path (path);
+   g_free (path);
+   error = NULL;
+-- 
+1.7.0
+

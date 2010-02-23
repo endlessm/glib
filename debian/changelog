@@ -1,3 +1,14 @@
+glib2.0 (2.23.4-2) UNRELEASED; urgency=low
+
+  * debian/patches/05-dont-fail-a-couple-of-tests-when-running-as-root.patch:
+    - Updated.
+  * 06-test-for-unexisting-files-in-TMP-and-not-in-HOME.patch:
+    - Added, don't look for an unexisting file in $HOME since it will
+      fail with an unexpected result if it's not writable (which happens
+      on some buildds). Look at $TMP instead.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Mon, 22 Feb 2010 17:50:16 +0100
+
 glib2.0 (2.23.4-1) experimental; urgency=low
 
   [ Emilio Pozuelo Monfort ]
