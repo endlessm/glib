@@ -1,0 +1,37 @@
+From 5b19345246aa179788b09b7a82702e79f9d815d8 Mon Sep 17 00:00:00 2001
+From: Ryan Lortie <desrt@desrt.ca>
+Date: Fri, 12 Mar 2010 20:38:47 +0000
+Subject: Bug 610858 - gvariant test fails sometimes
+
+NaN floating point values get mangled when passing across the function
+call ABI on x86 so avoid using them to get rid of spurious failures.
+
+Reported by Christian Persch and reliably reproduced by Emilio Pozuelo
+Monfort.
+---
+diff --git a/glib/tests/gvariant.c b/glib/tests/gvariant.c
+index ec28e76..af648a7 100644
+--- a/glib/tests/gvariant.c
++++ b/glib/tests/gvariant.c
+@@ -1933,13 +1933,18 @@ tree_instance_new (const GVariantType *type,
+       instance->data_size = 4;
+       break;
+ 
+-    case 'x': case 't': case 'd':
++    case 'x': case 't':
+       instance->data.integer = g_test_rand_int ();
+       instance->data.integer <<= 32;
+       instance->data.integer |= (guint32) g_test_rand_int ();
+       instance->data_size = 8;
+       break;
+ 
++    case 'd':
++      instance->data.floating = g_test_rand_double ();
++      instance->data_size = 8;
++      break;
++
+     case 's': case 'o': case 'g':
+       instance->data_size = g_test_rand_int_range (10, 20);
+       make_random_string (instance->data.string, instance->data_size, type);
+--
+cgit v0.8.3.1
