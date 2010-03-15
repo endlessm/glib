@@ -1,10 +1,10 @@
-glib2.0 (2.23.5-2) UNRELEASED; urgency=low
+glib2.0 (2.23.5-2) experimental; urgency=low
 
   * debian/patches/05_gvariant_test_failure.patch:
     - Backport patch from upstream git to fix a gvariant test that fails
       randomly on x86.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 13 Mar 2010 01:18:35 +0100
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Mon, 15 Mar 2010 11:37:08 +0100
 
 glib2.0 (2.23.5-1) experimental; urgency=low
 
