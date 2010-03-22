@@ -139,6 +139,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_data_output_stream_set_byte_order@Base 2.16.0
  g_data_stream_byte_order_get_type@Base 2.16.0
  g_data_stream_newline_type_get_type@Base 2.16.0
+ g_desktop_app_info_get_filename@Base 2.23.6
  g_desktop_app_info_get_is_hidden@Base 2.16.0
  g_desktop_app_info_get_type@Base 2.16.0
  g_desktop_app_info_lookup_get_default_for_uri_scheme@Base 2.16.0
@@ -2071,6 +2072,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_variant_builder_open@Base 2.23.5
  g_variant_builder_ref@Base 2.23.5
  g_variant_builder_unref@Base 2.23.5
+ g_variant_byteswap@Base 2.23.6
  g_variant_classify@Base 2.23.4
  g_variant_dup_string@Base 2.23.4
  g_variant_dup_strv@Base 2.23.4
@@ -2090,6 +2092,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_variant_get_int32@Base 2.23.4
  g_variant_get_int64@Base 2.23.4
  g_variant_get_maybe@Base 2.23.4
+ g_variant_get_normal_form@Base 2.23.6
  g_variant_get_size@Base 2.23.4
  g_variant_get_string@Base 2.23.4
  g_variant_get_strv@Base 2.23.4
@@ -2102,6 +2105,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_variant_get_variant@Base 2.23.4
  g_variant_hash@Base 2.23.4
  g_variant_is_container@Base 2.23.4
+ g_variant_is_normal_form@Base 2.23.6
  g_variant_is_object_path@Base 2.23.4
  g_variant_is_of_type@Base 2.23.4
  g_variant_is_signature@Base 2.23.4
@@ -2120,12 +2124,15 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_variant_new_byte@Base 2.23.4
  g_variant_new_dict_entry@Base 2.23.4
  g_variant_new_double@Base 2.23.4
+ g_variant_new_from_data@Base 2.23.6
  g_variant_new_handle@Base 2.23.4
  g_variant_new_int16@Base 2.23.4
  g_variant_new_int32@Base 2.23.4
  g_variant_new_int64@Base 2.23.4
  g_variant_new_maybe@Base 2.23.4
  g_variant_new_object_path@Base 2.23.4
+ g_variant_new_parsed@Base 2.23.6
+ g_variant_new_parsed_va@Base 2.23.6
  g_variant_new_signature@Base 2.23.4
  g_variant_new_string@Base 2.23.4
  g_variant_new_strv@Base 2.23.4
@@ -2135,6 +2142,8 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_variant_new_uint64@Base 2.23.4
  g_variant_new_va@Base 2.23.5
  g_variant_new_variant@Base 2.23.4
+ g_variant_parse@Base 2.23.6
+ g_variant_parser_get_error_quark@Base 2.23.6
  g_variant_print@Base 2.23.4
  g_variant_print_string@Base 2.23.4
  g_variant_ref@Base 2.23.4
@@ -2415,6 +2424,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_strdup_value_contents@Base 2.12.0
  g_strv_get_type@Base 2.12.0
  g_type_add_class_cache_func@Base 2.12.0
+ g_type_add_class_private@Base 2.23.6
  g_type_add_interface_check@Base 2.12.0
  g_type_add_interface_dynamic@Base 2.12.0
  g_type_add_interface_static@Base 2.12.0
@@ -2428,6 +2438,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_type_check_value_holds@Base 2.12.0
  g_type_children@Base 2.12.0
  g_type_class_add_private@Base 2.12.0
+ g_type_class_get_private@Base 2.23.6
  g_type_class_peek@Base 2.12.0
  g_type_class_peek_parent@Base 2.12.0
  g_type_class_peek_static@Base 2.12.0
