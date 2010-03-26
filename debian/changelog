@@ -1,25 +1,111 @@
-glib2.0 (2.22.4-1) unstable; urgency=low
+glib2.0 (2.23.6-1) experimental; urgency=low
 
-  * New upstream bugfix release:
-    + debian/patches/05_timeval_initialize_variable.patch,
-      debian/patches/06_revert_g_set_prgname_change.patch:
+  [ Emilio Pozuelo Monfort ]
+  * debian/patches/05_gvariant_test_failure.patch:
+    - Backport patch from upstream git to fix a gvariant test that fails
+      randomly on x86.
+
+  [ Sebastian Dröge ]
+  * New upstream development release:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated for the new API.
+    + debian/patches/05_gvariant_test_failure.patch:
+      - Dropped, merged upstream.
+  * debian/rules:
+    + Make unit test failures non-fatal again because of race conditions
+      in some tests.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 22 Mar 2010 06:10:18 +0100
+
+glib2.0 (2.23.5-1) experimental; urgency=low
+
+  [ Emilio Pozuelo Monfort ]
+  * debian/patches/05-dont-fail-a-couple-of-tests-when-running-as-root.patch:
+    - Updated.
+  * 06-test-for-unexisting-files-in-TMP-and-not-in-HOME.patch:
+    - Added, don't look for an unexisting file in $HOME since it will
+      fail with an unexpected result if it's not writable (which happens
+      on some buildds). Look at $TMP instead.
+  * debian/rules:
+    - Make test suite failures fatal on amd64, i386 and s390.
+
+  [ Sebastian Dröge ]
+  * New upstream development release:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated for the new API.
+    + debian/patches/05-dont-fail-a-couple-of-tests-when-running-as-root.patch,
+      debian/patches/06-test-for-unexisting-files-in-TMP-and-not-in-HOME.patch:
       - Dropped, merged upstream.
 
- -- Sebastian Dröge <slomo@debian.org>  Fri, 15 Jan 2010 10:07:14 +0100
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 08 Mar 2010 18:49:00 +0000
 
-glib2.0 (2.22.3-2) unstable; urgency=low
+glib2.0 (2.23.4-1) experimental; urgency=low
 
-  * debian/patches/05_timeval_initialize_variable.patch:
-    - Patch from upstream git, initialize a variable in
-      g_time_val_from_iso8601() to stop returning wrong results.
-      Thanks to Ryan Niebur. Closes: #558099.
-  * debian/patches/06_revert_g_set_prgname_change.patch:
-    - Patch from upstream git, revert a change in g_set_prgname() that
-      made it spit warnings if called more than once. Closes: #559407.
+  [ Emilio Pozuelo Monfort ]
+  * debian/patches/05-dont-fail-a-couple-of-tests-when-running-as-root.patch:
+    - Added, expect a couple of tests that play with file permissions
+      to succeed when running as root.
+  * debian/control.in:
+    - Add desktop-file-utils to build depends to fix another test.
+    - Standards-Version is 3.8.4, no changes needed.
+    - Let libgio-fam depend on ${misc:Depends}.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 23 Dec 2009 22:46:50 +0100
+  [ Sebastian Dröge ]
+  * New upstream development release:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated for the new API.
 
-glib2.0 (2.22.3-1) unstable; urgency=low
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 22 Feb 2010 09:04:48 +0100
+
+glib2.0 (2.23.3-1) experimental; urgency=low
+
+  * New upstream development release:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated for the new API.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 09 Feb 2010 16:48:07 +0100
+
+glib2.0 (2.23.2-2) experimental; urgency=low
+
+  * debian/control.in,
+    debian/libglib2.0-0.triggers,
+    debian/libglib2.0-0.install,
+    debian/libglib2.0-dev.install:
+    + Ship gio-querymodules in the shared library package
+      and triggers calls to every time /usr/lib/gio/modules
+      is touched by a package.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 26 Jan 2010 09:40:47 +0100
+
+glib2.0 (2.23.2-1) experimental; urgency=low
+
+  * New upstream development release:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated for the new API.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 26 Jan 2010 08:14:26 +0100
+
+glib2.0 (2.23.1-1) experimental; urgency=low
+
+  [ Sebastian Dröge ]
+  * debian/control.in:
+    + Let the -dev package depend on zlib1g-dev as it's required by
+      the pkg-config file now.
+
+  [ Emilio Pozuelo Monfort ]
+  * New upstream release.
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated for the new API.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 22 Dec 2009 23:25:41 +0100
+
+glib2.0 (2.23.0-1) experimental; urgency=low
 
   [ Loïc Minier ]
   * -refdbg package is section/prio debug/extra.
@@ -28,11 +114,18 @@ glib2.0 (2.22.3-1) unstable; urgency=low
     mid:<1257999019.21780.15.camel@marzipan>.
 
   [ Sebastian Dröge ]
-  * New upstream bugfix release:
+  * New upstream development release:
     + debian/patches/90_mimetype-sorting.patch:
       - Dropped, merged upstream.
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Update for new API.
+    + debian/control.in:
+      - Build depend on zlib.
+    + debian/rules:
+      - Include check-dist.mk to prevent accidental uploads to unstable.
 
- -- Sebastian Dröge <slomo@debian.org>  Tue, 01 Dec 2009 16:36:30 +0100
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 30 Nov 2009 10:04:07 +0100
 
 glib2.0 (2.22.2-2) unstable; urgency=low
 

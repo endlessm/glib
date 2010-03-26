@@ -2,7 +2,7 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Loic Minier <lool@dooz.org>
-Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Emilio Pozuelo Monfort <pochu@debian.org>, Josselin Mouette <joss@debian.org>, Sebastian Dröge <slomo@debian.org>
+Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Emilio Pozuelo Monfort <pochu@debian.org>, Sebastian Dröge <slomo@debian.org>
 Build-Depends: debhelper (>> 5.0.22),
                pkg-config (>= 0.14.0),
                gettext,
@@ -11,12 +11,14 @@ Build-Depends: debhelper (>> 5.0.22),
                quilt,
                dpkg-dev (>= 1.14.13),
                libpcre3-dev (>= 7.4-1~),
+               desktop-file-utils,
                gtk-doc-tools,
                type-handling,
                libselinux1-dev | not+linux-gnu,
                linux-libc-dev | not+linux-gnu,
-               libgamin-dev | libfam-dev | linux-gnu
-Standards-Version: 3.8.3
+               libgamin-dev | libfam-dev | linux-gnu,
+               zlib1g-dev
+Standards-Version: 3.8.4
 Homepage: http://www.gtk.org/
 Vcs-Browser: http://svn.debian.org/wsvn/pkg-gnome/desktop/unstable/glib2.0/
 Vcs-Svn: svn://svn.debian.org/svn/pkg-gnome/desktop/unstable/glib2.0/
@@ -29,6 +31,7 @@ Depends: ${misc:Depends},
 Recommends: libglib2.0-data,
             shared-mime-info
 Conflicts: libpango1.0-0 (<< 1.11)
+Replaces: libglib2.0-dev (<< 2.23.2-2)
 Description: The GLib library of C routines
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -59,7 +62,8 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          libglib2.0-0 (= ${binary:Version}),
-         pkg-config (>= 0.14.0)
+         pkg-config (>= 0.14.0),
+         zlib1g-dev
 Recommends: python
 Suggests: libglib2.0-doc
 Replaces: libglib1.3-dev
@@ -123,7 +127,8 @@ Description: Documentation files for the GLib library
 
 Package: libgio-fam
 Architecture: hurd-i386 kfreebsd-i386 kfreebsd-amd64
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends},
+         ${misc:Depends}
 Recommends: gamin
 Description: GLib Input, Output and Streaming Library (fam module)
  GIO is the input, output and streaming API of GLib. This package

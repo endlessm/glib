@@ -2,6 +2,7 @@
 
 DISABLE_UPDATE_UPLOADERS := 1
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
+include /usr/share/gnome-pkg-tools/1/rules/check-dist.mk
 -include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
 
 GNOME_MODULE := glib
@@ -42,7 +43,7 @@ LDFLAGS += -Wl,-O1
 
 APIVER := 2.0
 SONAME := 0
-SHVER := 2.22.0
+SHVER := 2.23.6
 
 # package names
 SHARED_PKG := libglib$(APIVER)-$(SONAME)
@@ -61,11 +62,9 @@ FLAVORS := deb udeb refdbg
 # list of flavors to run the test suite on
 CHECK_FLAVORS := $(filter deb, $(FLAVORS))
 
-# list of arches on which testsuite failures are fatal
-# XXX testsuite failures currently disabled as testsuite fails everywhere when
-# $HOME isn't writable
 CHECK_SUPPORTED_ARCHES :=
-# CHECK_SUPPORTED_ARCHES := alpha amd64 i386 ia64 lpia m68k s390
+#CHECK_SUPPORTED_ARCHES := amd64 i386 s390
+# CHECK_SUPPORTED_ARCHES := alpha ia64 lpia m68k
 # testsuite is known to fail on hppa, hurd, kfreebsd-amd64, kfreebsd-i386; see
 # Debian #428674
 # testsuite is known to fail on arm, mips, mipsel, powerpc, sparc; see GNOME #481573
