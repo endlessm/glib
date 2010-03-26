@@ -1,3 +1,14 @@
+glib2.0 (2.24.0-1) unstable; urgency=low
+
+  * New upstream stable release:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Updated 2.23 symbols to 2.24 to force dependencies on a stable release.
+    + debian/rules:
+      - Remove check-dist.mk include to allow uploads to unstable again.
+
+ -- Sebastian Dröge <slomo@debian.org>  Fri, 26 Mar 2010 16:59:18 +0100
+
 glib2.0 (2.23.6-1) experimental; urgency=low
 
   [ Emilio Pozuelo Monfort ]
