@@ -14,7 +14,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_app_info_get_default_for_type@Base 2.16.0
  g_app_info_get_default_for_uri_scheme@Base 2.16.0
  g_app_info_get_description@Base 2.16.0
- g_app_info_get_display_name@Base 2.23.1
+ g_app_info_get_display_name@Base 2.24.0
  g_app_info_get_executable@Base 2.16.0
  g_app_info_get_icon@Base 2.16.0
  g_app_info_get_id@Base 2.16.0
@@ -79,11 +79,11 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_cancellable_release_fd@Base 2.22.0
  g_cancellable_reset@Base 2.16.0
  g_cancellable_set_error_if_cancelled@Base 2.16.0
- g_charset_converter_get_num_fallbacks@Base 2.23.1
- g_charset_converter_get_type@Base 2.23.1
- g_charset_converter_get_use_fallback@Base 2.23.1
- g_charset_converter_new@Base 2.23.1
- g_charset_converter_set_use_fallback@Base 2.23.1
+ g_charset_converter_get_num_fallbacks@Base 2.24.0
+ g_charset_converter_get_type@Base 2.24.0
+ g_charset_converter_get_use_fallback@Base 2.24.0
+ g_charset_converter_new@Base 2.24.0
+ g_charset_converter_set_use_fallback@Base 2.24.0
  g_content_type_can_be_executable@Base 2.16.0
  g_content_type_equals@Base 2.16.0
  g_content_type_from_mime_type@Base 2.18.0
@@ -95,17 +95,17 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_content_type_is_a@Base 2.16.0
  g_content_type_is_unknown@Base 2.16.0
  g_content_types_get_registered@Base 2.16.0
- g_converter_convert@Base 2.23.1
- g_converter_flags_get_type@Base 2.23.1
- g_converter_get_type@Base 2.23.1
- g_converter_input_stream_get_converter@Base 2.23.1
- g_converter_input_stream_get_type@Base 2.23.1
- g_converter_input_stream_new@Base 2.23.1
- g_converter_output_stream_get_converter@Base 2.23.1
- g_converter_output_stream_get_type@Base 2.23.1
- g_converter_output_stream_new@Base 2.23.1
- g_converter_reset@Base 2.23.1
- g_converter_result_get_type@Base 2.23.1
+ g_converter_convert@Base 2.24.0
+ g_converter_flags_get_type@Base 2.24.0
+ g_converter_get_type@Base 2.24.0
+ g_converter_input_stream_get_converter@Base 2.24.0
+ g_converter_input_stream_get_type@Base 2.24.0
+ g_converter_input_stream_new@Base 2.24.0
+ g_converter_output_stream_get_converter@Base 2.24.0
+ g_converter_output_stream_get_type@Base 2.24.0
+ g_converter_output_stream_new@Base 2.24.0
+ g_converter_reset@Base 2.24.0
+ g_converter_result_get_type@Base 2.24.0
  g_data_input_stream_get_byte_order@Base 2.16.0
  g_data_input_stream_get_newline_type@Base 2.16.0
  g_data_input_stream_get_type@Base 2.16.0
@@ -139,7 +139,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_data_output_stream_set_byte_order@Base 2.16.0
  g_data_stream_byte_order_get_type@Base 2.16.0
  g_data_stream_newline_type_get_type@Base 2.16.0
- g_desktop_app_info_get_filename@Base 2.23.6
+ g_desktop_app_info_get_filename@Base 2.24.0
  g_desktop_app_info_get_is_hidden@Base 2.16.0
  g_desktop_app_info_get_type@Base 2.16.0
  g_desktop_app_info_lookup_get_default_for_uri_scheme@Base 2.16.0
@@ -220,8 +220,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_create_readwrite_async@Base 2.22.0
  g_file_create_readwrite_finish@Base 2.22.0
  g_file_delete@Base 2.16.0
- g_file_descriptor_based_get_fd@Base 2.23.4
- g_file_descriptor_based_get_type@Base 2.23.4
+ g_file_descriptor_based_get_fd@Base 2.24.0
+ g_file_descriptor_based_get_type@Base 2.24.0
  g_file_dup@Base 2.16.0
  g_file_eject_mountable@Base 2.16.0
  g_file_eject_mountable_finish@Base 2.16.0
@@ -255,7 +255,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_get_type@Base 2.16.0
  g_file_get_uri@Base 2.16.0
  g_file_get_uri_scheme@Base 2.16.0
- g_file_has_parent@Base 2.23.1
+ g_file_has_parent@Base 2.24.0
  g_file_has_prefix@Base 2.16.0
  g_file_has_uri_scheme@Base 2.16.0
  g_file_hash@Base 2.16.0
@@ -498,7 +498,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_io_module_get_type@Base 2.16.0
  g_io_module_new@Base 2.16.0
  g_io_modules_load_all_in_directory@Base 2.16.0
- g_io_modules_scan_all_in_directory@Base 2.23.2
+ g_io_modules_scan_all_in_directory@Base 2.24.0
  g_io_scheduler_cancel_all_jobs@Base 2.16.0
  g_io_scheduler_job_send_to_mainloop@Base 2.16.0
  g_io_scheduler_job_send_to_mainloop_async@Base 2.16.0
@@ -534,7 +534,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_mount_eject_finish@Base 2.16.0
  g_mount_eject_with_operation@Base 2.22.0
  g_mount_eject_with_operation_finish@Base 2.22.0
- g_mount_get_default_location@Base 2.23.1
+ g_mount_get_default_location@Base 2.24.0
  g_mount_get_drive@Base 2.16.0
  g_mount_get_icon@Base 2.16.0
  g_mount_get_name@Base 2.16.0
@@ -593,7 +593,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_output_stream_get_type@Base 2.16.0
  g_output_stream_has_pending@Base 2.16.0
  g_output_stream_is_closed@Base 2.16.0
- g_output_stream_is_closing@Base 2.23.1
+ g_output_stream_is_closing@Base 2.24.0
  g_output_stream_set_pending@Base 2.16.0
  g_output_stream_splice@Base 2.16.0
  g_output_stream_splice_async@Base 2.16.0
@@ -720,7 +720,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_socket_listener_accept_socket_async@Base 2.22.0
  g_socket_listener_accept_socket_finish@Base 2.22.0
  g_socket_listener_add_address@Base 2.22.0
- g_socket_listener_add_any_inet_port@Base 2.23.1
+ g_socket_listener_add_any_inet_port@Base 2.24.0
  g_socket_listener_add_inet_port@Base 2.22.0
  g_socket_listener_add_socket@Base 2.22.0
  g_socket_listener_close@Base 2.22.0
@@ -773,19 +773,19 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_connection_get_type@Base 2.22.0
  g_unix_connection_receive_fd@Base 2.22.0
  g_unix_connection_send_fd@Base 2.22.0
- g_unix_fd_list_append@Base 2.23.1
- g_unix_fd_list_get@Base 2.23.1
- g_unix_fd_list_get_length@Base 2.23.1
- g_unix_fd_list_get_type@Base 2.23.1
- g_unix_fd_list_new@Base 2.23.1
- g_unix_fd_list_new_from_array@Base 2.23.1
- g_unix_fd_list_peek_fds@Base 2.23.1
- g_unix_fd_list_steal_fds@Base 2.23.1
+ g_unix_fd_list_append@Base 2.24.0
+ g_unix_fd_list_get@Base 2.24.0
+ g_unix_fd_list_get_length@Base 2.24.0
+ g_unix_fd_list_get_type@Base 2.24.0
+ g_unix_fd_list_new@Base 2.24.0
+ g_unix_fd_list_new_from_array@Base 2.24.0
+ g_unix_fd_list_peek_fds@Base 2.24.0
+ g_unix_fd_list_steal_fds@Base 2.24.0
  g_unix_fd_message_append_fd@Base 2.22.0
- g_unix_fd_message_get_fd_list@Base 2.23.1
+ g_unix_fd_message_get_fd_list@Base 2.24.0
  g_unix_fd_message_get_type@Base 2.22.0
  g_unix_fd_message_new@Base 2.22.0
- g_unix_fd_message_new_with_fd_list@Base 2.23.1
+ g_unix_fd_message_new_with_fd_list@Base 2.24.0
  g_unix_fd_message_steal_fds@Base 2.22.0
  g_unix_input_stream_get_close_fd@Base 2.20.0
  g_unix_input_stream_get_fd@Base 2.20.0
@@ -870,11 +870,11 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_volume_mount@Base 2.16.0
  g_volume_mount_finish@Base 2.16.0
  g_volume_should_automount@Base 2.16.0
- g_zlib_compressor_format_get_type@Base 2.23.1
- g_zlib_compressor_get_type@Base 2.23.1
- g_zlib_compressor_new@Base 2.23.1
- g_zlib_decompressor_get_type@Base 2.23.1
- g_zlib_decompressor_new@Base 2.23.1
+ g_zlib_compressor_format_get_type@Base 2.24.0
+ g_zlib_compressor_get_type@Base 2.24.0
+ g_zlib_compressor_new@Base 2.24.0
+ g_zlib_decompressor_get_type@Base 2.24.0
+ g_zlib_decompressor_new@Base 2.24.0
 libglib-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
  g_access@Base 2.12.0
@@ -953,12 +953,12 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_base64_encode_close@Base 2.12.0
  g_base64_encode_step@Base 2.12.0
  g_basename@Base 2.12.0
- g_bit_lock@Base 2.23.3
+ g_bit_lock@Base 2.24.0
  g_bit_nth_lsf@Base 2.12.0
  g_bit_nth_msf@Base 2.12.0
  g_bit_storage@Base 2.12.0
- g_bit_trylock@Base 2.23.3
- g_bit_unlock@Base 2.23.3
+ g_bit_trylock@Base 2.24.0
+ g_bit_unlock@Base 2.24.0
  g_blow_chunks@Base 2.12.0
  g_bookmark_file_add_application@Base 2.12.0
  g_bookmark_file_add_group@Base 2.12.0
@@ -1397,9 +1397,9 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_main_loop_run@Base 2.12.0
  g_main_loop_unref@Base 2.12.0
  g_malloc0@Base 2.12.0
- g_malloc0_n@Base 2.23.5
+ g_malloc0_n@Base 2.24.0
  g_malloc@Base 2.12.0
- g_malloc_n@Base 2.23.5
+ g_malloc_n@Base 2.24.0
  g_mapped_file_free@Base 2.12.0
  g_mapped_file_get_contents@Base 2.12.0
  g_mapped_file_get_length@Base 2.12.0
@@ -1611,7 +1611,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_random_int_range@Base 2.12.0
  g_random_set_seed@Base 2.12.0
  g_realloc@Base 2.12.0
- g_realloc_n@Base 2.23.5
+ g_realloc_n@Base 2.24.0
  g_regex_check_replacement@Base 2.14.0
  g_regex_error_quark@Base 2.14.0
  g_regex_escape_string@Base 2.14.0
@@ -1717,7 +1717,6 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_slice_alloc0@Base 2.12.0
  g_slice_alloc@Base 2.12.0
  g_slice_copy@Base 2.14.0
- g_slice_debug_tree_statistics@Base 2.23.1
  g_slice_free1@Base 2.12.0
  g_slice_free_chain_with_offset@Base 2.12.0
  g_slice_get_config@Base 2.12.0
@@ -1987,11 +1986,11 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_tree_traverse@Base 2.12.0
  g_tree_unref@Base 2.22.0
  g_try_malloc0@Base 2.12.0
- g_try_malloc0_n@Base 2.23.5
+ g_try_malloc0_n@Base 2.24.0
  g_try_malloc@Base 2.12.0
- g_try_malloc_n@Base 2.23.5
+ g_try_malloc_n@Base 2.24.0
  g_try_realloc@Base 2.12.0
- g_try_realloc_n@Base 2.23.5
+ g_try_realloc_n@Base 2.24.0
  g_tuples_destroy@Base 2.12.0
  g_tuples_index@Base 2.12.0
  g_ucs4_to_utf16@Base 2.12.0
@@ -2062,143 +2061,143 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_utf8_to_utf16@Base 2.12.0
  g_utf8_validate@Base 2.12.0
  g_utime@Base 2.18.0
- g_variant_builder_add@Base 2.23.5
- g_variant_builder_add_value@Base 2.23.5
- g_variant_builder_clear@Base 2.23.5
- g_variant_builder_close@Base 2.23.5
- g_variant_builder_end@Base 2.23.5
- g_variant_builder_init@Base 2.23.5
- g_variant_builder_new@Base 2.23.5
- g_variant_builder_open@Base 2.23.5
- g_variant_builder_ref@Base 2.23.5
- g_variant_builder_unref@Base 2.23.5
- g_variant_byteswap@Base 2.23.6
- g_variant_classify@Base 2.23.4
- g_variant_dup_string@Base 2.23.4
- g_variant_dup_strv@Base 2.23.4
- g_variant_equal@Base 2.23.4
- g_variant_format_string_scan@Base 2.23.5
- g_variant_format_string_scan_type@Base 2.23.5
- g_variant_get@Base 2.23.5
- g_variant_get_boolean@Base 2.23.4
- g_variant_get_byte@Base 2.23.4
- g_variant_get_child@Base 2.23.5
- g_variant_get_child_value@Base 2.23.4
- g_variant_get_data@Base 2.23.4
- g_variant_get_double@Base 2.23.4
- g_variant_get_fixed_array@Base 2.23.4
- g_variant_get_handle@Base 2.23.4
- g_variant_get_int16@Base 2.23.4
- g_variant_get_int32@Base 2.23.4
- g_variant_get_int64@Base 2.23.4
- g_variant_get_maybe@Base 2.23.4
- g_variant_get_normal_form@Base 2.23.6
- g_variant_get_size@Base 2.23.4
- g_variant_get_string@Base 2.23.4
- g_variant_get_strv@Base 2.23.4
- g_variant_get_type@Base 2.23.4
- g_variant_get_type_string@Base 2.23.4
- g_variant_get_uint16@Base 2.23.4
- g_variant_get_uint32@Base 2.23.4
- g_variant_get_uint64@Base 2.23.4
- g_variant_get_va@Base 2.23.5
- g_variant_get_variant@Base 2.23.4
- g_variant_hash@Base 2.23.4
- g_variant_is_container@Base 2.23.4
- g_variant_is_normal_form@Base 2.23.6
- g_variant_is_object_path@Base 2.23.4
- g_variant_is_of_type@Base 2.23.4
- g_variant_is_signature@Base 2.23.4
- g_variant_iter_copy@Base 2.23.5
- g_variant_iter_free@Base 2.23.5
- g_variant_iter_init@Base 2.23.5
- g_variant_iter_loop@Base 2.23.5
- g_variant_iter_n_children@Base 2.23.5
- g_variant_iter_new@Base 2.23.5
- g_variant_iter_next@Base 2.23.5
- g_variant_iter_next_value@Base 2.23.5
- g_variant_n_children@Base 2.23.4
- g_variant_new@Base 2.23.5
- g_variant_new_array@Base 2.23.4
- g_variant_new_boolean@Base 2.23.4
- g_variant_new_byte@Base 2.23.4
- g_variant_new_dict_entry@Base 2.23.4
- g_variant_new_double@Base 2.23.4
- g_variant_new_from_data@Base 2.23.6
- g_variant_new_handle@Base 2.23.4
- g_variant_new_int16@Base 2.23.4
- g_variant_new_int32@Base 2.23.4
- g_variant_new_int64@Base 2.23.4
- g_variant_new_maybe@Base 2.23.4
- g_variant_new_object_path@Base 2.23.4
- g_variant_new_parsed@Base 2.23.6
- g_variant_new_parsed_va@Base 2.23.6
- g_variant_new_signature@Base 2.23.4
- g_variant_new_string@Base 2.23.4
- g_variant_new_strv@Base 2.23.4
- g_variant_new_tuple@Base 2.23.4
- g_variant_new_uint16@Base 2.23.4
- g_variant_new_uint32@Base 2.23.4
- g_variant_new_uint64@Base 2.23.4
- g_variant_new_va@Base 2.23.5
- g_variant_new_variant@Base 2.23.4
- g_variant_parse@Base 2.23.6
- g_variant_parser_get_error_quark@Base 2.23.6
- g_variant_print@Base 2.23.4
- g_variant_print_string@Base 2.23.4
- g_variant_ref@Base 2.23.4
- g_variant_ref_sink@Base 2.23.4
- g_variant_serialised_byteswap@Base 2.23.5
- g_variant_serialised_get_child@Base 2.23.5
- g_variant_serialised_is_normal@Base 2.23.5
- g_variant_serialised_n_children@Base 2.23.5
- g_variant_serialiser_is_object_path@Base 2.23.5
- g_variant_serialiser_is_signature@Base 2.23.5
- g_variant_serialiser_is_string@Base 2.23.5
- g_variant_serialiser_needed_size@Base 2.23.5
- g_variant_serialiser_serialise@Base 2.23.5
- g_variant_store@Base 2.23.4
- g_variant_type_checked_@Base 2.23.2
- g_variant_type_copy@Base 2.23.2
- g_variant_type_dup_string@Base 2.23.2
- g_variant_type_element@Base 2.23.2
- g_variant_type_equal@Base 2.23.2
- g_variant_type_first@Base 2.23.2
- g_variant_type_free@Base 2.23.2
- g_variant_type_get_string_length@Base 2.23.2
- g_variant_type_hash@Base 2.23.2
- g_variant_type_info_assert_no_infos@Base 2.23.5
- g_variant_type_info_element@Base 2.23.5
- g_variant_type_info_get@Base 2.23.5
- g_variant_type_info_get_type_string@Base 2.23.5
- g_variant_type_info_member_info@Base 2.23.5
- g_variant_type_info_n_members@Base 2.23.5
- g_variant_type_info_query@Base 2.23.5
- g_variant_type_info_query_element@Base 2.23.5
- g_variant_type_info_ref@Base 2.23.5
- g_variant_type_info_unref@Base 2.23.5
- g_variant_type_is_array@Base 2.23.2
- g_variant_type_is_basic@Base 2.23.2
- g_variant_type_is_container@Base 2.23.2
- g_variant_type_is_definite@Base 2.23.2
- g_variant_type_is_dict_entry@Base 2.23.2
- g_variant_type_is_maybe@Base 2.23.2
- g_variant_type_is_subtype_of@Base 2.23.2
- g_variant_type_is_tuple@Base 2.23.2
- g_variant_type_is_variant@Base 2.23.5
- g_variant_type_key@Base 2.23.2
- g_variant_type_n_items@Base 2.23.2
- g_variant_type_new@Base 2.23.2
- g_variant_type_new_array@Base 2.23.2
- g_variant_type_new_dict_entry@Base 2.23.2
- g_variant_type_new_maybe@Base 2.23.2
- g_variant_type_new_tuple@Base 2.23.2
- g_variant_type_next@Base 2.23.2
- g_variant_type_peek_string@Base 2.23.2
- g_variant_type_string_is_valid@Base 2.23.2
- g_variant_type_string_scan@Base 2.23.2
- g_variant_type_value@Base 2.23.2
- g_variant_unref@Base 2.23.4
+ g_variant_builder_add@Base 2.24.0
+ g_variant_builder_add_value@Base 2.24.0
+ g_variant_builder_clear@Base 2.24.0
+ g_variant_builder_close@Base 2.24.0
+ g_variant_builder_end@Base 2.24.0
+ g_variant_builder_init@Base 2.24.0
+ g_variant_builder_new@Base 2.24.0
+ g_variant_builder_open@Base 2.24.0
+ g_variant_builder_ref@Base 2.24.0
+ g_variant_builder_unref@Base 2.24.0
+ g_variant_byteswap@Base 2.24.0
+ g_variant_classify@Base 2.24.0
+ g_variant_dup_string@Base 2.24.0
+ g_variant_dup_strv@Base 2.24.0
+ g_variant_equal@Base 2.24.0
+ g_variant_format_string_scan@Base 2.24.0
+ g_variant_format_string_scan_type@Base 2.24.0
+ g_variant_get@Base 2.24.0
+ g_variant_get_boolean@Base 2.24.0
+ g_variant_get_byte@Base 2.24.0
+ g_variant_get_child@Base 2.24.0
+ g_variant_get_child_value@Base 2.24.0
+ g_variant_get_data@Base 2.24.0
+ g_variant_get_double@Base 2.24.0
+ g_variant_get_fixed_array@Base 2.24.0
+ g_variant_get_handle@Base 2.24.0
+ g_variant_get_int16@Base 2.24.0
+ g_variant_get_int32@Base 2.24.0
+ g_variant_get_int64@Base 2.24.0
+ g_variant_get_maybe@Base 2.24.0
+ g_variant_get_normal_form@Base 2.24.0
+ g_variant_get_size@Base 2.24.0
+ g_variant_get_string@Base 2.24.0
+ g_variant_get_strv@Base 2.24.0
+ g_variant_get_type@Base 2.24.0
+ g_variant_get_type_string@Base 2.24.0
+ g_variant_get_uint16@Base 2.24.0
+ g_variant_get_uint32@Base 2.24.0
+ g_variant_get_uint64@Base 2.24.0
+ g_variant_get_va@Base 2.24.0
+ g_variant_get_variant@Base 2.24.0
+ g_variant_hash@Base 2.24.0
+ g_variant_is_container@Base 2.24.0
+ g_variant_is_normal_form@Base 2.24.0
+ g_variant_is_object_path@Base 2.24.0
+ g_variant_is_of_type@Base 2.24.0
+ g_variant_is_signature@Base 2.24.0
+ g_variant_iter_copy@Base 2.24.0
+ g_variant_iter_free@Base 2.24.0
+ g_variant_iter_init@Base 2.24.0
+ g_variant_iter_loop@Base 2.24.0
+ g_variant_iter_n_children@Base 2.24.0
+ g_variant_iter_new@Base 2.24.0
+ g_variant_iter_next@Base 2.24.0
+ g_variant_iter_next_value@Base 2.24.0
+ g_variant_n_children@Base 2.24.0
+ g_variant_new@Base 2.24.0
+ g_variant_new_array@Base 2.24.0
+ g_variant_new_boolean@Base 2.24.0
+ g_variant_new_byte@Base 2.24.0
+ g_variant_new_dict_entry@Base 2.24.0
+ g_variant_new_double@Base 2.24.0
+ g_variant_new_from_data@Base 2.24.0
+ g_variant_new_handle@Base 2.24.0
+ g_variant_new_int16@Base 2.24.0
+ g_variant_new_int32@Base 2.24.0
+ g_variant_new_int64@Base 2.24.0
+ g_variant_new_maybe@Base 2.24.0
+ g_variant_new_object_path@Base 2.24.0
+ g_variant_new_parsed@Base 2.24.0
+ g_variant_new_parsed_va@Base 2.24.0
+ g_variant_new_signature@Base 2.24.0
+ g_variant_new_string@Base 2.24.0
+ g_variant_new_strv@Base 2.24.0
+ g_variant_new_tuple@Base 2.24.0
+ g_variant_new_uint16@Base 2.24.0
+ g_variant_new_uint32@Base 2.24.0
+ g_variant_new_uint64@Base 2.24.0
+ g_variant_new_va@Base 2.24.0
+ g_variant_new_variant@Base 2.24.0
+ g_variant_parse@Base 2.24.0
+ g_variant_parser_get_error_quark@Base 2.24.0
+ g_variant_print@Base 2.24.0
+ g_variant_print_string@Base 2.24.0
+ g_variant_ref@Base 2.24.0
+ g_variant_ref_sink@Base 2.24.0
+ g_variant_serialised_byteswap@Base 2.24.0
+ g_variant_serialised_get_child@Base 2.24.0
+ g_variant_serialised_is_normal@Base 2.24.0
+ g_variant_serialised_n_children@Base 2.24.0
+ g_variant_serialiser_is_object_path@Base 2.24.0
+ g_variant_serialiser_is_signature@Base 2.24.0
+ g_variant_serialiser_is_string@Base 2.24.0
+ g_variant_serialiser_needed_size@Base 2.24.0
+ g_variant_serialiser_serialise@Base 2.24.0
+ g_variant_store@Base 2.24.0
+ g_variant_type_checked_@Base 2.24.0
+ g_variant_type_copy@Base 2.24.0
+ g_variant_type_dup_string@Base 2.24.0
+ g_variant_type_element@Base 2.24.0
+ g_variant_type_equal@Base 2.24.0
+ g_variant_type_first@Base 2.24.0
+ g_variant_type_free@Base 2.24.0
+ g_variant_type_get_string_length@Base 2.24.0
+ g_variant_type_hash@Base 2.24.0
+ g_variant_type_info_assert_no_infos@Base 2.24.0
+ g_variant_type_info_element@Base 2.24.0
+ g_variant_type_info_get@Base 2.24.0
+ g_variant_type_info_get_type_string@Base 2.24.0
+ g_variant_type_info_member_info@Base 2.24.0
+ g_variant_type_info_n_members@Base 2.24.0
+ g_variant_type_info_query@Base 2.24.0
+ g_variant_type_info_query_element@Base 2.24.0
+ g_variant_type_info_ref@Base 2.24.0
+ g_variant_type_info_unref@Base 2.24.0
+ g_variant_type_is_array@Base 2.24.0
+ g_variant_type_is_basic@Base 2.24.0
+ g_variant_type_is_container@Base 2.24.0
+ g_variant_type_is_definite@Base 2.24.0
+ g_variant_type_is_dict_entry@Base 2.24.0
+ g_variant_type_is_maybe@Base 2.24.0
+ g_variant_type_is_subtype_of@Base 2.24.0
+ g_variant_type_is_tuple@Base 2.24.0
+ g_variant_type_is_variant@Base 2.24.0
+ g_variant_type_key@Base 2.24.0
+ g_variant_type_n_items@Base 2.24.0
+ g_variant_type_new@Base 2.24.0
+ g_variant_type_new_array@Base 2.24.0
+ g_variant_type_new_dict_entry@Base 2.24.0
+ g_variant_type_new_maybe@Base 2.24.0
+ g_variant_type_new_tuple@Base 2.24.0
+ g_variant_type_next@Base 2.24.0
+ g_variant_type_peek_string@Base 2.24.0
+ g_variant_type_string_is_valid@Base 2.24.0
+ g_variant_type_string_scan@Base 2.24.0
+ g_variant_type_value@Base 2.24.0
+ g_variant_unref@Base 2.24.0
  g_vasprintf@Base 2.12.0
  g_vfprintf@Base 2.12.0
  g_vprintf@Base 2.12.0
@@ -2424,7 +2423,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_strdup_value_contents@Base 2.12.0
  g_strv_get_type@Base 2.12.0
  g_type_add_class_cache_func@Base 2.12.0
- g_type_add_class_private@Base 2.23.6
+ g_type_add_class_private@Base 2.24.0
  g_type_add_interface_check@Base 2.12.0
  g_type_add_interface_dynamic@Base 2.12.0
  g_type_add_interface_static@Base 2.12.0
@@ -2438,7 +2437,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_type_check_value_holds@Base 2.12.0
  g_type_children@Base 2.12.0
  g_type_class_add_private@Base 2.12.0
- g_type_class_get_private@Base 2.23.6
+ g_type_class_get_private@Base 2.24.0
  g_type_class_peek@Base 2.12.0
  g_type_class_peek_parent@Base 2.12.0
  g_type_class_peek_static@Base 2.12.0
@@ -2570,8 +2569,8 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_value_type_compatible@Base 2.12.0
  g_value_type_transformable@Base 2.12.0
  g_value_unset@Base 2.12.0
- g_variant_get_gtype@Base 2.23.4
- g_variant_type_get_gtype@Base 2.23.4
+ g_variant_get_gtype@Base 2.24.0
+ g_variant_type_get_gtype@Base 2.24.0
 libgthread-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
  g_thread_init@Base 2.12.0
