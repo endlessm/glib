@@ -1,3 +1,20 @@
+glib2.0 (2.25.1-1) experimental; urgency=low
+
+  * New upstream development release:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Update for API additions.
+    + debian/libglib2.0-dev.install,
+      debian/libglib2.0-0.install:
+      - Install new GSettings utitilies and manpages.
+  * debian/control.in,
+    debian/rules:
+    + Enable manpage generation via xsltproc for now until
+      https://bugzilla.gnome.org/show_bug.cgi?id=616264
+      is fixed.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 20 Apr 2010 09:24:20 +0200
+
 glib2.0 (2.24.0-1) unstable; urgency=low
 
   * New upstream stable release:

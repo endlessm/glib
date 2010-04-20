@@ -2,6 +2,7 @@
 
 DISABLE_UPDATE_UPLOADERS := 1
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
+include /usr/share/gnome-pkg-tools/1/rules/check-dist.mk
 -include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
 
 GNOME_MODULE := glib
@@ -42,7 +43,7 @@ LDFLAGS += -Wl,-O1
 
 APIVER := 2.0
 SONAME := 0
-SHVER := 2.24.0
+SHVER := 2.25.0
 
 # package names
 SHARED_PKG := libglib$(APIVER)-$(SONAME)
@@ -85,7 +86,8 @@ common_configure_flags := \
 			--mandir=\$${prefix}/share/man \
 			--infodir=\$${prefix}/share/info \
 			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG) \
-			--with-pcre=system
+			--with-pcre=system \
+			--enable-man
 ifeq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
 	common_configure_flags += --build=$(DEB_BUILD_GNU_TYPE)
 else
