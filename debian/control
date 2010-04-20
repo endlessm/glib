@@ -19,7 +19,9 @@ Build-Depends: debhelper (>> 5.0.22),
                libgamin-dev | libfam-dev | linux-gnu,
                zlib1g-dev,
                xsltproc,
-               docbook-xsl
+               docbook-xsl,
+               docbook-xml,
+               libxml2-utils
 Standards-Version: 3.8.4
 Homepage: http://www.gtk.org/
 Vcs-Browser: http://svn.debian.org/wsvn/pkg-gnome/desktop/unstable/glib2.0/
