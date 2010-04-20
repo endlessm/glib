@@ -626,6 +626,44 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_seekable_seek@Base 2.16.0
  g_seekable_tell@Base 2.16.0
  g_seekable_truncate@Base 2.16.0
+ g_settings_apply@Base 2.25.0
+ g_settings_backend_changed@Base 2.25.0
+ g_settings_backend_changed_tree@Base 2.25.0
+ g_settings_backend_get_type@Base 2.25.0
+ g_settings_backend_keys_changed@Base 2.25.0
+ g_settings_backend_path_changed@Base 2.25.0
+ g_settings_backend_path_writable_changed@Base 2.25.0
+ g_settings_backend_setup@Base 2.25.0
+ g_settings_backend_setup_keyfile@Base 2.25.0
+ g_settings_backend_writable_changed@Base 2.25.0
+ g_settings_bind@Base 2.25.0
+ g_settings_bind_flags_get_type@Base 2.25.0
+ g_settings_bind_with_mapping@Base 2.25.0
+ g_settings_delay@Base 2.25.0
+ g_settings_get@Base 2.25.0
+ g_settings_get_boolean@Base 2.25.0
+ g_settings_get_child@Base 2.25.0
+ g_settings_get_double@Base 2.25.0
+ g_settings_get_has_unapplied@Base 2.25.0
+ g_settings_get_int@Base 2.25.0
+ g_settings_get_string@Base 2.25.0
+ g_settings_get_strv@Base 2.25.0
+ g_settings_get_type@Base 2.25.0
+ g_settings_get_value@Base 2.25.0
+ g_settings_is_writable@Base 2.25.0
+ g_settings_new@Base 2.25.0
+ g_settings_new_with_context@Base 2.25.0
+ g_settings_new_with_context_and_path@Base 2.25.0
+ g_settings_new_with_path@Base 2.25.0
+ g_settings_revert@Base 2.25.0
+ g_settings_set@Base 2.25.0
+ g_settings_set_boolean@Base 2.25.0
+ g_settings_set_double@Base 2.25.0
+ g_settings_set_int@Base 2.25.0
+ g_settings_set_string@Base 2.25.0
+ g_settings_set_strv@Base 2.25.0
+ g_settings_set_value@Base 2.25.0
+ g_settings_unbind@Base 2.25.0
  g_simple_async_report_error_in_idle@Base 2.16.0
  g_simple_async_report_gerror_in_idle@Base 2.16.0
  g_simple_async_result_complete@Base 2.16.0
@@ -1717,6 +1755,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_slice_alloc0@Base 2.12.0
  g_slice_alloc@Base 2.12.0
  g_slice_copy@Base 2.14.0
+ g_slice_debug_tree_statistics@Base 2.25.0
  g_slice_free1@Base 2.12.0
  g_slice_free_chain_with_offset@Base 2.12.0
  g_slice_get_config@Base 2.12.0
