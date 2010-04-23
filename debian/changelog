@@ -1,3 +1,14 @@
+glib2.0 (2.25.2-1) experimental; urgency=low
+
+  * New upstream development release:
+    + debian/libglib2.0-0.install:
+      - Add new gsettings tool.
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Update for API additions.
+
+ -- Sebastian Dröge <slomo@debian.org>  Fri, 23 Apr 2010 06:14:47 +0200
+
 glib2.0 (2.25.1-1) experimental; urgency=low
 
   * New upstream development release:
