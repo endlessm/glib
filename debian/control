@@ -33,6 +33,7 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libglib2.0-data,
+            @BIN_PKG@,
             shared-mime-info
 Conflicts: libpango1.0-0 (<< 1.11)
 Replaces: libglib2.0-dev (<< 2.23.2-2)
@@ -59,6 +60,22 @@ Description: The GLib library of C routines - minimal runtime
  .
  This package contains the minimal runtime library needed by the Debian
  installer.
+
+Package: @BIN_PKG@
+Section: misc
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         libglib2.0-0 (>= ${source:Version}),
+         libglib2.0-data
+Replaces: libglib2.0-0 (<< 2.25.2)
+Description: The programs for the GLib library
+ GLib is a library containing many useful C routines for things such
+ as trees, hashes, lists, and strings.  It is a useful general-purpose
+ C library used by projects such as GTK+, GIMP, and GNOME.
+ .
+ This package contains the program files which is used for the libraries
+ and others.
 
 Package: libglib2.0-dev
 Section: libdevel

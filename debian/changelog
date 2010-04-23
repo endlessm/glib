@@ -1,7 +1,13 @@
 glib2.0 (2.25.2-1) experimental; urgency=low
 
   * New upstream development release:
-    + debian/libglib2.0-0.install:
+    + debian/libglib2.0-0.install,
+      debian/libglib2.0-0.triggers,
+      debian/control.in,
+      debian/rules,
+      debian/libglib2.0-bin.install,
+      debian/libglib2.0-bin.triggers:
+      - Move binaries to an unversioned, separate package.
       - Add new gsettings tool.
     + debian/rules,
       debian/libglib2.0-0.symbols:

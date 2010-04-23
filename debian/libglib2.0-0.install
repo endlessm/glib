@@ -1,6 +1,2 @@
 debian/install/deb/usr/lib/libglib-*.so.* lib
 debian/install/deb/usr/lib/libg{object,module,thread,io}-*.so.* usr/lib
-debian/install/deb/usr/bin/gio-querymodules usr/bin
-debian/install/deb/usr/bin/gsettings usr/bin
-debian/install/deb/usr/share/man/man1/gio-querymodules.1* usr/share/man/man1
-debian/install/deb/usr/share/man/man1/gsettings.1* usr/share/man/man1

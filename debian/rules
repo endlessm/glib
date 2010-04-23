@@ -49,6 +49,7 @@ SHVER := 2.25.2
 SHARED_PKG := libglib$(APIVER)-$(SONAME)
 DATA_PKG := libglib$(APIVER)-data
 DEV_PKG := libglib$(APIVER)-dev
+BIN_PKG := libglib$(APIVER)-bin
 UDEB_PKG := libglib$(APIVER)-udeb
 DOC_PKG := libglib$(APIVER)-doc
 DEBUG_PKG := $(SHARED_PKG)-dbg
