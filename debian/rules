@@ -168,6 +168,7 @@ debian/control:
 		-e "s#@APIVER@#$(APIVER)#g" \
 		-e "s#@VERSION@#$(VERSION)#g" \
 		-e "s#@SHARED_PKG@#$(SHARED_PKG)#g" \
+		-e "s#@BIN_PKG@#$(BIN_PKG)#g" \
 		-e "s#@DATA_PKG@#$(DATA_PKG)#g" \
 		-e "s#@DEV_PKG@#$(DEV_PKG)#g" \
 		-e "s#@UDEB_PKG@#$(UDEB_PKG)#g" \

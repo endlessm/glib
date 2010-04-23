@@ -33,7 +33,7 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libglib2.0-data,
-            @BIN_PKG@,
+            libglib2.0-bin,
             shared-mime-info
 Conflicts: libpango1.0-0 (<< 1.11)
 Replaces: libglib2.0-dev (<< 2.23.2-2)
@@ -61,7 +61,7 @@ Description: The GLib library of C routines - minimal runtime
  This package contains the minimal runtime library needed by the Debian
  installer.
 
-Package: @BIN_PKG@
+Package: libglib2.0-bin
 Section: misc
 Architecture: any
 Depends: ${shlibs:Depends},
