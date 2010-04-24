@@ -1,3 +1,18 @@
+glib2.0 (2.25.3-1) experimental; urgency=low
+
+  * New upstream development release:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Update for API additions.
+    + debian/libglib2.0-dev.install:
+      - gschema-compile was renamed to glib-compile-schemas.
+    + debian/control.in,
+      debian/rules:
+      - Manpages are now properly shipped with the tarballs,
+        drop xsltproc, etc. build dependencies.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 24 Apr 2010 06:16:59 +0200
+
 glib2.0 (2.25.2-1) experimental; urgency=low
 
   * New upstream development release:

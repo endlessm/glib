@@ -748,6 +748,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_socket_get_protocol@Base 2.22.0
  g_socket_get_remote_address@Base 2.22.0
  g_socket_get_socket_type@Base 2.22.0
+ g_socket_get_timeout@Base 2.25.3
  g_socket_get_type@Base 2.22.0
  g_socket_is_closed@Base 2.22.0
  g_socket_is_connected@Base 2.22.0
@@ -784,6 +785,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_socket_set_blocking@Base 2.22.0
  g_socket_set_keepalive@Base 2.22.0
  g_socket_set_listen_backlog@Base 2.22.0
+ g_socket_set_timeout@Base 2.25.3
  g_socket_shutdown@Base 2.22.0
  g_socket_speaks_ipv4@Base 2.22.0
  g_socket_type_get_type@Base 2.22.0

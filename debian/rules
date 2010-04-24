@@ -43,7 +43,7 @@ LDFLAGS += -Wl,-O1
 
 APIVER := 2.0
 SONAME := 0
-SHVER := 2.25.2
+SHVER := 2.25.3
 
 # package names
 SHARED_PKG := libglib$(APIVER)-$(SONAME)
@@ -87,8 +87,7 @@ common_configure_flags := \
 			--mandir=\$${prefix}/share/man \
 			--infodir=\$${prefix}/share/info \
 			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG) \
-			--with-pcre=system \
-			--enable-man
+			--with-pcre=system
 ifeq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
 	common_configure_flags += --build=$(DEB_BUILD_GNU_TYPE)
 else
