@@ -4,8 +4,10 @@ glib2.0 (2.25.4-1) experimental; urgency=low
     + debian/rules,
       debian/libglib2.0-0.symbols:
       - Update for API additions.
+    + debian/libglib2.0-bin.install:
+      - Add gdbus utility and manpage.
 
- -- Sebastian Dröge <slomo@debian.org>  Fri, 14 May 2010 18:02:00 +0200
+ -- Sebastian Dröge <slomo@debian.org>  Fri, 14 May 2010 18:25:58 +0200
 
 glib2.0 (2.25.3-1) experimental; urgency=low
 
