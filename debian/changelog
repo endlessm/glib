@@ -4,8 +4,12 @@ glib2.0 (2.25.8-1) experimental; urgency=low
     + debian/rules,
       debian/libglib2.0-0.symbols:
       - Update for API additions.
+  * debian/libglib2.0-dev.install,
+    debian/control.in:
+    + Include the systemtap files in the -dev package and
+      suggest systemtap.
 
- -- Sebastian Dröge <slomo@debian.org>  Tue, 08 Jun 2010 09:55:57 +0200
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 08 Jun 2010 11:07:18 +0200
 
 glib2.0 (2.25.7-1) experimental; urgency=low
 

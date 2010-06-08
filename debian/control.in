@@ -31,6 +31,7 @@ Depends: ${misc:Depends},
 Recommends: @DATA_PKG@,
             @BIN_PKG@,
             shared-mime-info
+Suggests: systemtap
 Conflicts: libpango1.0-0 (<< 1.11)
 Replaces: @DEV_PKG@ (<< 2.23.2-2)
 Description: The GLib library of C routines
