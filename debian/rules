@@ -94,8 +94,7 @@ else
 	common_configure_flags += --build=$(DEB_BUILD_GNU_TYPE) --host=$(DEB_HOST_GNU_TYPE)
 endif
 deb_configure_flags := $(common_configure_flags) \
-			--enable-static \
-			--enable-systemtap
+			--enable-static
 udeb_configure_flags := $(common_configure_flags) \
 			--disable-selinux
 refdbg_configure_flags := $(common_configure_flags) \

@@ -20,4 +20,3 @@ debian/install/deb/usr/bin/glib-gettextize usr/bin
 debian/install/deb/usr/bin/glib-compile-schemas usr/bin
 debian/install/deb/usr/bin/gsettings-schema-convert usr/bin
 debian/install/deb/usr/bin/gtester usr/bin
-debian/install/deb/usr/share/systemtap

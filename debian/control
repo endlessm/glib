@@ -31,7 +31,6 @@ Depends: ${misc:Depends},
 Recommends: libglib2.0-data,
             libglib2.0-bin,
             shared-mime-info
-Suggests: systemtap
 Conflicts: libpango1.0-0 (<< 1.11)
 Replaces: libglib2.0-dev (<< 2.23.2-2)
 Description: The GLib library of C routines
