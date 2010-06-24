@@ -1,3 +1,16 @@
+glib2.0 (2.25.10-1) experimental; urgency=low
+
+  * New upstream development release:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Update for API changes.
+    + debian/libglib2.0-dev.install:
+      - Drop gsettings-schema-convert.
+    + debian/patches/*:
+      - Refreshed all patches.
+
+ -- Sebastian Dröge <slomo@debian.org>  Thu, 24 Jun 2010 19:59:54 +0200
+
 glib2.0 (2.25.9-1) experimental; urgency=low
 
   * New upstream development release:

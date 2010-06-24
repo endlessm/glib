@@ -11,12 +11,10 @@ debian/install/deb/usr/share/man/man1/glib-mkenums.1* usr/share/man/man1
 debian/install/deb/usr/share/man/man1/gobject-query.1* usr/share/man/man1
 debian/install/deb/usr/share/man/man1/glib-gettextize.1* usr/share/man/man1
 debian/install/deb/usr/share/man/man1/glib-compile-schemas.1* usr/share/man/man1
-debian/install/deb/usr/share/man/man1/gsettings-schema-convert.1* usr/share/man/man1
 debian/install/deb/usr/bin/glib-genmarshal usr/bin
 debian/install/deb/usr/bin/gobject-query usr/bin
 debian/install/deb/usr/bin/glib-mkenums usr/bin
 debian/install/deb/usr/bin/gtester-report usr/bin
 debian/install/deb/usr/bin/glib-gettextize usr/bin
 debian/install/deb/usr/bin/glib-compile-schemas usr/bin
-debian/install/deb/usr/bin/gsettings-schema-convert usr/bin
 debian/install/deb/usr/bin/gtester usr/bin

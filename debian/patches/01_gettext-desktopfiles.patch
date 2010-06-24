@@ -1,11 +1,11 @@
 # Description: If a .desktop file does not have inline translations, fall back to calling gettext.
 # Ubuntu: https://launchpad.net/bugs/3935
 # Upstream: http://bugzilla.gnome.org/show_bug.cgi?id=569829
-Index: glib2.0-2.19.5/glib/gkeyfile.c
+Index: glib2.0-2.25.10/glib/gkeyfile.c
 ===================================================================
---- glib2.0-2.19.5.orig/glib/gkeyfile.c	2009-01-30 15:34:03.000000000 +0100
-+++ glib2.0-2.19.5/glib/gkeyfile.c	2009-01-30 15:34:32.000000000 +0100
-@@ -83,6 +83,7 @@
+--- glib2.0-2.25.10.orig/glib/gkeyfile.c	2010-05-14 00:39:17.000000000 +0200
++++ glib2.0-2.25.10/glib/gkeyfile.c	2010-06-24 20:01:19.717054931 +0200
+@@ -88,6 +88,7 @@
    GKeyFileFlags flags;
  
    gchar **locales;
@@ -13,7 +13,7 @@ Index: glib2.0-2.19.5/glib/gkeyfile.c
  };
  
  typedef struct _GKeyFileKeyValuePair GKeyFileKeyValuePair;
-@@ -209,6 +210,7 @@
+@@ -214,6 +215,7 @@
    key_file->list_separator = ';';
    key_file->flags = 0;
    key_file->locales = g_strdupv ((gchar **)g_get_language_names ());
@@ -21,7 +21,7 @@ Index: glib2.0-2.19.5/glib/gkeyfile.c
  }
  
  static void
-@@ -228,6 +230,12 @@
+@@ -233,6 +235,12 @@
        key_file->parse_buffer = NULL;
      }
  
@@ -34,7 +34,7 @@ Index: glib2.0-2.19.5/glib/gkeyfile.c
    tmp = key_file->groups;
    while (tmp != NULL)
      {
-@@ -448,6 +456,11 @@
+@@ -452,6 +460,11 @@
        return FALSE;
      }
  
@@ -46,7 +46,7 @@ Index: glib2.0-2.19.5/glib/gkeyfile.c
    return TRUE;
  }
  
-@@ -554,6 +567,11 @@
+@@ -558,6 +571,11 @@
        return FALSE;
      }
  
@@ -58,7 +58,7 @@ Index: glib2.0-2.19.5/glib/gkeyfile.c
    return TRUE;
  }
  
-@@ -1662,6 +1680,8 @@
+@@ -1666,6 +1684,8 @@
    GError *key_file_error;
    gchar **languages;
    gboolean free_languages = FALSE;
@@ -67,7 +67,7 @@ Index: glib2.0-2.19.5/glib/gkeyfile.c
    gint i;
  
    g_return_val_if_fail (key_file != NULL, NULL);
-@@ -1692,6 +1712,23 @@
+@@ -1696,6 +1716,23 @@
        free_languages = FALSE;
      }
    
@@ -91,7 +91,7 @@ Index: glib2.0-2.19.5/glib/gkeyfile.c
    for (i = 0; languages[i]; i++)
      {
        candidate_key = g_strdup_printf ("%s[%s]", key, languages[i]);
-@@ -1708,6 +1745,39 @@
+@@ -1712,6 +1749,39 @@
        translated_value = NULL;
     }
  
@@ -131,11 +131,11 @@ Index: glib2.0-2.19.5/glib/gkeyfile.c
    /* Fallback to untranslated key
     */
    if (!translated_value)
-Index: glib2.0-2.19.5/glib/gkeyfile.h
+Index: glib2.0-2.25.10/glib/gkeyfile.h
 ===================================================================
---- glib2.0-2.19.5.orig/glib/gkeyfile.h	2009-01-30 15:34:03.000000000 +0100
-+++ glib2.0-2.19.5/glib/gkeyfile.h	2009-01-30 15:34:32.000000000 +0100
-@@ -240,6 +240,7 @@
+--- glib2.0-2.25.10.orig/glib/gkeyfile.h	2010-05-14 00:39:17.000000000 +0200
++++ glib2.0-2.25.10/glib/gkeyfile.h	2010-06-24 20:01:19.717054931 +0200
+@@ -256,6 +256,7 @@
  #define G_KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY   "StartupNotify"
  #define G_KEY_FILE_DESKTOP_KEY_STARTUP_WM_CLASS "StartupWMClass"
  #define G_KEY_FILE_DESKTOP_KEY_URL              "URL"
