@@ -2,6 +2,25 @@ glib2.0 (2.25.10-2) UNRELEASED; urgency=low
 
   * Drop type-handling usage. Closes: #587863.
   * Bump standards version accordingly.
+  * Patch from Ubuntu, thanks Sébastien Bacher. Closes: #587661.
+    * debian/libglib2.0-bin.install:
+      - Install glib-compile-schemas
+    * debian/libglib2.0-bin.postinst:
+      - Run glib-compile-schemas when schemas modified
+    * debian/libglib2.0-bin.triggers:
+      - Watch for schema changes
+    * debian/libglib2.0-dev.install:
+      - glib-compile-schemas moved to libglib2.0-bin
+    * debian/libglib2.0-dev.install:
+    - install the new gdb python macros since the gdb version is recent 
+      enough now to use those
+  * Put gio-querymodules and glib-compile-schemas in a private, 
+    versioned directory in libglib2.0-0 to avoid a dependency loop.
+  * Move back the triggers to libglib2.0-0.
+  * Add a purge of the necessary files in the postinst.
+  * Stop recommending libglib2.0-bin since the necessary stuff is in 
+    libglib2.0-0 now.
+  * Add symlinks to keep the binaries at their place in libglib2.0-bin.
 
  -- Josselin Mouette <joss@debian.org>  Fri, 02 Jul 2010 18:51:29 +0200
 
