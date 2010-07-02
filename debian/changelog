@@ -4,6 +4,7 @@ glib2.0 (2.24.1-2) UNRELEASED; urgency=low
   * Bump standards version accordingly.
   * Ship gio-querymodules in a versioned directory.
   * Run it on installation, not only when triggered.
+  * Purge the modules cache in the postrm.
 
  -- Josselin Mouette <joss@debian.org>  Fri, 02 Jul 2010 18:51:29 +0200
 
