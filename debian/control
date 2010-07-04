@@ -60,7 +60,7 @@ Section: misc
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-         libglib2.0-0 (>= ${source:Version}),
+         libglib2.0-0 (= ${binary:Version}),
          libglib2.0-data
 Replaces: libglib2.0-0 (<< 2.25.2),
           libglib2.0-dev (<< 2.25.10-2)

@@ -60,7 +60,7 @@ Section: misc
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
-         @SHARED_PKG@ (>= ${source:Version}),
+         @SHARED_PKG@ (= ${binary:Version}),
          @DATA_PKG@
 Replaces: @SHARED_PKG@ (<< 2.25.2),
           @DEV_PKG@ (<< 2.25.10-2)

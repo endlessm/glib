@@ -21,6 +21,7 @@ glib2.0 (2.25.10-2) UNRELEASED; urgency=low
   * Stop recommending libglib2.0-bin since the necessary stuff is in 
     libglib2.0-0 now.
   * Add symlinks to keep the binaries at their place in libglib2.0-bin.
+  * Tighten the dependency between libglib2.0-bin and libglib2.0-0.
 
  -- Josselin Mouette <joss@debian.org>  Fri, 02 Jul 2010 18:51:29 +0200
 
