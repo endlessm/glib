@@ -1,5 +1,6 @@
-glib2.0 (2.25.10-2) UNRELEASED; urgency=low
+glib2.0 (2.25.11-1) experimental; urgency=low
 
+  [ Josselin Mouette ]
   * Drop type-handling usage. Closes: #587863.
   * Bump standards version accordingly.
   * Patch from Ubuntu, thanks Sébastien Bacher. Closes: #587661.
@@ -23,7 +24,16 @@ glib2.0 (2.25.10-2) UNRELEASED; urgency=low
   * Add symlinks to keep the binaries at their place in libglib2.0-bin.
   * Tighten the dependency between libglib2.0-bin and libglib2.0-0.
 
- -- Josselin Mouette <joss@debian.org>  Fri, 02 Jul 2010 18:51:29 +0200
+  [ Sebastian Dröge ]
+  * New upstream development release.
+  * debian/libglib2.0-0.dirs:
+    + Create empty directories for the triggers to actually work.
+  * debian/libglib2.0-0.links,
+    debian/control.in:
+    + Add links for gio-querymodules and glib-compile-schemas in
+      /usr/bin.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sun, 11 Jul 2010 19:54:48 +0200
 
 glib2.0 (2.25.10-1) experimental; urgency=low
 
