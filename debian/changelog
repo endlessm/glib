@@ -25,7 +25,10 @@ glib2.0 (2.25.11-1) experimental; urgency=low
   * Tighten the dependency between libglib2.0-bin and libglib2.0-0.
 
   [ Sebastian Dröge ]
-  * New upstream development release.
+  * New upstream development release:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Update for API changes.
   * debian/libglib2.0-0.dirs:
     + Create empty directories for the triggers to actually work.
   * debian/libglib2.0-0.links,
@@ -33,7 +36,7 @@ glib2.0 (2.25.11-1) experimental; urgency=low
     + Add links for gio-querymodules and glib-compile-schemas in
       /usr/bin.
 
- -- Sebastian Dröge <slomo@debian.org>  Sun, 11 Jul 2010 19:54:48 +0200
+ -- Sebastian Dröge <slomo@debian.org>  Sun, 11 Jul 2010 20:13:58 +0200
 
 glib2.0 (2.25.10-1) experimental; urgency=low
 
