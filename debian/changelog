@@ -1,3 +1,19 @@
+glib2.0 (2.25.11-2) experimental; urgency=low
+
+  * debian/control.in,
+    debian/libglib2.0-bin.links,
+    debian/libglib2.0-0.links:
+    + Move links to the -bin package again but let the -dev package
+      depend on the -bin package. Having the links in the shared library
+      package will cause conflicts when the soname changes but the
+      links in /usr/bin must be there at least if the -dev package is
+      installed because build systems might assume that the applications
+      are in $PATH.
+  * debian/patches/61_glib-compile-schemas-path.patch:
+    + Adjust path to glib-compile-schemas in the pkg-config file.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 13 Jul 2010 14:06:28 +0200
+
 glib2.0 (2.25.11-1) experimental; urgency=low
 
   [ Josselin Mouette ]
