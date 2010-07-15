@@ -1,3 +1,13 @@
+glib2.0 (2.25.11-3) experimental; urgency=low
+
+  * debian/patches/99_gsocket-create-socket-cloexec.patch:
+    Patch by Julien Cristau:
+    Just because SOCK_CLOEXEC was defined at build time doesn't mean the
+    kernel we're running on supports it.  So if socket() fails with EINVAL,
+    try again without the flag.
+
+ -- Sebastian Dröge <slomo@debian.org>  Thu, 15 Jul 2010 20:23:30 +0200
+
 glib2.0 (2.25.11-2) experimental; urgency=low
 
   * debian/control.in,
