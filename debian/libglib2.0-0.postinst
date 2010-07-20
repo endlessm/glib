@@ -3,6 +3,9 @@ set -e
 
 if [ "$1" = triggered ]; then
     for trigger in $2; do
+        if ! [ -d $trigger ]; then
+            continue
+        fi
         case $trigger in
           /usr/share/glib-2.0/schemas)
             # This is triggered everytime an application installs a

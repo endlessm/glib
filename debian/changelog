@@ -1,3 +1,10 @@
+glib2.0 (2.25.11-4) UNRELEASED; urgency=low
+
+  * Don’t run the triggers when executed from a nonexistent directory.
+    Closes: #589693.
+
+ -- Josselin Mouette <joss@debian.org>  Tue, 20 Jul 2010 15:41:37 +0200
+
 glib2.0 (2.25.11-3) experimental; urgency=low
 
   * debian/patches/99_gsocket-create-socket-cloexec.patch:
