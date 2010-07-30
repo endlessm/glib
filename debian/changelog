@@ -1,4 +1,4 @@
-glib2.0 (2.25.12-1) UNRELEASED; urgency=low
+glib2.0 (2.25.12-1) experimental; urgency=low
 
   [ Josselin Mouette ]
   * Don’t run the triggers when executed from a nonexistent directory.
