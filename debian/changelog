@@ -1,9 +1,18 @@
-glib2.0 (2.25.11-4) UNRELEASED; urgency=low
+glib2.0 (2.25.12-1) UNRELEASED; urgency=low
 
+  [ Josselin Mouette ]
   * Don’t run the triggers when executed from a nonexistent directory.
     Closes: #589693.
 
- -- Josselin Mouette <joss@debian.org>  Tue, 20 Jul 2010 15:41:37 +0200
+  [ Sebastian Dröge ]
+  * New upstream development release:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Update for API changes.
+    + debian/patches/99_gsocket-create-socket-cloexec.patch:
+      - Dropped, merged upstream.
+
+ -- Sebastian Dröge <slomo@debian.org>  Fri, 30 Jul 2010 12:29:10 +0200
 
 glib2.0 (2.25.11-3) experimental; urgency=low
 
