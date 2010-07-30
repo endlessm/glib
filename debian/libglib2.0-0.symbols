@@ -147,6 +147,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_credentials_set_native@Base 2.25.12
  g_credentials_set_unix_user@Base 2.25.12
  g_credentials_to_string@Base 2.25.12
+ g_credentials_type_get_type@Base 2.25.12
  g_data_input_stream_get_byte_order@Base 2.16.0
  g_data_input_stream_get_newline_type@Base 2.16.0
  g_data_input_stream_get_type@Base 2.16.0
@@ -201,6 +202,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_dbus_connection_call_finish@Base 2.25.12
  g_dbus_connection_call_sync@Base 2.25.12
  g_dbus_connection_close@Base 2.25.12
+ g_dbus_connection_close_finish@Base 2.25.12
+ g_dbus_connection_close_sync@Base 2.25.12
  g_dbus_connection_emit_signal@Base 2.25.12
  g_dbus_connection_flags_get_type@Base 2.25.12
  g_dbus_connection_flush@Base 2.25.12
@@ -362,6 +365,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_dbus_proxy_set_cached_property@Base 2.25.12
  g_dbus_proxy_set_default_timeout@Base 2.25.12
  g_dbus_proxy_set_interface_info@Base 2.25.12
+ g_dbus_send_message_flags_get_type@Base 2.25.12
  g_dbus_server_flags_get_type@Base 2.25.12
  g_dbus_server_get_client_address@Base 2.25.12
  g_dbus_server_get_flags@Base 2.25.12
@@ -371,6 +375,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_dbus_server_new_sync@Base 2.25.12
  g_dbus_server_start@Base 2.25.12
  g_dbus_server_stop@Base 2.25.12
+ g_dbus_signal_flags_get_type@Base 2.25.12
  g_dbus_signal_info_get_type@Base 2.25.12
  g_dbus_signal_info_ref@Base 2.25.12
  g_dbus_signal_info_unref@Base 2.25.12
@@ -909,6 +914,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_settings_new_with_backend@Base 2.25.12
  g_settings_new_with_backend_and_path@Base 2.25.12
  g_settings_new_with_path@Base 2.25.12
+ g_settings_reset@Base 2.25.12
  g_settings_revert@Base 2.25.12
  g_settings_set@Base 2.25.12
  g_settings_set_boolean@Base 2.25.12
@@ -998,6 +1004,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_socket_create_source@Base 2.22.0
  g_socket_family_get_type@Base 2.22.0
  g_socket_get_blocking@Base 2.22.0
+ g_socket_get_credentials@Base 2.25.12
  g_socket_get_family@Base 2.22.0
  g_socket_get_fd@Base 2.22.0
  g_socket_get_keepalive@Base 2.22.0
