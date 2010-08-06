@@ -1,0 +1,132 @@
+--- glib2.0-2.25.12.is.2.25.12.orig/gio/Makefile.am	2010-07-29 16:49:48.000000000 +0200
++++ glib2.0-2.25.12.is.2.25.12/gio/Makefile.am	2010-08-06 17:37:08.000000000 +0200
+@@ -43,6 +43,7 @@
+ 	-I$(top_srcdir)					\
+ 	-I$(top_srcdir)/glib				\
+ 	-I$(top_srcdir)/gmodule				\
++	-I$(top_builddir)/glib				\
+ 	$(GLIB_DEBUG_FLAGS)				\
+ 	$(THREAD_FLAGS)					\
+ 	-DG_DISABLE_DEPRECATED				\
+--- glib2.0-2.25.12.is.2.25.12.orig/gio/tests/Makefile.am	2010-07-27 07:31:41.000000000 +0200
++++ glib2.0-2.25.12.is.2.25.12/gio/tests/Makefile.am	2010-08-06 17:37:08.000000000 +0200
+@@ -9,6 +9,7 @@
+ 	-I$(top_srcdir)/gmodule	\
+ 	-I$(top_srcdir)/gobject	\
+ 	-I$(top_srcdir)/gio 	\
++	-I$(top_builddir)/glib 	\
+ 	$(GLIB_DEBUG_FLAGS)	\
+ 	-DSRCDIR=\""$(srcdir)"\"
+ 
+--- glib2.0-2.25.12.is.2.25.12.orig/glib/gnulib/Makefile.am	2010-07-13 21:57:27.000000000 +0200
++++ glib2.0-2.25.12.is.2.25.12/glib/gnulib/Makefile.am	2010-08-06 17:37:08.000000000 +0200
+@@ -1,7 +1,8 @@
+ ## Process this file with automake to produce Makefile.in
+ include $(top_srcdir)/Makefile.decl
+ 
+-INCLUDES = -I$(top_srcdir) -I$(top_srcdir)/glib -DG_LOG_DOMAIN=\"GLib\" \
++INCLUDES = -I$(top_srcdir) -I$(top_srcdir)/glib -I$(top_builddir)/glib \
++	-DG_LOG_DOMAIN=\"GLib\" \
+ 	$(GLIB_DEBUG_FLAGS) -DG_DISABLE_DEPRECATED -DGLIB_COMPILATION 
+ 
+ noinst_LTLIBRARIES = libgnulib.la
+--- glib2.0-2.25.12.is.2.25.12.orig/glib/tests/Makefile.am	2010-07-27 07:31:41.000000000 +0200
++++ glib2.0-2.25.12.is.2.25.12/glib/tests/Makefile.am	2010-08-06 17:37:08.000000000 +0200
+@@ -4,6 +4,7 @@
+ 	-g 				\
+ 	-I$(top_srcdir) 		\
+ 	-I$(top_srcdir)/glib 		\
++	-I$(top_builddir)/glib		\
+ 	-DSRCDIR=\""$(srcdir)"\"	\
+ 	$(GLIB_DEBUG_FLAGS)
+ 
+--- glib2.0-2.25.12.is.2.25.12.orig/gmodule/Makefile.am	2010-07-27 07:31:41.000000000 +0200
++++ glib2.0-2.25.12.is.2.25.12/gmodule/Makefile.am	2010-08-06 17:37:08.000000000 +0200
+@@ -5,6 +5,7 @@
+ 	-I$(top_srcdir) 		\
+ 	-I$(top_srcdir)/glib 		\
+ 	-I$(top_srcdir)/gmodule 	\
++	-I$(top_builddir)/glib 		\
+ 	-DG_LOG_DOMAIN=\"GModule\" 	\
+ 	@GLIB_DEBUG_FLAGS@ 		\
+ 	-DG_DISABLE_DEPRECATED
+--- glib2.0-2.25.12.is.2.25.12.orig/gobject/Makefile.am	2010-07-27 07:31:41.000000000 +0200
++++ glib2.0-2.25.12.is.2.25.12/gobject/Makefile.am	2010-08-06 17:37:08.000000000 +0200
+@@ -17,6 +17,7 @@
+ 	-I$(top_srcdir)				\
+ 	-I$(top_srcdir)/glib			\
+ 	-I$(top_builddir)			\
++	-I$(top_builddir)/glib			\
+ 	$(GLIB_DEBUG_FLAGS)			\
+ 	$(THREAD_FLAGS)				\
+ 	-DG_DISABLE_DEPRECATED			\
+--- glib2.0-2.25.12.is.2.25.12.orig/gobject/tests/Makefile.am	2010-07-27 07:31:41.000000000 +0200
++++ glib2.0-2.25.12.is.2.25.12/gobject/tests/Makefile.am	2010-08-06 17:37:08.000000000 +0200
+@@ -1,6 +1,6 @@
+ include $(top_srcdir)/Makefile.decl
+ 
+-INCLUDES = -g -I$(top_srcdir) -I$(top_srcdir)/glib $(GLIB_DEBUG_FLAGS)
++INCLUDES = -g -I$(top_srcdir) -I$(top_srcdir)/glib -I$(top_builddir)/glib $(GLIB_DEBUG_FLAGS)
+ 
+ noinst_PROGRAMS  = $(TEST_PROGS)
+ libgobject_LDADD = ../libgobject-2.0.la $(top_builddir)/gthread/libgthread-2.0.la $(top_builddir)/glib/libglib-2.0.la
+--- glib2.0-2.25.12.is.2.25.12.orig/gthread/Makefile.am	2010-07-27 07:31:41.000000000 +0200
++++ glib2.0-2.25.12.is.2.25.12/gthread/Makefile.am	2010-08-06 17:37:08.000000000 +0200
+@@ -8,6 +8,7 @@
+ 	-I$(top_srcdir) 		\
+ 	-I$(top_srcdir)/glib 		\
+ 	-I$(top_srcdir)/gthread 	\
++	-I$(top_builddir)/glib 		\
+ 	-DG_LOG_DOMAIN=\"GThread\" 	\
+ 	@GTHREAD_COMPILE_IMPL_DEFINES@ 	\
+ 	@GLIB_DEBUG_FLAGS@ 		\
+--- glib2.0-2.25.12.is.2.25.12.orig/tests/Makefile.am	2010-07-27 07:31:41.000000000 +0200
++++ glib2.0-2.25.12.is.2.25.12/tests/Makefile.am	2010-08-06 17:37:08.000000000 +0200
+@@ -6,6 +6,7 @@
+ 	-I$(top_srcdir) 		\
+ 	-I$(top_srcdir)/glib 		\
+ 	-I$(top_srcdir)/gmodule 	\
++	-I$(top_builddir)/glib 		\
+ 	$(GLIB_DEBUG_FLAGS)
+ 
+ AM_CFLAGS = -g
+--- glib2.0-2.25.12.is.2.25.12.orig/tests/gobject/Makefile.am	2010-07-27 07:31:41.000000000 +0200
++++ glib2.0-2.25.12.is.2.25.12/tests/gobject/Makefile.am	2010-08-06 17:37:08.000000000 +0200
+@@ -4,6 +4,7 @@
+ 	-I$(top_srcdir)				\
+ 	-I$(top_srcdir)/glib			\
+ 	-I$(top_srcdir)/gmodule			\
++	-I$(top_builddir)/glib			\
+ 	$(GLIB_DEBUG_FLAGS)
+ 
+ libglib = $(top_builddir)/glib/libglib-2.0.la
+--- glib2.0-2.25.12.is.2.25.12.orig/tests/refcount/Makefile.am	2010-07-29 16:49:48.000000000 +0200
++++ glib2.0-2.25.12.is.2.25.12/tests/refcount/Makefile.am	2010-08-06 17:37:08.000000000 +0200
+@@ -4,6 +4,7 @@
+ 	-I$(top_srcdir)				\
+ 	-I$(top_srcdir)/glib			\
+ 	-I$(top_srcdir)/gmodule			\
++	-I$(top_builddir)/glib			\
+ 	$(GLIB_DEBUG_FLAGS)
+ 
+ libglib = $(top_builddir)/glib/libglib-2.0.la
+--- glib2.0-2.25.12.is.2.25.12.orig/gio/fam/Makefile.am	2010-08-06 17:38:43.000000000 +0200
++++ glib2.0-2.25.12.is.2.25.12/gio/fam/Makefile.am	2010-08-06 17:38:12.000000000 +0200
+@@ -19,6 +19,7 @@
+ 
+ libgiofam_la_CFLAGS = \
+ 	-DG_LOG_DOMAIN=\"GLib-GIO\"	\
++	-I$(top_builddir)/glib 	\
+ 	-I$(top_srcdir) 		\
+ 	-I$(top_srcdir)/glib 		\
+ 	-I$(top_srcdir)/gmodule		\
+--- glib2.0-2.25.12.is.2.25.12.orig/gio/inotify/Makefile.am	2010-08-06 17:38:42.000000000 +0200
++++ glib2.0-2.25.12.is.2.25.12/gio/inotify/Makefile.am	2010-08-06 17:38:18.000000000 +0200
+@@ -25,6 +25,7 @@
+ 
+ libinotify_la_CFLAGS = \
+ 	-DG_LOG_DOMAIN=\"GLib-GIO\"	\
++	-I$(top_builddir)/glib 	\
+ 	-I$(top_srcdir) 		\
+ 	-I$(top_srcdir)/glib 		\
+ 	-I$(top_srcdir)/gmodule		\

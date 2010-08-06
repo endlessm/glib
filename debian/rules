@@ -183,6 +183,8 @@ clean: debian/control
 	# remove install and build dirs
 	rm -rf $(installbasedir)
 	rm -rf $(buildbasedir)
+	# workaround bug, that should not be shipped in the tarball
+	-rm glib/glibconfig.h
 	# restore files from backup (before unpatching)
 	-test -r config.sub.orig && mv -f config.sub.orig config.sub
 	-test -r config.guess.orig && mv -f config.guess.orig config.guess
@@ -203,6 +205,7 @@ endif
 binary-indep: build $(maybe_check) install
 	dh_testdir
 	dh_testroot
+	dh_installdirs -i
 	dh_install -i
 	dh_installchangelogs -i -N$(DATA_PKG) ChangeLog
 	dh_installdocs -N$(DATA_PKG) -i NEWS README
@@ -217,6 +220,7 @@ binary-indep: build $(maybe_check) install
 binary-arch: build $(maybe_check) install
 	dh_testdir
 	dh_testroot
+	dh_installdirs -s
 	dh_install -s
 	# empty the dependency_libs in the *.la files
 	sed -i -e "/dependency_libs/ s/'.*'/''/" debian/$(DEV_PKG)/usr/lib/*.la
