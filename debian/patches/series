@@ -4,5 +4,3 @@
 04_homedir_env.patch
 60_wait-longer-for-threads-to-die.patch
 61_glib-compile-schemas-path.patch
-90_git_glibconfig_build.patch
-99_autoreconf.patch
