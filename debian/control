@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Loic Minier <lool@dooz.org>
 Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Sebastian Dröge <slomo@debian.org>
 Build-Depends: debhelper (>> 5.0.22),
-               pkg-config (>= 0.14.0),
+               pkg-config (>= 0.16.0),
                gettext,
                autotools-dev,
                gnome-pkg-tools (>= 0.11),
@@ -80,7 +80,7 @@ Depends: ${misc:Depends},
          ${shlibs:Depends},
          libglib2.0-0 (= ${binary:Version}),
          libglib2.0-bin (= ${binary:Version}),
-         pkg-config (>= 0.14.0),
+         pkg-config (>= 0.16.0),
          zlib1g-dev
 Recommends: python
 Suggests: libglib2.0-doc

@@ -35,23 +35,23 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_app_launch_context_get_type@Base 2.16.0
  g_app_launch_context_launch_failed@Base 2.16.0
  g_app_launch_context_new@Base 2.16.0
- g_application_add_action@Base 2.25.12
- g_application_get_action_description@Base 2.25.12
- g_application_get_action_enabled@Base 2.25.12
- g_application_get_id@Base 2.25.12
- g_application_get_instance@Base 2.25.12
- g_application_get_type@Base 2.25.12
- g_application_invoke_action@Base 2.25.12
- g_application_is_remote@Base 2.25.12
- g_application_list_actions@Base 2.25.12
- g_application_new@Base 2.25.12
- g_application_quit_with_data@Base 2.25.12
- g_application_register@Base 2.25.12
- g_application_remove_action@Base 2.25.12
- g_application_run@Base 2.25.12
- g_application_set_action_enabled@Base 2.25.12
- g_application_try_new@Base 2.25.12
- g_application_unregistered_try_new@Base 2.25.12
+ g_application_add_action@Base 2.25.13
+ g_application_get_action_description@Base 2.25.13
+ g_application_get_action_enabled@Base 2.25.13
+ g_application_get_id@Base 2.25.13
+ g_application_get_instance@Base 2.25.13
+ g_application_get_type@Base 2.25.13
+ g_application_invoke_action@Base 2.25.13
+ g_application_is_remote@Base 2.25.13
+ g_application_list_actions@Base 2.25.13
+ g_application_new@Base 2.25.13
+ g_application_quit_with_data@Base 2.25.13
+ g_application_register@Base 2.25.13
+ g_application_remove_action@Base 2.25.13
+ g_application_run@Base 2.25.13
+ g_application_set_action_enabled@Base 2.25.13
+ g_application_try_new@Base 2.25.13
+ g_application_unregistered_try_new@Base 2.25.13
  g_ask_password_flags_get_type@Base 2.16.0
  g_async_initable_get_type@Base 2.22.0
  g_async_initable_init_async@Base 2.22.0
@@ -82,22 +82,22 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_buffered_output_stream_new_sized@Base 2.16.0
  g_buffered_output_stream_set_auto_grow@Base 2.16.0
  g_buffered_output_stream_set_buffer_size@Base 2.16.0
- g_bus_get@Base 2.25.12
- g_bus_get_finish@Base 2.25.12
- g_bus_get_sync@Base 2.25.12
- g_bus_name_owner_flags_get_type@Base 2.25.12
- g_bus_name_watcher_flags_get_type@Base 2.25.12
- g_bus_own_name@Base 2.25.12
- g_bus_own_name_on_connection@Base 2.25.12
- g_bus_own_name_on_connection_with_closures@Base 2.25.12
- g_bus_own_name_with_closures@Base 2.25.12
- g_bus_type_get_type@Base 2.25.12
- g_bus_unown_name@Base 2.25.12
- g_bus_unwatch_name@Base 2.25.12
- g_bus_watch_name@Base 2.25.12
- g_bus_watch_name_on_connection@Base 2.25.12
- g_bus_watch_name_on_connection_with_closures@Base 2.25.12
- g_bus_watch_name_with_closures@Base 2.25.12
+ g_bus_get@Base 2.25.13
+ g_bus_get_finish@Base 2.25.13
+ g_bus_get_sync@Base 2.25.13
+ g_bus_name_owner_flags_get_type@Base 2.25.13
+ g_bus_name_watcher_flags_get_type@Base 2.25.13
+ g_bus_own_name@Base 2.25.13
+ g_bus_own_name_on_connection@Base 2.25.13
+ g_bus_own_name_on_connection_with_closures@Base 2.25.13
+ g_bus_own_name_with_closures@Base 2.25.13
+ g_bus_type_get_type@Base 2.25.13
+ g_bus_unown_name@Base 2.25.13
+ g_bus_unwatch_name@Base 2.25.13
+ g_bus_watch_name@Base 2.25.13
+ g_bus_watch_name_on_connection@Base 2.25.13
+ g_bus_watch_name_on_connection_with_closures@Base 2.25.13
+ g_bus_watch_name_with_closures@Base 2.25.13
  g_cancellable_cancel@Base 2.16.0
  g_cancellable_connect@Base 2.22.0
  g_cancellable_disconnect@Base 2.22.0
@@ -139,15 +139,15 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_converter_output_stream_new@Base 2.24.0
  g_converter_reset@Base 2.24.0
  g_converter_result_get_type@Base 2.24.0
- g_credentials_get_native@Base 2.25.12
- g_credentials_get_type@Base 2.25.12
- g_credentials_get_unix_user@Base 2.25.12
- g_credentials_is_same_user@Base 2.25.12
- g_credentials_new@Base 2.25.12
- g_credentials_set_native@Base 2.25.12
- g_credentials_set_unix_user@Base 2.25.12
- g_credentials_to_string@Base 2.25.12
- g_credentials_type_get_type@Base 2.25.12
+ g_credentials_get_native@Base 2.25.13
+ g_credentials_get_type@Base 2.25.13
+ g_credentials_get_unix_user@Base 2.25.13
+ g_credentials_is_same_user@Base 2.25.13
+ g_credentials_new@Base 2.25.13
+ g_credentials_set_native@Base 2.25.13
+ g_credentials_set_unix_user@Base 2.25.13
+ g_credentials_to_string@Base 2.25.13
+ g_credentials_type_get_type@Base 2.25.13
  g_data_input_stream_get_byte_order@Base 2.16.0
  g_data_input_stream_get_newline_type@Base 2.16.0
  g_data_input_stream_get_type@Base 2.16.0
@@ -181,205 +181,208 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_data_output_stream_set_byte_order@Base 2.16.0
  g_data_stream_byte_order_get_type@Base 2.16.0
  g_data_stream_newline_type_get_type@Base 2.16.0
- g_dbus_address_get_for_bus_sync@Base 2.25.12
- g_dbus_address_get_stream@Base 2.25.12
- g_dbus_address_get_stream_finish@Base 2.25.12
- g_dbus_address_get_stream_sync@Base 2.25.12
- g_dbus_annotation_info_get_type@Base 2.25.12
- g_dbus_annotation_info_lookup@Base 2.25.12
- g_dbus_annotation_info_ref@Base 2.25.12
- g_dbus_annotation_info_unref@Base 2.25.12
- g_dbus_arg_info_get_type@Base 2.25.12
- g_dbus_arg_info_ref@Base 2.25.12
- g_dbus_arg_info_unref@Base 2.25.12
- g_dbus_auth_observer_authorize_authenticated_peer@Base 2.25.12
- g_dbus_auth_observer_get_type@Base 2.25.12
- g_dbus_auth_observer_new@Base 2.25.12
- g_dbus_call_flags_get_type@Base 2.25.12
- g_dbus_capability_flags_get_type@Base 2.25.12
- g_dbus_connection_add_filter@Base 2.25.12
- g_dbus_connection_call@Base 2.25.12
- g_dbus_connection_call_finish@Base 2.25.12
- g_dbus_connection_call_sync@Base 2.25.12
- g_dbus_connection_close@Base 2.25.12
- g_dbus_connection_close_finish@Base 2.25.12
- g_dbus_connection_close_sync@Base 2.25.12
- g_dbus_connection_emit_signal@Base 2.25.12
- g_dbus_connection_flags_get_type@Base 2.25.12
- g_dbus_connection_flush@Base 2.25.12
- g_dbus_connection_flush_finish@Base 2.25.12
- g_dbus_connection_flush_sync@Base 2.25.12
- g_dbus_connection_get_capabilities@Base 2.25.12
- g_dbus_connection_get_exit_on_close@Base 2.25.12
- g_dbus_connection_get_guid@Base 2.25.12
- g_dbus_connection_get_peer_credentials@Base 2.25.12
- g_dbus_connection_get_stream@Base 2.25.12
- g_dbus_connection_get_type@Base 2.25.12
- g_dbus_connection_get_unique_name@Base 2.25.12
- g_dbus_connection_is_closed@Base 2.25.12
- g_dbus_connection_new@Base 2.25.12
- g_dbus_connection_new_finish@Base 2.25.12
- g_dbus_connection_new_for_address@Base 2.25.12
- g_dbus_connection_new_for_address_finish@Base 2.25.12
- g_dbus_connection_new_for_address_sync@Base 2.25.12
- g_dbus_connection_new_sync@Base 2.25.12
- g_dbus_connection_register_object@Base 2.25.12
- g_dbus_connection_register_subtree@Base 2.25.12
- g_dbus_connection_remove_filter@Base 2.25.12
- g_dbus_connection_send_message@Base 2.25.12
- g_dbus_connection_send_message_with_reply@Base 2.25.12
- g_dbus_connection_send_message_with_reply_finish@Base 2.25.12
- g_dbus_connection_send_message_with_reply_sync@Base 2.25.12
- g_dbus_connection_set_exit_on_close@Base 2.25.12
- g_dbus_connection_signal_subscribe@Base 2.25.12
- g_dbus_connection_signal_unsubscribe@Base 2.25.12
- g_dbus_connection_start_message_processing@Base 2.25.12
- g_dbus_connection_unregister_object@Base 2.25.12
- g_dbus_connection_unregister_subtree@Base 2.25.12
- g_dbus_error_encode_gerror@Base 2.25.12
- g_dbus_error_get_remote_error@Base 2.25.12
- g_dbus_error_get_type@Base 2.25.12
- g_dbus_error_is_remote_error@Base 2.25.12
- g_dbus_error_new_for_dbus_error@Base 2.25.12
- g_dbus_error_quark@Base 2.25.12
- g_dbus_error_register_error@Base 2.25.12
- g_dbus_error_register_error_domain@Base 2.25.12
- g_dbus_error_set_dbus_error@Base 2.25.12
- g_dbus_error_set_dbus_error_valist@Base 2.25.12
- g_dbus_error_strip_remote_error@Base 2.25.12
- g_dbus_error_unregister_error@Base 2.25.12
- g_dbus_generate_guid@Base 2.25.12
- g_dbus_interface_info_generate_xml@Base 2.25.12
- g_dbus_interface_info_get_type@Base 2.25.12
- g_dbus_interface_info_lookup_method@Base 2.25.12
- g_dbus_interface_info_lookup_property@Base 2.25.12
- g_dbus_interface_info_lookup_signal@Base 2.25.12
- g_dbus_interface_info_ref@Base 2.25.12
- g_dbus_interface_info_unref@Base 2.25.12
- g_dbus_is_address@Base 2.25.12
- g_dbus_is_guid@Base 2.25.12
- g_dbus_is_interface_name@Base 2.25.12
- g_dbus_is_member_name@Base 2.25.12
- g_dbus_is_name@Base 2.25.12
- g_dbus_is_supported_address@Base 2.25.12
- g_dbus_is_unique_name@Base 2.25.12
- g_dbus_message_bytes_needed@Base 2.25.12
- g_dbus_message_flags_get_type@Base 2.25.12
- g_dbus_message_get_arg0@Base 2.25.12
- g_dbus_message_get_body@Base 2.25.12
- g_dbus_message_get_destination@Base 2.25.12
- g_dbus_message_get_error_name@Base 2.25.12
- g_dbus_message_get_flags@Base 2.25.12
- g_dbus_message_get_header@Base 2.25.12
- g_dbus_message_get_header_fields@Base 2.25.12
- g_dbus_message_get_interface@Base 2.25.12
- g_dbus_message_get_member@Base 2.25.12
- g_dbus_message_get_message_type@Base 2.25.12
- g_dbus_message_get_num_unix_fds@Base 2.25.12
- g_dbus_message_get_path@Base 2.25.12
- g_dbus_message_get_reply_serial@Base 2.25.12
- g_dbus_message_get_sender@Base 2.25.12
- g_dbus_message_get_serial@Base 2.25.12
- g_dbus_message_get_signature@Base 2.25.12
- g_dbus_message_get_type@Base 2.25.12
- g_dbus_message_get_unix_fd_list@Base 2.25.12
- g_dbus_message_header_field_get_type@Base 2.25.12
- g_dbus_message_new@Base 2.25.12
- g_dbus_message_new_from_blob@Base 2.25.12
- g_dbus_message_new_method_call@Base 2.25.12
- g_dbus_message_new_method_error@Base 2.25.12
- g_dbus_message_new_method_error_literal@Base 2.25.12
- g_dbus_message_new_method_error_valist@Base 2.25.12
- g_dbus_message_new_method_reply@Base 2.25.12
- g_dbus_message_new_signal@Base 2.25.12
- g_dbus_message_print@Base 2.25.12
- g_dbus_message_set_body@Base 2.25.12
- g_dbus_message_set_destination@Base 2.25.12
- g_dbus_message_set_error_name@Base 2.25.12
- g_dbus_message_set_flags@Base 2.25.12
- g_dbus_message_set_header@Base 2.25.12
- g_dbus_message_set_interface@Base 2.25.12
- g_dbus_message_set_member@Base 2.25.12
- g_dbus_message_set_message_type@Base 2.25.12
- g_dbus_message_set_num_unix_fds@Base 2.25.12
- g_dbus_message_set_path@Base 2.25.12
- g_dbus_message_set_reply_serial@Base 2.25.12
- g_dbus_message_set_sender@Base 2.25.12
- g_dbus_message_set_serial@Base 2.25.12
- g_dbus_message_set_signature@Base 2.25.12
- g_dbus_message_set_unix_fd_list@Base 2.25.12
- g_dbus_message_to_blob@Base 2.25.12
- g_dbus_message_to_gerror@Base 2.25.12
- g_dbus_message_type_get_type@Base 2.25.12
- g_dbus_method_info_get_type@Base 2.25.12
- g_dbus_method_info_ref@Base 2.25.12
- g_dbus_method_info_unref@Base 2.25.12
- g_dbus_method_invocation_get_connection@Base 2.25.12
- g_dbus_method_invocation_get_interface_name@Base 2.25.12
- g_dbus_method_invocation_get_message@Base 2.25.12
- g_dbus_method_invocation_get_method_info@Base 2.25.12
- g_dbus_method_invocation_get_method_name@Base 2.25.12
- g_dbus_method_invocation_get_object_path@Base 2.25.12
- g_dbus_method_invocation_get_parameters@Base 2.25.12
- g_dbus_method_invocation_get_sender@Base 2.25.12
- g_dbus_method_invocation_get_type@Base 2.25.12
- g_dbus_method_invocation_get_user_data@Base 2.25.12
- g_dbus_method_invocation_new@Base 2.25.12
- g_dbus_method_invocation_return_dbus_error@Base 2.25.12
- g_dbus_method_invocation_return_error@Base 2.25.12
- g_dbus_method_invocation_return_error_literal@Base 2.25.12
- g_dbus_method_invocation_return_error_valist@Base 2.25.12
- g_dbus_method_invocation_return_gerror@Base 2.25.12
- g_dbus_method_invocation_return_value@Base 2.25.12
- g_dbus_node_info_generate_xml@Base 2.25.12
- g_dbus_node_info_get_type@Base 2.25.12
- g_dbus_node_info_lookup_interface@Base 2.25.12
- g_dbus_node_info_new_for_xml@Base 2.25.12
- g_dbus_node_info_ref@Base 2.25.12
- g_dbus_node_info_unref@Base 2.25.12
- g_dbus_property_info_flags_get_type@Base 2.25.12
- g_dbus_property_info_get_type@Base 2.25.12
- g_dbus_property_info_ref@Base 2.25.12
- g_dbus_property_info_unref@Base 2.25.12
- g_dbus_proxy_call@Base 2.25.12
- g_dbus_proxy_call_finish@Base 2.25.12
- g_dbus_proxy_call_sync@Base 2.25.12
- g_dbus_proxy_flags_get_type@Base 2.25.12
- g_dbus_proxy_get_cached_property@Base 2.25.12
- g_dbus_proxy_get_cached_property_names@Base 2.25.12
- g_dbus_proxy_get_connection@Base 2.25.12
- g_dbus_proxy_get_default_timeout@Base 2.25.12
- g_dbus_proxy_get_flags@Base 2.25.12
- g_dbus_proxy_get_interface_info@Base 2.25.12
- g_dbus_proxy_get_interface_name@Base 2.25.12
- g_dbus_proxy_get_name@Base 2.25.12
- g_dbus_proxy_get_name_owner@Base 2.25.12
- g_dbus_proxy_get_object_path@Base 2.25.12
- g_dbus_proxy_get_type@Base 2.25.12
- g_dbus_proxy_new@Base 2.25.12
- g_dbus_proxy_new_finish@Base 2.25.12
- g_dbus_proxy_new_for_bus@Base 2.25.12
- g_dbus_proxy_new_for_bus_finish@Base 2.25.12
- g_dbus_proxy_new_for_bus_sync@Base 2.25.12
- g_dbus_proxy_new_sync@Base 2.25.12
- g_dbus_proxy_set_cached_property@Base 2.25.12
- g_dbus_proxy_set_default_timeout@Base 2.25.12
- g_dbus_proxy_set_interface_info@Base 2.25.12
- g_dbus_send_message_flags_get_type@Base 2.25.12
- g_dbus_server_flags_get_type@Base 2.25.12
- g_dbus_server_get_client_address@Base 2.25.12
- g_dbus_server_get_flags@Base 2.25.12
- g_dbus_server_get_guid@Base 2.25.12
- g_dbus_server_get_type@Base 2.25.12
- g_dbus_server_is_active@Base 2.25.12
- g_dbus_server_new_sync@Base 2.25.12
- g_dbus_server_start@Base 2.25.12
- g_dbus_server_stop@Base 2.25.12
- g_dbus_signal_flags_get_type@Base 2.25.12
- g_dbus_signal_info_get_type@Base 2.25.12
- g_dbus_signal_info_ref@Base 2.25.12
- g_dbus_signal_info_unref@Base 2.25.12
- g_dbus_subtree_flags_get_type@Base 2.25.12
+ g_dbus_address_get_for_bus_sync@Base 2.25.13
+ g_dbus_address_get_stream@Base 2.25.13
+ g_dbus_address_get_stream_finish@Base 2.25.13
+ g_dbus_address_get_stream_sync@Base 2.25.13
+ g_dbus_annotation_info_get_type@Base 2.25.13
+ g_dbus_annotation_info_lookup@Base 2.25.13
+ g_dbus_annotation_info_ref@Base 2.25.13
+ g_dbus_annotation_info_unref@Base 2.25.13
+ g_dbus_arg_info_get_type@Base 2.25.13
+ g_dbus_arg_info_ref@Base 2.25.13
+ g_dbus_arg_info_unref@Base 2.25.13
+ g_dbus_auth_observer_authorize_authenticated_peer@Base 2.25.13
+ g_dbus_auth_observer_get_type@Base 2.25.13
+ g_dbus_auth_observer_new@Base 2.25.13
+ g_dbus_call_flags_get_type@Base 2.25.13
+ g_dbus_capability_flags_get_type@Base 2.25.13
+ g_dbus_connection_add_filter@Base 2.25.13
+ g_dbus_connection_call@Base 2.25.13
+ g_dbus_connection_call_finish@Base 2.25.13
+ g_dbus_connection_call_sync@Base 2.25.13
+ g_dbus_connection_close@Base 2.25.13
+ g_dbus_connection_close_finish@Base 2.25.13
+ g_dbus_connection_close_sync@Base 2.25.13
+ g_dbus_connection_emit_signal@Base 2.25.13
+ g_dbus_connection_flags_get_type@Base 2.25.13
+ g_dbus_connection_flush@Base 2.25.13
+ g_dbus_connection_flush_finish@Base 2.25.13
+ g_dbus_connection_flush_sync@Base 2.25.13
+ g_dbus_connection_get_capabilities@Base 2.25.13
+ g_dbus_connection_get_exit_on_close@Base 2.25.13
+ g_dbus_connection_get_guid@Base 2.25.13
+ g_dbus_connection_get_peer_credentials@Base 2.25.13
+ g_dbus_connection_get_stream@Base 2.25.13
+ g_dbus_connection_get_type@Base 2.25.13
+ g_dbus_connection_get_unique_name@Base 2.25.13
+ g_dbus_connection_is_closed@Base 2.25.13
+ g_dbus_connection_new@Base 2.25.13
+ g_dbus_connection_new_finish@Base 2.25.13
+ g_dbus_connection_new_for_address@Base 2.25.13
+ g_dbus_connection_new_for_address_finish@Base 2.25.13
+ g_dbus_connection_new_for_address_sync@Base 2.25.13
+ g_dbus_connection_new_sync@Base 2.25.13
+ g_dbus_connection_register_object@Base 2.25.13
+ g_dbus_connection_register_subtree@Base 2.25.13
+ g_dbus_connection_remove_filter@Base 2.25.13
+ g_dbus_connection_send_message@Base 2.25.13
+ g_dbus_connection_send_message_with_reply@Base 2.25.13
+ g_dbus_connection_send_message_with_reply_finish@Base 2.25.13
+ g_dbus_connection_send_message_with_reply_sync@Base 2.25.13
+ g_dbus_connection_set_exit_on_close@Base 2.25.13
+ g_dbus_connection_signal_subscribe@Base 2.25.13
+ g_dbus_connection_signal_unsubscribe@Base 2.25.13
+ g_dbus_connection_start_message_processing@Base 2.25.13
+ g_dbus_connection_unregister_object@Base 2.25.13
+ g_dbus_connection_unregister_subtree@Base 2.25.13
+ g_dbus_error_encode_gerror@Base 2.25.13
+ g_dbus_error_get_remote_error@Base 2.25.13
+ g_dbus_error_get_type@Base 2.25.13
+ g_dbus_error_is_remote_error@Base 2.25.13
+ g_dbus_error_new_for_dbus_error@Base 2.25.13
+ g_dbus_error_quark@Base 2.25.13
+ g_dbus_error_register_error@Base 2.25.13
+ g_dbus_error_register_error_domain@Base 2.25.13
+ g_dbus_error_set_dbus_error@Base 2.25.13
+ g_dbus_error_set_dbus_error_valist@Base 2.25.13
+ g_dbus_error_strip_remote_error@Base 2.25.13
+ g_dbus_error_unregister_error@Base 2.25.13
+ g_dbus_generate_guid@Base 2.25.13
+ g_dbus_interface_info_generate_xml@Base 2.25.13
+ g_dbus_interface_info_get_type@Base 2.25.13
+ g_dbus_interface_info_lookup_method@Base 2.25.13
+ g_dbus_interface_info_lookup_property@Base 2.25.13
+ g_dbus_interface_info_lookup_signal@Base 2.25.13
+ g_dbus_interface_info_ref@Base 2.25.13
+ g_dbus_interface_info_unref@Base 2.25.13
+ g_dbus_is_address@Base 2.25.13
+ g_dbus_is_guid@Base 2.25.13
+ g_dbus_is_interface_name@Base 2.25.13
+ g_dbus_is_member_name@Base 2.25.13
+ g_dbus_is_name@Base 2.25.13
+ g_dbus_is_supported_address@Base 2.25.13
+ g_dbus_is_unique_name@Base 2.25.13
+ g_dbus_message_byte_order_get_type@Base 2.25.13
+ g_dbus_message_bytes_needed@Base 2.25.13
+ g_dbus_message_flags_get_type@Base 2.25.13
+ g_dbus_message_get_arg0@Base 2.25.13
+ g_dbus_message_get_body@Base 2.25.13
+ g_dbus_message_get_byte_order@Base 2.25.13
+ g_dbus_message_get_destination@Base 2.25.13
+ g_dbus_message_get_error_name@Base 2.25.13
+ g_dbus_message_get_flags@Base 2.25.13
+ g_dbus_message_get_header@Base 2.25.13
+ g_dbus_message_get_header_fields@Base 2.25.13
+ g_dbus_message_get_interface@Base 2.25.13
+ g_dbus_message_get_member@Base 2.25.13
+ g_dbus_message_get_message_type@Base 2.25.13
+ g_dbus_message_get_num_unix_fds@Base 2.25.13
+ g_dbus_message_get_path@Base 2.25.13
+ g_dbus_message_get_reply_serial@Base 2.25.13
+ g_dbus_message_get_sender@Base 2.25.13
+ g_dbus_message_get_serial@Base 2.25.13
+ g_dbus_message_get_signature@Base 2.25.13
+ g_dbus_message_get_type@Base 2.25.13
+ g_dbus_message_get_unix_fd_list@Base 2.25.13
+ g_dbus_message_header_field_get_type@Base 2.25.13
+ g_dbus_message_new@Base 2.25.13
+ g_dbus_message_new_from_blob@Base 2.25.13
+ g_dbus_message_new_method_call@Base 2.25.13
+ g_dbus_message_new_method_error@Base 2.25.13
+ g_dbus_message_new_method_error_literal@Base 2.25.13
+ g_dbus_message_new_method_error_valist@Base 2.25.13
+ g_dbus_message_new_method_reply@Base 2.25.13
+ g_dbus_message_new_signal@Base 2.25.13
+ g_dbus_message_print@Base 2.25.13
+ g_dbus_message_set_body@Base 2.25.13
+ g_dbus_message_set_byte_order@Base 2.25.13
+ g_dbus_message_set_destination@Base 2.25.13
+ g_dbus_message_set_error_name@Base 2.25.13
+ g_dbus_message_set_flags@Base 2.25.13
+ g_dbus_message_set_header@Base 2.25.13
+ g_dbus_message_set_interface@Base 2.25.13
+ g_dbus_message_set_member@Base 2.25.13
+ g_dbus_message_set_message_type@Base 2.25.13
+ g_dbus_message_set_num_unix_fds@Base 2.25.13
+ g_dbus_message_set_path@Base 2.25.13
+ g_dbus_message_set_reply_serial@Base 2.25.13
+ g_dbus_message_set_sender@Base 2.25.13
+ g_dbus_message_set_serial@Base 2.25.13
+ g_dbus_message_set_signature@Base 2.25.13
+ g_dbus_message_set_unix_fd_list@Base 2.25.13
+ g_dbus_message_to_blob@Base 2.25.13
+ g_dbus_message_to_gerror@Base 2.25.13
+ g_dbus_message_type_get_type@Base 2.25.13
+ g_dbus_method_info_get_type@Base 2.25.13
+ g_dbus_method_info_ref@Base 2.25.13
+ g_dbus_method_info_unref@Base 2.25.13
+ g_dbus_method_invocation_get_connection@Base 2.25.13
+ g_dbus_method_invocation_get_interface_name@Base 2.25.13
+ g_dbus_method_invocation_get_message@Base 2.25.13
+ g_dbus_method_invocation_get_method_info@Base 2.25.13
+ g_dbus_method_invocation_get_method_name@Base 2.25.13
+ g_dbus_method_invocation_get_object_path@Base 2.25.13
+ g_dbus_method_invocation_get_parameters@Base 2.25.13
+ g_dbus_method_invocation_get_sender@Base 2.25.13
+ g_dbus_method_invocation_get_type@Base 2.25.13
+ g_dbus_method_invocation_get_user_data@Base 2.25.13
+ g_dbus_method_invocation_new@Base 2.25.13
+ g_dbus_method_invocation_return_dbus_error@Base 2.25.13
+ g_dbus_method_invocation_return_error@Base 2.25.13
+ g_dbus_method_invocation_return_error_literal@Base 2.25.13
+ g_dbus_method_invocation_return_error_valist@Base 2.25.13
+ g_dbus_method_invocation_return_gerror@Base 2.25.13
+ g_dbus_method_invocation_return_value@Base 2.25.13
+ g_dbus_node_info_generate_xml@Base 2.25.13
+ g_dbus_node_info_get_type@Base 2.25.13
+ g_dbus_node_info_lookup_interface@Base 2.25.13
+ g_dbus_node_info_new_for_xml@Base 2.25.13
+ g_dbus_node_info_ref@Base 2.25.13
+ g_dbus_node_info_unref@Base 2.25.13
+ g_dbus_property_info_flags_get_type@Base 2.25.13
+ g_dbus_property_info_get_type@Base 2.25.13
+ g_dbus_property_info_ref@Base 2.25.13
+ g_dbus_property_info_unref@Base 2.25.13
+ g_dbus_proxy_call@Base 2.25.13
+ g_dbus_proxy_call_finish@Base 2.25.13
+ g_dbus_proxy_call_sync@Base 2.25.13
+ g_dbus_proxy_flags_get_type@Base 2.25.13
+ g_dbus_proxy_get_cached_property@Base 2.25.13
+ g_dbus_proxy_get_cached_property_names@Base 2.25.13
+ g_dbus_proxy_get_connection@Base 2.25.13
+ g_dbus_proxy_get_default_timeout@Base 2.25.13
+ g_dbus_proxy_get_flags@Base 2.25.13
+ g_dbus_proxy_get_interface_info@Base 2.25.13
+ g_dbus_proxy_get_interface_name@Base 2.25.13
+ g_dbus_proxy_get_name@Base 2.25.13
+ g_dbus_proxy_get_name_owner@Base 2.25.13
+ g_dbus_proxy_get_object_path@Base 2.25.13
+ g_dbus_proxy_get_type@Base 2.25.13
+ g_dbus_proxy_new@Base 2.25.13
+ g_dbus_proxy_new_finish@Base 2.25.13
+ g_dbus_proxy_new_for_bus@Base 2.25.13
+ g_dbus_proxy_new_for_bus_finish@Base 2.25.13
+ g_dbus_proxy_new_for_bus_sync@Base 2.25.13
+ g_dbus_proxy_new_sync@Base 2.25.13
+ g_dbus_proxy_set_cached_property@Base 2.25.13
+ g_dbus_proxy_set_default_timeout@Base 2.25.13
+ g_dbus_proxy_set_interface_info@Base 2.25.13
+ g_dbus_send_message_flags_get_type@Base 2.25.13
+ g_dbus_server_flags_get_type@Base 2.25.13
+ g_dbus_server_get_client_address@Base 2.25.13
+ g_dbus_server_get_flags@Base 2.25.13
+ g_dbus_server_get_guid@Base 2.25.13
+ g_dbus_server_get_type@Base 2.25.13
+ g_dbus_server_is_active@Base 2.25.13
+ g_dbus_server_new_sync@Base 2.25.13
+ g_dbus_server_start@Base 2.25.13
+ g_dbus_server_stop@Base 2.25.13
+ g_dbus_signal_flags_get_type@Base 2.25.13
+ g_dbus_signal_info_get_type@Base 2.25.13
+ g_dbus_signal_info_ref@Base 2.25.13
+ g_dbus_signal_info_unref@Base 2.25.13
+ g_dbus_subtree_flags_get_type@Base 2.25.13
  g_desktop_app_info_get_filename@Base 2.24.0
  g_desktop_app_info_get_is_hidden@Base 2.16.0
  g_desktop_app_info_get_type@Base 2.16.0
@@ -441,7 +444,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_attribute_info_list_unref@Base 2.16.0
  g_file_attribute_matcher_enumerate_namespace@Base 2.16.0
  g_file_attribute_matcher_enumerate_next@Base 2.16.0
- g_file_attribute_matcher_get_type@Base 2.25.12
+ g_file_attribute_matcher_get_type@Base 2.25.13
  g_file_attribute_matcher_matches@Base 2.16.0
  g_file_attribute_matcher_matches_only@Base 2.16.0
  g_file_attribute_matcher_new@Base 2.16.0
@@ -755,7 +758,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_io_stream_has_pending@Base 2.22.0
  g_io_stream_is_closed@Base 2.22.0
  g_io_stream_set_pending@Base 2.22.0
- g_keyfile_settings_backend_new@Base 2.25.12
+ g_keyfile_settings_backend_new@Base 2.25.13
  g_loadable_icon_get_type@Base 2.16.0
  g_loadable_icon_load@Base 2.16.0
  g_loadable_icon_load_async@Base 2.16.0
@@ -847,17 +850,17 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_output_stream_write_async@Base 2.16.0
  g_output_stream_write_finish@Base 2.16.0
  g_password_save_get_type@Base 2.16.0
- g_permission_acquire@Base 2.25.12
- g_permission_acquire_async@Base 2.25.12
- g_permission_acquire_finish@Base 2.25.12
- g_permission_get_allowed@Base 2.25.12
- g_permission_get_can_acquire@Base 2.25.12
- g_permission_get_can_release@Base 2.25.12
- g_permission_get_type@Base 2.25.12
- g_permission_impl_update@Base 2.25.12
- g_permission_release@Base 2.25.12
- g_permission_release_async@Base 2.25.12
- g_permission_release_finish@Base 2.25.12
+ g_permission_acquire@Base 2.25.13
+ g_permission_acquire_async@Base 2.25.13
+ g_permission_acquire_finish@Base 2.25.13
+ g_permission_get_allowed@Base 2.25.13
+ g_permission_get_can_acquire@Base 2.25.13
+ g_permission_get_can_release@Base 2.25.13
+ g_permission_get_type@Base 2.25.13
+ g_permission_impl_update@Base 2.25.13
+ g_permission_release@Base 2.25.13
+ g_permission_release_async@Base 2.25.13
+ g_permission_release_finish@Base 2.25.13
  g_resolver_error_get_type@Base 2.22.0
  g_resolver_error_quark@Base 2.22.0
  g_resolver_free_addresses@Base 2.22.0
@@ -880,53 +883,53 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_seekable_seek@Base 2.16.0
  g_seekable_tell@Base 2.16.0
  g_seekable_truncate@Base 2.16.0
- g_settings_apply@Base 2.25.12
- g_settings_backend_changed@Base 2.25.12
- g_settings_backend_changed_tree@Base 2.25.12
- g_settings_backend_flatten_tree@Base 2.25.12
- g_settings_backend_get_type@Base 2.25.12
- g_settings_backend_keys_changed@Base 2.25.12
- g_settings_backend_path_changed@Base 2.25.12
- g_settings_backend_path_writable_changed@Base 2.25.12
- g_settings_backend_writable_changed@Base 2.25.12
- g_settings_bind@Base 2.25.12
- g_settings_bind_flags_get_type@Base 2.25.12
- g_settings_bind_with_mapping@Base 2.25.12
- g_settings_bind_writable@Base 2.25.12
- g_settings_delay@Base 2.25.12
- g_settings_get@Base 2.25.12
- g_settings_get_boolean@Base 2.25.12
- g_settings_get_child@Base 2.25.12
- g_settings_get_double@Base 2.25.12
- g_settings_get_enum@Base 2.25.12
- g_settings_get_flags@Base 2.25.12
- g_settings_get_has_unapplied@Base 2.25.12
- g_settings_get_int@Base 2.25.12
- g_settings_get_mapped@Base 2.25.12
- g_settings_get_string@Base 2.25.12
- g_settings_get_strv@Base 2.25.12
- g_settings_get_type@Base 2.25.12
- g_settings_get_value@Base 2.25.12
- g_settings_is_writable@Base 2.25.12
- g_settings_list_items@Base 2.25.12
- g_settings_list_schemas@Base 2.25.12
- g_settings_new@Base 2.25.12
- g_settings_new_with_backend@Base 2.25.12
- g_settings_new_with_backend_and_path@Base 2.25.12
- g_settings_new_with_path@Base 2.25.12
- g_settings_reset@Base 2.25.12
- g_settings_revert@Base 2.25.12
- g_settings_set@Base 2.25.12
- g_settings_set_boolean@Base 2.25.12
- g_settings_set_double@Base 2.25.12
- g_settings_set_enum@Base 2.25.12
- g_settings_set_flags@Base 2.25.12
- g_settings_set_int@Base 2.25.12
- g_settings_set_string@Base 2.25.12
- g_settings_set_strv@Base 2.25.12
- g_settings_set_value@Base 2.25.12
- g_settings_sync@Base 2.25.12
- g_settings_unbind@Base 2.25.12
+ g_settings_apply@Base 2.25.13
+ g_settings_backend_changed@Base 2.25.13
+ g_settings_backend_changed_tree@Base 2.25.13
+ g_settings_backend_flatten_tree@Base 2.25.13
+ g_settings_backend_get_type@Base 2.25.13
+ g_settings_backend_keys_changed@Base 2.25.13
+ g_settings_backend_path_changed@Base 2.25.13
+ g_settings_backend_path_writable_changed@Base 2.25.13
+ g_settings_backend_writable_changed@Base 2.25.13
+ g_settings_bind@Base 2.25.13
+ g_settings_bind_flags_get_type@Base 2.25.13
+ g_settings_bind_with_mapping@Base 2.25.13
+ g_settings_bind_writable@Base 2.25.13
+ g_settings_delay@Base 2.25.13
+ g_settings_get@Base 2.25.13
+ g_settings_get_boolean@Base 2.25.13
+ g_settings_get_child@Base 2.25.13
+ g_settings_get_double@Base 2.25.13
+ g_settings_get_enum@Base 2.25.13
+ g_settings_get_flags@Base 2.25.13
+ g_settings_get_has_unapplied@Base 2.25.13
+ g_settings_get_int@Base 2.25.13
+ g_settings_get_mapped@Base 2.25.13
+ g_settings_get_string@Base 2.25.13
+ g_settings_get_strv@Base 2.25.13
+ g_settings_get_type@Base 2.25.13
+ g_settings_get_value@Base 2.25.13
+ g_settings_is_writable@Base 2.25.13
+ g_settings_list_items@Base 2.25.13
+ g_settings_list_schemas@Base 2.25.13
+ g_settings_new@Base 2.25.13
+ g_settings_new_with_backend@Base 2.25.13
+ g_settings_new_with_backend_and_path@Base 2.25.13
+ g_settings_new_with_path@Base 2.25.13
+ g_settings_reset@Base 2.25.13
+ g_settings_revert@Base 2.25.13
+ g_settings_set@Base 2.25.13
+ g_settings_set_boolean@Base 2.25.13
+ g_settings_set_double@Base 2.25.13
+ g_settings_set_enum@Base 2.25.13
+ g_settings_set_flags@Base 2.25.13
+ g_settings_set_int@Base 2.25.13
+ g_settings_set_string@Base 2.25.13
+ g_settings_set_strv@Base 2.25.13
+ g_settings_set_value@Base 2.25.13
+ g_settings_sync@Base 2.25.13
+ g_settings_unbind@Base 2.25.13
  g_simple_async_report_error_in_idle@Base 2.16.0
  g_simple_async_report_gerror_in_idle@Base 2.16.0
  g_simple_async_result_complete@Base 2.16.0
@@ -949,8 +952,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_simple_async_result_set_op_res_gboolean@Base 2.16.0
  g_simple_async_result_set_op_res_gpointer@Base 2.16.0
  g_simple_async_result_set_op_res_gssize@Base 2.16.0
- g_simple_permission_get_type@Base 2.25.12
- g_simple_permission_new@Base 2.25.12
+ g_simple_permission_get_type@Base 2.25.13
+ g_simple_permission_new@Base 2.25.13
  g_socket_accept@Base 2.22.0
  g_socket_address_enumerator_get_type@Base 2.22.0
  g_socket_address_enumerator_next@Base 2.22.0
@@ -1004,7 +1007,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_socket_create_source@Base 2.22.0
  g_socket_family_get_type@Base 2.22.0
  g_socket_get_blocking@Base 2.22.0
- g_socket_get_credentials@Base 2.25.12
+ g_socket_get_credentials@Base 2.25.13
  g_socket_get_family@Base 2.22.0
  g_socket_get_fd@Base 2.22.0
  g_socket_get_keepalive@Base 2.22.0
@@ -1013,7 +1016,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_socket_get_protocol@Base 2.22.0
  g_socket_get_remote_address@Base 2.22.0
  g_socket_get_socket_type@Base 2.22.0
- g_socket_get_timeout@Base 2.25.12
+ g_socket_get_timeout@Base 2.25.13
  g_socket_get_type@Base 2.22.0
  g_socket_is_closed@Base 2.22.0
  g_socket_is_connected@Base 2.22.0
@@ -1050,7 +1053,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_socket_set_blocking@Base 2.22.0
  g_socket_set_keepalive@Base 2.22.0
  g_socket_set_listen_backlog@Base 2.22.0
- g_socket_set_timeout@Base 2.25.12
+ g_socket_set_timeout@Base 2.25.13
  g_socket_shutdown@Base 2.22.0
  g_socket_speaks_ipv4@Base 2.22.0
  g_socket_type_get_type@Base 2.22.0
@@ -1077,15 +1080,15 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_threaded_socket_service_get_type@Base 2.22.0
  g_threaded_socket_service_new@Base 2.22.0
  g_unix_connection_get_type@Base 2.22.0
- g_unix_connection_receive_credentials@Base 2.25.12
+ g_unix_connection_receive_credentials@Base 2.25.13
  g_unix_connection_receive_fd@Base 2.22.0
- g_unix_connection_send_credentials@Base 2.25.12
+ g_unix_connection_send_credentials@Base 2.25.13
  g_unix_connection_send_fd@Base 2.22.0
- g_unix_credentials_message_get_credentials@Base 2.25.12
- g_unix_credentials_message_get_type@Base 2.25.12
- g_unix_credentials_message_is_supported@Base 2.25.12
- g_unix_credentials_message_new@Base 2.25.12
- g_unix_credentials_message_new_with_credentials@Base 2.25.12
+ g_unix_credentials_message_get_credentials@Base 2.25.13
+ g_unix_credentials_message_get_type@Base 2.25.13
+ g_unix_credentials_message_is_supported@Base 2.25.13
+ g_unix_credentials_message_new@Base 2.25.13
+ g_unix_credentials_message_new_with_credentials@Base 2.25.13
  g_unix_fd_list_append@Base 2.24.0
  g_unix_fd_list_get@Base 2.24.0
  g_unix_fd_list_get_length@Base 2.24.0
@@ -1143,15 +1146,15 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_output_stream_set_close_fd@Base 2.20.0
  g_unix_resolver_get_type@Base 2.22.0
  g_unix_socket_address_abstract_names_supported@Base 2.22.0
- g_unix_socket_address_get_address_type@Base 2.25.12
+ g_unix_socket_address_get_address_type@Base 2.25.13
  g_unix_socket_address_get_is_abstract@Base 2.22.0
  g_unix_socket_address_get_path@Base 2.22.0
  g_unix_socket_address_get_path_len@Base 2.22.0
  g_unix_socket_address_get_type@Base 2.22.0
  g_unix_socket_address_new@Base 2.22.0
  g_unix_socket_address_new_abstract@Base 2.22.0
- g_unix_socket_address_new_with_type@Base 2.25.12
- g_unix_socket_address_type_get_type@Base 2.25.12
+ g_unix_socket_address_new_with_type@Base 2.25.13
+ g_unix_socket_address_type_get_type@Base 2.25.13
  g_vfs_get_default@Base 2.16.0
  g_vfs_get_file_for_path@Base 2.16.0
  g_vfs_get_file_for_uri@Base 2.16.0
@@ -1431,7 +1434,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_date_valid_month@Base 2.12.0
  g_date_valid_weekday@Base 2.12.0
  g_date_valid_year@Base 2.12.0
- g_dcgettext@Base 2.25.12
+ g_dcgettext@Base 2.25.13
  g_dgettext@Base 2.18.0
  g_dir_close@Base 2.12.0
  g_dir_open@Base 2.12.0
@@ -1603,7 +1606,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_key_file_get_double@Base 2.12.0
  g_key_file_get_double_list@Base 2.12.0
  g_key_file_get_groups@Base 2.12.0
- g_key_file_get_int64@Base 2.25.12
+ g_key_file_get_int64@Base 2.25.13
  g_key_file_get_integer@Base 2.12.0
  g_key_file_get_integer_list@Base 2.12.0
  g_key_file_get_keys@Base 2.12.0
@@ -1612,7 +1615,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_key_file_get_start_group@Base 2.12.0
  g_key_file_get_string@Base 2.12.0
  g_key_file_get_string_list@Base 2.12.0
- g_key_file_get_uint64@Base 2.25.12
+ g_key_file_get_uint64@Base 2.25.13
  g_key_file_get_value@Base 2.12.0
  g_key_file_has_group@Base 2.12.0
  g_key_file_has_key@Base 2.12.0
@@ -1629,7 +1632,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_key_file_set_comment@Base 2.12.0
  g_key_file_set_double@Base 2.12.0
  g_key_file_set_double_list@Base 2.12.0
- g_key_file_set_int64@Base 2.25.12
+ g_key_file_set_int64@Base 2.25.13
  g_key_file_set_integer@Base 2.12.0
  g_key_file_set_integer_list@Base 2.12.0
  g_key_file_set_list_separator@Base 2.12.0
@@ -1637,7 +1640,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_key_file_set_locale_string_list@Base 2.12.0
  g_key_file_set_string@Base 2.12.0
  g_key_file_set_string_list@Base 2.12.0
- g_key_file_set_uint64@Base 2.25.12
+ g_key_file_set_uint64@Base 2.25.13
  g_key_file_set_value@Base 2.12.0
  g_key_file_to_data@Base 2.12.0
  g_list_alloc@Base 2.12.0
@@ -1937,8 +1940,8 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_regex_error_quark@Base 2.14.0
  g_regex_escape_string@Base 2.14.0
  g_regex_get_capture_count@Base 2.14.0
- g_regex_get_compile_flags@Base 2.25.12
- g_regex_get_match_flags@Base 2.25.12
+ g_regex_get_compile_flags@Base 2.25.13
+ g_regex_get_match_flags@Base 2.25.13
  g_regex_get_max_backref@Base 2.14.0
  g_regex_get_pattern@Base 2.14.0
  g_regex_get_string_number@Base 2.14.0
@@ -2040,7 +2043,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_slice_alloc0@Base 2.12.0
  g_slice_alloc@Base 2.12.0
  g_slice_copy@Base 2.14.0
- g_slice_debug_tree_statistics@Base 2.25.12
+ g_slice_debug_tree_statistics@Base 2.25.13
  g_slice_free1@Base 2.12.0
  g_slice_free_chain_with_offset@Base 2.12.0
  g_slice_get_config@Base 2.12.0
@@ -2083,7 +2086,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_source_get_context@Base 2.12.0
  g_source_get_current_time@Base 2.12.0
  g_source_get_id@Base 2.12.0
- g_source_get_name@Base 2.25.12
+ g_source_get_name@Base 2.25.13
  g_source_get_priority@Base 2.12.0
  g_source_is_destroyed@Base 2.12.0
  g_source_new@Base 2.12.0
@@ -2096,8 +2099,8 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_source_set_callback_indirect@Base 2.12.0
  g_source_set_can_recurse@Base 2.12.0
  g_source_set_funcs@Base 2.12.0
- g_source_set_name@Base 2.25.12
- g_source_set_name_by_id@Base 2.25.12
+ g_source_set_name@Base 2.25.13
+ g_source_set_name_by_id@Base 2.25.13
  g_source_set_priority@Base 2.12.0
  g_source_unref@Base 2.12.0
  g_spaced_primes_closest@Base 2.12.0
@@ -2389,7 +2392,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_utf8_validate@Base 2.12.0
  g_utime@Base 2.18.0
  g_variant_builder_add@Base 2.24.0
- g_variant_builder_add_parsed@Base 2.25.12
+ g_variant_builder_add_parsed@Base 2.25.13
  g_variant_builder_add_value@Base 2.24.0
  g_variant_builder_clear@Base 2.24.0
  g_variant_builder_close@Base 2.24.0
@@ -2401,9 +2404,9 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_variant_builder_unref@Base 2.24.0
  g_variant_byteswap@Base 2.24.0
  g_variant_classify@Base 2.24.0
- g_variant_compare@Base 2.25.12
- g_variant_dup_bytestring@Base 2.25.12
- g_variant_dup_bytestring_array@Base 2.25.12
+ g_variant_compare@Base 2.25.13
+ g_variant_dup_bytestring@Base 2.25.13
+ g_variant_dup_bytestring_array@Base 2.25.13
  g_variant_dup_string@Base 2.24.0
  g_variant_dup_strv@Base 2.24.0
  g_variant_equal@Base 2.24.0
@@ -2412,8 +2415,8 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_variant_get@Base 2.24.0
  g_variant_get_boolean@Base 2.24.0
  g_variant_get_byte@Base 2.24.0
- g_variant_get_bytestring@Base 2.25.12
- g_variant_get_bytestring_array@Base 2.25.12
+ g_variant_get_bytestring@Base 2.25.13
+ g_variant_get_bytestring_array@Base 2.25.13
  g_variant_get_child@Base 2.24.0
  g_variant_get_child_value@Base 2.24.0
  g_variant_get_data@Base 2.24.0
@@ -2437,7 +2440,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_variant_get_variant@Base 2.24.0
  g_variant_hash@Base 2.24.0
  g_variant_is_container@Base 2.24.0
- g_variant_is_floating@Base 2.25.12
+ g_variant_is_floating@Base 2.25.13
  g_variant_is_normal_form@Base 2.24.0
  g_variant_is_object_path@Base 2.24.0
  g_variant_is_of_type@Base 2.24.0
@@ -2455,8 +2458,8 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_variant_new_array@Base 2.24.0
  g_variant_new_boolean@Base 2.24.0
  g_variant_new_byte@Base 2.24.0
- g_variant_new_bytestring@Base 2.25.12
- g_variant_new_bytestring_array@Base 2.25.12
+ g_variant_new_bytestring@Base 2.25.13
+ g_variant_new_bytestring_array@Base 2.25.13
  g_variant_new_dict_entry@Base 2.24.0
  g_variant_new_double@Base 2.24.0
  g_variant_new_from_data@Base 2.24.0
@@ -2562,17 +2565,18 @@ libgmodule-2.0.so.0 libglib2.0-0 #MINVER#
 libgobject-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
  g_array_get_type@Base 2.22.0
- g_binding_flags_get_type@Base 2.25.12
- g_binding_get_flags@Base 2.25.12
- g_binding_get_source@Base 2.25.12
- g_binding_get_source_property@Base 2.25.12
- g_binding_get_target@Base 2.25.12
- g_binding_get_target_property@Base 2.25.12
- g_binding_get_type@Base 2.25.12
+ g_binding_flags_get_type@Base 2.25.13
+ g_binding_get_flags@Base 2.25.13
+ g_binding_get_source@Base 2.25.13
+ g_binding_get_source_property@Base 2.25.13
+ g_binding_get_target@Base 2.25.13
+ g_binding_get_target_property@Base 2.25.13
+ g_binding_get_type@Base 2.25.13
  g_boxed_copy@Base 2.12.0
  g_boxed_free@Base 2.12.0
  g_boxed_type_register_static@Base 2.12.0
  g_byte_array_get_type@Base 2.22.0
+ g_cclosure_marshal_BOOLEAN__BOXED_BOXED@Base 2.25.13
  g_cclosure_marshal_BOOLEAN__FLAGS@Base 2.12.0
  g_cclosure_marshal_STRING__OBJECT_POINTER@Base 2.12.0
  g_cclosure_marshal_VOID__BOOLEAN@Base 2.12.0
@@ -2592,7 +2596,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_cclosure_marshal_VOID__UINT@Base 2.12.0
  g_cclosure_marshal_VOID__UINT_POINTER@Base 2.12.0
  g_cclosure_marshal_VOID__ULONG@Base 2.12.0
- g_cclosure_marshal_VOID__VARIANT@Base 2.25.12
+ g_cclosure_marshal_VOID__VARIANT@Base 2.25.13
  g_cclosure_marshal_VOID__VOID@Base 2.12.0
  g_cclosure_new@Base 2.12.0
  g_cclosure_new_object@Base 2.12.0
@@ -2619,7 +2623,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_enum_get_value_by_name@Base 2.12.0
  g_enum_get_value_by_nick@Base 2.12.0
  g_enum_register_static@Base 2.12.0
- g_error_get_type@Base 2.25.12
+ g_error_get_type@Base 2.25.13
  g_flags_complete_type_info@Base 2.12.0
  g_flags_get_first_value@Base 2.12.0
  g_flags_get_value_by_name@Base 2.12.0
@@ -2633,8 +2637,9 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_io_condition_get_type@Base 2.12.0
  g_object_add_toggle_ref@Base 2.12.0
  g_object_add_weak_pointer@Base 2.12.0
- g_object_bind_property@Base 2.25.12
- g_object_bind_property_full@Base 2.25.12
+ g_object_bind_property@Base 2.25.13
+ g_object_bind_property_full@Base 2.25.13
+ g_object_bind_property_with_closures@Base 2.25.13
  g_object_class_find_property@Base 2.12.0
  g_object_class_install_property@Base 2.12.0
  g_object_class_list_properties@Base 2.12.0
@@ -2658,7 +2663,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_object_new_valist@Base 2.12.0
  g_object_newv@Base 2.12.0
  g_object_notify@Base 2.12.0
- g_object_notify_by_pspec@Base 2.25.12
+ g_object_notify_by_pspec@Base 2.25.13
  g_object_ref@Base 2.12.0
  g_object_ref_sink@Base 2.12.0
  g_object_remove_toggle_ref@Base 2.12.0
@@ -2720,7 +2725,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_param_spec_unichar@Base 2.12.0
  g_param_spec_unref@Base 2.12.0
  g_param_spec_value_array@Base 2.12.0
- g_param_spec_variant@Base 2.25.12
+ g_param_spec_variant@Base 2.25.13
  g_param_type_register_static@Base 2.12.0
  g_param_value_convert@Base 2.12.0
  g_param_value_defaults@Base 2.12.0
@@ -2859,7 +2864,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_value_dup_object@Base 2.12.0
  g_value_dup_param@Base 2.12.0
  g_value_dup_string@Base 2.12.0
- g_value_dup_variant@Base 2.25.12
+ g_value_dup_variant@Base 2.25.13
  g_value_fits_pointer@Base 2.12.0
  g_value_get_boolean@Base 2.12.0
  g_value_get_boxed@Base 2.12.0
@@ -2881,7 +2886,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_value_get_uint64@Base 2.12.0
  g_value_get_uint@Base 2.12.0
  g_value_get_ulong@Base 2.12.0
- g_value_get_variant@Base 2.25.12
+ g_value_get_variant@Base 2.25.13
  g_value_init@Base 2.12.0
  g_value_peek_pointer@Base 2.12.0
  g_value_register_transform_func@Base 2.12.0
@@ -2912,12 +2917,12 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_value_set_uint64@Base 2.12.0
  g_value_set_uint@Base 2.12.0
  g_value_set_ulong@Base 2.12.0
- g_value_set_variant@Base 2.25.12
+ g_value_set_variant@Base 2.25.13
  g_value_take_boxed@Base 2.12.0
  g_value_take_object@Base 2.12.0
  g_value_take_param@Base 2.12.0
  g_value_take_string@Base 2.12.0
- g_value_take_variant@Base 2.25.12
+ g_value_take_variant@Base 2.25.13
  g_value_transform@Base 2.12.0
  g_value_type_compatible@Base 2.12.0
  g_value_type_transformable@Base 2.12.0

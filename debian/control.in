@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Loic Minier <lool@dooz.org>
 Uploaders: @GNOME_TEAM@
 Build-Depends: debhelper (>> 5.0.22),
-               pkg-config (>= 0.14.0),
+               pkg-config (>= 0.16.0),
                gettext,
                autotools-dev,
                gnome-pkg-tools (>= 0.11),
@@ -80,7 +80,7 @@ Depends: ${misc:Depends},
          ${shlibs:Depends},
          @SHARED_PKG@ (= ${binary:Version}),
          @BIN_PKG@ (= ${binary:Version}),
-         pkg-config (>= 0.14.0),
+         pkg-config (>= 0.16.0),
          zlib1g-dev
 Recommends: python
 Suggests: @DOC_PKG@
