@@ -1,3 +1,12 @@
+glib2.0 (2.25.14-1) experimental; urgency=low
+
+  * New upstream development release:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Update for the new version.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 17 Aug 2010 11:37:23 +0200
+
 glib2.0 (2.25.13-1) experimental; urgency=low
 
   * New upstream development release:
