@@ -1,4 +1,4 @@
-glib2.0 (2.24.2-1) UNRELEASED; urgency=low
+glib2.0 (2.24.2-1) unstable; urgency=low
 
   * Drop type-handling usage. Closes: #587863.
   * Bump standards version accordingly.
@@ -9,7 +9,7 @@ glib2.0 (2.24.2-1) UNRELEASED; urgency=low
     + Works around the race condition in gtester that causes random 
       FTBFSes.
 
- -- Josselin Mouette <joss@debian.org>  Fri, 02 Jul 2010 18:51:29 +0200
+ -- Josselin Mouette <joss@debian.org>  Wed, 08 Sep 2010 20:39:43 +0200
 
 glib2.0 (2.24.1-1) unstable; urgency=low
 
