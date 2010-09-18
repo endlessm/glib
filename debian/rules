@@ -43,7 +43,7 @@ LDFLAGS += -Wl,-O1
 
 APIVER := 2.0
 SONAME := 0
-SHVER := 2.25.15
+SHVER := 2.25.16
 
 # package names
 SHARED_PKG := libglib$(APIVER)-$(SONAME)

@@ -1,3 +1,14 @@
+glib2.0 (2.25.16-1) experimental; urgency=low
+
+  * New upstream development release:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Update for the new version.
+    + debian/patches/90_gregex-system-pcre.patch:
+      - Fix GRegex compilation with the system pcre.
+
+ -- Sebastian Dröge <slomo@debian.org>  Sat, 18 Sep 2010 07:15:26 +0200
+
 glib2.0 (2.25.15-1) experimental; urgency=low
 
   * New upstream development release:

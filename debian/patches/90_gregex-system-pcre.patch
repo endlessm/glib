@@ -1,0 +1,12 @@
+Index: glib2.0-2.25.16/glib/gregex.c
+===================================================================
+--- glib2.0-2.25.16.orig/glib/gregex.c	2010-09-18 09:00:13.287008726 +0200
++++ glib2.0-2.25.16/glib/gregex.c	2010-09-18 09:00:16.715798553 +0200
+@@ -29,6 +29,7 @@
+ #include "pcre/pcre.h"
+ #endif
+ 
++#include "glib.h"
+ #include "gtypes.h"
+ #include "gregex.h"
+ #include "glibintl.h"
