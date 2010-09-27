@@ -1,3 +1,14 @@
+glib2.0 (2.26.0-1) experimental; urgency=low
+
+  * New upstream stable release:
+    + debian/rules,
+      debian/libglib2.0-0.symbols:
+      - Update for the new version.
+    + debian/patches/90_gregex-system-pcre.patch:
+      - Dropped, merged upstream.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 27 Sep 2010 22:43:13 +0200
+
 glib2.0 (2.25.16-1) experimental; urgency=low
 
   * New upstream development release:

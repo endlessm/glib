@@ -4,4 +4,3 @@
 04_homedir_env.patch
 60_wait-longer-for-threads-to-die.patch
 61_glib-compile-schemas-path.patch
-90_gregex-system-pcre.patch
