@@ -2119,7 +2119,6 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_slice_alloc0@Base 2.12.0
  g_slice_alloc@Base 2.12.0
  g_slice_copy@Base 2.14.0
- g_slice_debug_tree_statistics@Base 2.26.0
  g_slice_free1@Base 2.12.0
  g_slice_free_chain_with_offset@Base 2.12.0
  g_slice_get_config@Base 2.12.0
@@ -2356,6 +2355,11 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_time_val_add@Base 2.12.0
  g_time_val_from_iso8601@Base 2.12.0
  g_time_val_to_iso8601@Base 2.12.0
+ g_time_zone_new@Base 2.26.0
+ g_time_zone_new_local@Base 2.26.0
+ g_time_zone_new_utc@Base 2.26.0
+ g_time_zone_ref@Base 2.26.0
+ g_time_zone_unref@Base 2.26.0
  g_timeout_add@Base 2.12.0
  g_timeout_add_full@Base 2.12.0
  g_timeout_add_seconds@Base 2.14.0
