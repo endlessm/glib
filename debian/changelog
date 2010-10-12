@@ -1,12 +1,18 @@
-glib2.0 (2.27.0-1) UNRELEASED; urgency=low
+glib2.0 (2.27.0-1) experimental; urgency=low
 
+  [ Sjoerd Simons ]
   * New upstream experimental release
   * debian/libglib2.0-0.symbols
     + Updated
   * debian/patches/70_fix-header-cleaup-fallout.patch
     + Added. Fix complilation error (from upstream git)
 
- -- Sjoerd Simons <sjoerd@debian.org>  Sat, 09 Oct 2010 20:37:21 +0100
+  [ Sebastian Dröge ]
+  * Upload to experimental.
+  * debian/rules:
+    + Update SHVER to 2.27.0.
+
+ -- Sebastian Dröge <slomo@debian.org>  Tue, 12 Oct 2010 10:56:13 +0200
 
 glib2.0 (2.26.0-1) experimental; urgency=low
 
