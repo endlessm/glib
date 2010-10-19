@@ -111,11 +111,10 @@ Description: Common files for GLib library
 Package: @DOC_PKG@
 Section: doc
 Architecture: all
-Depends: ${misc:Depends},
-         lynx | www-browser
+Depends: ${misc:Depends}
 Replaces: libglib1.3-doc
 Conflicts: libglib1.3-doc
-Suggests: libgtk2.0-doc
+Suggests: libgtk2.0-doc, devhelp
 Description: Documentation files for the GLib library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
