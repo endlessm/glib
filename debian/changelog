@@ -10,10 +10,13 @@ glib2.0 (2.27.1-1) experimental; urgency=low
       - Dropped, merged upstream.
     + debian/patches/*:
       - Refreshed.
-  * debian/libglib2.0-0.symbols
-    + Updated
+    + debian/libglib2.0-0.symbols:
+      - Updated
+    + debian/patches/70_dtrace.patch:
+      - Patch from upstream GIT to not enable DTrace if it's not
+        available. Fixes the build on kFreeBSD.
 
- -- Sebastian Dröge <slomo@debian.org>  Fri, 29 Oct 2010 11:08:10 +0200
+ -- Sebastian Dröge <slomo@debian.org>  Fri, 29 Oct 2010 11:32:02 +0200
 
 glib2.0 (2.27.0-1) experimental; urgency=low
 
