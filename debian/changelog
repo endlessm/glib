@@ -1,9 +1,19 @@
-glib2.0 (2.27.0-2) UNRELEASED; urgency=low
+glib2.0 (2.27.1-1) experimental; urgency=low
 
+  [ Josselin Mouette ]
   * Drop lynx dependency in the -doc package. Suggest devhelp instead.
     Closes: #599743.
 
- -- Josselin Mouette <joss@debian.org>  Tue, 19 Oct 2010 09:09:00 +0200
+  [ Sebastian Dröge ]
+  * New upstream development release:
+    + debian/patches/70_fix-header-cleaup-fallout.patch:
+      - Dropped, merged upstream.
+    + debian/patches/*:
+      - Refreshed.
+  * debian/libglib2.0-0.symbols
+    + Updated
+
+ -- Sebastian Dröge <slomo@debian.org>  Fri, 29 Oct 2010 11:08:10 +0200
 
 glib2.0 (2.27.0-1) experimental; urgency=low
 

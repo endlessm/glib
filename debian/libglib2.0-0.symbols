@@ -1,28 +1,28 @@
 libgio-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
- g_action_activate@Base 2.27.0
- g_action_get_enabled@Base 2.27.0
- g_action_get_name@Base 2.27.0
- g_action_get_parameter_type@Base 2.27.0
- g_action_get_state@Base 2.27.0
- g_action_get_state_hint@Base 2.27.0
- g_action_get_state_type@Base 2.27.0
- g_action_get_type@Base 2.27.0
- g_action_group_action_added@Base 2.27.0
- g_action_group_action_enabled_changed@Base 2.27.0
- g_action_group_action_removed@Base 2.27.0
- g_action_group_action_state_changed@Base 2.27.0
- g_action_group_activate@Base 2.27.0
- g_action_group_get_enabled@Base 2.27.0
- g_action_group_get_parameter_type@Base 2.27.0
- g_action_group_get_state@Base 2.27.0
- g_action_group_get_state_hint@Base 2.27.0
- g_action_group_get_state_type@Base 2.27.0
- g_action_group_get_type@Base 2.27.0
- g_action_group_has_action@Base 2.27.0
- g_action_group_list_actions@Base 2.27.0
- g_action_group_set_state@Base 2.27.0
- g_action_set_state@Base 2.27.0
+ g_action_activate@Base 2.27.1
+ g_action_get_enabled@Base 2.27.1
+ g_action_get_name@Base 2.27.1
+ g_action_get_parameter_type@Base 2.27.1
+ g_action_get_state@Base 2.27.1
+ g_action_get_state_hint@Base 2.27.1
+ g_action_get_state_type@Base 2.27.1
+ g_action_get_type@Base 2.27.1
+ g_action_group_action_added@Base 2.27.1
+ g_action_group_action_enabled_changed@Base 2.27.1
+ g_action_group_action_removed@Base 2.27.1
+ g_action_group_action_state_changed@Base 2.27.1
+ g_action_group_activate_action@Base 2.27.1
+ g_action_group_change_action_state@Base 2.27.1
+ g_action_group_get_action_enabled@Base 2.27.1
+ g_action_group_get_action_parameter_type@Base 2.27.1
+ g_action_group_get_action_state@Base 2.27.1
+ g_action_group_get_action_state_hint@Base 2.27.1
+ g_action_group_get_action_state_type@Base 2.27.1
+ g_action_group_get_type@Base 2.27.1
+ g_action_group_has_action@Base 2.27.1
+ g_action_group_list_actions@Base 2.27.1
+ g_action_set_state@Base 2.27.1
  g_app_info_add_supports_type@Base 2.16.0
  g_app_info_can_delete@Base 2.20.0
  g_app_info_can_remove_supports_type@Base 2.16.0
@@ -58,23 +58,34 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_app_launch_context_get_type@Base 2.16.0
  g_app_launch_context_launch_failed@Base 2.16.0
  g_app_launch_context_new@Base 2.16.0
- g_application_add_action@Base 2.27.0
- g_application_get_action_description@Base 2.27.0
- g_application_get_action_enabled@Base 2.27.0
- g_application_get_id@Base 2.27.0
- g_application_get_instance@Base 2.27.0
- g_application_get_type@Base 2.27.0
- g_application_invoke_action@Base 2.27.0
- g_application_is_remote@Base 2.27.0
- g_application_list_actions@Base 2.27.0
- g_application_new@Base 2.27.0
- g_application_quit_with_data@Base 2.27.0
- g_application_register@Base 2.27.0
- g_application_remove_action@Base 2.27.0
- g_application_run@Base 2.27.0
- g_application_set_action_enabled@Base 2.27.0
- g_application_try_new@Base 2.27.0
- g_application_unregistered_try_new@Base 2.27.0
+ g_application_activate@Base 2.27.1
+ g_application_command_line_get_arguments@Base 2.27.1
+ g_application_command_line_get_cwd@Base 2.27.1
+ g_application_command_line_get_exit_status@Base 2.27.1
+ g_application_command_line_get_is_remote@Base 2.27.1
+ g_application_command_line_get_platform_data@Base 2.27.1
+ g_application_command_line_get_type@Base 2.27.1
+ g_application_command_line_print@Base 2.27.1
+ g_application_command_line_printerr@Base 2.27.1
+ g_application_command_line_set_exit_status@Base 2.27.1
+ g_application_flags_get_type@Base 2.27.1
+ g_application_get_application_id@Base 2.27.1
+ g_application_get_flags@Base 2.27.1
+ g_application_get_inactivity_timeout@Base 2.27.1
+ g_application_get_is_registered@Base 2.27.1
+ g_application_get_is_remote@Base 2.27.1
+ g_application_get_type@Base 2.27.1
+ g_application_hold@Base 2.27.1
+ g_application_id_is_valid@Base 2.27.1
+ g_application_new@Base 2.27.1
+ g_application_open@Base 2.27.1
+ g_application_register@Base 2.27.1
+ g_application_release@Base 2.27.1
+ g_application_run@Base 2.27.1
+ g_application_set_action_group@Base 2.27.1
+ g_application_set_application_id@Base 2.27.1
+ g_application_set_flags@Base 2.27.1
+ g_application_set_inactivity_timeout@Base 2.27.1
  g_ask_password_flags_get_type@Base 2.16.0
  g_async_initable_get_type@Base 2.22.0
  g_async_initable_init_async@Base 2.22.0
@@ -414,8 +425,6 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_desktop_app_info_get_filename@Base 2.24.0
  g_desktop_app_info_get_is_hidden@Base 2.16.0
  g_desktop_app_info_get_type@Base 2.16.0
- g_desktop_app_info_lookup_get_default_for_uri_scheme@Base 2.16.0
- g_desktop_app_info_lookup_get_type@Base 2.16.0
  g_desktop_app_info_new@Base 2.16.0
  g_desktop_app_info_new_from_filename@Base 2.16.0
  g_desktop_app_info_new_from_keyfile@Base 2.18.0
@@ -883,6 +892,15 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_output_stream_write_async@Base 2.16.0
  g_output_stream_write_finish@Base 2.16.0
  g_password_save_get_type@Base 2.16.0
+ g_periodic_add@Base 2.27.1
+ g_periodic_block@Base 2.27.1
+ g_periodic_damaged@Base 2.27.1
+ g_periodic_get_hz@Base 2.27.1
+ g_periodic_get_priority@Base 2.27.1
+ g_periodic_get_type@Base 2.27.1
+ g_periodic_new@Base 2.27.1
+ g_periodic_remove@Base 2.27.1
+ g_periodic_unblock@Base 2.27.1
  g_permission_acquire@Base 2.26.0
  g_permission_acquire_async@Base 2.26.0
  g_permission_acquire_finish@Base 2.26.0
@@ -959,6 +977,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_settings_get_has_unapplied@Base 2.26.0
  g_settings_get_int@Base 2.26.0
  g_settings_get_mapped@Base 2.26.0
+ g_settings_get_range@Base 2.27.1
  g_settings_get_string@Base 2.26.0
  g_settings_get_strv@Base 2.26.0
  g_settings_get_type@Base 2.26.0
@@ -967,10 +986,12 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_settings_list_children@Base 2.26.0
  g_settings_list_schemas@Base 2.26.0
  g_settings_list_keys@Base 2.26.0
+ g_settings_list_relocatable_schemas@Base 2.27.1
  g_settings_new@Base 2.26.0
  g_settings_new_with_backend@Base 2.26.0
  g_settings_new_with_backend_and_path@Base 2.26.0
  g_settings_new_with_path@Base 2.26.0
+ g_settings_range_check@Base 2.27.1
  g_settings_reset@Base 2.26.0
  g_settings_revert@Base 2.26.0
  g_settings_set@Base 2.26.0
@@ -984,16 +1005,16 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_settings_set_value@Base 2.26.0
  g_settings_sync@Base 2.26.0
  g_settings_unbind@Base 2.26.0
- g_simple_action_get_parameter_type@Base 2.27.0
- g_simple_action_get_type@Base 2.27.0
- g_simple_action_group_get_type@Base 2.27.0
- g_simple_action_group_insert@Base 2.27.0
- g_simple_action_group_lookup@Base 2.27.0
- g_simple_action_group_new@Base 2.27.0
- g_simple_action_group_remove@Base 2.27.0
- g_simple_action_new@Base 2.27.0
- g_simple_action_new_stateful@Base 2.27.0
- g_simple_action_set_enabled@Base 2.27.0
+ g_simple_action_get_parameter_type@Base 2.27.1
+ g_simple_action_get_type@Base 2.27.1
+ g_simple_action_group_get_type@Base 2.27.1
+ g_simple_action_group_insert@Base 2.27.1
+ g_simple_action_group_lookup@Base 2.27.1
+ g_simple_action_group_new@Base 2.27.1
+ g_simple_action_group_remove@Base 2.27.1
+ g_simple_action_new@Base 2.27.1
+ g_simple_action_new_stateful@Base 2.27.1
+ g_simple_action_set_enabled@Base 2.27.1
  g_simple_async_report_error_in_idle@Base 2.16.0
  g_simple_async_report_gerror_in_idle@Base 2.16.0
  g_simple_async_result_complete@Base 2.16.0
@@ -1528,7 +1549,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_date_time_get_seconds@Base 2.26.0
  g_date_time_get_timezone_abbreviation@Base 2.26.0
  g_date_time_get_utc_offset@Base 2.26.0
-#MISSING: 2.27.0# g_date_time_get_week_numbering_year@Base 2.26.0
+ g_date_time_get_week_numbering_year@Base 2.27.1
  g_date_time_get_week_of_year@Base 2.26.0
  g_date_time_get_year@Base 2.26.0
  g_date_time_get_ymd@Base 2.26.0
@@ -1821,6 +1842,8 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_main_context_find_source_by_user_data@Base 2.12.0
  g_main_context_get_poll_func@Base 2.12.0
  g_main_context_get_thread_default@Base 2.22.0
+ g_main_context_invoke@Base 2.27.1
+ g_main_context_invoke_full@Base 2.27.1
  g_main_context_is_owner@Base 2.12.0
  g_main_context_iteration@Base 2.12.0
  g_main_context_new@Base 2.12.0
@@ -2168,7 +2191,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_slice_alloc0@Base 2.12.0
  g_slice_alloc@Base 2.12.0
  g_slice_copy@Base 2.14.0
- g_slice_debug_tree_statistics@Base 2.27.0
+ g_slice_debug_tree_statistics@Base 2.27.1
  g_slice_free1@Base 2.12.0
  g_slice_free_chain_with_offset@Base 2.12.0
  g_slice_get_config@Base 2.12.0
@@ -2405,11 +2428,11 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_time_val_add@Base 2.12.0
  g_time_val_from_iso8601@Base 2.12.0
  g_time_val_to_iso8601@Base 2.12.0
- g_time_zone_adjust_time@Base 2.27.0
- g_time_zone_find_interval@Base 2.27.0
- g_time_zone_get_abbreviation@Base 2.27.0
- g_time_zone_get_offset@Base 2.27.0
- g_time_zone_is_dst@Base 2.27.0
+ g_time_zone_adjust_time@Base 2.27.1
+ g_time_zone_find_interval@Base 2.27.1
+ g_time_zone_get_abbreviation@Base 2.27.1
+ g_time_zone_get_offset@Base 2.27.1
+ g_time_zone_is_dst@Base 2.27.1
  g_time_zone_new@Base 2.26.0
  g_time_zone_new_local@Base 2.26.0
  g_time_zone_new_utc@Base 2.26.0
@@ -2872,6 +2895,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_pointer_type_register_static@Base 2.12.0
  g_ptr_array_get_type@Base 2.22.0
  g_regex_get_type@Base 2.14.0
+ g_signal_accumulator_first_wins@Base 2.27.1
  g_signal_accumulator_true_handled@Base 2.12.0
  g_signal_add_emission_hook@Base 2.12.0
  g_signal_chain_from_overridden@Base 2.12.0

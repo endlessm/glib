@@ -1,7 +1,7 @@
-Index: glib2.0-2.25.10/tests/threadpool-test.c
+Index: glib2.0-2.27.1/tests/threadpool-test.c
 ===================================================================
---- glib2.0-2.25.10.orig/tests/threadpool-test.c	2010-04-08 08:10:50.000000000 +0200
-+++ glib2.0-2.25.10/tests/threadpool-test.c	2010-06-24 20:01:27.297087713 +0200
+--- glib2.0-2.27.1.orig/tests/threadpool-test.c	2010-10-29 11:10:22.752016315 +0200
++++ glib2.0-2.27.1/tests/threadpool-test.c	2010-10-29 11:10:38.769022868 +0200
 @@ -5,8 +5,8 @@
  
  #include <glib.h>

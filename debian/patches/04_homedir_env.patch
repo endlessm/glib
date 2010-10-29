@@ -1,10 +1,10 @@
-Index: glib2.0-2.25.10/docs/reference/glib/running.sgml
+Index: glib2.0-2.27.1/docs/reference/glib/running.sgml
 ===================================================================
---- glib2.0-2.25.10.orig/docs/reference/glib/running.sgml	2010-06-12 20:04:32.000000000 +0200
-+++ glib2.0-2.25.10/docs/reference/glib/running.sgml	2010-06-24 20:01:26.150959575 +0200
-@@ -202,6 +202,22 @@
+--- glib2.0-2.27.1.orig/docs/reference/glib/running.sgml	2010-10-29 11:10:22.844016204 +0200
++++ glib2.0-2.27.1/docs/reference/glib/running.sgml	2010-10-29 11:10:37.680025596 +0200
+@@ -213,6 +213,22 @@
    </para>
- </formalpara> 
+ </formalpara>
  
 +<formalpara id="G_HOME">
 +  <title><envar>G_HOME</envar></title>
@@ -25,11 +25,11 @@ Index: glib2.0-2.25.10/docs/reference/glib/running.sgml
  </refsect2>
  
  <refsect2 id="setlocale">
-Index: glib2.0-2.25.10/glib/gutils.c
+Index: glib2.0-2.27.1/glib/gutils.c
 ===================================================================
---- glib2.0-2.25.10.orig/glib/gutils.c	2010-06-12 20:04:33.000000000 +0200
-+++ glib2.0-2.25.10/glib/gutils.c	2010-06-24 20:01:26.152917925 +0200
-@@ -1552,11 +1552,14 @@
+--- glib2.0-2.27.1.orig/glib/gutils.c	2010-10-29 11:10:22.820046747 +0200
++++ glib2.0-2.27.1/glib/gutils.c	2010-10-29 11:10:37.684013883 +0200
+@@ -1565,11 +1565,14 @@
      }
  #endif	/* !G_OS_WIN32 */
    
@@ -45,7 +45,7 @@ Index: glib2.0-2.25.10/glib/gutils.c
  
    /* Only believe HOME if it is an absolute path and exists */
    if (g_home_dir)
-@@ -1852,6 +1855,11 @@
+@@ -1865,6 +1868,11 @@
   *      homedir = g_get_home_dir (<!-- -->);
   * ]|
   *
