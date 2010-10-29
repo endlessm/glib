@@ -14,7 +14,7 @@ glib2.0 (2.27.1-1) experimental; urgency=low
       - Updated
     + debian/patches/70_dtrace.patch:
       - Patch from upstream GIT to not enable DTrace if it's not
-        available. Fixes the build on kFreeBSD.
+        available. Fixes the build on kFreeBSD (Closes: #592024).
 
  -- Sebastian Dröge <slomo@debian.org>  Fri, 29 Oct 2010 11:32:02 +0200
 
