@@ -1,10 +1,10 @@
 # Description: If a .desktop file does not have inline translations, fall back to calling gettext.
 # Ubuntu: https://launchpad.net/bugs/3935
 # Upstream: http://bugzilla.gnome.org/show_bug.cgi?id=569829
-Index: glib2.0-2.27.1/glib/gkeyfile.c
+Index: glib2.0-2.27.2/glib/gkeyfile.c
 ===================================================================
---- glib2.0-2.27.1.orig/glib/gkeyfile.c	2010-10-29 11:10:23.128015726 +0200
-+++ glib2.0-2.27.1/glib/gkeyfile.c	2010-10-29 11:10:33.728025481 +0200
+--- glib2.0-2.27.2.orig/glib/gkeyfile.c	2010-07-08 04:03:01.000000000 +0200
++++ glib2.0-2.27.2/glib/gkeyfile.c	2010-11-01 10:55:54.368605345 +0100
 @@ -87,6 +87,7 @@
    GKeyFileFlags flags;
  
@@ -131,10 +131,10 @@ Index: glib2.0-2.27.1/glib/gkeyfile.c
    /* Fallback to untranslated key
     */
    if (!translated_value)
-Index: glib2.0-2.27.1/glib/gkeyfile.h
+Index: glib2.0-2.27.2/glib/gkeyfile.h
 ===================================================================
---- glib2.0-2.27.1.orig/glib/gkeyfile.h	2010-10-29 11:10:23.148047043 +0200
-+++ glib2.0-2.27.1/glib/gkeyfile.h	2010-10-29 11:10:33.728025481 +0200
+--- glib2.0-2.27.2.orig/glib/gkeyfile.h	2010-05-14 04:21:51.000000000 +0200
++++ glib2.0-2.27.2/glib/gkeyfile.h	2010-11-01 10:55:54.368605345 +0100
 @@ -256,6 +256,7 @@
  #define G_KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY   "StartupNotify"
  #define G_KEY_FILE_DESKTOP_KEY_STARTUP_WM_CLASS "StartupWMClass"

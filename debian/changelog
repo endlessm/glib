@@ -1,3 +1,15 @@
+glib2.0 (2.27.2-1) experimental; urgency=low
+
+  * New upstream development release:
+    + debian/patches/*:
+      - Refreshed.
+    + debian/libglib2.0-0.symbols:
+      - Updated
+    + debian/patches/70_dtrace.patch:
+      - Dropped, merged upstream.
+
+ -- Sebastian Dröge <slomo@debian.org>  Mon, 01 Nov 2010 10:53:15 +0100
+
 glib2.0 (2.27.1-1) experimental; urgency=low
 
   [ Josselin Mouette ]
