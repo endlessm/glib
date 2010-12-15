@@ -164,5 +164,5 @@ Description: The GLib library of C routines - refdbg library
  C library used by projects such as GTK+, GIMP, and GNOME.
  .
  This package contains the shared library built with
- --disable-visibility so that it can be used with refdbg, a GObject
+ --disable-Bsymbolic so that it can be used with refdbg, a GObject
  refcount debugger.

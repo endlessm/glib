@@ -98,7 +98,7 @@ deb_configure_flags := $(common_configure_flags) \
 udeb_configure_flags := $(common_configure_flags) \
 			--disable-selinux
 refdbg_configure_flags := $(common_configure_flags) \
-			--disable-visibility \
+			--disable-Bsymbolic \
 			--enable-debug=yes
 
 $(STAMP_DIR)/patch-stamp:
