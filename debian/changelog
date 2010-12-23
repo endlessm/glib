@@ -1,4 +1,4 @@
-glib2.0 (2.27.5-1) UNRELEASED; urgency=low
+glib2.0 (2.27.5-1) experimental; urgency=low
 
   * New upstream release.
     + debian/libglib2.0-0.symbols:
@@ -8,7 +8,7 @@ glib2.0 (2.27.5-1) UNRELEASED; urgency=low
       We have symbols file anyway, and manually bumping the shver is
       error prone.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Thu, 23 Dec 2010 00:48:02 +0000
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Thu, 23 Dec 2010 01:44:45 +0000
 
 glib2.0 (2.27.4-2) experimental; urgency=low
 
