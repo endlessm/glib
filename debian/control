@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Loic Minier <lool@dooz.org>
 Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Emilio Pozuelo Monfort <pochu@debian.org>, Sebastian Dröge <slomo@debian.org>
 Build-Depends: debhelper (>> 5.0.22),
-               cdbs,
+               cdbs (>= 0.4.90),
                pkg-config (>= 0.16.0),
                gettext,
                autotools-dev,
