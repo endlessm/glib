@@ -1,37 +1,20 @@
 #!/usr/bin/make -f
 
+DEB_BUILDDIR = debian/build
+DEB_MAKE_FLAVORS = deb udeb refdbg
 DISABLE_UPDATE_UPLOADERS := 1
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/rules/utils.mk
+include /usr/share/cdbs/1/class/gnome.mk
+include /usr/share/gnome-pkg-tools/1/rules/clean-la.mk
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
 include /usr/share/gnome-pkg-tools/1/rules/check-dist.mk
--include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
+include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
 
 GNOME_MODULE := glib
 
-STAMP_DIR := debian/stampdir
-
-PATCH_DIR := debian/patches
-
-# rules in this debian/rules Makefile can be built concurrently as well as
-# upstream rules in Makefile; all $(MAKE) invocations will inherit this flag,
-# if you recurse into debian/rules ($(MAKE)
-# -f debian/rules in rules), you need to pass a flag to avoid adding "-jX" when
-# the childs encounters this line
-DEB_BUILD_OPTIONS_PARALLEL ?= $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
-MAKEFLAGS += $(if $(DEB_BUILD_OPTIONS_PARALLEL),-j$(DEB_BUILD_OPTIONS_PARALLEL))
-
-# These are used for cross-compiling and for saving the configure script
-# from having to guess our platform (since we know it already)
-DEB_HOST_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
-DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
-
-# Debian architectures
-DEB_BUILD_ARCH ?= $(shell dpkg-architecture -qDEB_BUILD_ARCH)
-DEB_HOST_ARCH  ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
-
-CFLAGS += -Wall -g -O$(if $(findstring noopt,$(DEB_BUILD_OPTIONS)),0,2)
-
-# Ensure the build aborts when there are still references to undefined
-# symbols
+# Ensure the build aborts when there are still references to undefined symbols
 LDFLAGS += -Wl,-z,defs
 
 # NB: do NOT use -Wl,--as-needed to build glib; for instance the link to
@@ -54,113 +37,34 @@ DOC_PKG := libglib$(APIVER)-doc
 DEBUG_PKG := $(SHARED_PKG)-dbg
 REFDBG_PKG := libglib$(APIVER)-$(SONAME)-refdbg
 
-# list of flavors we build; each gets a builddir, a configure pass (configure
-# args are defined below), a build pass, and an install pass (in two steps)
-# Note: the "deb" flavor is required
-FLAVORS := deb udeb refdbg
+DEB_MAKE_DESTDIRSKEL = $(CURDIR)/debian/install/@FLAVOR@
 
-# list of flavors to run the test suite on
-CHECK_FLAVORS := $(filter deb, $(FLAVORS))
-
-CHECK_SUPPORTED_ARCHES :=
-#CHECK_SUPPORTED_ARCHES := amd64 i386 s390
-# CHECK_SUPPORTED_ARCHES := alpha ia64 lpia m68k
-# testsuite is known to fail on hppa, hurd, kfreebsd-amd64, kfreebsd-i386; see
-# Debian #428674
-# testsuite is known to fail on arm, mips, mipsel, powerpc, sparc; see GNOME #481573
-
-# build dir for the current flavor; this is only expanded in flavor specific
-# targets
-# Note: dh_clean will rm -rf debian/tmp, hence all builds
-builddir = $(buildbasedir)/$*
-buildbasedir = $(CURDIR)/debian/build
-
-# install dir for the current flavor; this is only expanded in flavor specific
-# targets
-installdir = $(installbasedir)/$*
-installbasedir = $(CURDIR)/debian/install
+DEB_DH_MAKESHLIBS_ARGS_$(SHARED_PKG) += -V --add-udeb=$(UDEB_PKG) -- -c4
+DEB_DH_MAKESHLIBS_ARGS_$(REFDBG_PKG) = --no-act
+DEB_COMPRESS_EXCLUDE += .sgml .devhelp
+DEB_DH_STRIP_ARGS_$(REFDBG_PKG) = --no-act
+# Don't put the symbols in the -dbg package
+DEB_DH_STRIP_ARGS_$(UDEB_PKG) = --dbg-package=
 
 # configure flags
-common_configure_flags := \
+DEB_CONFIGURE_EXTRA_FLAGS := \
 			--prefix=/usr \
 			--mandir=\$${prefix}/share/man \
 			--infodir=\$${prefix}/share/info \
 			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG) \
 			--with-pcre=system
-ifeq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
-	common_configure_flags += --build=$(DEB_BUILD_GNU_TYPE)
-else
-	common_configure_flags += --build=$(DEB_BUILD_GNU_TYPE) --host=$(DEB_HOST_GNU_TYPE)
-endif
-deb_configure_flags := $(common_configure_flags) \
+
+DEB_CONFIGURE_FLAGS_deb := \
 			--enable-static
-udeb_configure_flags := $(common_configure_flags) \
+
+DEB_CONFIGURE_FLAGS_udeb := \
 			--disable-selinux
-refdbg_configure_flags := $(common_configure_flags) \
+
+DEB_CONFIGURE_FLAGS_refdbg := \
 			--disable-Bsymbolic \
 			--enable-debug=yes
 
-$(STAMP_DIR)/patch-stamp:
-	dh_testdir
-	# backup the original files to restore them in the clean target
-	-test -r config.sub && cp config.sub config.sub.orig
-	-test -r config.guess && cp config.guess config.guess.orig
-	# apply patches
-	QUILT_PATCHES=$(PATCH_DIR) \
-		quilt --quiltrc /dev/null push -a || test $$? = 2
-	-test -r /usr/share/misc/config.sub && \
-		cp -f /usr/share/misc/config.sub config.sub
-	-test -r /usr/share/misc/config.guess && \
-		cp -f /usr/share/misc/config.guess config.guess
-	-mkdir -p $(STAMP_DIR)
-	touch $@
-
-patch: $(STAMP_DIR)/patch-stamp
-
-$(STAMP_DIR)/configure-stamp-%: $(STAMP_DIR)/patch-stamp
-	dh_testdir
-	mkdir -p $(builddir)
-	cd $(builddir) && \
-		CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" \
-			$(CURDIR)/configure $($*_configure_flags)
-	touch $@
-
-configure: $(addprefix $(STAMP_DIR)/configure-stamp-, $(FLAVORS))
-
-$(STAMP_DIR)/build-stamp-%: $(STAMP_DIR)/configure-stamp-%
-	dh_testdir
-	LD_LIBRARY_PATH=$(builddir)/glib/.libs:$(builddir)/gmodule/.libs:$(builddir)/gobject/.libs:$(builddir)/gthread/.libs:$(LD_LIBRARY_PATH) \
-		$(MAKE) -C $(builddir)
-	touch $@
-
-build: $(addprefix $(STAMP_DIR)/build-stamp-, $(FLAVORS))
-
-maybe_ignore_check_failure = $(if $(filter ,$(CHECK_SUPPORTED_ARCHES)),-)
-
-$(STAMP_DIR)/check-stamp-%: $(STAMP_DIR)/build-stamp-%
-	dh_testdir
-ifeq ($(filter $(DEB_BUILD_ARCH),$(CHECK_SUPPORTED_ARCHES)),$(DEB_BUILD_ARCH))
-	# testsuite failures are fatal
-	LD_LIBRARY_PATH=$(builddir)/glib/.libs:$(builddir)/gmodule/.libs:$(builddir)/gobject/.libs:$(builddir)/gthread/.libs:$(LD_LIBRARY_PATH) \
-		$(MAKE) -k -C $(builddir) check
-else
-	# testsuite failures are ignored
-	-LD_LIBRARY_PATH=$(builddir)/glib/.libs:$(builddir)/gmodule/.libs:$(builddir)/gobject/.libs:$(builddir)/gthread/.libs:$(LD_LIBRARY_PATH) \
-		$(MAKE) -k -C $(builddir) check
-endif
-	touch $@
-
-check: $(addprefix $(STAMP_DIR)/check-stamp-, $(CHECK_FLAVORS))
-
-$(STAMP_DIR)/install-stamp-%: $(STAMP_DIR)/build-stamp-%
-	mkdir -p $(installdir)
-	$(MAKE) -C $(builddir) install DESTDIR=$(installdir)
-	touch $@
-
-install: $(addprefix $(STAMP_DIR)/install-stamp-, $(FLAVORS))
-
-debian/control:
-	dh_testdir
+clean::
 	sed \
 		-e "s#@SONAME@#$(SONAME)#g" \
 		-e "s#@APIVER@#$(APIVER)#g" \
@@ -174,79 +78,4 @@ debian/control:
 		-e "s#@DEBUG_PKG@#$(DEBUG_PKG)#g" \
 		-e "s#@GNOME_TEAM@#$(UPLOADERS)#g" \
 		-e "s#@REFDBG_PKG@#$(REFDBG_PKG)#g" \
-		$@.in >$@
-
-clean: debian/control
-	dh_testdir
-	dh_testroot
-	# remove install and build dirs
-	rm -rf $(installbasedir)
-	rm -rf $(buildbasedir)
-	# workaround bug, that should not be shipped in the tarball
-	-rm glib/glibconfig.h
-	# restore files from backup (before unpatching)
-	-test -r config.sub.orig && mv -f config.sub.orig config.sub
-	-test -r config.guess.orig && mv -f config.guess.orig config.guess
-	# unapply patches, if any
-	QUILT_PATCHES=$(PATCH_DIR) \
-		quilt --quiltrc /dev/null pop -a -R || test $$? = 2
-	-rm -rf .pc
-	-rm -rf $(STAMP_DIR)
-	dh_clean
-
-ifeq ($(DEB_BUILD_ARCH),$(DEB_HOST_ARCH))
-maybe_check = $(if $(findstring nocheck,$(DEB_BUILD_OPTIONS)),,check)
-else
-# can't run the testsuite when cross-compiling
-maybe_check =
-endif
-
-binary-indep: build $(maybe_check) install
-	dh_testdir
-	dh_testroot
-	dh_installdirs -i
-	dh_install -i
-	dh_installchangelogs -i -N$(DATA_PKG) ChangeLog
-	dh_installdocs -N$(DATA_PKG) -i NEWS README
-	dh_link -i
-	dh_compress -i -X.sgml -X.devhelp
-	dh_fixperms -i
-	dh_installdeb -i
-	dh_gencontrol -i
-	dh_md5sums -i
-	dh_builddeb -i
-
-binary-arch: build $(maybe_check) install
-	dh_testdir
-	dh_testroot
-	dh_installdirs -s
-	dh_install -s
-	# empty the dependency_libs in the *.la files
-	sed -i -e "/dependency_libs/ s/'.*'/''/" debian/$(DEV_PKG)/usr/lib/*.la
-	dh_installchangelogs -s -N$(DEV_PKG) -N$(DEBUG_PKG) \
-		ChangeLog
-	dh_installdocs -s -N$(DEV_PKG) -N$(DEBUG_PKG) NEWS README
-	dh_link -s
-	dh_strip -s --dbg-package=$(DEBUG_PKG) -N$(UDEB_PKG) -N$(REFDBG_PKG)
-	dh_strip -p$(UDEB_PKG)
-	dh_compress -s -X.sgml -X.devhelp
-	dh_fixperms -s
-	dh_makeshlibs	-p$(SHARED_PKG) \
-			-V \
-			--add-udeb="$(UDEB_PKG)" -- -c4
-	dh_installdeb -s
-	# override shlibs for libraries from this source before computing
-	# dependencies of packages generated from this source; we already have
-	# inter-dependencies expressed manually in the control file, we do not
-	# need the shlibs to add duplicates
-	sed -nr -e 's/(([^ ]+: )?([^ ]+) ([^ ]+)) .*/\1/p' \
-		debian/*/DEBIAN/shlibs \
-		>debian/shlibs.local
-	dh_shlibdeps -s -ldebian/$(SHARED_PKG)/usr/lib
-	-rm -f debian/shlibs.local
-	dh_gencontrol -s
-	dh_md5sums -s
-	dh_builddeb -s
-
-binary: binary-indep binary-arch
-.PHONY: patch configure build check install clean binary-indep binary-arch binary debian/control
+		debian/control.in > debian/control

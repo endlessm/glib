@@ -1,3 +1,11 @@
+glib2.0 (2.27.5-2) UNRELEASED; urgency=low
+
+  * Switch to CDBS' flavors system.
+  * Switch to source format 3.0 (quilt).
+  * Stop symlinking /usr/share/doc/$pkg directories.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Fri, 24 Dec 2010 00:05:04 +0000
+
 glib2.0 (2.27.5-1) experimental; urgency=low
 
   * New upstream release.

@@ -4,11 +4,11 @@ Priority: optional
 Maintainer: Loic Minier <lool@dooz.org>
 Uploaders: @GNOME_TEAM@
 Build-Depends: debhelper (>> 5.0.22),
+               cdbs,
                pkg-config (>= 0.16.0),
                gettext,
                autotools-dev,
                gnome-pkg-tools (>= 0.11),
-               quilt,
                dpkg-dev (>= 1.14.13),
                libpcre3-dev (>= 7.4-1~),
                desktop-file-utils,
