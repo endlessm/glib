@@ -1,4 +1,4 @@
-glib2.0 (2.27.90-1) UNRELEASED; urgency=low
+glib2.0 (2.27.90-1) experimental; urgency=low
 
   * Switch to CDBS' flavors system.
   * Switch to source format 3.0 (quilt).
@@ -8,8 +8,10 @@ glib2.0 (2.27.90-1) UNRELEASED; urgency=low
       default and is harmful for us.
     - Run the test suite but don't make it fatal yet.
   * New upstream release.
+    - debian/libglib2.0-0.symbols:
+      + Updated.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Fri, 24 Dec 2010 00:05:04 +0000
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Thu, 06 Jan 2011 12:46:00 +0000
 
 glib2.0 (2.27.5-1) experimental; urgency=low
 
