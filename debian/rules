@@ -47,11 +47,10 @@ DEB_DH_STRIP_ARGS_$(REFDBG_PKG) = --no-act
 # Don't put the symbols in the -dbg package
 DEB_DH_STRIP_ARGS_$(UDEB_PKG) = --dbg-package=
 
+DEB_MAKE_CHECK_TARGET = -k check || true
+
 # configure flags
 DEB_CONFIGURE_EXTRA_FLAGS := \
-			--prefix=/usr \
-			--mandir=\$${prefix}/share/man \
-			--infodir=\$${prefix}/share/info \
 			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG) \
 			--with-pcre=system
 
