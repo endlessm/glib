@@ -1,0 +1,75 @@
+From e738a8dd8ca3d3dd327bc5a3bbfd151858738609 Mon Sep 17 00:00:00 2001
+From: Colin Walters <walters@verbum.org>
+Date: Thu, 6 Jan 2011 11:47:58 -0500
+Subject: [PATCH] gdesktopappinfo: Don't crash if we don't have a desktop filename
+
+If code creates a GDesktopAppInfo via g_desktop_app_info_new_from_keyfile(),
+we'd try to send a NULL pointer down into GVariant.
+
+Since in this case we don't have a filename, just send the empty
+string.  In the future we should either:
+
+1) Change panel to use g_desktop_app_info_new_from_filename(), and
+   take the hit of parsing the file twice.
+2) Add a g_key_file_get_origin_filename()
+3) Add g_desktop_app_info_new_from_keyfile_and_name()
+
+https://bugzilla.gnome.org/show_bug.cgi?id=638838
+---
+ gio/gdesktopappinfo.c |   14 +++++++++++---
+ 1 files changed, 11 insertions(+), 3 deletions(-)
+
+diff --git a/gio/gdesktopappinfo.c b/gio/gdesktopappinfo.c
+index c808796..f557538 100644
+--- a/gio/gdesktopappinfo.c
++++ b/gio/gdesktopappinfo.c
+@@ -932,7 +932,7 @@ child_setup (gpointer user_data)
+ 
+ static void
+ notify_desktop_launch (GDBusConnection  *session_bus,
+-		       const char       *desktop_file, /* filename */
++		       GDesktopAppInfo  *info,
+ 		       long              pid,
+ 		       const char       *display,
+ 		       const char       *sn_id,
+@@ -942,6 +942,7 @@ notify_desktop_launch (GDBusConnection  *session_bus,
+   GVariantBuilder uri_variant;
+   GVariantBuilder extras_variant;
+   GList *iter;
++  const char *desktop_file_id;
+ 
+   if (session_bus == NULL)
+     return;
+@@ -956,12 +957,19 @@ notify_desktop_launch (GDBusConnection  *session_bus,
+ 			   "startup-id",
+ 			   g_variant_new ("s",
+ 					  sn_id));
++
++  if (info->filename)
++    desktop_file_id = info->filename;
++  else if (info->desktop_id)
++    desktop_file_id = info->desktop_id;
++  else
++    desktop_file_id = "";
+   
+   msg = g_dbus_message_new_signal ("/org/gtk/gio/DesktopAppInfo",
+ 				   "org.gtk.gio.DesktopAppInfo",
+ 				   "Launched");
+   g_dbus_message_set_body (msg, g_variant_new ("(@aysxasa{sv})",
+-					       g_variant_new_bytestring (desktop_file),
++					       g_variant_new_bytestring (desktop_file_id),
+ 					       display ? display : "",
+ 					       (gint64)pid,
+ 					       &uri_variant,
+@@ -1069,7 +1077,7 @@ _g_desktop_app_info_launch_uris_internal (GAppInfo                   *appinfo,
+ 	pid_callback (info, pid, pid_callback_data);
+ 
+       notify_desktop_launch (session_bus,
+-			     info->filename,
++			     info,
+ 			     pid,
+ 			     data.display,
+ 			     data.sn_id,
+-- 
+1.7.2.3
+
