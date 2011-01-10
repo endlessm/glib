@@ -44,7 +44,7 @@ DEB_DH_MAKESHLIBS_ARGS_$(SHARED_PKG) += -V --add-udeb=$(UDEB_PKG) -- -c4
 DEB_DH_MAKESHLIBS_ARGS_$(REFDBG_PKG) = --no-act
 DEB_DH_STRIP_ARGS_$(REFDBG_PKG) = --no-act
 # Don't put the symbols in the -dbg package
-DEB_DH_STRIP_ARGS_$(UDEB_PKG) =
+DEB_DH_STRIP_ARGS_$(UDEB_PKG) = --dbg-package=
 
 DEB_MAKE_CHECK_TARGET = -k check || true
 
