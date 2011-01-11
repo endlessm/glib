@@ -67,7 +67,7 @@ clean::
 	sed \
 		-e "s#@SONAME@#$(SONAME)#g" \
 		-e "s#@APIVER@#$(APIVER)#g" \
-		-e "s#@VERSION@#$(VERSION)#g" \
+		-e "s#@VERSION@#$(DEB_UPSTREAM_VERSION)#g" \
 		-e "s#@SHARED_PKG@#$(SHARED_PKG)#g" \
 		-e "s#@BIN_PKG@#$(BIN_PKG)#g" \
 		-e "s#@DATA_PKG@#$(DATA_PKG)#g" \

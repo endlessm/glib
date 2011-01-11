@@ -4,6 +4,7 @@ glib2.0 (2.27.90-3) UNRELEASED; urgency=low
     - Don't exclude .sgml and .devhelp files from being compressed.
       The former are already excluded by dh_compress and the later
       can be compressed now that devhelp can handle them.
+    - Fix variable substitution.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Mon, 10 Jan 2011 08:35:57 +0000
 
