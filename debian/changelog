@@ -1,12 +1,17 @@
-glib2.0 (2.27.90-3) UNRELEASED; urgency=low
+glib2.0 (2.27.91-1) experimental; urgency=low
 
   * debian/rules:
     - Don't exclude .sgml and .devhelp files from being compressed.
       The former are already excluded by dh_compress and the later
       can be compressed now that devhelp can handle them.
     - Fix variable substitution.
+  * New upstream release.
+    - debian/patches/62_dont_crash_without_desktop_filename.patch:
+      + Removed, included upstream.
+  * debian/control.in:
+    - Standards-Version is 3.9.1, no changes needed.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Mon, 10 Jan 2011 08:35:57 +0000
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 11 Jan 2011 22:59:07 +0000
 
 glib2.0 (2.27.90-2) experimental; urgency=low
 
