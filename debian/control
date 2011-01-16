@@ -84,8 +84,6 @@ Depends: ${misc:Depends},
          zlib1g-dev
 Recommends: python
 Suggests: libglib2.0-doc
-Replaces: libglib1.3-dev
-Conflicts: libglib1.3-dev
 Description: Development files for the GLib library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -116,9 +114,6 @@ Package: libglib2.0-data
 Architecture: all
 Depends: ${misc:Depends},
          libglib2.0-0 (>= ${source:Version})
-Replaces: libglib1.3,
-          libglib1.3-data
-Conflicts: libglib1.3-data
 Description: Common files for GLib library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -131,9 +126,7 @@ Package: libglib2.0-doc
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}
-Replaces: libglib1.3-doc
-Conflicts: libglib1.3-doc
-Suggests: libgtk2.0-doc, devhelp
+Suggests: devhelp
 Description: Documentation files for the GLib library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
