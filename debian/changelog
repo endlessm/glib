@@ -1,10 +1,11 @@
-glib2.0 (2.27.91-2) UNRELEASED; urgency=low
+glib2.0 (2.27.92-1) UNRELEASED; urgency=low
 
   * debian/control.in:
     + Drop obsolete conflicts/replaces with libglib1.3.
     + Don't suggest libgtk2.0-doc in the doc package.
+  * New upstream release.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Sun, 16 Jan 2011 23:24:36 +0000
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 22 Jan 2011 15:17:51 +0000
 
 glib2.0 (2.27.91-1) experimental; urgency=low
 
