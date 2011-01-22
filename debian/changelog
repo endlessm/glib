@@ -4,6 +4,8 @@ glib2.0 (2.27.92-1) UNRELEASED; urgency=low
     + Drop obsolete conflicts/replaces with libglib1.3.
     + Don't suggest libgtk2.0-doc in the doc package.
   * New upstream release.
+    + debian/control.in:
+      - Bump the libpcre3-dev build dependency.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 22 Jan 2011 15:17:51 +0000
 
