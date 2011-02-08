@@ -2,22 +2,22 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Loic Minier <lool@dooz.org>
-Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Emilio Pozuelo Monfort <pochu@debian.org>, Josselin Mouette <joss@debian.org>, Sebastian Dröge <slomo@debian.org>
+Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Emilio Pozuelo Monfort <pochu@debian.org>, Sebastian Dröge <slomo@debian.org>, Sjoerd Simons <sjoerd@debian.org>
 Build-Depends: debhelper (>> 5.0.22),
-               pkg-config (>= 0.14.0),
+               cdbs (>= 0.4.90),
+               pkg-config (>= 0.16.0),
                gettext,
                autotools-dev,
                gnome-pkg-tools (>= 0.11),
-               quilt,
                dpkg-dev (>= 1.14.13),
-               libpcre3-dev (>= 7.4-1~),
+               libpcre3-dev (>= 8.11),
                desktop-file-utils,
-               gtk-doc-tools,
+               gtk-doc-tools (>= 1.15),
                libselinux1-dev [linux-any],
                linux-libc-dev [linux-any],
                libgamin-dev [!linux-any] | libfam-dev [!linux-any],
                zlib1g-dev
-Standards-Version: 3.9.0
+Standards-Version: 3.9.1
 Homepage: http://www.gtk.org/
 Vcs-Browser: http://svn.debian.org/wsvn/pkg-gnome/desktop/unstable/glib2.0/
 Vcs-Svn: svn://svn.debian.org/svn/pkg-gnome/desktop/unstable/glib2.0/
@@ -55,18 +55,35 @@ Description: The GLib library of C routines - minimal runtime
  This package contains the minimal runtime library needed by the Debian
  installer.
 
+Package: libglib2.0-bin
+Section: misc
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         libglib2.0-0 (= ${binary:Version}),
+         libglib2.0-data
+Conflicts: libglib2.0-0 (<< 2.25.11-2),
+Replaces: libglib2.0-0 (<< 2.25.11-2),
+          libglib2.0-dev (<< 2.25.11-2)
+Description: The programs for the GLib library
+ GLib is a library containing many useful C routines for things such
+ as trees, hashes, lists, and strings.  It is a useful general-purpose
+ C library used by projects such as GTK+, GIMP, and GNOME.
+ .
+ This package contains the program files which is used for the libraries
+ and others.
+
 Package: libglib2.0-dev
 Section: libdevel
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          libglib2.0-0 (= ${binary:Version}),
-         pkg-config (>= 0.14.0),
+         libglib2.0-bin (= ${binary:Version}),
+         pkg-config (>= 0.16.0),
          zlib1g-dev
 Recommends: python
 Suggests: libglib2.0-doc
-Replaces: libglib1.3-dev
-Conflicts: libglib1.3-dev
 Description: Development files for the GLib library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -97,9 +114,6 @@ Package: libglib2.0-data
 Architecture: all
 Depends: ${misc:Depends},
          libglib2.0-0 (>= ${source:Version})
-Replaces: libglib1.3,
-          libglib1.3-data
-Conflicts: libglib1.3-data
 Description: Common files for GLib library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -112,9 +126,7 @@ Package: libglib2.0-doc
 Section: doc
 Architecture: all
 Depends: ${misc:Depends}
-Replaces: libglib1.3-doc
-Conflicts: libglib1.3-doc
-Suggests: libgtk2.0-doc, devhelp
+Suggests: devhelp
 Description: Documentation files for the GLib library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -145,5 +157,5 @@ Description: The GLib library of C routines - refdbg library
  C library used by projects such as GTK+, GIMP, and GNOME.
  .
  This package contains the shared library built with
- --disable-visibility so that it can be used with refdbg, a GObject
+ --disable-Bsymbolic so that it can be used with refdbg, a GObject
  refcount debugger.
