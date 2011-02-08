@@ -1,11 +1,16 @@
-glib2.0 (2.27.92-1) UNRELEASED; urgency=low
+glib2.0 (2.28.0-1) UNRELEASED; urgency=low
 
   * debian/control.in:
     + Drop obsolete conflicts/replaces with libglib1.3.
     + Don't suggest libgtk2.0-doc in the doc package.
-  * New upstream release.
+  * New upstream stable release.
     + debian/control.in:
       - Bump the libpcre3-dev build dependency.
+    + debian/patches/01_gettext-desktopfiles.patch,
+      debian/patches/02_gettext-desktopfiles-ubuntu.patch,
+      debian/patches/04_homedir_env.patch,
+      debian/patches/61_glib-compile-schemas-path.patch:
+      - Refreshed.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 22 Jan 2011 15:17:51 +0000
 
