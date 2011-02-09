@@ -11,6 +11,8 @@ glib2.0 (2.28.0-1) UNRELEASED; urgency=low
       debian/patches/04_homedir_env.patch,
       debian/patches/61_glib-compile-schemas-path.patch:
       - Refreshed.
+    + debian/libglib2.0-0.symbols:
+      - Updated.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 22 Jan 2011 15:17:51 +0000
 
