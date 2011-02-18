@@ -1,3 +1,12 @@
+glib2.0 (2.28.0-2) unstable; urgency=low
+
+  * 20_mime_extension_point.patch: temporary revert the upstream change 
+    in URI schemes handling. Closes: #612876.
+    Note for later: it must absolutely be reverted in a synchronized 
+    upload with gvfs 1.8 and control-center 3.0.
+
+ -- Josselin Mouette <joss@debian.org>  Fri, 18 Feb 2011 19:36:42 +0100
+
 glib2.0 (2.28.0-1) unstable; urgency=low
 
   * debian/control.in:
