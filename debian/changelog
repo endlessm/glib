@@ -1,3 +1,10 @@
+glib2.0 (2.28.1-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+    + Fixes g_timeout_add overflowing with large timeouts. Closes: #606618.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 19 Feb 2011 17:47:49 +0000
+
 glib2.0 (2.28.0-2) unstable; urgency=low
 
   * 20_mime_extension_point.patch: temporary revert the upstream change 
