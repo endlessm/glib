@@ -1,0 +1,50 @@
+From 2f35703dcf1ff844801556a97835ff91e8d5f8e8 Mon Sep 17 00:00:00 2001
+From: Emilio Pozuelo Monfort <pochu27@gmail.com>
+Date: Sat, 12 Mar 2011 10:08:52 +0000
+Subject: [PATCH] Document g_timeout_add_seconds first call latency
+
+And fix /timeout/rounding to not fail if the first call
+happens after 2 seconds.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=644552
+---
+ glib/gmain.c         |    6 +++++-
+ glib/tests/timeout.c |    5 ++++-
+ 2 files changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/glib/gmain.c b/glib/gmain.c
+index 3a480f3..d4f393e 100644
+--- a/glib/gmain.c
++++ b/glib/gmain.c
+@@ -4118,7 +4118,11 @@ g_timeout_add_seconds_full (gint           priority,
+  * g_timeout_source_new_seconds() and attaches it to the main loop context 
+  * using g_source_attach(). You can do these steps manually if you need 
+  * greater control. Also see g_timout_add_seconds_full().
+- * 
++ *
++ * Note that the first call of the timer may not be precise for timeouts
++ * of one second. If you need finer precision and have such a timeout,
++ * you may want to use g_timeout_add() instead.
++ *
+  * Return value: the ID (greater than 0) of the event source.
+  *
+  * Since: 2.14
+diff --git a/glib/tests/timeout.c b/glib/tests/timeout.c
+index 824afc0..2037029 100644
+--- a/glib/tests/timeout.c
++++ b/glib/tests/timeout.c
+@@ -53,7 +53,10 @@ test_func (gpointer data)
+ 
+   current_time = g_get_monotonic_time ();
+ 
+-  g_assert (current_time / 1000000 - last_time / 1000000 == 1);
++  if (count == 0)
++    g_assert (current_time / 1000000 - last_time / 1000000 <= 2);
++  else
++    g_assert (current_time / 1000000 - last_time / 1000000 == 1);
+ 
+   last_time = current_time;
+   count++;
+-- 
+1.7.4.1
+
