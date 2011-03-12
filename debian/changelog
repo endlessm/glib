@@ -1,3 +1,15 @@
+glib2.0 (2.28.2-2) UNRELEASED; urgency=low
+
+  * debian/control.in:
+    + Build depend on dbus, shared-mime-info, python-gobject and
+      python-dbus, needed by the test suite.
+    + libglib2.0-data doesn't need to depend on libglib2.0-0, since
+      it only ships translations. This will avoid making glib
+      uninstallable on the buildds when it is uploaded until the new
+      version has been built.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Fri, 11 Mar 2011 23:19:30 +0000
+
 glib2.0 (2.28.2-1) unstable; urgency=low
 
   * New upstream release.
