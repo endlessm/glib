@@ -5,6 +5,9 @@ test_ltlibraries =
 
 SUBDIRS = gdbus-object-manager-example services modules
 
+# Some tests need a dbus session
+GTESTER_ENV = dbus-launch
+
 LDADD = \
 	$(top_builddir)/gio/libgio-2.0.la		\
 	$(top_builddir)/gobject/libgobject-2.0.la	\
