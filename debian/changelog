@@ -1,14 +1,20 @@
 glib2.0 (2.28.2-2) UNRELEASED; urgency=low
 
   * debian/control.in:
-    + Build depend on dbus, shared-mime-info, python-gobject and
-      python-dbus, needed by the test suite.
+    + Build depend on dbus, dbus-x11,  shared-mime-info, python-gobject
+      and python-dbus, needed by the test suite.
     + libglib2.0-data doesn't need to depend on libglib2.0-0, since
       it only ships translations. This will avoid making glib
       uninstallable on the buildds when it is uploaded until the new
       version has been built.
   * d/p/0001-Document-g_timeout_add_seconds-first-call-latency.patch:
     + New patch. Fix a test case that was failing randomly.
+  * d/p/0001-Run-gio-tests-with-a-dbus-session.patch:
+    + New patch. Run gio tests through dbus-launch, since some of them
+      need a running dbus session.
+  * debian/control.in,
+    debian/rules:
+    + Add autoreconf magic, needed by the above patch.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Fri, 11 Mar 2011 23:19:30 +0000
 

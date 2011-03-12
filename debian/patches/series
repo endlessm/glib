@@ -1,4 +1,5 @@
 0001-Document-g_timeout_add_seconds-first-call-latency.patch
+0001-Run-gio-tests-with-a-dbus-session.patch
 01_gettext-desktopfiles.patch
 02_gettext-desktopfiles-ubuntu.patch
 03_blacklist-directories.patch

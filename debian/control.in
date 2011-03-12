@@ -5,6 +5,7 @@ Maintainer: Loic Minier <lool@dooz.org>
 Uploaders: @GNOME_TEAM@
 Build-Depends: debhelper (>> 5.0.22),
                cdbs (>= 0.4.90),
+               dh-autoreconf,
                pkg-config (>= 0.16.0),
                gettext,
                autotools-dev,
@@ -18,6 +19,7 @@ Build-Depends: debhelper (>> 5.0.22),
                libgamin-dev [!linux-any] | libfam-dev [!linux-any],
                zlib1g-dev,
                dbus,
+               dbus-x11,
                shared-mime-info,
                python-gobject,
                python-dbus
