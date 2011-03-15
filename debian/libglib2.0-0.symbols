@@ -2795,6 +2795,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  glib_micro_version@Base 2.12.0
  glib_minor_version@Base 2.12.0
  glib_on_error_halt@Base 2.12.0
+ glib_pgettext@Base 2.28.3
 libgmodule-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
  g_module_build_path@Base 2.12.0
