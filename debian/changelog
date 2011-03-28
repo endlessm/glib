@@ -1,4 +1,4 @@
-glib2.0 (2.28.4-1) UNRELEASED; urgency=low
+glib2.0 (2.28.4-1) unstable; urgency=low
 
   * debian/control.in:
     + Build depend on dbus, dbus-x11,  shared-mime-info, python-gobject
@@ -15,7 +15,7 @@ glib2.0 (2.28.4-1) UNRELEASED; urgency=low
     + Add autoreconf magic, needed by the above patch.
   * New upstream release.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 15 Mar 2011 20:59:27 +0000
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Mon, 28 Mar 2011 19:53:02 +0100
 
 glib2.0 (2.28.2-1) unstable; urgency=low
 
