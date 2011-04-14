@@ -1,3 +1,29 @@
+glib2.0 (2.28.6-2) experimental; urgency=low
+
+  * Team upload.
+  * Drop 20_mime_extension_point.patch and add Breaks against gvfs
+    and gnome-control-center to ensure they have been updated at the
+    same time.
+  * Drop Conflicts against pango, it's no longer relevant (even for
+    oldstable).
+  * Fix watch file.
+  * Drop leading article in descriptions as recommended by lintian.
+  * Add lintian overrides for package-name-doesnt-match-sonames, it's a
+    deliberate choice.
+  * Add some copyright holders to debian/copyright to appease lintian.
+  * Drop unneeded section/priority fields as they duplicate the default
+    values.
+  * Add some DEP-3 descriptions to patches that had no description at
+    all.
+
+ -- Raphaël Hertzog <hertzog@debian.org>  Thu, 14 Apr 2011 10:51:16 +0200
+
+glib2.0 (2.28.6-1) unstable; urgency=low
+
+  * New upstream bugfix release.
+
+ -- Sebastian Dröge <slomo@debian.org>  Thu, 14 Apr 2011 09:18:31 +0200
+
 glib2.0 (2.28.4-1) unstable; urgency=low
 
   * debian/control.in:

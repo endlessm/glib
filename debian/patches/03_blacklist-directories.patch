@@ -1,3 +1,10 @@
+Description: Blacklist more FHS directories that are commonly found as Unix mount points
+ It includes those that are necessary for live-initramfs.
+ .
+ Ported from GnomeVFS.
+Author: Josselin Mouette <joss@debian.org>
+Origin: vendor
+
 Index: glib2.0-2.27.2/gio/gunixmounts.c
 ===================================================================
 --- glib2.0-2.27.2.orig/gio/gunixmounts.c	2010-10-17 05:31:18.000000000 +0200

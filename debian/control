@@ -2,7 +2,7 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Loic Minier <lool@dooz.org>
-Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Emilio Pozuelo Monfort <pochu@debian.org>, Josselin Mouette <joss@debian.org>, Sjoerd Simons <sjoerd@debian.org>
+Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Emilio Pozuelo Monfort <pochu@debian.org>, Josselin Mouette <joss@debian.org>, Sebastian Dröge <slomo@debian.org>, Sjoerd Simons <sjoerd@debian.org>
 Build-Depends: debhelper (>> 5.0.22),
                cdbs (>= 0.4.90),
                dh-autoreconf,
@@ -35,7 +35,7 @@ Depends: ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libglib2.0-data,
             shared-mime-info
-Conflicts: libpango1.0-0 (<< 1.11)
+Breaks: gvfs (<< 1.8), gnome-control-center (<< 1:3)
 Replaces: libglib2.0-dev (<< 2.23.2-2)
 Description: The GLib library of C routines
  GLib is a library containing many useful C routines for things such
