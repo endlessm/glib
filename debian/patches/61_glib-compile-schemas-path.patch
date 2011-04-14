@@ -1,13 +1,11 @@
-Index: glib2.0-2.27.2/gio-2.0.pc.in
-===================================================================
---- glib2.0-2.27.2.orig/gio-2.0.pc.in	2010-05-03 04:24:51.000000000 +0200
-+++ glib2.0-2.27.2/gio-2.0.pc.in	2010-11-01 10:55:59.816601729 +0100
+--- a/gio-2.0.pc.in
++++ b/gio-2.0.pc.in
 @@ -4,7 +4,7 @@
  includedir=@includedir@
  
  giomoduledir=@GIO_MODULE_DIR@
--glib_compile_schemas=@bindir@/glib-compile-schemas
-+glib_compile_schemas=@libdir@/glib-2.0/glib-compile-schemas
+-glib_compile_schemas=@bindir@/glib-compile-schemas@EXEEXT@
++glib_compile_schemas=@libdir@/glib-2.0/glib-compile-schemas@EXEEXT@
  
  Name: GIO
  Description: glib I/O library

@@ -1,0 +1,77 @@
+Debian #612876 (and lots of duplicates)
+Reverts 9b262f1c5fe5a6fd879f17cd7b80d8c54e33d80c
+
+THIS IS TEMPORARY. It should be reverted together with:
+ - gvfs that doesn’t use the extension point
+ - control-center that sets associations the proper way
+
+Index: glib-2.28.0/gio/gdesktopappinfo.c
+===================================================================
+--- glib-2.28.0.orig/gio/gdesktopappinfo.c	2011-02-18 19:22:38.379346994 +0100
++++ glib-2.28.0/gio/gdesktopappinfo.c	2011-02-18 19:22:52.778846019 +0100
+@@ -2252,18 +2252,57 @@ g_app_info_get_default_for_type (const c
+ GAppInfo *
+ g_app_info_get_default_for_uri_scheme (const char *uri_scheme)
+ {
+-  GAppInfo *app_info;
+-  char *content_type, *scheme_down;
++  static gsize lookup = 0;
++  
++  if (g_once_init_enter (&lookup))
++    {
++      gsize setup_value = 1;
++      GDesktopAppInfoLookup *lookup_instance;
++      const char *use_this;
++      GIOExtensionPoint *ep;
++      GIOExtension *extension;
++      GList *l;
+ 
+-  scheme_down = g_ascii_strdown (uri_scheme, -1);
+-  content_type = g_strdup_printf ("x-scheme-handler/%s", scheme_down);
+-  g_free (scheme_down);
+-  app_info = g_app_info_get_default_for_type (content_type, FALSE);
+-  g_free (content_type);
++      use_this = g_getenv ("GIO_USE_URI_ASSOCIATION");
++      
++      /* Ensure vfs in modules loaded */
++      _g_io_modules_ensure_loaded ();
++      
++      ep = g_io_extension_point_lookup (G_DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME);
+ 
+-  return app_info;
++      lookup_instance = NULL;
++      if (use_this)
++	{
++	  extension = g_io_extension_point_get_extension_by_name (ep, use_this);
++	  if (extension)
++	    lookup_instance = g_object_new (g_io_extension_get_type (extension), NULL);
++	}
++      
++      if (lookup_instance == NULL)
++	{
++	  for (l = g_io_extension_point_get_extensions (ep); l != NULL; l = l->next)
++	    {
++	      extension = l->data;
++	      lookup_instance = g_object_new (g_io_extension_get_type (extension), NULL);
++	      if (lookup_instance != NULL)
++		break;
++	    }
++	}
++
++      if (lookup_instance != NULL)
++	setup_value = (gsize)lookup_instance;
++      
++      g_once_init_leave (&lookup, setup_value);
++    }
++
++  if (lookup == 1)
++    return NULL;
++
++  return g_desktop_app_info_lookup_get_default_for_uri_scheme (G_DESKTOP_APP_INFO_LOOKUP (lookup),
++							       uri_scheme);
+ }
+ 
++
+ static void
+ get_apps_from_dir (GHashTable *apps, 
+                    const char *dirname, 
