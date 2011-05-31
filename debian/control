@@ -29,15 +29,17 @@ Vcs-Browser: http://svn.debian.org/wsvn/pkg-gnome/desktop/unstable/glib2.0/
 Vcs-Svn: svn://svn.debian.org/svn/pkg-gnome/desktop/unstable/glib2.0/
 
 Package: libglib2.0-0
-Section: libs
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libglib2.0-data,
             shared-mime-info
-Breaks: gvfs (<< 1.8), gnome-control-center (<< 1:3)
+Breaks: gvfs (<< 1.8),
+        gnome-control-center (<< 1:3),
+        gnome-session (<< 3.0.0-3),
+        gdm3 (<< 3.0.3)
 Replaces: libglib2.0-dev (<< 2.23.2-2)
-Description: The GLib library of C routines
+Description: GLib library of C routines
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
  C library used by projects such as GTK+, GIMP, and GNOME.
@@ -47,11 +49,10 @@ Description: The GLib library of C routines
 Package: libglib2.0-udeb
 Section: debian-installer
 XC-Package-Type: udeb
-Priority: optional
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
-Description: The GLib library of C routines - minimal runtime
+Description: GLib library of C routines - minimal runtime
  This is a udeb, or a microdeb, for the debian-installer.
  .
  GLib is a library containing many useful C routines for things such
@@ -71,7 +72,7 @@ Depends: ${shlibs:Depends},
 Conflicts: libglib2.0-0 (<< 2.25.11-2),
 Replaces: libglib2.0-0 (<< 2.25.11-2),
           libglib2.0-dev (<< 2.25.11-2)
-Description: The programs for the GLib library
+Description: Programs for the GLib library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
  C library used by projects such as GTK+, GIMP, and GNOME.
@@ -107,7 +108,7 @@ Depends: ${misc:Depends},
          libglib2.0-0 (= ${binary:Version})
 Conflicts: libglib2.0-dbg
 Replaces: libglib2.0-dbg
-Description: The GLib libraries and debugging symbols
+Description: Debugging symbols for the GLib libraries
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
  C library used by projects such as GTK+, GIMP, and GNOME.
@@ -156,7 +157,7 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          libglib2.0-0 (= ${binary:Version})
-Description: The GLib library of C routines - refdbg library
+Description: GLib library of C routines - refdbg library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
  C library used by projects such as GTK+, GIMP, and GNOME.
