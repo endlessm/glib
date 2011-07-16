@@ -1206,6 +1206,9 @@ _g_io_modules_ensure_loaded (void)
 
       g_io_module_scope_free (scope);
 
+      /* Hard-coded fallback directory for pre-multiarch compatibility */
+      g_io_modules_scan_all_in_directory ("/usr/lib/gio/modules");
+
       /* Initialize types from built-in "modules" */
       g_type_ensure (g_null_settings_backend_get_type ());
       g_type_ensure (g_memory_settings_backend_get_type ());
