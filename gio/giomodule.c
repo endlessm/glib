@@ -1060,6 +1060,8 @@ _g_io_modules_ensure_loaded (void)
         module_dir = GIO_MODULE_DIR;
 
       g_io_modules_scan_all_in_directory_with_scope (module_dir, scope);
+      /* Hard-coded fallback directory for pre-multiarch compatibility */
+      g_io_modules_scan_all_in_directory ("/usr/lib/gio/modules");
 
       g_io_module_scope_free (scope);
 
