@@ -1,4 +1,4 @@
-glib2.0 (2.28.6-3) UNRELEASED; urgency=low
+glib2.0 (2.28.6-3) experimental; urgency=low
 
   * Break gnome-session < 3.0.0-3 for the updated defaults.list taking 
     x-scheme-* into account.
@@ -9,7 +9,7 @@ glib2.0 (2.28.6-3) UNRELEASED; urgency=low
     gnome-control-center breaking file associations just by opening the 
     info dialog.
 
- -- Josselin Mouette <joss@debian.org>  Wed, 01 Jun 2011 00:15:30 +0200
+ -- Josselin Mouette <joss@debian.org>  Sun, 04 Sep 2011 23:07:46 +0200
 
 glib2.0 (2.28.6-2) experimental; urgency=low
 
