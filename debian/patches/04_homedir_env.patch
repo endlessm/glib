@@ -4,8 +4,10 @@ Description: Handle the G_HOME environment variable to override the passwd entry
 Author: Josselin Mouette <joss@debian.org>
 Origin: vendor
 
---- a/docs/reference/glib/running.sgml
-+++ b/docs/reference/glib/running.sgml
+Index: glib-2.30.0/docs/reference/glib/running.sgml
+===================================================================
+--- glib-2.30.0.orig/docs/reference/glib/running.sgml	2011-09-09 21:58:10.000000000 +0200
++++ glib-2.30.0/docs/reference/glib/running.sgml	2011-10-06 03:28:39.730396342 +0200
 @@ -213,6 +213,22 @@
    </para>
  </formalpara>
@@ -29,9 +31,11 @@ Origin: vendor
  </refsect2>
  
  <refsect2 id="setlocale">
---- a/glib/gutils.c
-+++ b/glib/gutils.c
-@@ -1626,11 +1626,14 @@
+Index: glib-2.30.0/glib/gutils.c
+===================================================================
+--- glib-2.30.0.orig/glib/gutils.c	2011-09-26 22:54:50.000000000 +0200
++++ glib-2.30.0/glib/gutils.c	2011-10-06 03:28:39.734396292 +0200
+@@ -1725,11 +1725,14 @@
      }
  #endif	/* !G_OS_WIN32 */
    
@@ -47,7 +51,7 @@ Origin: vendor
  
    /* Only believe HOME if it is an absolute path and exists */
    if (g_home_dir)
-@@ -1926,6 +1929,11 @@
+@@ -2025,6 +2028,11 @@
   *      homedir = g_get_home_dir (<!-- -->);
   * ]|
   *
@@ -58,4 +62,4 @@ Origin: vendor
 + *
   * Returns: the current user's home directory
   */
- G_CONST_RETURN gchar*
+ const gchar *

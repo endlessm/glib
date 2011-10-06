@@ -27,6 +27,9 @@ glib2.0 (2.30.0-1) UNRELEASED; urgency=low
   * Update patches
     - Remove 03_blacklist-directories.patch, merged upstream.
     - Remove 10_gdesktopappinfo_set_last_used.patch, fixed upstream.
+    - Remove 60_wait-longer-for-threads-to-die.patch, fixed upstream using a
+      counter.
+    - Refresh remaining patches.
 
  -- Michael Biebl <biebl@debian.org>  Thu, 06 Oct 2011 00:09:17 +0200
 
