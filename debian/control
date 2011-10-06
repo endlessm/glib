@@ -142,7 +142,7 @@ Description: Documentation files for the GLib library
  in /usr/share/doc/libglib2.0-doc/ .
 
 Package: libgio-fam
-Architecture: hurd-i386 kfreebsd-i386 kfreebsd-amd64
+Architecture: hurd-any kfreebsd-any
 Depends: ${shlibs:Depends},
          ${misc:Depends}
 Recommends: gamin
