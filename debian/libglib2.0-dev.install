@@ -6,6 +6,7 @@ debian/install/deb/usr/lib/libgmodule*.so usr/lib
 debian/install/deb/usr/lib/libgthread*.so usr/lib
 debian/install/deb/usr/lib/libgio*.so usr/lib
 debian/install/deb/usr/lib/glib-2.0 usr/lib
+debian/install/deb/usr/lib/gdbus-2.0/codegen/*.py usr/lib/gdbus-2.0/codegen
 debian/install/deb/usr/lib/pkgconfig usr/lib
 debian/install/deb/usr/share/aclocal usr/share
 debian/install/deb/usr/share/glib-2.0/gdb usr/share/glib-2.0
