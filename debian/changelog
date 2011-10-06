@@ -5,6 +5,8 @@ glib2.0 (2.30.0-1) UNRELEASED; urgency=low
     - Bump Build-Depends on debhelper.
     - Don't pass --dbg-package= without an argument to dh_strip as commands
       will fail rather than warn when they are passed unknown options.
+  * Don't use brace expansion in debian/libglib2.0-0.install and
+    debian/libglib2.0-dev.install.
 
  -- Michael Biebl <biebl@debian.org>  Thu, 06 Oct 2011 00:09:17 +0200
 
