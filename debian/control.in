@@ -22,7 +22,8 @@ Build-Depends: debhelper (>= 8),
                dbus-x11,
                shared-mime-info,
                python-gobject,
-               python-dbus
+               python-dbus,
+               libffi-dev (>= 3.0.0)
 Standards-Version: 3.9.2
 Homepage: http://www.gtk.org/
 Vcs-Browser: http://svn.debian.org/wsvn/pkg-gnome/desktop/unstable/glib2.0/

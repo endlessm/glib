@@ -13,6 +13,7 @@ glib2.0 (2.30.0-1) UNRELEASED; urgency=low
     - Use architecture wildcard for kfreebsd and hurd.
     - Bump Standards-Version to 3.9.2. No further changes.
     - Set pkg-gnome-maintainers@lists.alioth.debian.org as Maintainer.
+    - Add Build-Depends on libffi-dev (>= 3.0.0).
 
  -- Michael Biebl <biebl@debian.org>  Thu, 06 Oct 2011 00:09:17 +0200
 
