@@ -1,6 +1,8 @@
 glib2.0 (2.30.0-1) UNRELEASED; urgency=low
 
   * New upstream release.
+    - Avoid assertion in GDBus if we fail to authenticate twice.
+      Closes: #634312
   * Bump debhelper compatibility level to 8.
     - Bump Build-Depends on debhelper.
     - Don't pass --dbg-package= without an argument to dh_strip as commands
