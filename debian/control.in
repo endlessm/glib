@@ -1,7 +1,7 @@
 Source: glib@APIVER@
 Section: libs
 Priority: optional
-Maintainer: Loic Minier <lool@dooz.org>
+Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
 Uploaders: @GNOME_TEAM@
 Build-Depends: debhelper (>= 8),
                cdbs (>= 0.4.90),
