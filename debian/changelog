@@ -19,6 +19,11 @@ glib2.0 (2.30.0-1) UNRELEASED; urgency=low
     - Install gtester and gtester-report manpage.
   * debian/libglib2.0-bin.install
     - Install bash completion files for gdbus and gsettings.
+  * debian/libglib2.0-0.symbols
+    - Update symbols file. The GAction API had an incompatible change. As a
+      result g_action_set_state has been renamed to g_action_change_state.
+      See upstream commit 5ff65d869543587d10d78c123698e47effc5fb8c for further
+      details and on the impact of this change.
 
  -- Michael Biebl <biebl@debian.org>  Thu, 06 Oct 2011 00:09:17 +0200
 
