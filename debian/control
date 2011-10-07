@@ -38,7 +38,8 @@ Recommends: libglib2.0-data,
 Breaks: gvfs (<< 1.8),
         gnome-control-center (<< 1:3),
         gnome-session (<< 3.0.0-3),
-        gdm3 (<< 3.0.3)
+        gdm3 (<< 3.0.3),
+        libgtk-3-0 (<< 3.0.12)
 Replaces: libglib2.0-dev (<< 2.23.2-2)
 Description: GLib library of C routines
  GLib is a library containing many useful C routines for things such
