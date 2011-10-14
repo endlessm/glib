@@ -1,3 +1,9 @@
+Description: Handle the G_HOME environment variable to override the passwd entry
+ This will allow to fix various kinds of build failures due to restricted
+ build environments.
+Author: Josselin Mouette <joss@debian.org>
+Origin: vendor
+
 --- a/docs/reference/glib/running.sgml
 +++ b/docs/reference/glib/running.sgml
 @@ -213,6 +213,22 @@

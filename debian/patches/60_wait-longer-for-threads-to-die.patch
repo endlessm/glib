@@ -1,3 +1,10 @@
+Description: Wait 5s instead of one for threads to die in the threadpool test
+ Hopefully fixes hppa and kfreebsd testsuite failures.
+Bug-Debian: http://bugs.debian.org/428674
+Bug-Debian: http://bugs.debian.org/431720
+Author: Loic Minier <lool@dooz.org>
+Origin: vendor
+
 Index: glib2.0-2.27.2/tests/threadpool-test.c
 ===================================================================
 --- glib2.0-2.27.2.orig/tests/threadpool-test.c	2009-04-01 01:04:21.000000000 +0200
