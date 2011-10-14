@@ -25,6 +25,8 @@ glib2.0 (2.30.0-1) UNRELEASED; urgency=low
       result g_action_set_state has been renamed to g_action_change_state.
       See upstream commit 5ff65d869543587d10d78c123698e47effc5fb8c for further
       details and on the impact of this change.
+  * debian/watch:
+    - Track .xz tarballs.
   * Update patches
     - Remove 03_blacklist-directories.patch, merged upstream.
     - Remove 10_gdesktopappinfo_set_last_used.patch, fixed upstream.
