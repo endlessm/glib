@@ -12,6 +12,7 @@ glib2.0 (2.28.8-1) UNRELEASED; urgency=low
     debian/libglib2.0-dev.install.
   * debian/control.in
     - Use architecture wildcard for kfreebsd and hurd.
+    - Bump Standards-Version to 3.9.2. No further changes.
     - Set pkg-gnome-maintainers@lists.alioth.debian.org as Maintainer.
 
  -- Michael Biebl <biebl@debian.org>  Fri, 14 Oct 2011 13:21:55 +0200
