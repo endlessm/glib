@@ -4,6 +4,10 @@ glib2.0 (2.28.8-1) UNRELEASED; urgency=low
   * debian/watch:
     - Update to version 3.
     - Track .xz tarballs.
+  * Bump debhelper compatibility level to 8.
+    - Bump Build-Depends on debhelper.
+    - Don't pass --dbg-package= without an argument to dh_strip as commands
+      will fail rather than warn when they are passed unknown options.
   * Don't use brace expansion in debian/libglib2.0-0.install and
     debian/libglib2.0-dev.install.
 

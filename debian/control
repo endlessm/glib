@@ -3,7 +3,7 @@ Section: libs
 Priority: optional
 Maintainer: Loic Minier <lool@dooz.org>
 Uploaders: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>, Emilio Pozuelo Monfort <pochu@debian.org>, Josselin Mouette <joss@debian.org>, Michael Biebl <biebl@debian.org>, Sebastian Dröge <slomo@debian.org>
-Build-Depends: debhelper (>> 5.0.22),
+Build-Depends: debhelper (>> 8),
                cdbs (>= 0.4.90),
                dh-autoreconf,
                pkg-config (>= 0.16.0),
