@@ -1,6 +1,10 @@
 debian/install/deb/usr/include/* usr/include
-debian/install/deb/usr/lib/lib*.{la,a} usr/lib
-debian/install/deb/usr/lib/libg{object,module,thread,io}*.so usr/lib
+debian/install/deb/usr/lib/lib*.a usr/lib
+debian/install/deb/usr/lib/lib*.la usr/lib
+debian/install/deb/usr/lib/libgobject*.so usr/lib
+debian/install/deb/usr/lib/libgmodule*.so usr/lib
+debian/install/deb/usr/lib/libgthread*.so usr/lib
+debian/install/deb/usr/lib/libgio*.so usr/lib
 debian/install/deb/usr/lib/glib-2.0 usr/lib
 debian/install/deb/usr/lib/pkgconfig usr/lib
 debian/install/deb/usr/share/aclocal usr/share
