@@ -54,6 +54,7 @@ DEB_CONFIGURE_EXTRA_FLAGS := \
 			--with-pcre=system
 
 DEB_CONFIGURE_FLAGS_deb := \
+			--enable-gtk-doc \
 			--enable-static
 
 DEB_CONFIGURE_FLAGS_udeb := \

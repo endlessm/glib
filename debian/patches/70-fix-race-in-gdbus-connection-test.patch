@@ -1,0 +1,36 @@
+From 7e4c0ce7b7f7894b7f97e8484dc2101885e72702 Mon Sep 17 00:00:00 2001
+From: Sjoerd Simons <sjoerd@luon.net>
+Date: Sun, 16 Oct 2011 10:57:29 +0100
+Subject: [PATCH] GDBusConnection: Fix race in /gdbus/connection/life-cycle
+
+GDBusConnection sets the closed flag in the worker thread, then adds an
+idle callback (which refs the Connection) to signal this in the main
+thread. The tests session_bus_down doesn't spin the mainloop, so the
+"closed" signal will always fire if iterating the mainloop later (and
+drops the ref when doing so). But _is_closed can return TRUE even before
+signalling this, in which case the "closed" signal isn't fired and the
+ref isn't dropped, causing the test to fail.
+
+Instead simply always wait for the closed signal, which is a good thing
+to check anyway and ensures the ref is closed.
+---
+ gio/tests/gdbus-connection.c |    3 +--
+ 1 files changed, 1 insertions(+), 2 deletions(-)
+
+diff --git a/gio/tests/gdbus-connection.c b/gio/tests/gdbus-connection.c
+index a88df90..073ff9e 100644
+--- a/gio/tests/gdbus-connection.c
++++ b/gio/tests/gdbus-connection.c
+@@ -264,8 +264,7 @@ test_connection_life_cycle (void)
+   g_assert (!g_dbus_connection_is_closed (c));
+   g_dbus_connection_set_exit_on_close (c, FALSE);
+   session_bus_down ();
+-  if (!g_dbus_connection_is_closed (c))
+-    _g_assert_signal_received (c, "closed");
++  _g_assert_signal_received (c, "closed");
+   g_assert (g_dbus_connection_is_closed (c));
+ 
+   _g_object_wait_for_single_ref (c);
+-- 
+1.7.7
+

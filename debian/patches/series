@@ -3,3 +3,4 @@
 02_gettext-desktopfiles-ubuntu.patch
 04_homedir_env.patch
 61_glib-compile-schemas-path.patch
+70-fix-race-in-gdbus-connection-test.patch
