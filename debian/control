@@ -2,15 +2,15 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
-Uploaders: Emilio Pozuelo Monfort <pochu@debian.org>, Josselin Mouette <joss@debian.org>, Sebastian Dröge <slomo@debian.org>, Sjoerd Simons <sjoerd@debian.org>
-Build-Depends: debhelper (>= 8),
-               cdbs (>= 0.4.90),
+Uploaders: Emilio Pozuelo Monfort <pochu@debian.org>, Josselin Mouette <joss@debian.org>, Michael Biebl <biebl@debian.org>, Sebastian Dröge <slomo@debian.org>, Sjoerd Simons <sjoerd@debian.org>
+Build-Depends: debhelper (>= 8.1.3),
+               cdbs (>= 0.4.93),
                dh-autoreconf,
                pkg-config (>= 0.16.0),
                gettext,
                autotools-dev,
                gnome-pkg-tools (>= 0.11),
-               dpkg-dev (>= 1.14.13),
+               dpkg-dev (>= 1.16.0),
                libpcre3-dev (>= 8.11),
                desktop-file-utils,
                gtk-doc-tools (>= 1.15),
@@ -41,6 +41,8 @@ Breaks: gvfs (<< 1.8),
         gdm3 (<< 3.0.3),
         libgtk-3-0 (<< 3.0.12)
 Replaces: libglib2.0-dev (<< 2.23.2-2)
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
 Description: GLib library of C routines
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -74,6 +76,7 @@ Depends: ${shlibs:Depends},
 Conflicts: libglib2.0-0 (<< 2.25.11-2),
 Replaces: libglib2.0-0 (<< 2.25.11-2),
           libglib2.0-dev (<< 2.25.11-2)
+Multi-Arch: foreign
 Description: Programs for the GLib library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -122,6 +125,7 @@ Description: Debugging symbols for the GLib libraries
 Package: libglib2.0-data
 Architecture: all
 Depends: ${misc:Depends}
+Multi-Arch: foreign
 Description: Common files for GLib library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -135,6 +139,7 @@ Section: doc
 Architecture: all
 Depends: ${misc:Depends}
 Suggests: devhelp
+Multi-Arch: foreign
 Description: Documentation files for the GLib library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -148,6 +153,7 @@ Architecture: hurd-any kfreebsd-any
 Depends: ${shlibs:Depends},
          ${misc:Depends}
 Recommends: gamin
+Multi-Arch: same
 Description: GLib Input, Output and Streaming Library (fam module)
  GIO is the input, output and streaming API of GLib. This package
  provides a fam file and directory monitoring backend for it.
@@ -159,6 +165,7 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          libglib2.0-0 (= ${binary:Version})
+Multi-Arch: same
 Description: GLib library of C routines - refdbg library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose

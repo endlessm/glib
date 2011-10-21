@@ -51,6 +51,7 @@ DEB_MAKE_CHECK_TARGET = -k check || true
 # configure flags
 DEB_CONFIGURE_EXTRA_FLAGS := \
 			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG) \
+			--libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) \
 			--with-pcre=system
 
 DEB_CONFIGURE_FLAGS_deb := \
@@ -63,6 +64,26 @@ DEB_CONFIGURE_FLAGS_udeb := \
 DEB_CONFIGURE_FLAGS_refdbg := \
 			--disable-Bsymbolic \
 			--enable-debug=yes
+
+binary-install/libglib2.0-0::
+	set -e; for script in postinst postrm; do \
+		sed -e"s/#MULTIARCH#/$(DEB_HOST_MULTIARCH)/g" \
+		    debian/$(cdbs_curpkg).$$script.in \
+		    > debian/$(cdbs_curpkg).$$script ; \
+	done
+
+
+common-install-arch::
+	set -e; for file in libgio-fam.install libglib2.0-0.install \
+	            libglib2.0-0-refdbg.install libglib2.0-dbg.install \
+	            libglib2.0-dev.install \
+	            libglib2.0-udeb.install libglib2.0-bin.links \
+	            libglib2.0-dev.links \
+	            libglib2.0-0.dirs libglib2.0-0.triggers; \
+	do \
+		sed -e"s,\$${DEB_HOST_MULTIARCH},${DEB_HOST_MULTIARCH},g" \
+		        debian/$${file}.in > debian/$$file; \
+	done
 
 clean::
 	sed \

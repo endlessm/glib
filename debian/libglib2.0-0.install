@@ -1,7 +1,0 @@
-debian/install/deb/usr/lib/libglib*.so.* lib
-debian/install/deb/usr/lib/libgobject*.so.* usr/lib
-debian/install/deb/usr/lib/libgmodule*.so.* usr/lib
-debian/install/deb/usr/lib/libgthread*.so.* usr/lib
-debian/install/deb/usr/lib/libgio*.so.* usr/lib
-debian/install/deb/usr/bin/gio-querymodules usr/lib/glib-2.0
-debian/install/deb/usr/bin/glib-compile-schemas usr/lib/glib-2.0
