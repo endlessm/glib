@@ -1,9 +1,14 @@
 glib2.0 (2.30.1-2) UNRELEASED; urgency=low
 
+  [ Martin Pitt ]
   * debian/patches/01_gettext-desktopfiles.patch:
     - Translate X-GNOME-FullName and X-GNOME-Keywords, too.
 
- -- Martin Pitt <mpitt@debian.org>  Fri, 21 Oct 2011 12:35:24 +0200
+  [ Sjoerd Simons ]
+  * debian/patches/80_gtk_doc_out_of_tree.patch:
+    - Added. Fix documentation generation when build out of tree
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Fri, 21 Oct 2011 16:57:26 +0200
 
 glib2.0 (2.30.1-1) experimental; urgency=low
 

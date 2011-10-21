@@ -4,3 +4,4 @@
 04_homedir_env.patch
 61_glib-compile-schemas-path.patch
 70-fix-race-in-gdbus-connection-test.patch
+80_gtk_doc_out_of_tree.patch
