@@ -52,6 +52,32 @@ glib2.0 (2.30.1-1) experimental; urgency=low
 
  -- Sjoerd Simons <sjoerd@debian.org>  Sun, 16 Oct 2011 11:50:31 +0100
 
+glib2.0 (2.28.8-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/watch:
+    - Update to version 3.
+    - Track .xz tarballs.
+  * Bump debhelper compatibility level to 8.
+    - Bump Build-Depends on debhelper.
+    - Don't pass --dbg-package= without an argument to dh_strip as commands
+      will fail rather than warn when they are passed unknown options.
+  * Don't use brace expansion in debian/libglib2.0-0.install and
+    debian/libglib2.0-dev.install.
+  * debian/control.in
+    - Use architecture wildcard for kfreebsd and hurd.
+    - Bump Standards-Version to 3.9.2. No further changes.
+    - Set pkg-gnome-maintainers@lists.alioth.debian.org as Maintainer.
+  * Refresh patches.
+
+ -- Michael Biebl <biebl@debian.org>  Sat, 15 Oct 2011 18:09:05 +0200
+
+glib2.0 (2.28.6-4) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 14 Oct 2011 10:42:58 +0200
+
 glib2.0 (2.28.6-3) experimental; urgency=low
 
   * Break gnome-session < 3.0.0-3 for the updated defaults.list taking 
