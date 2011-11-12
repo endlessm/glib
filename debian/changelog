@@ -1,4 +1,4 @@
-glib2.0 (2.30.2-1) experimental; urgency=low
+glib2.0 (2.30.2-1) UNRELEASED; urgency=low
 
   * New upstream release.
   * debian/patches/70-fix-race-in-gdbus-connection-test.patch:
