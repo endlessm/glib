@@ -1,6 +1,10 @@
 glib2.0 (2.30.2-1) UNRELEASED; urgency=low
 
   * New upstream release.
+  * debian/patches/70-fix-race-in-gdbus-connection-test.patch:
+    - Removed, merged upstream.
+  * debian/patches/80_gtk_doc_out_of_tree.patch:
+    - Removed, merged upstream.
 
  -- Michael Biebl <biebl@debian.org>  Sat, 12 Nov 2011 06:29:48 +0100
 
