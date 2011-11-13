@@ -4,3 +4,4 @@
 04_homedir_env.patch
 61_glib-compile-schemas-path.patch
 90-gio-modules-multiarch-compat.patch
+95-gmain-get-rid-of-poll_waiting.patch
