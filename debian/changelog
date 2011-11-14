@@ -4,8 +4,11 @@ glib2.0 (2.30.2-2) UNRELEASED; urgency=low
     - Added, Fix race conditions with g_main_quit being called from other
       threads by getting rid of the poll_waiting flag. (Backported from git
       master)
+  * debian/rules: Don't ignore testsuite failures. If the testsuite turns out
+    to be too brittle then we can always re-start ignoring it before upload to
+    unstable.
 
- -- Sjoerd Simons <sjoerd@debian.org>  Sun, 13 Nov 2011 23:57:07 +0100
+ -- Sjoerd Simons <sjoerd@debian.org>  Mon, 14 Nov 2011 08:03:55 +0100
 
 glib2.0 (2.30.2-1) experimental; urgency=low
 
