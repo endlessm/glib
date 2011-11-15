@@ -46,7 +46,7 @@ DEB_DH_STRIP_ARGS_$(REFDBG_PKG) = --no-act
 # Don't put the symbols in the -dbg package
 DEB_DH_STRIP_ARGS_$(UDEB_PKG) =
 
-DEB_MAKE_CHECK_TARGET = -k check
+DEB_MAKE_CHECK_TARGET = -k check || true
 
 # configure flags
 DEB_CONFIGURE_EXTRA_FLAGS := \

@@ -4,9 +4,6 @@ glib2.0 (2.30.2-2) UNRELEASED; urgency=low
     - Added, Fix race conditions with g_main_quit being called from other
       threads by getting rid of the poll_waiting flag. (Backported from git
       master)
-  * debian/rules: Don't ignore testsuite failures. If the testsuite turns out
-    to be too brittle then we can always re-start ignoring it before upload to
-    unstable.
   * debian/patches/96-fix-one-bit-mutex-test-on-some-platforms.patch:
     - Added, Fix the 1 bit mutex failing on platforms that have pointers
       aligned to 32 bits instead of 64 bits (bgo#201322).
