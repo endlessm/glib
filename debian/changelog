@@ -1,4 +1,4 @@
-glib2.0 (2.30.2-2) UNRELEASED; urgency=low
+glib2.0 (2.30.2-2) experimental; urgency=low
 
   * debian/patches/95-gmain-get-rid-of-poll_waiting.patch:
     - Added, Fix race conditions with g_main_quit being called from other
@@ -10,7 +10,7 @@ glib2.0 (2.30.2-2) UNRELEASED; urgency=low
   * debian/patches/97-silence-compiler-warnings.patch:
     - Added, Fix various compiler warnings
 
- -- Sjoerd Simons <sjoerd@debian.org>  Tue, 15 Nov 2011 22:04:08 +0100
+ -- Sjoerd Simons <sjoerd@debian.org>  Wed, 16 Nov 2011 22:21:52 +0000
 
 glib2.0 (2.30.2-1) experimental; urgency=low
 
