@@ -1,10 +1,10 @@
-glib2.0 (2.30.2-3) UNRELEASED; urgency=low
+glib2.0 (2.30.2-3) experimental; urgency=low
 
   * debian/patches/98-disable-two-more-GDBus-tests-using-fork.patch:
     - Added. Disable gdbus test which use GMainContext over a fork, see
       https://bugzilla.gnome.org/show_bug.cgi?id=658999 for more details
 
- -- Sjoerd Simons <sjoerd@debian.org>  Thu, 17 Nov 2011 22:15:50 +0000
+ -- Sjoerd Simons <sjoerd@debian.org>  Thu, 17 Nov 2011 22:20:48 +0000
 
 glib2.0 (2.30.2-2) experimental; urgency=low
 
