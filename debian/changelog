@@ -1,6 +1,7 @@
 glib2.0 (2.30.2-4) UNRELEASED; urgency=low
 
   * Upload to unstable.
+  * Disable test suite on kfreebsd-* for now.
 
  -- Michael Biebl <biebl@debian.org>  Fri, 18 Nov 2011 19:28:31 +0100
 
