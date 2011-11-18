@@ -17,17 +17,7 @@ if [ "$1" = triggered ]; then
             # This is triggered everytime an application installs a GIO
             # module into /usr/lib/#MULTIARCH#/gio/modules or the
             # backwards-compatible /usr/lib/gio/modules directory
-
-            # check which directories actually exist
-            dirs=""
-            for dir in /usr/lib/#MULTIARCH#/gio/modules /usr/lib/gio/modules; do
-                if [ -d "$dir" ]; then
-                    dirs="$dirs $dir"
-                fi
-            done
-            if [ -n "$dirs" ]; then
-                /usr/lib/#MULTIARCH#/glib-2.0/gio-querymodules $dirs
-            fi
+            /usr/lib/#MULTIARCH#/glib-2.0/gio-querymodules /usr/lib/#MULTIARCH#/gio/modules /usr/lib/gio/modules
             ;;
         esac
     done
