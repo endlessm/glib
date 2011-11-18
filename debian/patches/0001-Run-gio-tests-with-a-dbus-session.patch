@@ -11,10 +11,10 @@ dbus session.
  gio/tests/Makefile.am |    3 +++
  2 files changed, 4 insertions(+), 1 deletions(-)
 
-diff --git a/Makefile.decl b/Makefile.decl
-index 163fd8b..6bf9281 100644
---- a/Makefile.decl
-+++ b/Makefile.decl
+Index: glib-2.30.0/Makefile.decl
+===================================================================
+--- glib-2.30.0.orig/Makefile.decl	2011-09-15 02:01:00.000000000 +0200
++++ glib-2.30.0/Makefile.decl	2011-10-06 03:28:05.378828199 +0200
 @@ -1,7 +1,7 @@
  # GLIB - Library of useful C routines
  
@@ -24,13 +24,13 @@ index 163fd8b..6bf9281 100644
  GTESTER_REPORT = $(top_builddir)/glib/gtester-report	# for the GLIB package
  
  # initialize variables for unconditional += appending
-diff --git a/gio/tests/Makefile.am b/gio/tests/Makefile.am
-index 46b0efa..e775180 100644
---- a/gio/tests/Makefile.am
-+++ b/gio/tests/Makefile.am
-@@ -2,6 +2,9 @@ NULL =
+Index: glib-2.30.0/gio/tests/Makefile.am
+===================================================================
+--- glib-2.30.0.orig/gio/tests/Makefile.am	2011-09-26 22:54:58.000000000 +0200
++++ glib-2.30.0/gio/tests/Makefile.am	2011-10-06 03:28:05.382828149 +0200
+@@ -6,6 +6,9 @@
  
- include $(top_srcdir)/Makefile.decl
+ SUBDIRS = gdbus-object-manager-example
  
 +# Some tests need a dbus session
 +GTESTER_ENV = dbus-launch
@@ -38,6 +38,3 @@ index 46b0efa..e775180 100644
  INCLUDES = 			\
  	-g 			\
  	$(gio_INCLUDES)		\
--- 
-1.7.4.1
-

@@ -1,3 +1,4 @@
+debian/install/deb/etc/bash_completion.d etc
 debian/install/deb/usr/bin/gsettings usr/bin
 debian/install/deb/usr/bin/gdbus usr/bin
 debian/install/deb/usr/share/man/man1/gio-querymodules.1* usr/share/man/man1

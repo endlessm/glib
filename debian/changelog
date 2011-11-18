@@ -1,3 +1,115 @@
+glib2.0 (2.30.2-4) UNRELEASED; urgency=low
+
+  * Avoid harmless warning when running
+    "/usr/lib/i386-linux-gnu/glib-2.0/gio-querymodules
+    /usr/lib/i386-linux-gnu/gio/modules /usr/lib/gio/modules" on an amd64
+    system without /usr/lib/i386-linux-gnu/gio/modules: "Unable to open
+    directory /usr/lib/i386-linux-gnu/gio/modules: Error opening directory
+    '/usr/lib/i386-linux-gnu/gio/modules': No such file or directory"
+
+ -- Loïc Minier <lool@debian.org>  Fri, 18 Nov 2011 13:04:50 +0100
+
+glib2.0 (2.30.2-3) experimental; urgency=low
+
+  * debian/patches/98-disable-two-more-GDBus-tests-using-fork.patch:
+    - Added. Disable gdbus test which use GMainContext over a fork, see
+      https://bugzilla.gnome.org/show_bug.cgi?id=658999 for more details
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Thu, 17 Nov 2011 22:20:48 +0000
+
+glib2.0 (2.30.2-2) experimental; urgency=low
+
+  * debian/patches/95-gmain-get-rid-of-poll_waiting.patch:
+    - Added, Fix race conditions with g_main_quit being called from other
+      threads by getting rid of the poll_waiting flag. (Backported from git
+      master)
+  * debian/patches/96-fix-one-bit-mutex-test-on-some-platforms.patch:
+    - Added, Fix the 1 bit mutex failing on platforms that have pointers
+      aligned to 32 bits instead of 64 bits (bgo#201322).
+  * debian/patches/97-silence-compiler-warnings.patch:
+    - Added, Fix various compiler warnings
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Wed, 16 Nov 2011 22:21:52 +0000
+
+glib2.0 (2.30.2-1) experimental; urgency=low
+
+  * New upstream release.
+  * debian/patches/70-fix-race-in-gdbus-connection-test.patch:
+    - Removed, merged upstream.
+  * debian/patches/80_gtk_doc_out_of_tree.patch:
+    - Removed, merged upstream.
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 13 Nov 2011 01:24:28 +0100
+
+glib2.0 (2.30.1-2) experimental; urgency=low
+
+  [ Martin Pitt ]
+  * debian/patches/01_gettext-desktopfiles.patch:
+    - Translate X-GNOME-FullName and X-GNOME-Keywords, too.
+
+  [ Sjoerd Simons ]
+  * debian/patches/80_gtk_doc_out_of_tree.patch:
+    - Added. Fix documentation generation when build out of tree
+
+  [ Michael Biebl ]
+  * Transition to multiarch, thanks Steve. Closes: #634099
+    The following modifications were made to the original patch:
+    - Drop the libtool .la files, since we break existing references anyway.
+    - Don't mark libglib2.0-0-dbg as Multi-Arch: same and install into
+      /usr/lib/debug, not /usr/lib/<triplet>/debug.
+    - Guard the for loops in debian/rules with "set -e".
+  * debian/libglib2.0-dev.install.in:
+    - Install gdb auto-load files.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 21 Oct 2011 21:26:48 +0200
+
+glib2.0 (2.30.1-1) experimental; urgency=low
+
+  [ Michael Biebl ]
+  * New upstream release.
+    - Avoid assertion in GDBus if we fail to authenticate twice.
+      Closes: #634312
+  * Bump debhelper compatibility level to 8.
+    - Bump Build-Depends on debhelper.
+    - Don't pass --dbg-package= without an argument to dh_strip as commands
+      will fail rather than warn when they are passed unknown options.
+  * Don't use brace expansion in debian/libglib2.0-0.install and
+    debian/libglib2.0-dev.install.
+  * debian/control.in
+    - Use architecture wildcard for kfreebsd and hurd.
+    - Bump Standards-Version to 3.9.2. No further changes.
+    - Set pkg-gnome-maintainers@lists.alioth.debian.org as Maintainer.
+    - Add Build-Depends on libffi-dev (>= 3.0.0).
+  * debian/libglib2.0-dev.install
+    - Install gdbus-codegen binary and manpage.
+    - Install gtester and gtester-report manpage.
+  * debian/libglib2.0-bin.install
+    - Install bash completion files for gdbus and gsettings.
+  * debian/libglib2.0-0.symbols
+    - Update symbols file. The GAction API had an incompatible change. As a
+      result g_action_set_state has been renamed to g_action_change_state.
+      See upstream commit 5ff65d869543587d10d78c123698e47effc5fb8c for further
+      details and on the impact of this change.
+  * debian/watch:
+    - Track .xz tarballs.
+  * Update patches
+    - Remove 03_blacklist-directories.patch, merged upstream.
+    - Remove 10_gdesktopappinfo_set_last_used.patch, fixed upstream.
+    - Remove 60_wait-longer-for-threads-to-die.patch, fixed upstream using a
+      counter.
+    - Refresh remaining patches.
+
+  [ Josselin Mouette ]
+  * Break gtk3 < 3.0.12 because it uses an internal symbol that ceases 
+    to work with glib 2.30.
+
+  [ Sjoerd Simons ]
+  * debian/rules: Explicitely build gtk-doc
+  * debian/patches/70-fix-race-in-gdbus-connection-test.patch:
+    - Added, fix race condition in the GDBusConnection life-cycle test
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Sun, 16 Oct 2011 11:50:31 +0100
+
 glib2.0 (2.28.8-1) unstable; urgency=low
 
   * New upstream release.
