@@ -1,3 +1,9 @@
+glib2.0 (2.30.2-4) UNRELEASED; urgency=low
+
+  * Upload to unstable.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 18 Nov 2011 19:28:31 +0100
+
 glib2.0 (2.30.2-3) experimental; urgency=low
 
   * debian/patches/98-disable-two-more-GDBus-tests-using-fork.patch:
