@@ -1,3 +1,10 @@
+glib2.0 (2.30.2-5) UNRELEASED; urgency=low
+
+  * Drop deprecated build-dependencies on pygobject & python-dbus.
+  * Retain one on python for the script that uses it.
+
+ -- Josselin Mouette <joss@debian.org>  Thu, 24 Nov 2011 21:12:46 +0100
+
 glib2.0 (2.30.2-4) unstable; urgency=low
 
   * Upload to unstable.
