@@ -1,7 +1,16 @@
 glib2.0 (2.30.2-5) UNRELEASED; urgency=low
 
+  [ Josselin Mouette ]
   * Drop deprecated build-dependencies on pygobject & python-dbus.
   * Retain one on python for the script that uses it.
+
+  [ Loïc Minier ]
+  * Avoid harmless warning when running
+    "/usr/lib/i386-linux-gnu/glib-2.0/gio-querymodules
+    /usr/lib/i386-linux-gnu/gio/modules /usr/lib/gio/modules" on an amd64
+    system without /usr/lib/i386-linux-gnu/gio/modules: "Unable to open
+    directory /usr/lib/i386-linux-gnu/gio/modules: Error opening directory
+    '/usr/lib/i386-linux-gnu/gio/modules': No such file or directory"
 
  -- Josselin Mouette <joss@debian.org>  Thu, 24 Nov 2011 21:12:46 +0100
 
