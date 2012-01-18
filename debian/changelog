@@ -15,7 +15,14 @@ glib2.0 (2.30.2-5) UNRELEASED; urgency=low
     system ("Unable to open directory /usr/lib/gio/modules: Error opening
     directory '/usr/lib/gio/modules': No such file or directory").
 
- -- Josselin Mouette <joss@debian.org>  Thu, 24 Nov 2011 21:12:46 +0100
+  [ Michael Biebl ]
+  * Cherry-pick patches from upstream Git which fix handling of ENUMs and
+    integral return types on 64-bit BE platforms.Closes: #653308
+    - Add d/p/94-closure-fix-handling-of-ENUMs-and-integral-return-ty.patch.
+    - Add d/p/93-gvalue-Add-explicitly-signed-g_value_get_schar-and-g.patch.
+    - Update symbols file accordingly.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 18 Jan 2012 12:46:47 +0100
 
 glib2.0 (2.30.2-4) unstable; urgency=low
 

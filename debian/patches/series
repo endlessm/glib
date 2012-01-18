@@ -4,6 +4,8 @@
 04_homedir_env.patch
 61_glib-compile-schemas-path.patch
 90-gio-modules-multiarch-compat.patch
+93-gvalue-Add-explicitly-signed-g_value_get_schar-and-g.patch
+94-closure-fix-handling-of-ENUMs-and-integral-return-ty.patch
 95-gmain-get-rid-of-poll_waiting.patch
 96-fix-one-bit-mutex-test-on-some-platforms.patch
 97-silence-compiler-warnings.patch
