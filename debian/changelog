@@ -5,19 +5,13 @@ glib2.0 (2.30.2-5) UNRELEASED; urgency=low
   * Retain one on python for the script that uses it.
 
   [ Loïc Minier ]
-  * Avoid harmless warning when running
-    "/usr/lib/i386-linux-gnu/glib-2.0/gio-querymodules
-    /usr/lib/i386-linux-gnu/gio/modules /usr/lib/gio/modules" on an amd64
-    system without /usr/lib/i386-linux-gnu/gio/modules: "Unable to open
-    directory /usr/lib/i386-linux-gnu/gio/modules: Error opening directory
-    '/usr/lib/i386-linux-gnu/gio/modules': No such file or directory" or when
-    processing triggers of libglib2.0-0:i386 and libglib2.0-0 on an amd64
-    system ("Unable to open directory /usr/lib/gio/modules: Error opening
+  * Avoid harmless warnings when processing triggers of libglib2.0-0
+    ("Unable to open directory /usr/lib/gio/modules: Error opening
     directory '/usr/lib/gio/modules': No such file or directory").
 
   [ Michael Biebl ]
   * Cherry-pick patches from upstream Git which fix handling of ENUMs and
-    integral return types on 64-bit BE platforms.Closes: #653308
+    integral return types on 64-bit BE platforms. Closes: #653308
     - Add d/p/94-closure-fix-handling-of-ENUMs-and-integral-return-ty.patch.
     - Add d/p/93-gvalue-Add-explicitly-signed-g_value_get_schar-and-g.patch.
     - Update symbols file accordingly.
