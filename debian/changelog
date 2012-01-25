@@ -2,7 +2,7 @@ glib2.0 (2.30.2-6) UNRELEASED; urgency=low
 
   * Revert the patches added in 2.30.2-5 which changed the handling of return
     types from libffi. They didn't actually fix the build failures on s390x
-    and caused random segfaults in e.g. gnome-settings-daemon. Closes: #656564
+    and had some unpleasant side effects, like making other packages FTBFS.
 
  -- Michael Biebl <biebl@debian.org>  Wed, 18 Jan 2012 14:27:37 +0100
 
