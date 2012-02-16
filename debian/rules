@@ -72,6 +72,7 @@ DEB_CONFIGURE_FLAGS_refdbg := \
 binary-install/libglib2.0-0::
 	set -e; for script in postinst postrm; do \
 		sed -e"s/#MULTIARCH#/$(DEB_HOST_MULTIARCH)/g" \
+		    -e"s/#ARCH#/$(DEB_HOST_ARCH)/g" \
 		    debian/$(cdbs_curpkg).$$script.in \
 		    > debian/$(cdbs_curpkg).$$script ; \
 	done
