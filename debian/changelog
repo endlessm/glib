@@ -1,6 +1,6 @@
 glib2.0 (2.30.2-7) UNRELEASED; urgency=low
 
-  * libglib2.0-0.posinst.in:
+  * libglib2.0-0.postinst.in:
     + Encapsulate gio-querymodules calls in || true statements.
       Closes: #659588.
     + Only run gio-querymodules on the non-multiarch path for the host 
