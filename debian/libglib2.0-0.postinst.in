@@ -10,7 +10,10 @@ if [ "$1" = triggered ]; then
           /usr/share/glib-2.0/schemas)
             # This is triggered everytime an application installs a
             # GSettings schema
-            /usr/lib/#MULTIARCH#/glib-2.0/glib-compile-schemas /usr/share/glib-2.0/schemas || true
+            # Only do this once, using the host installation.
+            if [ $(dpkg-architecture -qDEB_HOST_MULTIARCH) = #MULTIARCH# ]; then
+              /usr/lib/#MULTIARCH#/glib-2.0/glib-compile-schemas /usr/share/glib-2.0/schemas || true
+            fi
             ;;
 
           /usr/lib/#MULTIARCH#/gio/modules|/usr/lib/gio/modules)
@@ -22,10 +25,10 @@ if [ "$1" = triggered ]; then
             # libglib2.0 itself so we need to check to avoid a warning from
             # gio-querymodules
             dirs=/usr/lib/#MULTIARCH#/gio/modules
-            if [ -d /usr/lib/gio/modules ]; then
+            if [ -d /usr/lib/gio/modules ] && [ $(dpkg-architecture -qDEB_HOST_MULTIARCH) = #MULTIARCH# ]; then
                 dirs="$dirs /usr/lib/gio/modules"
             fi
-            /usr/lib/#MULTIARCH#/glib-2.0/gio-querymodules $dirs
+            /usr/lib/#MULTIARCH#/glib-2.0/gio-querymodules $dirs || true
             ;;
         esac
     done
@@ -35,12 +38,12 @@ fi
 #DEBHELPER#
 
 # Also handle the initial installation
-if [ -d /usr/share/glib-2.0/schemas ]; then
+if [ -d /usr/share/glib-2.0/schemas ] && [ $(dpkg-architecture -qDEB_HOST_MULTIARCH) = #MULTIARCH# ]; then
     /usr/lib/#MULTIARCH#/glib-2.0/glib-compile-schemas /usr/share/glib-2.0/schemas || true
 fi
 if [ -d /usr/lib/#MULTIARCH#/gio/modules ]; then
-    /usr/lib/#MULTIARCH#/glib-2.0/gio-querymodules /usr/lib/#MULTIARCH#/gio/modules
+    /usr/lib/#MULTIARCH#/glib-2.0/gio-querymodules /usr/lib/#MULTIARCH#/gio/modules || true
 fi
-if [ -d /usr/lib/gio/modules ]; then
-    /usr/lib/#MULTIARCH#/glib-2.0/gio-querymodules /usr/lib/gio/modules
+if [ -d /usr/lib/gio/modules ] && [ $(dpkg-architecture -qDEB_HOST_MULTIARCH) = #MULTIARCH# ]; then
+    /usr/lib/#MULTIARCH#/glib-2.0/gio-querymodules /usr/lib/gio/modules || true
 fi
