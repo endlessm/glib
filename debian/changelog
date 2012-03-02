@@ -1,5 +1,7 @@
-glib2.0 (2.31.8-2) UNRELEASED; urgency=low
+glib2.0 (2.31.18-1) UNRELEASED; urgency=low
 
+  * New development release
+  - Yeah, 2.31.8 was a mistake =/
   * debian/libglib2.0-0.symbols:
   - fix version declared for 2.31.8 symbols to not have -1
 
