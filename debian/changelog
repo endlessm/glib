@@ -7,8 +7,10 @@ glib2.0 (2.31.18-1) UNRELEASED; urgency=low
   * debian/patches/61_glib-compile-schemas-path.patch,
     debian/patches/61_glib-compile-binaries-path.patch:
   - renamed, and updated to also cover glib-compile-resources
+  * debian/libglib2.0-0.install.in:
+  - add glib-compile-resources
 
- -- Gustavo Noronha Silva <kov@debian.org>  Fri, 02 Mar 2012 19:27:52 -0300
+ -- Gustavo Noronha Silva <kov@debian.org>  Fri, 02 Mar 2012 19:42:33 -0300
 
 glib2.0 (2.31.8-1) experimental; urgency=low
 
