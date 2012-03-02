@@ -6,9 +6,9 @@
 # Upstream: http://bugzilla.gnome.org/show_bug.cgi?id=569829
 Index: glib2.0/glib/gkeyfile.c
 ===================================================================
---- glib2.0.orig/glib/gkeyfile.c	2012-01-03 14:44:55.000000000 -0200
-+++ glib2.0/glib/gkeyfile.c	2012-03-02 00:37:37.822554746 -0300
-@@ -446,6 +446,7 @@
+--- glib2.0.orig/glib/gkeyfile.c	2012-02-20 22:10:54.000000000 -0200
++++ glib2.0/glib/gkeyfile.c	2012-03-02 19:33:42.972567490 -0300
+@@ -443,6 +443,7 @@
    GKeyFileFlags flags;
  
    gchar **locales;
@@ -16,7 +16,7 @@ Index: glib2.0/glib/gkeyfile.c
  
    volatile gint ref_count;
  };
-@@ -577,6 +578,7 @@
+@@ -573,6 +574,7 @@
    key_file->list_separator = ';';
    key_file->flags = 0;
    key_file->locales = g_strdupv ((gchar **)g_get_language_names ());
@@ -24,7 +24,7 @@ Index: glib2.0/glib/gkeyfile.c
  }
  
  static void
-@@ -596,6 +598,12 @@
+@@ -592,6 +594,12 @@
        key_file->parse_buffer = NULL;
      }
  
@@ -37,7 +37,7 @@ Index: glib2.0/glib/gkeyfile.c
    tmp = key_file->groups;
    while (tmp != NULL)
      {
-@@ -811,6 +819,11 @@
+@@ -807,6 +815,11 @@
        return FALSE;
      }
  
@@ -49,7 +49,7 @@ Index: glib2.0/glib/gkeyfile.c
    return TRUE;
  }
  
-@@ -917,6 +930,11 @@
+@@ -912,6 +925,11 @@
        return FALSE;
      }
  
@@ -61,7 +61,7 @@ Index: glib2.0/glib/gkeyfile.c
    return TRUE;
  }
  
-@@ -2098,6 +2116,8 @@
+@@ -2091,6 +2109,8 @@
    GError *key_file_error;
    gchar **languages;
    gboolean free_languages = FALSE;
@@ -70,7 +70,7 @@ Index: glib2.0/glib/gkeyfile.c
    gint i;
  
    g_return_val_if_fail (key_file != NULL, NULL);
-@@ -2119,6 +2139,24 @@
+@@ -2112,6 +2132,24 @@
        free_languages = FALSE;
      }
    
@@ -95,7 +95,7 @@ Index: glib2.0/glib/gkeyfile.c
    for (i = 0; languages[i]; i++)
      {
        candidate_key = g_strdup_printf ("%s[%s]", key, languages[i]);
-@@ -2135,6 +2173,39 @@
+@@ -2128,6 +2166,39 @@
        translated_value = NULL;
     }
  
@@ -137,8 +137,8 @@ Index: glib2.0/glib/gkeyfile.c
    if (!translated_value)
 Index: glib2.0/glib/gkeyfile.h
 ===================================================================
---- glib2.0.orig/glib/gkeyfile.h	2011-11-28 22:40:42.000000000 -0200
-+++ glib2.0/glib/gkeyfile.h	2012-03-02 00:37:20.834470518 -0300
+--- glib2.0.orig/glib/gkeyfile.h	2012-02-20 18:23:17.000000000 -0200
++++ glib2.0/glib/gkeyfile.h	2012-03-02 19:33:42.972567490 -0300
 @@ -258,6 +258,9 @@
  #define G_KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY   "StartupNotify"
  #define G_KEY_FILE_DESKTOP_KEY_STARTUP_WM_CLASS "StartupWMClass"
