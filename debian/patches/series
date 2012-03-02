@@ -4,7 +4,3 @@
 04_homedir_env.patch
 61_glib-compile-schemas-path.patch
 90-gio-modules-multiarch-compat.patch
-95-gmain-get-rid-of-poll_waiting.patch
-96-fix-one-bit-mutex-test-on-some-platforms.patch
-97-silence-compiler-warnings.patch
-98-disable-two-more-GDBus-tests-using-fork.patch

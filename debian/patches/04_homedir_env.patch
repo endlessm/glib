@@ -4,11 +4,11 @@ Description: Handle the G_HOME environment variable to override the passwd entry
 Author: Josselin Mouette <joss@debian.org>
 Origin: vendor
 
-Index: glib-2.30.0/docs/reference/glib/running.sgml
+Index: glib2.0/docs/reference/glib/running.sgml
 ===================================================================
---- glib-2.30.0.orig/docs/reference/glib/running.sgml	2011-09-09 21:58:10.000000000 +0200
-+++ glib-2.30.0/docs/reference/glib/running.sgml	2011-10-06 03:28:39.730396342 +0200
-@@ -213,6 +213,22 @@
+--- glib2.0.orig/docs/reference/glib/running.sgml	2011-11-28 22:40:42.000000000 -0200
++++ glib2.0/docs/reference/glib/running.sgml	2012-03-02 00:38:00.230665860 -0300
+@@ -244,6 +244,22 @@
    </para>
  </formalpara>
  
@@ -31,11 +31,11 @@ Index: glib-2.30.0/docs/reference/glib/running.sgml
  </refsect2>
  
  <refsect2 id="setlocale">
-Index: glib-2.30.0/glib/gutils.c
+Index: glib2.0/glib/gutils.c
 ===================================================================
---- glib-2.30.0.orig/glib/gutils.c	2011-09-26 22:54:50.000000000 +0200
-+++ glib-2.30.0/glib/gutils.c	2011-10-06 03:28:39.734396292 +0200
-@@ -1725,11 +1725,14 @@
+--- glib2.0.orig/glib/gutils.c	2012-01-03 14:44:55.000000000 -0200
++++ glib2.0/glib/gutils.c	2012-03-02 00:38:00.230665860 -0300
+@@ -686,11 +686,14 @@
      }
  #endif	/* !G_OS_WIN32 */
    
@@ -51,7 +51,7 @@ Index: glib-2.30.0/glib/gutils.c
  
    /* Only believe HOME if it is an absolute path and exists */
    if (g_home_dir)
-@@ -2025,6 +2028,11 @@
+@@ -986,6 +989,11 @@
   *      homedir = g_get_home_dir (<!-- -->);
   * ]|
   *

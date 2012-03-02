@@ -1,10 +1,10 @@
 # Description: Provide backwards compatibility for 01_gettext-desktopfiles.patch for X-{Debian,Ubuntu}-Gettext-Domain
 # UbuntuSpecific: 01_gettext-desktopfiles.patch was changed to use X-GNOME-, so this is necessary until all our .desktop files are converted
-Index: glib-2.30.0/glib/gkeyfile.c
+Index: glib2.0/glib/gkeyfile.c
 ===================================================================
---- glib-2.30.0.orig/glib/gkeyfile.c	2011-10-06 03:28:09.442777108 +0200
-+++ glib-2.30.0/glib/gkeyfile.c	2011-10-06 03:28:36.222440443 +0200
-@@ -467,6 +467,16 @@
+--- glib2.0.orig/glib/gkeyfile.c	2012-03-02 00:37:37.822554746 -0300
++++ glib2.0/glib/gkeyfile.c	2012-03-02 00:37:54.486637406 -0300
+@@ -823,6 +823,16 @@
                                                      G_KEY_FILE_DESKTOP_GROUP,
                                                      G_KEY_FILE_DESKTOP_KEY_GETTEXT_DOMAIN,
                                                      NULL);
@@ -21,7 +21,7 @@ Index: glib-2.30.0/glib/gkeyfile.c
  
    return TRUE;
  }
-@@ -578,6 +588,16 @@
+@@ -934,6 +944,16 @@
                                                      G_KEY_FILE_DESKTOP_GROUP,
                                                      G_KEY_FILE_DESKTOP_KEY_GETTEXT_DOMAIN,
                                                      NULL);

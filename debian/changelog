@@ -1,3 +1,16 @@
+glib2.0 (2.31.8-1) UNRELEASED; urgency=low
+
+  * New development release
+  * debian/patches/*:
+  - refreshed;
+  * debian/patches/95-gmain-get-rid-of-poll_waiting.patch,
+    debian/patches/96-fix-one-bit-mutex-test-on-some-platforms.patch,
+    debian/patches/97-silence-compiler-warnings.patch,
+    debian/patches/98-disable-two-more-GDBus-tests-using-fork.patch:
+  - removed; applied upstream
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Fri, 02 Mar 2012 00:34:30 -0300
+
 glib2.0 (2.30.2-7) UNRELEASED; urgency=low
 
   * libglib2.0-0.postinst.in:
