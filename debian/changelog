@@ -1,5 +1,6 @@
 glib2.0 (2.31.18-1) UNRELEASED; urgency=low
 
+  [ Gustavo Noronha Silva ]
   * New development release
   - Yeah, 2.31.8 was a mistake =/
   * debian/libglib2.0-0.symbols:
@@ -11,7 +12,13 @@ glib2.0 (2.31.18-1) UNRELEASED; urgency=low
   * debian/libglib2.0-0.install.in:
   - add glib-compile-resources
 
- -- Gustavo Noronha Silva <kov@debian.org>  Fri, 02 Mar 2012 19:42:33 -0300
+  [ Michael Biebl ]
+  * debian/libglib2.0-bin.install: Install new gresource binary and the man
+    pages for gresource and glib-compile-resources.
+  * debian/libglib2.0-bin.links.in: Add symlink in /usr/bin for
+    glib-compile-resources since we install the binary in a multiarch path.
+
+ -- Michael Biebl <biebl@debian.org>  Sat, 03 Mar 2012 00:53:56 +0100
 
 glib2.0 (2.31.8-1) experimental; urgency=low
 
