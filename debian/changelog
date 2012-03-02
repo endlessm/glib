@@ -1,13 +1,48 @@
-glib2.0 (2.30.2-4) UNRELEASED; urgency=low
+glib2.0 (2.30.2-7) UNRELEASED; urgency=low
 
-  * Avoid harmless warning when running
-    "/usr/lib/i386-linux-gnu/glib-2.0/gio-querymodules
-    /usr/lib/i386-linux-gnu/gio/modules /usr/lib/gio/modules" on an amd64
-    system without /usr/lib/i386-linux-gnu/gio/modules: "Unable to open
-    directory /usr/lib/i386-linux-gnu/gio/modules: Error opening directory
-    '/usr/lib/i386-linux-gnu/gio/modules': No such file or directory"
+  * libglib2.0-0.postinst.in:
+    + Encapsulate gio-querymodules calls in || true statements.
+      Closes: #659588.
+    + Only run gio-querymodules on the non-multiarch path for the host 
+      architecture.
+  * rules: add substitution for #ARCH# for the above change.
 
- -- Loïc Minier <lool@debian.org>  Fri, 18 Nov 2011 13:04:50 +0100
+ -- Josselin Mouette <joss@debian.org>  Thu, 16 Feb 2012 12:21:51 +0100
+
+glib2.0 (2.30.2-6) unstable; urgency=low
+
+  * Revert the patches added in 2.30.2-5 which changed the handling of return
+    types from libffi. They didn't actually fix the build failures on s390x
+    and had some unpleasant side effects, like making other packages FTBFS.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 25 Jan 2012 12:17:29 +0100
+
+glib2.0 (2.30.2-5) unstable; urgency=low
+
+  [ Josselin Mouette ]
+  * Drop deprecated build-dependencies on pygobject & python-dbus.
+  * Retain one on python for the script that uses it.
+
+  [ Loïc Minier ]
+  * Avoid harmless warnings when processing triggers of libglib2.0-0
+    ("Unable to open directory /usr/lib/gio/modules: Error opening
+    directory '/usr/lib/gio/modules': No such file or directory").
+
+  [ Michael Biebl ]
+  * Cherry-pick patches from upstream Git which fix handling of ENUMs and
+    integral return types on 64-bit BE platforms. Closes: #653308
+    - Add d/p/94-closure-fix-handling-of-ENUMs-and-integral-return-ty.patch.
+    - Add d/p/93-gvalue-Add-explicitly-signed-g_value_get_schar-and-g.patch.
+    - Update symbols file accordingly.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 18 Jan 2012 13:50:56 +0100
+
+glib2.0 (2.30.2-4) unstable; urgency=low
+
+  * Upload to unstable.
+  * Disable test suite on kfreebsd-* for now.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 18 Nov 2011 19:38:40 +0100
 
 glib2.0 (2.30.2-3) experimental; urgency=low
 
