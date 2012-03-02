@@ -4,6 +4,7 @@ glib2.0 (2.31.18-1) UNRELEASED; urgency=low
   - Yeah, 2.31.8 was a mistake =/
   * debian/libglib2.0-0.symbols:
   - fix version declared for 2.31.8 symbols to not have -1
+  - updated for 2.31.8 symbols
   * debian/patches/61_glib-compile-schemas-path.patch,
     debian/patches/61_glib-compile-binaries-path.patch:
   - renamed, and updated to also cover glib-compile-resources
