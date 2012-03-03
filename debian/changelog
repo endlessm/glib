@@ -17,8 +17,10 @@ glib2.0 (2.31.18-1) UNRELEASED; urgency=low
     pages for gresource and glib-compile-resources.
   * debian/libglib2.0-bin.links.in: Add symlink in /usr/bin for
     glib-compile-resources since we install the binary in a multiarch path.
+  * debian/rules: Re-enable test-suite on kfreebsd but keep it non-fatal for
+    now.
 
- -- Michael Biebl <biebl@debian.org>  Sat, 03 Mar 2012 00:53:56 +0100
+ -- Michael Biebl <biebl@debian.org>  Sat, 03 Mar 2012 02:35:20 +0100
 
 glib2.0 (2.31.8-1) experimental; urgency=low
 
