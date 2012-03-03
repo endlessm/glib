@@ -2,8 +2,10 @@ glib2.0 (2.31.18-2) experimental; urgency=low
 
   * debian/control.in:
   - add libpcre3-dev to the list of dependencies of libglib2.0-dev
+  - add libelf-dev as a build dependency to make gresource able to deal
+    with ELF files
 
- -- Gustavo Noronha Silva <kov@debian.org>  Sat, 03 Mar 2012 16:13:14 -0300
+ -- Gustavo Noronha Silva <kov@debian.org>  Sat, 03 Mar 2012 17:29:51 -0300
 
 glib2.0 (2.31.18-1) experimental; urgency=low
 
