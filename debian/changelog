@@ -1,4 +1,4 @@
-glib2.0 (2.31.18-1) UNRELEASED; urgency=low
+glib2.0 (2.31.18-1) experimental; urgency=low
 
   [ Gustavo Noronha Silva ]
   * New development release
@@ -20,7 +20,7 @@ glib2.0 (2.31.18-1) UNRELEASED; urgency=low
   * debian/rules: Re-enable test-suite on kfreebsd but keep it non-fatal for
     now.
 
- -- Michael Biebl <biebl@debian.org>  Sat, 03 Mar 2012 02:35:20 +0100
+ -- Michael Biebl <biebl@debian.org>  Sat, 03 Mar 2012 02:36:26 +0100
 
 glib2.0 (2.31.8-1) experimental; urgency=low
 
