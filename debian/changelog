@@ -1,3 +1,10 @@
+glib2.0 (2.31.18-3) UNRELEASED; urgency=low
+
+  * debian/control.in: Add Build-Depends on python-dbus, python-gobject-2, and
+    libxml2-utils (xmllint). Required to run the test-suite.
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 04 Mar 2012 01:23:31 +0100
+
 glib2.0 (2.31.18-2) experimental; urgency=low
 
   * debian/control.in:
