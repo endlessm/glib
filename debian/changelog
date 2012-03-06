@@ -1,3 +1,9 @@
+glib2.0 (2.31.20-1) UNRELEASED; urgency=low
+
+  * New upstream development release.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 06 Mar 2012 02:20:13 +0100
+
 glib2.0 (2.31.18-3) experimental; urgency=low
 
   * debian/control.in: Add Build-Depends on python-dbus, python-gobject-2, and
