@@ -4,10 +4,10 @@ Description: Adjust path to glib-compile-schemas in the pkg-config file
 Author: Sebastian Dröge <slomo@debian.org>
 Origin: vendor
 
-Index: glib2.0/gio-2.0.pc.in
+Index: glib-2.31.20/gio-2.0.pc.in
 ===================================================================
---- glib2.0.orig/gio-2.0.pc.in	2012-02-20 18:23:17.000000000 -0200
-+++ glib2.0/gio-2.0.pc.in	2012-03-02 19:35:20.825052715 -0300
+--- glib-2.31.20.orig/gio-2.0.pc.in	2012-03-05 02:35:47.000000000 +0100
++++ glib-2.31.20/gio-2.0.pc.in	2012-03-05 19:21:12.614147505 +0100
 @@ -4,8 +4,8 @@
  includedir=@includedir@
  
@@ -16,6 +16,6 @@ Index: glib2.0/gio-2.0.pc.in
 -glib_compile_resources=@bindir@/glib-compile-resources@EXEEXT@
 +glib_compile_schemas=@libdir@/glib-2.0/glib-compile-schemas@EXEEXT@
 +glib_compile_resources=@libdir@/glib-2.0/glib-compile-resources@EXEEXT@
+ gdbus_codegen=@bindir@/gdbus-codegen
  
  Name: GIO
- Description: glib I/O library

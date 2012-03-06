@@ -1,8 +1,9 @@
 glib2.0 (2.31.20-1) UNRELEASED; urgency=low
 
   * New upstream development release.
+  * debian/patches/61_glib-compile-binaries-path.patch: Refreshed.
 
- -- Michael Biebl <biebl@debian.org>  Tue, 06 Mar 2012 02:20:13 +0100
+ -- Michael Biebl <biebl@debian.org>  Tue, 06 Mar 2012 02:21:12 +0100
 
 glib2.0 (2.31.18-3) experimental; urgency=low
 
