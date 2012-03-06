@@ -3228,28 +3228,51 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_byte_array_get_type@Base 2.22.0
  g_bytes_get_type@Base 2.31.8
  g_cclosure_marshal_BOOLEAN__BOXED_BOXED@Base 2.26.0
+ g_cclosure_marshal_BOOLEAN__BOXED_BOXEDv@Base 2.31.20
  g_cclosure_marshal_BOOLEAN__FLAGS@Base 2.12.0
+ g_cclosure_marshal_BOOLEAN__FLAGSv@Base 2.31.20
  g_cclosure_marshal_STRING__OBJECT_POINTER@Base 2.12.0
+ g_cclosure_marshal_STRING__OBJECT_POINTERv@Base 2.31.20
  g_cclosure_marshal_VOID__BOOLEAN@Base 2.12.0
+ g_cclosure_marshal_VOID__BOOLEANv@Base 2.31.20
  g_cclosure_marshal_VOID__BOXED@Base 2.12.0
+ g_cclosure_marshal_VOID__BOXEDv@Base 2.31.20
  g_cclosure_marshal_VOID__CHAR@Base 2.12.0
+ g_cclosure_marshal_VOID__CHARv@Base 2.31.20
  g_cclosure_marshal_VOID__DOUBLE@Base 2.12.0
+ g_cclosure_marshal_VOID__DOUBLEv@Base 2.31.20
  g_cclosure_marshal_VOID__ENUM@Base 2.12.0
+ g_cclosure_marshal_VOID__ENUMv@Base 2.31.20
  g_cclosure_marshal_VOID__FLAGS@Base 2.12.0
+ g_cclosure_marshal_VOID__FLAGSv@Base 2.31.20
  g_cclosure_marshal_VOID__FLOAT@Base 2.12.0
+ g_cclosure_marshal_VOID__FLOATv@Base 2.31.20
  g_cclosure_marshal_VOID__INT@Base 2.12.0
+ g_cclosure_marshal_VOID__INTv@Base 2.31.20
  g_cclosure_marshal_VOID__LONG@Base 2.12.0
+ g_cclosure_marshal_VOID__LONGv@Base 2.31.20
  g_cclosure_marshal_VOID__OBJECT@Base 2.12.0
+ g_cclosure_marshal_VOID__OBJECTv@Base 2.31.20
  g_cclosure_marshal_VOID__PARAM@Base 2.12.0
+ g_cclosure_marshal_VOID__PARAMv@Base 2.31.20
  g_cclosure_marshal_VOID__POINTER@Base 2.12.0
+ g_cclosure_marshal_VOID__POINTERv@Base 2.31.20
  g_cclosure_marshal_VOID__STRING@Base 2.12.0
+ g_cclosure_marshal_VOID__STRINGv@Base 2.31.20
  g_cclosure_marshal_VOID__UCHAR@Base 2.12.0
+ g_cclosure_marshal_VOID__UCHARv@Base 2.31.20
  g_cclosure_marshal_VOID__UINT@Base 2.12.0
  g_cclosure_marshal_VOID__UINT_POINTER@Base 2.12.0
+ g_cclosure_marshal_VOID__UINT_POINTERv@Base 2.31.20
+ g_cclosure_marshal_VOID__UINTv@Base 2.31.20
  g_cclosure_marshal_VOID__ULONG@Base 2.12.0
+ g_cclosure_marshal_VOID__ULONGv@Base 2.31.20
  g_cclosure_marshal_VOID__VARIANT@Base 2.26.0
+ g_cclosure_marshal_VOID__VARIANTv@Base 2.31.20
  g_cclosure_marshal_VOID__VOID@Base 2.12.0
+ g_cclosure_marshal_VOID__VOIDv@Base 2.31.20
  g_cclosure_marshal_generic@Base 2.30.0
+ g_cclosure_marshal_generic_va@Base 2.31.20
  g_cclosure_new@Base 2.12.0
  g_cclosure_new_object@Base 2.12.0
  g_cclosure_new_object_swap@Base 2.12.0
@@ -3430,6 +3453,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_signal_parse_name@Base 2.12.0
  g_signal_query@Base 2.12.0
  g_signal_remove_emission_hook@Base 2.12.0
+ g_signal_set_va_marshaller@Base 2.31.20
  g_signal_stop_emission@Base 2.12.0
  g_signal_stop_emission_by_name@Base 2.12.0
  g_signal_type_cclosure_new@Base 2.12.0
