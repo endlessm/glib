@@ -1,4 +1,4 @@
-glib2.0 (2.31.20-1) UNRELEASED; urgency=low
+glib2.0 (2.31.20-1) experimental; urgency=low
 
   * New upstream development release.
   * debian/patches/61_glib-compile-binaries-path.patch: Refreshed.
@@ -6,7 +6,7 @@ glib2.0 (2.31.20-1) UNRELEASED; urgency=low
   * Override list-missing target with an implementation that better handles
     multiple flavors (copied from the gtk+3.0 package).
 
- -- Michael Biebl <biebl@debian.org>  Tue, 06 Mar 2012 02:21:33 +0100
+ -- Michael Biebl <biebl@debian.org>  Tue, 06 Mar 2012 02:28:12 +0100
 
 glib2.0 (2.31.18-3) experimental; urgency=low
 
