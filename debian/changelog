@@ -3,6 +3,8 @@ glib2.0 (2.31.20-1) UNRELEASED; urgency=low
   * New upstream development release.
   * debian/patches/61_glib-compile-binaries-path.patch: Refreshed.
   * debian/libglib2.0-0.symbols: Add new symbols.
+  * Override list-missing target with an implementation that better handles
+    multiple flavors (copied from the gtk+3.0 package).
 
  -- Michael Biebl <biebl@debian.org>  Tue, 06 Mar 2012 02:21:33 +0100
 
