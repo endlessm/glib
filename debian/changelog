@@ -1,8 +1,9 @@
 glib2.0 (2.31.22-1) UNRELEASED; urgency=low
 
   * New upstream development release.
+  * debian/libglib2.0-0.symbols: Add new symbol.
 
- -- Michael Biebl <biebl@debian.org>  Tue, 20 Mar 2012 00:51:40 +0100
+ -- Michael Biebl <biebl@debian.org>  Tue, 20 Mar 2012 01:59:20 +0100
 
 glib2.0 (2.31.20-1) experimental; urgency=low
 
