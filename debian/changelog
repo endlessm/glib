@@ -1,3 +1,9 @@
+glib2.0 (2.32.0-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 25 Mar 2012 13:24:41 +0200
+
 glib2.0 (2.31.22-1) experimental; urgency=low
 
   * New upstream development release.
