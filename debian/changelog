@@ -1,10 +1,10 @@
-glib2.0 (2.32.0-1) UNRELEASED; urgency=low
+glib2.0 (2.32.0-1) experimental; urgency=low
 
   * New upstream release.
   * Add single-include guard for gbytes.h. Patch cherry-picked from
     upstream Git.
 
- -- Michael Biebl <biebl@debian.org>  Sun, 25 Mar 2012 13:25:30 +0200
+ -- Michael Biebl <biebl@debian.org>  Mon, 26 Mar 2012 18:41:49 +0200
 
 glib2.0 (2.31.22-1) experimental; urgency=low
 
