@@ -1,4 +1,4 @@
-glib2.0 (2.32.0-3) UNRELEASED; urgency=low
+glib2.0 (2.32.0-3) unstable; urgency=low
 
   [ Martin Pitt ]
   * 01_gettext-desktopfiles.patch: Use official "Keywords" key now,
@@ -11,7 +11,7 @@ glib2.0 (2.32.0-3) UNRELEASED; urgency=low
   * Don't enforce single include for glib/gversionmacros.h since this header
     is included from glib/gtypes.h which is widely used.
 
- -- Michael Biebl <biebl@debian.org>  Fri, 30 Mar 2012 23:46:00 +0200
+ -- Michael Biebl <biebl@debian.org>  Fri, 30 Mar 2012 23:55:41 +0200
 
 glib2.0 (2.32.0-2) unstable; urgency=low
 
