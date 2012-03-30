@@ -2,6 +2,9 @@ glib2.0 (2.32.0-3) UNRELEASED; urgency=low
 
   * 01_gettext-desktopfiles.patch: Use official "Keywords" key now,
     X-GNOME-Keywords has been deprecated for a while now. (LP: #949864)
+  * debian/libglib2.0-0.postrm.in: Only remove the compiled schemas on purge,
+    not during upgrades. Otherwise we have no schemas available until the new
+    postinst is run, which leads to applications aborting on missing schemas.
 
  -- Martin Pitt <mpitt@debian.org>  Fri, 30 Mar 2012 13:24:11 +0200
 
