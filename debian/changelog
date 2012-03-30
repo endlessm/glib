@@ -1,3 +1,10 @@
+glib2.0 (2.32.0-3) UNRELEASED; urgency=low
+
+  * 01_gettext-desktopfiles.patch: Use official "Keywords" key now,
+    X-GNOME-Keywords has been deprecated for a while now. (LP: #949864)
+
+ -- Martin Pitt <mpitt@debian.org>  Fri, 30 Mar 2012 13:24:11 +0200
+
 glib2.0 (2.32.0-2) unstable; urgency=low
 
   * Upload to unstable.
