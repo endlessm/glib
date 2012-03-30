@@ -1,3 +1,89 @@
+glib2.0 (2.32.0-1) experimental; urgency=low
+
+  * New upstream release.
+  * Add single-include guard for gbytes.h. Patch cherry-picked from
+    upstream Git.
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 26 Mar 2012 18:41:49 +0200
+
+glib2.0 (2.31.22-1) experimental; urgency=low
+
+  * New upstream development release.
+  * debian/libglib2.0-0.symbols: Add new symbol.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 20 Mar 2012 02:00:06 +0100
+
+glib2.0 (2.31.20-1) experimental; urgency=low
+
+  * New upstream development release.
+  * debian/patches/61_glib-compile-binaries-path.patch: Refreshed.
+  * debian/libglib2.0-0.symbols: Add new symbols.
+  * Override list-missing target with an implementation that better handles
+    multiple flavors (copied from the gtk+3.0 package).
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 06 Mar 2012 02:28:12 +0100
+
+glib2.0 (2.31.18-3) experimental; urgency=low
+
+  * debian/control.in: Add Build-Depends on python-dbus, python-gobject-2, and
+    libxml2-utils (xmllint). Required to run the test-suite.
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 04 Mar 2012 20:27:09 +0100
+
+glib2.0 (2.31.18-2) experimental; urgency=low
+
+  * debian/control.in:
+  - add libpcre3-dev to the list of dependencies of libglib2.0-dev
+  - add libelf-dev as a build dependency to make gresource able to deal
+    with ELF files
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Sat, 03 Mar 2012 17:29:51 -0300
+
+glib2.0 (2.31.18-1) experimental; urgency=low
+
+  [ Gustavo Noronha Silva ]
+  * New development release
+  - Yeah, 2.31.8 was a mistake =/
+  * debian/libglib2.0-0.symbols:
+  - fix version declared for 2.31.8 symbols to not have -1
+  - updated for 2.31.8 symbols
+  * debian/patches/61_glib-compile-schemas-path.patch,
+    debian/patches/61_glib-compile-binaries-path.patch:
+  - renamed, and updated to also cover glib-compile-resources
+  * debian/libglib2.0-0.install.in:
+  - add glib-compile-resources
+
+  [ Michael Biebl ]
+  * debian/libglib2.0-bin.install: Install new gresource binary and the man
+    pages for gresource and glib-compile-resources.
+  * debian/libglib2.0-bin.links.in: Add symlink in /usr/bin for
+    glib-compile-resources since we install the binary in a multiarch path.
+  * debian/rules: Re-enable test-suite on kfreebsd but keep it non-fatal for
+    now.
+
+ -- Michael Biebl <biebl@debian.org>  Sat, 03 Mar 2012 02:36:26 +0100
+
+glib2.0 (2.31.8-1) experimental; urgency=low
+
+  * New development release
+  * debian/patches/*:
+  - refreshed;
+  * debian/patches/95-gmain-get-rid-of-poll_waiting.patch,
+    debian/patches/96-fix-one-bit-mutex-test-on-some-platforms.patch,
+    debian/patches/97-silence-compiler-warnings.patch,
+    debian/patches/98-disable-two-more-GDBus-tests-using-fork.patch:
+  - removed; applied upstream
+  * debian/libglib2.0-0.symbols:
+  - updated with new symbols
+   NOTES:
+    + g_simple_action_get_parameter_type (from 2.28.0)
+      was made static in 09429e2c820118918e6132d32884eb02203136d4
+    + g_unix_resolver_get_type (from 2.22.0) was removed
+      by 5a30712dc7e4adc36b0e8fd82cf5ccec19bbbdc5, with the
+      removal of !g_thread_supported code paths
+
+ -- Gustavo Noronha Silva <kov@debian.org>  Fri, 02 Mar 2012 00:34:30 -0300
+
 glib2.0 (2.30.2-7) UNRELEASED; urgency=low
 
   * libglib2.0-0.postinst.in:

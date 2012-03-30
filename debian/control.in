@@ -11,6 +11,7 @@ Build-Depends: debhelper (>= 8.1.3),
                autotools-dev,
                gnome-pkg-tools (>= 0.11),
                dpkg-dev (>= 1.16.0),
+               libelf-dev,
                libpcre3-dev (>= 8.11),
                desktop-file-utils,
                gtk-doc-tools (>= 1.15),
@@ -22,6 +23,9 @@ Build-Depends: debhelper (>= 8.1.3),
                dbus-x11,
                shared-mime-info,
                python (>= 2.5),
+               python-dbus,
+               python-gobject-2,
+               libxml2-utils,
                libffi-dev (>= 3.0.0)
 Standards-Version: 3.9.2
 Homepage: http://www.gtk.org/
@@ -91,6 +95,7 @@ Depends: ${misc:Depends},
          ${shlibs:Depends},
          @SHARED_PKG@ (= ${binary:Version}),
          @BIN_PKG@ (= ${binary:Version}),
+         libpcre3-dev (>= 8.11),
          pkg-config (>= 0.16.0),
          zlib1g-dev
 Recommends: python

@@ -46,11 +46,7 @@ DEB_DH_STRIP_ARGS_$(REFDBG_PKG) = --no-act
 # Don't put the symbols in the -dbg package
 DEB_DH_STRIP_ARGS_$(UDEB_PKG) =
 
-# Disable test suite on kfreebsd-*
-# http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=649196
-ifneq ($(DEB_HOST_ARCH_OS),kfreebsd)
 DEB_MAKE_CHECK_TARGET = -k check || true
-endif
 
 # configure flags
 DEB_CONFIGURE_EXTRA_FLAGS := \
@@ -105,3 +101,8 @@ clean::
 		-e "s#@GNOME_TEAM@#$(UPLOADERS)#g" \
 		-e "s#@REFDBG_PKG@#$(REFDBG_PKG)#g" \
 		debian/control.in > debian/control
+
+list-missing:
+	# FIXME: remove this when CDBS' list-missing works with multiple flavors
+	perl -w debian/dh_listmissing.pl $(foreach f,$(DEB_MAKE_FLAVORS),debian/install/$(f)) 2>&1 | \
+	    egrep -v '(\.la|\.pyc|\.pyo) has been installed' >&2

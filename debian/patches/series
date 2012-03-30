@@ -2,9 +2,6 @@
 01_gettext-desktopfiles.patch
 02_gettext-desktopfiles-ubuntu.patch
 04_homedir_env.patch
-61_glib-compile-schemas-path.patch
+10-add-a-forgotten-include-guard.patch
+61_glib-compile-binaries-path.patch
 90-gio-modules-multiarch-compat.patch
-95-gmain-get-rid-of-poll_waiting.patch
-96-fix-one-bit-mutex-test-on-some-platforms.patch
-97-silence-compiler-warnings.patch
-98-disable-two-more-GDBus-tests-using-fork.patch
