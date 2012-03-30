@@ -1,7 +1,7 @@
 Index: glib-2.32.0/configure.ac
 ===================================================================
---- glib-2.32.0.orig/configure.ac	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/configure.ac	2012-03-30 08:17:55.740937153 +0200
+--- glib-2.32.0.orig/configure.ac	2012-03-24 04:02:16.000000000 +0100
++++ glib-2.32.0/configure.ac	2012-03-30 23:44:13.665365884 +0200
 @@ -514,6 +514,8 @@
    esac
  fi
@@ -13,8 +13,8 @@ Index: glib-2.32.0/configure.ac
      AC_MSG_ERROR([Can not build both shared and static at the same time on Windows.])
 Index: glib-2.32.0/glib/deprecated/gallocator.h
 ===================================================================
---- glib-2.32.0.orig/glib/deprecated/gallocator.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/deprecated/gallocator.h	2012-03-30 08:17:55.744937152 +0200
+--- glib-2.32.0.orig/glib/deprecated/gallocator.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/deprecated/gallocator.h	2012-03-30 23:44:13.665365884 +0200
 @@ -15,7 +15,7 @@
   * Boston, MA 02111-1307, USA.
   */
@@ -26,8 +26,8 @@ Index: glib-2.32.0/glib/deprecated/gallocator.h
  
 Index: glib-2.32.0/glib/deprecated/gcache.h
 ===================================================================
---- glib-2.32.0.orig/glib/deprecated/gcache.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/deprecated/gcache.h	2012-03-30 08:17:55.744937152 +0200
+--- glib-2.32.0.orig/glib/deprecated/gcache.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/deprecated/gcache.h	2012-03-30 23:44:13.669365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -39,8 +39,8 @@ Index: glib-2.32.0/glib/deprecated/gcache.h
  
 Index: glib-2.32.0/glib/deprecated/gcompletion.h
 ===================================================================
---- glib-2.32.0.orig/glib/deprecated/gcompletion.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/deprecated/gcompletion.h	2012-03-30 08:17:55.744937152 +0200
+--- glib-2.32.0.orig/glib/deprecated/gcompletion.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/deprecated/gcompletion.h	2012-03-30 23:44:13.669365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -52,8 +52,8 @@ Index: glib-2.32.0/glib/deprecated/gcompletion.h
  
 Index: glib-2.32.0/glib/deprecated/grel.h
 ===================================================================
---- glib-2.32.0.orig/glib/deprecated/grel.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/deprecated/grel.h	2012-03-30 08:17:55.744937152 +0200
+--- glib-2.32.0.orig/glib/deprecated/grel.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/deprecated/grel.h	2012-03-30 23:44:13.669365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -65,8 +65,8 @@ Index: glib-2.32.0/glib/deprecated/grel.h
  
 Index: glib-2.32.0/glib/deprecated/gthread.h
 ===================================================================
---- glib-2.32.0.orig/glib/deprecated/gthread.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/deprecated/gthread.h	2012-03-30 08:17:55.744937152 +0200
+--- glib-2.32.0.orig/glib/deprecated/gthread.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/deprecated/gthread.h	2012-03-30 23:44:13.669365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -78,8 +78,8 @@ Index: glib-2.32.0/glib/deprecated/gthread.h
  
 Index: glib-2.32.0/glib/galloca.h
 ===================================================================
---- glib-2.32.0.orig/glib/galloca.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/galloca.h	2012-03-30 08:17:55.744937152 +0200
+--- glib-2.32.0.orig/glib/galloca.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/galloca.h	2012-03-30 23:44:13.669365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -91,8 +91,8 @@ Index: glib-2.32.0/glib/galloca.h
  
 Index: glib-2.32.0/glib/garray.h
 ===================================================================
---- glib-2.32.0.orig/glib/garray.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/garray.h	2012-03-30 08:17:55.744937152 +0200
+--- glib-2.32.0.orig/glib/garray.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/garray.h	2012-03-30 23:44:13.669365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -104,8 +104,8 @@ Index: glib-2.32.0/glib/garray.h
  
 Index: glib-2.32.0/glib/gasyncqueue.h
 ===================================================================
---- glib-2.32.0.orig/glib/gasyncqueue.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gasyncqueue.h	2012-03-30 08:17:55.748937152 +0200
+--- glib-2.32.0.orig/glib/gasyncqueue.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gasyncqueue.h	2012-03-30 23:44:13.681365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -117,8 +117,8 @@ Index: glib-2.32.0/glib/gasyncqueue.h
  
 Index: glib-2.32.0/glib/gatomic.h
 ===================================================================
---- glib-2.32.0.orig/glib/gatomic.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gatomic.h	2012-03-30 08:17:55.748937152 +0200
+--- glib-2.32.0.orig/glib/gatomic.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gatomic.h	2012-03-30 23:44:13.681365883 +0200
 @@ -19,7 +19,7 @@
   * Author: Ryan Lortie <desrt@desrt.ca>
   */
@@ -130,8 +130,8 @@ Index: glib-2.32.0/glib/gatomic.h
  
 Index: glib-2.32.0/glib/gbacktrace.h
 ===================================================================
---- glib-2.32.0.orig/glib/gbacktrace.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gbacktrace.h	2012-03-30 08:17:55.748937152 +0200
+--- glib-2.32.0.orig/glib/gbacktrace.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gbacktrace.h	2012-03-30 23:44:13.681365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -143,8 +143,8 @@ Index: glib-2.32.0/glib/gbacktrace.h
  
 Index: glib-2.32.0/glib/gbase64.h
 ===================================================================
---- glib-2.32.0.orig/glib/gbase64.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gbase64.h	2012-03-30 08:17:55.748937152 +0200
+--- glib-2.32.0.orig/glib/gbase64.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gbase64.h	2012-03-30 23:44:13.681365883 +0200
 @@ -18,7 +18,7 @@
   * Boston, MA 02111-1307, USA.
   */
@@ -156,8 +156,8 @@ Index: glib-2.32.0/glib/gbase64.h
  
 Index: glib-2.32.0/glib/gbitlock.h
 ===================================================================
---- glib-2.32.0.orig/glib/gbitlock.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gbitlock.h	2012-03-30 08:17:55.748937152 +0200
+--- glib-2.32.0.orig/glib/gbitlock.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gbitlock.h	2012-03-30 23:44:13.681365883 +0200
 @@ -25,7 +25,7 @@
  
  #include <glib/gtypes.h>
@@ -169,8 +169,8 @@ Index: glib-2.32.0/glib/gbitlock.h
  
 Index: glib-2.32.0/glib/gbookmarkfile.h
 ===================================================================
---- glib-2.32.0.orig/glib/gbookmarkfile.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gbookmarkfile.h	2012-03-30 08:17:55.748937152 +0200
+--- glib-2.32.0.orig/glib/gbookmarkfile.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gbookmarkfile.h	2012-03-30 23:44:13.681365883 +0200
 @@ -17,7 +17,7 @@
   * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
   */
@@ -182,8 +182,8 @@ Index: glib-2.32.0/glib/gbookmarkfile.h
  
 Index: glib-2.32.0/glib/gchecksum.h
 ===================================================================
---- glib-2.32.0.orig/glib/gchecksum.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gchecksum.h	2012-03-30 08:17:55.748937152 +0200
+--- glib-2.32.0.orig/glib/gchecksum.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gchecksum.h	2012-03-30 23:44:13.685365883 +0200
 @@ -18,7 +18,7 @@
   * Boston, MA 02111-1307, USA.
   */
@@ -195,8 +195,8 @@ Index: glib-2.32.0/glib/gchecksum.h
  
 Index: glib-2.32.0/glib/gconvert.h
 ===================================================================
---- glib-2.32.0.orig/glib/gconvert.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gconvert.h	2012-03-30 08:17:55.748937152 +0200
+--- glib-2.32.0.orig/glib/gconvert.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gconvert.h	2012-03-30 23:44:13.685365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -208,8 +208,8 @@ Index: glib-2.32.0/glib/gconvert.h
  
 Index: glib-2.32.0/glib/gdataset.h
 ===================================================================
---- glib-2.32.0.orig/glib/gdataset.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gdataset.h	2012-03-30 08:17:55.752937152 +0200
+--- glib-2.32.0.orig/glib/gdataset.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gdataset.h	2012-03-30 23:44:13.685365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -221,8 +221,8 @@ Index: glib-2.32.0/glib/gdataset.h
  
 Index: glib-2.32.0/glib/gdate.h
 ===================================================================
---- glib-2.32.0.orig/glib/gdate.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gdate.h	2012-03-30 08:17:55.752937152 +0200
+--- glib-2.32.0.orig/glib/gdate.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gdate.h	2012-03-30 23:44:13.685365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -234,8 +234,8 @@ Index: glib-2.32.0/glib/gdate.h
  
 Index: glib-2.32.0/glib/gdatetime.h
 ===================================================================
---- glib-2.32.0.orig/glib/gdatetime.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gdatetime.h	2012-03-30 08:17:55.752937152 +0200
+--- glib-2.32.0.orig/glib/gdatetime.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gdatetime.h	2012-03-30 23:44:13.685365883 +0200
 @@ -23,7 +23,7 @@
   *          Ryan Lortie <desrt@desrt.ca>
   */
@@ -247,8 +247,8 @@ Index: glib-2.32.0/glib/gdatetime.h
  
 Index: glib-2.32.0/glib/gdir.h
 ===================================================================
---- glib-2.32.0.orig/glib/gdir.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gdir.h	2012-03-30 08:17:55.752937152 +0200
+--- glib-2.32.0.orig/glib/gdir.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gdir.h	2012-03-30 23:44:13.685365883 +0200
 @@ -21,7 +21,7 @@
   * Boston, MA 02111-1307, USA.
   */
@@ -260,8 +260,8 @@ Index: glib-2.32.0/glib/gdir.h
  
 Index: glib-2.32.0/glib/gerror.h
 ===================================================================
---- glib-2.32.0.orig/glib/gerror.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gerror.h	2012-03-30 08:17:55.752937152 +0200
+--- glib-2.32.0.orig/glib/gerror.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gerror.h	2012-03-30 23:44:13.685365883 +0200
 @@ -18,7 +18,7 @@
   *   Boston, MA 02111-1307, USA.
   */
@@ -273,8 +273,8 @@ Index: glib-2.32.0/glib/gerror.h
  
 Index: glib-2.32.0/glib/gfileutils.h
 ===================================================================
---- glib-2.32.0.orig/glib/gfileutils.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gfileutils.h	2012-03-30 08:17:55.752937152 +0200
+--- glib-2.32.0.orig/glib/gfileutils.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gfileutils.h	2012-03-30 23:44:13.685365883 +0200
 @@ -18,7 +18,7 @@
   *   Boston, MA 02111-1307, USA.
   */
@@ -286,8 +286,8 @@ Index: glib-2.32.0/glib/gfileutils.h
  
 Index: glib-2.32.0/glib/ghash.h
 ===================================================================
---- glib-2.32.0.orig/glib/ghash.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/ghash.h	2012-03-30 08:17:55.752937152 +0200
+--- glib-2.32.0.orig/glib/ghash.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/ghash.h	2012-03-30 23:44:13.685365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -299,8 +299,8 @@ Index: glib-2.32.0/glib/ghash.h
  
 Index: glib-2.32.0/glib/ghmac.h
 ===================================================================
---- glib-2.32.0.orig/glib/ghmac.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/ghmac.h	2012-03-30 08:17:55.752937152 +0200
+--- glib-2.32.0.orig/glib/ghmac.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/ghmac.h	2012-03-30 23:44:13.685365883 +0200
 @@ -18,7 +18,7 @@
   * Boston, MA 02111-1307, USA.
   */
@@ -312,8 +312,8 @@ Index: glib-2.32.0/glib/ghmac.h
  
 Index: glib-2.32.0/glib/ghook.h
 ===================================================================
---- glib-2.32.0.orig/glib/ghook.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/ghook.h	2012-03-30 08:17:55.756937152 +0200
+--- glib-2.32.0.orig/glib/ghook.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/ghook.h	2012-03-30 23:44:13.685365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -325,8 +325,8 @@ Index: glib-2.32.0/glib/ghook.h
  
 Index: glib-2.32.0/glib/giochannel.h
 ===================================================================
---- glib-2.32.0.orig/glib/giochannel.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/giochannel.h	2012-03-30 08:17:55.756937152 +0200
+--- glib-2.32.0.orig/glib/giochannel.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/giochannel.h	2012-03-30 23:44:13.685365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -338,8 +338,8 @@ Index: glib-2.32.0/glib/giochannel.h
  
 Index: glib-2.32.0/glib/gkeyfile.h
 ===================================================================
---- glib-2.32.0.orig/glib/gkeyfile.h	2012-03-30 08:17:52.320937273 +0200
-+++ glib-2.32.0/glib/gkeyfile.h	2012-03-30 08:17:55.756937152 +0200
+--- glib-2.32.0.orig/glib/gkeyfile.h	2012-03-30 23:44:12.041365941 +0200
++++ glib-2.32.0/glib/gkeyfile.h	2012-03-30 23:44:13.685365883 +0200
 @@ -20,7 +20,7 @@
   *   Boston, MA 02111-1307, USA.
   */
@@ -351,8 +351,8 @@ Index: glib-2.32.0/glib/gkeyfile.h
  
 Index: glib-2.32.0/glib/glist.h
 ===================================================================
---- glib-2.32.0.orig/glib/glist.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/glist.h	2012-03-30 08:17:55.756937152 +0200
+--- glib-2.32.0.orig/glib/glist.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/glist.h	2012-03-30 23:44:13.685365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -364,8 +364,8 @@ Index: glib-2.32.0/glib/glist.h
  
 Index: glib-2.32.0/glib/gmacros.h
 ===================================================================
---- glib-2.32.0.orig/glib/gmacros.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gmacros.h	2012-03-30 08:17:55.756937152 +0200
+--- glib-2.32.0.orig/glib/gmacros.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gmacros.h	2012-03-30 23:44:13.685365883 +0200
 @@ -28,7 +28,7 @@
   * not refer to variables from glibconfig.h
   */
@@ -377,8 +377,8 @@ Index: glib-2.32.0/glib/gmacros.h
  
 Index: glib-2.32.0/glib/gmain.h
 ===================================================================
---- glib-2.32.0.orig/glib/gmain.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gmain.h	2012-03-30 08:17:55.756937152 +0200
+--- glib-2.32.0.orig/glib/gmain.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gmain.h	2012-03-30 23:44:13.689365883 +0200
 @@ -17,7 +17,7 @@
   * Boston, MA 02111-1307, USA.
   */
@@ -390,8 +390,8 @@ Index: glib-2.32.0/glib/gmain.h
  
 Index: glib-2.32.0/glib/gmappedfile.h
 ===================================================================
---- glib-2.32.0.orig/glib/gmappedfile.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gmappedfile.h	2012-03-30 08:17:55.756937152 +0200
+--- glib-2.32.0.orig/glib/gmappedfile.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gmappedfile.h	2012-03-30 23:44:13.689365883 +0200
 @@ -19,7 +19,7 @@
   * Boston, MA 02111-1307, USA.
   */
@@ -403,8 +403,8 @@ Index: glib-2.32.0/glib/gmappedfile.h
  
 Index: glib-2.32.0/glib/gmarkup.h
 ===================================================================
---- glib-2.32.0.orig/glib/gmarkup.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gmarkup.h	2012-03-30 08:17:55.760937152 +0200
+--- glib-2.32.0.orig/glib/gmarkup.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gmarkup.h	2012-03-30 23:44:13.689365883 +0200
 @@ -18,7 +18,7 @@
   *   Boston, MA 02111-1307, USA.
   */
@@ -416,8 +416,8 @@ Index: glib-2.32.0/glib/gmarkup.h
  
 Index: glib-2.32.0/glib/gmem.h
 ===================================================================
---- glib-2.32.0.orig/glib/gmem.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gmem.h	2012-03-30 08:17:55.760937152 +0200
+--- glib-2.32.0.orig/glib/gmem.h	2012-03-12 01:42:41.000000000 +0100
++++ glib-2.32.0/glib/gmem.h	2012-03-30 23:44:13.689365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -429,8 +429,8 @@ Index: glib-2.32.0/glib/gmem.h
  
 Index: glib-2.32.0/glib/gmessages.h
 ===================================================================
---- glib-2.32.0.orig/glib/gmessages.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gmessages.h	2012-03-30 08:17:55.760937152 +0200
+--- glib-2.32.0.orig/glib/gmessages.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gmessages.h	2012-03-30 23:44:13.689365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -442,8 +442,8 @@ Index: glib-2.32.0/glib/gmessages.h
  
 Index: glib-2.32.0/glib/gnode.h
 ===================================================================
---- glib-2.32.0.orig/glib/gnode.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gnode.h	2012-03-30 08:17:55.760937152 +0200
+--- glib-2.32.0.orig/glib/gnode.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gnode.h	2012-03-30 23:44:13.689365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -455,8 +455,8 @@ Index: glib-2.32.0/glib/gnode.h
  
 Index: glib-2.32.0/glib/goption.h
 ===================================================================
---- glib-2.32.0.orig/glib/goption.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/goption.h	2012-03-30 08:17:55.760937152 +0200
+--- glib-2.32.0.orig/glib/goption.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/goption.h	2012-03-30 23:44:13.689365883 +0200
 @@ -18,7 +18,7 @@
   * Boston, MA 02111-1307, USA.
   */
@@ -468,8 +468,8 @@ Index: glib-2.32.0/glib/goption.h
  
 Index: glib-2.32.0/glib/gpattern.h
 ===================================================================
---- glib-2.32.0.orig/glib/gpattern.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gpattern.h	2012-03-30 08:17:55.760937152 +0200
+--- glib-2.32.0.orig/glib/gpattern.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gpattern.h	2012-03-30 23:44:13.689365883 +0200
 @@ -17,7 +17,7 @@
   * Boston, MA 02111-1307, USA.
   */
@@ -481,8 +481,8 @@ Index: glib-2.32.0/glib/gpattern.h
  
 Index: glib-2.32.0/glib/gprimes.h
 ===================================================================
---- glib-2.32.0.orig/glib/gprimes.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gprimes.h	2012-03-30 08:17:55.760937152 +0200
+--- glib-2.32.0.orig/glib/gprimes.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gprimes.h	2012-03-30 23:44:13.689365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -494,8 +494,8 @@ Index: glib-2.32.0/glib/gprimes.h
  
 Index: glib-2.32.0/glib/gqsort.h
 ===================================================================
---- glib-2.32.0.orig/glib/gqsort.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gqsort.h	2012-03-30 08:17:55.760937152 +0200
+--- glib-2.32.0.orig/glib/gqsort.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gqsort.h	2012-03-30 23:44:13.689365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -507,8 +507,8 @@ Index: glib-2.32.0/glib/gqsort.h
  
 Index: glib-2.32.0/glib/gquark.h
 ===================================================================
---- glib-2.32.0.orig/glib/gquark.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gquark.h	2012-03-30 08:17:55.764937152 +0200
+--- glib-2.32.0.orig/glib/gquark.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gquark.h	2012-03-30 23:44:13.689365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -520,8 +520,8 @@ Index: glib-2.32.0/glib/gquark.h
  
 Index: glib-2.32.0/glib/gqueue.h
 ===================================================================
---- glib-2.32.0.orig/glib/gqueue.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gqueue.h	2012-03-30 08:17:55.764937152 +0200
+--- glib-2.32.0.orig/glib/gqueue.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gqueue.h	2012-03-30 23:44:13.689365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -533,8 +533,8 @@ Index: glib-2.32.0/glib/gqueue.h
  
 Index: glib-2.32.0/glib/grand.h
 ===================================================================
---- glib-2.32.0.orig/glib/grand.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/grand.h	2012-03-30 08:17:55.764937152 +0200
+--- glib-2.32.0.orig/glib/grand.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/grand.h	2012-03-30 23:44:13.689365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -546,8 +546,8 @@ Index: glib-2.32.0/glib/grand.h
  
 Index: glib-2.32.0/glib/gregex.h
 ===================================================================
---- glib-2.32.0.orig/glib/gregex.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gregex.h	2012-03-30 08:17:55.764937152 +0200
+--- glib-2.32.0.orig/glib/gregex.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gregex.h	2012-03-30 23:44:13.689365883 +0200
 @@ -19,7 +19,7 @@
   * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
   */
@@ -559,8 +559,8 @@ Index: glib-2.32.0/glib/gregex.h
  
 Index: glib-2.32.0/glib/gscanner.h
 ===================================================================
---- glib-2.32.0.orig/glib/gscanner.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gscanner.h	2012-03-30 08:17:55.764937152 +0200
+--- glib-2.32.0.orig/glib/gscanner.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gscanner.h	2012-03-30 23:44:13.689365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -572,8 +572,8 @@ Index: glib-2.32.0/glib/gscanner.h
  
 Index: glib-2.32.0/glib/gsequence.h
 ===================================================================
---- glib-2.32.0.orig/glib/gsequence.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gsequence.h	2012-03-30 08:17:55.764937152 +0200
+--- glib-2.32.0.orig/glib/gsequence.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gsequence.h	2012-03-30 23:44:13.689365883 +0200
 @@ -18,7 +18,7 @@
   * Boston, MA 02111-1307, USA.
   */
@@ -585,8 +585,8 @@ Index: glib-2.32.0/glib/gsequence.h
  
 Index: glib-2.32.0/glib/gshell.h
 ===================================================================
---- glib-2.32.0.orig/glib/gshell.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gshell.h	2012-03-30 08:17:55.764937152 +0200
+--- glib-2.32.0.orig/glib/gshell.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gshell.h	2012-03-30 23:44:13.689365883 +0200
 @@ -18,7 +18,7 @@
   * Boston, MA 02111-1307, USA.
   */
@@ -598,8 +598,8 @@ Index: glib-2.32.0/glib/gshell.h
  
 Index: glib-2.32.0/glib/gslice.h
 ===================================================================
---- glib-2.32.0.orig/glib/gslice.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gslice.h	2012-03-30 08:17:55.764937152 +0200
+--- glib-2.32.0.orig/glib/gslice.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gslice.h	2012-03-30 23:44:13.689365883 +0200
 @@ -17,7 +17,7 @@
   * Boston, MA 02111-1307, USA.
   */
@@ -611,8 +611,8 @@ Index: glib-2.32.0/glib/gslice.h
  
 Index: glib-2.32.0/glib/gslist.h
 ===================================================================
---- glib-2.32.0.orig/glib/gslist.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gslist.h	2012-03-30 08:17:55.764937152 +0200
+--- glib-2.32.0.orig/glib/gslist.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gslist.h	2012-03-30 23:44:13.693365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -624,8 +624,8 @@ Index: glib-2.32.0/glib/gslist.h
  
 Index: glib-2.32.0/glib/gspawn.h
 ===================================================================
---- glib-2.32.0.orig/glib/gspawn.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gspawn.h	2012-03-30 08:17:55.764937152 +0200
+--- glib-2.32.0.orig/glib/gspawn.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gspawn.h	2012-03-30 23:44:13.693365883 +0200
 @@ -18,7 +18,7 @@
   * Boston, MA 02111-1307, USA.
   */
@@ -637,8 +637,8 @@ Index: glib-2.32.0/glib/gspawn.h
  
 Index: glib-2.32.0/glib/gstrfuncs.h
 ===================================================================
---- glib-2.32.0.orig/glib/gstrfuncs.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gstrfuncs.h	2012-03-30 08:17:55.764937152 +0200
+--- glib-2.32.0.orig/glib/gstrfuncs.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gstrfuncs.h	2012-03-30 23:44:13.693365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -650,8 +650,8 @@ Index: glib-2.32.0/glib/gstrfuncs.h
  
 Index: glib-2.32.0/glib/gstringchunk.h
 ===================================================================
---- glib-2.32.0.orig/glib/gstringchunk.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gstringchunk.h	2012-03-30 08:17:55.764937152 +0200
+--- glib-2.32.0.orig/glib/gstringchunk.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gstringchunk.h	2012-03-30 23:44:13.693365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -663,8 +663,8 @@ Index: glib-2.32.0/glib/gstringchunk.h
  
 Index: glib-2.32.0/glib/gstring.h
 ===================================================================
---- glib-2.32.0.orig/glib/gstring.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gstring.h	2012-03-30 08:17:55.764937152 +0200
+--- glib-2.32.0.orig/glib/gstring.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gstring.h	2012-03-30 23:44:13.693365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -676,8 +676,8 @@ Index: glib-2.32.0/glib/gstring.h
  
 Index: glib-2.32.0/glib/gtestutils.h
 ===================================================================
---- glib-2.32.0.orig/glib/gtestutils.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gtestutils.h	2012-03-30 08:17:55.764937152 +0200
+--- glib-2.32.0.orig/glib/gtestutils.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gtestutils.h	2012-03-30 23:44:13.693365883 +0200
 @@ -18,7 +18,7 @@
   * Boston, MA 02111-1307, USA.
   */
@@ -689,8 +689,8 @@ Index: glib-2.32.0/glib/gtestutils.h
  
 Index: glib-2.32.0/glib/gthread.h
 ===================================================================
---- glib-2.32.0.orig/glib/gthread.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gthread.h	2012-03-30 08:17:55.764937152 +0200
+--- glib-2.32.0.orig/glib/gthread.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gthread.h	2012-03-30 23:44:13.693365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -702,8 +702,8 @@ Index: glib-2.32.0/glib/gthread.h
  
 Index: glib-2.32.0/glib/gthreadpool.h
 ===================================================================
---- glib-2.32.0.orig/glib/gthreadpool.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gthreadpool.h	2012-03-30 08:17:55.764937152 +0200
+--- glib-2.32.0.orig/glib/gthreadpool.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gthreadpool.h	2012-03-30 23:44:13.693365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -715,8 +715,8 @@ Index: glib-2.32.0/glib/gthreadpool.h
  
 Index: glib-2.32.0/glib/gtimer.h
 ===================================================================
---- glib-2.32.0.orig/glib/gtimer.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gtimer.h	2012-03-30 08:17:55.768937152 +0200
+--- glib-2.32.0.orig/glib/gtimer.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gtimer.h	2012-03-30 23:44:13.693365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -728,8 +728,8 @@ Index: glib-2.32.0/glib/gtimer.h
  
 Index: glib-2.32.0/glib/gtimezone.h
 ===================================================================
---- glib-2.32.0.orig/glib/gtimezone.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gtimezone.h	2012-03-30 08:17:55.768937152 +0200
+--- glib-2.32.0.orig/glib/gtimezone.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gtimezone.h	2012-03-30 23:44:13.693365883 +0200
 @@ -19,7 +19,7 @@
   * Author: Ryan Lortie <desrt@desrt.ca>
   */
@@ -741,8 +741,8 @@ Index: glib-2.32.0/glib/gtimezone.h
  
 Index: glib-2.32.0/glib/gtree.h
 ===================================================================
---- glib-2.32.0.orig/glib/gtree.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gtree.h	2012-03-30 08:17:55.768937152 +0200
+--- glib-2.32.0.orig/glib/gtree.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gtree.h	2012-03-30 23:44:13.693365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -754,8 +754,8 @@ Index: glib-2.32.0/glib/gtree.h
  
 Index: glib-2.32.0/glib/gtypes.h
 ===================================================================
---- glib-2.32.0.orig/glib/gtypes.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gtypes.h	2012-03-30 08:17:55.768937152 +0200
+--- glib-2.32.0.orig/glib/gtypes.h	2012-03-18 04:27:18.000000000 +0100
++++ glib-2.32.0/glib/gtypes.h	2012-03-30 23:44:13.693365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -767,8 +767,8 @@ Index: glib-2.32.0/glib/gtypes.h
  
 Index: glib-2.32.0/glib/gunicode.h
 ===================================================================
---- glib-2.32.0.orig/glib/gunicode.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gunicode.h	2012-03-30 08:17:55.768937152 +0200
+--- glib-2.32.0.orig/glib/gunicode.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gunicode.h	2012-03-30 23:44:13.693365883 +0200
 @@ -19,7 +19,7 @@
   *   Boston, MA 02111-1307, USA.
   */
@@ -780,8 +780,8 @@ Index: glib-2.32.0/glib/gunicode.h
  
 Index: glib-2.32.0/glib/gurifuncs.h
 ===================================================================
---- glib-2.32.0.orig/glib/gurifuncs.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gurifuncs.h	2012-03-30 08:17:55.768937152 +0200
+--- glib-2.32.0.orig/glib/gurifuncs.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gurifuncs.h	2012-03-30 23:44:13.693365883 +0200
 @@ -20,7 +20,7 @@
   * Author: Alexander Larsson <alexl@redhat.com>
   */
@@ -793,8 +793,8 @@ Index: glib-2.32.0/glib/gurifuncs.h
  
 Index: glib-2.32.0/glib/gutils.h
 ===================================================================
---- glib-2.32.0.orig/glib/gutils.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gutils.h	2012-03-30 08:17:55.768937152 +0200
+--- glib-2.32.0.orig/glib/gutils.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gutils.h	2012-03-30 23:44:13.693365883 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
@@ -806,8 +806,8 @@ Index: glib-2.32.0/glib/gutils.h
  
 Index: glib-2.32.0/glib/gvariant.h
 ===================================================================
---- glib-2.32.0.orig/glib/gvariant.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gvariant.h	2012-03-30 08:17:55.768937152 +0200
+--- glib-2.32.0.orig/glib/gvariant.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gvariant.h	2012-03-30 23:44:13.697365882 +0200
 @@ -20,7 +20,7 @@
   * Author: Ryan Lortie <desrt@desrt.ca>
   */
@@ -819,8 +819,8 @@ Index: glib-2.32.0/glib/gvariant.h
  
 Index: glib-2.32.0/glib/gvarianttype.h
 ===================================================================
---- glib-2.32.0.orig/glib/gvarianttype.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gvarianttype.h	2012-03-30 08:17:55.768937152 +0200
+--- glib-2.32.0.orig/glib/gvarianttype.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gvarianttype.h	2012-03-30 23:44:13.697365882 +0200
 @@ -20,7 +20,7 @@
   * Author: Ryan Lortie <desrt@desrt.ca>
   */
@@ -832,8 +832,21 @@ Index: glib-2.32.0/glib/gvarianttype.h
  
 Index: glib-2.32.0/glib/gwin32.h
 ===================================================================
---- glib-2.32.0.orig/glib/gwin32.h	2012-03-30 08:17:48.652937403 +0200
-+++ glib-2.32.0/glib/gwin32.h	2012-03-30 08:17:55.768937152 +0200
+--- glib-2.32.0.orig/glib/gwin32.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gwin32.h	2012-03-30 23:44:13.697365882 +0200
+@@ -24,7 +24,7 @@
+  * GLib at ftp://ftp.gtk.org/pub/gtk/.
+  */
+ 
+-#if !defined (__GLIB_H_INSIDE__) && !defined (GLIB_COMPILATION)
++#if defined(G_DISABLE_SINGLE_INCLUDES) && !defined (__GLIB_H_INSIDE__) && !defined (GLIB_COMPILATION)
+ #error "Only <glib.h> can be included directly."
+ #endif
+ 
+Index: glib-2.32.0/glib/gversionmacros.h
+===================================================================
+--- glib-2.32.0.orig/glib/gversionmacros.h	2012-03-12 01:42:42.000000000 +0100
++++ glib-2.32.0/glib/gversionmacros.h	2012-03-30 23:45:47.521362564 +0200
 @@ -24,7 +24,7 @@
   * GLib at ftp://ftp.gtk.org/pub/gtk/.
   */
