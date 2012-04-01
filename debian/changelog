@@ -1,3 +1,11 @@
+glib2.0 (2.32.0-4) UNRELEASED; urgency=low
+
+  * Set --sourcedir for the different flavors when running dh_install. This
+    way the .install files can be simplified a lot which makes them much more
+    readable.
+
+ -- Michael Biebl <biebl@debian.org>  Sat, 31 Mar 2012 00:53:47 +0200
+
 glib2.0 (2.32.0-3) unstable; urgency=low
 
   [ Martin Pitt ]
