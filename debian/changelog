@@ -1,8 +1,13 @@
 glib2.0 (2.32.0-4) UNRELEASED; urgency=low
 
+  [ Michael Biebl ]
   * Set --sourcedir for the different flavors when running dh_install. This
     way the .install files can be simplified a lot which makes them much more
     readable.
+
+  [ Martin Pitt ]
+  * Drop 90-gio-modules-multiarch-compat.patch. There are no packages shipping
+    gio modules in the old /usr/lib/gio/ path any more.
 
  -- Michael Biebl <biebl@debian.org>  Sat, 31 Mar 2012 00:53:47 +0200
 
