@@ -5,3 +5,4 @@
 04_homedir_env.patch
 #10-add-a-forgotten-include-guard.patch
 61_glib-compile-binaries-path.patch
+90-gio-modules-multiarch-compat.patch
