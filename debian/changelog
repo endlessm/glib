@@ -1,4 +1,4 @@
-glib2.0 (2.32.0-4) UNRELEASED; urgency=low
+glib2.0 (2.32.0-4) unstable; urgency=low
 
   * Set --sourcedir for the different flavors when running dh_install. This
     way the .install files can be simplified a lot which makes them much more
@@ -9,7 +9,7 @@ glib2.0 (2.32.0-4) UNRELEASED; urgency=low
     GdkThreads so they needed to be fixed to correctly work with glib 2.32.
     Closes: #668019
 
- -- Michael Biebl <biebl@debian.org>  Mon, 09 Apr 2012 14:01:18 +0200
+ -- Michael Biebl <biebl@debian.org>  Mon, 09 Apr 2012 14:16:26 +0200
 
 glib2.0 (2.32.0-3) unstable; urgency=low
 
