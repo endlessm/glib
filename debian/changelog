@@ -3,8 +3,9 @@ glib2.0 (2.32.0-4) UNRELEASED; urgency=low
   * Set --sourcedir for the different flavors when running dh_install. This
     way the .install files can be simplified a lot which makes them much more
     readable.
+  * Bump Standards-Version to 3.9.3.
 
- -- Michael Biebl <biebl@debian.org>  Sat, 31 Mar 2012 00:53:47 +0200
+ -- Michael Biebl <biebl@debian.org>  Mon, 09 Apr 2012 11:41:03 +0200
 
 glib2.0 (2.32.0-3) unstable; urgency=low
 
