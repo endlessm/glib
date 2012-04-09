@@ -4,8 +4,12 @@ glib2.0 (2.32.0-4) UNRELEASED; urgency=low
     way the .install files can be simplified a lot which makes them much more
     readable.
   * Bump Standards-Version to 3.9.3.
+  * Add Breaks against emacs23, eog and gwaei. Those applications were broken
+    due to changes in GApplication and the way they interacted with
+    GdkThreads so they needed to be fixed to correctly work with glib 2.32.
+    Closes: #668019
 
- -- Michael Biebl <biebl@debian.org>  Mon, 09 Apr 2012 11:41:03 +0200
+ -- Michael Biebl <biebl@debian.org>  Mon, 09 Apr 2012 14:01:18 +0200
 
 glib2.0 (2.32.0-3) unstable; urgency=low
 
