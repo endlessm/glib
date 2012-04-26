@@ -1,4 +1,4 @@
-glib2.0 (2.32.1-1) UNRELEASED; urgency=low
+glib2.0 (2.32.1-1) unstable; urgency=low
 
   * New upstream release.
   * Refresh patches.
@@ -10,7 +10,7 @@ glib2.0 (2.32.1-1) UNRELEASED; urgency=low
     paths of all packages. This avoids tons of spewage from the gsettings
     trigger during package installation.
 
- -- Michael Biebl <biebl@debian.org>  Thu, 26 Apr 2012 23:03:59 +0200
+ -- Michael Biebl <biebl@debian.org>  Thu, 26 Apr 2012 23:13:28 +0200
 
 glib2.0 (2.32.0-4) unstable; urgency=low
 
