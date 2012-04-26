@@ -1,8 +1,9 @@
 glib2.0 (2.32.1-1) UNRELEASED; urgency=low
 
   * New upstream release.
+  * Refresh patches.
 
- -- Michael Biebl <biebl@debian.org>  Thu, 26 Apr 2012 23:00:24 +0200
+ -- Michael Biebl <biebl@debian.org>  Thu, 26 Apr 2012 23:00:54 +0200
 
 glib2.0 (2.32.0-4) unstable; urgency=low
 
