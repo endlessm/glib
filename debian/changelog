@@ -4,6 +4,11 @@ glib2.0 (2.32.1-1) UNRELEASED; urgency=low
   * Refresh patches.
   * debian/patches/git_powerpc_gresources.patch: Upstream fix for gresource on
     big endian architectures, i.e powerpc. Closes: #669130
+  * debian/patches/revert_schema_path_warning.patch: Revert upstream commit
+    which generates a warning for applications using a non-recommended
+    gsettings path. Final freeze is not the time to start fixing the gsettings
+    paths of all packages. This avoids tons of spewage from the gsettings
+    trigger during package installation.
 
  -- Michael Biebl <biebl@debian.org>  Thu, 26 Apr 2012 23:03:59 +0200
 

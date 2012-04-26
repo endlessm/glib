@@ -7,3 +7,4 @@
 61_glib-compile-binaries-path.patch
 90-gio-modules-multiarch-compat.patch
 git_powerpc_gresources.patch
+revert_schema_path_warning.patch
