@@ -5,8 +5,11 @@ glib2.0 (2.32.2-1) UNRELEASED; urgency=low
   * Remove debian/patches/git_powerpc_gresources.patch, merged upstream.
   * debian/patches/95_configure-Fix-typo-in-ELF-check.patch: Fix typo in ELF
     configure check. Patch cherry-picked from upstream Git.
+  * debian/patches/96_configure-Reset-LIBS-after-ELF-check.patch: Reset LIBS
+    after running the ELF checks otherwise we end up linking everything
+    against libelf. Patch cherry-picked from upstream Git.
 
- -- Michael Biebl <biebl@debian.org>  Tue, 01 May 2012 17:36:36 +0200
+ -- Michael Biebl <biebl@debian.org>  Tue, 01 May 2012 20:01:13 +0200
 
 glib2.0 (2.32.1-1) unstable; urgency=low
 
