@@ -2,8 +2,9 @@ glib2.0 (2.32.2-1) UNRELEASED; urgency=low
 
   * New upstream release.
   * Refresh patches.
+  * Remove debian/patches/git_powerpc_gresources.patch, merged upstream.
 
- -- Michael Biebl <biebl@debian.org>  Tue, 01 May 2012 17:03:56 +0200
+ -- Michael Biebl <biebl@debian.org>  Tue, 01 May 2012 17:04:44 +0200
 
 glib2.0 (2.32.1-1) unstable; urgency=low
 
