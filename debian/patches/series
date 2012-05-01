@@ -3,7 +3,6 @@
 02_gettext-desktopfiles-ubuntu.patch
 03_revert_git_single_include_error.patch
 04_homedir_env.patch
-#10-add-a-forgotten-include-guard.patch
 61_glib-compile-binaries-path.patch
 90-gio-modules-multiarch-compat.patch
 revert_schema_path_warning.patch
