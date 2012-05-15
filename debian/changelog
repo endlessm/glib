@@ -1,3 +1,9 @@
+glib2.0 (2.32.2-2) UNRELEASED; urgency=low
+
+  * debian/control.in: Update Vcs-* for experimental branch.
+
+ -- Martin Pitt <mpitt@debian.org>  Tue, 15 May 2012 15:01:33 +0200
+
 glib2.0 (2.32.2-1) unstable; urgency=low
 
   * New upstream release.
