@@ -145,7 +145,7 @@ Index: glib2.0/glib/gkeyfile.h
  #define G_KEY_FILE_DESKTOP_KEY_URL              "URL"
 +#define G_KEY_FILE_DESKTOP_KEY_GETTEXT_DOMAIN   "X-GNOME-Gettext-Domain"
 +#define G_KEY_FILE_DESKTOP_KEY_FULLNAME         "X-GNOME-FullName"
-+#define G_KEY_FILE_DESKTOP_KEY_KEYWORDS         "X-GNOME-Keywords"
++#define G_KEY_FILE_DESKTOP_KEY_KEYWORDS         "Keywords"
  
  #define G_KEY_FILE_DESKTOP_TYPE_APPLICATION     "Application"
  #define G_KEY_FILE_DESKTOP_TYPE_LINK            "Link"

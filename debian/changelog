@@ -1,3 +1,66 @@
+glib2.0 (2.32.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * Refresh patches.
+  * Remove debian/patches/git_powerpc_gresources.patch, merged upstream.
+  * debian/patches/95_configure-Fix-typo-in-ELF-check.patch: Fix typo in ELF
+    configure check. Patch cherry-picked from upstream Git.
+  * debian/patches/96_configure-Reset-LIBS-after-ELF-check.patch: Reset LIBS
+    after running the ELF checks otherwise we end up linking everything
+    against libelf. Patch cherry-picked from upstream Git.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 01 May 2012 20:02:21 +0200
+
+glib2.0 (2.32.1-1) unstable; urgency=low
+
+  * New upstream release.
+  * Refresh patches.
+  * debian/patches/git_powerpc_gresources.patch: Upstream fix for gresource on
+    big endian architectures, i.e powerpc. Closes: #669130
+  * debian/patches/revert_schema_path_warning.patch: Revert upstream commit
+    which generates a warning for applications using a non-recommended
+    gsettings path. Final freeze is not the time to start fixing the gsettings
+    paths of all packages. This avoids tons of spewage from the gsettings
+    trigger during package installation.
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 26 Apr 2012 23:13:28 +0200
+
+glib2.0 (2.32.0-4) unstable; urgency=low
+
+  * Set --sourcedir for the different flavors when running dh_install. This
+    way the .install files can be simplified a lot which makes them much more
+    readable.
+  * Bump Standards-Version to 3.9.3.
+  * Add Breaks against emacs23, eog and gwaei. Those applications were broken
+    due to changes in GApplication and the way they interacted with
+    GdkThreads so they needed to be fixed to correctly work with glib 2.32.
+    Closes: #668019
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 09 Apr 2012 14:16:26 +0200
+
+glib2.0 (2.32.0-3) unstable; urgency=low
+
+  [ Martin Pitt ]
+  * 01_gettext-desktopfiles.patch: Use official "Keywords" key now,
+    X-GNOME-Keywords has been deprecated for a while now. (LP: #949864)
+  * debian/libglib2.0-0.postrm.in: Only remove the compiled schemas on purge,
+    not during upgrades. Otherwise we have no schemas available until the new
+    postinst is run, which leads to applications aborting on missing schemas.
+
+  [ Michael Biebl ]
+  * Don't enforce single include for glib/gversionmacros.h since this header
+    is included from glib/gtypes.h which is widely used.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 30 Mar 2012 23:55:41 +0200
+
+glib2.0 (2.32.0-2) unstable; urgency=low
+
+  * Upload to unstable.
+  * Revert upstream commit for now which makes single includes mandatory as
+    the list of affected packages is still a bit too long.
+
+ -- Michael Biebl <biebl@debian.org>  Fri, 30 Mar 2012 08:25:15 +0200
+
 glib2.0 (2.32.0-1) experimental; urgency=low
 
   * New upstream release.
