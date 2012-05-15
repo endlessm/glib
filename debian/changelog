@@ -1,6 +1,9 @@
 glib2.0 (2.32.3-1) UNRELEASED; urgency=low
 
   * New upstream release.
+  * Remove debian/patches/95_configure-Fix-typo-in-ELF-check.patch and
+    debian/patches/96_configure-Reset-LIBS-after-ELF-check.patch, merged
+    upstream.
 
  -- Michael Biebl <biebl@debian.org>  Tue, 15 May 2012 16:06:39 +0200
 
