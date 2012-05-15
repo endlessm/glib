@@ -1,4 +1,4 @@
-glib2.0 (2.33.1-1) UNRELEASED; urgency=low
+glib2.0 (2.33.1-1) experimental; urgency=low
 
   * debian/control.in: Update Vcs-* for experimental branch.
   * Drop 03_revert_git_single_include_error.patch. For GNOME 3.5.x we want to
@@ -9,7 +9,7 @@ glib2.0 (2.33.1-1) UNRELEASED; urgency=low
     96_configure-Reset-LIBS-after-ELF-check.patch: upstream now.
   * debian/libglib2.0-0.symbols: Add new symbols from this release.
 
- -- Martin Pitt <mpitt@debian.org>  Tue, 15 May 2012 15:01:33 +0200
+ -- Martin Pitt <mpitt@debian.org>  Tue, 15 May 2012 16:59:15 +0200
 
 glib2.0 (2.32.2-1) unstable; urgency=low
 
