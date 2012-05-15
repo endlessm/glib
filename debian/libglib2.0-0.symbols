@@ -84,6 +84,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_application_command_line_set_exit_status@Base 2.28.0
  g_application_flags_get_type@Base 2.28.0
  g_application_get_application_id@Base 2.28.0
+ g_application_get_dbus_connection@Base 2.33.1
+ g_application_get_dbus_object_path@Base 2.33.1
  g_application_get_default@Base 2.31.8
  g_application_get_flags@Base 2.28.0
  g_application_get_inactivity_timeout@Base 2.28.0
@@ -251,6 +253,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_dbus_arg_info_get_type@Base 2.26.0
  g_dbus_arg_info_ref@Base 2.26.0
  g_dbus_arg_info_unref@Base 2.26.0
+ g_dbus_auth_observer_allow_mechanism@Base 2.33.1
  g_dbus_auth_observer_authorize_authenticated_peer@Base 2.26.0
  g_dbus_auth_observer_get_type@Base 2.26.0
  g_dbus_auth_observer_new@Base 2.26.0
@@ -527,6 +530,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_desktop_app_info_get_keywords@Base 2.31.8
  g_desktop_app_info_get_nodisplay@Base 2.30.0
  g_desktop_app_info_get_show_in@Base 2.30.0
+ g_desktop_app_info_get_startup_wm_class@Base 2.33.1
  g_desktop_app_info_get_type@Base 2.16.0
  g_desktop_app_info_launch_uris_as_manager@Base 2.28.0
  g_desktop_app_info_lookup_get_default_for_uri_scheme@Base 2.28.0
@@ -1110,12 +1114,18 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_pollable_output_stream_is_writable@Base 2.28.0
  g_pollable_output_stream_write_nonblocking@Base 2.28.0
  g_pollable_source_new@Base 2.28.0
+ g_pollable_source_new_full@Base 2.33.1
+ g_pollable_stream_read@Base 2.33.1
+ g_pollable_stream_write@Base 2.33.1
+ g_pollable_stream_write_all@Base 2.33.1
  g_proxy_address_enumerator_get_type@Base 2.26.0
  g_proxy_address_get_destination_hostname@Base 2.26.0
  g_proxy_address_get_destination_port@Base 2.26.0
+ g_proxy_address_get_destination_protocol@Base 2.33.1
  g_proxy_address_get_password@Base 2.26.0
  g_proxy_address_get_protocol@Base 2.26.0
  g_proxy_address_get_type@Base 2.26.0
+ g_proxy_address_get_uri@Base 2.33.1
  g_proxy_address_get_username@Base 2.26.0
  g_proxy_address_new@Base 2.26.0
  g_proxy_connect@Base 2.26.0
@@ -1145,9 +1155,13 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_resolver_lookup_by_name@Base 2.22.0
  g_resolver_lookup_by_name_async@Base 2.22.0
  g_resolver_lookup_by_name_finish@Base 2.22.0
+ g_resolver_lookup_records@Base 2.33.1
+ g_resolver_lookup_records_async@Base 2.33.1
+ g_resolver_lookup_records_finish@Base 2.33.1
  g_resolver_lookup_service@Base 2.22.0
  g_resolver_lookup_service_async@Base 2.22.0
  g_resolver_lookup_service_finish@Base 2.22.0
+ g_resolver_record_type_get_type@Base 2.33.1
  g_resolver_set_default@Base 2.22.0
  g_resource_enumerate_children@Base 2.31.18
  g_resource_error_get_type@Base 2.31.18
@@ -1433,6 +1447,16 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_tcp_wrapper_connection_get_base_io_stream@Base 2.28.0
  g_tcp_wrapper_connection_get_type@Base 2.28.0
  g_tcp_wrapper_connection_new@Base 2.28.0
+ g_test_dbus_add_service_dir@Base 2.33.1
+ g_test_dbus_down@Base 2.33.1
+ g_test_dbus_flags_get_type@Base 2.33.1
+ g_test_dbus_get_bus_address@Base 2.33.1
+ g_test_dbus_get_flags@Base 2.33.1
+ g_test_dbus_get_type@Base 2.33.1
+ g_test_dbus_new@Base 2.33.1
+ g_test_dbus_stop@Base 2.33.1
+ g_test_dbus_unset@Base 2.33.1
+ g_test_dbus_up@Base 2.33.1
  g_themed_icon_append_name@Base 2.16.0
  g_themed_icon_get_names@Base 2.16.0
  g_themed_icon_get_type@Base 2.16.0
@@ -1843,6 +1867,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_child_watch_source_new@Base 2.12.0
  g_chmod@Base 2.12.0
  g_clear_error@Base 2.12.0
+ g_clear_pointer@Base 2.33.1
  g_completion_add_items@Base 2.12.0
  g_completion_clear_items@Base 2.12.0
  g_completion_complete@Base 2.12.0
@@ -2652,6 +2677,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_slice_alloc0@Base 2.12.0
  g_slice_alloc@Base 2.12.0
  g_slice_copy@Base 2.14.0
+ g_slice_debug_tree_statistics@Base 2.33.1
  g_slice_free1@Base 2.12.0
  g_slice_free_chain_with_offset@Base 2.12.0
  g_slice_get_config@Base 2.12.0

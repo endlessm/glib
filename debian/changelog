@@ -7,6 +7,7 @@ glib2.0 (2.33.1-1) UNRELEASED; urgency=low
   * 04_homedir_env.patch: Adjust for new release.
   * Drop 95_configure-Fix-typo-in-ELF-check.patch and
     96_configure-Reset-LIBS-after-ELF-check.patch: upstream now.
+  * debian/libglib2.0-0.symbols: Add new symbols from this release.
 
  -- Martin Pitt <mpitt@debian.org>  Tue, 15 May 2012 15:01:33 +0200
 
