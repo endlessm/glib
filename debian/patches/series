@@ -5,5 +5,3 @@
 61_glib-compile-binaries-path.patch
 90_gio-modules-multiarch-compat.patch
 91_revert_schema_path_warning.patch
-95_configure-Fix-typo-in-ELF-check.patch
-96_configure-Reset-LIBS-after-ELF-check.patch

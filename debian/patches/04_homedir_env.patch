@@ -4,10 +4,10 @@ Description: Handle the G_HOME environment variable to override the passwd entry
 Author: Josselin Mouette <joss@debian.org>
 Origin: vendor
 
-Index: glib2.0/docs/reference/glib/running.sgml
+Index: glib2.0-exp/docs/reference/glib/running.xml
 ===================================================================
---- glib2.0.orig/docs/reference/glib/running.sgml	2011-11-28 22:40:42.000000000 -0200
-+++ glib2.0/docs/reference/glib/running.sgml	2012-03-02 00:38:00.230665860 -0300
+--- glib2.0-exp.orig/docs/reference/glib/running.xml	2012-05-01 07:22:53.000000000 +0200
++++ glib2.0-exp/docs/reference/glib/running.xml	2012-05-15 15:06:13.030894814 +0200
 @@ -244,6 +244,22 @@
    </para>
  </formalpara>
@@ -31,10 +31,10 @@ Index: glib2.0/docs/reference/glib/running.sgml
  </refsect2>
  
  <refsect2 id="setlocale">
-Index: glib2.0/glib/gutils.c
+Index: glib2.0-exp/glib/gutils.c
 ===================================================================
---- glib2.0.orig/glib/gutils.c	2012-01-03 14:44:55.000000000 -0200
-+++ glib2.0/glib/gutils.c	2012-03-02 00:38:00.230665860 -0300
+--- glib2.0-exp.orig/glib/gutils.c	2012-04-13 01:39:20.000000000 +0200
++++ glib2.0-exp/glib/gutils.c	2012-05-15 15:04:24.086889541 +0200
 @@ -686,11 +686,14 @@
      }
  #endif	/* !G_OS_WIN32 */

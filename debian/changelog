@@ -1,8 +1,12 @@
-glib2.0 (2.32.2-2) UNRELEASED; urgency=low
+glib2.0 (2.33.1-1) UNRELEASED; urgency=low
 
   * debian/control.in: Update Vcs-* for experimental branch.
   * Drop 03_revert_git_single_include_error.patch. For GNOME 3.5.x we want to
     properly fix the reverse dependencies. NB this is NOT for Debian wheezy.
+  * New upstream release.
+  * 04_homedir_env.patch: Adjust for new release.
+  * Drop 95_configure-Fix-typo-in-ELF-check.patch and
+    96_configure-Reset-LIBS-after-ELF-check.patch: upstream now.
 
  -- Martin Pitt <mpitt@debian.org>  Tue, 15 May 2012 15:01:33 +0200
 
