@@ -1,4 +1,4 @@
-glib2.0 (2.33.2-1) UNRELEASED; urgency=low
+glib2.0 (2.33.2-1) experimental; urgency=low
 
   * Track unstable versions in the experimental branch. 
   * New upstream release 2.33.2
