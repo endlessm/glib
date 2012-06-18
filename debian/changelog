@@ -1,8 +1,16 @@
-glib2.0 (2.33.1-2) UNRELEASED; urgency=low
+glib2.0 (2.33.2-1) UNRELEASED; urgency=low
 
   * Track unstable versions in the experimental branch. 
+  * New upstream release 2.33.2
+    - GLIB_VERSION_MIN_REQUIRED now defaults to the current stable version
+    - GIO input and output stream classes have grown GBytes-based methods
+    - GApplication now has hooks to register D-Bus objects before the bus name
+      is taken
+  * Refresh 04_homedir_env.patch to cleanly apply
+  * Add the new symbols from this release (g_app_info_get_supported_types,
+    g_*_bytes, g_type_ensure)
 
- -- Iain Lane <laney@debian.org>  Mon, 18 Jun 2012 09:59:51 +0100
+ -- Iain Lane <laney@debian.org>  Mon, 18 Jun 2012 11:56:08 +0100
 
 glib2.0 (2.33.1-1) experimental; urgency=low
 

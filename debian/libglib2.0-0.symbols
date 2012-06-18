@@ -50,6 +50,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_app_info_get_id@Base 2.16.0
  g_app_info_get_name@Base 2.16.0
  g_app_info_get_recommended_for_type@Base 2.28.0
+ g_app_info_get_supported_types@Base 2.33.2
  g_app_info_get_type@Base 2.16.0
  g_app_info_launch@Base 2.16.0
  g_app_info_launch_default_for_uri@Base 2.16.0
@@ -885,6 +886,9 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_input_stream_read@Base 2.16.0
  g_input_stream_read_all@Base 2.16.0
  g_input_stream_read_async@Base 2.16.0
+ g_input_stream_read_bytes@Base 2.33.2
+ g_input_stream_read_bytes_async@Base 2.33.2
+ g_input_stream_read_bytes_finish@Base 2.33.2
  g_input_stream_read_finish@Base 2.16.0
  g_input_stream_set_pending@Base 2.16.0
  g_input_stream_skip@Base 2.16.0
@@ -938,15 +942,18 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_loadable_icon_load_finish@Base 2.16.0
  g_local_directory_monitor_get_type@Base 2.16.0
  g_local_file_monitor_get_type@Base 2.16.0
+ g_memory_input_stream_add_bytes@Base 2.33.2
  g_memory_input_stream_add_data@Base 2.16.0
  g_memory_input_stream_get_type@Base 2.16.0
  g_memory_input_stream_new@Base 2.16.0
+ g_memory_input_stream_new_from_bytes@Base 2.33.2
  g_memory_input_stream_new_from_data@Base 2.16.0
  g_memory_output_stream_get_data@Base 2.16.0
  g_memory_output_stream_get_data_size@Base 2.18.0
  g_memory_output_stream_get_size@Base 2.16.0
  g_memory_output_stream_get_type@Base 2.16.0
  g_memory_output_stream_new@Base 2.16.0
+ g_memory_output_stream_steal_as_bytes@Base 2.33.2
  g_memory_output_stream_steal_data@Base 2.26.0
  g_memory_settings_backend_new@Base 2.28.0
  g_menu_append@Base 2.31.8
@@ -1090,6 +1097,9 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_output_stream_write@Base 2.16.0
  g_output_stream_write_all@Base 2.16.0
  g_output_stream_write_async@Base 2.16.0
+ g_output_stream_write_bytes@Base 2.33.2
+ g_output_stream_write_bytes_async@Base 2.33.2
+ g_output_stream_write_bytes_finish@Base 2.33.2
  g_output_stream_write_finish@Base 2.16.0
  g_password_save_get_type@Base 2.16.0
  g_permission_acquire@Base 2.26.0
@@ -3515,6 +3525,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_type_default_interface_ref@Base 2.12.0
  g_type_default_interface_unref@Base 2.12.0
  g_type_depth@Base 2.12.0
+ g_type_ensure@Base 2.33.2
  g_type_free_instance@Base 2.12.0
  g_type_from_name@Base 2.12.0
  g_type_fundamental@Base 2.12.0
