@@ -1,0 +1,17 @@
+Description: On some buildds the poll duration in the /socket/timed_wait test is slightly lower than the requested 100000. Adjust test to not fail in these cases.
+Author: Martin Pitt <martin.pitt@ubuntu.com>
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=678881
+
+Index: glib2.0-2.33.2/gio/tests/socket.c
+===================================================================
+--- glib2.0-2.33.2.orig/gio/tests/socket.c	2012-04-13 01:39:20.000000000 +0200
++++ glib2.0-2.33.2/gio/tests/socket.c	2012-06-26 16:00:58.185666813 +0200
+@@ -616,7 +616,7 @@
+   g_clear_error (&error);
+   poll_duration = g_get_monotonic_time () - start_time;
+ 
+-  g_assert_cmpint (poll_duration, >=, 100000);
++  g_assert_cmpint (poll_duration, >=, 98000);
+   g_assert_cmpint (poll_duration, <, 110000);
+ 
+   g_socket_close (client, &error);

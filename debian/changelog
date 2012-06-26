@@ -12,6 +12,10 @@ glib2.0 (2.33.2-2) UNRELEASED; urgency=low
     avoid failure on the buildds where creating /home/buildd/.dbus-keyrings
     fails.
   * debian/rules: Fail the build on failed tests.
+  * Add 07_socket_test_timespan_jitter.patch:  On some buildds the poll
+    duration in the /socket/timed_wait test is slightly lower than the
+    requested 100000. Adjust test to not fail in these cases. Forwarded to
+    GNOME #678881.
 
  -- Martin Pitt <mpitt@debian.org>  Tue, 26 Jun 2012 09:29:35 +0200
 
