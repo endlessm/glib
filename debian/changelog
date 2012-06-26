@@ -1,5 +1,6 @@
-glib2.0 (2.33.2-2) UNRELEASED; urgency=low
+glib2.0 (2.33.3-1) UNRELEASED; urgency=low
 
+  * New upstream release.
   * Add debian/tests/control: DEP-8 autopkgtest control file. Add XS-Testsuite
     header to debian/control.in.
   * Add debian/tests/build: autopkgtest check: Build and run a program against
