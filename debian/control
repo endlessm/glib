@@ -31,6 +31,7 @@ Standards-Version: 3.9.3
 Homepage: http://www.gtk.org/
 Vcs-Browser: http://svn.debian.org/wsvn/pkg-gnome/desktop/experimental/glib2.0/
 Vcs-Svn: svn://svn.debian.org/svn/pkg-gnome/desktop/experimental/glib2.0/
+XS-Testsuite: autopkgtest
 
 Package: libglib2.0-0
 Architecture: any

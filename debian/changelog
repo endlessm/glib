@@ -1,3 +1,13 @@
+glib2.0 (2.33.2-2) UNRELEASED; urgency=low
+
+  * Add debian/tests/control: DEP-8 autopkgtest control file. Add XS-Testsuite
+    header to debian/control.in.
+  * Add debian/tests/build: autopkgtest check: Build and run a program against
+    glib, to verify that the headers and pkg-config file are installed
+    correctly.
+
+ -- Martin Pitt <mpitt@debian.org>  Tue, 26 Jun 2012 09:29:35 +0200
+
 glib2.0 (2.33.2-1) experimental; urgency=low
 
   * Track unstable versions in the experimental branch. 
