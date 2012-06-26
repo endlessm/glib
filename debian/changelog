@@ -2,6 +2,10 @@ glib2.0 (2.33.3-1) UNRELEASED; urgency=low
 
   * New upstream release.
   * debian/libglib2.0-0.symbols: Add new symbols from this release.
+  * debian/libglib2.0-bin.install: bash completion is now installed into
+    /usr/share/bash-completion/completions/ by upstream.
+  * Add debian/libglib2.0-bin.maintscript: Clean up old bash completion
+    conffiles on upgrade. Add ${misc:Pre-Depends} to libglib2.0-bin.
   * Add debian/tests/control: DEP-8 autopkgtest control file. Add XS-Testsuite
     header to debian/control.in.
   * Add debian/tests/build: autopkgtest check: Build and run a program against
@@ -20,7 +24,7 @@ glib2.0 (2.33.3-1) UNRELEASED; urgency=low
     requested 100000. Adjust test to not fail in these cases. Forwarded to
     GNOME #678881.
 
- -- Martin Pitt <mpitt@debian.org>  Tue, 26 Jun 2012 09:29:35 +0200
+ -- Martin Pitt <mpitt@debian.org>  Tue, 26 Jun 2012 19:26:38 +0200
 
 glib2.0 (2.33.2-1) experimental; urgency=low
 
