@@ -76,6 +76,7 @@ Description: GLib library of C routines - minimal runtime
 Package: @BIN_PKG@
 Section: misc
 Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          @SHARED_PKG@ (= ${binary:Version}),
