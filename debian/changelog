@@ -1,4 +1,4 @@
-glib2.0 (2.33.3-1) UNRELEASED; urgency=low
+glib2.0 (2.33.3-1) experimental; urgency=low
 
   * New upstream release.
   * debian/libglib2.0-0.symbols: Add new symbols from this release.
@@ -24,7 +24,7 @@ glib2.0 (2.33.3-1) UNRELEASED; urgency=low
     requested 100000. Adjust test to not fail in these cases. Forwarded to
     GNOME #678881.
 
- -- Martin Pitt <mpitt@debian.org>  Tue, 26 Jun 2012 19:26:38 +0200
+ -- Martin Pitt <mpitt@debian.org>  Tue, 26 Jun 2012 19:28:14 +0200
 
 glib2.0 (2.33.2-1) experimental; urgency=low
 
