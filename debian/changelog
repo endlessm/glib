@@ -5,6 +5,13 @@ glib2.0 (2.33.2-2) UNRELEASED; urgency=low
   * Add debian/tests/build: autopkgtest check: Build and run a program against
     glib, to verify that the headers and pkg-config file are installed
     correctly.
+  * Add 06_thread_test_ignore_prctl_fail.patch: Do not fail the
+    /thread/thread4 test if prctrl() fails. This happens on the Debian
+    buildds.
+  * debian/rules: Set G_HOME to not clutter $HOME with ~/.dbus-keyrings and
+    avoid failure on the buildds where creating /home/buildd/.dbus-keyrings
+    fails.
+  * debian/rules: Fail the build on failed tests.
 
  -- Martin Pitt <mpitt@debian.org>  Tue, 26 Jun 2012 09:29:35 +0200
 
