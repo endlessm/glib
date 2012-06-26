@@ -1,6 +1,7 @@
 glib2.0 (2.33.3-1) UNRELEASED; urgency=low
 
   * New upstream release.
+  * debian/libglib2.0-0.symbols: Add new symbols from this release.
   * Add debian/tests/control: DEP-8 autopkgtest control file. Add XS-Testsuite
     header to debian/control.in.
   * Add debian/tests/build: autopkgtest check: Build and run a program against

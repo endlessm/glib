@@ -280,6 +280,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_dbus_connection_get_capabilities@Base 2.26.0
  g_dbus_connection_get_exit_on_close@Base 2.26.0
  g_dbus_connection_get_guid@Base 2.26.0
+ g_dbus_connection_get_last_serial@Base 2.33.3-1
  g_dbus_connection_get_peer_credentials@Base 2.26.0
  g_dbus_connection_get_stream@Base 2.26.0
  g_dbus_connection_get_type@Base 2.26.0
@@ -465,6 +466,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_dbus_object_manager_server_export_uniquely@Base 2.30.0
  g_dbus_object_manager_server_get_connection@Base 2.30.0
  g_dbus_object_manager_server_get_type@Base 2.30.0
+ g_dbus_object_manager_server_is_exported@Base 2.33.3-1
  g_dbus_object_manager_server_new@Base 2.30.0
  g_dbus_object_manager_server_set_connection@Base 2.30.0
  g_dbus_object_manager_server_unexport@Base 2.30.0
@@ -2250,6 +2252,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_list_append@Base 2.12.0
  g_list_concat@Base 2.12.0
  g_list_copy@Base 2.12.0
+ g_list_copy_deep@Base 2.33.3-1
  g_list_delete_link@Base 2.12.0
  g_list_find@Base 2.12.0
  g_list_find_custom@Base 2.12.0
@@ -2697,6 +2700,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_slist_append@Base 2.12.0
  g_slist_concat@Base 2.12.0
  g_slist_copy@Base 2.12.0
+ g_slist_copy_deep@Base 2.33.3-1
  g_slist_delete_link@Base 2.12.0
  g_slist_find@Base 2.12.0
  g_slist_find_custom@Base 2.12.0
