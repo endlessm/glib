@@ -1,0 +1,37 @@
+From 72af44cb1249f02cbe56376a751e3ae6d3b39ea8 Mon Sep 17 00:00:00 2001
+From: Martin Pitt <martinpitt@gnome.org>
+Date: Tue, 26 Jun 2012 18:32:29 +0200
+Subject: [PATCH] Allow slightly too small poll duration in /socket/timed_wait
+ test
+
+Sometimes the poll duration in the /socket/timed_wait test is slightly lower
+than the requested 100000, causing failures like
+
+ERROR:/build/buildd/glib2.0-2.33.2/./gio/tests/socket.c:619:test_timed_wait:
+  assertion failed (poll_duration > = 100000): (99240 >= 100000)
+FAIL
+
+Adjust the test to also allow some jitter in the "too small" direction, similar
+to the already existing span for "slightly too large".
+
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=678881
+---
+ gio/tests/socket.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gio/tests/socket.c b/gio/tests/socket.c
+index 7404bba..0a61c9f 100644
+--- a/gio/tests/socket.c
++++ b/gio/tests/socket.c
+@@ -616,7 +616,7 @@ test_timed_wait (void)
+   g_clear_error (&error);
+   poll_duration = g_get_monotonic_time () - start_time;
+ 
+-  g_assert_cmpint (poll_duration, >=, 100000);
++  g_assert_cmpint (poll_duration, >=, 98000);
+   g_assert_cmpint (poll_duration, <, 110000);
+ 
+   g_socket_close (client, &error);
+-- 
+1.7.10.4
+
