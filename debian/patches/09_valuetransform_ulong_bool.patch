@@ -1,0 +1,30 @@
+From 240ef2b9e830f2aa92356368902bec813f3c1ef8 Mon Sep 17 00:00:00 2001
+From: Philipp Kern <pkern@debian.org>
+Date: Wed, 27 Jun 2012 10:57:50 +0200
+Subject: [PATCH] valuetransform: Fix definition of ulong_bool
+
+On big endian 64 bit machines such as s390x, an uint is too small to hold a
+ulong_bool; it needs to be an actual ulong.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=678949
+http://bugs.debian.org/662057
+---
+ gobject/gvaluetransform.c |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gobject/gvaluetransform.c b/gobject/gvaluetransform.c
+index a785817..054250c 100644
+--- a/gobject/gvaluetransform.c
++++ b/gobject/gvaluetransform.c
+@@ -140,7 +140,7 @@ value_transform_##func_name (const GValue *src_value,                       \
+ DEFINE_BOOL_CHECK (int_bool,    v_int);
+ DEFINE_BOOL_CHECK (uint_bool,   v_uint);
+ DEFINE_BOOL_CHECK (long_bool,   v_long);
+-DEFINE_BOOL_CHECK (ulong_bool,  v_uint);
++DEFINE_BOOL_CHECK (ulong_bool,  v_ulong);
+ DEFINE_BOOL_CHECK (int64_bool,  v_int64);
+ DEFINE_BOOL_CHECK (uint64_bool, v_uint64);
+ 
+-- 
+1.7.10.4
+
