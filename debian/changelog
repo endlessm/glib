@@ -14,6 +14,11 @@ glib2.0 (2.33.3-2) UNRELEASED; urgency=low
     sometimes fails due to a different order of expected and actual actions;
     increase delay between them to reduce the race condition. Workaround for
     https://bugzilla.gnome.org/show_bug.cgi?id=664627
+  * Add 11_timeout_test_reduce_race.patch: Due to load, particular traits of
+    the architecture, or other circumstances, the /mainloop/timeouts sometimes
+    manages to call the "every 100 ms" timer loop only 9 times in 1050 ms.
+    This is an inherent race-condition in the test; allow it some slack and
+    accept 9 times as well. Forwarded to GNOME #678959.
 
  -- Martin Pitt <mpitt@debian.org>  Wed, 27 Jun 2012 10:37:07 +0200
 

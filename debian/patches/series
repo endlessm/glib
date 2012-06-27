@@ -8,6 +8,7 @@
 08_contenttype_known_test_failure.patch
 09_valuetransform_ulong_bool.patch
 10_increase_gapplication_test_delay.patch
+11_timeout_test_reduce_race.patch
 61_glib-compile-binaries-path.patch
 90_gio-modules-multiarch-compat.patch
 91_revert_schema_path_warning.patch
