@@ -5,6 +5,7 @@
 05_run-gio-tests-with-a-dbus-session.patch
 06_thread_test_ignore_prctl_fail.patch
 07_contenttype_test_fix_overflow.patch
+08_contenttype_known_test_failure.patch
 61_glib-compile-binaries-path.patch
 90_gio-modules-multiarch-compat.patch
 91_revert_schema_path_warning.patch
