@@ -1,0 +1,25 @@
+Description: /gapplication/basic sometimes fails due to a different order of expected and actual actions; increase delay between them to reduce the race condition.
+Author: Martin Pitt <martin.pitt@ubuntu.com>
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=664627
+
+diff --git a/gio/tests/gapplication.c b/gio/tests/gapplication.c
+index 2e0ea9d..5a3e789 100644
+--- a/gio/tests/gapplication.c
++++ b/gio/tests/gapplication.c
+@@ -103,14 +103,14 @@ basic (void)
+          "./app", NULL);
+ 
+   /* make sure it becomes the master */
+-  g_usleep (100000);
++  g_usleep (1000000);
+ 
+   /* send it some files */
+   spawn ("exit status: 0\n",
+          "./app", "/a", "/b", NULL);
+ 
+   /* make sure the commandline arrives after the files */
+-  g_usleep (100000);
++  g_usleep (1000000);
+ 
+   spawn ("40 + 2 = 42\n"
+          "exit status: 42\n",

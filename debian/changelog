@@ -10,6 +10,10 @@ glib2.0 (2.33.3-2) UNRELEASED; urgency=low
     https://bugzilla.gnome.org/show_bug.cgi?id=678941
   * Add 09_valuetransform_ulong_bool.patch: valuetransform: Fix definition of
     ulong_bool. Thanks Philipp Kern! (Closes: #662057)
+  * Add 10_increase_gapplication_test_delay.patch: /gapplication/basic
+    sometimes fails due to a different order of expected and actual actions;
+    increase delay between them to reduce the race condition. Workaround for
+    https://bugzilla.gnome.org/show_bug.cgi?id=664627
 
  -- Martin Pitt <mpitt@debian.org>  Wed, 27 Jun 2012 10:37:07 +0200
 
