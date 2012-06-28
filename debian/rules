@@ -54,9 +54,10 @@ DEB_DH_STRIP_ARGS_$(UDEB_PKG) =
 # where creating /home/buildd/.dbus-keyrings fails
 export G_HOME=$(CURDIR)/debian/build
 
-# make tests non-fatal on architectures which currently have failed tests
+# make tests non-fatal on Debian architectures which currently have failed
+# tests; always fail on Ubuntu
 ifneq ($(findstring $(DEB_BUILD_ARCH), armel armhf kfreebsd-i386 kfreebsd-amd64 s390x sparc),)
-DEB_MAKE_CHECK_TARGET = -k check || true
+DEB_MAKE_CHECK_TARGET = -k check || ! dpkg-vendor --is ubuntu
 else
 DEB_MAKE_CHECK_TARGET = -k check
 endif
