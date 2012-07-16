@@ -117,6 +117,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_async_result_get_source_object@Base 2.16.0
  g_async_result_get_type@Base 2.16.0
  g_async_result_get_user_data@Base 2.16.0
+ g_async_result_is_tagged@Base 2.33.4
+ g_async_result_legacy_propagate_error@Base 2.33.4
  g_buffered_input_stream_fill@Base 2.16.0
  g_buffered_input_stream_fill_async@Base 2.16.0
  g_buffered_input_stream_fill_finish@Base 2.16.0
@@ -2578,6 +2580,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_regex_escape_string@Base 2.14.0
  g_regex_get_capture_count@Base 2.14.0
  g_regex_get_compile_flags@Base 2.26.0
+ g_regex_get_has_cr_or_lf@Base 2.33.4
  g_regex_get_match_flags@Base 2.26.0
  g_regex_get_max_backref@Base 2.14.0
  g_regex_get_pattern@Base 2.14.0
@@ -2758,10 +2761,12 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_spaced_primes_closest@Base 2.12.0
  g_spawn_async@Base 2.12.0
  g_spawn_async_with_pipes@Base 2.12.0
+ g_spawn_check_exit_status@Base 2.33.4
  g_spawn_close_pid@Base 2.12.0
  g_spawn_command_line_async@Base 2.12.0
  g_spawn_command_line_sync@Base 2.12.0
  g_spawn_error_quark@Base 2.12.0
+ g_spawn_exit_error_quark@Base 2.33.4
  g_spawn_sync@Base 2.12.0
  g_sprintf@Base 2.12.0
  g_stat@Base 2.12.0
@@ -2828,6 +2833,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_string_equal@Base 2.12.0
  g_string_erase@Base 2.12.0
  g_string_free@Base 2.12.0
+ g_string_free_to_bytes@Base 2.33.4
  g_string_hash@Base 2.12.0
  g_string_insert@Base 2.12.0
  g_string_insert_c@Base 2.12.0

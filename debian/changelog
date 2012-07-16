@@ -1,8 +1,15 @@
-glib2.0 (2.33.3-3) UNRELEASED; urgency=low
+glib2.0 (2.33.4-1) experimental; urgency=low
 
+  [ Martin Pitt ]
   * debian/rules: Make tests always fatal on Ubuntu.
 
- -- Martin Pitt <mpitt@debian.org>  Thu, 28 Jun 2012 07:18:26 +0200
+  [ Iain Lane ]
+  * New upstream release 2.33.4.
+  * Refresh patches to apply cleanly and remove those applied upstream.
+  * Bump version on libpcre-dev BD in line with upstream.
+  * debian/libglib2.0-0.symbols: Add new symbols in this release.
+
+ -- Iain Lane <laney@debian.org>  Mon, 16 Jul 2012 11:55:30 +0100
 
 glib2.0 (2.33.3-2) experimental; urgency=low
 
