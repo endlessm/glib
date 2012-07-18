@@ -1,3 +1,9 @@
+glib2.0 (2.33.6-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+
+ -- Martin Pitt <mpitt@debian.org>  Wed, 18 Jul 2012 14:06:38 +0200
+
 glib2.0 (2.33.4-1) experimental; urgency=low
 
   [ Martin Pitt ]
