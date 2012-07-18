@@ -3,6 +3,9 @@ glib2.0 (2.33.6-1) UNRELEASED; urgency=low
   * New upstream release.
   * Drop 91_revert_schema_path_warning.patch now, we are not in final freeze
     in Ubuntu, and this is not aimed at Debian Wheezy.
+  * Add 91_revert_pcre_8.31_test.patch: Revert new regex test from 2.33.4
+    which depends on pcre 8.31. We still have 8.30, and we are building
+    against the system library instead of the bundled one.
 
  -- Martin Pitt <mpitt@debian.org>  Wed, 18 Jul 2012 14:06:38 +0200
 
