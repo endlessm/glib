@@ -59,7 +59,7 @@ Description: GLib library of C routines
 
 Package: libglib@APIVER@-udeb
 Section: debian-installer
-XC-Package-Type: udeb
+Package-Type: udeb
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
