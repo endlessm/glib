@@ -978,8 +978,12 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_menu_insert_item@Base 2.31.8
  g_menu_insert_section@Base 2.31.8
  g_menu_insert_submenu@Base 2.31.8
+ g_menu_item_get_attribute@Base 2.33.10
+ g_menu_item_get_attribute_value@Base 2.33.10
+ g_menu_item_get_link@Base 2.33.10
  g_menu_item_get_type@Base 2.31.8
  g_menu_item_new@Base 2.31.8
+ g_menu_item_new_from_model@Base 2.33.10
  g_menu_item_new_section@Base 2.31.8
  g_menu_item_new_submenu@Base 2.31.8
  g_menu_item_set_action_and_target@Base 2.31.8
@@ -2341,6 +2345,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_malloc@Base 2.12.0
  g_malloc_n@Base 2.24.0
  g_mapped_file_free@Base 2.12.0
+ g_mapped_file_get_bytes@Base 2.33.10
  g_mapped_file_get_contents@Base 2.12.0
  g_mapped_file_get_length@Base 2.12.0
  g_mapped_file_new@Base 2.12.0
@@ -2878,11 +2883,13 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_test_add_data_func@Base 2.16.0
  g_test_add_func@Base 2.16.0
  g_test_add_vtable@Base 2.16.0
+ g_test_assert_expected_messages_internal@Base 2.33.10
  g_test_bug@Base 2.16.0
  g_test_bug_base@Base 2.16.0
  g_test_config_vars@Base 2.16.0
  g_test_create_case@Base 2.16.0
  g_test_create_suite@Base 2.16.0
+ g_test_expect_message@Base 2.33.10
  g_test_fail@Base 2.30.0
  g_test_get_root@Base 2.16.0
  g_test_init@Base 2.16.0
@@ -3094,6 +3101,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_variant_builder_ref@Base 2.24.0
  g_variant_builder_unref@Base 2.24.0
  g_variant_byteswap@Base 2.24.0
+ g_variant_check_format_string@Base 2.33.10
  g_variant_classify@Base 2.24.0
  g_variant_compare@Base 2.26.0
  g_variant_dup_bytestring@Base 2.26.0

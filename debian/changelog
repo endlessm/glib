@@ -1,4 +1,10 @@
-glib2.0 (2.33.8-2) UNRELEASED; urgency=low
+glib2.0 (2.33.10-1) UNRELEASED; urgency=low
+
+  * New upstream version
+  * debian/libglib2.0-0.symbols:
+    - updated
+  * revert_g_file_make_directory_with_parents_error_propagation.patch:
+    - dropped, the issue is fixed in the new version
 
   [ Iain Lane ]
   * Add revert_g_file_make_directory_with_parents_error_propagation.patch:
@@ -14,7 +20,7 @@ glib2.0 (2.33.8-2) UNRELEASED; urgency=low
   * Add 08_disable_gapplication_basic_test.patch: Disable /gapplication/basic
     test. It's full of race conditions and keeps breaking builds.
 
- -- Iain Lane <laney@debian.org>  Thu, 16 Aug 2012 11:48:21 +0100
+ -- Sebastien Bacher <seb128@ubuntu.com>  Tue, 21 Aug 2012 13:10:43 +0200
 
 glib2.0 (2.33.8-1) experimental; urgency=low
 
