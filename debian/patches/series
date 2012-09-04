@@ -9,4 +9,3 @@
 61_glib-compile-binaries-path.patch
 90_gio-modules-multiarch-compat.patch
 91_revert_pcre_8.31_test.patch
-revert_g_file_make_directory_with_parents_error_propagation.patch
