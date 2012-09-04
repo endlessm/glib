@@ -180,6 +180,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_content_type_get_description@Base 2.16.0
  g_content_type_get_icon@Base 2.16.0
  g_content_type_get_mime_type@Base 2.16.0
+ g_content_type_get_symbolic_icon@Base 2.33.12
  g_content_type_guess@Base 2.16.0
  g_content_type_guess_for_tree@Base 2.18.0
  g_content_type_is_a@Base 2.16.0
@@ -559,6 +560,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_drive_get_name@Base 2.16.0
  g_drive_get_sort_key@Base 2.31.8
  g_drive_get_start_stop_type@Base 2.22.0
+ g_drive_get_symbolic_icon@Base 2.33.12
  g_drive_get_type@Base 2.16.0
  g_drive_get_volumes@Base 2.16.0
  g_drive_has_media@Base 2.16.0
@@ -694,6 +696,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_info_get_name@Base 2.16.0
  g_file_info_get_size@Base 2.16.0
  g_file_info_get_sort_order@Base 2.16.0
+ g_file_info_get_symbolic_icon@Base 2.33.12
  g_file_info_get_symlink_target@Base 2.16.0
  g_file_info_get_type@Base 2.16.0
  g_file_info_has_attribute@Base 2.16.0
@@ -724,6 +727,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_info_set_name@Base 2.16.0
  g_file_info_set_size@Base 2.16.0
  g_file_info_set_sort_order@Base 2.16.0
+ g_file_info_set_symbolic_icon@Base 2.33.12
  g_file_info_set_symlink_target@Base 2.16.0
  g_file_info_unset_attribute_mask@Base 2.16.0
  g_file_input_stream_get_type@Base 2.16.0
@@ -1029,6 +1033,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_mount_get_name@Base 2.16.0
  g_mount_get_root@Base 2.16.0
  g_mount_get_sort_key@Base 2.31.8
+ g_mount_get_symbolic_icon@Base 2.33.12
  g_mount_get_type@Base 2.16.0
  g_mount_get_uuid@Base 2.16.0
  g_mount_get_volume@Base 2.16.0
@@ -1618,6 +1623,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_mount_guess_icon@Base 2.16.0
  g_unix_mount_guess_name@Base 2.16.0
  g_unix_mount_guess_should_display@Base 2.16.0
+ g_unix_mount_guess_symbolic_icon@Base 2.33.12
  g_unix_mount_is_readonly@Base 2.16.0
  g_unix_mount_is_system_internal@Base 2.16.0
  g_unix_mount_monitor_get_type@Base 2.16.0
@@ -1632,6 +1638,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_mount_point_guess_can_eject@Base 2.16.0
  g_unix_mount_point_guess_icon@Base 2.16.0
  g_unix_mount_point_guess_name@Base 2.16.0
+ g_unix_mount_point_guess_symbolic_icon@Base 2.33.12
  g_unix_mount_point_is_loopback@Base 2.16.0
  g_unix_mount_point_is_readonly@Base 2.16.0
  g_unix_mount_point_is_user_mountable@Base 2.16.0
@@ -1676,6 +1683,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_volume_get_mount@Base 2.16.0
  g_volume_get_name@Base 2.16.0
  g_volume_get_sort_key@Base 2.31.8
+ g_volume_get_symbolic_icon@Base 2.33.12
  g_volume_get_type@Base 2.16.0
  g_volume_get_uuid@Base 2.16.0
  g_volume_monitor_adopt_orphan_mount@Base 2.16.0
@@ -1920,8 +1928,10 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_datalist_foreach@Base 2.12.0
  g_datalist_get_data@Base 2.30.0
  g_datalist_get_flags@Base 2.12.0
+ g_datalist_id_dup_data@Base 2.33.12
  g_datalist_id_get_data@Base 2.12.0
  g_datalist_id_remove_no_notify@Base 2.12.0
+ g_datalist_id_replace_data@Base 2.33.12
  g_datalist_id_set_data_full@Base 2.12.0
  g_datalist_init@Base 2.12.0
  g_datalist_set_flags@Base 2.12.0
@@ -2881,6 +2891,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_strup@Base 2.12.0
  g_strv_length@Base 2.12.0
  g_test_add_data_func@Base 2.16.0
+ g_test_add_data_func_full@Base 2.33.12
  g_test_add_func@Base 2.16.0
  g_test_add_vtable@Base 2.16.0
  g_test_assert_expected_messages_internal@Base 2.33.10
@@ -3387,6 +3398,8 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_object_compat_control@Base 2.12.0
  g_object_connect@Base 2.12.0
  g_object_disconnect@Base 2.12.0
+ g_object_dup_data@Base 2.33.12
+ g_object_dup_qdata@Base 2.33.12
  g_object_force_floating@Base 2.12.0
  g_object_freeze_notify@Base 2.12.0
  g_object_get@Base 2.12.0
@@ -3408,6 +3421,8 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_object_ref_sink@Base 2.12.0
  g_object_remove_toggle_ref@Base 2.12.0
  g_object_remove_weak_pointer@Base 2.12.0
+ g_object_replace_data@Base 2.33.12
+ g_object_replace_qdata@Base 2.33.12
  g_object_run_dispose@Base 2.12.0
  g_object_set@Base 2.12.0
  g_object_set_data@Base 2.12.0
