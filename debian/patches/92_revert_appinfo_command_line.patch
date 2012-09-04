@@ -1,0 +1,10 @@
+--- glib2.0-2.33.10/gio/tests/appinfo-test.desktop.gnome	2012-08-21 15:17:22.205059142 +0200
++++ glib2.0-2.33.10/gio/tests/appinfo-test.desktop	2012-08-21 15:17:28.621059452 +0200
+@@ -9,7 +9,6 @@
+ Comment[de]=GAppInfo Beispiel
+ Exec=./appinfo-test --option %U %i --name %c --filename %k %m %%
+ Icon=testicon.svg
+-Terminal=true
+ StartupNotify=true
+ StartupWMClass=appinfo-class
+ MimeType=image/png;image/jpeg;

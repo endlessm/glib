@@ -1,10 +1,13 @@
 glib2.0 (2.33.10-1) UNRELEASED; urgency=low
 
+  [ Sebastien Bacher ]
   * New upstream version
   * debian/libglib2.0-0.symbols:
     - updated
   * revert_g_file_make_directory_with_parents_error_propagation.patch:
     - dropped, the issue is fixed in the new version
+  * debian/patches/92_revert_appinfo_command_line.patch:
+    - don't require a vte for test, we don't want an xorg stack there
 
   [ Iain Lane ]
   * Add revert_g_file_make_directory_with_parents_error_propagation.patch:
