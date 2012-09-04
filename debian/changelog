@@ -1,4 +1,4 @@
-glib2.0 (2.33.10-1) UNRELEASED; urgency=low
+glib2.0 (2.33.12-1) UNRELEASED; urgency=low
 
   [ Sebastien Bacher ]
   * New upstream version
@@ -22,6 +22,11 @@ glib2.0 (2.33.10-1) UNRELEASED; urgency=low
     more resilient to this.
   * Add 08_disable_gapplication_basic_test.patch: Disable /gapplication/basic
     test. It's full of race conditions and keeps breaking builds.
+
+  [ Robert Ancell ]
+  * New upstream bugfix release (LP: #1045608)
+  * Drop 07_test_method_calls_on_proxy_bump_max_time.patch:
+    - Applied upstream
 
  -- Sebastien Bacher <seb128@ubuntu.com>  Tue, 21 Aug 2012 13:10:43 +0200
 

@@ -1,11 +1,11 @@
 Description: Revert new regex test from 2.33.4 which depends on pcre 8.31. In Debian we still have 8.30, and we are building against the system library instead of the bundled one.
 Author: Martin Pitt <martin.pitt@ubuntu.com>
 
-Index: glib2.0-exp/glib/tests/regex.c
+Index: glib-2.33.12/glib/tests/regex.c
 ===================================================================
---- glib2.0-exp.orig/glib/tests/regex.c	2012-07-15 03:11:28.000000000 +0200
-+++ glib2.0-exp/glib/tests/regex.c	2012-07-18 14:39:35.631520519 +0200
-@@ -2165,8 +2165,10 @@
+--- glib-2.33.12.orig/glib/tests/regex.c	2012-08-28 16:08:02.000000000 +1200
++++ glib-2.33.12/glib/tests/regex.c	2012-09-04 14:43:42.108115030 +1200
+@@ -2201,8 +2201,10 @@
    TEST_NEW_FAIL ("^\\c€", 0, G_REGEX_ERROR_INVALID_CONTROL_CHAR);
    TEST_NEW_FAIL ("\\k", 0, G_REGEX_ERROR_MISSING_NAME);
    TEST_NEW_FAIL ("a[\\NB]c", 0, G_REGEX_ERROR_NOT_SUPPORTED_IN_CLASS);
