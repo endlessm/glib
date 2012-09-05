@@ -2,6 +2,10 @@ glib2.0 (2.33.12-2) UNRELEASED; urgency=low
 
   * Drop 10_increase_gapplication_test_delay.patch. We disable the whole test
     now anyway (08_disable_gapplication_basic_test.patch).
+  * Add 07_disable_gvariant_checksum_tests.patch: 2.33.12 introduced two new
+    checks for GVariant checksum stability. This does not currently work on
+    big-endian machines (https://bugzilla.gnome.org/show_bug.cgi?id=683384),
+    so disable these tests for now.
 
  -- Martin Pitt <mpitt@debian.org>  Wed, 05 Sep 2012 11:14:11 +0200
 
