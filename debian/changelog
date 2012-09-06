@@ -5,6 +5,10 @@ glib2.0 (2.33.12-3) UNRELEASED; urgency=low
   * debian/rules: Ignore test case failures on hurd-i386 (not a release
     architecture) and mips (this keeps tripping over a gdbus test race
     condition).
+  * Replace 07_disable_gvariant_checksum_tests.patch with
+    07_tests_gvariant_big_endian.patch which fixes the test properly instead
+    of disabling it. Taken from
+    https://bugzilla.gnome.org/show_bug.cgi?id=683384
 
  -- Martin Pitt <mpitt@debian.org>  Thu, 06 Sep 2012 05:38:04 +0200
 
