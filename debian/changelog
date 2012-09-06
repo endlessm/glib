@@ -1,4 +1,4 @@
-glib2.0 (2.33.12-3) UNRELEASED; urgency=low
+glib2.0 (2.33.12-3) experimental; urgency=low
 
   * debian/control.in: Add Breaks: too glib-networking versions prior to
     2.33.12. (LP: #1046319)
@@ -10,7 +10,7 @@ glib2.0 (2.33.12-3) UNRELEASED; urgency=low
     of disabling it. Taken from
     https://bugzilla.gnome.org/show_bug.cgi?id=683384
 
- -- Martin Pitt <mpitt@debian.org>  Thu, 06 Sep 2012 05:38:04 +0200
+ -- Martin Pitt <mpitt@debian.org>  Thu, 06 Sep 2012 06:14:41 +0200
 
 glib2.0 (2.33.12-2) experimental; urgency=low
 
