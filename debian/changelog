@@ -2,6 +2,9 @@ glib2.0 (2.33.12-3) UNRELEASED; urgency=low
 
   * debian/control.in: Add Breaks: too glib-networking versions prior to
     2.33.12. (LP: #1046319)
+  * debian/rules: Ignore test case failures on hurd-i386 (not a release
+    architecture) and mips (this keeps tripping over a gdbus test race
+    condition).
 
  -- Martin Pitt <mpitt@debian.org>  Thu, 06 Sep 2012 05:38:04 +0200
 
