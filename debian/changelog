@@ -1,4 +1,4 @@
-glib2.0 (2.33.12-4) UNRELEASED; urgency=low
+glib2.0 (2.33.12-4) experimental; urgency=low
 
   * debian/patches/03_disble_glib_compile_schemas_warning.patch: Add a new
     patch to disable a warning when compiling schemas which are installed into
