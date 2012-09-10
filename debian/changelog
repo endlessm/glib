@@ -1,3 +1,13 @@
+glib2.0 (2.33.12-4) UNRELEASED; urgency=low
+
+  * debian/patches/03_disble_glib_compile_schemas_warning.patch: Add a new
+    patch to disable a warning when compiling schemas which are installed into
+    'deprecated' locations. Users see this very often due to
+    glib-compile-schemas being called from libglib2.0-0's trigger and it is
+    not very useful for them.
+
+ -- Iain Lane <laney@debian.org>  Mon, 10 Sep 2012 16:25:18 +0100
+
 glib2.0 (2.33.12-3) experimental; urgency=low
 
   * debian/control.in: Add Breaks: too glib-networking versions prior to

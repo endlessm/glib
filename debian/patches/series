@@ -1,5 +1,6 @@
 01_gettext-desktopfiles.patch
 02_gettext-desktopfiles-ubuntu.patch
+03_disble_glib_compile_schemas_warning.patch
 04_homedir_env.patch
 05_run-gio-tests-with-a-dbus-session.patch
 06_thread_test_ignore_prctl_fail.patch
