@@ -1,5 +1,6 @@
 glib2.0 (2.33.14-1) UNRELEASED; urgency=low
 
+  [ Iain Lane ]
   * New upstream release
     + CVE-2012-3524: don't run dbus-launch from setuid binaries
     + g_content_type_get_generic_icon_name(): new API for getting the icon
@@ -15,6 +16,10 @@ glib2.0 (2.33.14-1) UNRELEASED; urgency=low
     + tests/gvariant: Fix test on big endian architectures
     + Fix regression in g_shell_parse_argv()
   * Dropped 07_tests_gvariant_big_endian.patch: applied upstream. 
+
+  [ Michael Biebl ]
+  * Bump all 2.33.x symbol versions to 2.33.14 to ensure a tight enough
+    dependency for packages using features from glib 2.33.
 
  -- Iain Lane <laney@debian.org>  Tue, 18 Sep 2012 12:33:16 +0100
 
