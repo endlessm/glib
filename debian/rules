@@ -27,6 +27,7 @@ LDFLAGS += -Wl,-O1
 
 APIVER := 2.0
 SONAME := 0
+SHVER := 2.32.3
 
 # package names
 SHARED_PKG := libglib$(APIVER)-$(SONAME)
@@ -44,7 +45,7 @@ DEB_DH_INSTALL_ARGS += --sourcedir=debian/install/deb
 DEB_DH_INSTALL_ARGS_$(UDEB_PKG) += --sourcedir=debian/install/udeb
 DEB_DH_INSTALL_ARGS_$(REFDBG_PKG) += --sourcedir=debian/install/refdbg
 
-DEB_DH_MAKESHLIBS_ARGS_$(SHARED_PKG) += -V --add-udeb=$(UDEB_PKG) -- -c4
+DEB_DH_MAKESHLIBS_ARGS_$(SHARED_PKG) += -V'$(SHARED_PKG) (>= $(SHVER))' --add-udeb=$(UDEB_PKG) -- -c4
 DEB_DH_MAKESHLIBS_ARGS_$(REFDBG_PKG) = --no-act
 DEB_DH_STRIP_ARGS_$(REFDBG_PKG) = --no-act
 # Don't put the symbols in the -dbg package
