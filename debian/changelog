@@ -1,8 +1,22 @@
 glib2.0 (2.33.14-1) UNRELEASED; urgency=low
 
-  * New upstream release.
+  * New upstream release
+    + CVE-2012-3524: don't run dbus-launch from setuid binaries
+    + g_content_type_get_generic_icon_name(): new API for getting the icon
+      name for a mime type
+    + Introspection fixes:
+      - GDBusConnection nullability fixes
+      - give a box type to GTimeZone
+    + Drop GVFS_INOTIFY_DIAG
+    + Add a new "Writing GLib Applications" section to the reference
+      documentation with general info on security, threads, etc.
+    + gwin32mount.c: Fix syntax error
+    + gresource tests: srcdir != builddir fixes
+    + tests/gvariant: Fix test on big endian architectures
+    + Fix regression in g_shell_parse_argv()
+  * Dropped 07_tests_gvariant_big_endian.patch: applied upstream. 
 
- -- Michael Biebl <biebl@debian.org>  Wed, 19 Sep 2012 01:56:24 +0200
+ -- Iain Lane <laney@debian.org>  Tue, 18 Sep 2012 12:33:16 +0100
 
 glib2.0 (2.33.12-4) experimental; urgency=low
 

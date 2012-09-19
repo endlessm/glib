@@ -178,6 +178,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_content_type_equals@Base 2.16.0
  g_content_type_from_mime_type@Base 2.18.0
  g_content_type_get_description@Base 2.16.0
+ g_content_type_get_generic_icon_name@Base 2.33.14
  g_content_type_get_icon@Base 2.16.0
  g_content_type_get_mime_type@Base 2.16.0
  g_content_type_get_symbolic_icon@Base 2.33.12
@@ -3535,6 +3536,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_source_set_dummy_callback@Base 2.28.0
  g_strdup_value_contents@Base 2.12.0
  g_strv_get_type@Base 2.12.0
+ g_time_zone_get_type@Base 2.33.14
  g_type_add_class_cache_func@Base 2.12.0
  g_type_add_class_private@Base 2.24.0
  g_type_add_interface_check@Base 2.12.0
