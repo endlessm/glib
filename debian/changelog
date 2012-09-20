@@ -1,3 +1,10 @@
+glib2.0 (2.33.14-2) UNRELEASED; urgency=low
+
+  * debian/rules: Only run tests for the main flavour; it takes too
+    long for all three and does not give us a lot of extra confidence.
+
+ -- Martin Pitt <mpitt@debian.org>  Thu, 20 Sep 2012 17:57:19 +0200
+
 glib2.0 (2.33.14-1) experimental; urgency=low
 
   [ Iain Lane ]
