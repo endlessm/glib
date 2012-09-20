@@ -79,6 +79,9 @@ DEB_CONFIGURE_FLAGS_refdbg := \
 			--disable-Bsymbolic \
 			--enable-debug=yes
 
+pre-build::
+	mkdir -p debian/stamp-makefile-check
+
 binary-install/libglib2.0-0::
 	set -e; for script in postinst postrm; do \
 		sed -e"s/#MULTIARCH#/$(DEB_HOST_MULTIARCH)/g" \
