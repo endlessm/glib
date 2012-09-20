@@ -2,6 +2,9 @@ glib2.0 (2.33.14-2) UNRELEASED; urgency=low
 
   * debian/rules: Only run tests for the main flavour; it takes too
     long for all three and does not give us a lot of extra confidence.
+  * Add 07_socket_test_bump_max_time.patch: Increase /socket/timed_wait test
+    max time. On slow architectures like armel, this test often fails due to
+    "(poll_duration < 110000): (154022 < 110000)".
 
  -- Martin Pitt <mpitt@debian.org>  Thu, 20 Sep 2012 17:57:19 +0200
 
