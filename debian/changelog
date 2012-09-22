@@ -1,3 +1,11 @@
+glib2.0 (2.33.12+really2.32.4-1) unstable; urgency=low
+
+  * New upstream bugfix release.
+  * 10_gdbus_race.patch: stolen from upstream git. Fix a race condition 
+    that would make gnome-shell crash on startup under some conditions.
+
+ -- Josselin Mouette <joss@debian.org>  Sat, 22 Sep 2012 17:59:34 +0200
+
 glib2.0 (2.33.12+really2.32.3-2) unstable; urgency=low
 
   * Explicitly set the shlibs version to 2.32.3 to not generate overly strict
