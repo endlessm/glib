@@ -79,6 +79,7 @@ Depends: ${shlibs:Depends},
          ${misc:Depends},
          @SHARED_PKG@ (= ${binary:Version}),
          @DATA_PKG@
+Pre-Depends: ${misc:Pre-Depends}
 Conflicts: @SHARED_PKG@ (<< 2.25.11-2),
 Replaces: @SHARED_PKG@ (<< 2.25.11-2),
           @DEV_PKG@ (<< 2.25.11-2)

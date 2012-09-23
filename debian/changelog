@@ -5,6 +5,8 @@ glib2.0 (2.33.12+really2.32.4-1) unstable; urgency=low
     that would make gnome-shell crash on startup under some conditions.
   * libglib2.0-bin.install: bash completions have moved to /usr/share.
   * libglib2.0-bin.maintscript: remove old conffiles.
+  * Add appropriate pre-dependency.
+  * libglib2.0-doc.links: add link for gdbus-object-manager-example.
 
  -- Josselin Mouette <joss@debian.org>  Sat, 22 Sep 2012 17:59:34 +0200
 
