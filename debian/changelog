@@ -8,6 +8,7 @@ glib2.0 (2.34.0-1) UNRELEASED; urgency=low
   * Add 07_socket_test_bump_max_time.patch: Increase /socket/timed_wait test
     max time. On slow architectures like armel, this test often fails due to
     "(poll_duration < 110000): (154022 < 110000)".
+  * debian/control.in: Bump pcre dependency to >= 1:8.31.
 
   [ Michael Biebl ]
   * New upstream release.
