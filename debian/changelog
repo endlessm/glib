@@ -9,6 +9,9 @@ glib2.0 (2.34.0-1) UNRELEASED; urgency=low
     max time. On slow architectures like armel, this test often fails due to
     "(poll_duration < 110000): (154022 < 110000)".
   * debian/control.in: Bump pcre dependency to >= 1:8.31.
+  * Add 09_mainloop_test_relax.patch: On slower architectures like ARM,
+    /mainloop/timeouts insistently fails with having done fewer iterations in
+    1050 ms than expected. Relax the required minimum loop runs.
 
   [ Michael Biebl ]
   * New upstream release.
