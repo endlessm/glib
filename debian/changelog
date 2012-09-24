@@ -11,6 +11,8 @@ glib2.0 (2.34.0-1) UNRELEASED; urgency=low
 
   [ Michael Biebl ]
   * New upstream release.
+  * Drop debian/patches/91_revert_pcre_8.31_test.patch now that we have a
+    recent enough version.
 
  -- Martin Pitt <mpitt@debian.org>  Thu, 20 Sep 2012 17:57:19 +0200
 
