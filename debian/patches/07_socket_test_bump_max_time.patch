@@ -24,7 +24,7 @@ index 0a61c9f..cd92e91 100644
  
    g_assert_cmpint (poll_duration, >=, 98000);
 -  g_assert_cmpint (poll_duration, <, 110000);
-+  g_assert_cmpint (poll_duration, <, 160000);
++  g_assert_cmpint (poll_duration, <, 190000);
  
    g_socket_close (client, &error);
    g_assert_no_error (error);
