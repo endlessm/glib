@@ -1,0 +1,46 @@
+Description: Disable tests on slow architectures which keep failing the tests.
+Author: Martin Pitt <martin.pitt@ubuntu.com>
+Forwarded: No
+
+Index: glib2.0-2.33.14/gio/tests/socket.c
+===================================================================
+--- glib2.0-2.33.14.orig/gio/tests/socket.c	2012-09-25 08:10:26.029164560 +0200
++++ glib2.0-2.33.14/gio/tests/socket.c	2012-09-25 08:14:38.249176766 +0200
+@@ -828,7 +828,9 @@
+   g_test_add_func ("/socket/ipv6_v4mapped", test_ipv6_v4mapped);
+ #endif
+   g_test_add_func ("/socket/close_graceful", test_close_graceful);
++#if !defined(__arm__)
+   g_test_add_func ("/socket/timed_wait", test_timed_wait);
++#endif
+   g_test_add_func ("/socket/address", test_sockaddr);
+ #ifdef G_OS_UNIX
+   g_test_add_func ("/socket/unix-from-fd", test_unix_from_fd);
+Index: glib2.0-2.33.14/glib/tests/mainloop.c
+===================================================================
+--- glib2.0-2.33.14.orig/glib/tests/mainloop.c	2012-09-25 08:10:25.869164551 +0200
++++ glib2.0-2.33.14/glib/tests/mainloop.c	2012-09-25 08:14:13.969175591 +0200
+@@ -684,7 +684,9 @@
+ 
+   g_test_add_func ("/maincontext/basic", test_maincontext_basic);
+   g_test_add_func ("/mainloop/basic", test_mainloop_basic);
++#if !defined(__arm__)
+   g_test_add_func ("/mainloop/timeouts", test_timeouts);
++#endif
+   g_test_add_func ("/mainloop/priorities", test_priorities);
+   g_test_add_func ("/mainloop/invoke", test_invoke);
+   g_test_add_func ("/mainloop/child_sources", test_child_sources);
+Index: glib2.0-2.33.14/glib/tests/timeout.c
+===================================================================
+--- glib2.0-2.33.14.orig/glib/tests/timeout.c	2012-08-27 22:12:27.000000000 +0200
++++ glib2.0-2.33.14/glib/tests/timeout.c	2012-09-25 08:14:29.341176334 +0200
+@@ -102,7 +102,9 @@
+   g_test_init (&argc, &argv, NULL);
+ 
+   g_test_add_func ("/timeout/seconds", test_seconds);
++#if !defined(__arm__)
+   g_test_add_func ("/timeout/rounding", test_rounding);
++#endif
+ 
+   return g_test_run ();
+ }
