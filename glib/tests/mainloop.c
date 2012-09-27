@@ -168,6 +168,14 @@ test_timeouts (void)
   GMainLoop *loop;
   GSource *source;
 
+#if defined(__arm__)
+  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") == NULL)
+    {
+      g_test_skip ("Not reliable on older ARM hardware");
+      return;
+    }
+#endif
+
   a = b = c = 0;
 
   ctx = g_main_context_new ();
@@ -451,6 +459,14 @@ test_child_sources (void)
   GMainLoop *loop;
   GSource *parent, *child_b, *child_c, *end;
 
+#if defined(__arm__)
+  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") == NULL)
+    {
+      g_test_skip ("Not reliable on older ARM hardware");
+      return;
+    }
+#endif
+
   ctx = g_main_context_new ();
   loop = g_main_loop_new (ctx, FALSE);
 
@@ -528,6 +544,14 @@ test_recursive_child_sources (void)
   GMainContext *ctx;
   GMainLoop *loop;
   GSource *parent, *child_b, *child_c, *end;
+
+#if defined(__arm__)
+  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") == NULL)
+    {
+      g_test_skip ("Not reliable on older ARM hardware");
+      return;
+    }
+#endif
 
   ctx = g_main_context_new ();
   loop = g_main_loop_new (ctx, FALSE);
