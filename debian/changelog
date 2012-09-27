@@ -11,6 +11,9 @@ glib2.0 (2.34.0-1) UNRELEASED; urgency=low
     /timeout/rounding, and the upper bound on /gdbus/method-calls-in-thread on
     ARM platforms.
   * debian/control.in: Bump pcre dependency to >= 1:8.31.
+  * debian/rules: Seems there is no way of making the test suite work reliably
+    with the upgraded Ubuntu ARM builders, so make tests non-fatal on
+    arm{el,hf} until they get less swap happy.
 
   [ Michael Biebl ]
   * New upstream release.
