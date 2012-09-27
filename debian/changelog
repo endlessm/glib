@@ -1,4 +1,4 @@
-glib2.0 (2.34.0-1) UNRELEASED; urgency=low
+glib2.0 (2.34.0-1) experimental; urgency=low
 
   [ Martin Pitt ]
   * debian/rules: Only run tests for the main flavour; it takes too
@@ -20,7 +20,7 @@ glib2.0 (2.34.0-1) UNRELEASED; urgency=low
   * Drop debian/patches/91_revert_pcre_8.31_test.patch now that we have a
     recent enough version.
 
- -- Martin Pitt <mpitt@debian.org>  Thu, 20 Sep 2012 17:57:19 +0200
+ -- Martin Pitt <mpitt@debian.org>  Thu, 27 Sep 2012 11:22:56 +0200
 
 glib2.0 (2.33.14-1) experimental; urgency=low
 
