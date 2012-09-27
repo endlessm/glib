@@ -7,8 +7,9 @@ glib2.0 (2.34.0-1) UNRELEASED; urgency=low
     change it's not created automatically any more.
   * Add 07_disable_tests_on_slow_archs.patch: Disable tests on slow
     architectures which keep failing the tests. These are currently
-    /socket/timed_wait, /mainloop/timeouts, and /timeout/rounding on armhf and
-    armel.
+    /socket/timed_wait, /mainloop/timeouts, /mainloop/child_sources,
+    /timeout/rounding, and the upper bound on /gdbus/method-calls-in-thread on
+    ARM platforms.
   * debian/control.in: Bump pcre dependency to >= 1:8.31.
 
   [ Michael Biebl ]
