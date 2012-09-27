@@ -175,6 +175,15 @@ test_func (gpointer data)
 static void
 test_rounding (void)
 {
+
+#if defined(__arm__)
+  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") == NULL)
+    {
+      g_test_skip ("Not reliable on older ARM hardware");
+      return;
+    }
+#endif
+
   loop = g_main_loop_new (NULL, FALSE);
 
   last_time = g_get_monotonic_time ();

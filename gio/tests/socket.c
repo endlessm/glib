@@ -1111,6 +1111,14 @@ test_timed_wait (void)
   gint64 start_time;
   gint poll_duration;
 
+#if defined(__arm__)
+  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") == NULL)
+    {
+      g_test_skip ("Not reliable on older ARM hardware");
+      return;
+    }
+#endif
+
   data = create_server (G_SOCKET_FAMILY_IPV4, echo_server_thread, FALSE, &error);
   if (error != NULL)
     {
