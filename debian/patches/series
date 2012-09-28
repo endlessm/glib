@@ -4,6 +4,7 @@
 04_homedir_env.patch
 05_run-gio-tests-with-a-dbus-session.patch
 10_gdbus_race.patch
+20_glib-compile-resources_leak.patch
 61_glib-compile-binaries-path.patch
 90_gio-modules-multiarch-compat.patch
 91_revert_schema_path_warning.patch

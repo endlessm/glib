@@ -3,6 +3,8 @@ glib2.0 (2.33.12+really2.32.4-2) UNRELEASED; urgency=low
   * Revert link adding for gdbus-object-manager-example. While it is 
     useful to have in /usr/share/doc as an example, it must not be 
     shipped with the system documentation.
+  * 20_glib-compile-resources_leak.patch: new patch. Fix a leak 
+    introduced in version 2.32.4. Thanks Niels Thykier!
 
  -- Josselin Mouette <joss@debian.org>  Sun, 23 Sep 2012 13:26:33 +0200
 
