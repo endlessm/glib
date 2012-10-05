@@ -1,10 +1,12 @@
-glib2.0 (2.33.12+really2.32.4-2) UNRELEASED; urgency=low
+glib2.0 (2.33.12+really2.32.4-2) UNRELEASED; urgency=medium
 
   * Revert link adding for gdbus-object-manager-example. While it is 
     useful to have in /usr/share/doc as an example, it must not be 
     shipped with the system documentation.
   * 20_glib-compile-resources_leak.patch: new patch. Fix a leak 
     introduced in version 2.32.4. Thanks Niels Thykier!
+  * SECURITY: add 11_CVE-2012-3524_setuid.patch from upstream. Prevents 
+    from using DBus in a setuid binary. Fixes CVE-2012-3524.
 
  -- Josselin Mouette <joss@debian.org>  Sun, 23 Sep 2012 13:26:33 +0200
 
