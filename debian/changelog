@@ -1,9 +1,18 @@
-glib2.0 (2.34.0-2) UNRELEASED; urgency=low
+glib2.0 (2.34.1-1) UNRELEASED; urgency=low
 
+  [ Josselin Mouette ]
   * Require libelfg0-dev, not libelf-dev which has nothing to do with 
     it.
 
- -- Josselin Mouette <joss@debian.org>  Fri, 28 Sep 2012 22:05:59 +0200
+  [ Iain Lane ]
+  * New upstream release
+    + GTimeZone support for zoneinfo version 1
+    + Leak in glib-compile-resources
+    + g_settings_bind: use canonical property name
+    + Port gio tests from pygobject to pygi
+  * Switch python-gobject-2 BD to python-gi, folowing porting of tests. 
+
+ -- Iain Lane <laney@debian.org>  Tue, 16 Oct 2012 14:46:29 +0100
 
 glib2.0 (2.34.0-1) experimental; urgency=low
 
