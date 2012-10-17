@@ -1,4 +1,4 @@
-glib2.0 (2.34.1-1) UNRELEASED; urgency=low
+glib2.0 (2.34.1-1) experimental; urgency=low
 
   [ Josselin Mouette ]
   * Require libelfg0-dev, not libelf-dev which has nothing to do with 
@@ -15,7 +15,7 @@ glib2.0 (2.34.1-1) UNRELEASED; urgency=low
     Cherry-pick upstream patch to fix crash when GBusNameVanishedCallback is
     called with a NULL GDBusConnection. (LP: #1044322)
 
- -- Iain Lane <laney@debian.org>  Tue, 16 Oct 2012 14:46:29 +0100
+ -- Iain Lane <laney@debian.org>  Wed, 17 Oct 2012 11:51:14 +0100
 
 glib2.0 (2.34.0-1) experimental; urgency=low
 
