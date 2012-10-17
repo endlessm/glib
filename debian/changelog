@@ -11,6 +11,9 @@ glib2.0 (2.34.1-1) UNRELEASED; urgency=low
     + g_settings_bind: use canonical property name
     + Port gio tests from pygobject to pygi
   * Switch python-gobject-2 BD to python-gi, folowing porting of tests. 
+  * debian/patches/50_git_gmenuexporter_allow_null_bus_on_name_vanished.patch:
+    Cherry-pick upstream patch to fix crash when GBusNameVanishedCallback is
+    called with a NULL GDBusConnection. (LP: #1044322)
 
  -- Iain Lane <laney@debian.org>  Tue, 16 Oct 2012 14:46:29 +0100
 

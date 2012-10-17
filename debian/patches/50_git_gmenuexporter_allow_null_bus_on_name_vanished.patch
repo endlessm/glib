@@ -1,0 +1,28 @@
+From 3766b7b5cd0f22d2773c7efc8b52fc2f214d0372 Mon Sep 17 00:00:00 2001
+From: Ryan Lortie <desrt@desrt.ca>
+Date: Tue, 16 Oct 2012 16:27:12 +0000
+Subject: GMenuExporter: allow NULL bus on _name_vanished
+
+GBusNameVanishedCallback is called with a NULL GDBusConnection in the
+case that the connection has vanished.  We were doing an assert to
+verify that it was the same as we had exported the menu on and that
+assert was failing.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=685995
+---
+diff --git a/gio/gmenuexporter.c b/gio/gmenuexporter.c
+index e57ad47..8509ffd 100644
+--- a/gio/gmenuexporter.c
++++ b/gio/gmenuexporter.c
+@@ -556,7 +556,8 @@ g_menu_exporter_name_vanished (GDBusConnection *connection,
+ {
+   GMenuExporter *exporter = user_data;
+ 
+-  g_assert (exporter->connection == connection);
++  /* connection == NULL when we get called because the connection closed */
++  g_assert (exporter->connection == connection || connection == NULL);
+ 
+   g_hash_table_remove (exporter->remotes, name);
+ }
+--
+cgit v0.9.0.2
