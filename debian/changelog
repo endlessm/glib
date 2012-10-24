@@ -1,10 +1,11 @@
-glib2.0 (2.33.12+really2.32.4-3) UNRELEASED; urgency=low
+glib2.0 (2.33.12+really2.32.4-3) unstable; urgency=low
 
+  * Team upload
   * 92_kfreebsd_credentials.patch: use the FreeBSD credentials-passing
     implementation on kFreeBSD too, making gnome-terminal and lightdm
     work on kFreeBSD (Closes: #631968)
 
- -- Simon McVittie <smcv@debian.org>  Wed, 24 Oct 2012 10:12:13 +0100
+ -- Simon McVittie <smcv@debian.org>  Wed, 24 Oct 2012 10:51:08 +0100
 
 glib2.0 (2.33.12+really2.32.4-2) unstable; urgency=medium
 
