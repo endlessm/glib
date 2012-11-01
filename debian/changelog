@@ -1,10 +1,11 @@
-glib2.0 (2.34.1-2) UNRELEASED; urgency=low
+glib2.0 (2.34.1-2) experimental; urgency=low
 
+  * Team upload
   * Apply patch from unstable to use the FreeBSD credentials-passing code
     path on kFreeBSD too, fixing (at least) gnome-terminal and lightdm on
     kFreeBSD (Closes: #581750, #631968)
 
- -- Simon McVittie <smcv@debian.org>  Wed, 31 Oct 2012 12:50:52 +0000
+ -- Simon McVittie <smcv@debian.org>  Wed, 31 Oct 2012 12:56:54 +0000
 
 glib2.0 (2.34.1-1) experimental; urgency=low
 
