@@ -55,10 +55,9 @@ DEB_DH_STRIP_ARGS_$(UDEB_PKG) =
 export G_HOME=$(CURDIR)/debian/build
 
 # make tests non-fatal on Debian architectures which currently have failed
-# tests; armel/armhf builders on Ubuntu are currently too swap-happy and
-# unpredictable
+# tests; always fail on Ubuntu; only run the tests for the main flavour
 ifneq ($(findstring $(DEB_BUILD_ARCH), armel armhf kfreebsd-i386 kfreebsd-amd64 s390x sparc mips hurd-i386),)
-DEB_MAKE_CHECK_TARGET = $(if $(filter deb, $(cdbs_make_curflavor)), -k check || true)
+DEB_MAKE_CHECK_TARGET = $(if $(filter deb, $(cdbs_make_curflavor)), -k check || ! dpkg-vendor --is ubuntu)
 else
 DEB_MAKE_CHECK_TARGET = $(if $(filter deb, $(cdbs_make_curflavor)), -k check)
 endif
