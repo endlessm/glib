@@ -1,11 +1,11 @@
-glib2.0 (2.34.1-3) UNRELEASED; urgency=low
-
-  [ Simon McVittie ]
-  * Mark 91_kfreebsd_credentials.patch as having gone upstream
+glib2.0 (2.34.2-1) UNRELEASED; urgency=low
 
   [ Martin Pitt ]
   * debian/rules: Re-enable failing the build on failed tests on armel/armhf
     on Ubuntu, now that the buildds behave themselves again.
+
+  [ Simon McVittie ]
+  * New upstream release
 
  -- Simon McVittie <smcv@debian.org>  Fri, 02 Nov 2012 14:12:24 +0000
 
