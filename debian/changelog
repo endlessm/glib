@@ -1,4 +1,6 @@
-glib2.0 (2.34.2-1) UNRELEASED; urgency=low
+glib2.0 (2.34.2-1) experimental; urgency=low
+
+  * Team upload
 
   [ Martin Pitt ]
   * debian/rules: Re-enable failing the build on failed tests on armel/armhf
@@ -14,7 +16,7 @@ glib2.0 (2.34.2-1) UNRELEASED; urgency=low
   * Override package-contains-devhelp-file-without-symlink lintian tag
     for gdbus-object-manager-example, which is deliberately not in devhelp
 
- -- Simon McVittie <smcv@debian.org>  Fri, 02 Nov 2012 14:12:24 +0000
+ -- Simon McVittie <smcv@debian.org>  Mon, 12 Nov 2012 16:08:29 +0000
 
 glib2.0 (2.34.1-2) experimental; urgency=low
 
