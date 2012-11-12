@@ -9,6 +9,8 @@ glib2.0 (2.34.2-1) UNRELEASED; urgency=low
     - 50_git_gmenuexporter_allow_null_bus_on_name_vanished.patch: remove,
       applied upstream
     - 91_kfreebsd_credentials.patch: remove, applied upstream
+  * Override a couple of package-contains-empty-directory lintian tags
+    for deliberate empty directories
 
  -- Simon McVittie <smcv@debian.org>  Fri, 02 Nov 2012 14:12:24 +0000
 
