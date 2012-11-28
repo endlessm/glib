@@ -1,8 +1,8 @@
-glib2.0 (2.34.3-1) UNRELEASED; urgency=low
+glib2.0 (2.34.3-1) experimental; urgency=low
 
   * New upstream release.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 27 Nov 2012 21:26:01 +0100
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 28 Nov 2012 14:38:35 +0100
 
 glib2.0 (2.34.2-1) experimental; urgency=low
 
