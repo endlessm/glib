@@ -6,6 +6,8 @@ glib2.0 (2.33.12+really2.32.4-4) UNRELEASED; urgency=low
     After removing /usr/share/glib-2.0/schemas/gschemas.compiled on purge,
     run dpkg-trigger explicitly, so in case libglib2.0-0 is installed for
     other architectures, the cache file is re-created. (Closes: #696389)
+  * Drop the various Breaks from libglib2.0-0. Those are causing APT to fail
+    on a dist-upgrade from squeeze to wheezy. (Closes: #676485)
 
  -- Michael Biebl <biebl@debian.org>  Tue, 08 Jan 2013 07:46:19 +0100
 
