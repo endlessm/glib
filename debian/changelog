@@ -1,4 +1,4 @@
-glib2.0 (2.33.12+really2.32.4-4) UNRELEASED; urgency=low
+glib2.0 (2.33.12+really2.32.4-4) unstable; urgency=low
 
   * Take into account multiarch when removing the cache files in postrm:
     Remove /usr/lib/gio/modules/giomodule.cache only for the native
@@ -9,7 +9,7 @@ glib2.0 (2.33.12+really2.32.4-4) UNRELEASED; urgency=low
   * Drop the various Breaks from libglib2.0-0. Those are causing APT to fail
     on a dist-upgrade from squeeze to wheezy. (Closes: #676485)
 
- -- Michael Biebl <biebl@debian.org>  Tue, 08 Jan 2013 07:46:19 +0100
+ -- Michael Biebl <biebl@debian.org>  Tue, 08 Jan 2013 23:30:04 +0100
 
 glib2.0 (2.33.12+really2.32.4-3) unstable; urgency=low
 
