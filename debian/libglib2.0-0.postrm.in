@@ -27,5 +27,5 @@ if [ "$1" = purge ] && [ -d /usr/share/glib-2.0/schemas ]; then
     # regenerate the cache file if required.
     if [ -d /usr/share/glib-2.0/schemas ]; then
         dpkg-trigger /usr/share/glib-2.0/schemas
-    if
+    fi
 fi

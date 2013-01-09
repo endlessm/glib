@@ -1,3 +1,9 @@
+glib2.0 (2.33.12+really2.32.4-5) UNRELEASED; urgency=low
+
+  * Fix the closing fi in the if statement in postrm.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 09 Jan 2013 00:38:34 +0100
+
 glib2.0 (2.33.12+really2.32.4-4) unstable; urgency=low
 
   * Take into account multiarch when removing the cache files in postrm:
