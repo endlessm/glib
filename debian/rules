@@ -68,6 +68,12 @@ DEB_CONFIGURE_EXTRA_FLAGS := \
 			--libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) \
 			--with-pcre=system
 
+ifneq ($(DEB_BUILD_ARCH),$(DEB_HOST_ARCH))
+  DEB_CONFIGURE_EXTRA_FLAGS += \
+			--disable-modular-tests \
+			--disable-gtk-doc
+endif
+
 DEB_CONFIGURE_FLAGS_deb := \
 			--enable-gtk-doc \
 			--enable-static
