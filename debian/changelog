@@ -17,6 +17,7 @@ glib2.0 (2.35.3-1) UNRELEASED; urgency=low
   * Refresh patches and slightly rework debian/patches/04_homedir_env.patch:
     g_get_home_dir() now respects the HOME environment variable but we'll keep
     G_HOME for now as packages in Debian rely on it.
+  * gdbus-codegen .py files have moved to /usr/share/glib-2.0 
 
  -- Iain Lane <laney@debian.org>  Thu, 10 Jan 2013 13:00:54 +0000
 
