@@ -40,14 +40,7 @@ Depends: ${misc:Depends},
 Recommends: @DATA_PKG@,
             shared-mime-info
 Breaks: gvfs (<< 1.8),
-        glib-networking (<< 2.33.12),
-        gnome-control-center (<< 1:3),
-        gnome-session (<< 3.0.0-3),
-        gdm3 (<< 3.0.3),
-        libgtk-3-0 (<< 3.0.12),
-        emacs23 (<< 23.4+1-3),
-        eog (<< 3.2.2-3),
-        gwaei (<< 3.2.0b1-2)
+        glib-networking (<< 2.33.12)
 Replaces: @DEV_PKG@ (<< 2.23.2-2)
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
