@@ -1,4 +1,4 @@
-glib2.0 (2.35.3-1) unstable; urgency=low
+glib2.0 (2.35.3-1) UNRELEASED; urgency=low
 
   [ Matthias Klose ]
   * Configure cross builds with --disable-modular-tests --disable-gtk-doc.
@@ -12,6 +12,9 @@ glib2.0 (2.35.3-1) unstable; urgency=low
       After removing /usr/share/glib-2.0/schemas/gschemas.compiled on purge,
       run dpkg-trigger explicitly, so in case libglib2.0-0 is installed for
       other architectures, the cache file is re-created. (Closes: #696389)
+  * Refresh patches and slightly rework debian/patches/04_homedir_env.patch:
+    g_get_home_dir() now respects the HOME environment variable but we'll keep
+    G_HOME for now as packages in Debian rely on it.
 
  -- Iain Lane <laney@debian.org>  Thu, 10 Jan 2013 13:00:54 +0000
 

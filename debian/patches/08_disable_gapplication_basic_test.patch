@@ -8,11 +8,11 @@ It's full of race conditions and keeps breaking builds.
  gio/tests/gapplication.c |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/gio/tests/gapplication.c b/gio/tests/gapplication.c
-index 2e0ea9d..f8ba1f2 100644
+Index: b/gio/tests/gapplication.c
+===================================================================
 --- a/gio/tests/gapplication.c
 +++ b/gio/tests/gapplication.c
-@@ -458,7 +458,7 @@ main (int argc, char **argv)
+@@ -514,7 +514,7 @@
    g_test_dbus_unset ();
  
    g_test_add_func ("/gapplication/no-dbus", test_nodbus);
@@ -21,6 +21,3 @@ index 2e0ea9d..f8ba1f2 100644
    g_test_add_func ("/gapplication/no-appid", test_noappid);
  /*  g_test_add_func ("/gapplication/non-unique", test_nonunique); */
    g_test_add_func ("/gapplication/properties", properties);
--- 
-1.7.10.4
-
