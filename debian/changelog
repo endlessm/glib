@@ -1,10 +1,9 @@
-glib2.0 (2.35.3-1) UNRELEASED; urgency=low
+glib2.0 (2.35.4-1) UNRELEASED; urgency=low
 
   [ Matthias Klose ]
   * Configure cross builds with --disable-modular-tests --disable-gtk-doc.
 
   [ Iain Lane ]
-  * New upstream release 2.35.3 
   * Merges from unstable branch (Michael Biebl)
     - Take into account multiarch when removing the cache files in postrm:
       Remove /usr/lib/gio/modules/giomodule.cache only for the native
@@ -19,6 +18,9 @@ glib2.0 (2.35.3-1) UNRELEASED; urgency=low
     G_HOME for now as packages in Debian rely on it.
   * gdbus-codegen .py files have moved to /usr/share/glib-2.0 
   * Update symbols file 
+
+  [ Martin Pitt ]
+  * New upstream release 2.35.4 
 
  -- Iain Lane <laney@debian.org>  Thu, 10 Jan 2013 13:00:54 +0000
 
