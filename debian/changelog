@@ -21,6 +21,7 @@ glib2.0 (2.35.4-1) UNRELEASED; urgency=low
 
   [ Martin Pitt ]
   * New upstream release 2.35.4 
+  * debian/libglib2.0-0.symbols: Update for new upstream release.
   * Drop 08_disable_gapplication_basic_test.patch, test is now more robust.
   * 92_revert_appinfo_command_line.patch: Update test that assumes that the
     desktop file has a Terminal line, as the patch removes that.
