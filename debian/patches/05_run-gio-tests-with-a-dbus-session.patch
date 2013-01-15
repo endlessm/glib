@@ -11,10 +11,10 @@ dbus session.
  gio/tests/Makefile.am |    3 +++
  2 files changed, 4 insertions(+), 1 deletions(-)
 
-Index: glib-2.33.12/Makefile.decl
+Index: glib2.0-exp/Makefile.decl
 ===================================================================
---- glib-2.33.12.orig/Makefile.decl	2012-08-25 13:14:10.000000000 +1200
-+++ glib-2.33.12/Makefile.decl	2012-09-04 14:42:52.872116736 +1200
+--- glib2.0-exp.orig/Makefile.decl	2013-01-15 11:11:03.091352736 +0100
++++ glib2.0-exp/Makefile.decl	2013-01-15 11:11:03.087352736 +0100
 @@ -1,7 +1,7 @@
  # GLIB - Library of useful C routines
  
@@ -24,13 +24,13 @@ Index: glib-2.33.12/Makefile.decl
  GTESTER_REPORT = $(top_builddir)/glib/gtester-report	# for the GLIB package
  
  # initialize variables for unconditional += appending
-Index: glib-2.33.12/gio/tests/Makefile.am
+Index: glib2.0-exp/gio/tests/Makefile.am
 ===================================================================
---- glib-2.33.12.orig/gio/tests/Makefile.am	2012-09-04 02:24:05.000000000 +1200
-+++ glib-2.33.12/gio/tests/Makefile.am	2012-09-04 14:42:52.872116736 +1200
+--- glib2.0-exp.orig/gio/tests/Makefile.am	2013-01-15 11:11:03.091352736 +0100
++++ glib2.0-exp/gio/tests/Makefile.am	2013-01-15 11:11:03.087352736 +0100
 @@ -6,6 +6,9 @@
  
- SUBDIRS = gdbus-object-manager-example
+ SUBDIRS = gdbus-object-manager-example services
  
 +# Some tests need a dbus session
 +GTESTER_ENV = dbus-launch
