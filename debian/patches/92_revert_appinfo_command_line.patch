@@ -1,5 +1,7 @@
---- glib2.0-2.33.10/gio/tests/appinfo-test.desktop.gnome	2012-08-21 15:17:22.205059142 +0200
-+++ glib2.0-2.33.10/gio/tests/appinfo-test.desktop	2012-08-21 15:17:28.621059452 +0200
+Index: glib2.0-2.35.4/gio/tests/appinfo-test.desktop
+===================================================================
+--- glib2.0-2.35.4.orig/gio/tests/appinfo-test.desktop	2012-08-19 04:19:25.000000000 +0200
++++ glib2.0-2.35.4/gio/tests/appinfo-test.desktop	2013-01-15 09:54:26.000000000 +0100
 @@ -9,7 +9,6 @@
  Comment[de]=GAppInfo Beispiel
  Exec=./appinfo-test --option %U %i --name %c --filename %k %m %%
@@ -8,3 +10,16 @@
  StartupNotify=true
  StartupWMClass=appinfo-class
  MimeType=image/png;image/jpeg;
+Index: glib2.0-2.35.4/gio/tests/desktop-app-info.c
+===================================================================
+--- glib2.0-2.35.4.orig/gio/tests/desktop-app-info.c	2012-11-22 03:13:00.000000000 +0100
++++ glib2.0-2.35.4/gio/tests/desktop-app-info.c	2013-01-15 09:55:24.315133072 +0100
+@@ -360,7 +360,7 @@
+   appinfo = g_desktop_app_info_new_from_filename (SRCDIR "/appinfo-test.desktop");
+   g_assert (appinfo != NULL);
+ 
+-  g_assert (g_desktop_app_info_has_key (appinfo, "Terminal"));
++  g_assert (g_desktop_app_info_has_key (appinfo, "StartupNotify"));
+   g_assert (!g_desktop_app_info_has_key (appinfo, "Bratwurst"));
+ 
+   s = g_desktop_app_info_get_string (appinfo, "StartupWMClass");
