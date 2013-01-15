@@ -21,6 +21,7 @@ glib2.0 (2.35.4-1) UNRELEASED; urgency=low
 
   [ Martin Pitt ]
   * New upstream release 2.35.4 
+  * Drop 08_disable_gapplication_basic_test.patch, test is now more robust.
 
  -- Iain Lane <laney@debian.org>  Thu, 10 Jan 2013 13:00:54 +0000
 

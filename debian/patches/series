@@ -5,7 +5,6 @@
 05_run-gio-tests-with-a-dbus-session.patch
 06_thread_test_ignore_prctl_fail.patch
 07_disable_tests_on_slow_archs.patch
-08_disable_gapplication_basic_test.patch
 61_glib-compile-binaries-path.patch
 90_gio-modules-multiarch-compat.patch
 92_revert_appinfo_command_line.patch
