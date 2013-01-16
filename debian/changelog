@@ -23,8 +23,9 @@ glib2.0 (2.35.4-1) UNRELEASED; urgency=low
   * New upstream release 2.35.4 
   * debian/libglib2.0-0.symbols: Update for new upstream release.
   * Drop 08_disable_gapplication_basic_test.patch, test is now more robust.
-  * 92_revert_appinfo_command_line.patch: Update test that assumes that the
-    desktop file has a Terminal line, as the patch removes that.
+  * Drop 92_revert_appinfo_command_line.patch and add xterm build dependency;
+    xterm is rather lightweight in terms of dependencies and is sufficient to
+    run all the "Terminal=true" tests.
 
  -- Iain Lane <laney@debian.org>  Thu, 10 Jan 2013 13:00:54 +0000
 
