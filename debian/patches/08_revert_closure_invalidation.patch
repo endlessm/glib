@@ -1,0 +1,15 @@
+Description: Revert http://git.gnome.org/browse/glib/commit/?id=a36028f386708bb until the crash introduced by it is solved properly.
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=690118
+
+diff --git a/gobject/gsignal.c b/gobject/gsignal.c
+index de95fcb..70167af 100644
+--- a/gobject/gsignal.c
++++ b/gobject/gsignal.c
+@@ -3737,7 +3737,6 @@ invalid_closure_notify (gpointer  instance,
+ 
+   handler = handler_lookup (instance, 0, closure, &signal_id);
+   /* GClosure removes our notifier when we're done */
+-  handler->has_invalid_closure_notify = 0;
+   handler_unref_R (signal_id, instance, handler);
+ 
+   SIGNAL_UNLOCK ();

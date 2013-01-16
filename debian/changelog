@@ -26,6 +26,8 @@ glib2.0 (2.35.4-1) UNRELEASED; urgency=low
   * Drop 92_revert_appinfo_command_line.patch and add xterm build dependency;
     xterm is rather lightweight in terms of dependencies and is sufficient to
     run all the "Terminal=true" tests.
+  * Add 08_revert_closure_invalidation.patch: Revert upstream commit a36028
+    until the crash introduced by it is solved properly. (GNOME #690118)
 
  -- Iain Lane <laney@debian.org>  Thu, 10 Jan 2013 13:00:54 +0000
 
