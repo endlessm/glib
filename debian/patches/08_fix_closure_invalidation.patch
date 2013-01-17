@@ -1,0 +1,91 @@
+From 6f43a8f8c2118c54ca3055cfbf4a3fabee1f8e2c Mon Sep 17 00:00:00 2001
+From: Ryan Lortie <desrt@desrt.ca>
+Date: Wed, 16 Jan 2013 22:55:27 -0500
+Subject: [PATCH] gsignal: fix closure invalidation code
+
+This is the bug that has been causing segfaults and criticals when accel
+keys are used to close windows via GtkUIManager.
+
+The main cause of this problem was a mistake made in the original patch
+when modifying the handler_lookup() to take the extra 'closure'
+parameter.  The original check used was:
+
+    if (handler->sequential_number == handler_id ||
+       (closure && handler->closure == closure))
+
+It was called to find a particular closure like so:
+
+    handler_lookup (instance, 0, closure, &signal_id);
+
+The problem is that the check will return if either the signal ID or
+closure matches (if a closure was given).  The calling code assumes 0 to
+be an invalid signal ID which will match no handlers, but unfortunately
+the rest of gsignal code uses this to denote a signal that has already
+been disconnected.  The result is that this function was searching for a
+matching closure _or_ the first already-disconnected handler.  When it
+found the already-disconnected handler, we'd get criticals and crashes.
+
+The condition has been corrected; it now ignores the handler_id
+parameter if the closure parameter is non-NULL.
+
+While we're in here, change the lifecycle of the invalidation notify to
+be easier to understand.
+
+Before, the notify was removed when the last reference on the handler
+dropped.  This could happen in very many situations; often at the end of
+an emission.  Instead, we now tie the registration of the notifier to
+the lifecycle of the signal connection.  When the signal is disconnected
+we remove the notification, even if other references are held (eg:
+because it is currently being dispatched).
+
+https://bugzilla.gnome.org/show_bug.cgi?id=690118
+---
+ gobject/gsignal.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/gobject/gsignal.c b/gobject/gsignal.c
+index de95fcb..cf3aacd 100644
+--- a/gobject/gsignal.c
++++ b/gobject/gsignal.c
+@@ -445,8 +445,7 @@ handler_lookup (gpointer  instance,
+           Handler *handler;
+           
+           for (handler = hlist->handlers; handler; handler = handler->next)
+-            if (handler->sequential_number == handler_id ||
+-		(closure && handler->closure == closure))
++            if (closure ? (handler->closure == closure) : (handler->sequential_number == handler_id))
+               {
+                 if (signal_id_p)
+                   *signal_id_p = hlist->signal_id;
+@@ -653,7 +652,6 @@ handler_unref_R (guint    signal_id,
+         }
+ 
+       SIGNAL_UNLOCK ();
+-      remove_invalid_closure_notify (handler, instance);
+       g_closure_unref (handler->closure);
+       SIGNAL_LOCK ();
+       g_slice_free (Handler, handler);
+@@ -2584,6 +2582,7 @@ g_signal_handler_disconnect (gpointer instance,
+     {
+       handler->sequential_number = 0;
+       handler->block_count = 1;
++      remove_invalid_closure_notify (handler, instance);
+       handler_unref_R (signal_id, instance, handler);
+     }
+   else
+@@ -3736,8 +3735,10 @@ invalid_closure_notify (gpointer  instance,
+   SIGNAL_LOCK ();
+ 
+   handler = handler_lookup (instance, 0, closure, &signal_id);
+-  /* GClosure removes our notifier when we're done */
+-  handler->has_invalid_closure_notify = 0;
++  g_assert (handler->closure == closure);
++
++  handler->sequential_number = 0;
++  handler->block_count = 1;
+   handler_unref_R (signal_id, instance, handler);
+ 
+   SIGNAL_UNLOCK ();
+-- 
+1.8.0
+
