@@ -1,4 +1,4 @@
-glib2.0 (2.35.4-1) UNRELEASED; urgency=low
+glib2.0 (2.35.8-1) UNRELEASED; urgency=low
 
   [ Matthias Klose ]
   * Configure cross builds with --disable-modular-tests --disable-gtk-doc.
@@ -20,7 +20,7 @@ glib2.0 (2.35.4-1) UNRELEASED; urgency=low
   * Update symbols file 
 
   [ Martin Pitt ]
-  * New upstream release 2.35.4 
+  * New upstream release 2.35.4
   * debian/libglib2.0-0.symbols: Update for new upstream release.
   * Drop 08_disable_gapplication_basic_test.patch, test is now more robust.
   * Drop 92_revert_appinfo_command_line.patch and add xterm build dependency;
@@ -28,6 +28,9 @@ glib2.0 (2.35.4-1) UNRELEASED; urgency=low
     run all the "Terminal=true" tests.
   * Add 08_fix_closure_invalidation.patch: gsignal: fix closure invalidation
     code. (GNOME #690118)
+
+  [ Emilio Pozuelo Monfort ]
+  * New upstream release 2.35.8.
 
  -- Iain Lane <laney@debian.org>  Thu, 10 Jan 2013 13:00:54 +0000
 
