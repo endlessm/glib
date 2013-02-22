@@ -4,11 +4,9 @@
 ## Bug: bug URL
 # Ubuntu: https://launchpad.net/bugs/3935
 # Upstream: http://bugzilla.gnome.org/show_bug.cgi?id=569829
-Index: glib-2.33.12/glib/gkeyfile.c
-===================================================================
---- glib-2.33.12.orig/glib/gkeyfile.c	2012-08-29 13:27:51.000000000 +1200
-+++ glib-2.33.12/glib/gkeyfile.c	2012-09-04 14:42:46.956116941 +1200
-@@ -443,6 +443,7 @@
+--- a/glib/gkeyfile.c
++++ b/glib/gkeyfile.c
+@@ -445,6 +445,7 @@
    GKeyFileFlags flags;
  
    gchar **locales;
@@ -16,7 +14,7 @@ Index: glib-2.33.12/glib/gkeyfile.c
  
    volatile gint ref_count;
  };
-@@ -567,6 +568,7 @@
+@@ -569,6 +570,7 @@
    key_file->list_separator = ';';
    key_file->flags = 0;
    key_file->locales = g_strdupv ((gchar **)g_get_language_names ());
@@ -24,7 +22,7 @@ Index: glib-2.33.12/glib/gkeyfile.c
  }
  
  static void
-@@ -586,6 +588,12 @@
+@@ -588,6 +590,12 @@
        key_file->parse_buffer = NULL;
      }
  
@@ -37,7 +35,7 @@ Index: glib-2.33.12/glib/gkeyfile.c
    tmp = key_file->groups;
    while (tmp != NULL)
      {
-@@ -801,6 +809,11 @@
+@@ -803,6 +811,11 @@
        return FALSE;
      }
  
@@ -49,7 +47,7 @@ Index: glib-2.33.12/glib/gkeyfile.c
    return TRUE;
  }
  
-@@ -906,6 +919,11 @@
+@@ -908,6 +921,11 @@
        return FALSE;
      }
  
@@ -61,7 +59,7 @@ Index: glib-2.33.12/glib/gkeyfile.c
    return TRUE;
  }
  
-@@ -2081,6 +2099,8 @@
+@@ -2083,6 +2101,8 @@
    GError *key_file_error;
    gchar **languages;
    gboolean free_languages = FALSE;
@@ -70,7 +68,7 @@ Index: glib-2.33.12/glib/gkeyfile.c
    gint i;
  
    g_return_val_if_fail (key_file != NULL, NULL);
-@@ -2102,6 +2122,24 @@
+@@ -2104,6 +2124,24 @@
        free_languages = FALSE;
      }
    
@@ -95,7 +93,7 @@ Index: glib-2.33.12/glib/gkeyfile.c
    for (i = 0; languages[i]; i++)
      {
        candidate_key = g_strdup_printf ("%s[%s]", key, languages[i]);
-@@ -2118,6 +2156,39 @@
+@@ -2120,6 +2158,39 @@
        translated_value = NULL;
     }
  
@@ -135,11 +133,9 @@ Index: glib-2.33.12/glib/gkeyfile.c
    /* Fallback to untranslated key
     */
    if (!translated_value)
-Index: glib-2.33.12/glib/gkeyfile.h
-===================================================================
---- glib-2.33.12.orig/glib/gkeyfile.h	2012-03-12 13:42:41.000000000 +1300
-+++ glib-2.33.12/glib/gkeyfile.h	2012-09-04 14:42:46.956116941 +1200
-@@ -258,6 +258,9 @@
+--- a/glib/gkeyfile.h
++++ b/glib/gkeyfile.h
+@@ -305,6 +305,9 @@
  #define G_KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY   "StartupNotify"
  #define G_KEY_FILE_DESKTOP_KEY_STARTUP_WM_CLASS "StartupWMClass"
  #define G_KEY_FILE_DESKTOP_KEY_URL              "URL"

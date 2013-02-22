@@ -2,11 +2,9 @@ Description: Disable confusing (to users) warning about deprecated schema paths
 Author: Iain Lane <iain.lane@canonical.com>
 Forwarded: not-needed
 
-Index: b/gio/glib-compile-schemas.c
-===================================================================
 --- a/gio/glib-compile-schemas.c
 +++ b/gio/glib-compile-schemas.c
-@@ -1204,11 +1204,13 @@
+@@ -1208,11 +1208,13 @@
        return;
      }
  
