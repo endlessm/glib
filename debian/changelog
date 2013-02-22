@@ -35,6 +35,8 @@ glib2.0 (2.35.8-1) UNRELEASED; urgency=low
       - Removed, applied upstream.
     + debian/patches/*:
       - Refreshed.
+    + debian/libglib2.0-0.symbols:
+      - Updated for the new symbols.
 
  -- Iain Lane <laney@debian.org>  Thu, 10 Jan 2013 13:00:54 +0000
 
