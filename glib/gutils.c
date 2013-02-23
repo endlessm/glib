@@ -797,7 +797,9 @@ g_build_home_dir (void)
   gchar *home_dir;
 
   /* We first check HOME and use it if it is set */
-  home_dir = g_strdup (g_getenv ("HOME"));
+  home_dir = g_strdup (g_getenv ("G_HOME"));
+  if (!home_dir)
+    home_dir = g_strdup (g_getenv ("HOME"));
 
 #ifdef G_OS_WIN32
   /* Only believe HOME if it is an absolute path and exists.
@@ -884,6 +886,12 @@ g_build_home_dir (void)
  * dependency to ensure that the new behaviour is in effect) then you
  * should either directly check the `HOME` environment variable yourself
  * or unset it before calling any functions in GLib.
+ *
+ * When the pre-2.36 behaviour was in effect, Debian provided the
+ * <envar>G_HOME</envar> environment variable for testing and development
+ * purposes. This is now unnecessary as <envar>HOME</envar> can be used
+ * directly, but is retained for compatibility. It is deprecated and will be
+ * removed in a future release.
  *
  * Returns: (type filename): the current user's home directory
  */
