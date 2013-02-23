@@ -1,4 +1,4 @@
-glib2.0 (2.35.8-1) UNRELEASED; urgency=low
+glib2.0 (2.35.8-1) experimental; urgency=low
 
   [ Matthias Klose ]
   * Configure cross builds with --disable-modular-tests --disable-gtk-doc.
@@ -38,7 +38,7 @@ glib2.0 (2.35.8-1) UNRELEASED; urgency=low
     + debian/libglib2.0-0.symbols:
       - Updated for the new symbols.
 
- -- Iain Lane <laney@debian.org>  Thu, 10 Jan 2013 13:00:54 +0000
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 23 Feb 2013 19:27:38 +0100
 
 glib2.0 (2.34.3-1) experimental; urgency=low
 
