@@ -256,6 +256,24 @@ How to run and debug your GLib application
   </para>
 </formalpara>
 
+<formalpara id="G_HOME">
+  <title><envar>G_HOME</envar></title>
+
+  <para>
+    Historically, GLib applications ignored the <envar>HOME</envar>
+    environment variable on Unix systems, instead using the user directory
+    as specified by the <filename>passwd</filename> entry. As of GLib 2.35.3,
+    this is no longer true: <envar>HOME</envar> is respected.
+  </para>
+  <para>
+    The <envar>G_HOME</envar> environment variable will override any
+    other setting for the home directory. It is not meant for daily usage, but
+    it is useful in testing or building environments. As <envar>HOME</envar> is
+    now supported by GLib, <envar>G_HOME</envar> is deprecated and will be
+    removed in a future release.
+  </para>
+</formalpara>
+
 </refsect2>
 
 <refsect2 id="setlocale">
