@@ -52,7 +52,7 @@ DEB_DH_STRIP_ARGS_$(UDEB_PKG) =
 
 # Do not clutter $HOME with ~/.dbus-keyrings and avoid failure on the buildds
 # where creating /home/buildd/.dbus-keyrings fails
-export G_HOME=$(CURDIR)/debian/build
+export HOME=$(CURDIR)/debian/build
 
 # make tests non-fatal on Debian architectures which currently have failed
 # tests; always fail on Ubuntu; only run the tests for the main flavour

@@ -3,6 +3,11 @@ glib2.0 (2.35.9-1) UNRELEASED; urgency=low
   * debian/control.in:
     + Break python-gi (<< 3.7.2). Closes: #702603.
   * New upstream release.
+  * debian/rules:
+    + Set HOME instead G_HOME, as GLib now honors the former. We will
+      eventually remove our local patch to support G_HOME, so packages
+      that need to override the home directory for the test suite should
+      switch to overriding HOME.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 12 Mar 2013 15:57:08 +0100
 
