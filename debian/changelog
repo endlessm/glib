@@ -13,6 +13,8 @@ glib2.0 (2.35.9-1) experimental; urgency=low
   * debian/libglib2.0-0.symbols:
     + Bump minimum version for g_get_home_dir() so that users that need
       HOME to be honored get a proper runtime dependency.
+  * debian/patches/10_kfreebsd_issetugid_prototype.patch:
+    + Untested patch to fix the build on kfreebsd.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 19 Mar 2013 13:58:27 +0100
 
