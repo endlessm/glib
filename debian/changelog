@@ -1,7 +1,8 @@
-glib2.0 (2.35.8-2) UNRELEASED; urgency=low
+glib2.0 (2.35.9-1) UNRELEASED; urgency=low
 
   * debian/control.in:
     + Break python-gi (<< 3.7.2). Closes: #702603.
+  * New upstream release.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 12 Mar 2013 15:57:08 +0100
 
