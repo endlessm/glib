@@ -1,4 +1,4 @@
-glib2.0 (2.35.9-1) UNRELEASED; urgency=low
+glib2.0 (2.35.9-1) experimental; urgency=low
 
   * debian/control.in:
     + Break python-gi (<< 3.7.2). Closes: #702603.
@@ -14,7 +14,7 @@ glib2.0 (2.35.9-1) UNRELEASED; urgency=low
     + Bump minimum version for g_get_home_dir() so that users that need
       HOME to be honored get a proper runtime dependency.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 12 Mar 2013 15:57:08 +0100
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 19 Mar 2013 13:58:27 +0100
 
 glib2.0 (2.35.8-1) experimental; urgency=low
 
