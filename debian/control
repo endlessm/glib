@@ -41,7 +41,8 @@ Depends: ${misc:Depends},
 Recommends: libglib2.0-data,
             shared-mime-info
 Breaks: gvfs (<< 1.8),
-        glib-networking (<< 2.33.12)
+        glib-networking (<< 2.33.12),
+        python-gi (<< 3.7.2)
 Replaces: libglib2.0-dev (<< 2.23.2-2)
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
