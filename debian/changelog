@@ -1,3 +1,14 @@
+glib2.0 (2.35.9-2) UNRELEASED; urgency=low
+
+  * d/p/11_kfreebsd_pthread_condattr_setclock_prototype.patch:
+    + Another patch to fix the build on kfreebsd. Add a prototype
+      for pthread_condattr_setclock() when building on kfreebsd
+      since the prototype there is missing. The glibc bug to add
+      the missing prototype is #703545, we can remove this hack
+      when that is fixed.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 20 Mar 2013 20:05:37 +0100
+
 glib2.0 (2.35.9-1) experimental; urgency=low
 
   * debian/control.in:
