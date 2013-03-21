@@ -6,6 +6,12 @@ glib2.0 (2.35.9-2) UNRELEASED; urgency=low
       since the prototype there is missing. The glibc bug to add
       the missing prototype is #703545, we can remove this hack
       when that is fixed.
+  * debian/patches/13_sparc_prlimit_prototype.patch:
+    + New patch, only use prlimit if the prototype is available.
+      Should fix the build on sparc where prlimit is available but
+      the prototype is missing. Thanks to Julien Cristau for the
+      patch. This works-around #703559 and can be removed when that
+      bug is fixed.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 20 Mar 2013 20:05:37 +0100
 
