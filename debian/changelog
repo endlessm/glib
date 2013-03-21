@@ -1,4 +1,4 @@
-glib2.0 (2.35.9-2) UNRELEASED; urgency=low
+glib2.0 (2.35.9-2) experimental; urgency=low
 
   * d/p/11_kfreebsd_pthread_condattr_setclock_prototype.patch:
     + Another patch to fix the build on kfreebsd. Add a prototype
@@ -24,7 +24,7 @@ glib2.0 (2.35.9-2) UNRELEASED; urgency=low
       making the testsuite non-fatal on amd64 and i386 because they
       match kfreebsd-amd64 and kfreebsd-i386.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 20 Mar 2013 20:05:37 +0100
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Thu, 21 Mar 2013 16:24:45 +0100
 
 glib2.0 (2.35.9-1) experimental; urgency=low
 
