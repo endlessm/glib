@@ -12,6 +12,11 @@ glib2.0 (2.35.9-2) UNRELEASED; urgency=low
       the prototype is missing. Thanks to Julien Cristau for the
       patch. This works-around #703559 and can be removed when that
       bug is fixed.
+  * debian/patches/15_gio_desktop_app_info_test_bin_true_path.patch:
+    + Change path for 'true' to /bin/true as that's where it is in
+      Debian. This fixes a testcase that was failing on every arch
+      and was causing the build to fail on ia64 and powerpc as test
+      failures are fatal on those arches.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 20 Mar 2013 20:05:37 +0100
 
