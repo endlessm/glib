@@ -9,5 +9,6 @@
 11_kfreebsd_pthread_condattr_setclock_prototype.patch
 13_sparc_prlimit_prototype.patch
 15_gio_desktop_app_info_test_bin_true_path.patch
+17_check_abis_mips_symbols.patch
 61_glib-compile-binaries-path.patch
 90_gio-modules-multiarch-compat.patch

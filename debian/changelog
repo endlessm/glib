@@ -2,6 +2,9 @@ glib2.0 (2.35.9-3) UNRELEASED; urgency=low
 
   * debian/rules:
     + Make the test suite fatal in armel and armhf.
+  * debian/patches/17_check_abis_mips_symbols.patch:
+    + Add _ftext to the list of allowed symbols, since that
+      is leaked on mips.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Sun, 24 Mar 2013 11:43:01 +0100
 
