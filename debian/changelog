@@ -1,5 +1,6 @@
-glib2.0 (2.35.9-3) UNRELEASED; urgency=low
+glib2.0 (2.36.0-1) UNRELEASED; urgency=low
 
+  * New upstream release.
   * debian/rules:
     + Make the test suite fatal in armel and armhf.
   * debian/patches/17_check_abis_mips_symbols.patch:
