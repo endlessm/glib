@@ -1,6 +1,8 @@
 glib2.0 (2.36.0-1) UNRELEASED; urgency=low
 
   * New upstream release.
+    + debian/libglib2.0-0.symbols:
+      - Updated.
   * debian/rules:
     + Make the test suite fatal in armel and armhf.
   * debian/patches/17_check_abis_mips_symbols.patch:
