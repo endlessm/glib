@@ -1,4 +1,4 @@
-glib2.0 (2.36.0-1) UNRELEASED; urgency=low
+glib2.0 (2.36.0-1) experimental; urgency=low
 
   * New upstream release.
     + debian/libglib2.0-0.symbols:
@@ -9,7 +9,7 @@ glib2.0 (2.36.0-1) UNRELEASED; urgency=low
     + Add _ftext to the list of allowed symbols, since that
       is leaked on mips.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Sun, 24 Mar 2013 11:43:01 +0100
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 26 Mar 2013 11:14:37 +0100
 
 glib2.0 (2.35.9-2) experimental; urgency=low
 
