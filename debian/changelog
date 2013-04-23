@@ -1,4 +1,4 @@
-glib2.0 (2.36.1-1) UNRELEASED; urgency=low
+glib2.0 (2.36.1-1) experimental; urgency=low
 
   * New upstream release
   * Refresh debian/patches/06_thread_test_ignore_prctl_fail.patch 
