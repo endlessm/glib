@@ -1,0 +1,22 @@
+Author: Emilio Pozuelo Monfort <pochu@debian.org>
+
+Add a prototype for pthread_condattr_setclock() when building
+on kFreeBSD since the prototype there is missing. The glibc bug
+to add the missing prototype is http://bugs.debian.org/703545,
+we can remove this hack when that is fixed.
+
+--- a/glib/gthread-posix.c
++++ b/glib/gthread-posix.c
+@@ -630,6 +630,12 @@
+ 
+ /* {{{1 GCond */
+ 
++#if defined (HAVE_PTHREAD_CONDATTR_SETCLOCK) && defined (CLOCK_MONOTONIC) && defined (__FreeBSD_kernel__)
++extern int pthread_condattr_setclock (pthread_condattr_t *__attr,
++                                      __clockid_t __clock_id)
++     __THROW __nonnull ((1));
++#endif
++
+ static pthread_cond_t *
+ g_cond_impl_new (void)
+ {
