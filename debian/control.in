@@ -42,7 +42,8 @@ Recommends: @DATA_PKG@,
             shared-mime-info
 Breaks: gvfs (<< 1.8),
         glib-networking (<< 2.33.12),
-        python-gi (<< 3.7.2)
+        python-gi (<< 3.7.2),
+        libgnome-desktop-3-2 (<< 3.4.2-2)
 Replaces: @DEV_PKG@ (<< 2.23.2-2)
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
