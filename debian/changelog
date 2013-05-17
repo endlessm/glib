@@ -1,9 +1,13 @@
-glib2.0 (2.36.1-3) UNRELEASED; urgency=low
+glib2.0 (2.36.2-1) UNRELEASED; urgency=low
 
+  [ Josselin Mouette ]
   * Make the testsuite fatal on all architectures. If it fails, we need 
     to fix it or drop the architecture, not to ignore it.
   * Break libgnome-desktop-3-2 < 3.4.2-2 for the thumbnails location 
     change.
+
+  [ Emilio Pozuelo Monfort ]
+  * New upstream bugfix release. Closes: #708568.
 
  -- Josselin Mouette <joss@debian.org>  Sat, 11 May 2013 22:58:25 +0200
 
