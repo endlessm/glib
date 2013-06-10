@@ -8,6 +8,8 @@ glib2.0 (2.36.3-1) UNRELEASED; urgency=low
 
   [ Emilio Pozuelo Monfort ]
   * New upstream bugfix release. Closes: #708568.
+  * debian/patches/13_sparc_prlimit_prototype.patch:
+    + Refreshed.
 
  -- Josselin Mouette <joss@debian.org>  Sat, 11 May 2013 22:58:25 +0200
 

@@ -1,7 +1,7 @@
 --- a/configure.ac
 +++ b/configure.ac
 @@ -995,6 +995,9 @@
- AC_CHECK_FUNCS(getmntent_r setmntent endmntent hasmntopt getfsstat getvfsstat)
+ AC_CHECK_FUNCS(getmntent_r setmntent endmntent hasmntopt getfsstat getvfsstat fallocate)
  # Check for high-resolution sleep functions
  AC_CHECK_FUNCS(splice)
 +AC_CHECK_DECLS([prlimit], [], [], [[
