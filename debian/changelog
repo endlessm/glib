@@ -1,4 +1,4 @@
-glib2.0 (2.37.2-1) UNRELEASED; urgency=low
+glib2.0 (2.37.2-1) experimental; urgency=low
 
   * New upstream version
     + add support for installed tests:
@@ -23,7 +23,7 @@ glib2.0 (2.37.2-1) UNRELEASED; urgency=low
   * Set $XDG_RUNTIME_DIR to a writable directory we control; now required by
     the testsuite. 
 
- -- Iain Lane <laney@debian.org>  Fri, 21 Jun 2013 13:11:43 +0100
+ -- Iain Lane <laney@debian.org>  Fri, 21 Jun 2013 15:28:46 +0100
 
 glib2.0 (2.36.3-2) unstable; urgency=low
 
