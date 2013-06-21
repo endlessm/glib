@@ -1,3 +1,34 @@
+glib2.0 (2.36.3-2) unstable; urgency=low
+
+  * 0001-Revert-g_file_set_contents-don-t-fsync-on-ext3-4.patch:
+    + Patch from the upstream 2.36 stable branch. Revert a previous
+      commit that dropped calls to fsync() on ext[234] fileystems as
+      that caused data corruption in some cases (e.g. corrupted dconf
+      db on power loss).
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Thu, 20 Jun 2013 23:17:54 +0200
+
+glib2.0 (2.36.3-1) unstable; urgency=low
+
+  [ Josselin Mouette ]
+  * Make the testsuite fatal on all architectures. If it fails, we need 
+    to fix it or drop the architecture, not to ignore it.
+  * Break libgnome-desktop-3-2 < 3.4.2-2 for the thumbnails location 
+    change.
+
+  [ Emilio Pozuelo Monfort ]
+  * New upstream bugfix release. Closes: #708568.
+  * debian/patches/13_sparc_prlimit_prototype.patch:
+    + Refreshed.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Mon, 10 Jun 2013 21:34:19 +0200
+
+glib2.0 (2.36.1-2) unstable; urgency=low
+
+  * Merge experimental branch, upload to unstable.
+
+ -- Martin Pitt <mpitt@debian.org>  Wed, 08 May 2013 06:25:57 +0200
+
 glib2.0 (2.36.1-1) experimental; urgency=low
 
   * New upstream release
@@ -401,6 +432,82 @@ glib2.0 (2.33.1-1) experimental; urgency=low
   * debian/libglib2.0-0.symbols: Add new symbols from this release.
 
  -- Martin Pitt <mpitt@debian.org>  Tue, 15 May 2012 16:59:15 +0200
+
+glib2.0 (2.33.12+really2.32.4-5) unstable; urgency=low
+
+  * Fix the closing fi in the if statement in postrm.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 09 Jan 2013 16:14:49 +0100
+
+glib2.0 (2.33.12+really2.32.4-4) unstable; urgency=low
+
+  * Take into account multiarch when removing the cache files in postrm:
+    Remove /usr/lib/gio/modules/giomodule.cache only for the native
+    architecture for which this cache file was created.
+    After removing /usr/share/glib-2.0/schemas/gschemas.compiled on purge,
+    run dpkg-trigger explicitly, so in case libglib2.0-0 is installed for
+    other architectures, the cache file is re-created. (Closes: #696389)
+  * Drop the various Breaks from libglib2.0-0. Those are causing APT to fail
+    on a dist-upgrade from squeeze to wheezy. (Closes: #676485)
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 08 Jan 2013 23:30:04 +0100
+
+glib2.0 (2.33.12+really2.32.4-3) unstable; urgency=low
+
+  * Team upload
+  * 92_kfreebsd_credentials.patch: use the FreeBSD credentials-passing
+    implementation on kFreeBSD too, making gnome-terminal and lightdm
+    work on kFreeBSD (Closes: #631968)
+
+ -- Simon McVittie <smcv@debian.org>  Wed, 24 Oct 2012 10:51:08 +0100
+
+glib2.0 (2.33.12+really2.32.4-2) unstable; urgency=medium
+
+  * Revert link adding for gdbus-object-manager-example. While it is 
+    useful to have in /usr/share/doc as an example, it must not be 
+    shipped with the system documentation.
+  * 20_glib-compile-resources_leak.patch: new patch. Fix a leak 
+    introduced in version 2.32.4. Thanks Niels Thykier!
+  * SECURITY: add 11_CVE-2012-3524_setuid.patch from upstream. Prevents 
+    using DBus in a setuid binary. Fixes CVE-2012-3524.
+
+ -- Josselin Mouette <joss@debian.org>  Sat, 06 Oct 2012 01:15:16 +0200
+
+glib2.0 (2.33.12+really2.32.4-1) unstable; urgency=low
+
+  * New upstream bugfix release.
+  * 10_gdbus_race.patch: stolen from upstream git. Fix a race condition 
+    that would make gnome-shell crash on startup under some conditions.
+  * libglib2.0-bin.install: bash completions have moved to /usr/share.
+  * libglib2.0-bin.maintscript: remove old conffiles.
+  * Add appropriate pre-dependency.
+  * libglib2.0-doc.links: add link for gdbus-object-manager-example.
+
+ -- Josselin Mouette <joss@debian.org>  Sat, 22 Sep 2012 17:59:34 +0200
+
+glib2.0 (2.33.12+really2.32.3-2) unstable; urgency=low
+
+  * Explicitly set the shlibs version to 2.32.3 to not generate overly strict
+    dependencies for udeb packages.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 19 Sep 2012 21:25:56 +0200
+
+glib2.0 (2.33.12+really2.32.3-1) unstable; urgency=low
+
+  * Brown paper bag upload
+  * Re-upload version previously in unstable to superseded
+    experimental-targetted version previously mistakenly uploaded there.
+
+ -- Iain Lane <laney@debian.org>  Mon, 10 Sep 2012 22:52:32 +0100
+
+glib2.0 (2.32.3-1) unstable; urgency=low
+
+  * New upstream release.
+  * Remove debian/patches/95_configure-Fix-typo-in-ELF-check.patch and
+    debian/patches/96_configure-Reset-LIBS-after-ELF-check.patch, merged
+    upstream.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 15 May 2012 16:12:21 +0200
 
 glib2.0 (2.32.2-1) unstable; urgency=low
 
