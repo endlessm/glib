@@ -10,3 +10,4 @@ debian/libglib2.0-0.dirs
 debian/libglib2.0-0.triggers
 debian/libglib2.0-0.postinst
 debian/libglib2.0-0.postrm
+gio/gdbus-2.0/codegen/*.pyc
