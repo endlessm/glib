@@ -57,7 +57,8 @@ Description: GLib library of C routines
 Package: libglib@APIVER@-tests
 Architecture: any
 Depends: ${misc:Depends},
-         ${shlibs:Depends}
+         ${shlibs:Depends},
+         shared-mime-info
 Pre-Depends: ${misc:Pre-Depends}
 Description: GLib library of C routines - installed tests
  GLib is a library containing many useful C routines for things such
