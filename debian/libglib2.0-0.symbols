@@ -438,6 +438,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_dbus_method_invocation_get_method_name@Base 2.26.0
  g_dbus_method_invocation_get_object_path@Base 2.26.0
  g_dbus_method_invocation_get_parameters@Base 2.26.0
+ g_dbus_method_invocation_get_property_info@Base 2.37.3
  g_dbus_method_invocation_get_sender@Base 2.26.0
  g_dbus_method_invocation_get_type@Base 2.26.0
  g_dbus_method_invocation_get_user_data@Base 2.26.0
@@ -3629,6 +3630,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_time_zone_get_type@Base 2.33.14
  g_type_add_class_cache_func@Base 2.12.0
  g_type_add_class_private@Base 2.24.0
+ g_type_add_instance_private@Base 2.37.3
  g_type_add_interface_check@Base 2.12.0
  g_type_add_interface_dynamic@Base 2.12.0
  g_type_add_interface_static@Base 2.12.0
@@ -3642,6 +3644,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_type_check_value_holds@Base 2.12.0
  g_type_children@Base 2.12.0
  g_type_class_add_private@Base 2.12.0
+ g_type_class_adjust_private_offset@Base 2.37.3
  g_type_class_get_instance_private_offset@Base 2.37.0
  g_type_class_get_private@Base 2.24.0
  g_type_class_peek@Base 2.12.0

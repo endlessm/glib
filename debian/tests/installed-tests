@@ -1,0 +1,30 @@
+#!/bin/sh
+# autopkgtest check: Run the installed-tests to verify glib works correctly
+# (C) 2013 Canonical Ltd.
+# Author: Iain Lane <iain.lane@canonical.com>
+
+# This should be replaced by use of gnome-desktop-testing-runner when it is packaged
+EXIT=0
+
+export XDG_RUNTIME_DIR=$ADTTMP
+
+trap 'rm -rf $XDG_RUNTIME_DIR' EXIT QUIT HUP INT TERM KILL
+
+runtest() {
+    if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
+        DBUS_LAUNCH="dbus-launch --exit-with-session"
+    fi
+    if [ -z "$DISPLAY" ]; then
+        XVFB_RUN="xvfb-run -a"
+    fi
+
+    $DBUS_LAUNCH $XVFB_RUN $1
+
+    EXIT=$((EXIT+$?))
+}
+
+for test in $(find /usr/lib/glib2.0/installed-tests/glib -executable); do
+    runtest $test
+done
+
+exit $(test $EXIT -gt 0)
