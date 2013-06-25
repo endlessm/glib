@@ -8,8 +8,6 @@ EXIT=0
 
 export XDG_RUNTIME_DIR=$ADTTMP
 
-trap 'rm -rf $XDG_RUNTIME_DIR' EXIT QUIT HUP INT TERM KILL
-
 runtest() {
     if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
         DBUS_LAUNCH="dbus-launch --exit-with-session"
