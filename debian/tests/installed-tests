@@ -4,25 +4,8 @@
 # Author: Iain Lane <iain.lane@canonical.com>
 
 # This should be replaced by use of gnome-desktop-testing-runner when it is packaged
-EXIT=0
+set -e
 
 export XDG_RUNTIME_DIR=$ADTTMP
 
-runtest() {
-    if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
-        DBUS_LAUNCH="dbus-launch --exit-with-session"
-    fi
-    if [ -z "$DISPLAY" ]; then
-        XVFB_RUN="xvfb-run -a"
-    fi
-
-    $DBUS_LAUNCH $XVFB_RUN $1
-
-    EXIT=$((EXIT+$?))
-}
-
-for test in $(find /usr/lib/glib2.0/installed-tests/glib -executable); do
-    runtest $test
-done
-
-exit $(test $EXIT -gt 0)
+dbus-launch xvfb-run -a gnome-desktop-testing-runner glib
