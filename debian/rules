@@ -54,7 +54,9 @@ DEB_DH_STRIP_ARGS_$(UDEB_PKG) =
 # where creating /home/buildd/.dbus-keyrings fails
 export HOME=$(CURDIR)/debian/build
 
-DEB_MAKE_CHECK_TARGET = $(if $(filter deb, $(cdbs_make_curflavor)), -k check)
+ifeq ($(DEB_HOST_ARCH_OS), linux)
+  DEB_MAKE_CHECK_TARGET = $(if $(filter deb, $(cdbs_make_curflavor)), -k check)
+endif
 
 # configure flags
 DEB_CONFIGURE_EXTRA_FLAGS := \
