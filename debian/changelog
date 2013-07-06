@@ -1,4 +1,4 @@
-glib2.0 (2.36.3-3) UNRELEASED; urgency=low
+glib2.0 (2.36.3-3) unstable; urgency=low
 
   [ Julien Cristau ]
   * Use gcc-4.8 on sparc to fix misbuild causing test failure (closes: #709781).
@@ -8,7 +8,7 @@ glib2.0 (2.36.3-3) UNRELEASED; urgency=low
     architectures don’t pass, we have to keep a pair of reverse 
     dependencies working.
 
- -- Julien Cristau <jcristau@debian.org>  Thu, 04 Jul 2013 18:05:11 +0200
+ -- Josselin Mouette <joss@debian.org>  Sat, 06 Jul 2013 15:51:11 +0200
 
 glib2.0 (2.36.3-2) unstable; urgency=low
 
