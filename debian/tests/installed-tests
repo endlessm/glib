@@ -3,7 +3,6 @@
 # (C) 2013 Canonical Ltd.
 # Author: Iain Lane <iain.lane@canonical.com>
 
-# This should be replaced by use of gnome-desktop-testing-runner when it is packaged
 set -e
 
 export XDG_RUNTIME_DIR=$ADTTMP
