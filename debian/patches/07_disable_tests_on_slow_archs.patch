@@ -20,7 +20,7 @@ Index: b/glib/tests/mainloop.c
 ===================================================================
 --- a/glib/tests/mainloop.c
 +++ b/glib/tests/mainloop.c
-@@ -1284,11 +1284,15 @@
+@@ -1405,11 +1405,15 @@
  
    g_test_add_func ("/maincontext/basic", test_maincontext_basic);
    g_test_add_func ("/mainloop/basic", test_mainloop_basic);
@@ -34,8 +34,8 @@ Index: b/glib/tests/mainloop.c
    g_test_add_func ("/mainloop/recursive_child_sources", test_recursive_child_sources);
 +#endif
    g_test_add_func ("/mainloop/swapping_child_sources", test_swapping_child_sources);
+   g_test_add_func ("/mainloop/blocked_child_sources", test_blocked_child_sources);
    g_test_add_func ("/mainloop/source_time", test_source_time);
-   g_test_add_func ("/mainloop/overflow", test_mainloop_overflow);
 Index: b/glib/tests/timeout.c
 ===================================================================
 --- a/glib/tests/timeout.c

@@ -139,10 +139,10 @@ Index: b/glib/gkeyfile.h
 ===================================================================
 --- a/glib/gkeyfile.h
 +++ b/glib/gkeyfile.h
-@@ -306,6 +306,9 @@
- #define G_KEY_FILE_DESKTOP_KEY_STARTUP_WM_CLASS "StartupWMClass"
+@@ -307,6 +307,9 @@
  #define G_KEY_FILE_DESKTOP_KEY_URL              "URL"
  #define G_KEY_FILE_DESKTOP_KEY_DBUS_ACTIVATABLE "DBusActivatable"
+ #define G_KEY_FILE_DESKTOP_KEY_ACTIONS          "Actions"
 +#define G_KEY_FILE_DESKTOP_KEY_GETTEXT_DOMAIN   "X-GNOME-Gettext-Domain"
 +#define G_KEY_FILE_DESKTOP_KEY_FULLNAME         "X-GNOME-FullName"
 +#define G_KEY_FILE_DESKTOP_KEY_KEYWORDS         "Keywords"

@@ -1,5 +1,11 @@
-glib2.0 (2.37.3-1) UNRELEASED; urgency=low
+glib2.0 (2.37.5-1) UNRELEASED; urgency=low
 
+  * New upstream release 2.37.5 (including interesting changes from .3 and .4)
+    + Implement the Desktop Action specification
+    + The gsettings tool now reports failure to write a key (e.g. because the
+      key was locked down)
+    + add a new API for instance private data: G_DEFINE_TYPE_WITH_PRIVATE
+    + add new D-Bus API for async property handling
   * libglib2.0-tests: Depend on shared-mime-info required by contenttype test. 
   * New upstream release
   * 0001-Revert-g_file_set_contents-don-t-fsync-on-ext3-4.patch: Drop, now
