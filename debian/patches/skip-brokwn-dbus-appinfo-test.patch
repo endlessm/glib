@@ -1,0 +1,16 @@
+Description: The dbus-appinfo test hangs in a build environment (with no X serveR)
+Author: Iain Lane <laney@debian.org>
+Forwarded: yes (desrt)
+
+Index: b/gio/tests/Makefile.am
+===================================================================
+--- a/gio/tests/Makefile.am
++++ b/gio/tests/Makefile.am
+@@ -315,7 +315,6 @@
+ 
+ test_programs += \
+ 	actions					\
+-	dbus-appinfo				\
+ 	gapplication				\
+ 	gdbus-auth				\
+ 	gdbus-bz627724				\

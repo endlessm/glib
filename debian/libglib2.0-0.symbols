@@ -29,7 +29,9 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_action_map_get_type@Base 2.31.8
  g_action_map_lookup_action@Base 2.31.8
  g_action_map_remove_action@Base 2.31.8
+ g_action_name_is_valid@Base 2.37.5
  g_action_parse_detailed_name@Base 2.37.0
+ g_action_print_detailed_name@Base 2.37.5
  g_app_info_add_supports_type@Base 2.16.0
  g_app_info_can_delete@Base 2.20.0
  g_app_info_can_remove_supports_type@Base 2.16.0
@@ -541,6 +543,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_dbus_signal_info_ref@Base 2.26.0
  g_dbus_signal_info_unref@Base 2.26.0
  g_dbus_subtree_flags_get_type@Base 2.26.0
+ g_desktop_app_info_get_action_name@Base 2.37.5
  g_desktop_app_info_get_boolean@Base 2.35.8
  g_desktop_app_info_get_categories@Base 2.30.0
  g_desktop_app_info_get_filename@Base 2.24.0
@@ -553,7 +556,9 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_desktop_app_info_get_string@Base 2.35.8
  g_desktop_app_info_get_type@Base 2.16.0
  g_desktop_app_info_has_key@Base 2.35.8
+ g_desktop_app_info_launch_action@Base 2.37.5
  g_desktop_app_info_launch_uris_as_manager@Base 2.28.0
+ g_desktop_app_info_list_actions@Base 2.37.5
  g_desktop_app_info_lookup_get_default_for_uri_scheme@Base 2.28.0
  g_desktop_app_info_lookup_get_type@Base 2.28.0
  g_desktop_app_info_new@Base 2.16.0
@@ -1168,6 +1173,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_pollable_stream_read@Base 2.33.14
  g_pollable_stream_write@Base 2.33.14
  g_pollable_stream_write_all@Base 2.33.14
+ g_property_action_get_type@Base 2.37.5
+ g_property_action_new@Base 2.37.5
  g_proxy_address_enumerator_get_type@Base 2.26.0
  g_proxy_address_get_destination_hostname@Base 2.26.0
  g_proxy_address_get_destination_port@Base 2.26.0
@@ -2671,6 +2678,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_regex_get_has_cr_or_lf@Base 2.33.14
  g_regex_get_match_flags@Base 2.26.0
  g_regex_get_max_backref@Base 2.14.0
+ g_regex_get_max_lookbehind@Base 2.37.5
  g_regex_get_pattern@Base 2.14.0
  g_regex_get_string_number@Base 2.14.0
  g_regex_match@Base 2.14.0
@@ -3141,11 +3149,13 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_error_quark@Base 2.30.0
  g_unix_fd_add@Base 2.35.8
  g_unix_fd_add_full@Base 2.35.8
+ g_unix_fd_source_funcs@Base 2.37.5
  g_unix_fd_source_new@Base 2.35.8
  g_unix_open_pipe@Base 2.30.0
  g_unix_set_fd_nonblocking@Base 2.30.0
  g_unix_signal_add@Base 2.30.0
  g_unix_signal_add_full@Base 2.30.0
+ g_unix_signal_funcs@Base 2.37.5
  g_unix_signal_source_new@Base 2.30.0
  g_unlink@Base 2.12.0
  g_unsetenv@Base 2.12.0
@@ -3272,6 +3282,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_variant_new_objv@Base 2.30.0
  g_variant_new_parsed@Base 2.24.0
  g_variant_new_parsed_va@Base 2.24.0
+ g_variant_new_printf@Base 2.37.5
  g_variant_new_signature@Base 2.24.0
  g_variant_new_string@Base 2.24.0
  g_variant_new_strv@Base 2.24.0
