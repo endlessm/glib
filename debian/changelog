@@ -1,4 +1,4 @@
-glib2.0 (2.37.5-1) UNRELEASED; urgency=low
+glib2.0 (2.37.5-1) experimental; urgency=low
 
   * New upstream release 2.37.5 (including interesting changes from .3 and .4)
     + Implement the Desktop Action specification
@@ -17,7 +17,7 @@ glib2.0 (2.37.5-1) UNRELEASED; urgency=low
   * debian/patches/skip-brokwn-dbus-appinfo-test.patch: Skip a broken new
     dbus-appinfo test which is hanging. 
 
- -- Iain Lane <laney@debian.org>  Mon, 24 Jun 2013 11:17:03 +0100
+ -- Iain Lane <laney@debian.org>  Fri, 02 Aug 2013 16:54:51 +0000
 
 glib2.0 (2.37.2-1) experimental; urgency=low
 
