@@ -5,6 +5,8 @@ glib2.0 (2.36.3-4) UNRELEASED; urgency=low
 
   [ Michael Biebl ]
   * Track stable releases.
+  * Use dh_python2 to properly generate the dependencies for gdbus-codegen,
+    which is shipped in libglib2.0-dev.
 
  -- Josselin Mouette <joss@debian.org>  Sun, 07 Jul 2013 00:50:13 +0200
 

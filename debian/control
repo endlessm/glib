@@ -2,7 +2,7 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
-Uploaders: Emilio Pozuelo Monfort <pochu@debian.org>, Martin Pitt <mpitt@debian.org>
+Uploaders: Emilio Pozuelo Monfort <pochu@debian.org>, Josselin Mouette <joss@debian.org>, Martin Pitt <mpitt@debian.org>
 Build-Depends: debhelper (>= 8.1.3),
                cdbs (>= 0.4.93),
                dh-autoreconf,
@@ -24,7 +24,7 @@ Build-Depends: debhelper (>= 8.1.3),
                dbus-x11,
                shared-mime-info,
                xterm,
-               python (>= 2.5),
+               python (>= 2.6.6-3~),
                python-dbus,
                python-gi,
                libxml2-utils,
@@ -96,12 +96,12 @@ Section: libdevel
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
+         ${python:Depends},
          libglib2.0-0 (= ${binary:Version}),
          libglib2.0-bin (= ${binary:Version}),
          libpcre3-dev (>= 1:8.31),
          pkg-config (>= 0.16.0),
          zlib1g-dev
-Recommends: python
 Suggests: libglib2.0-doc
 Description: Development files for the GLib library
  GLib is a library containing many useful C routines for things such
