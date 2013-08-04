@@ -1,4 +1,4 @@
-glib2.0 (2.36.3-4) UNRELEASED; urgency=low
+glib2.0 (2.36.3-4) unstable; urgency=low
 
   [ Josselin Mouette ]
   * Still run the testsuite on !linux, even though non-fatal.
@@ -8,7 +8,7 @@ glib2.0 (2.36.3-4) UNRELEASED; urgency=low
   * Use dh_python2 to properly generate the dependencies for gdbus-codegen,
     which is shipped in libglib2.0-dev.
 
- -- Josselin Mouette <joss@debian.org>  Sun, 07 Jul 2013 00:50:13 +0200
+ -- Michael Biebl <biebl@debian.org>  Sun, 04 Aug 2013 16:39:05 +0200
 
 glib2.0 (2.36.3-3) unstable; urgency=low
 
