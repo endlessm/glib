@@ -1,4 +1,4 @@
-ource: glib@APIVER@
+Source: glib@APIVER@
 Section: libs
 Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
