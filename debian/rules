@@ -59,7 +59,9 @@ DEB_DH_TRANSLATIONS_ARGS = -Xinstalled-tests
 # where creating /home/buildd/.dbus-keyrings fails
 export HOME=$(CURDIR)/debian/build
 
-DEB_MAKE_CHECK_TARGET = $(if $(filter deb, $(cdbs_make_curflavor)), -k check)
+ifeq ($(DEB_HOST_ARCH_OS), linux)
+  DEB_MAKE_CHECK_TARGET = $(if $(filter deb, $(cdbs_make_curflavor)), -k check)
+endif
 
 # The tests assume this directory exists and is writable
 export XDG_RUNTIME_DIR=$(CURDIR)/debian/tmp-xdg-runtime-dir
@@ -74,6 +76,9 @@ ifneq ($(DEB_BUILD_ARCH),$(DEB_HOST_ARCH))
   DEB_CONFIGURE_EXTRA_FLAGS += \
 			--disable-modular-tests \
 			--disable-gtk-doc
+endif
+ifeq ($(DEB_HOST_ARCH), sparc)
+  DEB_CONFIGURE_EXTRA_FLAGS += CC=gcc-4.8
 endif
 
 DEB_CONFIGURE_FLAGS_deb := \
@@ -101,6 +106,8 @@ binary-install/libglib2.0-0::
 		    > debian/$(cdbs_curpkg).$$script ; \
 	done
 
+binary-install/libglib2.0-dev::
+	dh_python2 -plibglib2.0-dev /usr/share/glib-2.0/codegen
 
 common-install-arch::
 	set -e; for file in libgio-fam.install libglib2.0-0.install \
