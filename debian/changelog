@@ -1,10 +1,10 @@
-glib2.0 (2.37.6-1) UNRELEASED; urgency=low
+glib2.0 (2.37.6-1) experimental; urgency=low
 
   * New upstream release 2.37.6
   * Update symbols file 
   * Merge changes from unstable, mainly for build / testsuite fixes.
 
- -- Iain Lane <laney@debian.org>  Tue, 20 Aug 2013 14:44:10 +0000
+ -- Iain Lane <laney@debian.org>  Wed, 21 Aug 2013 09:48:19 +0000
 
 glib2.0 (2.37.5-1) experimental; urgency=low
 
