@@ -1,3 +1,10 @@
+glib2.0 (2.37.6-1) UNRELEASED; urgency=low
+
+  * New upstream release 2.37.6
+  * Update symbols file 
+
+ -- Iain Lane <laney@debian.org>  Tue, 20 Aug 2013 14:44:10 +0000
+
 glib2.0 (2.37.5-1) experimental; urgency=low
 
   * New upstream release 2.37.5 (including interesting changes from .3 and .4)

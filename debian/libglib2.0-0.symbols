@@ -1779,6 +1779,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_zlib_decompressor_new@Base 2.24.0
 libglib-2.0.so.0 libglib2.0-0 #MINVER#
 * Build-Depends-Package: libglib2.0-dev
+ __glib_assert_msg@Base 2.37.6
  g_access@Base 2.12.0
  g_allocator_free@Base 2.12.0
  g_allocator_new@Base 2.12.0
@@ -2986,9 +2987,11 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_test_create_suite@Base 2.16.0
  g_test_expect_message@Base 2.33.14
  g_test_fail@Base 2.30.0
+ g_test_failed@Base 2.37.6
  g_test_get_dir@Base 2.37.2
  g_test_get_filename@Base 2.37.2
  g_test_get_root@Base 2.16.0
+ g_test_incomplete@Base 2.37.6
  g_test_init@Base 2.16.0
  g_test_log_buffer_free@Base 2.16.0
  g_test_log_buffer_new@Base 2.16.0
@@ -3008,6 +3011,8 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_test_rand_int_range@Base 2.16.0
  g_test_run@Base 2.16.0
  g_test_run_suite@Base 2.16.0
+ g_test_set_nonfatal_assertions@Base 2.37.6
+ g_test_skip@Base 2.37.6
  g_test_subprocess@Base 2.37.1
  g_test_suite_add@Base 2.16.0
  g_test_suite_add_suite@Base 2.16.0
