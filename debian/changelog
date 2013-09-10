@@ -1,10 +1,10 @@
-glib2.0 (2.37.7-1) UNRELEASED; urgency=low
+glib2.0 (2.37.7-1) experimental; urgency=low
 
   * New upstream 2.37.7
     + GDateTime now supports %:z formatting variations for timezones. This is
     a GNU date extension.
 
- -- Iain Lane <laney@debian.org>  Wed, 21 Aug 2013 10:26:14 +0000
+ -- Iain Lane <laney@debian.org>  Tue, 10 Sep 2013 11:26:28 +0000
 
 glib2.0 (2.37.6-1) experimental; urgency=low
 
