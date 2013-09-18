@@ -772,6 +772,10 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_make_directory_finish@Base 2.37.0
  g_file_make_directory_with_parents@Base 2.18.0
  g_file_make_symbolic_link@Base 2.16.0
+ g_file_measure_disk_usage@Base 2.37.93
+ g_file_measure_disk_usage_async@Base 2.37.93
+ g_file_measure_disk_usage_finish@Base 2.37.93
+ g_file_measure_flags_get_type@Base 2.37.93
  g_file_monitor@Base 2.18.0
  g_file_monitor_cancel@Base 2.16.0
  g_file_monitor_directory@Base 2.16.0

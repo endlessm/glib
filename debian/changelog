@@ -1,3 +1,11 @@
+glib2.0 (2.37.93-1) UNRELEASED; urgency=low
+
+  * New upstream release 2.37.93 (& .92)
+    + new API g_file_measure_disk_usage() similar to du(1)
+  * Add new symbols for g_file_measure_disk_usage API added in this release. 
+
+ -- Iain Lane <laney@debian.org>  Wed, 18 Sep 2013 08:58:21 +0000
+
 glib2.0 (2.37.7-1) experimental; urgency=low
 
   * New upstream 2.37.7
