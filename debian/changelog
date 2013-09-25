@@ -1,3 +1,9 @@
+glib2.0 (2.38.0-2) UNRELEASED; urgency=low
+
+  * Build-Depend on python:any
+
+ -- Iain Lane <laney@debian.org>  Wed, 25 Sep 2013 11:26:51 +0000
+
 glib2.0 (2.38.0-1) experimental; urgency=low
 
   * New upstream release
