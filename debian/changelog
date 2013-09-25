@@ -1,4 +1,4 @@
-glib2.0 (2.38.0-1) UNRELEASED; urgency=low
+glib2.0 (2.38.0-1) experimental; urgency=low
 
   * New upstream release
   * debian/patches/0001-gio-Fix-typo-in-the-org-freedesktop-DBus-path.patch:
@@ -7,7 +7,7 @@ glib2.0 (2.38.0-1) UNRELEASED; urgency=low
   * Add --enable-debug=minimal explicitly to the deb build so the debugging
     level doesn't change between pre-release and stable versions. 
 
- -- Iain Lane <laney@debian.org>  Tue, 24 Sep 2013 16:03:49 +0000
+ -- Iain Lane <laney@debian.org>  Wed, 25 Sep 2013 10:37:50 +0000
 
 glib2.0 (2.37.93-1) experimental; urgency=low
 
