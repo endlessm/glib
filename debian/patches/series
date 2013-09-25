@@ -11,3 +11,4 @@
 61_glib-compile-binaries-path.patch
 90_gio-modules-multiarch-compat.patch
 skip-brokwn-dbus-appinfo-test.patch
+0001-gio-Fix-typo-in-the-org-freedesktop-DBus-path.patch

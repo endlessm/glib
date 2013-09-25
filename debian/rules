@@ -85,7 +85,8 @@ DEB_CONFIGURE_FLAGS_deb := \
 			--enable-gtk-doc \
 			--enable-static \
 			--enable-installed-tests \
-			--enable-always-build-tests
+			--enable-always-build-tests \
+			--enable-debug=minimal
 
 DEB_CONFIGURE_FLAGS_udeb := \
 			--disable-selinux

@@ -1,3 +1,14 @@
+glib2.0 (2.38.0-1) UNRELEASED; urgency=low
+
+  * New upstream release
+  * debian/patches/0001-gio-Fix-typo-in-the-org-freedesktop-DBus-path.patch:
+    Cherry-pick patch from upstream to fix object path typo in gio (LP:
+    #1227295)
+  * Add --enable-debug=minimal explicitly to the deb build so the debugging
+    level doesn't change between pre-release and stable versions. 
+
+ -- Iain Lane <laney@debian.org>  Tue, 24 Sep 2013 16:03:49 +0000
+
 glib2.0 (2.37.93-1) experimental; urgency=low
 
   * New upstream release 2.37.93 (& .92)
