@@ -1,3 +1,4 @@
+0001-g_file_copy-Fall-back-to-pathname-queryinfo-to-help-.patch
 01_gettext-desktopfiles.patch
 02_gettext-desktopfiles-ubuntu.patch
 03_disble_glib_compile_schemas_warning.patch
@@ -11,4 +12,3 @@
 61_glib-compile-binaries-path.patch
 90_gio-modules-multiarch-compat.patch
 skip-brokwn-dbus-appinfo-test.patch
-0001-gio-Fix-typo-in-the-org-freedesktop-DBus-path.patch

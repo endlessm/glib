@@ -1,0 +1,59 @@
+From 44edc3829d6db3fabe22d837eaaf2638003516c9 Mon Sep 17 00:00:00 2001
+From: Colin Walters <walters@verbum.org>
+Date: Wed, 16 Oct 2013 10:10:22 -0400
+Subject: [PATCH] g_file_copy: Fall back to pathname queryinfo to help gvfs
+ backends
+
+It's not difficult to do; not all backends implement it, and for some
+it may be difficult to implement query_info_on_read(), so let's just
+do both.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=706254
+---
+ gio/gfile.c | 23 ++++++++++++++++++++++-
+ 1 file changed, 22 insertions(+), 1 deletion(-)
+
+diff --git a/gio/gfile.c b/gio/gfile.c
+index afaee21..bf936ec 100644
+--- a/gio/gfile.c
++++ b/gio/gfile.c
+@@ -3112,6 +3112,8 @@ file_copy_fallback (GFile                  *source,
+ 
+   if (attrs_to_read != NULL)
+     {
++      GError *tmp_error = NULL;
++
+       /* Ok, ditch the previous lightweight info (on Unix we just
+        * called lstat()); at this point we gather all the information
+        * we need about the source from the opened file descriptor.
+@@ -3119,7 +3121,26 @@ file_copy_fallback (GFile                  *source,
+       g_object_unref (info);
+ 
+       info = g_file_input_stream_query_info (file_in, attrs_to_read,
+-                                             cancellable, error);
++                                             cancellable, &tmp_error);
++      if (!info)
++        {
++          /* Not all gvfs backends implement query_info_on_read(), we
++           * can just fall back to the pathname again.
++           * https://bugzilla.gnome.org/706254
++           */
++          if (g_error_matches (tmp_error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED))
++            {
++              g_clear_error (&tmp_error);
++              info = g_file_query_info (source, attrs_to_read, G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS,
++                                        cancellable, error);
++            }
++          else
++            {
++              g_free (attrs_to_read);
++              g_propagate_error (error, tmp_error);
++              goto out;
++            }
++        }
+       g_free (attrs_to_read);
+       if (!info)
+         goto out;
+-- 
+1.8.3.2
+
