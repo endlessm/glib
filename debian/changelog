@@ -1,4 +1,4 @@
-glib2.0 (2.38.1-1) UNRELEASED; urgency=low
+glib2.0 (2.38.1-1) experimental; urgency=low
 
   * Build-Depend on python:any
   * New upstream bugfix release 2.38.1 
@@ -14,7 +14,7 @@ glib2.0 (2.38.1-1) UNRELEASED; urgency=low
     query_info_on_read is not supported. Fixes copying from backends that
     don't implement the latter. (Closes: #715436, LP: #1217230)
 
- -- Iain Lane <laney@debian.org>  Wed, 25 Sep 2013 11:26:51 +0000
+ -- Iain Lane <laney@debian.org>  Thu, 17 Oct 2013 15:53:12 +0100
 
 glib2.0 (2.38.0-1) experimental; urgency=low
 
