@@ -1,6 +1,8 @@
 glib2.0 (2.38.1-1) experimental; urgency=low
 
-  * Build-Depend on python:any
+  * Build-Depend on python:any. python is Multi-Arch: allowed; this BD allows
+    the python from any architecture that can be executed on the builder to
+    satisfy the BD, simplifying cross building of glib2.0.
   * New upstream bugfix release 2.38.1 
     + Fix error code checks when SOCK_CLOEXEC is defined but not supported
       (fix support for GNU/Hurd)
