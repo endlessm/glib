@@ -65,6 +65,9 @@ endif
 
 # The tests assume this directory exists and is writable
 export XDG_RUNTIME_DIR=$(CURDIR)/debian/tmp-xdg-runtime-dir
+# Let's get failing tests' stdout and stderr so we have some information when
+# a build fails
+export VERBOSE=1
 
 # configure flags
 DEB_CONFIGURE_EXTRA_FLAGS := \
