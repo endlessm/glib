@@ -1,4 +1,4 @@
-glib2.0 (2.38.2-1) UNRELEASED; urgency=low
+glib2.0 (2.38.2-1) experimental; urgency=low
 
   * New upstream release
     - Drop d/p/0001-g_file_copy-Fall-back-to-pathname-queryinfo-to-help-.patch
@@ -7,7 +7,7 @@ glib2.0 (2.38.2-1) UNRELEASED; urgency=low
     - Bump Standards-Version to 3.9.5 (no further changes)
     - Use canonical URL for Vcs-Svn field
 
- -- Laurent Bigonville <bigon@debian.org>  Sat, 14 Dec 2013 16:07:57 +0100
+ -- Laurent Bigonville <bigon@debian.org>  Sat, 14 Dec 2013 16:38:02 +0100
 
 glib2.0 (2.38.1-2) experimental; urgency=low
 
