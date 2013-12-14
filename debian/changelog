@@ -1,3 +1,11 @@
+glib2.0 (2.38.2-1) UNRELEASED; urgency=medium
+
+  * New upstream release
+    - Drop d/p/0001-g_file_copy-Fall-back-to-pathname-queryinfo-to-help-.patch
+      merged upstream
+
+ -- Laurent Bigonville <bigon@debian.org>  Sat, 14 Dec 2013 15:29:50 +0100
+
 glib2.0 (2.38.1-2) experimental; urgency=low
 
   * debian/rules:

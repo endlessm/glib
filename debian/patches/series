@@ -1,4 +1,3 @@
-0001-g_file_copy-Fall-back-to-pathname-queryinfo-to-help-.patch
 01_gettext-desktopfiles.patch
 02_gettext-desktopfiles-ubuntu.patch
 03_disble_glib_compile_schemas_warning.patch
