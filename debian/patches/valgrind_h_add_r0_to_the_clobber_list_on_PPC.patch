@@ -1,4 +1,3 @@
-From 6c8600b2b86fe42edd6d6e9648a92f32e404457c Mon Sep 17 00:00:00 2001
 From: Ryan Lortie <desrt@desrt.ca>
 Date: Wed, 20 Nov 2013 21:57:26 +0000
 Subject: valgrind.h: add "r0" to the clobber list on PPC
@@ -6,7 +5,9 @@ Subject: valgrind.h: add "r0" to the clobber list on PPC
 Looks like the magic sequences trash this register, so make sure GCC
 knows that.
 
-https://bugzilla.gnome.org/show_bug.cgi?id=710983
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=710983
+Origin: upstream, 2.39.2, commit:6c8600b2b86fe42edd6d6e9648a92f32e404457c
+Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=737379
 ---
 diff --git a/glib/valgrind.h b/glib/valgrind.h
 index cc2cf3d..7bb1382 100644

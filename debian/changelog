@@ -6,7 +6,10 @@ glib2.0 (2.38.2-2) UNRELEASED; urgency=medium
 
   [ Laurent Bigonville ]
   * Add d/p/valgrind_h_add_r0_to_the_clobber_list_on_PPC.patch: Fix FTBFS on
-    PPC (taken from upstream)
+    PPC (taken from upstream, Closes: #737379)
+
+  [ Simon McVittie ]
+  * Add DEP-3 tagging to PPC patch
 
  -- Laurent Bigonville <bigon@debian.org>  Mon, 13 Jan 2014 02:15:16 +0100
 
