@@ -12,3 +12,4 @@
 90_gio-modules-multiarch-compat.patch
 skip-brokwn-dbus-appinfo-test.patch
 valgrind_h_add_r0_to_the_clobber_list_on_PPC.patch
+tests-move-param-implement-to-m-slow.patch

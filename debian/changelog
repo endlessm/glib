@@ -10,6 +10,10 @@ glib2.0 (2.38.2-2) UNRELEASED; urgency=medium
 
   [ Simon McVittie ]
   * Add DEP-3 tagging to PPC patch
+  * Add d/p/tests-move-param-implement-to-m-slow.patch to knock out
+    test /param/implement, which upstream describe as "essentially a
+    forkbomb", leading to failures on armel and at least sporadically
+    on mipsel (Closes: #737381)
 
  -- Laurent Bigonville <bigon@debian.org>  Mon, 13 Jan 2014 02:15:16 +0100
 

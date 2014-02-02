@@ -1,0 +1,34 @@
+From: Ryan Lortie <desrt@desrt.ca>
+Date: Wed, 27 Nov 2013 10:13:10 -0500
+Subject: tests: move /param/implement to -m slow
+
+Take this test out of 'make check'.  It's causing problems for a lot of people
+due to fact that it's essentially a forkbomb.  It's causing failures for Debian
+on ARM and it's DoSing coredumps to system crash collectors.
+
+The conditional only covers registration of the master, not the
+subprocess parts.  This is because g_test_slow() always return FALSE in
+the subprocesses, so they would fail to run if we didn't register them
+unconditionally.
+
+Origin: upstream, 2.39.2, commit:30e1ab326296088fd83c046e83b0f0a0b89b9489
+Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=737381
+---
+ gobject/tests/param.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/gobject/tests/param.c b/gobject/tests/param.c
+index 92948a9..40f453e 100644
+--- a/gobject/tests/param.c
++++ b/gobject/tests/param.c
+@@ -840,7 +840,9 @@ main (int argc, char *argv[])
+   g_test_add_func ("/param/validate", test_param_validate);
+   g_test_add_func ("/param/convert", test_param_convert);
+ 
+-  g_test_add_func ("/param/implement", test_param_implement);
++  if (g_test_slow ())
++    g_test_add_func ("/param/implement", test_param_implement);
++
+   for (data.change_this_flag = 0; data.change_this_flag < 16; data.change_this_flag++)
+     for (data.change_this_type = 0; data.change_this_type < 3; data.change_this_type++)
+       for (data.use_this_flag = 0; data.use_this_flag < 16; data.use_this_flag++)
