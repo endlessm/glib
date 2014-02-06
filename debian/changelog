@@ -1,5 +1,6 @@
-glib2.0 (2.38.2-3) UNRELEASED; urgency=medium
+glib2.0 (2.38.2-3) experimental; urgency=medium
 
+  * Team upload
   * d/p/Don-t-use-a-parallel-build-for-the-documentation.patch:
     Disable parallel build for the documentation, hopefully fixing an
     intermittent FTBFS in which gtk-doc tries to scan Windows-specific
@@ -13,7 +14,7 @@ glib2.0 (2.38.2-3) UNRELEASED; urgency=medium
     for libglib2.0-0-dbg (at the cost of ~ 30% larger .deb size)
     - mark libglib2.0-0-dbg Multi-Arch: same
 
- -- Simon McVittie <smcv@debian.org>  Thu, 06 Feb 2014 08:11:29 +0000
+ -- Simon McVittie <smcv@debian.org>  Thu, 06 Feb 2014 09:53:27 +0000
 
 glib2.0 (2.38.2-2) experimental; urgency=medium
 
