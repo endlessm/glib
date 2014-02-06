@@ -130,6 +130,7 @@ Package: @DEBUG_PKG@
 Section: debug
 Priority: extra
 Architecture: any
+Multi-Arch: same
 Depends: ${misc:Depends},
          @SHARED_PKG@ (= ${binary:Version})
 Conflicts: libglib2.0-dbg

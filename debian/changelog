@@ -8,6 +8,10 @@ glib2.0 (2.38.2-3) UNRELEASED; urgency=medium
     Refuse to perform D-Bus "autolaunch" if $DISPLAY is unset, in which
     case it isn't going to work anyway. This works around a process-launching
     issue in the GApplication test on mipsel (Closes: #737380)
+  * Bump debhelper compat level to 9, resulting in co-installable
+    multiarch debug symbols and ~ 50% smaller installed size
+    for libglib2.0-0-dbg (at the cost of ~ 30% larger .deb size)
+    - mark libglib2.0-0-dbg Multi-Arch: same
 
  -- Simon McVittie <smcv@debian.org>  Thu, 06 Feb 2014 08:11:29 +0000
 
