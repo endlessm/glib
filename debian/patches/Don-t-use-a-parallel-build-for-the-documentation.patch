@@ -6,6 +6,7 @@ We seem to get a sporadic FTBFS in which it tries to scan
 Windows-specific symbols. Possibly caused by
 <https://bugzilla.gnome.org/show_bug.cgi?id=697940>.
 
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=723653
 Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=737501
 ---
  docs/reference/gio/Makefile.am                              | 3 +++

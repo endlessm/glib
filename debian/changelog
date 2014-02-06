@@ -1,3 +1,9 @@
+glib2.0 (2.38.2-4) UNRELEASED; urgency=medium
+
+  * DEP-3: tag patch for Debian#737501 as sent upstream to GNOME#723653
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 06 Feb 2014 10:36:16 +0000
+
 glib2.0 (2.38.2-3) experimental; urgency=medium
 
   * Team upload
