@@ -13,3 +13,5 @@
 skip-brokwn-dbus-appinfo-test.patch
 valgrind_h_add_r0_to_the_clobber_list_on_PPC.patch
 tests-move-param-implement-to-m-slow.patch
+Don-t-use-a-parallel-build-for-the-documentation.patch
+Do-not-attempt-to-autolaunch-a-session-dbus-daemon-w.patch

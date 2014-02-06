@@ -1,3 +1,16 @@
+glib2.0 (2.38.2-3) UNRELEASED; urgency=medium
+
+  * d/p/Don-t-use-a-parallel-build-for-the-documentation.patch:
+    Disable parallel build for the documentation, hopefully fixing an
+    intermittent FTBFS in which gtk-doc tries to scan Windows-specific
+    objects (Closes: #737501)
+  * d/p/Do-not-attempt-to-autolaunch-a-session-dbus-daemon-w.patch:
+    Refuse to perform D-Bus "autolaunch" if $DISPLAY is unset, in which
+    case it isn't going to work anyway. This works around a process-launching
+    issue in the GApplication test on mipsel (Closes: #737380)
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 06 Feb 2014 08:11:29 +0000
+
 glib2.0 (2.38.2-2) experimental; urgency=medium
 
   * Team upload.
