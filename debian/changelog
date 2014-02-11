@@ -1,6 +1,16 @@
 glib2.0 (2.38.2-4) UNRELEASED; urgency=medium
 
+  * Team upload
   * DEP-3: tag patch for Debian#737501 as sent upstream to GNOME#723653
+  * d/p/gdbus-Let-the-pending-read-finish-before-closing-the.patch:
+    add patch from Mikhail Zabaluev fixing a test failure on mips,
+    also reproduced on mipsel (Closes: #738290)
+  * d/p/Fix-races-in-unix-signal-dispatch.patch: add patch from upstream
+    to fix what appears to be the root cause of #737380
+  * d/p/gdbus-tests-wait-up-to-60s-for-gdbus-testserver-to-t.patch,
+    d/p/gdbus-connection-wait-up-to-10s-to-actually-send-a-m.patch:
+    improve arbitrary timeouts in regression tests, fixing an unreported
+    FTBFS on armhf
 
  -- Simon McVittie <smcv@debian.org>  Thu, 06 Feb 2014 10:36:16 +0000
 

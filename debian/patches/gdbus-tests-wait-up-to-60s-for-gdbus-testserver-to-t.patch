@@ -1,0 +1,132 @@
+From: Simon McVittie <simon.mcvittie@collabora.co.uk>
+Date: Tue, 11 Feb 2014 14:22:04 +0000
+Subject: [PATCH] gdbus tests: wait up to 60s for gdbus-testserver to take
+ its bus name
+
+Previously, we waited up to 0.5s, but that can fail on slow architectures
+like ARM; now we wait up to 60s in 0.1s increments.
+
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=724113
+Forwarded: yes
+---
+ gio/tests/gdbus-connection-loss.c | 28 +++++++++++++++++++++++++---
+ gio/tests/gdbus-threading.c       | 27 ++++++++++++++++++++++-----
+ 2 files changed, 47 insertions(+), 8 deletions(-)
+
+diff --git a/gio/tests/gdbus-connection-loss.c b/gio/tests/gdbus-connection-loss.c
+index ed4142d..1adbc15 100644
+--- a/gio/tests/gdbus-connection-loss.c
++++ b/gio/tests/gdbus-connection-loss.c
+@@ -58,11 +58,20 @@ on_timeout (gpointer user_data)
+   return FALSE; /* remove source */
+ }
+ 
++static gboolean
++give_up (gpointer data)
++{
++  g_error ("%s", (const gchar *) data);
++  g_return_val_if_reached (TRUE);
++}
++
+ static void
+ test_connection_loss (void)
+ {
+   GDBusProxy *proxy;
+   GError *error;
++  gchar *name_owner;
++  guint id;
+ 
+   error = NULL;
+   proxy = g_dbus_proxy_new_sync (c,
+@@ -75,6 +84,22 @@ test_connection_loss (void)
+                                  &error);
+   g_assert_no_error (error);
+ 
++  id = g_timeout_add_seconds (60, give_up,
++      "waited more than ~ 60s for gdbus-testserver to take its bus name");
++
++  while (TRUE)
++    {
++      name_owner = g_dbus_proxy_get_name_owner (proxy);
++
++      if (name_owner != NULL)
++        break;
++
++      g_main_context_iteration (NULL, TRUE);
++    }
++
++  g_source_remove (id);
++  g_free (name_owner);
++
+   error = NULL;
+   g_dbus_proxy_call (proxy,
+                      "Sleep",
+@@ -126,9 +151,6 @@ main (int   argc,
+   g_assert (g_spawn_command_line_async (path, NULL));
+   g_free (path);
+ 
+-  /* wait for the service to come up */
+-  usleep (500 * 1000);
+-
+   /* Create the connection in the main thread */
+   error = NULL;
+   c = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
+diff --git a/gio/tests/gdbus-threading.c b/gio/tests/gdbus-threading.c
+index 5851114..0836365 100644
+--- a/gio/tests/gdbus-threading.c
++++ b/gio/tests/gdbus-threading.c
+@@ -412,6 +412,13 @@ test_method_calls_on_proxy (GDBusProxy *proxy)
+     }
+ }
+ 
++static gboolean
++give_up (gpointer data)
++{
++  g_error ("%s", (const gchar *) data);
++  g_return_val_if_reached (TRUE);
++}
++
+ static void
+ test_method_calls_in_thread (void)
+ {
+@@ -419,6 +426,7 @@ test_method_calls_in_thread (void)
+   GDBusConnection *connection;
+   GError *error;
+   gchar *name_owner;
++  guint id;
+ 
+   error = NULL;
+   connection = g_bus_get_sync (G_BUS_TYPE_SESSION,
+@@ -436,8 +444,20 @@ test_method_calls_in_thread (void)
+                                  &error);
+   g_assert_no_error (error);
+ 
+-  name_owner = g_dbus_proxy_get_name_owner (proxy);
+-  g_assert_cmpstr (name_owner, !=, NULL);
++  id = g_timeout_add_seconds (60, give_up,
++      "waited more than ~ 60s for gdbus-testserver to take its bus name");
++
++  while (TRUE)
++    {
++      name_owner = g_dbus_proxy_get_name_owner (proxy);
++
++      if (name_owner != NULL)
++        break;
++
++      g_main_context_iteration (NULL, TRUE);
++    }
++
++  g_source_remove (id);
+   g_free (name_owner);
+ 
+   test_method_calls_on_proxy (proxy);
+@@ -592,9 +612,6 @@ main (int   argc,
+   g_assert (g_spawn_command_line_async (path, NULL));
+   g_free (path);
+ 
+-  /* wait for the service to come up */
+-  usleep (500 * 1000);
+-
+   /* Create the connection in the main thread */
+   error = NULL;
+   c = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);

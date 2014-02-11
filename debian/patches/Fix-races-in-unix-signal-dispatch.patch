@@ -1,0 +1,95 @@
+From: Ryan Lortie <desrt@desrt.ca>
+Date: Tue, 29 Oct 2013 11:11:28 -0700
+Subject: [PATCH] Fix races in unix signal dispatch
+
+Fix some races introduced in be2c7b83c4a9c9d3aa76b1499c27ab19e0f4e470
+while keeping the property that multiple handlers for the same unix
+signal all get dispatched.
+
+Also fix the behaviour of the source checking for pending signals when
+it's created.  No matter what we do here (clear the pending flag or not)
+there is something that can go wrong.
+
+If we clear the flag, we may prevent other sources from being
+dispatched.  If we don't clear it, we may end up dispatching the same
+source twice (if we manage to dispatch it from its own thread before the
+GLib worker has a chance to run).
+
+Instead, run the full dispatch procedure when a new source is added.  It
+actually doesn't matter what thread this runs in since the lock is held.
+
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=711090
+Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=737380
+Origin: upstream, 2.39.3, commit:76584e7ae3c3676e6445637f1ad026e5af857938
+---
+ glib/gmain.c | 27 ++++++++++++++++++++-------
+ 1 file changed, 20 insertions(+), 7 deletions(-)
+
+diff --git a/glib/gmain.c b/glib/gmain.c
+index b5ee6df..9e3c993 100644
+--- a/glib/gmain.c
++++ b/glib/gmain.c
+@@ -4818,17 +4818,26 @@ wake_source (GSource *source)
+ }
+ 
+ static void
+-dispatch_unix_signals (void)
++dispatch_unix_signals_unlocked (void)
+ {
++  gboolean pending[NSIG];
+   GSList *node;
++  gint i;
+ 
+   /* clear this first incase another one arrives while we're processing */
+   any_unix_signal_pending = FALSE;
+ 
+-  G_LOCK(unix_signal_lock);
++  /* We atomically test/clear the bit from the global array in case
++   * other signals arrive while we are dispatching.
++   *
++   * We then can safely use our own array below without worrying about
++   * races.
++   */
++  for (i = 0; i < NSIG; i++)
++    pending[i] = g_atomic_int_compare_and_exchange (&unix_signal_pending[i], TRUE, FALSE);
+ 
+   /* handle GChildWatchSource instances */
+-  if (unix_signal_pending[SIGCHLD])
++  if (pending[SIGCHLD])
+     {
+       /* The only way we can do this is to scan all of the children.
+        *
+@@ -4875,7 +4884,7 @@ dispatch_unix_signals (void)
+ 
+       if (!source->pending)
+         {
+-          if (unix_signal_pending[source->signum])
++          if (pending[source->signum])
+             {
+               source->pending = TRUE;
+ 
+@@ -4884,8 +4893,13 @@ dispatch_unix_signals (void)
+         }
+     }
+ 
+-  memset ((void*)unix_signal_pending, 0, sizeof (unix_signal_pending));
++}
+ 
++static void
++dispatch_unix_signals (void)
++{
++  G_LOCK(unix_signal_lock);
++  dispatch_unix_signals_unlocked ();
+   G_UNLOCK(unix_signal_lock);
+ }
+ 
+@@ -4999,8 +5013,7 @@ _g_main_create_unix_signal_watch (int signum)
+   G_LOCK (unix_signal_lock);
+   ref_unix_signal_handler_unlocked (signum);
+   unix_signal_watches = g_slist_prepend (unix_signal_watches, unix_signal_source);
+-  if (unix_signal_pending[signum])
+-    unix_signal_source->pending = TRUE;
++  dispatch_unix_signals_unlocked ();
+   G_UNLOCK (unix_signal_lock);
+ 
+   return source;
