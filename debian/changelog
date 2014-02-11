@@ -1,4 +1,4 @@
-glib2.0 (2.38.2-4) UNRELEASED; urgency=medium
+glib2.0 (2.38.2-4) experimental; urgency=medium
 
   * Team upload
   * DEP-3: tag patch for Debian#737501 as sent upstream to GNOME#723653
@@ -12,7 +12,7 @@ glib2.0 (2.38.2-4) UNRELEASED; urgency=medium
     improve arbitrary timeouts in regression tests, fixing an unreported
     FTBFS on armhf
 
- -- Simon McVittie <smcv@debian.org>  Thu, 06 Feb 2014 10:36:16 +0000
+ -- Simon McVittie <smcv@debian.org>  Tue, 11 Feb 2014 17:43:08 +0000
 
 glib2.0 (2.38.2-3) experimental; urgency=medium
 
