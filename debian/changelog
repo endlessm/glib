@@ -1,3 +1,9 @@
+glib2.0 (2.38.2-5) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 15 Feb 2014 12:34:05 +0100
+
 glib2.0 (2.38.2-4) experimental; urgency=medium
 
   * Team upload
