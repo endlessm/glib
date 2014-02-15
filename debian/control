@@ -2,8 +2,8 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
-Uploaders: Emilio Pozuelo Monfort <pochu@debian.org>, Josselin Mouette <joss@debian.org>, Martin Pitt <mpitt@debian.org>, Michael Biebl <biebl@debian.org>
-Build-Depends: debhelper (>= 8.1.3),
+Uploaders: Emilio Pozuelo Monfort <pochu@debian.org>, Laurent Bigonville <bigon@debian.org>
+Build-Depends: debhelper (>= 9),
                cdbs (>= 0.4.93),
                dh-autoreconf,
                gcc-4.8 [sparc],
@@ -24,15 +24,15 @@ Build-Depends: debhelper (>= 8.1.3),
                dbus-x11,
                shared-mime-info,
                xterm,
-               python (>= 2.6.6-3~),
+               python:any (>= 2.6.6-3~),
                python-dbus,
                python-gi,
                libxml2-utils,
                libffi-dev (>= 3.0.0)
-Standards-Version: 3.9.3
+Standards-Version: 3.9.5
 Homepage: http://www.gtk.org/
-Vcs-Browser: http://anonscm.debian.org/viewvc/pkg-gnome/desktop/unstable/glib2.0/
-Vcs-Svn: svn://svn.debian.org/pkg-gnome/desktop/unstable/glib2.0/
+Vcs-Browser: http://anonscm.debian.org/viewvc/pkg-gnome/desktop/experimental/glib2.0/
+Vcs-Svn: svn://anonscm.debian.org/pkg-gnome/desktop/experimental/glib2.0/
 XS-Testsuite: autopkgtest
 
 Package: libglib2.0-0
@@ -54,6 +54,20 @@ Description: GLib library of C routines
  C library used by projects such as GTK+, GIMP, and GNOME.
  .
  This package contains the shared libraries.
+
+Package: libglib2.0-tests
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         shared-mime-info
+Pre-Depends: ${misc:Pre-Depends}
+Description: GLib library of C routines - installed tests
+ GLib is a library containing many useful C routines for things such
+ as trees, hashes, lists, and strings.  It is a useful general-purpose
+ C library used by projects such as GTK+, GIMP, and GNOME.
+ .
+ This package contains test programs, designed to be run as part of a
+ regression testsuite.
 
 Package: libglib2.0-udeb
 Section: debian-installer
@@ -116,6 +130,7 @@ Package: libglib2.0-0-dbg
 Section: debug
 Priority: extra
 Architecture: any
+Multi-Arch: same
 Depends: ${misc:Depends},
          libglib2.0-0 (= ${binary:Version})
 Conflicts: libglib2.0-dbg

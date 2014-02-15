@@ -14,6 +14,9 @@ include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
 
 GNOME_MODULE := glib
 
+# Enable parallel build support
+DEB_BUILD_PARALLEL = 1
+
 # Ensure the build aborts when there are still references to undefined symbols
 LDFLAGS += -Wl,-z,defs
 
@@ -31,6 +34,7 @@ SONAME := 0
 # package names
 SHARED_PKG := libglib$(APIVER)-$(SONAME)
 DATA_PKG := libglib$(APIVER)-data
+TEST_PKG := libglib$(APIVER)-tests
 DEV_PKG := libglib$(APIVER)-dev
 BIN_PKG := libglib$(APIVER)-bin
 UDEB_PKG := libglib$(APIVER)-udeb
@@ -41,6 +45,7 @@ REFDBG_PKG := libglib$(APIVER)-$(SONAME)-refdbg
 DEB_MAKE_DESTDIRSKEL = $(CURDIR)/debian/install/@FLAVOR@
 
 DEB_DH_INSTALL_ARGS += --sourcedir=debian/install/deb
+DEB_DH_INSTALL_ARGS_$(TEST_PKG) += --sourcedir=debian/install/deb -X.la
 DEB_DH_INSTALL_ARGS_$(UDEB_PKG) += --sourcedir=debian/install/udeb
 DEB_DH_INSTALL_ARGS_$(REFDBG_PKG) += --sourcedir=debian/install/refdbg
 
@@ -50,6 +55,9 @@ DEB_DH_STRIP_ARGS_$(REFDBG_PKG) = --no-act
 # Don't put the symbols in the -dbg package
 DEB_DH_STRIP_ARGS_$(UDEB_PKG) =
 
+# Don't strip translations from the installed tests; makes them environment dependent.
+DEB_DH_TRANSLATIONS_ARGS = -Xinstalled-tests
+
 # Do not clutter $HOME with ~/.dbus-keyrings and avoid failure on the buildds
 # where creating /home/buildd/.dbus-keyrings fails
 export HOME=$(CURDIR)/debian/build
@@ -57,6 +65,12 @@ export HOME=$(CURDIR)/debian/build
 ifeq ($(DEB_HOST_ARCH_OS), linux)
   DEB_MAKE_CHECK_TARGET = $(if $(filter deb, $(cdbs_make_curflavor)), -k check)
 endif
+
+# The tests assume this directory exists and is writable
+export XDG_RUNTIME_DIR=$(CURDIR)/debian/tmp-xdg-runtime-dir
+# Let's get failing tests' stdout and stderr so we have some information when
+# a build fails
+export VERBOSE=1
 
 # configure flags
 DEB_CONFIGURE_EXTRA_FLAGS := \
@@ -75,7 +89,10 @@ endif
 
 DEB_CONFIGURE_FLAGS_deb := \
 			--enable-gtk-doc \
-			--enable-static
+			--enable-static \
+			--enable-installed-tests \
+			--enable-always-build-tests \
+			--enable-debug=minimal
 
 DEB_CONFIGURE_FLAGS_udeb := \
 			--disable-selinux
@@ -85,7 +102,8 @@ DEB_CONFIGURE_FLAGS_refdbg := \
 			--enable-debug=yes
 
 pre-build::
-	mkdir -p debian/stamp-makefile-check
+	mkdir -p debian/stamp-makefile-check \
+		 debian/tmp-xdg-runtime-dir
 
 binary-install/libglib2.0-0::
 	set -e; for script in postinst postrm; do \
@@ -101,9 +119,8 @@ binary-install/libglib2.0-dev::
 common-install-arch::
 	set -e; for file in libgio-fam.install libglib2.0-0.install \
 	            libglib2.0-0-refdbg.install libglib2.0-dbg.install \
-	            libglib2.0-dev.install \
-	            libglib2.0-udeb.install libglib2.0-bin.links \
-	            libglib2.0-dev.links \
+	            libglib2.0-dev.install libglib2.0-udeb.install \
+		    libglib2.0-bin.links libglib2.0-dev.links \
 	            libglib2.0-0.dirs libglib2.0-0.triggers; \
 	do \
 		sed -e"s,\$${DEB_HOST_MULTIARCH},${DEB_HOST_MULTIARCH},g" \
@@ -125,6 +142,10 @@ clean::
 		-e "s#@GNOME_TEAM@#$(UPLOADERS)#g" \
 		-e "s#@REFDBG_PKG@#$(REFDBG_PKG)#g" \
 		debian/control.in > debian/control
+	rm -rf $(CURDIR)/debian/build \
+	       $(CURDIR)/debian/install \
+	       $(CURDIR)/debian/stamp-makefile-check \
+	       $(CURDIR)/debian/tmp-xdg-runtime-dir
 
 list-missing:
 	# FIXME: remove this when CDBS' list-missing works with multiple flavors

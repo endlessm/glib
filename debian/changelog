@@ -1,3 +1,180 @@
+glib2.0 (2.38.2-4) experimental; urgency=medium
+
+  * Team upload
+  * DEP-3: tag patch for Debian#737501 as sent upstream to GNOME#723653
+  * d/p/gdbus-Let-the-pending-read-finish-before-closing-the.patch:
+    add patch from Mikhail Zabaluev fixing a test failure on mips,
+    also reproduced on mipsel (Closes: #738290)
+  * d/p/Fix-races-in-unix-signal-dispatch.patch: add patch from upstream
+    to fix what appears to be the root cause of #737380
+  * d/p/gdbus-tests-wait-up-to-60s-for-gdbus-testserver-to-t.patch,
+    d/p/gdbus-connection-wait-up-to-10s-to-actually-send-a-m.patch:
+    improve arbitrary timeouts in regression tests, fixing an unreported
+    FTBFS on armhf
+
+ -- Simon McVittie <smcv@debian.org>  Tue, 11 Feb 2014 17:43:08 +0000
+
+glib2.0 (2.38.2-3) experimental; urgency=medium
+
+  * Team upload
+  * d/p/Don-t-use-a-parallel-build-for-the-documentation.patch:
+    Disable parallel build for the documentation, hopefully fixing an
+    intermittent FTBFS in which gtk-doc tries to scan Windows-specific
+    objects (Closes: #737501)
+  * d/p/Do-not-attempt-to-autolaunch-a-session-dbus-daemon-w.patch:
+    Refuse to perform D-Bus "autolaunch" if $DISPLAY is unset, in which
+    case it isn't going to work anyway. This works around a process-launching
+    issue in the GApplication test on mipsel (Closes: #737380)
+  * Bump debhelper compat level to 9, resulting in co-installable
+    multiarch debug symbols and ~ 50% smaller installed size
+    for libglib2.0-0-dbg (at the cost of ~ 30% larger .deb size)
+    - mark libglib2.0-0-dbg Multi-Arch: same
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 06 Feb 2014 09:53:27 +0000
+
+glib2.0 (2.38.2-2) experimental; urgency=medium
+
+  * Team upload.
+
+  [ Emilio Pozuelo Monfort ]
+  * debian/rules:
+    + Enable parallel builds.
+
+  [ Laurent Bigonville ]
+  * Add d/p/valgrind_h_add_r0_to_the_clobber_list_on_PPC.patch: Fix FTBFS on
+    PPC (taken from upstream, Closes: #737379)
+
+  [ Simon McVittie ]
+  * Add DEP-3 tagging to PPC patch
+  * Add d/p/tests-move-param-implement-to-m-slow.patch to knock out
+    test /param/implement, which upstream describe as "essentially a
+    forkbomb", leading to failures on armel and at least sporadically
+    on mipsel (Closes: #737381)
+
+ -- Simon McVittie <smcv@debian.org>  Sun, 02 Feb 2014 20:35:34 +0000
+
+glib2.0 (2.38.2-1) experimental; urgency=low
+
+  * New upstream release
+    - Drop d/p/0001-g_file_copy-Fall-back-to-pathname-queryinfo-to-help-.patch
+      merged upstream
+  * debian/control.in:
+    - Bump Standards-Version to 3.9.5 (no further changes)
+    - Use canonical URL for Vcs-Svn field
+
+ -- Laurent Bigonville <bigon@debian.org>  Sat, 14 Dec 2013 16:38:02 +0100
+
+glib2.0 (2.38.1-2) experimental; urgency=low
+
+  * debian/rules:
+    + Set VERBOSE so we get failing tests' stdout and stderr. This will
+      help us debug the various build failures in different arches.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Sun, 27 Oct 2013 21:58:46 +0100
+
+glib2.0 (2.38.1-1) experimental; urgency=low
+
+  * Build-Depend on python:any. python is Multi-Arch: allowed; this BD allows
+    the python from any architecture that can be executed on the builder to
+    satisfy the BD, simplifying cross building of glib2.0.
+  * New upstream bugfix release 2.38.1 
+    + Fix error code checks when SOCK_CLOEXEC is defined but not supported
+      (fix support for GNU/Hurd)
+    + g_settings_list_children: only list viable schemas (fix gsettings
+      list-recursively crashes with invalid schemas installed)
+    + GDBusObjectManagerClient: Fix typo in the /org/freedesktop/DBus path
+      when adding match rules
+      - Remove 0001-gio-Fix-typo-in-the-org-freedesktop-DBus-path.patch
+  * 0001-g_file_copy-Fall-back-to-pathname-queryinfo-to-help-.patch:
+    Cherry-pick gio patch to fall back to g_file_query_info if
+    query_info_on_read is not supported. Fixes copying from backends that
+    don't implement the latter. (Closes: #715436, LP: #1217230)
+
+ -- Iain Lane <laney@debian.org>  Thu, 17 Oct 2013 15:53:12 +0100
+
+glib2.0 (2.38.0-1) experimental; urgency=low
+
+  * New upstream release
+  * debian/patches/0001-gio-Fix-typo-in-the-org-freedesktop-DBus-path.patch:
+    Cherry-pick patch from upstream to fix object path typo in gio (LP:
+    #1227295)
+  * Add --enable-debug=minimal explicitly to the deb build so the debugging
+    level doesn't change between pre-release and stable versions. 
+
+ -- Iain Lane <laney@debian.org>  Wed, 25 Sep 2013 10:37:50 +0000
+
+glib2.0 (2.37.93-1) experimental; urgency=low
+
+  * New upstream release 2.37.93 (& .92)
+    + new API g_file_measure_disk_usage() similar to du(1)
+  * Add new symbols for g_file_measure_disk_usage API added in this release. 
+
+ -- Iain Lane <laney@debian.org>  Wed, 18 Sep 2013 10:07:15 +0000
+
+glib2.0 (2.37.7-1) experimental; urgency=low
+
+  * New upstream 2.37.7
+    + GDateTime now supports %:z formatting variations for timezones. This is
+    a GNU date extension.
+
+ -- Iain Lane <laney@debian.org>  Tue, 10 Sep 2013 11:26:28 +0000
+
+glib2.0 (2.37.6-1) experimental; urgency=low
+
+  * New upstream release 2.37.6
+  * Update symbols file 
+  * Merge changes from unstable, mainly for build / testsuite fixes.
+
+ -- Iain Lane <laney@debian.org>  Wed, 21 Aug 2013 09:48:19 +0000
+
+glib2.0 (2.37.5-1) experimental; urgency=low
+
+  * New upstream release 2.37.5 (including interesting changes from .3 and .4)
+    + Implement the Desktop Action specification
+    + The gsettings tool now reports failure to write a key (e.g. because the
+      key was locked down)
+    + add a new API for instance private data: G_DEFINE_TYPE_WITH_PRIVATE
+    + add new D-Bus API for async property handling
+  * libglib2.0-tests: Depend on shared-mime-info required by contenttype test. 
+  * New upstream release
+  * 0001-Revert-g_file_set_contents-don-t-fsync-on-ext3-4.patch: Drop, now
+    upstream.
+  * debian/tests/installed-tests: Add a new DEP-8 test to run the
+    installed-tests.
+  * Refresh patches.
+  * Update symbols file. 
+  * debian/patches/skip-brokwn-dbus-appinfo-test.patch: Skip a broken new
+    dbus-appinfo test which is hanging. 
+
+ -- Iain Lane <laney@debian.org>  Fri, 02 Aug 2013 16:54:51 +0000
+
+glib2.0 (2.37.2-1) experimental; urgency=low
+
+  * New upstream version
+    + add support for installed tests:
+      https://live.gnome.org/GnomeGoals/InstalledTests
+    + add a new g_test_trap_subprocess() that works on Windows as a
+      replacement for the (now deprecated) g_test_trap_fork()
+    + support for explicitly cancelling a gobject property binding
+    + performance improvements for signal argument handling
+    + stop using `quotes' in very many log messages generated by GLib, for
+      favour of 'this style'.  This may cause testcases in other packages to
+      fail if they were matching on the previous text.
+    + improve manpages: add missing arguments and flags
+    + Installing properties after class initialization is deprecated, and will
+      trigger a warning.
+    + GApplication Support org.freedesktop.Application, including D-Bus
+      activation from desktop files
+  * Refresh patches. 
+  * Update symbols file with new symbols in this release. 
+  * Enable installed tests and install into a libglib2.0-tests package. 
+  * clean debian/{install,build,stamp-makefile-check} and
+    gio/gdbus-2.0/codegen/*.pyc 
+  * Set $XDG_RUNTIME_DIR to a writable directory we control; now required by
+    the testsuite. 
+
+ -- Iain Lane <laney@debian.org>  Fri, 21 Jun 2013 15:28:46 +0100
+
 glib2.0 (2.36.4-1) unstable; urgency=low
 
   * New upstream release.
@@ -2968,4 +3145,3 @@ glib2.0 (2.0.0-1) unstable; urgency=low
   * Initial Release.
 
  -- Akira TAGOH <tagoh@debian.org>  Tue, 12 Mar 2002 02:32:11 +0900
-

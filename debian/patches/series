@@ -8,7 +8,14 @@
 10_kfreebsd_issetugid_prototype.patch
 11_kfreebsd_pthread_condattr_setclock_prototype.patch
 13_sparc_prlimit_prototype.patch
-15_gio_desktop_app_info_test_bin_true_path.patch
-17_check_abis_mips_symbols.patch
 61_glib-compile-binaries-path.patch
 90_gio-modules-multiarch-compat.patch
+skip-brokwn-dbus-appinfo-test.patch
+valgrind_h_add_r0_to_the_clobber_list_on_PPC.patch
+tests-move-param-implement-to-m-slow.patch
+Don-t-use-a-parallel-build-for-the-documentation.patch
+Do-not-attempt-to-autolaunch-a-session-dbus-daemon-w.patch
+gdbus-Let-the-pending-read-finish-before-closing-the.patch
+Fix-races-in-unix-signal-dispatch.patch
+gdbus-tests-wait-up-to-60s-for-gdbus-testserver-to-t.patch
+gdbus-connection-wait-up-to-10s-to-actually-send-a-m.patch

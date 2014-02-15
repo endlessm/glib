@@ -1,0 +1,61 @@
+From: Simon McVittie <smcv@debian.org>
+Date: Thu, 6 Feb 2014 08:09:56 +0000
+Subject: [PATCH] Don't use a parallel build for the documentation
+
+We seem to get a sporadic FTBFS in which it tries to scan
+Windows-specific symbols. Possibly caused by
+<https://bugzilla.gnome.org/show_bug.cgi?id=697940>.
+
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=723653
+Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=737501
+---
+ docs/reference/gio/Makefile.am                              | 3 +++
+ docs/reference/gio/gdbus-object-manager-example/Makefile.am | 3 +++
+ docs/reference/glib/Makefile.am                             | 3 +++
+ docs/reference/gobject/Makefile.am                          | 3 +++
+ 4 files changed, 12 insertions(+)
+
+diff --git a/docs/reference/gio/Makefile.am b/docs/reference/gio/Makefile.am
+index 112626b..ace4f29 100644
+--- a/docs/reference/gio/Makefile.am
++++ b/docs/reference/gio/Makefile.am
+@@ -1,3 +1,6 @@
++# Debian #737501
++.NOTPARALLEL:
++
+ NULL =
+ 
+ SUBDIRS = gdbus-object-manager-example
+diff --git a/docs/reference/gio/gdbus-object-manager-example/Makefile.am b/docs/reference/gio/gdbus-object-manager-example/Makefile.am
+index 50b0f19..4053128 100644
+--- a/docs/reference/gio/gdbus-object-manager-example/Makefile.am
++++ b/docs/reference/gio/gdbus-object-manager-example/Makefile.am
+@@ -1,3 +1,6 @@
++# Debian #737501
++.NOTPARALLEL:
++
+ NULL =
+ 
+ # The name of the module.
+diff --git a/docs/reference/glib/Makefile.am b/docs/reference/glib/Makefile.am
+index 2879607..002fb41 100644
+--- a/docs/reference/glib/Makefile.am
++++ b/docs/reference/glib/Makefile.am
+@@ -1,3 +1,6 @@
++# Debian #737501
++.NOTPARALLEL:
++
+ ## Process this file with automake to produce Makefile.in
+ 
+ AUTOMAKE_OPTIONS = 1.6
+diff --git a/docs/reference/gobject/Makefile.am b/docs/reference/gobject/Makefile.am
+index b3423f3..ce89a22 100644
+--- a/docs/reference/gobject/Makefile.am
++++ b/docs/reference/gobject/Makefile.am
+@@ -1,3 +1,6 @@
++# Debian #737501
++.NOTPARALLEL:
++
+ ## Process this file with automake to produce Makefile.in
+ 
+ AUTOMAKE_OPTIONS = 1.6
