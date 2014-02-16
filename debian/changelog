@@ -1,4 +1,4 @@
-glib2.0 (2.39.4-1) UNRELEASED; urgency=medium
+glib2.0 (2.39.4-1) experimental; urgency=medium
 
   * New upstream development release.
   * debian/rules:
@@ -22,7 +22,7 @@ glib2.0 (2.39.4-1) UNRELEASED; urgency=medium
       that fail randomly, and I'm more interested in whether glib builds
       fine everywhere. We should make the tests fatal again before 2.40.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Sun, 16 Feb 2014 00:45:50 +0100
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Sun, 16 Feb 2014 11:38:59 +0100
 
 glib2.0 (2.38.2-5) unstable; urgency=medium
 
