@@ -7,6 +7,10 @@ glib2.0 (2.39.4-1) UNRELEASED; urgency=medium
       everything that ends with .orig.
   * debian/libglib2.0-0.symbols:
     + Add new symbols.
+  * d/p/valgrind_h_add_r0_to_the_clobber_list_on_PPC.patch,
+    d/p/tests-move-param-implement-to-m-slow.patch,
+    d/p/Fix-races-in-unix-signal-dispatch.patch:
+    + Dropped, applied upstream.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Sun, 16 Feb 2014 00:45:50 +0100
 
