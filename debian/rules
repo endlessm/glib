@@ -44,6 +44,8 @@ REFDBG_PKG := libglib$(APIVER)-$(SONAME)-refdbg
 
 DEB_MAKE_DESTDIRSKEL = $(CURDIR)/debian/install/@FLAVOR@
 
+DEB_CLEAN_EXCLUDE = org.gtk.test.gschema.xml.orig
+
 DEB_DH_INSTALL_ARGS += --sourcedir=debian/install/deb
 DEB_DH_INSTALL_ARGS_$(TEST_PKG) += --sourcedir=debian/install/deb -X.la
 DEB_DH_INSTALL_ARGS_$(UDEB_PKG) += --sourcedir=debian/install/udeb
