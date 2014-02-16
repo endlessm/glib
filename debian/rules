@@ -65,7 +65,7 @@ DEB_DH_TRANSLATIONS_ARGS = -Xinstalled-tests
 export HOME=$(CURDIR)/debian/build
 
 ifeq ($(DEB_HOST_ARCH_OS), linux)
-  DEB_MAKE_CHECK_TARGET = $(if $(filter deb, $(cdbs_make_curflavor)), -k check)
+  DEB_MAKE_CHECK_TARGET = $(if $(filter deb, $(cdbs_make_curflavor)), -k check -j1 || true)
 endif
 
 # The tests assume this directory exists and is writable
