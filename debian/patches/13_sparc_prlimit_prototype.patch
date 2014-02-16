@@ -1,8 +1,8 @@
 --- a/configure.ac
 +++ b/configure.ac
-@@ -995,6 +995,9 @@
+@@ -960,6 +960,9 @@
  AC_CHECK_FUNCS(getmntent_r setmntent endmntent hasmntopt getfsstat getvfsstat fallocate)
- # Check for high-resolution sleep functions
+ case $host_os in aix*) ac_cv_func_splice=no ;; esac # AIX splice() is something else
  AC_CHECK_FUNCS(splice)
 +AC_CHECK_DECLS([prlimit], [], [], [[
 +#include <sys/time.h>
@@ -10,11 +10,9 @@
  AC_CHECK_FUNCS(prlimit)
  
  # To avoid finding a compatibility unusable statfs, which typically
-Index: b/glib/tests/thread.c
-===================================================================
 --- a/glib/tests/thread.c
 +++ b/glib/tests/thread.c
-@@ -130,7 +130,7 @@
+@@ -127,7 +127,7 @@
  static void
  test_thread4 (void)
  {

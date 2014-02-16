@@ -13,11 +13,9 @@ Forwarded: yes
  gio/tests/gdbus-threading.c       | 27 ++++++++++++++++++++++-----
  2 files changed, 47 insertions(+), 8 deletions(-)
 
-diff --git a/gio/tests/gdbus-connection-loss.c b/gio/tests/gdbus-connection-loss.c
-index ed4142d..1adbc15 100644
 --- a/gio/tests/gdbus-connection-loss.c
 +++ b/gio/tests/gdbus-connection-loss.c
-@@ -58,11 +58,20 @@ on_timeout (gpointer user_data)
+@@ -56,11 +56,20 @@
    return FALSE; /* remove source */
  }
  
@@ -38,7 +36,7 @@ index ed4142d..1adbc15 100644
  
    error = NULL;
    proxy = g_dbus_proxy_new_sync (c,
-@@ -75,6 +84,22 @@ test_connection_loss (void)
+@@ -73,6 +82,22 @@
                                   &error);
    g_assert_no_error (error);
  
@@ -61,7 +59,7 @@ index ed4142d..1adbc15 100644
    error = NULL;
    g_dbus_proxy_call (proxy,
                       "Sleep",
-@@ -126,9 +151,6 @@ main (int   argc,
+@@ -124,9 +149,6 @@
    g_assert (g_spawn_command_line_async (path, NULL));
    g_free (path);
  
@@ -71,11 +69,9 @@ index ed4142d..1adbc15 100644
    /* Create the connection in the main thread */
    error = NULL;
    c = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
-diff --git a/gio/tests/gdbus-threading.c b/gio/tests/gdbus-threading.c
-index 5851114..0836365 100644
 --- a/gio/tests/gdbus-threading.c
 +++ b/gio/tests/gdbus-threading.c
-@@ -412,6 +412,13 @@ test_method_calls_on_proxy (GDBusProxy *proxy)
+@@ -415,6 +415,13 @@
      }
  }
  
@@ -89,7 +85,7 @@ index 5851114..0836365 100644
  static void
  test_method_calls_in_thread (void)
  {
-@@ -419,6 +426,7 @@ test_method_calls_in_thread (void)
+@@ -422,6 +429,7 @@
    GDBusConnection *connection;
    GError *error;
    gchar *name_owner;
@@ -97,7 +93,7 @@ index 5851114..0836365 100644
  
    error = NULL;
    connection = g_bus_get_sync (G_BUS_TYPE_SESSION,
-@@ -436,8 +444,20 @@ test_method_calls_in_thread (void)
+@@ -439,8 +447,20 @@
                                   &error);
    g_assert_no_error (error);
  
@@ -120,7 +116,7 @@ index 5851114..0836365 100644
    g_free (name_owner);
  
    test_method_calls_on_proxy (proxy);
-@@ -592,9 +612,6 @@ main (int   argc,
+@@ -598,9 +618,6 @@
    g_assert (g_spawn_command_line_async (path, NULL));
    g_free (path);
  

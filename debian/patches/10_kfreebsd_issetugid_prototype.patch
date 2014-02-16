@@ -1,6 +1,6 @@
 --- a/glib/gutils.c
 +++ b/glib/gutils.c
-@@ -2386,6 +2386,12 @@
+@@ -2315,6 +2315,12 @@
  
  #endif
  

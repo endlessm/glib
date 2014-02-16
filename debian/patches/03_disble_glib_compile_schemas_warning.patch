@@ -4,7 +4,7 @@ Forwarded: not-needed
 
 --- a/gio/glib-compile-schemas.c
 +++ b/gio/glib-compile-schemas.c
-@@ -1208,11 +1208,13 @@
+@@ -1202,11 +1202,13 @@
        return;
      }
  

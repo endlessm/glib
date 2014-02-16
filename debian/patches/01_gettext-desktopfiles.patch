@@ -4,8 +4,6 @@
 ## Bug: bug URL
 # Ubuntu: https://launchpad.net/bugs/3935
 # Upstream: http://bugzilla.gnome.org/show_bug.cgi?id=569829
-Index: b/glib/gkeyfile.c
-===================================================================
 --- a/glib/gkeyfile.c
 +++ b/glib/gkeyfile.c
 @@ -445,6 +445,7 @@
@@ -135,11 +133,9 @@ Index: b/glib/gkeyfile.c
    /* Fallback to untranslated key
     */
    if (!translated_value)
-Index: b/glib/gkeyfile.h
-===================================================================
 --- a/glib/gkeyfile.h
 +++ b/glib/gkeyfile.h
-@@ -307,6 +307,9 @@
+@@ -310,6 +310,9 @@
  #define G_KEY_FILE_DESKTOP_KEY_URL              "URL"
  #define G_KEY_FILE_DESKTOP_KEY_DBUS_ACTIVATABLE "DBusActivatable"
  #define G_KEY_FILE_DESKTOP_KEY_ACTIONS          "Actions"
