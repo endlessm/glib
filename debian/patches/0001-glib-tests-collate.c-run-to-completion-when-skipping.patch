@@ -1,0 +1,58 @@
+From ffa5fab09a504cc6d2ff862b4cff123e27e118e1 Mon Sep 17 00:00:00 2001
+From: Simon McVittie <simon.mcvittie@collabora.co.uk>
+Date: Tue, 11 Feb 2014 15:14:33 +0000
+Subject: [PATCH 1/2] glib/tests/collate.c: run to completion when skipping all
+ tests
+
+Otherwise, we don't produce valid TAP output, and fail with:
+
+    ERROR: collate - missing test plan
+
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=724124
+Reviewed-by: Dan Winship <danw>
+---
+ glib/tests/collate.c | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/glib/tests/collate.c b/glib/tests/collate.c
+index a6fda18..24a913d 100644
+--- a/glib/tests/collate.c
++++ b/glib/tests/collate.c
+@@ -3,6 +3,8 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
++static gboolean missing_locale = FALSE;
++
+ typedef struct {
+   const gchar **input;
+   const gchar **sorted;
+@@ -45,6 +47,12 @@ do_collate (gboolean for_file, gboolean use_key, const CollateTest *test)
+   Line line;
+   gint i;
+ 
++  if (missing_locale)
++    {
++      g_test_skip ("no en_US locale");
++      return;
++    }
++
+   line_array = g_array_new (FALSE, FALSE, sizeof(Line));
+   g_array_set_clear_func (line_array, (GDestroyNotify)clear_line);
+ 
+@@ -253,8 +261,10 @@ main (int argc, char *argv[])
+   locale = setlocale (LC_ALL, "");
+   if (locale == NULL || strcmp (locale, "en_US") != 0)
+     {
+-      g_test_message ("No suitable locale, skipping test");
+-      return 0;
++      g_test_message ("No suitable locale, skipping tests");
++      missing_locale = TRUE;
++      /* let the tests run to completion so they show up as SKIP'd in TAP
++       * output */
+     }
+ 
+   test[0].input = input0;
+-- 
+1.9.rc1
+

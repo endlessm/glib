@@ -16,3 +16,5 @@ Do-not-attempt-to-autolaunch-a-session-dbus-daemon-w.patch
 gdbus-Let-the-pending-read-finish-before-closing-the.patch
 gdbus-tests-wait-up-to-60s-for-gdbus-testserver-to-t.patch
 gdbus-connection-wait-up-to-10s-to-actually-send-a-m.patch
+0001-glib-tests-collate.c-run-to-completion-when-skipping.patch
+0002-g_test_run-return-0-if-all-tests-are-skipped-in-TAP-.patch
