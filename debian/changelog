@@ -4,6 +4,7 @@ glib2.0 (2.39.90-1) UNRELEASED; urgency=medium
   * Drop patches now included in upstream release:
     - 0001-glib-tests-collate.c-run-to-completion-when-skipping.patch
     - 0002-g_test_run-return-0-if-all-tests-are-skipped-in-TAP-.patch
+  * Fix fuzz to make debian/patches/04_homedir_env.patch apply again.
 
  -- Andreas Henriksson <andreas@fatal.se>  Tue, 18 Feb 2014 19:36:34 +0100
 
