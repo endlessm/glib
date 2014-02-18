@@ -6,7 +6,7 @@
 # Upstream: http://bugzilla.gnome.org/show_bug.cgi?id=569829
 --- a/glib/gkeyfile.c
 +++ b/glib/gkeyfile.c
-@@ -445,6 +445,7 @@
+@@ -442,6 +442,7 @@
    GKeyFileFlags flags;
  
    gchar **locales;
@@ -14,7 +14,7 @@
  
    volatile gint ref_count;
  };
-@@ -569,6 +570,7 @@
+@@ -566,6 +567,7 @@
    key_file->list_separator = ';';
    key_file->flags = 0;
    key_file->locales = g_strdupv ((gchar **)g_get_language_names ());
@@ -22,7 +22,7 @@
  }
  
  static void
-@@ -588,6 +590,12 @@
+@@ -585,6 +587,12 @@
        key_file->parse_buffer = NULL;
      }
  
@@ -35,7 +35,7 @@
    tmp = key_file->groups;
    while (tmp != NULL)
      {
-@@ -803,6 +811,11 @@
+@@ -800,6 +808,11 @@
        return FALSE;
      }
  
@@ -47,7 +47,7 @@
    return TRUE;
  }
  
-@@ -908,6 +921,11 @@
+@@ -905,6 +918,11 @@
        return FALSE;
      }
  
@@ -59,7 +59,7 @@
    return TRUE;
  }
  
-@@ -2083,6 +2101,8 @@
+@@ -2080,6 +2098,8 @@
    GError *key_file_error;
    gchar **languages;
    gboolean free_languages = FALSE;
@@ -68,7 +68,7 @@
    gint i;
  
    g_return_val_if_fail (key_file != NULL, NULL);
-@@ -2104,6 +2124,24 @@
+@@ -2101,6 +2121,24 @@
        free_languages = FALSE;
      }
    
@@ -93,7 +93,7 @@
    for (i = 0; languages[i]; i++)
      {
        candidate_key = g_strdup_printf ("%s[%s]", key, languages[i]);
-@@ -2120,6 +2158,39 @@
+@@ -2117,6 +2155,39 @@
        translated_value = NULL;
     }
  
