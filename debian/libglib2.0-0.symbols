@@ -77,12 +77,15 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_app_launch_context_setenv@Base 2.31.8
  g_app_launch_context_unsetenv@Base 2.31.8
  g_application_activate@Base 2.28.0
+ g_application_add_main_option_entries@Base 2.39.90
+ g_application_add_option_group@Base 2.39.90
  g_application_command_line_create_file_for_arg@Base 2.35.8
  g_application_command_line_get_arguments@Base 2.28.0
  g_application_command_line_get_cwd@Base 2.28.0
  g_application_command_line_get_environ@Base 2.28.0
  g_application_command_line_get_exit_status@Base 2.28.0
  g_application_command_line_get_is_remote@Base 2.28.0
+ g_application_command_line_get_options_dict@Base 2.39.90
  g_application_command_line_get_platform_data@Base 2.28.0
  g_application_command_line_get_stdin@Base 2.35.8
  g_application_command_line_get_type@Base 2.28.0
@@ -920,6 +923,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_inet_socket_address_get_scope_id@Base 2.31.18
  g_inet_socket_address_get_type@Base 2.22.0
  g_inet_socket_address_new@Base 2.22.0
+ g_inet_socket_address_new_from_string@Base 2.39.90
  g_initable_get_type@Base 2.22.0
  g_initable_init@Base 2.22.0
  g_initable_new@Base 2.22.0
@@ -3308,6 +3312,18 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_variant_check_format_string@Base 2.33.14
  g_variant_classify@Base 2.24.0
  g_variant_compare@Base 2.26.0
+ g_variant_dict_clear@Base 2.39.90
+ g_variant_dict_contains@Base 2.39.90
+ g_variant_dict_end@Base 2.39.90
+ g_variant_dict_init@Base 2.39.90
+ g_variant_dict_insert@Base 2.39.90
+ g_variant_dict_insert_value@Base 2.39.90
+ g_variant_dict_lookup@Base 2.39.90
+ g_variant_dict_lookup_value@Base 2.39.90
+ g_variant_dict_new@Base 2.39.90
+ g_variant_dict_ref@Base 2.39.90
+ g_variant_dict_remove@Base 2.39.90
+ g_variant_dict_unref@Base 2.39.90
  g_variant_dup_bytestring@Base 2.26.0
  g_variant_dup_bytestring_array@Base 2.26.0
  g_variant_dup_objv@Base 2.30.0
@@ -3901,6 +3917,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_value_type_transformable@Base 2.12.0
  g_value_unset@Base 2.12.0
  g_variant_builder_get_type@Base 2.30.0
+ g_variant_dict_get_type@Base 2.39.90
  g_variant_get_gtype@Base 2.24.0
  g_variant_type_get_gtype@Base 2.24.0
  g_weak_ref_clear@Base 2.31.8
