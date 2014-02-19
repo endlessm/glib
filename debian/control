@@ -2,7 +2,7 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
-Uploaders: Emilio Pozuelo Monfort <pochu@debian.org>, Laurent Bigonville <bigon@debian.org>
+Uploaders: Andreas Henriksson <andreas@fatal.se>, Emilio Pozuelo Monfort <pochu@debian.org>, Laurent Bigonville <bigon@debian.org>
 Build-Depends: debhelper (>= 9),
                cdbs (>= 0.4.93),
                dh-autoreconf,
@@ -15,7 +15,7 @@ Build-Depends: debhelper (>= 9),
                libelfg0-dev (>= 0.8.12),
                libpcre3-dev (>= 1:8.31),
                desktop-file-utils,
-               gtk-doc-tools (>= 1.15),
+               gtk-doc-tools (>= 1.20),
                libselinux1-dev [linux-any],
                linux-libc-dev [linux-any],
                libgamin-dev [!linux-any] | libfam-dev [!linux-any],
