@@ -1,0 +1,44 @@
+From 356fe2cec65ad5b531ff08c78e5c24f37017bb83 Mon Sep 17 00:00:00 2001
+From: Ryan Lortie <desrt@desrt.ca>
+Date: Sun, 23 Feb 2014 01:11:50 -0500
+Subject: [PATCH] asyncqueue: fix timeout math on 32bit systems
+
+88182d375e13ae6519a288d5295220c83ca27e73 caught this issue in
+g_async_queue_timed_pop() but failed to fix the same bug in the _unlocked()
+variant.
+
+This is only a problem on 32bit systems.  On 64bit systems, the tv_sec
+in a timeval is already 64 bits, so no overflow occurs.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=722604
+---
+ glib/gasyncqueue.c | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/glib/gasyncqueue.c b/glib/gasyncqueue.c
+index 08bf126..8ed66ab 100644
+--- a/glib/gasyncqueue.c
++++ b/glib/gasyncqueue.c
+@@ -600,8 +600,7 @@ g_async_queue_timed_pop (GAsyncQueue *queue,
+   if (end_time != NULL)
+     {
+       m_end_time = g_get_monotonic_time () +
+-	((gint64)end_time->tv_sec * G_USEC_PER_SEC + end_time->tv_usec -
+-	 g_get_real_time ());
++        ((gint64) end_time->tv_sec * G_USEC_PER_SEC + end_time->tv_usec - g_get_real_time ());
+     }
+   else
+     m_end_time = -1;
+@@ -644,8 +643,7 @@ g_async_queue_timed_pop_unlocked (GAsyncQueue *queue,
+   if (end_time != NULL)
+     {
+       m_end_time = g_get_monotonic_time () +
+-	(end_time->tv_sec * G_USEC_PER_SEC + end_time->tv_usec -
+-	 g_get_real_time ());
++        ((gint64) end_time->tv_sec * G_USEC_PER_SEC + end_time->tv_usec - g_get_real_time ());
+     }
+   else
+     m_end_time = -1;
+-- 
+1.9.0
+
