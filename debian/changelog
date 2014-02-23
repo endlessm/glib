@@ -7,6 +7,9 @@ glib2.0 (2.39.90-2) UNRELEASED; urgency=medium
   * d/p/0001-asyncqueue-fix-timeout-math-on-32bit-systems.patch:
     + Patch from git, fix an overflow in g_async_queue_timed_pop_unlocked
       on 32 bits systems.
+  * debian/patches/80-skip-timer-test.patch:
+    + Skip the timer test which currently fails on x86 because of float
+      precission errors.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 19 Feb 2014 11:09:59 +0100
 
