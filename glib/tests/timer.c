@@ -30,7 +30,7 @@ static void
 test_timer_basic (void)
 {
   GTimer *timer;
-  gdouble elapsed;
+  volatile gdouble elapsed;
   gulong micros;
 
   timer = g_timer_new ();
@@ -47,7 +47,7 @@ static void
 test_timer_stop (void)
 {
   GTimer *timer;
-  gdouble elapsed, elapsed2;
+  volatile gdouble elapsed, elapsed2;
 
   timer = g_timer_new ();
 
