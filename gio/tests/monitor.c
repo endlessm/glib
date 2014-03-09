@@ -178,7 +178,9 @@ main (int argc, char *argv[])
 {
   g_test_init (&argc, &argv, NULL);
 
+#ifdef __linux__
   g_test_add_func ("/monitor/directory", test_directory_monitor);
+#endif
 
   return g_test_run ();
 }
