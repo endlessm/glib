@@ -5,6 +5,8 @@ glib2.0 (2.39.91-1) UNRELEASED; urgency=medium
     + Dropped, merged upstream.
   * debian/patches/81-skip-monitor-test-on-non-linux.patch:
     + New patch, skip the monitor test on non-linux as it currently hangs.
+  * debian/libglib2.0-0.symbols:
+    + Add a new symbol.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Sun, 09 Mar 2014 14:09:44 +0100
 

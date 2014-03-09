@@ -2998,6 +2998,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_str_hash@Base 2.12.0
  g_str_is_ascii@Base 2.39.4
  g_str_match_string@Base 2.39.4
+ g_str_to_ascii@Base 2.39.91
  g_str_tokenize_and_fold@Base 2.39.4
  g_strcanon@Base 2.12.0
  g_strcasecmp@Base 2.12.0
