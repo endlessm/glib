@@ -1,3 +1,9 @@
+glib2.0 (2.39.91-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Sun, 09 Mar 2014 14:09:44 +0100
+
 glib2.0 (2.39.90-2) experimental; urgency=medium
 
   * debian/control.in:
