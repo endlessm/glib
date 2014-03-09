@@ -1,6 +1,8 @@
 glib2.0 (2.39.91-1) UNRELEASED; urgency=medium
 
   * New upstream release.
+  * d/p/0001-asyncqueue-fix-timeout-math-on-32bit-systems.patch:
+    + Dropped, merged upstream.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Sun, 09 Mar 2014 14:09:44 +0100
 
