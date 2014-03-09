@@ -214,7 +214,9 @@ main (int argc, char *argv[])
 {
   g_test_init (&argc, &argv, NULL);
 
+#ifdef __linux__
   g_test_add ("/monitor/directory", Fixture, NULL, setup, test_directory_monitor, teardown);
+#endif
 
   return g_test_run ();
 }
