@@ -17,3 +17,4 @@ gdbus-tests-wait-up-to-60s-for-gdbus-testserver-to-t.patch
 gdbus-connection-wait-up-to-10s-to-actually-send-a-m.patch
 81-skip-monitor-test-on-non-linux.patch
 0001-timer-test-use-volatile-for-locals.patch
+skip-broken-timer-test.patch
