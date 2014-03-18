@@ -1,4 +1,4 @@
-glib2.0 (2.39.92-1) UNRELEASED; urgency=medium
+glib2.0 (2.39.92-1) experimental; urgency=medium
 
   * New upstream release.
   * 0001-timer-test-use-volatile-for-locals.patch: Take patch from bgo #722604
@@ -6,7 +6,7 @@ glib2.0 (2.39.92-1) UNRELEASED; urgency=medium
     + Remove debian/patches/80-skip-timer-test.patch accordingly; it should
       now work.
 
- -- Iain Lane <laney@debian.org>  Tue, 18 Mar 2014 09:52:04 +0000
+ -- Iain Lane <laney@debian.org>  Tue, 18 Mar 2014 10:14:36 +0000
 
 glib2.0 (2.39.91-1) experimental; urgency=medium
 
