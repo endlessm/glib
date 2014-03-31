@@ -1,3 +1,10 @@
+glib2.0 (2.40.0-2) UNRELEASED; urgency=medium
+
+  * gdbus-tests-wait-up-to-60s-for-gdbus-testserver-to-t.patch: Take latest
+    version from upstream bug to resolve some test failures.
+
+ -- Iain Lane <laney@debian.org>  Mon, 31 Mar 2014 11:18:18 +0100
+
 glib2.0 (2.40.0-1) experimental; urgency=medium
 
   * New upstream release.
