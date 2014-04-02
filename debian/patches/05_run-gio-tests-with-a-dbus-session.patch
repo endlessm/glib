@@ -11,8 +11,6 @@ dbus session.
  gio/tests/Makefile.am |    3 +++
  2 files changed, 4 insertions(+), 1 deletions(-)
 
-Index: b/glib.mk
-===================================================================
 --- a/glib.mk
 +++ b/glib.mk
 @@ -2,7 +2,7 @@
@@ -24,17 +22,15 @@ Index: b/glib.mk
  GTESTER_REPORT = $(top_builddir)/glib/gtester-report	# for the GLIB package
  NULL =
  
-Index: b/gio/tests/Makefile.am
-===================================================================
 --- a/gio/tests/Makefile.am
 +++ b/gio/tests/Makefile.am
-@@ -4,6 +4,9 @@
+@@ -5,6 +5,9 @@
  
- SUBDIRS = gdbus-object-manager-example services
+ SUBDIRS = gdbus-object-manager-example services modules
  
 +# Some tests need a dbus session
 +GTESTER_ENV = dbus-launch
 +
  LDADD = \
- 	$(top_builddir)/glib/libglib-2.0.la		\
+ 	$(top_builddir)/gio/libgio-2.0.la		\
  	$(top_builddir)/gobject/libgobject-2.0.la	\

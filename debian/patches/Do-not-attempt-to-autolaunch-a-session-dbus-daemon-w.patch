@@ -53,11 +53,9 @@ Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=737380
  gio/gdbusaddress.c | 7 +++++++
  1 file changed, 7 insertions(+)
 
-diff --git a/gio/gdbusaddress.c b/gio/gdbusaddress.c
-index ef807f6..bd37890 100644
 --- a/gio/gdbusaddress.c
 +++ b/gio/gdbusaddress.c
-@@ -1038,6 +1038,13 @@ get_session_address_dbus_launch (GError **error)
+@@ -1036,6 +1036,13 @@
        goto out;
      }
  
