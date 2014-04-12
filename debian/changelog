@@ -1,3 +1,10 @@
+glib2.0 (2.40.0-3) UNRELEASED; urgency=medium
+
+  * debian/libglib2.0-bin.install:
+    - Install /usr/bin/gapplication
+
+ -- Rico Tzschichholz <ricotz@ubuntu.com>  Sat, 12 Apr 2014 15:38:33 +0200
+
 glib2.0 (2.40.0-2) unstable; urgency=medium
 
   [ Iain Lane ]
