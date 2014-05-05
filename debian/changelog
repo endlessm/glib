@@ -1,3 +1,12 @@
+glib2.0 (2.40.0-4) UNRELEASED; urgency=medium
+
+  * debian/libglib2.0-doc.links:
+    + The symlink for the gtk docs is broken at the moment, and even if
+      fixed, it will still be broken if libgtk2.0-doc isn't installed on
+      a system, so just drop it. Closes: #746782.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Mon, 05 May 2014 11:50:10 +0200
+
 glib2.0 (2.40.0-3) unstable; urgency=medium
 
   [ Rico Tzschichholz ]
