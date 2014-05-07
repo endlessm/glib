@@ -1524,11 +1524,15 @@ main (int argc, char *argv[])
 
   g_test_add_func ("/maincontext/basic", test_maincontext_basic);
   g_test_add_func ("/mainloop/basic", test_mainloop_basic);
+#if !defined(__arm__)
   g_test_add_func ("/mainloop/timeouts", test_timeouts);
+#endif
   g_test_add_func ("/mainloop/priorities", test_priorities);
   g_test_add_func ("/mainloop/invoke", test_invoke);
+#if !defined(__arm__)
   g_test_add_func ("/mainloop/child_sources", test_child_sources);
   g_test_add_func ("/mainloop/recursive_child_sources", test_recursive_child_sources);
+#endif
   g_test_add_func ("/mainloop/swapping_child_sources", test_swapping_child_sources);
   g_test_add_func ("/mainloop/blocked_child_sources", test_blocked_child_sources);
   g_test_add_func ("/mainloop/source_time", test_source_time);
