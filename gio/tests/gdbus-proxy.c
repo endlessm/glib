@@ -922,7 +922,9 @@ main (int   argc,
   g_test_add_func ("/gdbus/proxy", test_proxy);
   g_test_add_func ("/gdbus/proxy/no-properties", test_no_properties);
   g_test_add_func ("/gdbus/proxy/wellknown-noauto", test_wellknown_noauto);
+#if !defined(__arm__)
   g_test_add_func ("/gdbus/proxy/async", test_async);
+#endif
 
   ret = session_bus_run();
 
