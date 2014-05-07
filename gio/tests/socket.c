@@ -1447,7 +1447,9 @@ main (int   argc,
   g_test_add_func ("/socket/ipv6_v4mapped", test_ipv6_v4mapped);
 #endif
   g_test_add_func ("/socket/close_graceful", test_close_graceful);
+#if !defined(__arm__)
   g_test_add_func ("/socket/timed_wait", test_timed_wait);
+#endif
   g_test_add_func ("/socket/fd_roundtrip", test_fd_roundtrip);
   g_test_add_func ("/socket/address", test_sockaddr);
 #ifdef G_OS_UNIX
