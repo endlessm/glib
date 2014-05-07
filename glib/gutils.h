@@ -140,6 +140,9 @@ typedef enum {
 GLIB_AVAILABLE_IN_ALL
 const gchar * g_get_user_special_dir (GUserDirectory directory);
 
+GLIB_AVAILABLE_IN_2_38
+const gchar * g_get_user_special_dir_for_desktop_id (const gchar *desktop_id);
+
 /**
  * GDebugKey:
  * @key: the string
