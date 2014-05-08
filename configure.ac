@@ -3566,9 +3566,6 @@ build/win32/vs9/Makefile
 build/win32/vs9/glib-gen-srcs.vsprops
 build/win32/vs10/Makefile
 build/win32/vs10/glib-gen-srcs.props
-build/win32/vs11/Makefile
-build/win32/vs12/Makefile
-build/win32/vs14/Makefile
 glib/Makefile
 glib/glib.stp
 glib/libcharset/Makefile
