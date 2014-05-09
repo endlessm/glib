@@ -859,10 +859,19 @@ test_stdio_wrappers (void)
 
   cwd = g_get_current_dir ();
   path = g_build_filename (cwd, "mkdir-test", NULL);
-  g_free (cwd);
   ret = g_chdir (path);
-  g_assert (errno == EACCES);
-  g_assert (ret == -1);
+  if (geteuid () == 0)
+    {
+      /* root can change to non-executable directories */
+      g_assert (ret == 0);
+      g_chdir (cwd);
+    }
+  else
+    {
+      g_assert (errno == EACCES);
+      g_assert (ret == -1);
+    }
+  g_free (cwd);
   ret = g_chmod (path, 0777);
   g_assert (ret == 0);
   ret = g_chdir (path);
