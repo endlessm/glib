@@ -1694,7 +1694,7 @@ test_keyfile (void)
   /* When executing as root, changing the mode of the keyfile will have
    * no effect on the writability of the settings.
    */
-  if (geteuid () == 0)
+  if (geteuid () != 0)
     {
       called = FALSE;
       g_signal_connect (settings, "writable-changed::greeting",
