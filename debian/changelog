@@ -23,6 +23,7 @@ glib2.0 (2.41.0-1) UNRELEASED; urgency=medium
       when gobject is used from a module for a program that does not itself use
       gobject and that module is unloaded/reloaded
   * debian/watch: Use http://ftp.gnome.org; it's more up-to-date.
+  * Update symbols file with new symbols for this release.
 
  -- Iain Lane <laney@debian.org>  Mon, 05 May 2014 11:50:10 +0200
 

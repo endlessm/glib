@@ -555,6 +555,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_desktop_app_info_get_categories@Base 2.30.0
  g_desktop_app_info_get_filename@Base 2.24.0
  g_desktop_app_info_get_generic_name@Base 2.30.0
+ g_desktop_app_info_get_implementations@Base 2.41.0
  g_desktop_app_info_get_is_hidden@Base 2.16.0
  g_desktop_app_info_get_keywords@Base 2.31.8
  g_desktop_app_info_get_nodisplay@Base 2.30.0
