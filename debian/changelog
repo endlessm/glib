@@ -1,4 +1,4 @@
-glib2.0 (2.41.0-1) UNRELEASED; urgency=medium
+glib2.0 (2.41.0-1) experimental; urgency=medium
 
   [ Emilio Pozuelo Monfort ]
   * debian/libglib2.0-doc.links:
@@ -25,7 +25,7 @@ glib2.0 (2.41.0-1) UNRELEASED; urgency=medium
   * debian/watch: Use http://ftp.gnome.org; it's more up-to-date.
   * Update symbols file with new symbols for this release.
 
- -- Iain Lane <laney@debian.org>  Mon, 05 May 2014 11:50:10 +0200
+ -- Iain Lane <laney@debian.org>  Tue, 27 May 2014 15:41:46 +0100
 
 glib2.0 (2.40.0-3) unstable; urgency=medium
 
