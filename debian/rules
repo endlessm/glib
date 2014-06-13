@@ -87,9 +87,6 @@ ifneq ($(DEB_BUILD_ARCH),$(DEB_HOST_ARCH))
 			--disable-modular-tests \
 			--disable-gtk-doc
 endif
-ifeq ($(DEB_HOST_ARCH), sparc)
-  DEB_CONFIGURE_EXTRA_FLAGS += CC=gcc-4.8
-endif
 
 DEB_CONFIGURE_FLAGS_deb := \
 			--enable-gtk-doc \

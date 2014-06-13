@@ -1,6 +1,11 @@
 glib2.0 (2.41.0-2) UNRELEASED; urgency=medium
 
+  [ Andreas Henriksson ]
   * Bump python:any build-dependency to >= 2.7.5-5~ (Closes: #747928)
+
+  [ Emilio Pozuelo Monfort ]
+  * Use the default compiler on sparc, since it's already >> 4.7.
+    Closes: #751313.
 
  -- Andreas Henriksson <andreas@fatal.se>  Thu, 12 Jun 2014 00:07:01 +0200
 
