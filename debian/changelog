@@ -9,6 +9,10 @@ glib2.0 (2.40.0-4) UNRELEASED; urgency=medium
   [ Iain Lane ]
   * Fix Vcs-* for the unstable branches
 
+  [ Emilio Pozuelo Monfort ]
+  * Use the default compiler on sparc, since it's already >> 4.7.
+    Closes: #751313.
+
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Mon, 05 May 2014 11:50:10 +0200
 
 glib2.0 (2.40.0-3) unstable; urgency=medium
