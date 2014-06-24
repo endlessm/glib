@@ -3771,6 +3771,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_type_check_instance@Base 2.12.0
  g_type_check_instance_cast@Base 2.12.0
  g_type_check_instance_is_a@Base 2.12.0
+ g_type_check_instance_is_fundamentally_a@Base 2.41.1
  g_type_check_is_value_type@Base 2.12.0
  g_type_check_value@Base 2.12.0
  g_type_check_value_holds@Base 2.12.0

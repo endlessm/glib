@@ -3,6 +3,7 @@ glib2.0 (2.41.1-1) UNRELEASED; urgency=medium
   * New upstream release
   * 0001-Prevent-an-invalid-CARBON_LIBS-from-appearing-in-the.patch: Drop,
     included in this release.
+  * Update symbols file with the new symbol in this release.
 
  -- Iain Lane <laney@debian.org>  Tue, 24 Jun 2014 11:50:11 +0100
 
