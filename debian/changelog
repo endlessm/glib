@@ -1,3 +1,11 @@
+glib2.0 (2.41.1-1) UNRELEASED; urgency=medium
+
+  * New upstream release
+  * 0001-Prevent-an-invalid-CARBON_LIBS-from-appearing-in-the.patch: Drop,
+    included in this release.
+
+ -- Iain Lane <laney@debian.org>  Tue, 24 Jun 2014 11:50:11 +0100
+
 glib2.0 (2.41.0-2) experimental; urgency=medium
 
   [ Andreas Henriksson ]

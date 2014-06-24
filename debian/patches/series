@@ -18,4 +18,3 @@ gdbus-connection-wait-up-to-10s-to-actually-send-a-m.patch
 81-skip-monitor-test-on-non-linux.patch
 0001-timer-test-use-volatile-for-locals.patch
 skip-broken-timer-test.patch
-0001-Prevent-an-invalid-CARBON_LIBS-from-appearing-in-the.patch
