@@ -1,0 +1,65 @@
+From f727c820b823178285d90b3f033f7d2a4d3cdf9f Mon Sep 17 00:00:00 2001
+From: Ryan Lortie <desrt@desrt.ca>
+Date: Tue, 24 Jun 2014 10:40:30 -0400
+Subject: [PATCH] gvariant tests: workaround libc/compiler "issue"
+
+memcmp() is declared by glibc as follows:
+
+  /* Compare N bytes of S1 and S2.  */
+  extern int memcmp (const void *__s1, const void *__s2, size_t __n)
+       __THROW __attribute_pure__ __nonnull ((1, 2));
+
+despite the fact that it is valid to call it with a null pointer if the
+size is zero.
+
+gcc 4.9.0 contains a new optimisation that sees that we pass a pointer
+to this function and concludes that it certainly must not be null,
+removing a later check and thereby causing a crash.
+
+We protect the invocation of memcmp() with a condition to prevent gcc
+from making this false assumption (arguably under wrong advice from
+glibc).
+---
+ glib/tests/gvariant.c | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
+
+diff --git a/glib/tests/gvariant.c b/glib/tests/gvariant.c
+index 122400e..9152a43 100644
+--- a/glib/tests/gvariant.c
++++ b/glib/tests/gvariant.c
+@@ -1520,7 +1520,9 @@ test_array (void)
+         g_variant_serialiser_serialise (serialised, random_instance_filler,
+                                         (gpointer *) instances, n_children);
+ 
+-        g_assert (memcmp (serialised.data, data, serialised.size) == 0);
++        if (serialised.size)
++          g_assert (memcmp (serialised.data, data, serialised.size) == 0);
++
+         g_assert (g_variant_serialised_n_children (serialised) == n_children);
+ 
+         for (i = 0; i < n_children; i++)
+@@ -1681,7 +1683,9 @@ test_tuple (void)
+         g_variant_serialiser_serialise (serialised, random_instance_filler,
+                                         (gpointer *) instances, n_children);
+ 
+-        g_assert (memcmp (serialised.data, data, serialised.size) == 0);
++        if (serialised.size)
++          g_assert (memcmp (serialised.data, data, serialised.size) == 0);
++
+         g_assert (g_variant_serialised_n_children (serialised) == n_children);
+ 
+         for (i = 0; i < n_children; i++)
+@@ -1774,7 +1778,9 @@ test_variant (void)
+         g_variant_serialiser_serialise (serialised, random_instance_filler,
+                                         (gpointer *) &instance, 1);
+ 
+-        g_assert (memcmp (serialised.data, data, serialised.size) == 0);
++        if (serialised.size)
++          g_assert (memcmp (serialised.data, data, serialised.size) == 0);
++
+         g_assert (g_variant_serialised_n_children (serialised) == 1);
+ 
+         child = g_variant_serialised_get_child (serialised, 0);
+-- 
+2.0.0
+
