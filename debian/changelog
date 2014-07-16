@@ -1,3 +1,15 @@
+glib2.0 (2.41.2-1) UNRELEASED; urgency=medium
+
+  * New upstream release
+    - The Unicode support has been updated to version 7.0 of the Unicode
+      standard
+    - GNotification now supports priorities for notifications
+    - GMutex now uses a faster, native implementation on Linux
+  * 0001-gvariant-tests-workaround-libc-compiler-issue.patch: Drop, applied
+    upstream in this release.
+
+ -- Iain Lane <laney@debian.org>  Wed, 16 Jul 2014 17:44:58 +0100
+
 glib2.0 (2.41.1-2) experimental; urgency=medium
 
   * 0001-gvariant-tests-workaround-libc-compiler-issue.patch: Cherry-pick
