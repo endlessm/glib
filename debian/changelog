@@ -7,6 +7,7 @@ glib2.0 (2.41.2-1) UNRELEASED; urgency=medium
     - GMutex now uses a faster, native implementation on Linux
   * 0001-gvariant-tests-workaround-libc-compiler-issue.patch: Drop, applied
     upstream in this release.
+  * Add new symbols for this release.
 
  -- Iain Lane <laney@debian.org>  Wed, 16 Jul 2014 17:44:58 +0100
 
