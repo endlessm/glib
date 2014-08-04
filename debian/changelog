@@ -13,6 +13,19 @@ glib2.0 (2.40.0-4) UNRELEASED; urgency=medium
   * Use the default compiler on sparc, since it's already >> 4.7.
     Closes: #751313.
 
+  [ Simon McVittie ]
+  * Adapt for system pcre3/1:8.35 (Closes: #755439):
+    - a PCRE 8.31 bug in case-insensitivity has been fixed, so do not assert
+      bug-for-bug compatibility with 8.31
+    - named match groups' names cannot start with a digit any more, so
+      (?P<1>.) is no longer allowed; do not assert that it is
+    - turn off a new optimization that would reduce the result set when called
+      from g_match_all(_full), to preserve existing functionality
+  * Build-depend on pcre3/1:8.35 so that the new optimization is
+    known to be turned off in the built binaries
+  * Add patch from upstream to fix mis-optimization in gvariant test
+    with gcc 4.9 (Closes: #756272)
+
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Mon, 05 May 2014 11:50:10 +0200
 
 glib2.0 (2.40.0-3) unstable; urgency=medium
