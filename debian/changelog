@@ -1,4 +1,6 @@
-glib2.0 (2.40.0-4) UNRELEASED; urgency=medium
+glib2.0 (2.40.0-4) unstable; urgency=medium
+
+  * Team upload
 
   [ Emilio Pozuelo Monfort ]
   * debian/libglib2.0-doc.links:
@@ -35,7 +37,7 @@ glib2.0 (2.40.0-4) UNRELEASED; urgency=medium
   * Override Lintian false positive #733733: we build-depend on python:any
     but Lintian doesn't yet understand :any syntax
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Mon, 05 May 2014 11:50:10 +0200
+ -- Simon McVittie <smcv@debian.org>  Sun, 10 Aug 2014 22:58:33 +0100
 
 glib2.0 (2.40.0-3) unstable; urgency=medium
 
