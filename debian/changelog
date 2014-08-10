@@ -32,6 +32,8 @@ glib2.0 (2.40.0-4) UNRELEASED; urgency=medium
       (i.e. remove 05_run-gio-tests-with-a-dbus-session.patch)
     - set a deliberately invalid DBUS_SESSION_BUS_ADDRESS to make sure
       nothing in the build is still inheriting it from the environment
+  * Override Lintian false positive #733733: we build-depend on python:any
+    but Lintian doesn't yet understand :any syntax
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Mon, 05 May 2014 11:50:10 +0200
 
