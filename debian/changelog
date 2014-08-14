@@ -29,6 +29,8 @@ glib2.0 (2.41.2-1) UNRELEASED; urgency=medium
         nothing in the build is still inheriting it from the environment
     + Override Lintian false positive #733733: we build-depend on python:any
       but Lintian doesn't yet understand :any syntax
+  * Make the installed tests still run dbus-launch if we don't have
+    dbus-run-session (i.e. if the installed dbus is << 1.8).
 
  -- Iain Lane <laney@debian.org>  Wed, 16 Jul 2014 17:44:58 +0100
 
