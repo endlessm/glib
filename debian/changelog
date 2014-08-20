@@ -1,10 +1,10 @@
-glib2.0 (2.41.3-1) UNRELEASED; urgency=medium
+glib2.0 (2.41.3-1) experimental; urgency=medium
 
   * New upstream release 2.41.3
   * debian/tests/installed-tests: Revert the previous change - require dbus >=
     1.8 and always use dbus-run-session.
 
- -- Iain Lane <laney@debian.org>  Wed, 20 Aug 2014 15:58:39 +0100
+ -- Iain Lane <iain@orangesquash.org.uk>  Wed, 20 Aug 2014 16:16:23 +0100
 
 glib2.0 (2.41.2-1) experimental; urgency=medium
 
