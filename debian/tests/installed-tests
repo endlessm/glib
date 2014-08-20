@@ -7,8 +7,4 @@ set -e
 
 export XDG_RUNTIME_DIR=$ADTTMP
 
-if [ -x /usr/bin/dbus-run-session ]; then
-    dbus-run-session -- xvfb-run -a gnome-desktop-testing-runner glib
-else
-    dbus-launch --exit-with-session xvfb-run -a gnome-desktop-testing-runner glib
-fi
+dbus-run-session -- xvfb-run -a gnome-desktop-testing-runner glib
