@@ -1,3 +1,11 @@
+glib2.0 (2.40.0-5) UNRELEASED; urgency=medium
+
+  * 0001-gobject-try-to-link-with-Wl-z-nodelete.patch: Cherry-pick upstream
+    patch to (try to) link gobject with -Wl,z,nodelete to indicate that the
+    library, once loaded, should not be unloaded at runtime. (Closes: #752544)
+
+ -- Iain Lane <laney@debian.org>  Fri, 29 Aug 2014 03:12:00 +0100
+
 glib2.0 (2.40.0-4) unstable; urgency=medium
 
   * Team upload

@@ -21,3 +21,4 @@ regex-if-PCRE-is-8.34-or-later-disable-auto-possessi.patch
 regex-test-do-not-assert-that-system-PCRE-allows-P-1.patch
 regex-test-do-not-assert-that-system-PCRE-still-has-.patch
 gvariant-tests-workaround-libc-compiler-issue.patch
+0001-gobject-try-to-link-with-Wl-z-nodelete.patch
