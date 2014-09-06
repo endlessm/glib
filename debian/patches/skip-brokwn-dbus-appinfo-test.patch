@@ -4,7 +4,7 @@ Forwarded: yes (desrt)
 
 --- a/gio/tests/Makefile.am
 +++ b/gio/tests/Makefile.am
-@@ -388,7 +388,6 @@
+@@ -385,7 +385,6 @@
  
  test_programs += \
  	actions					\

@@ -1,6 +1,6 @@
 --- a/configure.ac
 +++ b/configure.ac
-@@ -960,6 +960,9 @@
+@@ -966,6 +966,9 @@
  AC_CHECK_FUNCS(getmntent_r setmntent endmntent hasmntopt getfsstat getvfsstat fallocate)
  case $host_os in aix*) ac_cv_func_splice=no ;; esac # AIX splice() is something else
  AC_CHECK_FUNCS(splice)

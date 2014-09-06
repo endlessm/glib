@@ -27,7 +27,7 @@ Applied-upstream: no
  struct GDBusWorker
  {
    volatile gint                       ref_count;
-@@ -576,7 +578,10 @@
+@@ -577,7 +579,10 @@
  
    /* If already stopped, don't even process the reply */
    if (g_atomic_int_get (&worker->stopped))
@@ -39,7 +39,7 @@ Applied-upstream: no
  
    error = NULL;
    if (worker->socket == NULL)
-@@ -671,21 +676,16 @@
+@@ -672,21 +677,16 @@
         * if the GDBusConnection tells us to close (either via
         * _g_dbus_worker_stop, which is called on last-unref, or directly),
         * so a cancelled read must mean our connection was closed locally.
@@ -69,7 +69,7 @@ Applied-upstream: no
  
        g_error_free (error);
        goto out;
-@@ -814,6 +814,13 @@
+@@ -815,6 +815,13 @@
   out:
    g_mutex_unlock (&worker->read_lock);
  
@@ -83,7 +83,7 @@ Applied-upstream: no
    /* gives up the reference acquired when calling g_input_stream_read_async() */
    _g_dbus_worker_unref (worker);
  }
-@@ -822,8 +829,8 @@
+@@ -823,8 +830,8 @@
  static void
  _g_dbus_worker_do_read_unlocked (GDBusWorker *worker)
  {
@@ -94,7 +94,7 @@ Applied-upstream: no
     */
  
    /* if bytes_wanted is zero, it means start reading a message */
-@@ -1144,8 +1151,6 @@
+@@ -1145,8 +1152,6 @@
  }
  /* ---------------------------------------------------------------------------------------------------- */
  
@@ -103,7 +103,7 @@ Applied-upstream: no
  typedef struct
  {
    GDBusWorker *worker;
-@@ -1444,12 +1449,15 @@
+@@ -1445,12 +1450,15 @@
    /* if we want to close the connection, that takes precedence */
    if (worker->pending_close_attempts != NULL)
      {
@@ -124,15 +124,15 @@ Applied-upstream: no
      }
    else
      {
-@@ -1557,7 +1565,6 @@
- /*
+@@ -1558,7 +1566,6 @@
+ /**
   * @write_data: (transfer full) (allow-none):
   * @flush_data: (transfer full) (allow-none):
 - * @close_data: (transfer full) (allow-none):
   *
   * Can be called from any thread
   *
-@@ -1567,8 +1574,7 @@
+@@ -1568,8 +1575,7 @@
  static void
  schedule_writing_unlocked (GDBusWorker        *worker,
                             MessageToWriteData *write_data,
@@ -142,7 +142,7 @@ Applied-upstream: no
  {
    if (write_data != NULL)
      g_queue_push_tail (worker->write_queue, write_data);
-@@ -1576,10 +1582,6 @@
+@@ -1577,10 +1583,6 @@
    if (flush_data != NULL)
      worker->write_pending_flushes = g_list_prepend (worker->write_pending_flushes, flush_data);
  
@@ -153,7 +153,7 @@ Applied-upstream: no
    /* If we had output pending, the next bit of output will happen
     * automatically when it finishes, so we only need to do this
     * if nothing was pending.
-@@ -1627,7 +1629,7 @@
+@@ -1629,7 +1631,7 @@
    data->blob_size = blob_len;
  
    g_mutex_lock (&worker->write_lock);
@@ -162,7 +162,7 @@ Applied-upstream: no
    g_mutex_unlock (&worker->write_lock);
  }
  
-@@ -1707,13 +1709,12 @@
+@@ -1710,13 +1712,12 @@
        (cancellable == NULL ? NULL : g_object_ref (cancellable));
    close_data->result = (result == NULL ? NULL : g_object_ref (result));
  
@@ -180,7 +180,7 @@ Applied-upstream: no
  }
  
  /* This can be called from any thread - frees worker. Note that
-@@ -1783,7 +1784,7 @@
+@@ -1786,7 +1787,7 @@
        data->number_to_wait_for = worker->write_num_messages_written + pending_writes;
        g_mutex_lock (&data->mutex);
  
