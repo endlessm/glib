@@ -1,10 +1,10 @@
-glib2.0 (2.41.4-1) UNRELEASED; urgency=medium
+glib2.0 (2.41.4-1) experimental; urgency=medium
 
   * New upstream release
   * debian/libglib2.0-0.symbols:
     + Add g_application_add_main_option symbol
 
- -- Sjoerd Simons <sjoerd@debian.org>  Sat, 06 Sep 2014 15:13:20 +0200
+ -- Sjoerd Simons <sjoerd@debian.org>  Sat, 06 Sep 2014 15:16:14 +0200
 
 glib2.0 (2.41.3-1) experimental; urgency=medium
 
