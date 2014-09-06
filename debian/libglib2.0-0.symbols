@@ -77,6 +77,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_app_launch_context_setenv@Base 2.31.8
  g_app_launch_context_unsetenv@Base 2.31.8
  g_application_activate@Base 2.28.0
+ g_application_add_main_option@Base 2.41.4
  g_application_add_main_option_entries@Base 2.39.90
  g_application_add_option_group@Base 2.39.90
  g_application_command_line_create_file_for_arg@Base 2.35.8
