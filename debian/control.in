@@ -39,7 +39,8 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
 Recommends: @DATA_PKG@,
-            shared-mime-info
+            shared-mime-info,
+            xdg-user-dirs
 Breaks: gvfs (<< 1.8),
         glib-networking (<< 2.33.12),
         python-gi (<< 3.7.2),
