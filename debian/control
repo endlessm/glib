@@ -2,7 +2,7 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
-Uploaders: Emilio Pozuelo Monfort <pochu@debian.org>, Iain Lane <laney@debian.org>, Sjoerd Simons <sjoerd@debian.org>
+Uploaders: Sjoerd Simons <sjoerd@debian.org>
 Build-Depends: debhelper (>= 9),
                cdbs (>= 0.4.93),
                dh-autoreconf,
@@ -39,7 +39,8 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
 Recommends: libglib2.0-data,
-            shared-mime-info
+            shared-mime-info,
+            xdg-user-dirs
 Breaks: gvfs (<< 1.8),
         glib-networking (<< 2.33.12),
         python-gi (<< 3.7.2),

@@ -1,4 +1,4 @@
-glib2.0 (2.41.5-1) UNRELEASED; urgency=medium
+glib2.0 (2.41.5-1) experimental; urgency=medium
 
   [ Andreas Henriksson ]
   * Make libglib2.0-0 recommend xdg-user-dirs
@@ -8,7 +8,7 @@ glib2.0 (2.41.5-1) UNRELEASED; urgency=medium
   * New upstream release 2.41.5
     - GDesktopAppInfo: avoid polling on missing desktop dirs
 
- -- Iain Lane <laney@debian.org>  Wed, 17 Sep 2014 10:14:31 +0100
+ -- Iain Lane <iain@orangesquash.org.uk>  Wed, 17 Sep 2014 10:19:27 +0100
 
 glib2.0 (2.41.4-1) experimental; urgency=medium
 
