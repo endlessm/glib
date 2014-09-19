@@ -4,7 +4,7 @@ Forwarded: No
 
 --- a/gio/tests/socket.c
 +++ b/gio/tests/socket.c
-@@ -984,7 +984,9 @@
+@@ -1086,7 +1086,9 @@
    g_test_add_func ("/socket/ipv6_v4mapped", test_ipv6_v4mapped);
  #endif
    g_test_add_func ("/socket/close_graceful", test_close_graceful);
@@ -16,7 +16,7 @@ Forwarded: No
    g_test_add_func ("/socket/unix-from-fd", test_unix_from_fd);
 --- a/glib/tests/mainloop.c
 +++ b/glib/tests/mainloop.c
-@@ -1524,11 +1524,15 @@
+@@ -1572,11 +1572,15 @@
  
    g_test_add_func ("/maincontext/basic", test_maincontext_basic);
    g_test_add_func ("/mainloop/basic", test_mainloop_basic);

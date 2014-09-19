@@ -11,11 +11,9 @@ Bug: https://bugzilla.gnome.org/show_bug.cgi?id=733325
  glib/tests/regex.c | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/glib/tests/regex.c b/glib/tests/regex.c
-index 95b2360..b317501 100644
 --- a/glib/tests/regex.c
 +++ b/glib/tests/regex.c
-@@ -2632,8 +2632,11 @@ main (int argc, char *argv[])
+@@ -2569,8 +2569,11 @@
    TEST_EXPAND("a", "a", "\\0130", FALSE, "X");
    TEST_EXPAND("a", "a", "\\\\\\0", FALSE, "\\a");
    TEST_EXPAND("a(?P<G>.)c", "xabcy", "X\\g<G>X", FALSE, "XbX");
@@ -27,6 +25,3 @@ index 95b2360..b317501 100644
    TEST_EXPAND(".", EURO, "\\0", FALSE, EURO);
    TEST_EXPAND("(.)", EURO, "\\1", FALSE, EURO);
    TEST_EXPAND("(?P<G>.)", EURO, "\\g<G>", FALSE, EURO);
--- 
-2.0.1
-

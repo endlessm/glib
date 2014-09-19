@@ -5,11 +5,13 @@ on kFreeBSD since the prototype there is missing. The glibc bug
 to add the missing prototype is http://bugs.debian.org/703545,
 we can remove this hack when that is fixed.
 
+Index: b/glib/gthread-posix.c
+===================================================================
 --- a/glib/gthread-posix.c
 +++ b/glib/gthread-posix.c
-@@ -630,6 +630,12 @@
+@@ -642,6 +642,12 @@
  
- /* {{{1 GCond */
+ #if !defined(USE_NATIVE_MUTEX)
  
 +#if defined (HAVE_PTHREAD_CONDATTR_SETCLOCK) && defined (CLOCK_MONOTONIC) && defined (__FreeBSD_kernel__)
 +extern int pthread_condattr_setclock (pthread_condattr_t *__attr,

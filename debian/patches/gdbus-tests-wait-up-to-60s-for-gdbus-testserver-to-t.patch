@@ -19,11 +19,9 @@ https://bugzilla.gnome.org/show_bug.cgi?id=724113
  gio/tests/gdbus-threading.c       |  8 +-----
  4 files changed, 56 insertions(+), 9 deletions(-)
 
-diff --git a/gio/tests/gdbus-connection-loss.c b/gio/tests/gdbus-connection-loss.c
-index d807193..8ebb870 100644
 --- a/gio/tests/gdbus-connection-loss.c
 +++ b/gio/tests/gdbus-connection-loss.c
-@@ -124,8 +124,7 @@ main (int   argc,
+@@ -124,8 +124,7 @@
    g_assert (g_spawn_command_line_async (path, NULL));
    g_free (path);
  
@@ -33,11 +31,9 @@ index d807193..8ebb870 100644
  
    /* Create the connection in the main thread */
    error = NULL;
-diff --git a/gio/tests/gdbus-tests.c b/gio/tests/gdbus-tests.c
-index 8b64e85..8237dd0 100644
 --- a/gio/tests/gdbus-tests.c
 +++ b/gio/tests/gdbus-tests.c
-@@ -77,6 +77,58 @@ _g_assert_property_notify_run (gpointer     object,
+@@ -77,6 +77,58 @@
    return data.timed_out;
  }
  
@@ -96,11 +92,9 @@ index 8b64e85..8237dd0 100644
  /* ---------------------------------------------------------------------------------------------------- */
  
  typedef struct
-diff --git a/gio/tests/gdbus-tests.h b/gio/tests/gdbus-tests.h
-index 538b265..6e31d7b 100644
 --- a/gio/tests/gdbus-tests.h
 +++ b/gio/tests/gdbus-tests.h
-@@ -114,6 +114,8 @@ GDBusConnection *_g_bus_get_priv (GBusType            bus_type,
+@@ -114,6 +114,8 @@
                                    GCancellable       *cancellable,
                                    GError            **error);
  
@@ -109,11 +103,9 @@ index 538b265..6e31d7b 100644
  G_END_DECLS
  
  #endif /* __TESTS_H__ */
-diff --git a/gio/tests/gdbus-threading.c b/gio/tests/gdbus-threading.c
-index ee9dbe9..96ddba6 100644
 --- a/gio/tests/gdbus-threading.c
 +++ b/gio/tests/gdbus-threading.c
-@@ -419,7 +419,6 @@ test_method_calls_in_thread (void)
+@@ -421,7 +421,6 @@
    GDBusProxy *proxy;
    GDBusConnection *connection;
    GError *error;
@@ -121,7 +113,7 @@ index ee9dbe9..96ddba6 100644
  
    error = NULL;
    connection = g_bus_get_sync (G_BUS_TYPE_SESSION,
-@@ -437,10 +436,6 @@ test_method_calls_in_thread (void)
+@@ -439,10 +438,6 @@
                                   &error);
    g_assert_no_error (error);
  
@@ -132,7 +124,7 @@ index ee9dbe9..96ddba6 100644
    test_method_calls_on_proxy (proxy);
  
    g_object_unref (proxy);
-@@ -596,8 +591,7 @@ main (int   argc,
+@@ -598,8 +593,7 @@
    g_assert (g_spawn_command_line_async (path, NULL));
    g_free (path);
  
@@ -142,6 +134,3 @@ index ee9dbe9..96ddba6 100644
  
    /* Create the connection in the main thread */
    error = NULL;
--- 
-1.9.1
-

@@ -77,6 +77,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_app_launch_context_setenv@Base 2.31.8
  g_app_launch_context_unsetenv@Base 2.31.8
  g_application_activate@Base 2.28.0
+ g_application_add_main_option@Base 2.41.4
  g_application_add_main_option_entries@Base 2.39.90
  g_application_add_option_group@Base 2.39.90
  g_application_command_line_create_file_for_arg@Base 2.35.8
@@ -102,6 +103,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_application_get_inactivity_timeout@Base 2.28.0
  g_application_get_is_registered@Base 2.28.0
  g_application_get_is_remote@Base 2.28.0
+ g_application_get_resource_base_path@Base 2.41.2
  g_application_get_type@Base 2.28.0
  g_application_hold@Base 2.28.0
  g_application_id_is_valid@Base 2.28.0
@@ -118,6 +120,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_application_set_default@Base 2.31.8
  g_application_set_flags@Base 2.28.0
  g_application_set_inactivity_timeout@Base 2.28.0
+ g_application_set_resource_base_path@Base 2.41.2
  g_application_unmark_busy@Base 2.37.0
  g_application_withdraw_notification@Base 2.39.4
  g_ask_password_flags_get_type@Base 2.16.0
@@ -555,6 +558,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_desktop_app_info_get_categories@Base 2.30.0
  g_desktop_app_info_get_filename@Base 2.24.0
  g_desktop_app_info_get_generic_name@Base 2.30.0
+ g_desktop_app_info_get_implementations@Base 2.41.0
  g_desktop_app_info_get_is_hidden@Base 2.16.0
  g_desktop_app_info_get_keywords@Base 2.31.8
  g_desktop_app_info_get_nodisplay@Base 2.30.0
@@ -1141,11 +1145,13 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_notification_add_button_with_target_value@Base 2.39.4
  g_notification_get_type@Base 2.39.4
  g_notification_new@Base 2.39.4
+ g_notification_priority_get_type@Base 2.41.2
  g_notification_set_body@Base 2.39.4
  g_notification_set_default_action@Base 2.39.4
  g_notification_set_default_action_and_target@Base 2.39.4
  g_notification_set_default_action_and_target_value@Base 2.39.4
  g_notification_set_icon@Base 2.39.4
+ g_notification_set_priority@Base 2.41.2
  g_notification_set_title@Base 2.39.4
  g_notification_set_urgent@Base 2.39.4
  g_null_settings_backend_new@Base 2.28.0
@@ -3770,6 +3776,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_type_check_instance@Base 2.12.0
  g_type_check_instance_cast@Base 2.12.0
  g_type_check_instance_is_a@Base 2.12.0
+ g_type_check_instance_is_fundamentally_a@Base 2.41.1
  g_type_check_is_value_type@Base 2.12.0
  g_type_check_value@Base 2.12.0
  g_type_check_value_holds@Base 2.12.0
@@ -3877,6 +3884,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_value_get_ulong@Base 2.12.0
  g_value_get_variant@Base 2.26.0
  g_value_init@Base 2.12.0
+ g_value_init_from_instance@Base 2.41.2
  g_value_peek_pointer@Base 2.12.0
  g_value_register_transform_func@Base 2.12.0
  g_value_reset@Base 2.12.0
