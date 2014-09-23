@@ -1,8 +1,8 @@
-glib2.0 (2.42.0-1) UNRELEASED; urgency=medium
+glib2.0 (2.42.0-1) unstable; urgency=medium
 
   * New upstream release
 
- -- Iain Lane <laney@debian.org>  Tue, 23 Sep 2014 10:10:31 +0100
+ -- Iain Lane <iain@orangesquash.org.uk>  Tue, 23 Sep 2014 10:12:15 +0100
 
 glib2.0 (2.41.5-2) unstable; urgency=medium
 
