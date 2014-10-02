@@ -1,4 +1,4 @@
-glib2.0 (2.42.0-2) UNRELEASED; urgency=medium
+glib2.0 (2.42.0-2) unstable; urgency=medium
 
   [ Andreas Henriksson ]
   * Update Vcs-* to use unstable instead of experimental branch
@@ -8,7 +8,7 @@ glib2.0 (2.42.0-2) UNRELEASED; urgency=medium
     upstream stable branch - silences warnings that are shown to users on
     stderr, and which also cause some testsuite failures and consequent FTBFS.
 
- -- Andreas Henriksson <andreas@fatal.se>  Tue, 23 Sep 2014 20:33:29 +0200
+ -- Iain Lane <laney@debian.org>  Thu, 02 Oct 2014 13:08:24 +0100
 
 glib2.0 (2.42.0-1) unstable; urgency=medium
 
