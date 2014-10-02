@@ -1,0 +1,29 @@
+From b12bd1c3dcfbb398d2462dcf584a1f6d5173ca9a Mon Sep 17 00:00:00 2001
+From: Ryan Lortie <desrt@desrt.ca>
+Date: Thu, 25 Sep 2014 17:18:22 -0400
+Subject: [PATCH] properties: disable default deprecation warnings
+
+Disable the deprecation warnings on GObject properties by default.  This
+change is only being made on the stable branch, and maybe only for this
+one stable series -- the warnings will remain enabled by default on the
+unstable releases.
+---
+ gobject/gobject.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gobject/gobject.c b/gobject/gobject.c
+index cd00244..b013c12 100644
+--- a/gobject/gobject.c
++++ b/gobject/gobject.c
+@@ -1311,7 +1311,7 @@ consider_issuing_property_deprecation_warning (const GParamSpec *pspec)
+       const gchar *value = g_getenv ("G_ENABLE_DIAGNOSTIC");
+ 
+       if (!value)
+-        value = "-";
++        value = "0";
+ 
+       g_once_init_leave (&enable_diagnostic, value);
+     }
+-- 
+2.1.0
+
