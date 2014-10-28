@@ -1,3 +1,10 @@
+glib2.0 (2.42.0-3) UNRELEASED; urgency=medium
+
+  * Pass --enable-debug=minimum not minimal - this is what configure.ac
+    expects.
+
+ -- Iain Lane <laney@debian.org>  Thu, 02 Oct 2014 15:23:42 +0100
+
 glib2.0 (2.42.0-2) unstable; urgency=medium
 
   [ Andreas Henriksson ]

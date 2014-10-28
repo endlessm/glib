@@ -97,7 +97,7 @@ DEB_CONFIGURE_FLAGS_deb := \
 			--enable-static \
 			--enable-installed-tests \
 			--enable-always-build-tests \
-			--enable-debug=minimal
+			--enable-debug=minimum
 
 DEB_CONFIGURE_FLAGS_udeb := \
 			--disable-selinux
