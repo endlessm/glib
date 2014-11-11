@@ -6,6 +6,8 @@ glib2.0 (2.42.1-1) UNRELEASED; urgency=medium
 
   [ Emilio Pozuelo Monfort ]
   * New upstream bugfix release.
+  * d/p/0001-properties-disable-default-deprecation-warnings.patch:
+    + Removed, merged upstream.
 
  -- Iain Lane <laney@debian.org>  Thu, 02 Oct 2014 15:23:42 +0100
 
