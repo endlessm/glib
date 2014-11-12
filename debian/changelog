@@ -1,4 +1,4 @@
-glib2.0 (2.42.1-1) UNRELEASED; urgency=medium
+glib2.0 (2.42.1-1) unstable; urgency=medium
 
   [ Iain Lane ]
   * Pass --enable-debug=minimum not minimal - this is what configure.ac
@@ -9,7 +9,7 @@ glib2.0 (2.42.1-1) UNRELEASED; urgency=medium
   * d/p/0001-properties-disable-default-deprecation-warnings.patch:
     + Removed, merged upstream.
 
- -- Iain Lane <laney@debian.org>  Thu, 02 Oct 2014 15:23:42 +0100
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 11 Nov 2014 18:53:49 +0100
 
 glib2.0 (2.42.0-2) unstable; urgency=medium
 
