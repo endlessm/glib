@@ -1,3 +1,15 @@
+glib2.0 (2.43.1-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2.43.1, changes since 2.42.1:
+    + GQueue now accepts NULL as a sibling in g_queue_insert_before() and
+      g_queue_insert_after()
+    + GObject gained a debug option to provide instance counts. To use it, set
+      GOBJECT_DEBUG=instance-count and call g_type_get_instance_count().
+    + GOption now has a strict POSIX mode in which it stops parsing arguments
+      as soon as a non-option argument is encountered.
+
+ -- Iain Lane <laney@debian.org>  Tue, 25 Nov 2014 12:19:17 +0000
+
 glib2.0 (2.42.1-1) unstable; urgency=medium
 
   [ Iain Lane ]
