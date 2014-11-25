@@ -1,3 +1,34 @@
+glib2.0 (2.42.1-1) unstable; urgency=medium
+
+  [ Iain Lane ]
+  * Pass --enable-debug=minimum not minimal - this is what configure.ac
+    expects.
+
+  [ Emilio Pozuelo Monfort ]
+  * New upstream bugfix release.
+  * d/p/0001-properties-disable-default-deprecation-warnings.patch:
+    + Removed, merged upstream.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 11 Nov 2014 18:53:49 +0100
+
+glib2.0 (2.42.0-2) unstable; urgency=medium
+
+  [ Andreas Henriksson ]
+  * Update Vcs-* to use unstable instead of experimental branch
+
+  [ Iain Lane ]
+  * 0001-properties-disable-default-deprecation-warnings.patch: Backport from
+    upstream stable branch - silences warnings that are shown to users on
+    stderr, and which also cause some testsuite failures and consequent FTBFS.
+
+ -- Iain Lane <laney@debian.org>  Thu, 02 Oct 2014 13:08:24 +0100
+
+glib2.0 (2.42.0-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Iain Lane <iain@orangesquash.org.uk>  Tue, 23 Sep 2014 10:12:15 +0100
+
 glib2.0 (2.41.5-2) unstable; urgency=medium
 
   * Upload to unstable.
