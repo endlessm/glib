@@ -7,6 +7,8 @@ glib2.0 (2.43.1-1) UNRELEASED; urgency=medium
       GOBJECT_DEBUG=instance-count and call g_type_get_instance_count().
     + GOption now has a strict POSIX mode in which it stops parsing arguments
       as soon as a non-option argument is encountered.
+  * debian/control{,.in}: Bump Standards-Version to 3.9.6, no changes
+    required.
 
  -- Iain Lane <laney@debian.org>  Tue, 25 Nov 2014 12:19:17 +0000
 
