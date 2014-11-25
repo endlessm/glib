@@ -942,6 +942,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_input_stream_is_closed@Base 2.16.0
  g_input_stream_read@Base 2.16.0
  g_input_stream_read_all@Base 2.16.0
+ g_input_stream_read_all_async@Base 2.43.1
+ g_input_stream_read_all_finish@Base 2.43.1
  g_input_stream_read_async@Base 2.16.0
  g_input_stream_read_bytes@Base 2.33.14
  g_input_stream_read_bytes_async@Base 2.33.14
@@ -1175,6 +1177,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_output_stream_vprintf@Base 2.39.4
  g_output_stream_write@Base 2.16.0
  g_output_stream_write_all@Base 2.16.0
+ g_output_stream_write_all_async@Base 2.43.1
+ g_output_stream_write_all_finish@Base 2.43.1
  g_output_stream_write_async@Base 2.16.0
  g_output_stream_write_bytes@Base 2.33.14
  g_output_stream_write_bytes_async@Base 2.33.14
@@ -2641,6 +2645,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_option_context_get_help_enabled@Base 2.12.0
  g_option_context_get_ignore_unknown_options@Base 2.12.0
  g_option_context_get_main_group@Base 2.12.0
+ g_option_context_get_strict_posix@Base 2.43.1
  g_option_context_get_summary@Base 2.12.0
  g_option_context_new@Base 2.12.0
  g_option_context_parse@Base 2.12.0
@@ -2649,6 +2654,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_option_context_set_help_enabled@Base 2.12.0
  g_option_context_set_ignore_unknown_options@Base 2.12.0
  g_option_context_set_main_group@Base 2.12.0
+ g_option_context_set_strict_posix@Base 2.43.1
  g_option_context_set_summary@Base 2.12.0
  g_option_context_set_translate_func@Base 2.12.0
  g_option_context_set_translation_domain@Base 2.12.0
@@ -3801,6 +3807,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_type_from_name@Base 2.12.0
  g_type_fundamental@Base 2.12.0
  g_type_fundamental_next@Base 2.12.0
+ g_type_get_instance_count@Base 2.43.1
  g_type_get_plugin@Base 2.12.0
  g_type_get_qdata@Base 2.12.0
  g_type_get_type_registration_serial@Base 2.35.8
