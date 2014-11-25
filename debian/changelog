@@ -1,4 +1,4 @@
-glib2.0 (2.43.1-1) UNRELEASED; urgency=medium
+glib2.0 (2.43.1-1) experimental; urgency=medium
 
   * New upstream release 2.43.1, changes since 2.42.1:
     + GQueue now accepts NULL as a sibling in g_queue_insert_before() and
@@ -11,7 +11,7 @@ glib2.0 (2.43.1-1) UNRELEASED; urgency=medium
     required.
   * debian/libglib2.0-0.symbols: Add new symbols for this release.
 
- -- Iain Lane <laney@debian.org>  Tue, 25 Nov 2014 12:19:17 +0000
+ -- Iain Lane <laney@debian.org>  Tue, 25 Nov 2014 12:46:31 +0000
 
 glib2.0 (2.42.1-1) unstable; urgency=medium
 
