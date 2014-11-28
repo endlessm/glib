@@ -1,3 +1,12 @@
+glib2.0 (2.43.1-2) UNRELEASED; urgency=medium
+
+  * 0001-GSettings-fix-check-for-delaying-backend-subscriptio.patch:
+    Cherry-pick patch from upstream. Check signal detail too when looking for
+    pending signal handlers, so that subscribing to changed signals with a
+    detail works again.
+
+ -- Iain Lane <laney@debian.org>  Fri, 28 Nov 2014 17:55:55 +0000
+
 glib2.0 (2.43.1-1) experimental; urgency=medium
 
   * New upstream release 2.43.1, changes since 2.42.1:
