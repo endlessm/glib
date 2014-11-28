@@ -1,0 +1,32 @@
+From d2e79653c093050d790fd43680a420910ba4610e Mon Sep 17 00:00:00 2001
+From: Ryan Lortie <desrt@desrt.ca>
+Date: Fri, 28 Nov 2014 12:43:03 -0500
+Subject: [PATCH] gmain: fix poll record comparison
+
+We intend to keep the list of poll records sorted by (integer) file
+descriptor, but due to a typo we are actually keeping it sorted by
+pointer address of the GPollFD.
+
+Fix that.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=11059
+---
+ glib/gmain.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/glib/gmain.c b/glib/gmain.c
+index e2b6ca3..e20128a 100644
+--- a/glib/gmain.c
++++ b/glib/gmain.c
+@@ -4205,7 +4205,7 @@ g_main_context_add_poll_unlocked (GMainContext *context,
+   nextrec = context->poll_records;
+   while (nextrec)
+     {
+-      if (nextrec->fd > fd)
++      if (nextrec->fd->fd > fd->fd)
+         break;
+       prevrec = nextrec;
+       nextrec = nextrec->next;
+-- 
+2.1.3
+
