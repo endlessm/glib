@@ -1,4 +1,4 @@
-glib2.0 (2.43.1-2) UNRELEASED; urgency=medium
+glib2.0 (2.43.1-2) experimental; urgency=medium
 
   * 0001-GSettings-fix-check-for-delaying-backend-subscriptio.patch:
     Cherry-pick patch from upstream. Check signal detail too when looking for
@@ -7,7 +7,7 @@ glib2.0 (2.43.1-2) UNRELEASED; urgency=medium
   * 0001-gmain-fix-poll-record-comparison.patch: gmain: fix the sorting of
     poll records. Resolves FTBFS on ppc64el.
 
- -- Iain Lane <laney@debian.org>  Fri, 28 Nov 2014 17:55:55 +0000
+ -- Iain Lane <laney@debian.org>  Fri, 28 Nov 2014 18:08:16 +0000
 
 glib2.0 (2.43.1-1) experimental; urgency=medium
 
