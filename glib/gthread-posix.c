@@ -642,6 +642,12 @@ g_rw_lock_reader_unlock (GRWLock *rw_lock)
 
 #if !defined(USE_NATIVE_MUTEX)
 
+#if defined (HAVE_PTHREAD_CONDATTR_SETCLOCK) && defined (CLOCK_MONOTONIC) && defined (__FreeBSD_kernel__)
+extern int pthread_condattr_setclock (pthread_condattr_t *__attr,
+                                      __clockid_t __clock_id)
+     __THROW __nonnull ((1));
+#endif
+
 static pthread_cond_t *
 g_cond_impl_new (void)
 {
