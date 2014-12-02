@@ -966,6 +966,9 @@ AC_CHECK_FUNCS(lchmod lchown fchmod fchown utimes getresuid)
 AC_CHECK_FUNCS(getmntent_r setmntent endmntent hasmntopt getfsstat getvfsstat fallocate)
 case $host_os in aix*) ac_cv_func_splice=no ;; esac # AIX splice() is something else
 AC_CHECK_FUNCS(splice)
+AC_CHECK_DECLS([prlimit], [], [], [[
+#include <sys/time.h>
+#include <sys/resource.h>]])
 AC_CHECK_FUNCS(prlimit)
 
 # To avoid finding a compatibility unusable statfs, which typically
