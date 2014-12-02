@@ -1,10 +1,209 @@
-glib2.0 (2.40.0-3endless1) unstable; urgency=low
+glib2.0 (2.42.1-1endless1) unstable; urgency=medium
+
+  [ Iain Lane ]
+  * Pass --enable-debug=minimum not minimal - this is what configure.ac
+    expects.
+
+  [ Emilio Pozuelo Monfort ]
+  * New upstream bugfix release.
+  * d/p/0001-properties-disable-default-deprecation-warnings.patch:
+    + Removed, merged upstream.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 11 Nov 2014 18:53:49 +0100
+
+glib2.0 (2.42.0-2) unstable; urgency=medium
+
+  [ Andreas Henriksson ]
+  * Update Vcs-* to use unstable instead of experimental branch
+
+  [ Iain Lane ]
+  * 0001-properties-disable-default-deprecation-warnings.patch: Backport from
+    upstream stable branch - silences warnings that are shown to users on
+    stderr, and which also cause some testsuite failures and consequent FTBFS.
+
+ -- Iain Lane <laney@debian.org>  Thu, 02 Oct 2014 13:08:24 +0100
+
+glib2.0 (2.42.0-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Iain Lane <iain@orangesquash.org.uk>  Tue, 23 Sep 2014 10:12:15 +0100
+
+glib2.0 (2.41.5-2) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Fri, 19 Sep 2014 22:00:33 +0200
+
+glib2.0 (2.41.5-1) experimental; urgency=medium
+
+  [ Andreas Henriksson ]
+  * Make libglib2.0-0 recommend xdg-user-dirs
+    - needed to set up ~/.config/user-dirs.dirs to get default XDG_*_DIR set.
+
+  [ Iain Lane ]
+  * New upstream release 2.41.5
+    - GDesktopAppInfo: avoid polling on missing desktop dirs
+
+ -- Iain Lane <iain@orangesquash.org.uk>  Wed, 17 Sep 2014 10:19:27 +0100
+
+glib2.0 (2.41.4-1) experimental; urgency=medium
+
+  * New upstream release
+  * debian/libglib2.0-0.symbols:
+    + Add g_application_add_main_option symbol
+
+ -- Sjoerd Simons <sjoerd@debian.org>  Sat, 06 Sep 2014 15:16:14 +0200
+
+glib2.0 (2.41.3-1) experimental; urgency=medium
+
+  * New upstream release 2.41.3
+  * debian/tests/installed-tests: Revert the previous change - require dbus >=
+    1.8 and always use dbus-run-session.
+
+ -- Iain Lane <iain@orangesquash.org.uk>  Wed, 20 Aug 2014 16:16:23 +0100
+
+glib2.0 (2.41.2-1) experimental; urgency=medium
+
+  * New upstream release
+    - The Unicode support has been updated to version 7.0 of the Unicode
+      standard
+    - GNotification now supports priorities for notifications
+    - GMutex now uses a faster, native implementation on Linux
+  * 0001-gvariant-tests-workaround-libc-compiler-issue.patch: Drop, applied
+    upstream in this release.
+  * Add new symbols for this release.
+  * Merge in changes from 2.40.0-4
+    + Adapt for system pcre3/1:8.35 (Closes: #755439):
+      - a PCRE 8.31 bug in case-insensitivity has been fixed, so do not assert
+        bug-for-bug compatibility with 8.31
+      - named match groups' names cannot start with a digit any more, so
+        (?P<1>.) is no longer allowed; do not assert that it is
+      - turn off a new optimization that would reduce the result set when
+        called from g_match_all(_full), to preserve existing functionality
+    + Build-depend on pcre3/1:8.35 so that the new optimization is
+      known to be turned off in the built binaries
+    + Add patch from upstream to fix mis-optimization in gvariant test
+      with gcc 4.9 (Closes: #756272)
+    + Avoid using dbus-launch for regression tests (Closes: #737488):
+      - run installed-tests under dbus-run-session from dbus (>= 1.8)
+      - do not run build-time tests under dbus-launch: those that use D-Bus
+        all create their own session bus instances now
+        (i.e. remove 05_run-gio-tests-with-a-dbus-session.patch)
+      - set a deliberately invalid DBUS_SESSION_BUS_ADDRESS to make sure
+        nothing in the build is still inheriting it from the environment
+    + Override Lintian false positive #733733: we build-depend on python:any
+      but Lintian doesn't yet understand :any syntax
+  * Make the installed tests still run dbus-launch if we don't have
+    dbus-run-session (i.e. if the installed dbus is << 1.8).
+
+ -- Iain Lane <laney@debian.org>  Thu, 14 Aug 2014 11:14:40 +0100
+
+glib2.0 (2.41.1-2) experimental; urgency=medium
+
+  * 0001-gvariant-tests-workaround-libc-compiler-issue.patch: Cherry-pick
+    patch from upstream to fix/workaround a new compiler optimisation in
+    gcc-4.9 which occurs when passing a null pointer / zero size to memcmp.
+    Should fix FTBFS on many arches in unstable.
+
+ -- Iain Lane <iain@orangesquash.org.uk>  Wed, 25 Jun 2014 10:21:27 +0100
+
+glib2.0 (2.41.1-1) experimental; urgency=medium
+
+  * New upstream release
+  * 0001-Prevent-an-invalid-CARBON_LIBS-from-appearing-in-the.patch: Drop,
+    included in this release.
+  * Update symbols file with the new symbol in this release.
+
+ -- Iain Lane <iain@orangesquash.org.uk>  Tue, 24 Jun 2014 12:40:29 +0100
+
+glib2.0 (2.41.0-2) experimental; urgency=medium
+
+  [ Andreas Henriksson ]
+  * Bump python:any build-dependency to >= 2.7.5-5~ (Closes: #747928)
+
+  [ Emilio Pozuelo Monfort ]
+  * Use the default compiler on sparc, since it's already >> 4.7.
+    Closes: #751313.
+
+  [ Iain Lane ]
+  * 0001-Prevent-an-invalid-CARBON_LIBS-from-appearing-in-the.patch:
+    Cherry-pick patch from upstream to fix an invalid "@CARBON_LIBS@" token
+    appearing in Libs.private in the pcfile. (LP: #1330033)
+
+ -- Iain Lane <laney@debian.org>  Mon, 16 Jun 2014 10:17:36 +0100
+
+glib2.0 (2.41.0-1) experimental; urgency=medium
+
+  [ Emilio Pozuelo Monfort ]
+  * debian/libglib2.0-doc.links:
+    + The symlink for the gtk docs is broken at the moment, and even if
+      fixed, it will still be broken if libgtk2.0-doc isn't installed on
+      a system, so just drop it. Closes: #746782.
+
+  [ Iain Lane ]
+  * New upstream release 2.41.0
+    - Many bugfixes found by static analysis, including potential fd leaks and
+      NULL pointer dereferences.
+    - Increased use of (nullable) attribute on out values and return types now
+      that it is supported (mostly from porting Vala metadata).
+    - use XDG_CURRENT_DESKTOP for OnlyShowIn/NotShowIn handling of desktop
+      files, deprecating g_desktop_app_info_set_desktop_env()
+    - add support for g_desktop_app_info_get_implementations() to find desktop
+      files that have an Implements= line for a given interface
+    - GHmac has gained SHA-512 support
+    - support the new mimeapps specification (most notably, moving the
+      assoications/defaults configuration to ~/.config/mimeapps.list).
+    - libgobject is now linked -Wl,-z,nodelete when possible to avoid errors
+      when gobject is used from a module for a program that does not itself use
+      gobject and that module is unloaded/reloaded
+  * debian/watch: Use http://ftp.gnome.org; it's more up-to-date.
+  * Update symbols file with new symbols for this release.
+
+ -- Iain Lane <laney@debian.org>  Tue, 27 May 2014 15:41:46 +0100
+
+glib2.0 (2.40.0-4) unstable; urgency=medium
+
+  * Team upload
+
+  [ Emilio Pozuelo Monfort ]
+  * Use the default compiler on sparc, since it's already >> 4.7.
+    Closes: #751313.
+
+  [ Iain Lane ]
+  * Fix Vcs-* for the unstable branches
+
+  [ Simon McVittie ]
+  * Adapt for system pcre3/1:8.35 (Closes: #755439):
+    - a PCRE 8.31 bug in case-insensitivity has been fixed, so do not assert
+      bug-for-bug compatibility with 8.31
+    - named match groups' names cannot start with a digit any more, so
+      (?P<1>.) is no longer allowed; do not assert that it is
+    - turn off a new optimization that would reduce the result set when called
+      from g_match_all(_full), to preserve existing functionality
+  * Build-depend on pcre3/1:8.35 so that the new optimization is
+    known to be turned off in the built binaries
+  * Add patch from upstream to fix mis-optimization in gvariant test
+    with gcc 4.9 (Closes: #756272)
+  * Avoid using dbus-launch for regression tests (Closes: #737488):
+    - run installed-tests under dbus-run-session from dbus (>= 1.8)
+    - do not run build-time tests under dbus-launch: those that use D-Bus
+      all create their own session bus instances now
+      (i.e. remove 05_run-gio-tests-with-a-dbus-session.patch)
+    - set a deliberately invalid DBUS_SESSION_BUS_ADDRESS to make sure
+      nothing in the build is still inheriting it from the environment
+  * Override Lintian false positive #733733: we build-depend on python:any
+    but Lintian doesn't yet understand :any syntax
+
+ -- Simon McVittie <smcv@debian.org>  Sun, 10 Aug 2014 22:58:33 +0100
+
+glib2.0 (2.40.0-3) unstable; urgency=medium
 
   [ Rico Tzschichholz ]
   * debian/libglib2.0-bin.install:
     - Install /usr/bin/gapplication
 
- -- Víctor Jáquez <vjaquez@igalia.com>  Fri, 02 May 2014 13:24:49 +0200
+ -- Sjoerd Simons <sjoerd@debian.org>  Sun, 27 Apr 2014 10:36:34 +0200
 
 glib2.0 (2.40.0-2endless1) unstable; urgency=low
 

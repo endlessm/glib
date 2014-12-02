@@ -64,6 +64,10 @@ DEB_DH_TRANSLATIONS_ARGS = -Xinstalled-tests
 # where creating /home/buildd/.dbus-keyrings fails
 export HOME=$(CURDIR)/debian/build
 
+# Make sure that everything that uses D-Bus is creating its own temporary
+# session rather than polluting the developer's (or failing, on buildds)
+export DBUS_SESSION_BUS_ADDRESS=this-should-not-be-used-and-will-fail:
+
 ifeq ($(DEB_HOST_ARCH_OS), linux)
   DEB_MAKE_CHECK_TARGET = $(if $(filter deb, $(cdbs_make_curflavor)), -k check -j1)
 else
@@ -87,16 +91,13 @@ ifneq ($(DEB_BUILD_ARCH),$(DEB_HOST_ARCH))
 			--disable-modular-tests \
 			--disable-gtk-doc
 endif
-ifeq ($(DEB_HOST_ARCH), sparc)
-  DEB_CONFIGURE_EXTRA_FLAGS += CC=gcc-4.8
-endif
 
 DEB_CONFIGURE_FLAGS_deb := \
 			--enable-gtk-doc \
 			--enable-static \
 			--enable-installed-tests \
 			--enable-always-build-tests \
-			--enable-debug=minimal
+			--enable-debug=minimum
 
 DEB_CONFIGURE_FLAGS_udeb := \
 			--disable-selinux
