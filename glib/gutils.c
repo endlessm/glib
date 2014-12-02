@@ -2393,6 +2393,12 @@ const gchar *g_get_tmp_dir_utf8 (void) { return g_get_tmp_dir (); }
 
 #endif
 
+#ifdef HAVE_ISSETUGID
+/* Debian GNU/kFreeBSD doesn't have a prototype for issetugid(),
+ * see http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=635205 */
+int issetugid(void);
+#endif
+
 /* Private API:
  *
  * Returns %TRUE if the current process was executed as setuid (or an
