@@ -221,8 +221,8 @@ g_cancellable_pop_current (GCancellable *cancellable)
  *
  * Gets the top cancellable from the stack.
  *
- * Returns: (transfer none): a #GCancellable from the top of the stack, or %NULL
- * if the stack is empty.
+ * Returns: (nullable) (transfer none): a #GCancellable from the top
+ * of the stack, or %NULL if the stack is empty.
  **/
 GCancellable *
 g_cancellable_get_current  (void)
@@ -244,6 +244,13 @@ g_cancellable_get_current  (void)
  *
  * If cancellable is currently in use by any cancellable operation
  * then the behavior of this function is undefined.
+ *
+ * Note that it is generally not a good idea to reuse an existing
+ * cancellable for more operations after it has been cancelled once,
+ * as this function might tempt you to do. The recommended practice
+ * is to drop the reference to a cancellable after cancelling it,
+ * and let it die with the outstanding async operations. You should
+ * create a fresh cancellable for further async operations.
  **/
 void 
 g_cancellable_reset (GCancellable *cancellable)

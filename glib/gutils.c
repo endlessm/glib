@@ -1404,9 +1404,8 @@ load_user_special_dirs (void)
   g_user_special_dirs[G_USER_DIRECTORY_VIDEOS] = find_folder (kMovieDocumentsFolderType);
 }
 
-#endif /* HAVE_CARBON */
+#elif defined(G_OS_WIN32)
 
-#if defined(G_OS_WIN32)
 static void
 load_user_special_dirs (void)
 {
@@ -1474,8 +1473,6 @@ load_user_special_dirs (void)
   g_user_special_dirs[G_USER_DIRECTORY_TEMPLATES] = get_special_folder (CSIDL_TEMPLATES);
   g_user_special_dirs[G_USER_DIRECTORY_VIDEOS] = get_special_folder (CSIDL_MYVIDEO);
 }
-#endif /* G_OS_WIN32 */
-
 
 static gboolean
 get_user_special_directory_from_xdg_string (const char *string,
@@ -1535,7 +1532,7 @@ parse_user_directory_from_string (gchar *string,
   return NULL;
 }
 
-#if defined(G_OS_UNIX) && !defined(HAVE_CARBON)
+#else /* default is unix */
 
 /* adapted from xdg-user-dir-lookup.c
  *
@@ -1667,7 +1664,7 @@ load_user_special_dirs (void)
   g_free (config_file);
 }
 
-#endif /* G_OS_UNIX && !HAVE_CARBON */
+#endif /* platform-specific load_user_special_dirs implementations */
 
 
 /**
@@ -1872,7 +1869,8 @@ g_win32_get_system_data_dirs_for_module (void (*address_of_function)(void))
   gchar **retval;
   gchar *p;
   gchar *exe_root;
-      
+
+  hmodule = NULL;
   if (address_of_function)
     {
       G_LOCK (g_utils_global);
@@ -2405,8 +2403,13 @@ g_check_setuid (void)
     extern int __libc_enable_secure;
     return __libc_enable_secure;
   }
-#elif defined(HAVE_ISSETUGID)
+#elif defined(HAVE_ISSETUGID) && !defined(__BIONIC__)
   /* BSD: http://www.freebsd.org/cgi/man.cgi?query=issetugid&sektion=2 */
+
+  /* Android had it in older versions but the new 64 bit ABI does not
+   * have it anymore, and some versions of the 32 bit ABI neither.
+   * https://code.google.com/p/android-developer-preview/issues/detail?id=168
+   */
   return issetugid ();
 #elif defined(G_OS_UNIX)
   uid_t ruid, euid, suid; /* Real, effective and saved user ID's */

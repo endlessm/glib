@@ -299,7 +299,7 @@ psource_new()
 	return source;
 }
 
-/*
+/**
  * port_add:
  * @f:
  *
@@ -371,8 +371,8 @@ start_over:
     return errno;
 }
 
-/*
- * port_remove
+/**
+ * port_remove:
  *
  * < private >
  * Unsafe, need lock fen_lock.
@@ -460,9 +460,7 @@ printevent (const char *pname, int event, const char *tag)
     static gchar	*event_string = NULL;
     GString			*str;
 
-    if (event_string) {
-        g_free(event_string);
-    }
+    g_free(event_string);
 
     str = g_string_new ("");
     g_string_printf (str, "[%s] [%-20s]", tag, pname);

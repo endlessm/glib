@@ -155,6 +155,12 @@ GLIB_AVAILABLE_IN_ALL
 void                    g_application_set_flags                         (GApplication             *application,
                                                                          GApplicationFlags         flags);
 
+GLIB_AVAILABLE_IN_2_42
+const gchar *           g_application_get_resource_base_path            (GApplication             *application);
+GLIB_AVAILABLE_IN_2_42
+void                    g_application_set_resource_base_path            (GApplication             *application,
+                                                                         const gchar              *resource_path);
+
 GLIB_DEPRECATED
 void                    g_application_set_action_group                  (GApplication             *application,
                                                                          GActionGroup             *action_group);
@@ -162,6 +168,15 @@ void                    g_application_set_action_group                  (GApplic
 GLIB_AVAILABLE_IN_2_40
 void                    g_application_add_main_option_entries           (GApplication             *application,
                                                                          const GOptionEntry       *entries);
+
+GLIB_AVAILABLE_IN_2_42
+void                    g_application_add_main_option                   (GApplication             *application,
+                                                                         const char               *long_name,
+                                                                         char                      short_name,
+                                                                         GOptionFlags              flags,
+                                                                         GOptionArg                arg,
+                                                                         const char               *description,
+                                                                         const char               *arg_description);
 GLIB_AVAILABLE_IN_2_40
 void                    g_application_add_option_group                  (GApplication             *application,
                                                                          GOptionGroup             *group);

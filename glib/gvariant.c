@@ -71,10 +71,11 @@
  * in the gio library, for those.)
  *
  * For space-efficiency, the #GVariant serialisation format does not
- * automatically include the variant's type or endianness, which must
- * either be implied from context (such as knowledge that a particular
- * file format always contains a little-endian %G_VARIANT_TYPE_VARIANT)
- * or supplied out-of-band (for instance, a type and/or endianness
+ * automatically include the variant's length, type or endianness,
+ * which must either be implied from context (such as knowledge that a
+ * particular file format always contains a little-endian
+ * %G_VARIANT_TYPE_VARIANT which occupies the whole length of the file)
+ * or supplied out-of-band (for instance, a length, type and/or endianness
  * indicator could be placed at the beginning of a file, network message
  * or network stream).
  *
@@ -107,7 +108,8 @@
  *
  * This is the memory that is used for storing GVariant data in
  * serialised form.  This is what would be sent over the network or
- * what would end up on disk.
+ * what would end up on disk, not counting any indicator of the
+ * endianness, or of the length or type of the top-level variant.
  *
  * The amount of memory required to store a boolean is 1 byte. 16,
  * 32 and 64 bit integers and double precision floating point numbers
@@ -3665,7 +3667,7 @@ g_variant_builder_end (GVariantBuilder *builder)
  *
  * ## Using a stack-allocated GVariantDict
  *
- * |[
+ * |[<!-- language="C" -->
  *   GVariant *
  *   add_to_count (GVariant  *orig,
  *                 GError   **error)
@@ -3689,7 +3691,7 @@ g_variant_builder_end (GVariantBuilder *builder)
  *
  * ## Using heap-allocated GVariantDict
  *
- * |[
+ * |[<!-- language="C" -->
  *   GVariant *
  *   add_to_count (GVariant  *orig,
  *                 GError   **error)
@@ -5158,7 +5160,7 @@ g_variant_valist_get (const gchar **str,
  * specified in @format_string. This can be achieved by casting them. See
  * the [GVariant varargs documentation][gvariant-varargs].
  *
- * |[
+ * |[<!-- language="C" -->
  * MyFlags some_flags = FLAG_ONE | FLAG_TWO;
  * const gchar *some_strings[] = { "a", "b", "c", NULL };
  * GVariant *new_variant;

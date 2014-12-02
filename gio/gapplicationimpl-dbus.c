@@ -46,7 +46,7 @@
 /* DBus Interface definition {{{1 */
 
 /* For documentation of these interfaces, see
- * https://live.gnome.org/GApplication/DBusAPI
+ * https://wiki.gnome.org/Projects/GLib/GApplication/DBusAPI
  */
 static const gchar org_gtk_Application_xml[] =
   "<node>"
@@ -753,6 +753,7 @@ g_application_impl_command_line (GApplicationImpl    *impl,
                                               g_variant_new ("(o^aay@a{sv})", object_path, arguments, platform_data),
                                               G_VARIANT_TYPE ("(i)"), 0, G_MAXINT, fd_list, NULL,
                                               g_application_impl_cmdline_done, &data);
+    g_object_unref (fd_list);
   }
 #else
   g_dbus_connection_call (impl->session_bus, impl->bus_name, impl->object_path,

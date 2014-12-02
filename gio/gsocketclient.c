@@ -1492,6 +1492,12 @@ g_socket_client_connected_callback (GObject      *source,
   GProxy *proxy;
   const gchar *protocol;
 
+  if (g_task_return_error_if_cancelled (data->task))
+    {
+      g_object_unref (data->task);
+      return;
+    }
+
   if (!g_socket_connection_connect_finish (G_SOCKET_CONNECTION (source),
 					   result, &error))
     {
@@ -1574,7 +1580,10 @@ g_socket_client_enumerator_callback (GObject      *object,
   GError *error = NULL;
 
   if (g_task_return_error_if_cancelled (data->task))
-    return;
+    {
+      g_object_unref (data->task);
+      return;
+    }
 
   address = g_socket_address_enumerator_next_finish (data->enumerator,
 						     result, &error);
