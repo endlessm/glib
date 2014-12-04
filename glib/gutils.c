@@ -808,6 +808,12 @@ g_get_real_name (void)
  * should either directly check the `HOME` environment variable yourself
  * or unset it before calling any functions in GLib.
  *
+ * When the pre-2.36 behaviour was in effect, Debian provided the
+ * <envar>G_HOME</envar> environment variable for testing and development
+ * purposes. This is now unnecessary as <envar>HOME</envar> can be used
+ * directly, but is retained for compatibility. It is deprecated and will be
+ * removed in a future release.
+ *
  * Returns: the current user's home directory
  */
 const gchar *
@@ -820,7 +826,9 @@ g_get_home_dir (void)
       gchar *tmp;
 
       /* We first check HOME and use it if it is set */
-      tmp = g_strdup (g_getenv ("HOME"));
+      tmp = g_strdup (g_getenv ("G_HOME"));
+      if (!tmp)
+        tmp = g_strdup (g_getenv ("HOME"));
 
 #ifdef G_OS_WIN32
       /* Only believe HOME if it is an absolute path and exists.
@@ -2383,6 +2391,12 @@ const gchar *g_get_real_name_utf8 (void) { return g_get_real_name (); }
 const gchar *g_get_home_dir_utf8 (void) { return g_get_home_dir (); }
 const gchar *g_get_tmp_dir_utf8 (void) { return g_get_tmp_dir (); }
 
+#endif
+
+#ifdef HAVE_ISSETUGID
+/* Debian GNU/kFreeBSD doesn't have a prototype for issetugid(),
+ * see http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=635205 */
+int issetugid(void);
 #endif
 
 /* Private API:
