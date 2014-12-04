@@ -394,7 +394,7 @@ g_settings_schema_source_get_default (void)
  *
  * If the schema isn't found, %NULL is returned.
  *
- * Returns: (transfer full): a new #GSettingsSchema
+ * Returns: (nullable) (transfer full): a new #GSettingsSchema
  *
  * Since: 2.32
  **/
@@ -673,8 +673,9 @@ parse_into_text_tables (const gchar *directory,
           GMarkupParseContext *context;
 
           context = g_markup_parse_context_new (&parser, G_MARKUP_TREAT_CDATA_AS_TEXT, &info, NULL);
+          /* Ignore errors here, this is best effort only. */
           if (g_markup_parse_context_parse (context, contents, size, NULL))
-            g_markup_parse_context_end_parse (context, NULL);
+            (void) g_markup_parse_context_end_parse (context, NULL);
           g_markup_parse_context_free (context);
 
           /* Clean up dangling stuff in case there was an error. */
@@ -697,6 +698,8 @@ parse_into_text_tables (const gchar *directory,
 
       g_free (filename);
     }
+  
+  g_dir_close (dir);
 }
 
 static GHashTable **
@@ -723,9 +726,10 @@ g_settings_schema_source_get_text_tables (GSettingsSchemaSource *source)
  * g_settings_schema_source_list_schemas:
  * @source: a #GSettingsSchemaSource
  * @recursive: if we should recurse
- * @non_relocatable: (out) (transfer full): the list of non-relocatable
- *   schemas
- * @relocatable: (out) (transfer full): the list of relocatable schemas
+ * @non_relocatable: (out) (transfer full) (array zero-terminated=1): the
+ *   list of non-relocatable schemas
+ * @relocatable: (out) (transfer full) (array zero-terminated=1): the list
+ *   of relocatable schemas
  *
  * Lists the schemas in a given source.
  *

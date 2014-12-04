@@ -2387,8 +2387,12 @@ main (int argc, char *argv[])
   /* Test that othercasing in our pcre/glib integration is bug-for-bug compatible
    * with pcre's internal tables. Bug #678273 */
   TEST_MATCH("[Ǆ]", G_REGEX_CASELESS, 0, "Ǆ", -1, 0, 0, TRUE);
-  TEST_MATCH("[Ǆ]", G_REGEX_CASELESS, 0, "ǅ", -1, 0, 0, FALSE);
   TEST_MATCH("[Ǆ]", G_REGEX_CASELESS, 0, "ǆ", -1, 0, 0, TRUE);
+#ifndef USE_SYSTEM_PCRE
+  /* This is a bug, which was fixed in 8.32. A system pcre might
+   * be that version or newer, so we cannot assert that it has this bug. */
+  TEST_MATCH("[Ǆ]", G_REGEX_CASELESS, 0, "ǅ", -1, 0, 0, FALSE);
+#endif
 
   /* TEST_MATCH_NEXT#(pattern, string, string_len, start_position, ...) */
   TEST_MATCH_NEXT0("a", "x", -1, 0);
@@ -2569,8 +2573,11 @@ main (int argc, char *argv[])
   TEST_EXPAND("a", "a", "\\0130", FALSE, "X");
   TEST_EXPAND("a", "a", "\\\\\\0", FALSE, "\\a");
   TEST_EXPAND("a(?P<G>.)c", "xabcy", "X\\g<G>X", FALSE, "XbX");
+#ifndef USE_SYSTEM_PCRE
+  /* PCRE >= 8.34 no longer allows this usage. */
   TEST_EXPAND("(.)(?P<1>.)", "ab", "\\1", FALSE, "a");
   TEST_EXPAND("(.)(?P<1>.)", "ab", "\\g<1>", FALSE, "a");
+#endif
   TEST_EXPAND(".", EURO, "\\0", FALSE, EURO);
   TEST_EXPAND("(.)", EURO, "\\1", FALSE, EURO);
   TEST_EXPAND("(?P<G>.)", EURO, "\\g<G>", FALSE, EURO);

@@ -88,8 +88,13 @@ do_lookup_by_name (GTask         *task,
       for (ai = res; ai; ai = ai->ai_next)
         {
           sockaddr = g_socket_address_new_from_native (ai->ai_addr, ai->ai_addrlen);
-          if (!sockaddr || !G_IS_INET_SOCKET_ADDRESS (sockaddr))
+          if (!sockaddr)
             continue;
+          if (!G_IS_INET_SOCKET_ADDRESS (sockaddr))
+            {
+              g_clear_object (&sockaddr);
+              continue;
+            }
 
           addr = g_object_ref (g_inet_socket_address_get_address ((GInetSocketAddress *)sockaddr));
           addresses = g_list_prepend (addresses, addr);
@@ -108,8 +113,9 @@ do_lookup_by_name (GTask         *task,
           g_task_return_new_error (task,
                                    G_RESOLVER_ERROR,
                                    G_RESOLVER_ERROR_NOT_FOUND,
-                                   _("No DNS record of the requested type for '%s'"),
-                                   hostname);
+                                   _("Error resolving '%s': %s"),
+                                   hostname,
+                                   _("No valid addresses were found"));
         }
     }
   else
@@ -515,9 +521,6 @@ g_resolver_record_type_to_rrtype (GResolverRecordType type)
   g_return_val_if_reached (-1);
 }
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wformat-nonliteral"
-
 static GList *
 g_resolver_records_from_res_query (const gchar      *rrname,
                                    gint              rrtype,
@@ -627,8 +630,6 @@ g_resolver_records_from_res_query (const gchar      *rrname,
   else
     return records;
 }
-
-#pragma GCC diagnostic pop
 
 #elif defined(G_OS_WIN32)
 

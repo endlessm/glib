@@ -556,6 +556,7 @@ _g_dbus_worker_unfreeze (GDBusWorker *worker)
                          unfreeze_in_idle_cb,
                          _g_dbus_worker_ref (worker),
                          (GDestroyNotify) _g_dbus_worker_unref);
+  g_source_set_name (idle_source, "[gio] unfreeze_in_idle_cb");
   g_source_attach (idle_source, worker->shared_thread_data->context);
   g_source_unref (idle_source);
 }
@@ -1562,7 +1563,7 @@ continue_writing_in_idle_cb (gpointer user_data)
   return FALSE;
 }
 
-/*
+/**
  * @write_data: (transfer full) (allow-none):
  * @flush_data: (transfer full) (allow-none):
  *
@@ -1598,6 +1599,7 @@ schedule_writing_unlocked (GDBusWorker        *worker,
                              continue_writing_in_idle_cb,
                              _g_dbus_worker_ref (worker),
                              (GDestroyNotify) _g_dbus_worker_unref);
+      g_source_set_name (idle_source, "[gio] continue_writing_in_idle_cb");
       g_source_attach (idle_source, worker->shared_thread_data->context);
       g_source_unref (idle_source);
     }
@@ -1683,6 +1685,7 @@ _g_dbus_worker_new (GIOStream                              *stream,
                          _g_dbus_worker_do_initial_read,
                          _g_dbus_worker_ref (worker),
                          (GDestroyNotify) _g_dbus_worker_unref);
+  g_source_set_name (idle_source, "[gio] _g_dbus_worker_do_initial_read");
   g_source_attach (idle_source, worker->shared_thread_data->context);
   g_source_unref (idle_source);
 
@@ -1906,7 +1909,7 @@ _g_dbus_debug_print_unlock (void)
   G_UNLOCK (print_lock);
 }
 
-/*
+/**
  * _g_dbus_initialize:
  *
  * Does various one-time init things such as

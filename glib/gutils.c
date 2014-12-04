@@ -808,6 +808,12 @@ g_get_real_name (void)
  * should either directly check the `HOME` environment variable yourself
  * or unset it before calling any functions in GLib.
  *
+ * When the pre-2.36 behaviour was in effect, Debian provided the
+ * <envar>G_HOME</envar> environment variable for testing and development
+ * purposes. This is now unnecessary as <envar>HOME</envar> can be used
+ * directly, but is retained for compatibility. It is deprecated and will be
+ * removed in a future release.
+ *
  * Returns: the current user's home directory
  */
 const gchar *
@@ -820,7 +826,9 @@ g_get_home_dir (void)
       gchar *tmp;
 
       /* We first check HOME and use it if it is set */
-      tmp = g_strdup (g_getenv ("HOME"));
+      tmp = g_strdup (g_getenv ("G_HOME"));
+      if (!tmp)
+        tmp = g_strdup (g_getenv ("HOME"));
 
 #ifdef G_OS_WIN32
       /* Only believe HOME if it is an absolute path and exists.
@@ -1404,9 +1412,8 @@ load_user_special_dirs (void)
   g_user_special_dirs[G_USER_DIRECTORY_VIDEOS] = find_folder (kMovieDocumentsFolderType);
 }
 
-#endif /* HAVE_CARBON */
+#elif defined(G_OS_WIN32)
 
-#if defined(G_OS_WIN32)
 static void
 load_user_special_dirs (void)
 {
@@ -1474,8 +1481,6 @@ load_user_special_dirs (void)
   g_user_special_dirs[G_USER_DIRECTORY_TEMPLATES] = get_special_folder (CSIDL_TEMPLATES);
   g_user_special_dirs[G_USER_DIRECTORY_VIDEOS] = get_special_folder (CSIDL_MYVIDEO);
 }
-#endif /* G_OS_WIN32 */
-
 
 static gboolean
 get_user_special_directory_from_xdg_string (const char *string,
@@ -1535,7 +1540,7 @@ parse_user_directory_from_string (gchar *string,
   return NULL;
 }
 
-#if defined(G_OS_UNIX) && !defined(HAVE_CARBON)
+#else /* default is unix */
 
 /* adapted from xdg-user-dir-lookup.c
  *
@@ -1667,7 +1672,7 @@ load_user_special_dirs (void)
   g_free (config_file);
 }
 
-#endif /* G_OS_UNIX && !HAVE_CARBON */
+#endif /* platform-specific load_user_special_dirs implementations */
 
 
 /**
@@ -1872,7 +1877,8 @@ g_win32_get_system_data_dirs_for_module (void (*address_of_function)(void))
   gchar **retval;
   gchar *p;
   gchar *exe_root;
-      
+
+  hmodule = NULL;
   if (address_of_function)
     {
       G_LOCK (g_utils_global);
@@ -2387,6 +2393,12 @@ const gchar *g_get_tmp_dir_utf8 (void) { return g_get_tmp_dir (); }
 
 #endif
 
+#ifdef HAVE_ISSETUGID
+/* Debian GNU/kFreeBSD doesn't have a prototype for issetugid(),
+ * see http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=635205 */
+int issetugid(void);
+#endif
+
 /* Private API:
  *
  * Returns %TRUE if the current process was executed as setuid (or an
@@ -2405,8 +2417,13 @@ g_check_setuid (void)
     extern int __libc_enable_secure;
     return __libc_enable_secure;
   }
-#elif defined(HAVE_ISSETUGID)
+#elif defined(HAVE_ISSETUGID) && !defined(__BIONIC__)
   /* BSD: http://www.freebsd.org/cgi/man.cgi?query=issetugid&sektion=2 */
+
+  /* Android had it in older versions but the new 64 bit ABI does not
+   * have it anymore, and some versions of the 32 bit ABI neither.
+   * https://code.google.com/p/android-developer-preview/issues/detail?id=168
+   */
   return issetugid ();
 #elif defined(G_OS_UNIX)
   uid_t ruid, euid, suid; /* Real, effective and saved user ID's */

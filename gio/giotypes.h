@@ -497,7 +497,7 @@ typedef struct _GDBusObjectManagerServer    GDBusObjectManagerServer;
  * object proxy (if @interface_name is %NULL).
  *
  * This function is called in the
- * <link linkend="g-main-context-push-thread-default">thread-default main loop</link>
+ * [thread-default main loop][g-main-context-push-thread-default]
  * that @manager was constructed in.
  *
  * Returns: A #GType to use for the remote object. The returned type
@@ -526,7 +526,7 @@ typedef struct _GSubprocess                   GSubprocess;
  *
  * Options for launching a child process.
  *
- * Since: 2.36
+ * Since: 2.40
  */
 typedef struct _GSubprocessLauncher           GSubprocessLauncher;
 

@@ -1854,8 +1854,13 @@ g_source_get_can_recurse (GSource  *source)
  *
  * It is permitted to call this function multiple times, but is not
  * recommended due to the potential performance impact.  For example,
- * one could change the name in the "check" function of a #GSourceFuncs 
+ * one could change the name in the "check" function of a #GSourceFuncs
  * to include details like the event type in the source name.
+ *
+ * Use caution if changing the name while another thread may be
+ * accessing it with g_source_get_name(); that function does not copy
+ * the value, and changing the value will free it while the other thread
+ * may be attempting to use it.
  *
  * Since: 2.26
  **/
@@ -1863,7 +1868,14 @@ void
 g_source_set_name (GSource    *source,
                    const char *name)
 {
+  GMainContext *context;
+
   g_return_if_fail (source != NULL);
+
+  context = source->context;
+
+  if (context)
+    LOCK_CONTEXT (context);
 
   /* setting back to NULL is allowed, just because it's
    * weird if get_name can return NULL but you can't
@@ -1872,17 +1884,20 @@ g_source_set_name (GSource    *source,
 
   g_free (source->name);
   source->name = g_strdup (name);
+
+  if (context)
+    UNLOCK_CONTEXT (context);
 }
 
 /**
  * g_source_get_name:
  * @source: a #GSource
  *
- * Gets a name for the source, used in debugging and profiling.
- * The name may be #NULL if it has never been set with
- * g_source_set_name().
+ * Gets a name for the source, used in debugging and profiling.  The
+ * name may be #NULL if it has never been set with g_source_set_name().
  *
  * Returns: the name of the source
+ *
  * Since: 2.26
  **/
 const char *
@@ -1902,6 +1917,18 @@ g_source_get_name (GSource *source)
  *
  * This is a convenience utility to set source names from the return
  * value of g_idle_add(), g_timeout_add(), etc.
+ *
+ * It is a programmer error to attempt to set the name of a non-existent
+ * source.
+ *
+ * More specifically: source IDs can be reissued after a source has been
+ * destroyed and therefore it is never valid to use this function with a
+ * source ID which may have already been removed.  An example is when
+ * scheduling an idle to run in another thread with g_idle_add(): the
+ * idle may already have run and been removed by the time this function
+ * is called on its (now invalid) source ID.  This source ID may have
+ * been reissued, leading to the operation being performed against the
+ * wrong source.
  *
  * Since: 2.26
  **/
@@ -2043,7 +2070,18 @@ g_source_unref (GSource *source)
  *
  * Finds a #GSource given a pair of context and ID.
  *
- * Returns: (transfer none): the #GSource if found, otherwise, %NULL
+ * It is a programmer error to attempt to lookup a non-existent source.
+ *
+ * More specifically: source IDs can be reissued after a source has been
+ * destroyed and therefore it is never valid to use this function with a
+ * source ID which may have already been removed.  An example is when
+ * scheduling an idle to run in another thread with g_idle_add(): the
+ * idle may already have run and been removed by the time this function
+ * is called on its (now invalid) source ID.  This source ID may have
+ * been reissued, leading to the operation being performed against the
+ * wrong source.
+ *
+ * Returns: (transfer none): the #GSource
  **/
 GSource *
 g_main_context_find_source_by_id (GMainContext *context,
@@ -2177,6 +2215,15 @@ g_main_context_find_source_by_user_data (GMainContext *context,
  * added to a non-default main context.
  *
  * It is a programmer error to attempt to remove a non-existent source.
+ *
+ * More specifically: source IDs can be reissued after a source has been
+ * destroyed and therefore it is never valid to use this function with a
+ * source ID which may have already been removed.  An example is when
+ * scheduling an idle to run in another thread with g_idle_add(): the
+ * idle may already have run and been removed by the time this function
+ * is called on its (now invalid) source ID.  This source ID may have
+ * been reissued, leading to the operation being performed against the
+ * wrong source.
  *
  * Returns: For historical reasons, this function always returns %TRUE
  **/
@@ -4012,6 +4059,7 @@ g_main_context_poll (GMainContext *context,
   if (n_fds || timeout != 0)
     {
 #ifdef	G_MAIN_POLL_DEBUG
+      poll_timer = NULL;
       if (_g_main_poll_debug)
 	{
 	  g_print ("polling context=%p n=%d timeout=%d\n",

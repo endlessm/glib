@@ -212,6 +212,7 @@ struct _GApplicationPrivate
 {
   GApplicationFlags  flags;
   gchar             *id;
+  gchar             *resource_path;
 
   GActionGroup      *actions;
   GMenuModel        *app_menu;
@@ -238,6 +239,9 @@ struct _GApplicationPrivate
   GSList             *option_groups;
   GHashTable         *packed_options;
   gboolean            options_parsed;
+
+  /* Allocated option strings, from g_application_add_main_option() */
+  GSList             *option_strings;
 };
 
 enum
@@ -245,6 +249,7 @@ enum
   PROP_NONE,
   PROP_APPLICATION_ID,
   PROP_FLAGS,
+  PROP_RESOURCE_BASE_PATH,
   PROP_IS_REGISTERED,
   PROP_IS_REMOTE,
   PROP_INACTIVITY_TIMEOUT,
@@ -663,6 +668,64 @@ g_application_add_main_option_entries (GApplication       *application,
 }
 
 /**
+ * g_application_add_main_option:
+ * @application: the #GApplication
+ * @long_name: the long name of an option used to specify it in a commandline
+ * @short_name: the short name of an option
+ * @flags: flags from #GOptionFlags
+ * @arg: the type of the option, as a #GOptionArg
+ * @description: the description for the option in `--help` output
+ * @arg_description: (nullable): the placeholder to use for the extra argument
+ *    parsed by the option in `--help` output
+ *
+ * Add an option to be handled by @application.
+ *
+ * Calling this function is the equivalent of calling
+ * g_application_add_main_option_entries() with a single #GOptionEntry
+ * that has its arg_data member set to %NULL.
+ *
+ * The parsed arguments will be packed into a #GVariantDict which
+ * is passed to #GApplication::handle-local-options. If
+ * %G_APPLICATION_HANDLES_COMMAND_LINE is set, then it will also
+ * be sent to the primary instance. See
+ * g_application_add_main_option_entries() for more details.
+ *
+ * See #GOptionEntry for more documentation of the arguments.
+ *
+ * Since: 2.42
+ **/
+void
+g_application_add_main_option (GApplication *application,
+                               const char   *long_name,
+                               char          short_name,
+                               GOptionFlags  flags,
+                               GOptionArg    arg,
+                               const char   *description,
+                               const char   *arg_description)
+{
+  gchar *dup_string;
+  GOptionEntry my_entry[2] = {
+    { NULL, short_name, flags, arg, NULL, NULL, NULL },
+    { NULL }
+  };
+
+  g_return_if_fail (G_IS_APPLICATION (application));
+  g_return_if_fail (long_name != NULL);
+  g_return_if_fail (description != NULL);
+
+  my_entry[0].long_name = dup_string = g_strdup (long_name);
+  application->priv->option_strings = g_slist_prepend (application->priv->option_strings, dup_string);
+
+  my_entry[0].description = dup_string = g_strdup (description);
+  application->priv->option_strings = g_slist_prepend (application->priv->option_strings, dup_string);
+
+  my_entry[0].arg_description = dup_string = g_strdup (arg_description);
+  application->priv->option_strings = g_slist_prepend (application->priv->option_strings, dup_string);
+
+  g_application_add_main_option_entries (application, my_entry);
+}
+
+/**
  * g_application_add_option_group:
  * @application: the #GApplication
  * @group: a #GOptionGroup
@@ -1011,6 +1074,10 @@ g_application_set_property (GObject      *object,
       g_application_set_flags (application, g_value_get_flags (value));
       break;
 
+    case PROP_RESOURCE_BASE_PATH:
+      g_application_set_resource_base_path (application, g_value_get_string (value));
+      break;
+
     case PROP_INACTIVITY_TIMEOUT:
       g_application_set_inactivity_timeout (application,
                                             g_value_get_uint (value));
@@ -1078,6 +1145,10 @@ g_application_get_property (GObject    *object,
                          g_application_get_flags (application));
       break;
 
+    case PROP_RESOURCE_BASE_PATH:
+      g_value_set_string (value, g_application_get_resource_base_path (application));
+      break;
+
     case PROP_IS_REGISTERED:
       g_value_set_boolean (value,
                            g_application_get_is_registered (application));
@@ -1105,6 +1176,20 @@ g_application_constructed (GObject *object)
 
   if (g_application_get_default () == NULL)
     g_application_set_default (application);
+
+  /* People should not set properties from _init... */
+  g_assert (application->priv->resource_path == NULL);
+
+  if (application->priv->id != NULL)
+    {
+      gint i;
+
+      application->priv->resource_path = g_strconcat ("/", application->priv->id, NULL);
+
+      for (i = 1; application->priv->resource_path[i]; i++)
+        if (application->priv->resource_path[i] == '.')
+          application->priv->resource_path[i] = '/';
+    }
 }
 
 static void
@@ -1116,8 +1201,10 @@ g_application_finalize (GObject *object)
   if (application->priv->main_options)
     g_option_group_free (application->priv->main_options);
   if (application->priv->packed_options)
-    g_hash_table_unref (application->priv->packed_options);
-
+    {
+      g_slist_free_full (application->priv->option_strings, g_free);
+      g_hash_table_unref (application->priv->packed_options);
+    }
   if (application->priv->impl)
     g_application_impl_destroy (application->priv->impl);
   g_free (application->priv->id);
@@ -1205,6 +1292,12 @@ g_application_class_init (GApplicationClass *class)
                         P_("Flags specifying the behaviour of the application"),
                         G_TYPE_APPLICATION_FLAGS, G_APPLICATION_FLAGS_NONE,
                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
+  g_object_class_install_property (object_class, PROP_RESOURCE_BASE_PATH,
+    g_param_spec_string ("resource-base-path",
+                         P_("Resource base path"),
+                         P_("The base resource path for the application"),
+                         NULL, G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
 
   g_object_class_install_property (object_class, PROP_IS_REGISTERED,
     g_param_spec_boolean ("is-registered",
@@ -1322,11 +1415,6 @@ g_application_class_init (GApplicationClass *class)
    * decide to perform certain actions, including direct local handling
    * (which may be useful for options like --version).
    *
-   * If the options have been "handled" then a non-negative value should
-   * be returned.   In this case, the return value is the exit status: 0
-   * for success and a positive value for failure.  -1 means to continue
-   * normal processing.
-   *
    * In the event that the application is marked
    * %G_APPLICATION_HANDLES_COMMAND_LINE the "normal processing" will
    * send the @option dictionary to the primary instance where it can be
@@ -1356,6 +1444,11 @@ g_application_class_init (GApplicationClass *class)
    * You can override local_command_line() if you need more powerful
    * capabilities than what is provided here, but this should not
    * normally be required.
+   *
+   * Returns: an exit code. If you have handled your options and want
+   * to exit the process, return a non-negative option, 0 for success,
+   * and a positive value for failure. To continue, return -1 to let
+   * the default option processing continue.
    *
    * Since: 2.40
    **/
@@ -1572,6 +1665,79 @@ g_application_set_flags (GApplication      *application,
 }
 
 /**
+ * g_application_get_resource_base_path:
+ * @application: a #GApplication
+ *
+ * Gets the resource base path of @application.
+ *
+ * See g_application_set_resource_base_path() for more information.
+ *
+ * Returns: (nullable): the base resource path, if one is set
+ *
+ * Since: 2.42
+ */
+const gchar *
+g_application_get_resource_base_path (GApplication *application)
+{
+  g_return_val_if_fail (G_IS_APPLICATION (application), NULL);
+
+  return application->priv->resource_path;
+}
+
+/**
+ * g_application_set_resource_base_path:
+ * @application: a #GApplication
+ * @resource_path: (nullable): the resource path to use
+ *
+ * Sets (or unsets) the base resource path of @application.
+ *
+ * The path is used to automatically load various [application
+ * resources][gresource] such as menu layouts and action descriptions.
+ * The various types of resources will be found at fixed names relative
+ * to the given base path.
+ *
+ * By default, the resource base path is determined from the application
+ * ID by prefixing '/' and replacing each '.' with '/'.  This is done at
+ * the time that the #GApplication object is constructed.  Changes to
+ * the application ID after that point will not have an impact on the
+ * resource base path.
+ *
+ * As an example, if the application has an ID of "org.example.app" then
+ * the default resource base path will be "/org/example/app".  If this
+ * is a #GtkApplication (and you have not manually changed the path)
+ * then Gtk will then search for the menus of the application at
+ * "/org/example/app/gtk/menus.ui".
+ *
+ * See #GResource for more information about adding resources to your
+ * application.
+ *
+ * You can disable automatic resource loading functionality by setting
+ * the path to %NULL.
+ *
+ * Changing the resource base path once the application is running is
+ * not recommended.  The point at which the resource path is consulted
+ * for forming paths for various purposes is unspecified.
+ *
+ * Since: 2.42
+ */
+void
+g_application_set_resource_base_path (GApplication *application,
+                                      const gchar  *resource_path)
+{
+  g_return_if_fail (G_IS_APPLICATION (application));
+  g_return_if_fail (resource_path == NULL || g_str_has_prefix (resource_path, "/"));
+
+  if (g_strcmp0 (application->priv->resource_path, resource_path) != 0)
+    {
+      g_free (application->priv->resource_path);
+
+      application->priv->resource_path = g_strdup (resource_path);
+
+      g_object_notify (G_OBJECT (application), "resource-base-path");
+    }
+}
+
+/**
  * g_application_get_inactivity_timeout:
  * @application: a #GApplication
  *
@@ -1733,6 +1899,7 @@ g_application_get_dbus_object_path (GApplication *application)
 
   return g_application_impl_get_dbus_object_path (application->priv->impl);
 }
+
 
 /* Register {{{1 */
 /**

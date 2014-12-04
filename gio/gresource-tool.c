@@ -126,10 +126,6 @@ extract_resource (GResource   *resource,
         g_printerr ("Data truncated\n");
       g_bytes_unref (bytes);
     }
-  else
-    {
-      g_printerr ("Can't find resource path %s\n", path);
-    }
 }
 
 /* Elf functions {{{1 */
@@ -151,10 +147,18 @@ get_elf (const gchar *file,
 
   elf = elf_begin (*fd, ELF_C_READ, NULL);
   if (elf == NULL)
-    return NULL;
+    {
+      g_close (*fd, NULL);
+      *fd = -1;
+      return NULL;
+    }
 
   if (elf_kind (elf) != ELF_K_ELF)
-    return NULL;
+    {
+      g_close (*fd, NULL);
+      *fd = -1;
+      return NULL;
+    }
 
   return elf;
 }
@@ -220,10 +224,16 @@ resource_from_section (GElf_Shdr *shdr,
   if (contents != MAP_FAILED)
     {
       GBytes *bytes;
+      GError *error = NULL;
 
       bytes = g_bytes_new_static (contents + page_offset, shdr->sh_size);
-      resource = g_resource_new_from_data (bytes, NULL);
+      resource = g_resource_new_from_data (bytes, &error);
       g_bytes_unref (bytes);
+      if (error)
+        {
+          g_printerr ("%s\n", error->message);
+          g_error_free (error);
+        }
     }
   else
     {
@@ -306,7 +316,10 @@ extract_resource_cb (GElf_Shdr   *shdr,
   extract_resource (resource, d->path);
   g_resource_unref (resource);
 
-  return FALSE;
+  if (d->section)
+    return FALSE;
+
+  return TRUE;
 }
 
 static void
@@ -387,7 +400,6 @@ cmd_list (const gchar *file,
   GResource *resource;
 
 #ifdef HAVE_LIBELF
-
   Elf *elf;
   int fd;
 

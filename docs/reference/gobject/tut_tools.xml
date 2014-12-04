@@ -24,7 +24,7 @@
   <chapter id="tools-vala">
     <title>Vala</title>
     <para>
-      From the <ulink url="http://live.gnome.org/Vala">Vala
+      From the <ulink url="https://wiki.gnome.org/Projects/Vala">Vala
       homepage</ulink> itself: <quote>Vala is a new programming language
       that aims to bring modern programming language features to GNOME
       developers without imposing any additional runtime requirements
@@ -117,9 +117,9 @@ gtk_widget_freeze_child_notify (GtkWidget *widget)
     </para>
     <para>
     Thorough
-    <ulink url="http://library.gnome.org/devel/gtk-doc-manual/stable/">documentation</ulink>
+    <ulink url="https://developer.gnome.org/gtk-doc-manual/stable/">documentation</ulink>
     on how to set up and use gtk-doc in your project is provided on the
-    <ulink url="http://library.gnome.org/devel/">GNOME developer website</ulink>.
+    <ulink url="https://developer.gnome.org/">GNOME developer website</ulink>.
     </para>
   </chapter>
 </part>

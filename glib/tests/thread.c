@@ -127,7 +127,7 @@ test_thread3 (void)
 static void
 test_thread4 (void)
 {
-#ifdef HAVE_PRLIMIT
+#if HAVE_DECL_PRLIMIT && defined(HAVE_PRLIMIT)
   struct rlimit ol, nl;
   GThread *thread;
   GError *error;

@@ -346,6 +346,7 @@
  *       task = g_task_new (self, cancellable, callback, user_data);
  *       g_task_set_task_data (task, cake_data, (GDestroyNotify) cake_data_free);
  *       g_task_run_in_thread (task, bake_cake_thread);
+ *       g_object_unref (task);
  *     }
  *
  *     Cake *
@@ -539,7 +540,7 @@ struct _GTask {
   GDestroyNotify task_data_destroy;
 
   GMainContext *context;
-  guint64 creation_time;
+  gint64 creation_time;
   gint priority;
   GCancellable *cancellable;
   gboolean check_cancellable;
@@ -1135,6 +1136,7 @@ g_task_return (GTask           *task,
   /* Otherwise, complete in the next iteration */
   source = g_idle_source_new ();
   g_task_attach_source (task, source, complete_in_idle_cb);
+  g_source_set_name (source, "[gio] complete_in_idle_cb");
   g_source_unref (source);
 }
 
@@ -1272,16 +1274,22 @@ g_task_start_task_thread (GTask           *task,
           return;
         }
 
+      /* This introduces a reference count loop between the GTask and
+       * GCancellable, but is necessary to avoid a race on finalising the GTask
+       * between task_thread_cancelled() (in one thread) and
+       * g_task_thread_complete() (in another).
+       *
+       * Accordingly, the signal handler *must* be removed once the task has
+       * completed.
+       */
       g_signal_connect_data (task->cancellable, "cancelled",
                              G_CALLBACK (task_thread_cancelled),
                              g_object_ref (task),
                              task_thread_cancelled_disconnect_notify, 0);
     }
 
-  g_thread_pool_push (task_pool, g_object_ref (task), &task->error);
-  if (task->error)
-    task->thread_complete = TRUE;
-  else if (g_private_get (&task_private))
+  g_thread_pool_push (task_pool, g_object_ref (task), NULL);
+  if (g_private_get (&task_private))
     {
       /* This thread is being spawned from another GTask thread, so
        * bump up max-threads so we don't starve.

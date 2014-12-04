@@ -421,6 +421,7 @@ test_method_calls_in_thread (void)
   GDBusProxy *proxy;
   GDBusConnection *connection;
   GError *error;
+  gchar *name_owner;
 
   error = NULL;
   connection = g_bus_get_sync (G_BUS_TYPE_SESSION,
@@ -437,6 +438,10 @@ test_method_calls_in_thread (void)
                                  NULL, /* GCancellable */
                                  &error);
   g_assert_no_error (error);
+
+  name_owner = g_dbus_proxy_get_name_owner (proxy);
+  g_assert_cmpstr (name_owner, !=, NULL);
+  g_free (name_owner);
 
   test_method_calls_on_proxy (proxy);
 
@@ -466,7 +471,7 @@ ensure_connection_works (GDBusConnection *conn)
   g_variant_unref (v);
 }
 
-/*
+/**
  * get_sync_in_thread:
  * @data: (type guint): delay in microseconds
  *

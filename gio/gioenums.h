@@ -432,7 +432,7 @@ typedef enum {
  * @G_IO_ERROR_NO_SPACE: No space left on drive.
  * @G_IO_ERROR_INVALID_ARGUMENT: Invalid argument.
  * @G_IO_ERROR_PERMISSION_DENIED: Permission denied.
- * @G_IO_ERROR_NOT_SUPPORTED: Operation not supported for the current backend.
+ * @G_IO_ERROR_NOT_SUPPORTED: Operation (or one of its parameters) not supported
  * @G_IO_ERROR_NOT_MOUNTED: File isn't mounted.
  * @G_IO_ERROR_ALREADY_MOUNTED: File is already mounted.
  * @G_IO_ERROR_CLOSED: File was closed.
@@ -1030,6 +1030,14 @@ typedef enum
  * Existing file and the operation you're using does not silently overwrite.
  * @G_DBUS_ERROR_UNKNOWN_METHOD:
  * Method name you invoked isn't known by the object you invoked it on.
+ * @G_DBUS_ERROR_UNKNOWN_OBJECT:
+ * Object you invoked a method on isn't known. Since 2.42
+ * @G_DBUS_ERROR_UNKNOWN_INTERFACE:
+ * Interface you invoked a method on isn't known by the object. Since 2.42
+ * @G_DBUS_ERROR_UNKNOWN_PROPERTY:
+ * Property you tried to access isn't known by the object. Since 2.42
+ * @G_DBUS_ERROR_PROPERTY_READ_ONLY:
+ * Property you tried to set is read-only. Since 2.42
  * @G_DBUS_ERROR_TIMED_OUT:
  * Certain timeout errors, e.g. while starting a service. Warning: this is
  * confusingly-named given that %G_DBUS_ERROR_TIMEOUT also exists. We
@@ -1122,7 +1130,11 @@ typedef enum
   G_DBUS_ERROR_INVALID_FILE_CONTENT,             /* org.freedesktop.DBus.Error.InvalidFileContent */
   G_DBUS_ERROR_SELINUX_SECURITY_CONTEXT_UNKNOWN, /* org.freedesktop.DBus.Error.SELinuxSecurityContextUnknown */
   G_DBUS_ERROR_ADT_AUDIT_DATA_UNKNOWN,           /* org.freedesktop.DBus.Error.AdtAuditDataUnknown */
-  G_DBUS_ERROR_OBJECT_PATH_IN_USE                /* org.freedesktop.DBus.Error.ObjectPathInUse */
+  G_DBUS_ERROR_OBJECT_PATH_IN_USE,               /* org.freedesktop.DBus.Error.ObjectPathInUse */
+  G_DBUS_ERROR_UNKNOWN_OBJECT,                   /* org.freedesktop.DBus.Error.UnknownObject */
+  G_DBUS_ERROR_UNKNOWN_INTERFACE,                /* org.freedesktop.DBus.Error.UnknownInterface */
+  G_DBUS_ERROR_UNKNOWN_PROPERTY,                 /* org.freedesktop.DBus.Error.UnknownProperty */
+  G_DBUS_ERROR_PROPERTY_READ_ONLY                /* org.freedesktop.DBus.Error.PropertyReadOnly */
 } GDBusError;
 /* Remember to update g_dbus_error_quark() in gdbuserror.c if you extend this enumeration */
 
@@ -1354,6 +1366,7 @@ typedef enum
  * @G_CREDENTIALS_TYPE_FREEBSD_CMSGCRED: The native credentials type is a <type>struct cmsgcred</type>.
  * @G_CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED: The native credentials type is a <type>struct sockpeercred</type>. Added in 2.30.
  * @G_CREDENTIALS_TYPE_SOLARIS_UCRED: The native credentials type is a <type>ucred_t</type>. Added in 2.40.
+ * @G_CREDENTIALS_TYPE_NETBSD_UNPCBID: The native credentials type is a <type>struct unpcbid</type>.
  *
  * Enumeration describing different kinds of native credential types.
  *
@@ -1365,7 +1378,8 @@ typedef enum
   G_CREDENTIALS_TYPE_LINUX_UCRED,
   G_CREDENTIALS_TYPE_FREEBSD_CMSGCRED,
   G_CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED,
-  G_CREDENTIALS_TYPE_SOLARIS_UCRED
+  G_CREDENTIALS_TYPE_SOLARIS_UCRED,
+  G_CREDENTIALS_TYPE_NETBSD_UNPCBID
 } GCredentialsType;
 
 /**
@@ -1770,6 +1784,32 @@ typedef enum {
   G_SUBPROCESS_FLAGS_STDERR_MERGE          = (1u << 6),
   G_SUBPROCESS_FLAGS_INHERIT_FDS           = (1u << 7)
 } GSubprocessFlags;
+
+/**
+ * GNotificationPriority:
+ * @G_NOTIFICATION_PRIORITY_LOW: for notifications that do not require
+ *   immediate attention - typically used for contextual background
+ *   information, such as contact birthdays or local weather
+ * @G_NOTIFICATION_PRIORITY_NORMAL: the default priority, to be used for the
+ *   majority of notifications (for example email messages, software updates,
+ *   completed download/sync operations)
+ * @G_NOTIFICATION_PRIORITY_HIGH: for events that require more attention,
+ *   usually because responses are time-sensitive (for example chat and SMS
+ *   messages or alarms)
+ * @G_NOTIFICATION_PRIORITY_URGENT: for urgent notifications, or notifications
+ *   that require a response in a short space of time (for example phone calls
+ *   or emergency warnings)
+ *
+ * Priority levels for #GNotifications.
+ *
+ * Since: 2.42
+ */
+typedef enum {
+  G_NOTIFICATION_PRIORITY_NORMAL,
+  G_NOTIFICATION_PRIORITY_LOW,
+  G_NOTIFICATION_PRIORITY_HIGH,
+  G_NOTIFICATION_PRIORITY_URGENT
+} GNotificationPriority;
 
 G_END_DECLS
 
