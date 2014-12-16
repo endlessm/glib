@@ -6,6 +6,11 @@ glib2.0 (2.43.2-1) UNRELEASED; urgency=medium
 
   [ Iain Lane ]
   * New upstream release 2.43.2
+    + New function: g_strv_contains
+    + New function: g_network_address_new_loopback
+    + New function: g_socket_send_messages
+    + A new GNetworkMonitor implementation using NetworkManager provides more
+      detailed connectivity information
   * 0001-GSettings-fix-check-for-delaying-backend-subscriptio.patch,
     0001-gmain-fix-poll-record-comparison.patch: gmain: fix the sorting of:
     Drop, applied in this release.
