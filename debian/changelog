@@ -1,4 +1,4 @@
-glib2.0 (2.43.2-1) UNRELEASED; urgency=medium
+glib2.0 (2.43.2-1) experimental; urgency=medium
 
   [ Laurent Bigonville ]
   * debian/control.in: Switch build-dependency from libelfg0-dev to libelf-dev
@@ -16,7 +16,7 @@ glib2.0 (2.43.2-1) UNRELEASED; urgency=medium
     Drop, applied in this release.
   * debian/libglib2.0-0.symbols: Add new symbols for this release.
 
- -- Laurent Bigonville <bigon@debian.org>  Tue, 16 Dec 2014 16:49:48 +0100
+ -- Iain Lane <laney@debian.org>  Tue, 16 Dec 2014 17:29:02 +0000
 
 glib2.0 (2.43.1-2) experimental; urgency=medium
 
