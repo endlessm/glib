@@ -1122,8 +1122,10 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_network_address_get_scheme@Base 2.26.0
  g_network_address_get_type@Base 2.22.0
  g_network_address_new@Base 2.22.0
+ g_network_address_new_loopback@Base 2.43.2
  g_network_address_parse@Base 2.22.0
  g_network_address_parse_uri@Base 2.26.0
+ g_network_connectivity_get_type@Base 2.43.2
  g_network_monitor_base_add_network@Base 2.31.8
  g_network_monitor_base_get_type@Base 2.31.8
  g_network_monitor_base_remove_network@Base 2.31.8
@@ -1131,6 +1133,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_network_monitor_can_reach@Base 2.31.8
  g_network_monitor_can_reach_async@Base 2.31.8
  g_network_monitor_can_reach_finish@Base 2.31.8
+ g_network_monitor_get_connectivity@Base 2.43.2
  g_network_monitor_get_default@Base 2.31.8
  g_network_monitor_get_network_available@Base 2.31.8
  g_network_monitor_get_type@Base 2.31.8
@@ -1528,6 +1531,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_socket_receive_with_blocking@Base 2.26.0
  g_socket_send@Base 2.22.0
  g_socket_send_message@Base 2.22.0
+ g_socket_send_messages@Base 2.43.2
  g_socket_send_to@Base 2.22.0
  g_socket_send_with_blocking@Base 2.26.0
  g_socket_service_get_type@Base 2.22.0
@@ -3085,6 +3089,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_strstr_len@Base 2.12.0
  g_strtod@Base 2.12.0
  g_strup@Base 2.12.0
+ g_strv_contains@Base 2.43.2
  g_strv_length@Base 2.12.0
  g_test_add_data_func@Base 2.16.0
  g_test_add_data_func_full@Base 2.33.14
