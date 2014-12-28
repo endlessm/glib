@@ -2,7 +2,7 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
-Uploaders: Andreas Henriksson <andreas@fatal.se>, Emilio Pozuelo Monfort <pochu@debian.org>, Sjoerd Simons <sjoerd@debian.org>
+Uploaders: Andreas Henriksson <andreas@fatal.se>, Emilio Pozuelo Monfort <pochu@debian.org>, Iain Lane <laney@debian.org>, Laurent Bigonville <bigon@debian.org>, Sjoerd Simons <sjoerd@debian.org>
 Build-Depends: debhelper (>= 9),
                cdbs (>= 0.4.93),
                dh-autoreconf,
@@ -134,7 +134,8 @@ Multi-Arch: same
 Depends: ${misc:Depends},
          libglib2.0-0 (= ${binary:Version})
 Conflicts: libglib2.0-dbg
-Replaces: libglib2.0-dbg
+Breaks: libglib2.0-dev (<< 2.43.2-2~)
+Replaces: libglib2.0-dbg, libglib2.0-dev (<< 2.43.2-2~)
 Description: Debugging symbols for the GLib libraries
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
