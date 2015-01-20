@@ -1,9 +1,20 @@
-glib2.0 (2.43.2-2) UNRELEASED; urgency=medium
+glib2.0 (2.43.3-1) UNRELEASED; urgency=medium
 
+  [ Laurent Bigonville ]
   * debian/control.in, debian/libglib2.0-dev.install.in,
     debian/libglib2.0-0-dbg.install.in: Install the gdb python scripts in the
     proper locations, move them to the -dbg package and add the needed
     Breaks/Replaces (Closes: #774024)
+
+  [ Iain Lane ]
+  * New upstream release 2.43.3
+    + add g_set_object() convenience function
+    + GNetworkMonitor: check if NM is not running and don't crash
+    + fix some races with g_mkdir_with_parents
+    + avoid use of G_STRLOC in G_OBJECT_WARN_INVALID_PSPEC in order to save on
+      static strings
+    + fix some content type vs. mime issues
+  * 07_disable_tests_on_slow_archs.patch: Refresh
 
  -- Laurent Bigonville <bigon@debian.org>  Sat, 27 Dec 2014 21:49:47 +0100
 
