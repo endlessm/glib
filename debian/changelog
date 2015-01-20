@@ -1,4 +1,4 @@
-glib2.0 (2.43.3-1) UNRELEASED; urgency=medium
+glib2.0 (2.43.3-1) experimental; urgency=medium
 
   [ Laurent Bigonville ]
   * debian/control.in, debian/libglib2.0-dev.install.in,
@@ -16,7 +16,7 @@ glib2.0 (2.43.3-1) UNRELEASED; urgency=medium
     + fix some content type vs. mime issues
   * 07_disable_tests_on_slow_archs.patch: Refresh
 
- -- Laurent Bigonville <bigon@debian.org>  Sat, 27 Dec 2014 21:49:47 +0100
+ -- Iain Lane <laney@debian.org>  Tue, 20 Jan 2015 13:46:28 +0000
 
 glib2.0 (2.43.2-1) experimental; urgency=medium
 
