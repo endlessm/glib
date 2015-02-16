@@ -995,6 +995,20 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_io_stream_splice_finish@Base 2.28.0
  g_io_stream_splice_flags_get_type@Base 2.28.0
  g_keyfile_settings_backend_new@Base 2.26.0
+ g_list_model_get_item@Base 2.43.4
+ g_list_model_get_item_type@Base 2.43.4
+ g_list_model_get_n_items@Base 2.43.4
+ g_list_model_get_object@Base 2.43.4
+ g_list_model_get_type@Base 2.43.4
+ g_list_model_items_changed@Base 2.43.4
+ g_list_store_append@Base 2.43.4
+ g_list_store_get_type@Base 2.43.4
+ g_list_store_insert@Base 2.43.4
+ g_list_store_insert_sorted@Base 2.43.4
+ g_list_store_new@Base 2.43.4
+ g_list_store_remove@Base 2.43.4
+ g_list_store_remove_all@Base 2.43.4
+ g_list_store_splice@Base 2.43.4
  g_loadable_icon_get_type@Base 2.16.0
  g_loadable_icon_load@Base 2.16.0
  g_loadable_icon_load_async@Base 2.16.0
@@ -1339,6 +1353,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_settings_schema_has_key@Base 2.39.4
  g_settings_schema_key_get_default_value@Base 2.39.4
  g_settings_schema_key_get_description@Base 2.39.4
+ g_settings_schema_key_get_name@Base 2.43.4
  g_settings_schema_key_get_range@Base 2.39.4
  g_settings_schema_key_get_summary@Base 2.39.4
  g_settings_schema_key_get_type@Base 2.39.4
@@ -1346,6 +1361,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_settings_schema_key_range_check@Base 2.39.4
  g_settings_schema_key_ref@Base 2.39.4
  g_settings_schema_key_unref@Base 2.39.4
+ g_settings_schema_list_children@Base 2.43.4
  g_settings_schema_ref@Base 2.31.8
  g_settings_schema_source_get_default@Base 2.31.8
  g_settings_schema_source_get_type@Base 2.31.8
@@ -1378,6 +1394,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_simple_action_new_stateful@Base 2.28.0
  g_simple_action_set_enabled@Base 2.28.0
  g_simple_action_set_state@Base 2.30.0
+ g_simple_action_set_state_hint@Base 2.43.4
  g_simple_async_report_error_in_idle@Base 2.16.0
  g_simple_async_report_gerror_in_idle@Base 2.16.0
  g_simple_async_report_take_gerror_in_idle@Base 2.28.0

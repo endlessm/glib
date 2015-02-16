@@ -1,3 +1,21 @@
+glib2.0 (2.43.4-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2.43.4
+    + GType now has type declaration macros G_DECLARE_DERIVABLE_TYPE,
+      G_DECLARE_FINAL_TYPE and G_DECLARE_INTERFACE, which significantly reduce
+      the boilerplate needed for GObject types and interfaces.
+    + g_autoptr and g_auto are macros for declaring variables with automatic
+      cleanup. They only work with gcc and clang.
+    + GListModel is a new interface that represents a dynamic list of GObjects.
+    + GListStore is a GSequence-based implementation of GListModel.
+    + g_simple_action_set_state_hint: New function to set the state hint of
+      GSimpleActions
+    + g_settings_schema_list_children and g_settings_schema_key_get_name are
+      new functions to complete the GSettingsSchema API.
+  * debian/libglib2.0-0.symbols: Add new symbols for this release.
+
+ -- Iain Lane <laney@debian.org>  Mon, 16 Feb 2015 13:00:28 +0000
+
 glib2.0 (2.43.3-1) experimental; urgency=medium
 
   [ Laurent Bigonville ]
