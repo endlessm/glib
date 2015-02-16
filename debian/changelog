@@ -1,4 +1,4 @@
-glib2.0 (2.43.4-1) UNRELEASED; urgency=medium
+glib2.0 (2.43.4-1) experimental; urgency=medium
 
   * New upstream release 2.43.4
     + GType now has type declaration macros G_DECLARE_DERIVABLE_TYPE,
@@ -14,7 +14,7 @@ glib2.0 (2.43.4-1) UNRELEASED; urgency=medium
       new functions to complete the GSettingsSchema API.
   * debian/libglib2.0-0.symbols: Add new symbols for this release.
 
- -- Iain Lane <laney@debian.org>  Mon, 16 Feb 2015 13:00:28 +0000
+ -- Iain Lane <laney@debian.org>  Mon, 16 Feb 2015 16:37:30 +0000
 
 glib2.0 (2.43.3-1) experimental; urgency=medium
 
