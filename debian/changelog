@@ -1,3 +1,17 @@
+glib2.0 (2.43.90-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2.43.90
+    + new GSimpleIOStream class to construct a GIOStream from an arbitrary
+      GInputStream and GOutputStream
+    + GApplication: new API for marking 'busy' state according to the value of
+      a boolean property on another object
+    + GOptionGroup: add binding support (boxed type, annotation fixes, etc.)
+  * debian/patches/gdbus-Let-the-pending-read-finish-before-closing-the.patch:
+    Drop this cherry-pick from an upstream bug - should be fixed differently
+    in this release (bgo #743990).
+
+ -- Iain Lane <laney@debian.org>  Wed, 18 Feb 2015 17:19:53 +0000
+
 glib2.0 (2.43.4-1) experimental; urgency=medium
 
   * New upstream release 2.43.4

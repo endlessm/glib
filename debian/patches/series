@@ -11,7 +11,6 @@
 90_gio-modules-multiarch-compat.patch
 skip-brokwn-dbus-appinfo-test.patch
 Do-not-attempt-to-autolaunch-a-session-dbus-daemon-w.patch
-gdbus-Let-the-pending-read-finish-before-closing-the.patch
 gdbus-tests-wait-up-to-60s-for-gdbus-testserver-to-t.patch
 gdbus-connection-wait-up-to-10s-to-actually-send-a-m.patch
 81-skip-monitor-test-on-non-linux.patch
