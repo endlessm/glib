@@ -80,6 +80,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_application_add_main_option@Base 2.41.4
  g_application_add_main_option_entries@Base 2.39.90
  g_application_add_option_group@Base 2.39.90
+ g_application_bind_busy_property@Base 2.43.90
  g_application_command_line_create_file_for_arg@Base 2.35.8
  g_application_command_line_get_arguments@Base 2.28.0
  g_application_command_line_get_cwd@Base 2.28.0
@@ -1421,6 +1422,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_simple_async_result_set_op_res_gpointer@Base 2.16.0
  g_simple_async_result_set_op_res_gssize@Base 2.16.0
  g_simple_async_result_take_error@Base 2.28.0
+ g_simple_io_stream_get_type@Base 2.43.90
+ g_simple_io_stream_new@Base 2.43.90
  g_simple_permission_get_type@Base 2.26.0
  g_simple_permission_new@Base 2.26.0
  g_simple_proxy_resolver_get_type@Base 2.35.8
@@ -2683,10 +2686,12 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_option_group_add_entries@Base 2.12.0
  g_option_group_free@Base 2.12.0
  g_option_group_new@Base 2.12.0
+ g_option_group_ref@Base 2.43.90
  g_option_group_set_error_hook@Base 2.12.0
  g_option_group_set_parse_hooks@Base 2.12.0
  g_option_group_set_translate_func@Base 2.12.0
  g_option_group_set_translation_domain@Base 2.12.0
+ g_option_group_unref@Base 2.43.90
  g_parse_debug_string@Base 2.12.0
  g_path_get_basename@Base 2.12.0
  g_path_get_dirname@Base 2.12.0
@@ -3692,6 +3697,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_object_watch_closure@Base 2.12.0
  g_object_weak_ref@Base 2.12.0
  g_object_weak_unref@Base 2.12.0
+ g_option_group_get_type@Base 2.43.90
  g_param_spec_boolean@Base 2.12.0
  g_param_spec_boxed@Base 2.12.0
  g_param_spec_char@Base 2.12.0

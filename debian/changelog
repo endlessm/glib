@@ -9,6 +9,7 @@ glib2.0 (2.43.90-1) UNRELEASED; urgency=medium
   * debian/patches/gdbus-Let-the-pending-read-finish-before-closing-the.patch:
     Drop this cherry-pick from an upstream bug - should be fixed differently
     in this release (bgo #743990).
+  * debian/libglib2.0-0.symbols: Add new symbols for this release.
 
  -- Iain Lane <laney@debian.org>  Wed, 18 Feb 2015 17:19:53 +0000
 
