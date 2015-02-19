@@ -1,4 +1,4 @@
-glib2.0 (2.43.90-1) UNRELEASED; urgency=medium
+glib2.0 (2.43.90-1) experimental; urgency=medium
 
   * New upstream release 2.43.90
     + new GSimpleIOStream class to construct a GIOStream from an arbitrary
@@ -11,7 +11,7 @@ glib2.0 (2.43.90-1) UNRELEASED; urgency=medium
     in this release (bgo #743990).
   * debian/libglib2.0-0.symbols: Add new symbols for this release.
 
- -- Iain Lane <laney@debian.org>  Wed, 18 Feb 2015 17:19:53 +0000
+ -- Iain Lane <laney@debian.org>  Thu, 19 Feb 2015 11:37:11 +0000
 
 glib2.0 (2.43.4-1) experimental; urgency=medium
 
