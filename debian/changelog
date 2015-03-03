@@ -1,4 +1,4 @@
-glib2.0 (2.43.91-1) UNRELEASED; urgency=medium
+glib2.0 (2.43.91-1) experimental; urgency=medium
 
   * New upstream release 2.43.91
     - We have now added 'g_autofree' as a libgsystem-style autocleanup macro
@@ -8,7 +8,7 @@ glib2.0 (2.43.91-1) UNRELEASED; urgency=medium
       effective busy state.
   * debian/libglib2.0-0.symbols: Add new symbols for this release.
 
- -- Iain Lane <laney@debian.org>  Tue, 03 Mar 2015 15:22:49 +0000
+ -- Iain Lane <laney@debian.org>  Tue, 03 Mar 2015 17:36:38 +0000
 
 glib2.0 (2.43.90-1) experimental; urgency=medium
 
