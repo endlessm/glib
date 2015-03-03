@@ -102,6 +102,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_application_get_default@Base 2.31.8
  g_application_get_flags@Base 2.28.0
  g_application_get_inactivity_timeout@Base 2.28.0
+ g_application_get_is_busy@Base 2.43.91
  g_application_get_is_registered@Base 2.28.0
  g_application_get_is_remote@Base 2.28.0
  g_application_get_resource_base_path@Base 2.41.2
@@ -122,6 +123,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_application_set_flags@Base 2.28.0
  g_application_set_inactivity_timeout@Base 2.28.0
  g_application_set_resource_base_path@Base 2.41.2
+ g_application_unbind_busy_property@Base 2.43.91
  g_application_unmark_busy@Base 2.37.0
  g_application_withdraw_notification@Base 2.39.4
  g_ask_password_flags_get_type@Base 2.16.0
@@ -676,6 +678,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_enumerator_get_type@Base 2.16.0
  g_file_enumerator_has_pending@Base 2.16.0
  g_file_enumerator_is_closed@Base 2.16.0
+ g_file_enumerator_iterate@Base 2.43.91
  g_file_enumerator_next_file@Base 2.16.0
  g_file_enumerator_next_files_async@Base 2.16.0
  g_file_enumerator_next_files_finish@Base 2.16.0
