@@ -1635,6 +1635,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_task_attach_source@Base 2.35.8
  g_task_get_cancellable@Base 2.35.8
  g_task_get_check_cancellable@Base 2.35.8
+ g_task_get_completed@Base 2.43.92
  g_task_get_context@Base 2.35.8
  g_task_get_priority@Base 2.35.8
  g_task_get_return_on_cancel@Base 2.35.8
@@ -1828,6 +1829,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_mount_guess_symbolic_icon@Base 2.33.14
  g_unix_mount_is_readonly@Base 2.16.0
  g_unix_mount_is_system_internal@Base 2.16.0
+ g_unix_mount_monitor_get@Base 2.43.92
  g_unix_mount_monitor_get_type@Base 2.16.0
  g_unix_mount_monitor_new@Base 2.16.0
  g_unix_mount_monitor_set_rate_limit@Base 2.18.0

@@ -1,3 +1,16 @@
+glib2.0 (2.43.92-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2.43.92
+    + GUnixMountMonitor now properly supports multiple main contexts
+    + many documentation improvements and cleanups.
+    + new support for HTTP proxies in GIO
+    + new GTask:completed property
+    + use "private" futexes in order to further improve the performance of the
+      contended case of GMutex and g_bit_lock()
+  * debian/libglib2.0-0.symbols: Add new symbols for this release.
+
+ -- Iain Lane <laney@debian.org>  Wed, 04 Mar 2015 11:13:39 +0000
+
 glib2.0 (2.43.91-1) experimental; urgency=medium
 
   * New upstream release 2.43.91
