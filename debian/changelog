@@ -1,3 +1,10 @@
+glib2.0 (2.44.0-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2.44.0
+    + gsocket: Document FD ownership with g_socket_new_from_fd()
+
+ -- Iain Lane <laney@debian.org>  Wed, 18 Mar 2015 12:56:53 +0000
+
 glib2.0 (2.43.92-1) experimental; urgency=medium
 
   * New upstream release 2.43.92
