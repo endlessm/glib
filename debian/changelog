@@ -1,4 +1,4 @@
-glib2.0 (2.45.1-1) UNRELEASED; urgency=medium
+glib2.0 (2.45.1-1) experimental; urgency=medium
 
   * New upstream release 2.45.1
     + The GSettings schema compiler, glib-compile-schemas has been changed
@@ -30,7 +30,7 @@ glib2.0 (2.45.1-1) UNRELEASED; urgency=medium
   * debian/control{,.in}: Update Vcs-* for experimental.
   * debian/libglib2.0-0.symbols: Add new symbols for this release.
 
- -- Iain Lane <laney@debian.org>  Mon, 30 Mar 2015 17:47:31 +0100
+ -- Iain Lane <laney@debian.org>  Fri, 01 May 2015 13:37:01 +0100
 
 glib2.0 (2.44.0-1) experimental; urgency=medium
 
