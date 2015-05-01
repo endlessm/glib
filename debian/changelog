@@ -1,3 +1,35 @@
+glib2.0 (2.45.1-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2.45.1
+    + The GSettings schema compiler, glib-compile-schemas has been changed
+      to reject schema xml that has duplicate <summary> or <description>
+      elements. Such elements typically occur when translations are merged
+      into the schema, with xml:lang attributes. This is not the correct way
+      to translate schemas. Instead keep the translations in the .mo file and
+      set the gettext-domain attribute on the <schemalist> element. To avoid
+      breaking already-installed schemas, this change is only taking effect
+      when you use the --strict option.
+    + The file monitoring infrastructure has been rewritten, and all backends
+      have seen major improvements.
+      + The inotify backend is reporting events with less delay (no event will
+        be delayed more than 10ms) and wakeups due to file monitoring have
+        been significantly reduced. A CHANGES_DONE event will also be sent
+        when new files appear.
+      + The poll implementation is now using the thread default main context.
+      + The fam implmentation is now running in the worker thread.
+      + The fen implementation has been removed, since it was unmaintained.
+    + The hardcoded 10-thread limit of GTask's thread pool has been removed,
+      since it was prone to causing deadlocks. The thread pool is now allowed
+      to grow dynamically and will shrink back over time.
+    + GSimpleAsyncResult has been deprecated in favor of GTask.
+    + The algorithm used by GAppInfo to find default handlers for mime types
+      has been tweaked to prefer apps that handle the specific subtype over
+      default handlers for a generic supertype.
+  * d/p/regex-test-do-not-assert-that-system-PCRE-allows-P-1.patch: Drop,
+    applied upstream.
+
+ -- Iain Lane <laney@debian.org>  Mon, 30 Mar 2015 17:47:31 +0100
+
 glib2.0 (2.44.0-1) experimental; urgency=medium
 
   * New upstream release 2.44.0
