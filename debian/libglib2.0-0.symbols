@@ -802,6 +802,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_monitor_get_type@Base 2.16.0
  g_file_monitor_is_cancelled@Base 2.16.0
  g_file_monitor_set_rate_limit@Base 2.16.0
+ g_file_monitor_source_handle_event@Base 2.45.1
  g_file_mount_enclosing_volume@Base 2.16.0
  g_file_mount_enclosing_volume_finish@Base 2.16.0
  g_file_mount_mountable@Base 2.16.0
@@ -1017,7 +1018,6 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_loadable_icon_load@Base 2.16.0
  g_loadable_icon_load_async@Base 2.16.0
  g_loadable_icon_load_finish@Base 2.16.0
- g_local_directory_monitor_get_type@Base 2.16.0
  g_local_file_monitor_get_type@Base 2.16.0
  g_memory_input_stream_add_bytes@Base 2.33.14
  g_memory_input_stream_add_data@Base 2.16.0
@@ -1541,6 +1541,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_socket_listener_add_inet_port@Base 2.22.0
  g_socket_listener_add_socket@Base 2.22.0
  g_socket_listener_close@Base 2.22.0
+ g_socket_listener_event_get_type@Base 2.45.1
  g_socket_listener_get_type@Base 2.22.0
  g_socket_listener_new@Base 2.22.0
  g_socket_listener_set_backlog@Base 2.22.0
@@ -1709,6 +1710,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_tls_certificate_new_from_pem@Base 2.28.0
  g_tls_certificate_request_flags_get_type@Base 2.39.4
  g_tls_certificate_verify@Base 2.28.0
+ g_tls_client_connection_copy_session_state@Base 2.45.1
  g_tls_client_connection_get_accepted_cas@Base 2.28.0
  g_tls_client_connection_get_server_identity@Base 2.28.0
  g_tls_client_connection_get_type@Base 2.28.0
