@@ -1,9 +1,9 @@
-glib2.0 (2.44.0-2) UNRELEASED; urgency=medium
+glib2.0 (2.44.0-2) unstable; urgency=medium
 
   * Upload to unstable.
   * debian/watch: Consider stable versions only.
 
- -- Iain Lane <laney@debian.org>  Fri, 01 May 2015 11:17:34 +0100
+ -- Iain Lane <laney@debian.org>  Fri, 01 May 2015 11:27:39 +0100
 
 glib2.0 (2.44.0-1) experimental; urgency=medium
 
