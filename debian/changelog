@@ -27,6 +27,7 @@ glib2.0 (2.45.1-1) UNRELEASED; urgency=medium
       default handlers for a generic supertype.
   * d/p/regex-test-do-not-assert-that-system-PCRE-allows-P-1.patch: Drop,
     applied upstream.
+  * debian/control{,.in}: Update Vcs-* for experimental.
 
  -- Iain Lane <laney@debian.org>  Mon, 30 Mar 2015 17:47:31 +0100
 
