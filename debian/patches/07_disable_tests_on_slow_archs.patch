@@ -2,21 +2,25 @@ Description: Disable tests on slow architectures which keep failing the tests.
 Author: Martin Pitt <martin.pitt@ubuntu.com>
 Forwarded: No
 
+Index: b/gio/tests/socket.c
+===================================================================
 --- a/gio/tests/socket.c
 +++ b/gio/tests/socket.c
-@@ -1086,7 +1086,9 @@
+@@ -1447,7 +1447,9 @@
    g_test_add_func ("/socket/ipv6_v4mapped", test_ipv6_v4mapped);
  #endif
    g_test_add_func ("/socket/close_graceful", test_close_graceful);
 +#if !defined(__arm__)
    g_test_add_func ("/socket/timed_wait", test_timed_wait);
 +#endif
+   g_test_add_func ("/socket/fd_roundtrip", test_fd_roundtrip);
    g_test_add_func ("/socket/address", test_sockaddr);
  #ifdef G_OS_UNIX
-   g_test_add_func ("/socket/unix-from-fd", test_unix_from_fd);
+Index: b/glib/tests/mainloop.c
+===================================================================
 --- a/glib/tests/mainloop.c
 +++ b/glib/tests/mainloop.c
-@@ -1572,11 +1572,15 @@
+@@ -1732,11 +1732,15 @@
  
    g_test_add_func ("/maincontext/basic", test_maincontext_basic);
    g_test_add_func ("/mainloop/basic", test_mainloop_basic);
@@ -32,6 +36,8 @@ Forwarded: No
    g_test_add_func ("/mainloop/swapping_child_sources", test_swapping_child_sources);
    g_test_add_func ("/mainloop/blocked_child_sources", test_blocked_child_sources);
    g_test_add_func ("/mainloop/source_time", test_source_time);
+Index: b/glib/tests/timeout.c
+===================================================================
 --- a/glib/tests/timeout.c
 +++ b/glib/tests/timeout.c
 @@ -104,7 +104,9 @@
@@ -44,6 +50,8 @@ Forwarded: No
  
    return g_test_run ();
  }
+Index: b/gio/tests/gdbus-threading.c
+===================================================================
 --- a/gio/tests/gdbus-threading.c
 +++ b/gio/tests/gdbus-threading.c
 @@ -406,7 +406,9 @@
