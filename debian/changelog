@@ -2,6 +2,10 @@ glib2.0 (2.44.0-3) UNRELEASED; urgency=medium
 
   * d/p/regex-test-do-not-assert-that-system-PCRE-allows-P-1.patch:
     update to the version that went upstream in 2.45.1. No functional change.
+  * d/p/regex-if-PCRE-is-8.34-or-later-disable-auto-possessi.patch:
+    update to my latest version submitted upstream, which fixes undefined
+    behaviour in the unlikely event that G_REGEX_OPTIMIZE is combined
+    with g_regex_match_all().
 
  -- Simon McVittie <smcv@debian.org>  Mon, 04 May 2015 09:53:53 +0100
 
