@@ -7,6 +7,10 @@ glib2.0 (2.45.1-2) UNRELEASED; urgency=medium
   * d/p/regex-test-do-not-assert-that-system-PCRE-still-has-.patch:
     update to my latest version submitted upstream, which asserts that
     a newer-than-8.32 system PCRE does not have the bug in question.
+  * d/p/gdbus-serialization-use-check_serialization-instead-.patch:
+    add patch to fix FTBFS in non-minimal environments (libdbus-1-dev
+    installed); the patch is not identical to the one from 2.44
+    due to upstream changes
 
  -- Simon McVittie <smcv@debian.org>  Mon, 04 May 2015 12:15:17 +0100
 

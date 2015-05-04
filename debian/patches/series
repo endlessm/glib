@@ -18,3 +18,4 @@ gdbus-connection-wait-up-to-10s-to-actually-send-a-m.patch
 skip-broken-timer-test.patch
 regex-if-PCRE-is-8.34-or-later-disable-auto-possessi.patch
 regex-test-do-not-assert-that-system-PCRE-still-has-.patch
+gdbus-serialization-use-check_serialization-instead-.patch
