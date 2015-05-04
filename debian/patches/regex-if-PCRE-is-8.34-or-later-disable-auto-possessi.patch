@@ -1,7 +1,7 @@
-From e0c0836a09cac0cccfbc1c207bed7a7af1fb63fa Mon Sep 17 00:00:00 2001
+From 8e1b62ee24f22e89aae0491ff91741caef535292 Mon Sep 17 00:00:00 2001
 From: Simon McVittie <simon.mcvittie@collabora.co.uk>
-Date: Tue, 22 Jul 2014 09:33:39 +0100
-Subject: [PATCH 4/4] regex: if PCRE is 8.34 or later, disable
+Date: Mon, 27 Apr 2015 14:38:41 +0100
+Subject: [PATCH 2/2] regex: if PCRE is 8.34 or later, disable
  auto-possessification for DFA
 
 Normally, recent PCRE behaves as if certain patterns were replaced
@@ -15,11 +15,11 @@ an internal PCRE 8.34 or later if the embedded copy is updated.
 
 Bug: https://bugzilla.gnome.org/show_bug.cgi?id=733325
 ---
- glib/gregex.c | 122 ++++++++++++++++++++++++++++++++++++++++++----------------
- 1 file changed, 89 insertions(+), 33 deletions(-)
+ glib/gregex.c | 128 +++++++++++++++++++++++++++++++++++++++++++---------------
+ 1 file changed, 95 insertions(+), 33 deletions(-)
 
 diff --git a/glib/gregex.c b/glib/gregex.c
-index 41bf67e..1022dfb 100644
+index 41bf67e..1c141b2 100644
 --- a/glib/gregex.c
 +++ b/glib/gregex.c
 @@ -1267,6 +1267,15 @@ g_regex_unref (GRegex *regex)
@@ -136,9 +136,7 @@ index 41bf67e..1022dfb 100644
 -  regex->pcre_re = re;
 -  regex->compile_opts = compile_options;
 -  regex->match_opts = match_options;
-+  if (compile_options_out != 0)
-+    *compile_options_out = compile_options;
- 
+-
 -  if (optimize)
 -    {
 -      regex->extra = pcre_study (regex->pcre_re, 0, &errmsg);
@@ -156,21 +154,24 @@ index 41bf67e..1022dfb 100644
 -          return NULL;
 -        }
 -    }
--
++  if (compile_options_out != 0)
++    *compile_options_out = compile_options;
+ 
 -  return regex;
 +  return re;
  }
  
  /**
-@@ -1873,6 +1906,7 @@ g_regex_match_all_full (const GRegex      *regex,
+@@ -1873,6 +1906,8 @@ g_regex_match_all_full (const GRegex      *regex,
  {
    GMatchInfo *info;
    gboolean done;
 +  pcre *pcre_re;
++  pcre_extra *extra;
  
    g_return_val_if_fail (regex != NULL, FALSE);
    g_return_val_if_fail (string != NULL, FALSE);
-@@ -1880,6 +1914,24 @@ g_regex_match_all_full (const GRegex      *regex,
+@@ -1880,6 +1915,29 @@ g_regex_match_all_full (const GRegex      *regex,
    g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
    g_return_val_if_fail ((match_options & ~G_REGEX_MATCH_MASK) == 0, FALSE);
  
@@ -187,24 +188,29 @@ index 41bf67e..1022dfb 100644
 +
 +  if (pcre_re == NULL)
 +    return FALSE;
++
++  /* Not bothering to cache the optimization data either, with similar
++   * reasoning */
++  extra = NULL;
 +#else
 +  /* For PCRE < 8.33 the precompiled regex is fine. */
 +  pcre_re = regex->pcre_re;
++  extra = regex->extra;
 +#endif
 +
    info = match_info_new (regex, string, string_len, start_position,
                           match_options, TRUE);
  
-@@ -1887,7 +1939,7 @@ g_regex_match_all_full (const GRegex      *regex,
+@@ -1887,7 +1945,7 @@ g_regex_match_all_full (const GRegex      *regex,
    while (!done)
      {
        done = TRUE;
 -      info->matches = pcre_dfa_exec (regex->pcre_re, regex->extra,
-+      info->matches = pcre_dfa_exec (pcre_re, regex->extra,
++      info->matches = pcre_dfa_exec (pcre_re, extra,
                                       info->string, info->string_len,
                                       info->pos,
                                       regex->match_opts | match_options,
-@@ -1917,6 +1969,10 @@ g_regex_match_all_full (const GRegex      *regex,
+@@ -1917,6 +1975,10 @@ g_regex_match_all_full (const GRegex      *regex,
          }
      }
  
@@ -216,5 +222,5 @@ index 41bf67e..1022dfb 100644
    info->pos = -1;
  
 -- 
-2.0.1
+2.1.4
 

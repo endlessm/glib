@@ -1,3 +1,12 @@
+glib2.0 (2.45.1-2) UNRELEASED; urgency=medium
+
+  * d/p/regex-if-PCRE-is-8.34-or-later-disable-auto-possessi.patch:
+    update to my latest version submitted upstream, which fixes undefined
+    behaviour in the unlikely event that G_REGEX_OPTIMIZE is combined
+    with g_regex_match_all().
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 04 May 2015 12:15:17 +0100
+
 glib2.0 (2.45.1-1) experimental; urgency=medium
 
   * New upstream release 2.45.1
