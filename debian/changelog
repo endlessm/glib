@@ -1,3 +1,10 @@
+glib2.0 (2.44.0-3) UNRELEASED; urgency=medium
+
+  * d/p/regex-test-do-not-assert-that-system-PCRE-allows-P-1.patch:
+    update to the version that went upstream in 2.45.1. No functional change.
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 04 May 2015 09:53:53 +0100
+
 glib2.0 (2.44.0-2) unstable; urgency=medium
 
   * Upload to unstable.
