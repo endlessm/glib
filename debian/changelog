@@ -1,6 +1,7 @@
 glib2.0 (2.45.1-3) UNRELEASED; urgency=medium
 
   * Correctly attribute previous upload to Iain
+  * d/p/0001-Fix-trashing-on-overlayfs.patch: add upstream bug reference
 
  -- Simon McVittie <smcv@debian.org>  Mon, 11 May 2015 19:32:30 +0100
 

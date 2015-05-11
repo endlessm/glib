@@ -14,6 +14,8 @@ the file.
 
 Fix this by checking st_dev of the parent directory when we are deleting
 a file.
+
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=748248
 ---
  gio/glocalfile.c | 15 ++++++++++++++-
  1 file changed, 14 insertions(+), 1 deletion(-)
