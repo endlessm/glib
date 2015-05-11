@@ -13,8 +13,11 @@ glib2.0 (2.45.1-2) UNRELEASED; urgency=medium
     installed). Applied upstream for 2.45.2.
 
   [ Iain Lane ]
-  * debian/patches/0001-Fix-trashing-on-overlayfs.patch: Take patch from
+  * d/p/0001-Fix-trashing-on-overlayfs.patch: Take patch from
     upstream bug to fix trashing on overlayfs.
+  * d/p/0001-glocalfilemonitor-Send-DELETED-event-when-there-is-n.patch: Take
+    patch from upstream bug to send the right event when moving files outside
+    a monitored directory.
 
  -- Simon McVittie <smcv@debian.org>  Mon, 04 May 2015 12:15:17 +0100
 
