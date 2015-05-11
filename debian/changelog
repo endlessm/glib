@@ -1,4 +1,4 @@
-glib2.0 (2.45.1-2) UNRELEASED; urgency=medium
+glib2.0 (2.45.1-2) experimental; urgency=medium
 
   [ Simon McVittie ]
   * d/p/regex-if-PCRE-is-8.34-or-later-disable-auto-possessi.patch:
@@ -19,7 +19,7 @@ glib2.0 (2.45.1-2) UNRELEASED; urgency=medium
     patch from upstream bug to send the right event when moving files outside
     a monitored directory.
 
- -- Simon McVittie <smcv@debian.org>  Mon, 04 May 2015 12:15:17 +0100
+ -- Simon McVittie <smcv@debian.org>  Mon, 11 May 2015 16:30:47 +0100
 
 glib2.0 (2.45.1-1) experimental; urgency=medium
 
