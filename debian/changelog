@@ -12,6 +12,9 @@ glib2.0 (2.44.0-3) UNRELEASED; urgency=medium
   * d/p/gdbus-serialization-use-check_serialization-instead-.patch:
     add patch to fix FTBFS in non-minimal environments (libdbus-1-dev
     installed). Applied upstream for 2.45.2.
+  * d/p/gdbus-peer-test-let-GDBusServer-start-before-notifyi.patch:
+    add patch fixing a race condition in the gdbus-peer test.
+    Applied upstream for 2.45.2.
 
  -- Simon McVittie <smcv@debian.org>  Mon, 04 May 2015 09:53:53 +0100
 
