@@ -23,3 +23,4 @@ gdbus-serialization-use-check_serialization-instead-.patch
 0001-Fix-trashing-on-overlayfs.patch
 0001-glocalfilemonitor-Send-DELETED-event-when-there-is-n.patch
 gdbus-peer-test-let-GDBusServer-start-before-notifyi.patch
+gdatetime-test-don-t-assume-that-time-stands-still.patch
