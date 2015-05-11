@@ -13,6 +13,11 @@ glib2.0 (2.45.1-3) UNRELEASED; urgency=medium
   * d/p/gdatetime-test-don-t-assume-that-time-stands-still.patch:
     add patch fixing potential test failures at the boundary between
     one second and the next. Applied upstream for 2.45.2.
+  * d/p/10_kfreebsd_issetugid_prototype.patch,
+    d/p/11_kfreebsd_pthread_condattr_setclock_prototype.patch,
+    d/p/13_sparc_prlimit_prototype.patch:
+    drop workarounds for #635205, #703545, #703559 which were all fixed
+    in jessie
 
  -- Simon McVittie <smcv@debian.org>  Mon, 11 May 2015 19:32:30 +0100
 

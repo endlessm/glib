@@ -5,9 +5,6 @@
 06_thread_test_ignore_prctl_fail.patch
 GDBus-tests-change-progress-noise-from-if-not-quiet-.patch
 07_disable_tests_on_slow_archs.patch
-10_kfreebsd_issetugid_prototype.patch
-11_kfreebsd_pthread_condattr_setclock_prototype.patch
-13_sparc_prlimit_prototype.patch
 61_glib-compile-binaries-path.patch
 90_gio-modules-multiarch-compat.patch
 skip-brokwn-dbus-appinfo-test.patch
