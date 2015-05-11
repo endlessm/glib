@@ -1,5 +1,6 @@
 glib2.0 (2.44.0-3) UNRELEASED; urgency=medium
 
+  [ Simon McVittie ]
   * d/p/regex-test-do-not-assert-that-system-PCRE-allows-P-1.patch:
     update to the version that went upstream in 2.45.1. No functional change.
   * d/p/regex-if-PCRE-is-8.34-or-later-disable-auto-possessi.patch:
@@ -28,6 +29,10 @@ glib2.0 (2.44.0-3) UNRELEASED; urgency=medium
     in jessie
   * d/p/81-skip-monitor-test-on-non-linux.patch: add DEP-3 information
   * d/p/90_gio-modules-multiarch-compat.patch: add DEP-3 information
+
+  [ Iain Lane ]
+  * d/p/0001-Fix-trashing-on-overlayfs.patch: Take patch from
+    upstream bug to fix trashing on overlayfs.
 
  -- Simon McVittie <smcv@debian.org>  Mon, 04 May 2015 09:53:53 +0100
 

@@ -20,3 +20,4 @@ regex-test-do-not-assert-that-system-PCRE-still-has-.patch
 gdbus-serialization-use-check_serialization-instead-.patch
 gdbus-peer-test-let-GDBusServer-start-before-notifyi.patch
 gdatetime-test-don-t-assume-that-time-stands-still.patch
+0001-Fix-trashing-on-overlayfs.patch
