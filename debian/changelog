@@ -19,6 +19,7 @@ glib2.0 (2.45.1-3) UNRELEASED; urgency=medium
     drop workarounds for #635205, #703545, #703559 which were all fixed
     in jessie
   * d/p/81-skip-monitor-test-on-non-linux.patch: add DEP-3 information
+  * d/p/90_gio-modules-multiarch-compat.patch: add DEP-3 information
 
  -- Simon McVittie <smcv@debian.org>  Mon, 11 May 2015 19:32:30 +0100
 
