@@ -4,6 +4,9 @@ glib2.0 (2.45.1-3) UNRELEASED; urgency=medium
   * d/p/0001-Fix-trashing-on-overlayfs.patch: add upstream bug reference
   * d/p/0001-glocalfilemonitor-Send-DELETED-event-when-there-is-n.patch:
     add upstream bug reference
+  * d/p/gdbus-peer-test-let-GDBusServer-start-before-notifyi.patch:
+    add patch fixing a race condition in the gdbus-peer test.
+    Applied upstream for 2.45.2.
 
  -- Simon McVittie <smcv@debian.org>  Mon, 11 May 2015 19:32:30 +0100
 

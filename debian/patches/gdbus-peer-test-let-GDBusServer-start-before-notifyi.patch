@@ -1,0 +1,142 @@
+From 6f859fe21a1955ab60ba4aa7e22841c7dbffdea3 Mon Sep 17 00:00:00 2001
+From: Simon McVittie <simon.mcvittie@collabora.co.uk>
+Date: Thu, 7 May 2015 16:45:48 +0100
+Subject: gdbus-peer test: let GDBusServer start before notifying
+ main thread
+
+When running the nonce-tcp and tcp-anonymous tests in one run
+of gdbus-peer, or running one of them twice via command-line options
+"-p /gdbus/tcp-anonymous -p /gdbus/tcp-anonymous", the one run second
+would sometimes fail to connect with ECONNRESET.
+
+Adding more debug messages revealed that in the successful case,
+g_main_loop_run() was executed in the server thread first:
+
+ # tcp-anonymous: server thread: listening on tcp:host=localhost,port=53517
+ # tcp-anonymous: server thread: starting server...
+ # tcp-anonymous: server thread: creating main loop...
+ # tcp-anonymous: server thread: running main loop...
+ # tcp-anonymous: main thread: trying tcp:host=localhost,port=53517...
+ # tcp-anonymous: main thread: waiting for server thread...
+
+but in the failing case, the main thread attempted to connect
+before the call to g_main_loop_run() in the server thread:
+
+ # tcp-anonymous: server thread: listening on tcp:host=localhost,port=40659
+ # tcp-anonymous: server thread: starting server...
+ # tcp-anonymous: server thread: creating main loop...
+ # tcp-anonymous: main thread: trying tcp:host=localhost,port=40659...
+ # tcp-anonymous: server thread: running main loop...
+
+(The log message "creating main loop" was immediately before
+create_service_loop(), and "running main loop" was immediately
+before g_main_loop_run().)
+
+To ensure that the GDBusServer has a chance to start accepting
+connections before the main thread tries to connect to it, do not
+tell the main thread about the service_loop immediately, but instead
+defer it to an idle.
+
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=749079
+Signed-off-by: Simon McVittie <simon.mcvittie@collabora.co.uk>
+Reviewed-by: Philip Withnall <philip.withnall@collabora.co.uk>
+Applied-upstream: 2.45.2, commit:6f859fe21a1955ab60ba4aa7e22841c7dbffdea3
+---
+ gio/tests/gdbus-peer.c | 41 ++++++++++++++++++++++++++++-------------
+ 1 file changed, 28 insertions(+), 13 deletions(-)
+
+diff --git a/gio/tests/gdbus-peer.c b/gio/tests/gdbus-peer.c
+index 6c6f3b0..2c702ab 100644
+--- a/gio/tests/gdbus-peer.c
++++ b/gio/tests/gdbus-peer.c
+@@ -335,14 +335,34 @@ on_new_connection (GDBusServer *server,
+   return TRUE;
+ }
+ 
+-static void
+-create_service_loop (GMainContext *service_context)
++/* We don't tell the main thread about the new GDBusServer until it has
++ * had a chance to start listening. */
++static gboolean
++idle_in_service_loop (gpointer loop)
+ {
+   g_assert (service_loop == NULL);
+   g_mutex_lock (&service_loop_lock);
+-  service_loop = g_main_loop_new (service_context, FALSE);
++  service_loop = loop;
+   g_cond_broadcast (&service_loop_cond);
+   g_mutex_unlock (&service_loop_lock);
++
++  return G_SOURCE_REMOVE;
++}
++
++static void
++run_service_loop (GMainContext *service_context)
++{
++  GMainLoop *loop;
++  GSource *source;
++
++  g_assert (service_loop == NULL);
++
++  loop = g_main_loop_new (service_context, FALSE);
++  source = g_idle_source_new ();
++  g_source_set_callback (source, idle_in_service_loop, loop, NULL);
++  g_source_attach (source, service_context);
++  g_source_unref (source);
++  g_main_loop_run (loop);
+ }
+ 
+ static void
+@@ -417,8 +437,7 @@ service_thread_func (gpointer user_data)
+ 
+   g_dbus_server_start (server);
+ 
+-  create_service_loop (service_context);
+-  g_main_loop_run (service_loop);
++  run_service_loop (service_context);
+ 
+   g_main_context_pop_thread_default (service_context);
+ 
+@@ -512,8 +531,7 @@ service_thread_func (gpointer data)
+                     data);
+   g_socket_service_start (service);
+ 
+-  create_service_loop (service_context);
+-  g_main_loop_run (service_loop);
++  run_service_loop (service_context);
+ 
+   g_main_context_pop_thread_default (service_context);
+ 
+@@ -1212,8 +1230,7 @@ nonce_tcp_service_thread_func (gpointer user_data)
+ 
+   g_dbus_server_start (server);
+ 
+-  create_service_loop (service_context);
+-  g_main_loop_run (service_loop);
++  run_service_loop (service_context);
+ 
+   g_main_context_pop_thread_default (service_context);
+ 
+@@ -1405,8 +1422,7 @@ tcp_anonymous_service_thread_func (gpointer user_data)
+ 
+   g_dbus_server_start (server);
+ 
+-  create_service_loop (service_context);
+-  g_main_loop_run (service_loop);
++  run_service_loop (service_context);
+ 
+   g_main_context_pop_thread_default (service_context);
+ 
+@@ -1561,8 +1577,7 @@ codegen_service_thread_func (gpointer user_data)
+                     G_CALLBACK (codegen_on_new_connection),
+                     animal);
+ 
+-  create_service_loop (service_context);
+-  g_main_loop_run (service_loop);
++  run_service_loop (service_context);
+ 
+   g_object_unref (animal);
+ 
+-- 
+2.1.4
+
