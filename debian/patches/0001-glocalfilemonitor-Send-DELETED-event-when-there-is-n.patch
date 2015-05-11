@@ -17,6 +17,8 @@ gets a MOVED event.
 
 When moving a file outside of a monitored directory, send DELETED. This
 is the pre-2.45 behaviour.
+
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=749225
 ---
  gio/glocalfilemonitor.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
