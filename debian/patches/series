@@ -3,6 +3,7 @@
 03_disble_glib_compile_schemas_warning.patch
 04_homedir_env.patch
 06_thread_test_ignore_prctl_fail.patch
+GDBus-tests-change-progress-noise-from-if-not-quiet-.patch
 07_disable_tests_on_slow_archs.patch
 10_kfreebsd_issetugid_prototype.patch
 11_kfreebsd_pthread_condattr_setclock_prototype.patch
