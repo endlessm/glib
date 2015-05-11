@@ -18,6 +18,9 @@ glib2.0 (2.44.0-3) UNRELEASED; urgency=medium
   * d/p/GDBus-tests-change-progress-noise-from-if-not-quiet-.patch:
     add patch fixing potential test failures caused by corrupt TAP
     output. Applied upstream for 2.45.2.
+  * d/p/gdatetime-test-don-t-assume-that-time-stands-still.patch:
+    add patch fixing potential test failures at the boundary between
+    one second and the next. Applied upstream for 2.45.2.
 
  -- Simon McVittie <smcv@debian.org>  Mon, 04 May 2015 09:53:53 +0100
 
