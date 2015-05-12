@@ -1,4 +1,6 @@
-glib2.0 (2.44.0-3) UNRELEASED; urgency=medium
+glib2.0 (2.44.0-3) unstable; urgency=medium
+
+  * Team upload.
 
   [ Simon McVittie ]
   * d/p/regex-test-do-not-assert-that-system-PCRE-allows-P-1.patch:
@@ -34,7 +36,7 @@ glib2.0 (2.44.0-3) UNRELEASED; urgency=medium
   * d/p/0001-Fix-trashing-on-overlayfs.patch: Take patch from
     upstream bug to fix trashing on overlayfs.
 
- -- Simon McVittie <smcv@debian.org>  Mon, 04 May 2015 09:53:53 +0100
+ -- Simon McVittie <smcv@debian.org>  Tue, 12 May 2015 13:15:38 +0100
 
 glib2.0 (2.44.0-2) unstable; urgency=medium
 
