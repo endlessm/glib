@@ -1,3 +1,12 @@
+glib2.0 (2.44.1-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2.44.1
+    + Improve the default application algorithm
+    + Bump the number of children a GType can have
+    + Various testsuite improvements
+
+ -- Iain Lane <laney@debian.org>  Wed, 13 May 2015 17:27:56 +0100
+
 glib2.0 (2.44.0-3) unstable; urgency=medium
 
   * Team upload.
