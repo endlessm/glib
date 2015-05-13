@@ -5,7 +5,6 @@ static gboolean
 create_app (gpointer data)
 {
   const gchar *path = data;
-  gchar *file;
   GError *error = NULL;
   const gchar *contents = 
     "[Desktop Entry]\n"
@@ -14,12 +13,8 @@ create_app (gpointer data)
     "Type=Application\n"
     "Exec=true\n";
 
-  file = g_build_filename (path, "app.desktop", NULL);
-
-  g_file_set_contents (file, contents, -1, &error);
+  g_file_set_contents (path, contents, -1, &error);
   g_assert_no_error (error);
-
-  g_free (file);
 
   return G_SOURCE_REMOVE;
 }
@@ -28,13 +23,8 @@ static gboolean
 delete_app (gpointer data)
 {
   const gchar *path = data;
-  gchar *file;
 
-  file = g_build_filename (path, "app.desktop", NULL);
-
-  g_remove (file);
-
-  g_free (file);
+  g_remove (path);
 
   return G_SOURCE_REMOVE;
 }
@@ -61,12 +51,14 @@ quit_loop (gpointer data)
 static void
 test_app_monitor (void)
 {
-  gchar *path;
+  gchar *path, *app_path;
   GAppInfoMonitor *monitor;
   GMainLoop *loop;
 
   path = g_build_filename (g_get_user_data_dir (), "applications", NULL);
   g_mkdir (path, 0755);
+
+  app_path = g_build_filename (path, "app.desktop", NULL);
 
   /* FIXME: this shouldn't be required */
   g_list_free_full (g_app_info_get_all (), g_object_unref);
@@ -76,7 +68,7 @@ test_app_monitor (void)
 
   g_signal_connect (monitor, "changed", G_CALLBACK (changed_cb), loop);
 
-  g_idle_add (create_app, path);
+  g_idle_add (create_app, app_path);
   g_timeout_add_seconds (3, quit_loop, loop);
 
   g_main_loop_run (loop);
@@ -86,16 +78,18 @@ test_app_monitor (void)
   /* FIXME: this shouldn't be required */
   g_list_free_full (g_app_info_get_all (), g_object_unref);
 
-  g_idle_add (delete_app, path);
+  g_idle_add (delete_app, app_path);
   g_timeout_add_seconds (3, quit_loop, loop);
 
   g_main_loop_run (loop);
   g_assert (changed_fired);
 
   g_main_loop_unref (loop);
+  g_remove (app_path);
 
   g_object_unref (monitor);
   g_free (path);
+  g_free (app_path);
 }
 
 int
