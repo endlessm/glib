@@ -77,8 +77,10 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_app_launch_context_setenv@Base 2.31.8
  g_app_launch_context_unsetenv@Base 2.31.8
  g_application_activate@Base 2.28.0
+ g_application_add_main_option@Base 2.41.4
  g_application_add_main_option_entries@Base 2.39.90
  g_application_add_option_group@Base 2.39.90
+ g_application_bind_busy_property@Base 2.43.90
  g_application_command_line_create_file_for_arg@Base 2.35.8
  g_application_command_line_get_arguments@Base 2.28.0
  g_application_command_line_get_cwd@Base 2.28.0
@@ -100,8 +102,10 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_application_get_default@Base 2.31.8
  g_application_get_flags@Base 2.28.0
  g_application_get_inactivity_timeout@Base 2.28.0
+ g_application_get_is_busy@Base 2.43.91
  g_application_get_is_registered@Base 2.28.0
  g_application_get_is_remote@Base 2.28.0
+ g_application_get_resource_base_path@Base 2.41.2
  g_application_get_type@Base 2.28.0
  g_application_hold@Base 2.28.0
  g_application_id_is_valid@Base 2.28.0
@@ -118,6 +122,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_application_set_default@Base 2.31.8
  g_application_set_flags@Base 2.28.0
  g_application_set_inactivity_timeout@Base 2.28.0
+ g_application_set_resource_base_path@Base 2.41.2
+ g_application_unbind_busy_property@Base 2.43.91
  g_application_unmark_busy@Base 2.37.0
  g_application_withdraw_notification@Base 2.39.4
  g_ask_password_flags_get_type@Base 2.16.0
@@ -555,6 +561,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_desktop_app_info_get_categories@Base 2.30.0
  g_desktop_app_info_get_filename@Base 2.24.0
  g_desktop_app_info_get_generic_name@Base 2.30.0
+ g_desktop_app_info_get_implementations@Base 2.41.0
  g_desktop_app_info_get_is_hidden@Base 2.16.0
  g_desktop_app_info_get_keywords@Base 2.31.8
  g_desktop_app_info_get_nodisplay@Base 2.30.0
@@ -671,6 +678,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_enumerator_get_type@Base 2.16.0
  g_file_enumerator_has_pending@Base 2.16.0
  g_file_enumerator_is_closed@Base 2.16.0
+ g_file_enumerator_iterate@Base 2.43.91
  g_file_enumerator_next_file@Base 2.16.0
  g_file_enumerator_next_files_async@Base 2.16.0
  g_file_enumerator_next_files_finish@Base 2.16.0
@@ -938,6 +946,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_input_stream_is_closed@Base 2.16.0
  g_input_stream_read@Base 2.16.0
  g_input_stream_read_all@Base 2.16.0
+ g_input_stream_read_all_async@Base 2.43.1
+ g_input_stream_read_all_finish@Base 2.43.1
  g_input_stream_read_async@Base 2.16.0
  g_input_stream_read_bytes@Base 2.33.14
  g_input_stream_read_bytes_async@Base 2.33.14
@@ -989,6 +999,20 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_io_stream_splice_finish@Base 2.28.0
  g_io_stream_splice_flags_get_type@Base 2.28.0
  g_keyfile_settings_backend_new@Base 2.26.0
+ g_list_model_get_item@Base 2.43.4
+ g_list_model_get_item_type@Base 2.43.4
+ g_list_model_get_n_items@Base 2.43.4
+ g_list_model_get_object@Base 2.43.4
+ g_list_model_get_type@Base 2.43.4
+ g_list_model_items_changed@Base 2.43.4
+ g_list_store_append@Base 2.43.4
+ g_list_store_get_type@Base 2.43.4
+ g_list_store_insert@Base 2.43.4
+ g_list_store_insert_sorted@Base 2.43.4
+ g_list_store_new@Base 2.43.4
+ g_list_store_remove@Base 2.43.4
+ g_list_store_remove_all@Base 2.43.4
+ g_list_store_splice@Base 2.43.4
  g_loadable_icon_get_type@Base 2.16.0
  g_loadable_icon_load@Base 2.16.0
  g_loadable_icon_load_async@Base 2.16.0
@@ -1116,8 +1140,10 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_network_address_get_scheme@Base 2.26.0
  g_network_address_get_type@Base 2.22.0
  g_network_address_new@Base 2.22.0
+ g_network_address_new_loopback@Base 2.43.2
  g_network_address_parse@Base 2.22.0
  g_network_address_parse_uri@Base 2.26.0
+ g_network_connectivity_get_type@Base 2.43.2
  g_network_monitor_base_add_network@Base 2.31.8
  g_network_monitor_base_get_type@Base 2.31.8
  g_network_monitor_base_remove_network@Base 2.31.8
@@ -1125,6 +1151,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_network_monitor_can_reach@Base 2.31.8
  g_network_monitor_can_reach_async@Base 2.31.8
  g_network_monitor_can_reach_finish@Base 2.31.8
+ g_network_monitor_get_connectivity@Base 2.43.2
  g_network_monitor_get_default@Base 2.31.8
  g_network_monitor_get_network_available@Base 2.31.8
  g_network_monitor_get_type@Base 2.31.8
@@ -1141,11 +1168,13 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_notification_add_button_with_target_value@Base 2.39.4
  g_notification_get_type@Base 2.39.4
  g_notification_new@Base 2.39.4
+ g_notification_priority_get_type@Base 2.41.2
  g_notification_set_body@Base 2.39.4
  g_notification_set_default_action@Base 2.39.4
  g_notification_set_default_action_and_target@Base 2.39.4
  g_notification_set_default_action_and_target_value@Base 2.39.4
  g_notification_set_icon@Base 2.39.4
+ g_notification_set_priority@Base 2.41.2
  g_notification_set_title@Base 2.39.4
  g_notification_set_urgent@Base 2.39.4
  g_null_settings_backend_new@Base 2.28.0
@@ -1169,6 +1198,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_output_stream_vprintf@Base 2.39.4
  g_output_stream_write@Base 2.16.0
  g_output_stream_write_all@Base 2.16.0
+ g_output_stream_write_all_async@Base 2.43.1
+ g_output_stream_write_all_finish@Base 2.43.1
  g_output_stream_write_async@Base 2.16.0
  g_output_stream_write_bytes@Base 2.33.14
  g_output_stream_write_bytes_async@Base 2.33.14
@@ -1326,6 +1357,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_settings_schema_has_key@Base 2.39.4
  g_settings_schema_key_get_default_value@Base 2.39.4
  g_settings_schema_key_get_description@Base 2.39.4
+ g_settings_schema_key_get_name@Base 2.43.4
  g_settings_schema_key_get_range@Base 2.39.4
  g_settings_schema_key_get_summary@Base 2.39.4
  g_settings_schema_key_get_type@Base 2.39.4
@@ -1333,6 +1365,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_settings_schema_key_range_check@Base 2.39.4
  g_settings_schema_key_ref@Base 2.39.4
  g_settings_schema_key_unref@Base 2.39.4
+ g_settings_schema_list_children@Base 2.43.4
  g_settings_schema_ref@Base 2.31.8
  g_settings_schema_source_get_default@Base 2.31.8
  g_settings_schema_source_get_type@Base 2.31.8
@@ -1365,6 +1398,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_simple_action_new_stateful@Base 2.28.0
  g_simple_action_set_enabled@Base 2.28.0
  g_simple_action_set_state@Base 2.30.0
+ g_simple_action_set_state_hint@Base 2.43.4
  g_simple_async_report_error_in_idle@Base 2.16.0
  g_simple_async_report_gerror_in_idle@Base 2.16.0
  g_simple_async_report_take_gerror_in_idle@Base 2.28.0
@@ -1391,6 +1425,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_simple_async_result_set_op_res_gpointer@Base 2.16.0
  g_simple_async_result_set_op_res_gssize@Base 2.16.0
  g_simple_async_result_take_error@Base 2.28.0
+ g_simple_io_stream_get_type@Base 2.43.90
+ g_simple_io_stream_new@Base 2.43.90
  g_simple_permission_get_type@Base 2.26.0
  g_simple_permission_new@Base 2.26.0
  g_simple_proxy_resolver_get_type@Base 2.35.8
@@ -1518,6 +1554,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_socket_receive_with_blocking@Base 2.26.0
  g_socket_send@Base 2.22.0
  g_socket_send_message@Base 2.22.0
+ g_socket_send_messages@Base 2.43.2
  g_socket_send_to@Base 2.22.0
  g_socket_send_with_blocking@Base 2.26.0
  g_socket_service_get_type@Base 2.22.0
@@ -1598,6 +1635,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_task_attach_source@Base 2.35.8
  g_task_get_cancellable@Base 2.35.8
  g_task_get_check_cancellable@Base 2.35.8
+ g_task_get_completed@Base 2.43.92
  g_task_get_context@Base 2.35.8
  g_task_get_priority@Base 2.35.8
  g_task_get_return_on_cancel@Base 2.35.8
@@ -1791,6 +1829,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_mount_guess_symbolic_icon@Base 2.33.14
  g_unix_mount_is_readonly@Base 2.16.0
  g_unix_mount_is_system_internal@Base 2.16.0
+ g_unix_mount_monitor_get@Base 2.43.92
  g_unix_mount_monitor_get_type@Base 2.16.0
  g_unix_mount_monitor_new@Base 2.16.0
  g_unix_mount_monitor_set_rate_limit@Base 2.18.0
@@ -2636,6 +2675,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_option_context_get_help_enabled@Base 2.12.0
  g_option_context_get_ignore_unknown_options@Base 2.12.0
  g_option_context_get_main_group@Base 2.12.0
+ g_option_context_get_strict_posix@Base 2.43.1
  g_option_context_get_summary@Base 2.12.0
  g_option_context_new@Base 2.12.0
  g_option_context_parse@Base 2.12.0
@@ -2644,6 +2684,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_option_context_set_help_enabled@Base 2.12.0
  g_option_context_set_ignore_unknown_options@Base 2.12.0
  g_option_context_set_main_group@Base 2.12.0
+ g_option_context_set_strict_posix@Base 2.43.1
  g_option_context_set_summary@Base 2.12.0
  g_option_context_set_translate_func@Base 2.12.0
  g_option_context_set_translation_domain@Base 2.12.0
@@ -2651,10 +2692,12 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_option_group_add_entries@Base 2.12.0
  g_option_group_free@Base 2.12.0
  g_option_group_new@Base 2.12.0
+ g_option_group_ref@Base 2.43.90
  g_option_group_set_error_hook@Base 2.12.0
  g_option_group_set_parse_hooks@Base 2.12.0
  g_option_group_set_translate_func@Base 2.12.0
  g_option_group_set_translation_domain@Base 2.12.0
+ g_option_group_unref@Base 2.43.90
  g_parse_debug_string@Base 2.12.0
  g_path_get_basename@Base 2.12.0
  g_path_get_dirname@Base 2.12.0
@@ -3074,6 +3117,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_strstr_len@Base 2.12.0
  g_strtod@Base 2.12.0
  g_strup@Base 2.12.0
+ g_strv_contains@Base 2.43.2
  g_strv_length@Base 2.12.0
  g_test_add_data_func@Base 2.16.0
  g_test_add_data_func_full@Base 2.33.14
@@ -3659,6 +3703,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_object_watch_closure@Base 2.12.0
  g_object_weak_ref@Base 2.12.0
  g_object_weak_unref@Base 2.12.0
+ g_option_group_get_type@Base 2.43.90
  g_param_spec_boolean@Base 2.12.0
  g_param_spec_boxed@Base 2.12.0
  g_param_spec_char@Base 2.12.0
@@ -3771,6 +3816,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_type_check_instance@Base 2.12.0
  g_type_check_instance_cast@Base 2.12.0
  g_type_check_instance_is_a@Base 2.12.0
+ g_type_check_instance_is_fundamentally_a@Base 2.41.1
  g_type_check_is_value_type@Base 2.12.0
  g_type_check_value@Base 2.12.0
  g_type_check_value_holds@Base 2.12.0
@@ -3795,6 +3841,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_type_from_name@Base 2.12.0
  g_type_fundamental@Base 2.12.0
  g_type_fundamental_next@Base 2.12.0
+ g_type_get_instance_count@Base 2.43.1
  g_type_get_plugin@Base 2.12.0
  g_type_get_qdata@Base 2.12.0
  g_type_get_type_registration_serial@Base 2.35.8
@@ -3878,6 +3925,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_value_get_ulong@Base 2.12.0
  g_value_get_variant@Base 2.26.0
  g_value_init@Base 2.12.0
+ g_value_init_from_instance@Base 2.41.2
  g_value_peek_pointer@Base 2.12.0
  g_value_register_transform_func@Base 2.12.0
  g_value_reset@Base 2.12.0
