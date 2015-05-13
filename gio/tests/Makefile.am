@@ -486,9 +486,8 @@ test_programs += gdbus-serialization
 gdbus_serialization_CFLAGS = $(AM_CFLAGS) $(DBUS1_CFLAGS)
 gdbus_serialization_LDADD = $(LDADD) $(DBUS1_LIBS)
 gdbus_serialization_SOURCES = \
-	gdbus-serialization.c			\
-	gdbus-tests.h				\
-	gdbus-tests.c
+	$(gdbus_sessionbus_sources)		\
+	gdbus-serialization.c
 endif
 
 if HAVE_GCC

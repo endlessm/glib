@@ -25,6 +25,8 @@
 #include <unistd.h>
 #include <dbus/dbus.h>
 
+#include "gdbus-sessionbus.h"
+
 /* ---------------------------------------------------------------------------------------------------- */
 
 static void
@@ -1057,6 +1059,7 @@ test_double_array (void)
 
   g_test_bug ("732754");
 
+  session_bus_up ();
   conn = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
   g_assert_no_error (error);
 
@@ -1077,6 +1080,7 @@ test_double_array (void)
   g_assert_error (error, G_DBUS_ERROR, G_DBUS_ERROR_UNKNOWN_METHOD);
 
   g_object_unref (conn);
+  session_bus_down ();
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
