@@ -20,6 +20,7 @@ glib2.0 (2.45.1-3) UNRELEASED; urgency=medium
     in jessie
   * d/p/81-skip-monitor-test-on-non-linux.patch: add DEP-3 information
   * d/p/90_gio-modules-multiarch-compat.patch: add DEP-3 information
+  * Tag a couple more patches as applied upstream for 2.45.2
 
  -- Simon McVittie <smcv@debian.org>  Mon, 11 May 2015 19:32:30 +0100
 
