@@ -1,3 +1,9 @@
+glib2.0 (2.44.1-2) UNRELEASED; urgency=medium
+
+  * Tag a couple more patches as applied upstream for 2.45.2
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 14 May 2015 12:45:46 +0100
+
 glib2.0 (2.44.1-1) unstable; urgency=medium
 
   * New upstream release 2.44.1

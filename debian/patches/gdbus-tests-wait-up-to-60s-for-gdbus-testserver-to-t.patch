@@ -11,7 +11,10 @@ Patch originally by Simon McVittie <simon.mcvittie@collabora.co.uk>,
 modified by Iain Lane to be called earlier, to catch all testcases in a
 particular test.
 
-https://bugzilla.gnome.org/show_bug.cgi?id=724113
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=724113
+Reviewed-by: Simon McVittie <simon.mcvittie@collabora.co.uk>
+Acked-by: Matthias Clasen <mclasen@redhat.com>
+Applied-upstream: 2.45.2, commit:fe1a2dc1965b564727480c8a99740252ea81274b
 ---
  gio/tests/gdbus-connection-loss.c |  3 +--
  gio/tests/gdbus-tests.c           | 52 +++++++++++++++++++++++++++++++++++++++

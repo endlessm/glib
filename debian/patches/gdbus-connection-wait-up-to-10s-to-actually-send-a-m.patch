@@ -8,7 +8,8 @@ but you never know; but we also now wait in 0.1s increments, so this test
 should actually be faster now.
 
 Bug: https://bugzilla.gnome.org/show_bug.cgi?id=724113
-Forwarded: yes
+Acked-by: Matthias Clasen <mclasen@redhat.com>
+Applied-upstream: 2.45.2, commit:3beb67f9f3b1db6ee133973edfd89df89d7bdde5
 ---
  gio/tests/gdbus-connection.c | 14 ++++++++++++--
  1 file changed, 12 insertions(+), 2 deletions(-)
