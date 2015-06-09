@@ -1,18 +1,10 @@
-glib2.0 (2.45.1-3) UNRELEASED; urgency=medium
+glib2.0 (2.45.2-1) UNRELEASED; urgency=medium
 
+  [ Simon McVittie ]
   * Correctly attribute previous upload to Iain
   * d/p/0001-Fix-trashing-on-overlayfs.patch: add upstream bug reference
   * d/p/0001-glocalfilemonitor-Send-DELETED-event-when-there-is-n.patch:
     add upstream bug reference
-  * d/p/gdbus-peer-test-let-GDBusServer-start-before-notifyi.patch:
-    add patch fixing a race condition in the gdbus-peer test.
-    Applied upstream for 2.45.2.
-  * d/p/GDBus-tests-change-progress-noise-from-if-not-quiet-.patch:
-    add patch fixing potential test failures caused by corrupt TAP
-    output. Applied upstream for 2.45.2.
-  * d/p/gdatetime-test-don-t-assume-that-time-stands-still.patch:
-    add patch fixing potential test failures at the boundary between
-    one second and the next. Applied upstream for 2.45.2.
   * d/p/10_kfreebsd_issetugid_prototype.patch,
     d/p/11_kfreebsd_pthread_condattr_setclock_prototype.patch,
     d/p/13_sparc_prlimit_prototype.patch:
@@ -20,9 +12,22 @@ glib2.0 (2.45.1-3) UNRELEASED; urgency=medium
     in jessie
   * d/p/81-skip-monitor-test-on-non-linux.patch: add DEP-3 information
   * d/p/90_gio-modules-multiarch-compat.patch: add DEP-3 information
-  * Tag a couple more patches as applied upstream for 2.45.2
 
- -- Simon McVittie <smcv@debian.org>  Mon, 11 May 2015 19:32:30 +0100
+  [ Iain Lane ]
+  * New upstream release 2.45.2
+    + Improve error reporting in glib-compile-schemas.
+    + Add introspection annotations to GListStore.
+  * GDBus-tests-change-progress-noise-from-if-not-quiet-.patch,
+    gdbus-tests-wait-up-to-60s-for-gdbus-testserver-to-t.patch,
+    gdbus-connection-wait-up-to-10s-to-actually-send-a-m.patch,
+    regex-test-do-not-assert-that-system-PCRE-still-has-.patch,
+    gdbus-serialization-use-check_serialization-instead-.patch,
+    gdbus-peer-test-let-GDBusServer-start-before-notifyi.patch,
+    gdatetime-test-don-t-assume-that-time-stands-still.patch: Delete, applied
+    upstream.
+  * 07_disable_tests_on_slow_archs.patch: Refresh to defuzz
+
+ -- Iain Lane <laney@debian.org>  Tue, 09 Jun 2015 16:18:51 +0100
 
 glib2.0 (2.45.1-2) experimental; urgency=medium
 

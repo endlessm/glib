@@ -63,4 +63,4 @@ Index: b/gio/tests/gdbus-threading.c
 +#endif
  
        if (g_test_verbose ())
-         g_print (" ");
+         g_printerr (" ");
