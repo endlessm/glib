@@ -1,8 +1,6 @@
-From 8e1b62ee24f22e89aae0491ff91741caef535292 Mon Sep 17 00:00:00 2001
 From: Simon McVittie <simon.mcvittie@collabora.co.uk>
 Date: Mon, 27 Apr 2015 14:38:41 +0100
-Subject: [PATCH 2/2] regex: if PCRE is 8.34 or later, disable
- auto-possessification for DFA
+Subject: regex: if PCRE is 8.34 or later, disable auto-possessification for DFA
 
 Normally, recent PCRE behaves as if certain patterns were replaced
 by a more "possessive" pattern that gives the same answer for normal
@@ -14,6 +12,8 @@ This currently only affects a system PCRE, but would also work fine for
 an internal PCRE 8.34 or later if the embedded copy is updated.
 
 Bug: https://bugzilla.gnome.org/show_bug.cgi?id=733325
+Reviewed-by: Christian Persch <chpe@gnome.org>
+Applied-upstream: 2.45.3, commit:bf181a3ac78e824ca7e67ecfb2ba957e740594d7
 ---
  glib/gregex.c | 128 +++++++++++++++++++++++++++++++++++++++++++---------------
  1 file changed, 95 insertions(+), 33 deletions(-)
