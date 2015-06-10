@@ -1,4 +1,4 @@
-glib2.0 (2.45.2-1) UNRELEASED; urgency=medium
+glib2.0 (2.45.2-1) experimental; urgency=medium
 
   [ Simon McVittie ]
   * Correctly attribute previous upload to Iain
@@ -27,7 +27,7 @@ glib2.0 (2.45.2-1) UNRELEASED; urgency=medium
     upstream.
   * 07_disable_tests_on_slow_archs.patch: Refresh to defuzz
 
- -- Iain Lane <laney@debian.org>  Tue, 09 Jun 2015 16:18:51 +0100
+ -- Iain Lane <laney@debian.org>  Tue, 09 Jun 2015 16:19:20 +0100
 
 glib2.0 (2.45.1-2) experimental; urgency=medium
 
