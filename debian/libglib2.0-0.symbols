@@ -1366,6 +1366,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_settings_schema_key_ref@Base 2.39.4
  g_settings_schema_key_unref@Base 2.39.4
  g_settings_schema_list_children@Base 2.43.4
+ g_settings_schema_list_keys@Base 2.45.3
  g_settings_schema_ref@Base 2.31.8
  g_settings_schema_source_get_default@Base 2.31.8
  g_settings_schema_source_get_type@Base 2.31.8

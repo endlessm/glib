@@ -12,6 +12,7 @@ glib2.0 (2.45.3-1) UNRELEASED; urgency=medium
     + GSettings:
      - New API: g_settings_schema_list_keys
      - Deprecated: g_settings_list_keys
+  * debian/libglib2.0-0.symbols: Update with g_settings_schema_list_keys.
 
  -- Iain Lane <laney@debian.org>  Tue, 30 Jun 2015 15:07:56 +0100
 
