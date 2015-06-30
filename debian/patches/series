@@ -11,6 +11,5 @@ Do-not-attempt-to-autolaunch-a-session-dbus-daemon-w.patch
 81-skip-monitor-test-on-non-linux.patch
 0001-timer-test-use-volatile-for-locals.patch
 skip-broken-timer-test.patch
-regex-if-PCRE-is-8.34-or-later-disable-auto-possessi.patch
 0001-Fix-trashing-on-overlayfs.patch
 0001-glocalfilemonitor-Send-DELETED-event-when-there-is-n.patch
