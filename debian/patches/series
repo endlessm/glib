@@ -13,3 +13,4 @@ Do-not-attempt-to-autolaunch-a-session-dbus-daemon-w.patch
 skip-broken-timer-test.patch
 0001-Fix-trashing-on-overlayfs.patch
 0001-glocalfilemonitor-Send-DELETED-event-when-there-is-n.patch
+0001-gio-tests-appmonitor-Delete-file-before-checking-for.patch

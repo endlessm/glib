@@ -15,6 +15,8 @@ glib2.0 (2.45.3-1) UNRELEASED; urgency=medium
   * debian/libglib2.0-0.symbols: Update with g_settings_schema_list_keys.
   * debian/patches/regex-if-PCRE-is-8.34-or-later-disable-auto-possessi.patch:
     Delete, applied upstream.
+  * d/p/0001-gio-tests-appmonitor-Delete-file-before-checking-for.patch:
+    Cherry-pick upstream patch to fix testsuite failure causing FTBFS.
 
  -- Iain Lane <laney@debian.org>  Tue, 30 Jun 2015 15:19:06 +0100
 
