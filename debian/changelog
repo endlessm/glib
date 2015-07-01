@@ -12,7 +12,7 @@ glib2.0 (2.45.3-1) UNRELEASED; urgency=medium
     + GSettings:
      - New API: g_settings_schema_list_keys
      - Deprecated: g_settings_list_keys
-  * debian/libglib2.0-0.symbols: Update with g_settings_schema_list_keys.
+  * debian/libglib2.0-0.symbols: Update with new symbols from this release.
   * debian/patches/regex-if-PCRE-is-8.34-or-later-disable-auto-possessi.patch:
     Delete, applied upstream.
   * d/p/0001-gio-tests-appmonitor-Delete-file-before-checking-for.patch:

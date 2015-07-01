@@ -1134,6 +1134,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_mount_unmount_with_operation@Base 2.22.0
  g_mount_unmount_with_operation_finish@Base 2.22.0
  g_mount_unshadow@Base 2.20.0
+ g_native_socket_address_get_type@Base 2.45.3
+ g_native_socket_address_new@Base 2.45.3
  g_native_volume_monitor_get_type@Base 2.16.0
  g_network_address_get_hostname@Base 2.22.0
  g_network_address_get_port@Base 2.22.0
@@ -2523,6 +2525,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_log_set_default_handler@Base 2.12.0
  g_log_set_fatal_mask@Base 2.12.0
  g_log_set_handler@Base 2.12.0
+ g_log_set_handler_full@Base 2.45.3
  g_logv@Base 2.12.0
  g_lstat@Base 2.12.0
  g_main_context_acquire@Base 2.12.0
