@@ -1964,11 +1964,15 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_async_queue_pop@Base 2.12.0
  g_async_queue_pop_unlocked@Base 2.12.0
  g_async_queue_push@Base 2.12.0
+ g_async_queue_push_front@Base 2.45.4
+ g_async_queue_push_front_unlocked@Base 2.45.4
  g_async_queue_push_sorted@Base 2.12.0
  g_async_queue_push_sorted_unlocked@Base 2.12.0
  g_async_queue_push_unlocked@Base 2.12.0
  g_async_queue_ref@Base 2.12.0
  g_async_queue_ref_unlocked@Base 2.12.0
+ g_async_queue_remove@Base 2.45.4
+ g_async_queue_remove_unlocked@Base 2.45.4
  g_async_queue_sort@Base 2.12.0
  g_async_queue_sort_unlocked@Base 2.12.0
  g_async_queue_timed_pop@Base 2.12.0
@@ -3191,6 +3195,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_thread_pool_get_max_unused_threads@Base 2.12.0
  g_thread_pool_get_num_threads@Base 2.12.0
  g_thread_pool_get_num_unused_threads@Base 2.12.0
+ g_thread_pool_move_to_front@Base 2.45.4
  g_thread_pool_new@Base 2.12.0
  g_thread_pool_push@Base 2.12.0
  g_thread_pool_set_max_idle_time@Base 2.12.0
