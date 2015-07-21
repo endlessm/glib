@@ -6,14 +6,14 @@ Index: b/gio/tests/socket.c
 ===================================================================
 --- a/gio/tests/socket.c
 +++ b/gio/tests/socket.c
-@@ -1447,7 +1447,9 @@
+@@ -1452,7 +1452,9 @@
    g_test_add_func ("/socket/ipv6_v4mapped", test_ipv6_v4mapped);
  #endif
    g_test_add_func ("/socket/close_graceful", test_close_graceful);
 +#if !defined(__arm__)
    g_test_add_func ("/socket/timed_wait", test_timed_wait);
 +#endif
-   g_test_add_func ("/socket/fd_roundtrip", test_fd_roundtrip);
+   g_test_add_func ("/socket/fd_reuse", test_fd_reuse);
    g_test_add_func ("/socket/address", test_sockaddr);
  #ifdef G_OS_UNIX
 Index: b/glib/tests/mainloop.c

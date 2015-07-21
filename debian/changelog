@@ -1,3 +1,13 @@
+glib2.0 (2.45.4-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2.45.4
+  * d/p/0001-gio-tests-appmonitor-Delete-file-before-checking-for.patch,
+    d/p/0001-glocalfilemonitor-Send-DELETED-event-when-there-is-n.patch: Drop,
+    applied upstream.
+  * d/p/07_disable_tests_on_slow_archs.patch: Refresh to apply cleanly.
+
+ -- Iain Lane <laney@debian.org>  Tue, 21 Jul 2015 15:36:15 +0100
+
 glib2.0 (2.45.3-1) experimental; urgency=medium
 
   [ Simon McVittie ]
