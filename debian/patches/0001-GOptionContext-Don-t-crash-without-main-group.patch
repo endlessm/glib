@@ -1,0 +1,35 @@
+From 08a3f3f3d2190c7ff393ea13c5a310ba8a13a2e0 Mon Sep 17 00:00:00 2001
+From: Matthias Clasen <mclasen@redhat.com>
+Date: Mon, 27 Jul 2015 07:52:27 -0400
+Subject: [PATCH] GOptionContext: Don't crash without main group
+
+This was introduced in 126c685f4aa and caused e.g. gdbus
+to crash when called without arguments.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=752210
+
+Applied-Upstream: 2.45.90
+
+---
+ glib/goption.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/glib/goption.c b/glib/goption.c
+index 8a1848d..0464c2e 100644
+--- a/glib/goption.c
++++ b/glib/goption.c
+@@ -854,9 +854,9 @@ g_option_context_get_help (GOptionContext *context,
+         }
+     }
+ 
+-  g_string_append_printf (string, "%s\n  %s", _("Usage:"), g_get_prgname());
++  g_string_append_printf (string, "%s\n  %s", _("Usage:"), g_get_prgname ());
+   if (context->help_enabled ||
+-      context->main_group->n_entries > 0 ||
++      (context->main_group && context->main_group->n_entries > 0) ||
+       context->groups != NULL)
+     g_string_append_printf (string, " %s", _("[OPTION...]"));
+ 
+-- 
+2.4.6
+
