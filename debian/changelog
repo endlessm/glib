@@ -1,4 +1,4 @@
-glib2.0 (2.45.6-1) UNRELEASED; urgency=medium
+glib2.0 (2.45.6-1) experimental; urgency=medium
 
   * New upstream releases 2.45.5 and 2.45.6
     + GNetworkMonitor now provides information about metered networks
@@ -9,7 +9,7 @@ glib2.0 (2.45.6-1) UNRELEASED; urgency=medium
     Drop, applied upstream.
   * debian/libglib2.0-0.symbols: Add new symbols for this release.
 
- -- Iain Lane <laney@debian.org>  Wed, 29 Jul 2015 17:58:37 +0100
+ -- Iain Lane <laney@debian.org>  Wed, 26 Aug 2015 17:25:52 +0100
 
 glib2.0 (2.45.4-2) experimental; urgency=medium
 
