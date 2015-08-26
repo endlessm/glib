@@ -1,3 +1,16 @@
+glib2.0 (2.45.6-1) UNRELEASED; urgency=medium
+
+  * New upstream releases 2.45.5 and 2.45.6
+    + GNetworkMonitor now provides information about metered networks
+    + g_mem_set_vtable has been deprecated; it has not been working for quite
+      a while. The recommendation is to use valgrind, or replace malloc
+      itself.
+  * debian/patches/0001-GOptionContext-Don-t-crash-without-main-group.patch:
+    Drop, applied upstream.
+  * debian/libglib2.0-0.symbols: Add new symbols for this release.
+
+ -- Iain Lane <laney@debian.org>  Wed, 29 Jul 2015 17:58:37 +0100
+
 glib2.0 (2.45.4-2) experimental; urgency=medium
 
   * debian/patches/0001-GOptionContext-Don-t-crash-without-main-group.patch:

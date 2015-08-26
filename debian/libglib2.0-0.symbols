@@ -322,6 +322,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_dbus_connection_new_for_address_sync@Base 2.26.0
  g_dbus_connection_new_sync@Base 2.26.0
  g_dbus_connection_register_object@Base 2.26.0
+ g_dbus_connection_register_object_with_closures@Base 2.45.6
  g_dbus_connection_register_subtree@Base 2.26.0
  g_dbus_connection_remove_filter@Base 2.26.0
  g_dbus_connection_send_message@Base 2.26.0
@@ -1156,6 +1157,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_network_monitor_get_connectivity@Base 2.43.2
  g_network_monitor_get_default@Base 2.31.8
  g_network_monitor_get_network_available@Base 2.31.8
+ g_network_monitor_get_network_metered@Base 2.45.6
  g_network_monitor_get_type@Base 2.31.8
  g_network_service_get_domain@Base 2.22.0
  g_network_service_get_protocol@Base 2.22.0
