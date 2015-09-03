@@ -1,4 +1,4 @@
-glib2.0 (2.45.7-1) UNRELEASED; urgency=medium
+glib2.0 (2.45.7-1) experimental; urgency=medium
 
   * New upstream release 2.45.7
     + Add G_FILE_ATTRIBUTE_STANDARD_IS_VOLATILE for use by non-POSIX-like
@@ -13,7 +13,7 @@ glib2.0 (2.45.7-1) UNRELEASED; urgency=medium
        has been added
   * debian/libglib2.0-0.symbols: Add new symbol for this release.
 
- -- Iain Lane <laney@debian.org>  Wed, 26 Aug 2015 18:10:59 +0100
+ -- Iain Lane <iain@orangesquash.org.uk>  Thu, 03 Sep 2015 14:09:02 +0100
 
 glib2.0 (2.45.6-1) experimental; urgency=medium
 
