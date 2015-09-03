@@ -1,3 +1,20 @@
+glib2.0 (2.45.7-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2.45.7
+    + Add G_FILE_ATTRIBUTE_STANDARD_IS_VOLATILE for use by non-POSIX-like
+      backends (e.g. cloud storage).
+    + GFileMonitor: Make the inotify backend work with atomic renames again
+    + GSettings: change notification is again working unconditionally
+    + GListStore has a sort function now
+    + Test infrastructure:
+     - Tests are now required to have unique names
+     - TAP support has been improved
+     - A macro for asserting that two memory regions have identical content
+       has been added
+  * debian/libglib2.0-0.symbols: Add new symbol for this release.
+
+ -- Iain Lane <laney@debian.org>  Wed, 26 Aug 2015 18:10:59 +0100
+
 glib2.0 (2.45.6-1) experimental; urgency=medium
 
   * New upstream releases 2.45.5 and 2.45.6

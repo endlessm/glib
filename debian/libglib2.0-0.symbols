@@ -1014,6 +1014,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_list_store_new@Base 2.43.4
  g_list_store_remove@Base 2.43.4
  g_list_store_remove_all@Base 2.43.4
+ g_list_store_sort@Base 2.45.7
  g_list_store_splice@Base 2.43.4
  g_loadable_icon_get_type@Base 2.16.0
  g_loadable_icon_load@Base 2.16.0
