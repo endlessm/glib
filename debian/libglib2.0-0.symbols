@@ -3727,6 +3727,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_param_spec_get_blurb@Base 2.12.0
  g_param_spec_get_default_value@Base 2.37.0
  g_param_spec_get_name@Base 2.12.0
+ g_param_spec_get_name_quark@Base 2.45.8
  g_param_spec_get_nick@Base 2.12.0
  g_param_spec_get_qdata@Base 2.12.0
  g_param_spec_get_redirect_target@Base 2.12.0
