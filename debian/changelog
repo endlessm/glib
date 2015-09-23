@@ -1,4 +1,4 @@
-glib2.0 (2.46.0-1) UNRELEASED; urgency=medium
+glib2.0 (2.46.0-1) unstable; urgency=medium
 
   [ Iain Lane ]
   * New upstream stable release 2.46.0
@@ -10,7 +10,7 @@ glib2.0 (2.46.0-1) UNRELEASED; urgency=medium
     isn't kicked out into a separate mirror network when we get
     automatic -dbgsym packages (Closes: #796836)
 
- -- Iain Lane <laney@debian.org>  Tue, 22 Sep 2015 17:45:03 +0100
+ -- Iain Lane <laney@debian.org>  Wed, 23 Sep 2015 11:33:01 +0100
 
 glib2.0 (2.45.8-1) experimental; urgency=medium
 
