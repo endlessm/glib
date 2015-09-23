@@ -1,11 +1,183 @@
-glib2.0 (2.44.1-2) UNRELEASED; urgency=medium
+glib2.0 (2.46.0-1) UNRELEASED; urgency=medium
 
-  * Tag a couple more patches as applied upstream for 2.45.2
+  [ Iain Lane ]
+  * New upstream stable release 2.46.0
+    + Disable runtime-deprecation warnings
+    + Fix marshalling of flags on bigendian 64bit architectures
+
+  [ Simon McVittie ]
   * Change section of libglib2.0-refdbg from debug to devel, so that it
     isn't kicked out into a separate mirror network when we get
     automatic -dbgsym packages (Closes: #796836)
 
- -- Simon McVittie <smcv@debian.org>  Thu, 14 May 2015 12:45:46 +0100
+ -- Iain Lane <laney@debian.org>  Tue, 22 Sep 2015 17:45:03 +0100
+
+glib2.0 (2.45.8-1) experimental; urgency=medium
+
+  * New upstream development release.
+  * Update debian/libglib2.0-0.symbols with one addition:
+    g_param_spec_get_name_quark
+
+ -- Andreas Henriksson <andreas@fatal.se>  Thu, 17 Sep 2015 10:05:17 +0200
+
+glib2.0 (2.45.7-1) experimental; urgency=medium
+
+  * New upstream release 2.45.7
+    + Add G_FILE_ATTRIBUTE_STANDARD_IS_VOLATILE for use by non-POSIX-like
+      backends (e.g. cloud storage).
+    + GFileMonitor: Make the inotify backend work with atomic renames again
+    + GSettings: change notification is again working unconditionally
+    + GListStore has a sort function now
+    + Test infrastructure:
+     - Tests are now required to have unique names
+     - TAP support has been improved
+     - A macro for asserting that two memory regions have identical content
+       has been added
+  * debian/libglib2.0-0.symbols: Add new symbol for this release.
+
+ -- Iain Lane <iain@orangesquash.org.uk>  Thu, 03 Sep 2015 14:09:02 +0100
+
+glib2.0 (2.45.6-1) experimental; urgency=medium
+
+  * New upstream releases 2.45.5 and 2.45.6
+    + GNetworkMonitor now provides information about metered networks
+    + g_mem_set_vtable has been deprecated; it has not been working for quite
+      a while. The recommendation is to use valgrind, or replace malloc
+      itself.
+  * debian/patches/0001-GOptionContext-Don-t-crash-without-main-group.patch:
+    Drop, applied upstream.
+  * debian/libglib2.0-0.symbols: Add new symbols for this release.
+
+ -- Iain Lane <laney@debian.org>  Wed, 26 Aug 2015 17:25:52 +0100
+
+glib2.0 (2.45.4-2) experimental; urgency=medium
+
+  * debian/patches/0001-GOptionContext-Don-t-crash-without-main-group.patch:
+    Cherry-pick. Don't crash in GOptionContext if there's no main group. Fixes
+    crash when running (for example) gdbus.
+
+ -- Iain Lane <laney@debian.org>  Wed, 29 Jul 2015 16:30:21 +0100
+
+glib2.0 (2.45.4-1) experimental; urgency=medium
+
+  * New upstream release 2.45.4
+  * d/p/0001-gio-tests-appmonitor-Delete-file-before-checking-for.patch,
+    d/p/0001-glocalfilemonitor-Send-DELETED-event-when-there-is-n.patch: Drop,
+    applied upstream.
+  * d/p/07_disable_tests_on_slow_archs.patch: Refresh to apply cleanly.
+  * debian/libglib2.0-0.symbols: Add new symbols for this release.
+
+ -- Iain Lane <laney@debian.org>  Tue, 21 Jul 2015 18:07:32 +0100
+
+glib2.0 (2.45.3-1) experimental; urgency=medium
+
+  [ Simon McVittie ]
+  * d/p/regex-if-PCRE-is-8.34-or-later-disable-auto-possessi.patch:
+    mark as applied upstream in 2.45.3
+
+  [ Iain Lane ]
+  * New upstream release 2.45.3.
+    + Improve performance of g_signal_handler_disconnect for signals
+      with many handlers
+    + GDBus has gained a new call flag to allow interactive authorization
+    + GSettings:
+     - New API: g_settings_schema_list_keys
+     - Deprecated: g_settings_list_keys
+  * debian/libglib2.0-0.symbols: Update with new symbols from this release.
+  * debian/patches/regex-if-PCRE-is-8.34-or-later-disable-auto-possessi.patch:
+    Delete, applied upstream.
+  * d/p/0001-gio-tests-appmonitor-Delete-file-before-checking-for.patch:
+    Cherry-pick upstream patch to fix testsuite failure causing FTBFS.
+
+ -- Iain Lane <laney@debian.org>  Wed, 01 Jul 2015 18:15:07 +0100
+
+glib2.0 (2.45.2-1) experimental; urgency=medium
+
+  [ Simon McVittie ]
+  * Correctly attribute previous upload to Iain
+  * d/p/0001-Fix-trashing-on-overlayfs.patch: add upstream bug reference
+  * d/p/0001-glocalfilemonitor-Send-DELETED-event-when-there-is-n.patch:
+    add upstream bug reference
+  * d/p/10_kfreebsd_issetugid_prototype.patch,
+    d/p/11_kfreebsd_pthread_condattr_setclock_prototype.patch,
+    d/p/13_sparc_prlimit_prototype.patch:
+    drop workarounds for #635205, #703545, #703559 which were all fixed
+    in jessie
+  * d/p/81-skip-monitor-test-on-non-linux.patch: add DEP-3 information
+  * d/p/90_gio-modules-multiarch-compat.patch: add DEP-3 information
+
+  [ Iain Lane ]
+  * New upstream release 2.45.2
+    + Improve error reporting in glib-compile-schemas.
+    + Add introspection annotations to GListStore.
+  * GDBus-tests-change-progress-noise-from-if-not-quiet-.patch,
+    gdbus-tests-wait-up-to-60s-for-gdbus-testserver-to-t.patch,
+    gdbus-connection-wait-up-to-10s-to-actually-send-a-m.patch,
+    regex-test-do-not-assert-that-system-PCRE-still-has-.patch,
+    gdbus-serialization-use-check_serialization-instead-.patch,
+    gdbus-peer-test-let-GDBusServer-start-before-notifyi.patch,
+    gdatetime-test-don-t-assume-that-time-stands-still.patch: Delete, applied
+    upstream.
+  * 07_disable_tests_on_slow_archs.patch: Refresh to defuzz
+
+ -- Iain Lane <laney@debian.org>  Tue, 09 Jun 2015 16:19:20 +0100
+
+glib2.0 (2.45.1-2) experimental; urgency=medium
+
+  [ Simon McVittie ]
+  * d/p/regex-if-PCRE-is-8.34-or-later-disable-auto-possessi.patch:
+    update to my latest version submitted upstream, which fixes undefined
+    behaviour in the unlikely event that G_REGEX_OPTIMIZE is combined
+    with g_regex_match_all().
+  * d/p/regex-test-do-not-assert-that-system-PCRE-still-has-.patch:
+    update to my latest version submitted upstream, which asserts that
+    a newer-than-8.32 system PCRE does not have the bug in question.
+  * d/p/gdbus-serialization-use-check_serialization-instead-.patch:
+    add patch to fix FTBFS in non-minimal environments (libdbus-1-dev
+    installed). Applied upstream for 2.45.2.
+
+  [ Iain Lane ]
+  * d/p/0001-Fix-trashing-on-overlayfs.patch: Take patch from
+    upstream bug to fix trashing on overlayfs.
+  * d/p/0001-glocalfilemonitor-Send-DELETED-event-when-there-is-n.patch: Take
+    patch from upstream bug to send the right event when moving files outside
+    a monitored directory.
+
+ -- Iain Lane <laney@debian.org>  Mon, 11 May 2015 16:30:47 +0100
+
+glib2.0 (2.45.1-1) experimental; urgency=medium
+
+  * New upstream release 2.45.1
+    + The GSettings schema compiler, glib-compile-schemas has been changed
+      to reject schema xml that has duplicate <summary> or <description>
+      elements. Such elements typically occur when translations are merged
+      into the schema, with xml:lang attributes. This is not the correct way
+      to translate schemas. Instead keep the translations in the .mo file and
+      set the gettext-domain attribute on the <schemalist> element. To avoid
+      breaking already-installed schemas, this change is only taking effect
+      when you use the --strict option.
+    + The file monitoring infrastructure has been rewritten, and all backends
+      have seen major improvements.
+      + The inotify backend is reporting events with less delay (no event will
+        be delayed more than 10ms) and wakeups due to file monitoring have
+        been significantly reduced. A CHANGES_DONE event will also be sent
+        when new files appear.
+      + The poll implementation is now using the thread default main context.
+      + The fam implmentation is now running in the worker thread.
+      + The fen implementation has been removed, since it was unmaintained.
+    + The hardcoded 10-thread limit of GTask's thread pool has been removed,
+      since it was prone to causing deadlocks. The thread pool is now allowed
+      to grow dynamically and will shrink back over time.
+    + GSimpleAsyncResult has been deprecated in favor of GTask.
+    + The algorithm used by GAppInfo to find default handlers for mime types
+      has been tweaked to prefer apps that handle the specific subtype over
+      default handlers for a generic supertype.
+  * d/p/regex-test-do-not-assert-that-system-PCRE-allows-P-1.patch: Drop,
+    applied upstream.
+  * debian/control{,.in}: Update Vcs-* for experimental.
+  * debian/libglib2.0-0.symbols: Add new symbols for this release.
+
+ -- Iain Lane <laney@debian.org>  Fri, 01 May 2015 13:37:01 +0100
 
 glib2.0 (2.44.1-1) unstable; urgency=medium
 
