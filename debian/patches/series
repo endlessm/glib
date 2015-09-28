@@ -1,3 +1,4 @@
+0001-Revert-list-store-Fix-a-parameter-check.patch
 01_gettext-desktopfiles.patch
 02_gettext-desktopfiles-ubuntu.patch
 03_disble_glib_compile_schemas_warning.patch
