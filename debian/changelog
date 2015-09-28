@@ -1,10 +1,10 @@
-glib2.0 (2.46.0-2) UNRELEASED; urgency=medium
+glib2.0 (2.46.0-2) unstable; urgency=medium
 
   * debian/patches/0001-Revert-list-store-Fix-a-parameter-check.patch:
     Cherry-pick from upstream to fix GSequence (this at least makes
     GStreamer's testsuite fail).
 
- -- Iain Lane <laney@debian.org>  Fri, 25 Sep 2015 17:18:39 +0100
+ -- Iain Lane <laney@debian.org>  Mon, 28 Sep 2015 13:07:06 +0100
 
 glib2.0 (2.46.0-1) unstable; urgency=medium
 
