@@ -1,3 +1,9 @@
+glib2.0 (2.46.0-3) UNRELEASED; urgency=medium
+
+  * Drop clean-la.mk from debian/rules, no longer required.
+
+ -- Michael Biebl <biebl@debian.org>  Thu, 08 Oct 2015 19:14:31 +0200
+
 glib2.0 (2.46.0-2) unstable; urgency=medium
 
   * debian/patches/0001-Revert-list-store-Fix-a-parameter-check.patch:
