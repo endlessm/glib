@@ -1,6 +1,25 @@
-glib2.0 (2.46.0-3) UNRELEASED; urgency=medium
+glib2.0 (2.46.1-1) UNRELEASED; urgency=medium
 
+  [ Michael Biebl ]
   * Drop clean-la.mk from debian/rules, no longer required.
+
+  [ Iain Lane ]
+  * New upstream release 2.46.1
+    + Remove system_header pragma (should fix lack of warnings with things
+      like g_return_if_fail)
+    + move GStrv typedef (and auto-cleanup) from libgobject to libglib
+    + fix order of trashing files to be closer to what is required in the
+      specification. Namely, trashinfo files are written first.  This should
+      fix issues with the gvfs trash backend failing to correctly read the
+      info for recently trashed files (preventing 'restore'). (Closes:
+      #800491) (LP: #1495943)
+    + tweak mime logic to return text/plain on all empty files instead of
+      returning application/octet-stream.  This includes files that have
+      extensions that imply that they may be other types of files, which is a
+      slight change of behaviour with respect to old GLib versions. (LP:
+      #1497170)
+  * debian/patches/0001-Revert-list-store-Fix-a-parameter-check.patch: Drop -
+    this is applied upstream in this release.
 
  -- Michael Biebl <biebl@debian.org>  Thu, 08 Oct 2015 19:14:31 +0200
 
