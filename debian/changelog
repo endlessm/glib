@@ -1,4 +1,4 @@
-glib2.0 (2.46.1-1) UNRELEASED; urgency=medium
+glib2.0 (2.46.1-1) unstable; urgency=medium
 
   [ Michael Biebl ]
   * Drop clean-la.mk from debian/rules, no longer required.
@@ -24,7 +24,7 @@ glib2.0 (2.46.1-1) UNRELEASED; urgency=medium
     patch from bgo#754994 to resolve intermittent test failures in the
     GDateTime tests.
 
- -- Michael Biebl <biebl@debian.org>  Thu, 08 Oct 2015 19:14:31 +0200
+ -- Iain Lane <iain@orangesquash.org.uk>  Thu, 15 Oct 2015 16:08:30 +0100
 
 glib2.0 (2.46.0-2) unstable; urgency=medium
 
