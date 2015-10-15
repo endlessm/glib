@@ -20,6 +20,9 @@ glib2.0 (2.46.1-1) UNRELEASED; urgency=medium
       #1497170)
   * debian/patches/0001-Revert-list-store-Fix-a-parameter-check.patch: Drop -
     this is applied upstream in this release.
+  * debian/patches/0001-GDateTime-test-fix-occasional-failures.patch: Take
+    patch from bgo#754994 to resolve intermittent test failures in the
+    GDateTime tests.
 
  -- Michael Biebl <biebl@debian.org>  Thu, 08 Oct 2015 19:14:31 +0200
 
