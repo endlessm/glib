@@ -23,7 +23,8 @@ g_get_real_time().
 This is based on a similar patch from Iain Lane, but it uses
 g_get_real_time() instead of g_get_current_time().
 
-https://bugzilla.gnome.org/show_bug.cgi?id=754994
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=754994
+Origin: upstream, 2.46.2, commit:d46166e6e9019d3a4456fb258fc95ee6202452a3
 ---
  glib/tests/gdatetime.c | 14 +++++++-------
  1 file changed, 7 insertions(+), 7 deletions(-)

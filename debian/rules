@@ -108,6 +108,9 @@ DEB_CONFIGURE_FLAGS_refdbg := \
 pre-build::
 	mkdir -p debian/stamp-makefile-check \
 		 debian/tmp-xdg-runtime-dir
+	# this file was missed out of tarballs upstream
+	test -e gio/tests/gdbus-example-objectmanager-server.c || \
+		cp debian/gdbus-example-objectmanager-server.c gio/tests/
 
 binary-install/libglib2.0-0::
 	set -e; for script in postinst postrm; do \

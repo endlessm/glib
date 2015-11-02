@@ -1,0 +1,82 @@
+From 59bfb6be5f91e36088ad4217a44c5f68d469bf81 Mon Sep 17 00:00:00 2001
+From: Xavier Claessens <xavier.claessens@collabora.com>
+Date: Mon, 2 Nov 2015 09:36:47 -0500
+Subject: [PATCH 11/11] Doc: Fix missing glibconfig.h when builddir!=srcdir
+
+Currently the doc is incomplete when builddir!=srcdir
+(e.g. debian package) because glibconfig.h is generared from
+configure.ac and is thus missing from srcdir. This leads to
+missing doc for symbols like G_GINT64_FORMAT.
+
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=734469
+Origin: upstream, 2.46.2, commit:59bfb6be5f91e36088ad4217a44c5f68d469bf81
+---
+ docs/reference/gio/Makefile.am     |  7 ++++---
+ docs/reference/glib/Makefile.am    | 11 ++++++++---
+ docs/reference/gobject/Makefile.am |  2 +-
+ 3 files changed, 13 insertions(+), 7 deletions(-)
+
+diff --git a/docs/reference/gio/Makefile.am b/docs/reference/gio/Makefile.am
+index b17b50d..07fe6e6 100644
+--- a/docs/reference/gio/Makefile.am
++++ b/docs/reference/gio/Makefile.am
+@@ -13,10 +13,11 @@ SCAN_OPTIONS=--deprecated-guards="G_DISABLE_DEPRECATED" \
+              --ignore-decorators="G_GNUC_WARN_UNUSED_RESULT"
+ 
+ # The directory containing the source code. Relative to $(srcdir)
+-DOC_SOURCE_DIR=$(top_srcdir)/gio
++DOC_SOURCE_DIR =$(top_srcdir)/gio $(top_builddir)/gio
+ 
+-BUILT_HFILES=gioenumtypes.h
+-HFILE_GLOB=$(top_srcdir)/gio/*.h
++HFILE_GLOB= \
++    $(top_srcdir)/gio/*.h \
++    $(top_builddir)/gio/gioenumtypes.h
+ CFILE_GLOB=$(top_srcdir)/gio/*.c
+ 
+ IGNORE_HFILES = \
+diff --git a/docs/reference/glib/Makefile.am b/docs/reference/glib/Makefile.am
+index 67de7fe..8dbb069 100644
+--- a/docs/reference/glib/Makefile.am
++++ b/docs/reference/glib/Makefile.am
+@@ -9,7 +9,9 @@ DOC_MODULE=glib
+ DOC_MAIN_SGML_FILE=glib-docs.xml
+ 
+ # The directory containing the source code. Relative to $(srcdir)
+-DOC_SOURCE_DIR=$(top_srcdir)/glib $(top_srcdir)/gmodule
++DOC_SOURCE_DIR = \
++    $(top_srcdir)/glib $(top_srcdir)/gmodule \
++    $(top_builddir)/glib $(top_builddir)/gmodule
+ 
+ # Extra options to supply to gtkdoc-scan
+ SCAN_OPTIONS=--deprecated-guards="G_DISABLE_DEPRECATED" --ignore-decorators="GLIB_VAR|G_GNUC_WARN_UNUSED_RESULT"
+@@ -18,8 +20,11 @@ SCAN_OPTIONS=--deprecated-guards="G_DISABLE_DEPRECATED" --ignore-decorators="GLI
+ MKDB_OPTIONS=--output-format=xml --name-space=g
+ 
+ # Used for dependencies
+-HFILE_GLOB=$(top_srcdir)/glib/*.h $(top_srcdir)/gmodule/*.h
+-CFILE_GLOB=$(top_srcdir)/glib/*.c $(top_srcdir)/gmodule/*.c
++HFILE_GLOB = \
++    $(top_srcdir)/glib/*.h \
++    $(top_srcdir)/gmodule/*.h \
++    $(top_builddir)/glib/glibconfig.h
++CFILE_GLOB= $(top_srcdir)/glib/*.c $(top_srcdir)/gmodule/*.c
+ 
+ # Ignore some private headers
+ IGNORE_HFILES = \
+diff --git a/docs/reference/gobject/Makefile.am b/docs/reference/gobject/Makefile.am
+index 1ca6158..50b239b 100644
+--- a/docs/reference/gobject/Makefile.am
++++ b/docs/reference/gobject/Makefile.am
+@@ -9,7 +9,7 @@ DOC_MODULE=gobject
+ DOC_MAIN_SGML_FILE=gobject-docs.xml
+ 
+ # The directory containing the source code. Relative to $(srcdir)
+-DOC_SOURCE_DIR=$(top_srcdir)/gobject
++DOC_SOURCE_DIR =$(top_srcdir)/gobject $(top_builddir)/gobject
+ 
+ # Extra options to supply to gtkdoc-scan
+ SCAN_OPTIONS=--deprecated-guards="G_DISABLE_DEPRECATED" \
+-- 
+2.6.2
+

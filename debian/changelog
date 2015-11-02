@@ -1,3 +1,13 @@
+glib2.0 (2.46.1-2) unstable; urgency=medium
+
+  * Team upload.
+  * Cherry-pick patches from upstream glib-2-46 branch to fix incomplete
+    documentation (Closes: #659977)
+  * debian/gdbus-example-objectmanager-server.c: add missing example file
+    from upstream git; it was accidentally omitted from upstream tarballs
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 02 Nov 2015 17:31:00 +0000
+
 glib2.0 (2.46.1-1) unstable; urgency=medium
 
   [ Michael Biebl ]

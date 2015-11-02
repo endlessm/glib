@@ -13,3 +13,6 @@ Do-not-attempt-to-autolaunch-a-session-dbus-daemon-w.patch
 skip-broken-timer-test.patch
 0001-Fix-trashing-on-overlayfs.patch
 0001-GDateTime-test-fix-occasional-failures.patch
+Doc-copy-included-example-files.patch
+Doc-Fix-missing-glibconfig.h-when-builddir-srcdir.patch
+Build-gdbus-example-objectmanager-server-again.patch
