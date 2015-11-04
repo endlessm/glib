@@ -10,6 +10,7 @@ glib2.0 (2.47.1-1) UNRELEASED; urgency=medium
     this version.
   * debian/patches/0001-GDateTime-test-fix-occasional-failures.patch: Drop,
     upstream in this release.
+  * debian/libglib2.0-0.symbols: Update with new symbols for this release.
 
  -- Iain Lane <laney@debian.org>  Wed, 04 Nov 2015 15:52:44 +0000
 

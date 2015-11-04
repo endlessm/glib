@@ -269,6 +269,12 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_data_output_stream_set_byte_order@Base 2.16.0
  g_data_stream_byte_order_get_type@Base 2.16.0
  g_data_stream_newline_type_get_type@Base 2.16.0
+ g_datagram_based_condition_check@Base 2.47.1
+ g_datagram_based_condition_wait@Base 2.47.1
+ g_datagram_based_create_source@Base 2.47.1
+ g_datagram_based_get_type@Base 2.47.1
+ g_datagram_based_receive_messages@Base 2.47.1
+ g_datagram_based_send_messages@Base 2.47.1
  g_dbus_action_group_get@Base 2.31.8
  g_dbus_action_group_get_type@Base 2.31.8
  g_dbus_address_escape_value@Base 2.35.8
@@ -1494,6 +1500,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_socket_connectable_enumerate@Base 2.22.0
  g_socket_connectable_get_type@Base 2.22.0
  g_socket_connectable_proxy_enumerate@Base 2.26.0
+ g_socket_connectable_to_string@Base 2.47.1
  g_socket_connection_connect@Base 2.31.8
  g_socket_connection_connect_async@Base 2.31.8
  g_socket_connection_connect_finish@Base 2.31.8
@@ -1558,6 +1565,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_socket_receive@Base 2.22.0
  g_socket_receive_from@Base 2.22.0
  g_socket_receive_message@Base 2.22.0
+ g_socket_receive_messages@Base 2.47.1
  g_socket_receive_with_blocking@Base 2.26.0
  g_socket_send@Base 2.22.0
  g_socket_send_message@Base 2.22.0
@@ -2904,6 +2912,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_sequence_insert_before@Base 2.14.0
  g_sequence_insert_sorted@Base 2.14.0
  g_sequence_insert_sorted_iter@Base 2.14.0
+ g_sequence_is_empty@Base 2.47.1
  g_sequence_iter_compare@Base 2.14.0
  g_sequence_iter_get_position@Base 2.14.0
  g_sequence_iter_get_sequence@Base 2.14.0
