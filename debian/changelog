@@ -1,3 +1,14 @@
+glib2.0 (2.47.1-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+    + The Unicode support has been updated to version 8.0 of the Unicode standard
+    + GDesktopAppInfo no longer sets the DISPLAY environment variable when
+      launching apps. This is now done in the GAppLaunchContext
+      implementations when appropriate.
+  * debian/watch: Look for development versions too.
+
+ -- Iain Lane <laney@debian.org>  Wed, 04 Nov 2015 15:52:44 +0000
+
 glib2.0 (2.46.1-2) unstable; urgency=medium
 
   * Team upload.
