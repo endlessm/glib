@@ -1,0 +1,93 @@
+From ab7b4bebe09f30fd441a2b3c879f7af5695761b3 Mon Sep 17 00:00:00 2001
+From: Xavier Claessens <xavier.claessens@collabora.com>
+Date: Fri, 30 Oct 2015 14:59:11 -0400
+Subject: [PATCH 10/11] Doc: copy included example files
+
+This fix missing files when src_dir != build_dir.
+
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=734469
+Origin: upstream, 2.46.2, commit:ab7b4bebe09f30fd441a2b3c879f7af5695761b3
+---
+ docs/reference/gio/Makefile.am         | 19 ++++++++++++++++++-
+ docs/reference/gio/migrating-gdbus.xml | 10 +++++-----
+ 2 files changed, 23 insertions(+), 6 deletions(-)
+
+diff --git a/docs/reference/gio/Makefile.am b/docs/reference/gio/Makefile.am
+index 64e227a..b17b50d 100644
+--- a/docs/reference/gio/Makefile.am
++++ b/docs/reference/gio/Makefile.am
+@@ -126,6 +126,22 @@ HTML_IMAGES =			\
+ 	menu-example.png	\
+ 	menu-model.png
+ 
++example_files = \
++	gdbus-example-objectmanager.xml \
++	gdbus-example-objectmanager-server.c \
++	gdbus-example-objectmanager-client.c \
++	gdbus-example-objectmanager-generated-org.gtk.GDBus.Example.ObjectManager.Animal.xml \
++	gdbus-example-objectmanager-generated-org.gtk.GDBus.Example.ObjectManager.Cat.xml \
++	$(NULL)
++
++gdbus-example-objectmanager.xml: %: $(top_srcdir)/gio/tests/gdbus-object-manager-example/%
++gdbus-example-objectmanager-server.c: %: $(top_srcdir)/gio/tests/%
++gdbus-example-objectmanager-client.c: %: $(top_srcdir)/gio/tests/%
++gdbus-example-objectmanager-generated-org.gtk.GDBus.Example.ObjectManager.Animal.xml: %: $(top_builddir)/gio/tests/gdbus-object-manager-example/%
++gdbus-example-objectmanager-generated-org.gtk.GDBus.Example.ObjectManager.Cat.xml: %: $(top_builddir)/gio/tests/gdbus-object-manager-example/%
++$(example_files):
++	cp $< $@
++
+ content_files =			\
+ 	version.xml		\
+ 	overview.xml		\
+@@ -141,6 +157,7 @@ content_files =			\
+ 	gresource.xml		\
+ 	gdbus.xml		\
+ 	gdbus-codegen.xml	\
++	$(example_files)	\
+ 	$(NULL)
+ 
+ expand_content_files =		\
+@@ -192,7 +209,7 @@ XSLTPROC_FLAGS = \
+ endif
+ 
+ CLEANFILES ?=
+-CLEANFILES += $(man_MANS)
++CLEANFILES += $(man_MANS) $(example_files)
+ 
+ EXTRA_DIST += $(man_MANS)
+ 
+diff --git a/docs/reference/gio/migrating-gdbus.xml b/docs/reference/gio/migrating-gdbus.xml
+index 423ad16..d46f98c 100644
+--- a/docs/reference/gio/migrating-gdbus.xml
++++ b/docs/reference/gio/migrating-gdbus.xml
+@@ -254,7 +254,7 @@ on_name_acquired (GDBusConnection *connection,
+       linkend="gdbus-codegen">gdbus-codegen</link></command> is used and like
+       its counterpart, it also takes D-Bus Introspection XML as input:
+     </para>
+-    <example id="gdbus-example-codegen-input"><title>Example D-Bus Introspection XML</title><programlisting><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="../../../../gio/tests/gdbus-object-manager-example/gdbus-example-objectmanager.xml"><xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback></xi:include></programlisting></example>
++    <example id="gdbus-example-codegen-input"><title>Example D-Bus Introspection XML</title><programlisting><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="../gdbus-example-objectmanager.xml"><xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback></xi:include></programlisting></example>
+     <para>
+       If this XML is processed like this
+ <informalexample><programlisting><![CDATA[
+@@ -291,14 +291,14 @@ gdbus-codegen --interface-prefix org.gtk.GDBus.Example.ObjectManager. \
+       #ExampleObjectManagerClient pages for documentation.
+     </para>
+ 
+-    <example id="gdbus-example-codegen-server"><title>Server-side application using generated code</title><programlisting><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="../../../../gio/tests/gdbus-example-objectmanager-server.c"><xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback></xi:include></programlisting></example>
++    <example id="gdbus-example-codegen-server"><title>Server-side application using generated code</title><programlisting><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="../gdbus-example-objectmanager-server.c"><xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback></xi:include></programlisting></example>
+ 
+-    <example id="gdbus-example-codegen-client"><title>Client-side application using generated code</title><programlisting><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="../../../../gio/tests/gdbus-example-objectmanager-client.c"><xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback></xi:include></programlisting></example>
++    <example id="gdbus-example-codegen-client"><title>Client-side application using generated code</title><programlisting><xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="../gdbus-example-objectmanager-client.c"><xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback></xi:include></programlisting></example>
+ 
+   </section>
+ 
+-  <xi:include href="../../../../gio/tests/gdbus-object-manager-example/gdbus-example-objectmanager-generated-org.gtk.GDBus.Example.ObjectManager.Animal.xml"/>
+-  <xi:include href="../../../../gio/tests/gdbus-object-manager-example/gdbus-example-objectmanager-generated-org.gtk.GDBus.Example.ObjectManager.Cat.xml"/>
++  <xi:include href="../gdbus-example-objectmanager-generated-org.gtk.GDBus.Example.ObjectManager.Animal.xml"/>
++  <xi:include href="../gdbus-example-objectmanager-generated-org.gtk.GDBus.Example.ObjectManager.Cat.xml"/>
+   <xi:include href="../gdbus-object-manager-example/xml/ExampleAnimal.xml"/>
+   <xi:include href="../gdbus-object-manager-example/xml/ExampleCat.xml"/>
+   <xi:include href="../gdbus-object-manager-example/xml/ExampleObject.xml"/>
+-- 
+2.6.2
+

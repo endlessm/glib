@@ -8,7 +8,6 @@ include /usr/share/cdbs/1/rules/autoreconf.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/rules/utils.mk
 include /usr/share/cdbs/1/class/gnome.mk
-include /usr/share/gnome-pkg-tools/1/rules/clean-la.mk
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
 include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
 
@@ -109,6 +108,9 @@ DEB_CONFIGURE_FLAGS_refdbg := \
 pre-build::
 	mkdir -p debian/stamp-makefile-check \
 		 debian/tmp-xdg-runtime-dir
+	# this file was missed out of tarballs upstream
+	test -e gio/tests/gdbus-example-objectmanager-server.c || \
+		cp debian/gdbus-example-objectmanager-server.c gio/tests/
 
 binary-install/libglib2.0-0::
 	set -e; for script in postinst postrm; do \

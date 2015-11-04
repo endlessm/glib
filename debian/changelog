@@ -1,10 +1,62 @@
-glib2.0 (2.46.0-1) UNRELEASED; urgency=medium
+glib2.0 (2.46.1-2) unstable; urgency=medium
 
+  * Team upload.
+  * Cherry-pick patches from upstream glib-2-46 branch to fix incomplete
+    documentation (Closes: #659977)
+  * debian/gdbus-example-objectmanager-server.c: add missing example file
+    from upstream git; it was accidentally omitted from upstream tarballs
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 02 Nov 2015 17:31:00 +0000
+
+glib2.0 (2.46.1-1) unstable; urgency=medium
+
+  [ Michael Biebl ]
+  * Drop clean-la.mk from debian/rules, no longer required.
+
+  [ Iain Lane ]
+  * New upstream release 2.46.1
+    + Remove system_header pragma (should fix lack of warnings with things
+      like g_return_if_fail)
+    + move GStrv typedef (and auto-cleanup) from libgobject to libglib
+    + fix order of trashing files to be closer to what is required in the
+      specification. Namely, trashinfo files are written first.  This should
+      fix issues with the gvfs trash backend failing to correctly read the
+      info for recently trashed files (preventing 'restore'). (Closes:
+      #800491) (LP: #1495943)
+    + tweak mime logic to return text/plain on all empty files instead of
+      returning application/octet-stream.  This includes files that have
+      extensions that imply that they may be other types of files, which is a
+      slight change of behaviour with respect to old GLib versions. (LP:
+      #1497170)
+  * debian/patches/0001-Revert-list-store-Fix-a-parameter-check.patch: Drop -
+    this is applied upstream in this release.
+  * debian/patches/0001-GDateTime-test-fix-occasional-failures.patch: Take
+    patch from bgo#754994 to resolve intermittent test failures in the
+    GDateTime tests.
+
+ -- Iain Lane <iain@orangesquash.org.uk>  Thu, 15 Oct 2015 16:08:30 +0100
+
+glib2.0 (2.46.0-2) unstable; urgency=medium
+
+  * debian/patches/0001-Revert-list-store-Fix-a-parameter-check.patch:
+    Cherry-pick from upstream to fix GSequence (this at least makes
+    GStreamer's testsuite fail).
+
+ -- Iain Lane <laney@debian.org>  Mon, 28 Sep 2015 13:07:06 +0100
+
+glib2.0 (2.46.0-1) unstable; urgency=medium
+
+  [ Iain Lane ]
   * New upstream stable release 2.46.0
     + Disable runtime-deprecation warnings
     + Fix marshalling of flags on bigendian 64bit architectures
 
- -- Iain Lane <laney@debian.org>  Tue, 22 Sep 2015 17:45:03 +0100
+  [ Simon McVittie ]
+  * Change section of libglib2.0-refdbg from debug to devel, so that it
+    isn't kicked out into a separate mirror network when we get
+    automatic -dbgsym packages (Closes: #796836)
+
+ -- Iain Lane <laney@debian.org>  Wed, 23 Sep 2015 11:33:01 +0100
 
 glib2.0 (2.45.8-1) experimental; urgency=medium
 
@@ -172,6 +224,62 @@ glib2.0 (2.45.1-1) experimental; urgency=medium
   * debian/libglib2.0-0.symbols: Add new symbols for this release.
 
  -- Iain Lane <laney@debian.org>  Fri, 01 May 2015 13:37:01 +0100
+
+glib2.0 (2.44.1-1) unstable; urgency=medium
+
+  * New upstream release 2.44.1
+    + Improve the default application algorithm
+    + Bump the number of children a GType can have
+    + Various testsuite improvements
+
+ -- Iain Lane <laney@debian.org>  Wed, 13 May 2015 17:46:59 +0100
+
+glib2.0 (2.44.0-3) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Simon McVittie ]
+  * d/p/regex-test-do-not-assert-that-system-PCRE-allows-P-1.patch:
+    update to the version that went upstream in 2.45.1. No functional change.
+  * d/p/regex-if-PCRE-is-8.34-or-later-disable-auto-possessi.patch:
+    update to my latest version submitted upstream, which fixes undefined
+    behaviour in the unlikely event that G_REGEX_OPTIMIZE is combined
+    with g_regex_match_all().
+  * d/p/regex-test-do-not-assert-that-system-PCRE-still-has-.patch:
+    update to my latest version submitted upstream, which asserts that
+    a newer-than-8.32 system PCRE does not have the bug in question.
+  * d/p/gdbus-serialization-use-check_serialization-instead-.patch:
+    add patch to fix FTBFS in non-minimal environments (libdbus-1-dev
+    installed). Applied upstream for 2.45.2.
+  * d/p/gdbus-peer-test-let-GDBusServer-start-before-notifyi.patch:
+    add patch fixing a race condition in the gdbus-peer test.
+    Applied upstream for 2.45.2.
+  * d/p/GDBus-tests-change-progress-noise-from-if-not-quiet-.patch:
+    add patch fixing potential test failures caused by corrupt TAP
+    output. Applied upstream for 2.45.2.
+  * d/p/gdatetime-test-don-t-assume-that-time-stands-still.patch:
+    add patch fixing potential test failures at the boundary between
+    one second and the next. Applied upstream for 2.45.2.
+  * d/p/10_kfreebsd_issetugid_prototype.patch,
+    d/p/11_kfreebsd_pthread_condattr_setclock_prototype.patch,
+    d/p/13_sparc_prlimit_prototype.patch:
+    drop workarounds for #635205, #703545, #703559 which were all fixed
+    in jessie
+  * d/p/81-skip-monitor-test-on-non-linux.patch: add DEP-3 information
+  * d/p/90_gio-modules-multiarch-compat.patch: add DEP-3 information
+
+  [ Iain Lane ]
+  * d/p/0001-Fix-trashing-on-overlayfs.patch: Take patch from
+    upstream bug to fix trashing on overlayfs.
+
+ -- Simon McVittie <smcv@debian.org>  Tue, 12 May 2015 13:15:38 +0100
+
+glib2.0 (2.44.0-2) unstable; urgency=medium
+
+  * Upload to unstable.
+  * debian/watch: Consider stable versions only.
+
+ -- Iain Lane <laney@debian.org>  Fri, 01 May 2015 11:27:39 +0100
 
 glib2.0 (2.44.0-1) experimental; urgency=medium
 

@@ -1,0 +1,31 @@
+From 275c1d81b4ee6d1fc81c27f5d586df2d76cf8af9 Mon Sep 17 00:00:00 2001
+From: Simon McVittie <simon.mcvittie@collabora.co.uk>
+Date: Mon, 2 Nov 2015 17:17:55 +0000
+Subject: [PATCH] Build gdbus-example-objectmanager-server again
+
+It was removed, apparently accidentally, in commit 5b48dc4.
+This had the side-effect that it wasn't included in tarball releases,
+which means that commit ab7b4be doesn't work when building a package.
+
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=734469
+---
+ gio/tests/Makefile.am | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/gio/tests/Makefile.am b/gio/tests/Makefile.am
+index 868873f..894cf43 100644
+--- a/gio/tests/Makefile.am
++++ b/gio/tests/Makefile.am
+@@ -375,6 +375,9 @@ gdbus_non_socket_SOURCES = \
+ uninstalled_test_extra_programs += gdbus-example-objectmanager-client
+ gdbus_example_objectmanager_client_LDADD = gdbus-object-manager-example/libgdbus-example-objectmanager.la $(LDADD)
+ 
++uninstalled_test_extra_programs += gdbus-example-objectmanager-server
++gdbus_example_objectmanager_server_LDADD = gdbus-object-manager-example/libgdbus-example-objectmanager.la $(LDADD)
++
+ test_extra_programs += gsubprocess-testprog
+ 
+ uninstalled_test_extra_programs += gdbus-test-fixture
+-- 
+2.6.2
+
