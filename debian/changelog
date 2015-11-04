@@ -6,6 +6,8 @@ glib2.0 (2.47.1-1) UNRELEASED; urgency=medium
       launching apps. This is now done in the GAppLaunchContext
       implementations when appropriate.
   * debian/watch: Look for development versions too.
+  * debian/patches/90_gio-modules-multiarch-compat.patch: Refresh to apply on
+    this version.
 
  -- Iain Lane <laney@debian.org>  Wed, 04 Nov 2015 15:52:44 +0000
 
