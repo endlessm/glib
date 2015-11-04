@@ -1,4 +1,4 @@
-glib2.0 (2.47.1-1) UNRELEASED; urgency=medium
+glib2.0 (2.47.1-1) experimental; urgency=medium
 
   * New upstream release.
     + The Unicode support has been updated to version 8.0 of the Unicode standard
@@ -12,7 +12,7 @@ glib2.0 (2.47.1-1) UNRELEASED; urgency=medium
     upstream in this release.
   * debian/libglib2.0-0.symbols: Update with new symbols for this release.
 
- -- Iain Lane <laney@debian.org>  Wed, 04 Nov 2015 15:52:44 +0000
+ -- Iain Lane <laney@debian.org>  Wed, 04 Nov 2015 17:28:23 +0000
 
 glib2.0 (2.46.1-2) unstable; urgency=medium
 
