@@ -1,4 +1,4 @@
-glib2.0 (2.46.2-1) UNRELEASED; urgency=medium
+glib2.0 (2.46.2-1) unstable; urgency=medium
 
   * Fix Vcs-* to point to unstable.
   * New upstream stable release 2.46.2.
@@ -7,7 +7,7 @@ glib2.0 (2.46.2-1) UNRELEASED; urgency=medium
   * Drop debian/patches/0001-GDateTime-test-fix-occasional-failures.patch,
     applied upstream.
 
- -- Iain Lane <laney@debian.org>  Wed, 04 Nov 2015 15:01:22 +0000
+ -- Iain Lane <laney@debian.org>  Mon, 09 Nov 2015 12:59:12 +0000
 
 glib2.0 (2.46.1-2) unstable; urgency=medium
 
