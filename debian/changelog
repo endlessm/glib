@@ -1,4 +1,4 @@
-glib2.0 (2.47.3-1) UNRELEASED; urgency=medium
+glib2.0 (2.47.3-1) experimental; urgency=medium
 
   * New upstream release
     + New API: hardware-assisted helpers for overflow-checked integer math.
@@ -8,7 +8,7 @@ glib2.0 (2.47.3-1) UNRELEASED; urgency=medium
     Build-gdbus-example-objectmanager-server-again.patch}: Remove - in this
     upstream release.
 
- -- Iain Lane <laney@debian.org>  Wed, 25 Nov 2015 09:32:08 +0000
+ -- Iain Lane <laney@debian.org>  Wed, 25 Nov 2015 17:59:33 +0000
 
 glib2.0 (2.47.1-1) experimental; urgency=medium
 
