@@ -1,4 +1,5 @@
 0001-tests-fix-a-test-on-32-bit-builds.patch
+0001-gtypes.h-move-G_STATIC_ASSERT-to-function-scope.patch
 01_gettext-desktopfiles.patch
 02_gettext-desktopfiles-ubuntu.patch
 03_disble_glib_compile_schemas_warning.patch
