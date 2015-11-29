@@ -1,9 +1,9 @@
-glib2.0 (2.47.3-3) UNRELEASED; urgency=medium
+glib2.0 (2.47.3-3) experimental; urgency=medium
 
   * debian/patches/0001-gtypes.h-move-G_STATIC_ASSERT-to-function-scope.patch:
     Another cherry-pick. Should fix g-ir-scanner.
 
- -- Iain Lane <laney@debian.org>  Sun, 29 Nov 2015 18:43:17 +0000
+ -- Iain Lane <laney@debian.org>  Sun, 29 Nov 2015 18:45:29 +0000
 
 glib2.0 (2.47.3-2) experimental; urgency=medium
 
