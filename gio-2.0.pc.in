@@ -4,8 +4,8 @@ libdir=@libdir@
 includedir=@includedir@
 
 giomoduledir=@GIO_MODULE_DIR@
-glib_compile_schemas=@libdir@/glib-2.0/glib-compile-schemas
-glib_compile_resources=@libdir@/glib-2.0/glib-compile-resources
+glib_compile_schemas=glib-compile-schemas
+glib_compile_resources=glib-compile-resources
 gdbus_codegen=gdbus-codegen
 
 Name: GIO
