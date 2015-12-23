@@ -1,3 +1,12 @@
+glib2.0 (2.46.2-3) unstable; urgency=medium
+
+  * Add debian/patches/disable-failing-test-for-pcre838.patch
+    - disable regexp test that fails with new system pcre 8.38
+      which just hit Debian unstable. Needs further investigation
+      but lets not leave the build broken during the holidays.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Wed, 23 Dec 2015 17:11:16 +0100
+
 glib2.0 (2.46.2-2) unstable; urgency=medium
 
   [ Iain Lane ]

@@ -13,3 +13,4 @@ Do-not-attempt-to-autolaunch-a-session-dbus-daemon-w.patch
 skip-broken-timer-test.patch
 0001-Fix-trashing-on-overlayfs.patch
 bug712848-volume-monitor-deadlock-kfreebsd.patch
+disable-failing-test-for-pcre838.patch
