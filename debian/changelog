@@ -1,8 +1,19 @@
-glib2.0 (2.46.2-2) UNRELEASED; urgency=medium
+glib2.0 (2.46.2-2) unstable; urgency=medium
 
+  [ Iain Lane ]
   * Fix typo in previous changelog entry.
 
- -- Iain Lane <laney@debian.org>  Mon, 09 Nov 2015 15:02:58 +0000
+  [ Andreas Henriksson ]
+  * Add debian/patches/bug712848-volume-monitor-deadlock-kfreebsd.patch
+    - patch by and big thanks to Steven Chamberlain for debugging this!
+    - given lack of feedback from upstream, which would be very welcome
+      for deep changes like this, use an ifdef to only change on
+      *FreeBSD for now... (Closes: #712848)
+  * Add --no-ddebs arg to dh_strip for refdbg package build which
+    otherwise fails and I doubt we need ddeb/dbgsym for our debug
+    package.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Wed, 23 Dec 2015 11:54:51 +0100
 
 glib2.0 (2.46.2-1) unstable; urgency=medium
 

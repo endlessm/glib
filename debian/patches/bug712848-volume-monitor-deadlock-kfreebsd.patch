@@ -1,0 +1,29 @@
+From: Steven Chamberlain <steven@pyro.eu.org>
+Subject: bug712848-volume-monitor-deadlock-kfreebsd
+
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=712848
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=753378
+Forwarded: yes
+
+Original patch by Steven Chamberlain modified by Andreas Henriksson
+to only change on *FreeBSD until we get feedback from upstream.
+
+
+--- a/gio/gunionvolumemonitor.c
++++ b/gio/gunionvolumemonitor.c
+@@ -591,11 +591,15 @@
+   mount = NULL;
+ 
+   if (klass->get_mount_for_mount_path)
++#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
++    mount = klass->get_mount_for_mount_path (mount_path, cancellable);
++#else
+     {
+       g_rec_mutex_lock (&the_volume_monitor_mutex);
+       mount = klass->get_mount_for_mount_path (mount_path, cancellable);
+       g_rec_mutex_unlock (&the_volume_monitor_mutex);
+     }
++#endif
+ 
+   /* TODO: How do we know this succeeded? Keep in mind that the native
+    *       volume monitor may fail (e.g. not being able to connect to
