@@ -8,7 +8,6 @@ include /usr/share/cdbs/1/rules/autoreconf.mk
 include /usr/share/cdbs/1/rules/debhelper.mk
 include /usr/share/cdbs/1/rules/utils.mk
 include /usr/share/cdbs/1/class/gnome.mk
-include /usr/share/gnome-pkg-tools/1/rules/clean-la.mk
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
 include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
 
@@ -53,7 +52,7 @@ DEB_DH_INSTALL_ARGS_$(REFDBG_PKG) += --sourcedir=debian/install/refdbg
 
 DEB_DH_MAKESHLIBS_ARGS_$(SHARED_PKG) += -V --add-udeb=$(UDEB_PKG) -- -c4
 DEB_DH_MAKESHLIBS_ARGS_$(REFDBG_PKG) = --no-act
-DEB_DH_STRIP_ARGS_$(REFDBG_PKG) = --no-act
+DEB_DH_STRIP_ARGS_$(REFDBG_PKG) = --no-act --no-ddebs
 # Don't put the symbols in the -dbg package
 DEB_DH_STRIP_ARGS_$(UDEB_PKG) =
 
@@ -63,6 +62,10 @@ DEB_DH_TRANSLATIONS_ARGS = -Xinstalled-tests
 # Do not clutter $HOME with ~/.dbus-keyrings and avoid failure on the buildds
 # where creating /home/buildd/.dbus-keyrings fails
 export HOME=$(CURDIR)/debian/build
+
+# Make sure that everything that uses D-Bus is creating its own temporary
+# session rather than polluting the developer's (or failing, on buildds)
+export DBUS_SESSION_BUS_ADDRESS=this-should-not-be-used-and-will-fail:
 
 ifeq ($(DEB_HOST_ARCH_OS), linux)
   DEB_MAKE_CHECK_TARGET = $(if $(filter deb, $(cdbs_make_curflavor)), -k check -j1)
@@ -87,16 +90,13 @@ ifneq ($(DEB_BUILD_ARCH),$(DEB_HOST_ARCH))
 			--disable-modular-tests \
 			--disable-gtk-doc
 endif
-ifeq ($(DEB_HOST_ARCH), sparc)
-  DEB_CONFIGURE_EXTRA_FLAGS += CC=gcc-4.8
-endif
 
 DEB_CONFIGURE_FLAGS_deb := \
 			--enable-gtk-doc \
 			--enable-static \
 			--enable-installed-tests \
 			--enable-always-build-tests \
-			--enable-debug=minimal
+			--enable-debug=minimum
 
 DEB_CONFIGURE_FLAGS_udeb := \
 			--disable-selinux
@@ -122,7 +122,7 @@ binary-install/libglib2.0-dev::
 
 common-install-arch::
 	set -e; for file in libgio-fam.install libglib2.0-0.install \
-	            libglib2.0-0-refdbg.install libglib2.0-dbg.install \
+	            libglib2.0-0-refdbg.install libglib2.0-0-dbg.install \
 	            libglib2.0-dev.install libglib2.0-udeb.install \
 		    libglib2.0-bin.links libglib2.0-dev.links \
 	            libglib2.0-0.dirs libglib2.0-0.triggers; \
