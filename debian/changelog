@@ -1,3 +1,9 @@
+glib2.0 (2.46.2-0) master; urgency=medium
+
+  * Endless release. We are forcing a lower version for jenkins.
+
+ -- Matt Watson <mattdangerw@gmail.com>  Thu, 07 Jan 2016 16:28:34 -0800
+
 glib2.0 (2.46.2-3) unstable; urgency=medium
 
   * Add debian/patches/disable-failing-test-for-pcre838.patch
