@@ -86,6 +86,7 @@ test_writable (void)
   gchar *tmp_copy_path;
 
   tmp_copy_path = g_build_filename (g_get_user_runtime_dir (), "glib-test-4096-random-bytes", NULL);
+  g_mkdir_with_parents (g_get_user_runtime_dir (), 0700);
 
   g_file_get_contents (g_test_get_filename (G_TEST_DIST, "4096-random-bytes", NULL), &contents, &len, &error);
   g_assert_no_error (error);

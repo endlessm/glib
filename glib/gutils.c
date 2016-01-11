@@ -539,6 +539,8 @@ static  gchar  **g_system_config_dirs = NULL;
 
 static  gchar  **g_user_special_dirs = NULL;
 
+static  GHashTable *g_user_special_dirs_for_id = NULL;
+
 /* fifteen minutes of fame for everybody */
 #define G_USER_DIRS_EXPIRE      15 * 60
 
@@ -808,6 +810,12 @@ g_get_real_name (void)
  * should either directly check the `HOME` environment variable yourself
  * or unset it before calling any functions in GLib.
  *
+ * When the pre-2.36 behaviour was in effect, Debian provided the
+ * <envar>G_HOME</envar> environment variable for testing and development
+ * purposes. This is now unnecessary as <envar>HOME</envar> can be used
+ * directly, but is retained for compatibility. It is deprecated and will be
+ * removed in a future release.
+ *
  * Returns: the current user's home directory
  */
 const gchar *
@@ -820,7 +828,9 @@ g_get_home_dir (void)
       gchar *tmp;
 
       /* We first check HOME and use it if it is set */
-      tmp = g_strdup (g_getenv ("HOME"));
+      tmp = g_strdup (g_getenv ("G_HOME"));
+      if (!tmp)
+        tmp = g_strdup (g_getenv ("HOME"));
 
 #ifdef G_OS_WIN32
       /* Only believe HOME if it is an absolute path and exists.
@@ -1476,6 +1486,64 @@ load_user_special_dirs (void)
 
 #else /* default is unix */
 
+static gboolean
+get_user_special_directory_from_xdg_string (const char *string,
+                                            GUserDirectory *directory_out)
+{
+  GUserDirectory directory;
+  gboolean found = TRUE;
+
+  if (g_strcmp0 (string, "DESKTOP") == 0)
+    directory = G_USER_DIRECTORY_DESKTOP;
+  else if (g_strcmp0 (string, "DOCUMENTS") == 0)
+    directory = G_USER_DIRECTORY_DOCUMENTS;
+  else if (g_strcmp0 (string, "DOWNLOAD") == 0)
+    directory = G_USER_DIRECTORY_DOWNLOAD;
+  else if (g_strcmp0 (string, "MUSIC") == 0)
+    directory = G_USER_DIRECTORY_MUSIC;
+  else if (g_strcmp0 (string, "PICTURES") == 0)
+    directory = G_USER_DIRECTORY_PICTURES;
+  else if (g_strcmp0 (string, "PUBLICSHARE") == 0)
+    directory = G_USER_DIRECTORY_PUBLIC_SHARE;
+  else if (g_strcmp0 (string, "TEMPLATES") == 0)
+    directory = G_USER_DIRECTORY_TEMPLATES;
+  else if (g_strcmp0 (string, "VIDEOS") == 0)
+    directory = G_USER_DIRECTORY_VIDEOS;
+  else
+    found = FALSE;
+
+  if (found)
+    {
+      if (directory_out)
+        *directory_out = directory;
+    }
+
+  return found;
+}
+
+/* modifies the input string */
+static gchar *
+parse_user_directory_from_string (gchar *string,
+                                  gint len)
+{
+  if (len < 0)
+    len = strlen (string);
+
+  string[len] = '\0';
+
+  if (g_str_has_suffix (string, ".desktop"))
+    return string;
+
+  if (g_str_has_prefix (string, "XDG_") &&
+      g_str_has_suffix (string, "_DIR"))
+    {
+      string[len - 4] = '\0';
+      return string + 4;
+    }
+
+  return NULL;
+}
+
 /* adapted from xdg-user-dir-lookup.c
  *
  * Copyright (C) 2007 Red Hat Inc.
@@ -1527,6 +1595,8 @@ load_user_special_dirs (void)
     {
       gchar *buffer = lines[i];
       gchar *d, *p;
+      gchar *key, *key_end;
+      gchar *path;
       gint len;
       gboolean is_relative = FALSE;
       GUserDirectory directory;
@@ -1537,60 +1607,22 @@ load_user_special_dirs (void)
 	buffer[len - 1] = 0;
       
       p = buffer;
-      while (*p == ' ' || *p == '\t')
-	p++;
-      
-      if (strncmp (p, "XDG_DESKTOP_DIR", strlen ("XDG_DESKTOP_DIR")) == 0)
-        {
-          directory = G_USER_DIRECTORY_DESKTOP;
-          p += strlen ("XDG_DESKTOP_DIR");
-        }
-      else if (strncmp (p, "XDG_DOCUMENTS_DIR", strlen ("XDG_DOCUMENTS_DIR")) == 0)
-        {
-          directory = G_USER_DIRECTORY_DOCUMENTS;
-          p += strlen ("XDG_DOCUMENTS_DIR");
-        }
-      else if (strncmp (p, "XDG_DOWNLOAD_DIR", strlen ("XDG_DOWNLOAD_DIR")) == 0)
-        {
-          directory = G_USER_DIRECTORY_DOWNLOAD;
-          p += strlen ("XDG_DOWNLOAD_DIR");
-        }
-      else if (strncmp (p, "XDG_MUSIC_DIR", strlen ("XDG_MUSIC_DIR")) == 0)
-        {
-          directory = G_USER_DIRECTORY_MUSIC;
-          p += strlen ("XDG_MUSIC_DIR");
-        }
-      else if (strncmp (p, "XDG_PICTURES_DIR", strlen ("XDG_PICTURES_DIR")) == 0)
-        {
-          directory = G_USER_DIRECTORY_PICTURES;
-          p += strlen ("XDG_PICTURES_DIR");
-        }
-      else if (strncmp (p, "XDG_PUBLICSHARE_DIR", strlen ("XDG_PUBLICSHARE_DIR")) == 0)
-        {
-          directory = G_USER_DIRECTORY_PUBLIC_SHARE;
-          p += strlen ("XDG_PUBLICSHARE_DIR");
-        }
-      else if (strncmp (p, "XDG_TEMPLATES_DIR", strlen ("XDG_TEMPLATES_DIR")) == 0)
-        {
-          directory = G_USER_DIRECTORY_TEMPLATES;
-          p += strlen ("XDG_TEMPLATES_DIR");
-        }
-      else if (strncmp (p, "XDG_VIDEOS_DIR", strlen ("XDG_VIDEOS_DIR")) == 0)
-        {
-          directory = G_USER_DIRECTORY_VIDEOS;
-          p += strlen ("XDG_VIDEOS_DIR");
-        }
-      else
-	continue;
-
-      while (*p == ' ' || *p == '\t')
+      while (g_ascii_isspace (*p))
 	p++;
 
-      if (*p != '=')
-	continue;
-      p++;
+      key = p;
+      while (*p && !g_ascii_isspace (*p) && * p != '=')
+	p++;
 
-      while (*p == ' ' || *p == '\t')
+      if (*p == 0)
+	continue;
+
+      key_end = p++;
+      key = parse_user_directory_from_string (key, key_end - key);
+      if (key == NULL)
+        continue;
+
+      while (g_ascii_isspace (*p))
 	p++;
 
       if (*p != '"')
@@ -1616,13 +1648,26 @@ load_user_special_dirs (void)
       len = strlen (d);
       if (d[len - 1] == '/')
         d[len - 1] = 0;
-      
+
       if (is_relative)
+        path = g_build_filename (g_get_home_dir (), d, NULL);
+      else
+        path = g_strdup (d);
+
+      if (g_str_has_suffix (key, ".desktop"))
         {
-          g_user_special_dirs[directory] = g_build_filename (g_get_home_dir (), d, NULL);
+          g_hash_table_replace (g_user_special_dirs_for_id, g_strdup (key), path);
         }
       else
-	g_user_special_dirs[directory] = g_strdup (d);
+        {
+          if (!get_user_special_directory_from_xdg_string (key, &directory))
+            {
+              g_free (path);
+              continue;
+            }
+
+          g_user_special_dirs[directory] = path;
+        }
     }
 
   g_strfreev (lines);
@@ -1660,6 +1705,7 @@ g_reload_user_special_dirs_cache (void)
       char *old_val;
 
       /* recreate and reload our cache */
+      g_hash_table_remove_all (g_user_special_dirs_for_id);
       g_user_special_dirs = g_new0 (gchar *, G_USER_N_DIRECTORIES);
       load_user_special_dirs ();
 
@@ -1686,6 +1732,23 @@ g_reload_user_special_dirs_cache (void)
     }
 
   G_UNLOCK (g_utils_global);
+}
+
+static void
+init_special_dirs (void)
+{
+  if (G_UNLIKELY (g_user_special_dirs == NULL))
+    {
+      g_user_special_dirs = g_new0 (gchar *, G_USER_N_DIRECTORIES);
+      g_user_special_dirs_for_id = g_hash_table_new_full (g_str_hash, g_str_equal,
+                                                          g_free, g_free);
+
+      load_user_special_dirs ();
+
+      /* Special-case desktop for historical compatibility */
+      if (g_user_special_dirs[G_USER_DIRECTORY_DESKTOP] == NULL)
+        g_user_special_dirs[G_USER_DIRECTORY_DESKTOP] = g_build_filename (g_get_home_dir (), "Desktop", NULL);
+    }
 }
 
 /**
@@ -1717,20 +1780,38 @@ g_get_user_special_dir (GUserDirectory directory)
 
   G_LOCK (g_utils_global);
 
-  if (G_UNLIKELY (g_user_special_dirs == NULL))
-    {
-      g_user_special_dirs = g_new0 (gchar *, G_USER_N_DIRECTORIES);
-
-      load_user_special_dirs ();
-
-      /* Special-case desktop for historical compatibility */
-      if (g_user_special_dirs[G_USER_DIRECTORY_DESKTOP] == NULL)
-        g_user_special_dirs[G_USER_DIRECTORY_DESKTOP] = g_build_filename (g_get_home_dir (), "Desktop", NULL);
-    }
+  init_special_dirs ();
 
   G_UNLOCK (g_utils_global);
 
   return g_user_special_dirs[directory];
+}
+
+/**
+ * g_get_user_special_dir_for_desktop_id:
+ * @desktop_id: the ID of a desktop file describing the special directory
+ *
+ * Returns: the path to the specified special directory,
+ *     or %NULL if the id was not found.
+ *
+ * Since: 2.38
+ */
+const gchar *
+g_get_user_special_dir_for_desktop_id (const gchar *desktop_id)
+{
+  const gchar *retval;
+
+  g_return_val_if_fail (desktop_id != NULL, NULL);
+
+  G_LOCK (g_utils_global);
+
+  init_special_dirs ();
+
+  retval = g_hash_table_lookup (g_user_special_dirs_for_id, desktop_id);
+
+  G_UNLOCK (g_utils_global);
+
+  return retval;
 }
 
 #ifdef G_OS_WIN32
