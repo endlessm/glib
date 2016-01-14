@@ -1,4 +1,4 @@
-glib2.0 (2.47.4-1) UNRELEASED; urgency=medium
+glib2.0 (2.47.4-1) experimental; urgency=medium
 
   * New upstream release
     + The GApplication documentation has been improved in several areas.
@@ -10,7 +10,7 @@ glib2.0 (2.47.4-1) UNRELEASED; urgency=medium
     upstream. (Closes: #808842)
   * Don't build automatic dbgsym package for -refdbg
 
- -- Iain Lane <laney@debian.org>  Thu, 14 Jan 2016 17:29:33 +0000
+ -- Iain Lane <laney@debian.org>  Thu, 14 Jan 2016 18:27:02 +0000
 
 glib2.0 (2.47.3-3) experimental; urgency=medium
 
