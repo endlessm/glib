@@ -5,6 +5,9 @@ glib2.0 (2.47.4-1) UNRELEASED; urgency=medium
   * 0001-tests-fix-a-test-on-32-bit-builds.patch,
     0001-gtypes.h-move-G_STATIC_ASSERT-to-function-scope.patch: Drop, applied
     upstream in this release.
+  * 0001-regex-test-expect-ASSERTION_EXPECTED-for-ab-with-PCR.patch: Fix regex
+    tests to assert the right errors as of pcre 8.38. Cherry-pick from
+    upstream. (Closes: #808842)
 
  -- Iain Lane <laney@debian.org>  Thu, 14 Jan 2016 17:29:33 +0000
 
