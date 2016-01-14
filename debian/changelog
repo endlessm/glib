@@ -8,6 +8,7 @@ glib2.0 (2.47.4-1) UNRELEASED; urgency=medium
   * 0001-regex-test-expect-ASSERTION_EXPECTED-for-ab-with-PCR.patch: Fix regex
     tests to assert the right errors as of pcre 8.38. Cherry-pick from
     upstream. (Closes: #808842)
+  * Don't build automatic dbgsym package for -refdbg
 
  -- Iain Lane <laney@debian.org>  Thu, 14 Jan 2016 17:29:33 +0000
 
