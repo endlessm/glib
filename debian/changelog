@@ -1,7 +1,18 @@
-glib2.0 (2.47.4-2) UNRELEASED; urgency=medium
+glib2.0 (2.47.5-1) UNRELEASED; urgency=medium
 
   * debian/watch: Use download.gnome.org, seems ftp.gnome.org is not updating
     properly currently.
+  * New upstream release 2.47.5
+    + the system copy of PCRE is now used by default to implement GRegex.
+      Configure with --with-pcre=internal if a system PCRE version
+      is unavailable or undesired.
+    + interfaces for DTLS support have been added. A new version of
+      glib-networking will also be required.
+    + GDBusMethodInvocation now drops replies if the sender set the
+      NO_REPLY_EXPECTED flag
+    + several GApplication fixes, including fixes for commandline arguments in
+      interpreted languages on Windows
+  * debian/libglib2.0-0.symbols: Update with new symbols for this release.
 
  -- Iain Lane <laney@debian.org>  Wed, 20 Jan 2016 16:17:35 +0000
 
