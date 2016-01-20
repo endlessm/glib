@@ -1,4 +1,4 @@
-glib2.0 (2.47.5-1) UNRELEASED; urgency=medium
+glib2.0 (2.47.5-1) experimental; urgency=medium
 
   * debian/watch: Use download.gnome.org, seems ftp.gnome.org is not updating
     properly currently.
@@ -13,8 +13,10 @@ glib2.0 (2.47.5-1) UNRELEASED; urgency=medium
     + several GApplication fixes, including fixes for commandline arguments in
       interpreted languages on Windows
   * debian/libglib2.0-0.symbols: Update with new symbols for this release.
+  * 0001-regex-test-expect-ASSERTION_EXPECTED-for-ab-with-PCR.patch: Drop,
+    it's included in this release.
 
- -- Iain Lane <laney@debian.org>  Wed, 20 Jan 2016 16:17:35 +0000
+ -- Iain Lane <laney@debian.org>  Wed, 20 Jan 2016 17:55:16 +0000
 
 glib2.0 (2.47.4-1) experimental; urgency=medium
 
