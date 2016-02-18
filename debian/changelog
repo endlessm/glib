@@ -1,4 +1,4 @@
-glib2.0 (2.47.6-1) UNRELEASED; urgency=medium
+glib2.0 (2.47.6-1) experimental; urgency=medium
 
   * New upstream release.
     - GString is missing (transfer none) annotations on many of its methods
@@ -14,7 +14,7 @@ glib2.0 (2.47.6-1) UNRELEASED; urgency=medium
     auto-loaded scripts in the right place by themselves - no need for us to
     move them about.
 
- -- Iain Lane <laney@debian.org>  Wed, 20 Jan 2016 17:56:25 +0000
+ -- Iain Lane <laney@debian.org>  Thu, 18 Feb 2016 14:07:22 +0000
 
 glib2.0 (2.47.5-1) experimental; urgency=medium
 
