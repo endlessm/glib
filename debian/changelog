@@ -1,3 +1,21 @@
+glib2.0 (2.47.6-1) UNRELEASED; urgency=medium
+
+  * New upstraem release.
+    - GString is missing (transfer none) annotations on many of its methods
+    - systemtap and gdb scripts install in wrong place
+    - Documentation: various small improvements
+    - gdbusobjectmanagerserver: Clarify recommended ObjectManager paths
+    - Fix some annotations
+    - Cannot build with default flags under Fedora rawhide
+      (-Werror=format-nonliteral)
+    - gmacros.h is testing attributes with __has_feature (when compiling with
+      clang)
+  * debian/libglib2.0-0-dbg.install.in: Upstream now installs the gdb
+    auto-loaded scripts in the right place by themselves - no need for us to
+    move them about.
+
+ -- Iain Lane <laney@debian.org>  Wed, 20 Jan 2016 17:56:25 +0000
+
 glib2.0 (2.47.5-1) experimental; urgency=medium
 
   * debian/watch: Use download.gnome.org, seems ftp.gnome.org is not updating
