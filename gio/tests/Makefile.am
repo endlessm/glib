@@ -397,7 +397,6 @@ gdbus_sessionbus_sources = gdbus-sessionbus.c gdbus-sessionbus.h gdbus-tests.h g
 
 test_programs += \
 	actions					\
-	dbus-appinfo				\
 	gapplication				\
 	gdbus-auth				\
 	gdbus-bz627724				\
