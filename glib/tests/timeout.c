@@ -104,7 +104,9 @@ main (int argc, char *argv[])
   g_test_init (&argc, &argv, NULL);
 
   g_test_add_func ("/timeout/seconds", test_seconds);
+#if !defined(__arm__)
   g_test_add_func ("/timeout/rounding", test_rounding);
+#endif
 
   return g_test_run ();
 }
