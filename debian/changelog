@@ -1,8 +1,116 @@
-glib2.0 (2.46.2-0) master; urgency=medium
+glib2.0 (2.48.0-0) master; urgency=medium
 
   * Endless release. We are forcing a lower version for jenkins.
 
- -- Matt Watson <mattdangerw@gmail.com>  Thu, 07 Jan 2016 16:28:34 -0800
+ -- Philip Chimento <philip@endlessm.com>  Mon, 25 Apr 2016 15:51:04 -0700
+
+glib2.0 (2.48.0-1) unstable; urgency=medium
+
+  * New upstream stable release 2.48.0
+    + a minor build fix in the name of determinism (Closes: #812876)
+    + a few coverity fixes
+
+ -- Iain Lane <laney@debian.org>  Wed, 23 Mar 2016 17:59:23 +0000
+
+glib2.0 (2.47.92-1) experimental; urgency=medium
+
+  * New upstream release.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Wed, 16 Mar 2016 11:18:53 +0100
+
+glib2.0 (2.47.6-1) experimental; urgency=medium
+
+  * New upstream release.
+    - GString is missing (transfer none) annotations on many of its methods
+    - systemtap and gdb scripts install in wrong place
+    - Documentation: various small improvements
+    - gdbusobjectmanagerserver: Clarify recommended ObjectManager paths
+    - Fix some annotations
+    - Cannot build with default flags under Fedora rawhide
+      (-Werror=format-nonliteral)
+    - gmacros.h is testing attributes with __has_feature (when compiling with
+      clang)
+  * debian/libglib2.0-0-dbg.install.in: Upstream now installs the gdb
+    auto-loaded scripts in the right place by themselves - no need for us to
+    move them about.
+
+ -- Iain Lane <laney@debian.org>  Thu, 18 Feb 2016 14:07:22 +0000
+
+glib2.0 (2.47.5-1) experimental; urgency=medium
+
+  * debian/watch: Use download.gnome.org, seems ftp.gnome.org is not updating
+    properly currently.
+  * New upstream release 2.47.5
+    + the system copy of PCRE is now used by default to implement GRegex.
+      Configure with --with-pcre=internal if a system PCRE version
+      is unavailable or undesired.
+    + interfaces for DTLS support have been added. A new version of
+      glib-networking will also be required.
+    + GDBusMethodInvocation now drops replies if the sender set the
+      NO_REPLY_EXPECTED flag
+    + several GApplication fixes, including fixes for commandline arguments in
+      interpreted languages on Windows
+  * debian/libglib2.0-0.symbols: Update with new symbols for this release.
+  * 0001-regex-test-expect-ASSERTION_EXPECTED-for-ab-with-PCR.patch: Drop,
+    it's included in this release.
+
+ -- Iain Lane <laney@debian.org>  Wed, 20 Jan 2016 17:55:16 +0000
+
+glib2.0 (2.47.4-1) experimental; urgency=medium
+
+  * New upstream release
+    + The GApplication documentation has been improved in several areas.
+  * 0001-tests-fix-a-test-on-32-bit-builds.patch,
+    0001-gtypes.h-move-G_STATIC_ASSERT-to-function-scope.patch: Drop, applied
+    upstream in this release.
+  * 0001-regex-test-expect-ASSERTION_EXPECTED-for-ab-with-PCR.patch: Fix regex
+    tests to assert the right errors as of pcre 8.38. Cherry-pick from
+    upstream. (Closes: #808842)
+  * Don't build automatic dbgsym package for -refdbg
+
+ -- Iain Lane <laney@debian.org>  Thu, 14 Jan 2016 18:27:02 +0000
+
+glib2.0 (2.47.3-3) experimental; urgency=medium
+
+  * debian/patches/0001-gtypes.h-move-G_STATIC_ASSERT-to-function-scope.patch:
+    Another cherry-pick. Should fix g-ir-scanner.
+
+ -- Iain Lane <laney@debian.org>  Sun, 29 Nov 2015 18:45:29 +0000
+
+glib2.0 (2.47.3-2) experimental; urgency=medium
+
+  * debian/patches/0001-tests-fix-a-test-on-32-bit-builds.patch: Cherry-pick
+    from upstream. Fix tests (and therefore the build) on 32 bit arches.
+
+ -- Iain Lane <laney@debian.org>  Thu, 26 Nov 2015 16:12:12 +0000
+
+glib2.0 (2.47.3-1) experimental; urgency=medium
+
+  * New upstream release
+    + New API: hardware-assisted helpers for overflow-checked integer math.
+    + Fixes: Invalid free in g_local_file_trash() (LP: #1512826)
+  * d/p/{Doc-copy-included-example-files.patch,
+    Doc-Fix-missing-glibconfig.h-when-builddir-srcdir.patch,
+    Build-gdbus-example-objectmanager-server-again.patch}: Remove - in this
+    upstream release.
+
+ -- Iain Lane <laney@debian.org>  Wed, 25 Nov 2015 17:59:33 +0000
+
+glib2.0 (2.47.1-1) experimental; urgency=medium
+
+  * New upstream release.
+    + The Unicode support has been updated to version 8.0 of the Unicode standard
+    + GDesktopAppInfo no longer sets the DISPLAY environment variable when
+      launching apps. This is now done in the GAppLaunchContext
+      implementations when appropriate.
+  * debian/watch: Look for development versions too.
+  * debian/patches/90_gio-modules-multiarch-compat.patch: Refresh to apply on
+    this version.
+  * debian/patches/0001-GDateTime-test-fix-occasional-failures.patch: Drop,
+    upstream in this release.
+  * debian/libglib2.0-0.symbols: Update with new symbols for this release.
+
+ -- Iain Lane <laney@debian.org>  Wed, 04 Nov 2015 17:28:23 +0000
 
 glib2.0 (2.46.2-3) unstable; urgency=medium
 
