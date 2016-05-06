@@ -389,21 +389,57 @@ _g_get_unix_mounts (void)
   while ((mntent = getmntent (file)) != NULL)
 #endif
     {
-      /* ignore any mnt_fsname that is repeated and begins with a '/'
+      /* ignore any mnt_fsname that is repeated and begins with a '/',
+       * unless it's mounted in a higher level directory than the one
+       * we might have found in earlier iterations, in which case we
+       * replace it with the newly found one, so that we always register
+       * the highest level directory (which includes the other ones.)
        *
        * We do this to avoid being fooled by --bind mounts, since
        * these have the same device as the location they bind to.
-       * It's not an ideal solution to the problem, but it's likely that
-       * the most important mountpoint is first and the --bind ones after
-       * that aren't as important. So it should work.
+       *
+       * It's not an ideal solution to the problem, and most of the
+       * times sticking to the first mount directory found would be
+       * enough (it's likely that the most important mountpoint is
+       * first and the --bind ones after that aren't as important),
+       * but if we don't do the additional checks we might fall into a
+       * situation where the root directory is not being recognized as
+       * mounted, if another one has been detected first (e.g. /sysroot).
+       *
+       * In the long term we should probably move into parsing the
+       * /proc/self/mounts when available (bgo #522053) but this should
+       * work well enough in the meanwhile..
        *
        * The '/' is to handle procfs, tmpfs and other no device mounts.
        */
-      if (mntent->mnt_fsname != NULL &&
-	  mntent->mnt_fsname[0] == '/' &&
-	  g_hash_table_lookup (mounts_hash, mntent->mnt_fsname))
-        continue;
-      
+      if (mntent->mnt_fsname != NULL && mntent->mnt_fsname[0] == '/')
+        {
+          GUnixMountEntry *previous_entry =
+            g_hash_table_lookup (mounts_hash, mntent->mnt_fsname);
+
+          if (previous_entry)
+            {
+              /* We have previously found another directory mounted on the
+               * same device: we need to check if the new one is an ancestor.
+               */
+              gchar *previous_mnt_dir = previous_entry->mount_path;
+              if (g_str_has_prefix (previous_mnt_dir, mntent->mnt_dir))
+                {
+                  /* The newly found directory is an ancestor of the previously
+                   * found one: we remove the old directory to add the new one.
+                   */
+                  g_hash_table_remove (mounts_hash, previous_entry->device_path);
+                }
+              else
+                {
+                  /* The newly found directory is NOT ancestor of the previous
+                   * one: we stick to the old directory and check the next one.
+                   */
+                  continue;
+                }
+            }
+        }
+
       mount_entry = g_new0 (GUnixMountEntry, 1);
       mount_entry->mount_path = g_strdup (mntent->mnt_dir);
       if (g_strcmp0 (mntent->mnt_fsname, "/dev/root") == 0)
@@ -424,10 +460,10 @@ _g_get_unix_mounts (void)
       
       g_hash_table_insert (mounts_hash,
 			   mount_entry->device_path,
-			   mount_entry->device_path);
-      
-      return_list = g_list_prepend (return_list, mount_entry);
+			   mount_entry);
     }
+
+  return_list = g_hash_table_get_values (mounts_hash);
   g_hash_table_destroy (mounts_hash);
   
   endmntent (file);
