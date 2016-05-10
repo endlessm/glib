@@ -108,7 +108,7 @@ Depends: ${misc:Depends},
          libglib2.0-0 (= ${binary:Version}),
          libglib2.0-bin (= ${binary:Version}),
          libpcre3-dev (>= 1:8.31),
-         pkg-config (>= 0.16.0),
+         pkg-config,
          zlib1g-dev
 Suggests: libglib2.0-doc
 Description: Development files for the GLib library

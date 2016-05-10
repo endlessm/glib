@@ -108,7 +108,7 @@ Depends: ${misc:Depends},
          @SHARED_PKG@ (= ${binary:Version}),
          @BIN_PKG@ (= ${binary:Version}),
          libpcre3-dev (>= 1:8.31),
-         pkg-config (>= 0.16.0),
+         pkg-config,
          zlib1g-dev
 Suggests: @DOC_PKG@
 Description: Development files for the GLib library

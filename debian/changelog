@@ -5,6 +5,7 @@ glib2.0 (2.48.1-1) UNRELEASED; urgency=medium
   * Drop obsolete Conflicts, Breaks and Replaces from pre-wheezy.
   * Drop obsolete preinst maintainer scripts which cleaned up the
     /usr/share/doc symlinks.
+  * Drop version requirement for pkg-config dependency. (Closes: #734479)
 
  -- Michael Biebl <biebl@debian.org>  Wed, 11 May 2016 00:01:17 +0200
 
