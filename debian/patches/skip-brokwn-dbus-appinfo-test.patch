@@ -2,9 +2,11 @@ Description: The dbus-appinfo test hangs in a build environment (with no X serve
 Author: Iain Lane <laney@debian.org>
 Forwarded: yes (desrt)
 
+Index: b/gio/tests/Makefile.am
+===================================================================
 --- a/gio/tests/Makefile.am
 +++ b/gio/tests/Makefile.am
-@@ -385,7 +385,6 @@
+@@ -397,7 +397,6 @@
  
  test_programs += \
  	actions					\
