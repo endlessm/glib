@@ -458,12 +458,26 @@ _g_get_unix_mounts (void)
 			       mount_entry->filesystem_type,
 			       mount_entry->device_path);
       
-      g_hash_table_insert (mounts_hash,
-			   mount_entry->device_path,
-			   mount_entry);
+      /* We use a hash table to keep track of the mount points whose device starts
+       * with a '/' to prevent duplicates and --bind mounts from showing up, and a
+       * simple list for the other ones, which we will join later in a single list.
+       */
+      if (mntent->mnt_fsname != NULL && mntent->mnt_fsname[0] == '/')
+        {
+          /* Mount points with mnt_fsname starting with '/' (e.g. /dev/mmcblk0p1). */
+          g_hash_table_insert (mounts_hash,
+                               mount_entry->device_path,
+                               mount_entry);
+        }
+      else
+        {
+          /* Other mount points we won't check for duplicates (e.g. rootfs, tmpfs). */
+          return_list = g_list_prepend (return_list, mount_entry);
+        }
     }
 
-  return_list = g_hash_table_get_values (mounts_hash);
+  /* Merge the single list and the hash table together in one single list */
+  return_list = g_list_concat (return_list, g_hash_table_get_values (mounts_hash));
   g_hash_table_destroy (mounts_hash);
   
   endmntent (file);
