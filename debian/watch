@@ -1,3 +1,3 @@
-version=3
-https://download.gnome.org/sources/glib/([\d\.]+)/ \
-	glib-(.*)\.tar\.xz
+version=4
+https://download.gnome.org/sources/glib/([\d\.]+[02468])/ \
+	glib@ANY_VERSION@\.tar\.xz
