@@ -1,4 +1,4 @@
-glib2.0 (2.48.1-2) UNRELEASED; urgency=medium
+glib2.0 (2.49.2-1) UNRELEASED; urgency=medium
 
   [ Emilio Pozuelo Monfort ]
   * Remove refdbg variant. Thanks to Jonny Lamb for the patch.
@@ -6,6 +6,21 @@ glib2.0 (2.48.1-2) UNRELEASED; urgency=medium
 
   [ Iain Lane ]
   * Update Vcs-* for experimental
+  * New upstream release 2.49.2
+    + GDesktopAppInfo now allows bus activation with dashes. This is not
+      technically allowed per the Desktop Entry specification, but it happens
+      in the wild. Rather than forcing people to go through another traumatic
+      desktop file rename, accept it and translate - to _.
+    + The support for giving names to threads has been improved. Thread names
+      are now supported on Solaris as well, and the Linux support no longer
+      uses prctl() but the pthread api.
+    + GIO resources can now be overridden at runtime, using the
+      G_RESOURCE_OVERLAYS environment variable.
+    + gdbus-codegen can now generate autocleanup definitions for the types it
+      generates. Use the --c-generate-autocleanup option to control this
+    + GMainContext and GTask have gained more systemtap probes
+  * debian/watch: Update to find unstable versions
+  * debian/patches/04_homedir_env.patch: Refresh to apply correctly
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Thu, 16 Jun 2016 17:08:23 +0200
 

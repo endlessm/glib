@@ -37,7 +37,7 @@ Index: b/glib/gutils.c
 ===================================================================
 --- a/glib/gutils.c
 +++ b/glib/gutils.c
-@@ -807,6 +807,12 @@
+@@ -808,6 +808,12 @@
   * should either directly check the `HOME` environment variable yourself
   * or unset it before calling any functions in GLib.
   *
@@ -47,10 +47,10 @@ Index: b/glib/gutils.c
 + * directly, but is retained for compatibility. It is deprecated and will be
 + * removed in a future release.
 + *
-  * Returns: the current user's home directory
+  * Returns: (type filename): the current user's home directory
   */
  const gchar *
-@@ -819,7 +825,9 @@
+@@ -820,7 +826,9 @@
        gchar *tmp;
  
        /* We first check HOME and use it if it is set */
