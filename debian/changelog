@@ -21,6 +21,7 @@ glib2.0 (2.49.2-1) UNRELEASED; urgency=medium
     + GMainContext and GTask have gained more systemtap probes
   * debian/watch: Update to find unstable versions
   * debian/patches/04_homedir_env.patch: Refresh to apply correctly
+  * debian/libglib2.0-0.symbols: Update for this release
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Thu, 16 Jun 2016 17:08:23 +0200
 

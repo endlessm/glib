@@ -609,6 +609,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_drive_has_volumes@Base 2.16.0
  g_drive_is_media_check_automatic@Base 2.16.0
  g_drive_is_media_removable@Base 2.16.0
+ g_drive_is_removable@Base 2.49.2
  g_drive_poll_for_media@Base 2.16.0
  g_drive_poll_for_media_finish@Base 2.16.0
  g_drive_start@Base 2.22.0
@@ -1371,12 +1372,14 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_settings_get_enum@Base 2.26.0
  g_settings_get_flags@Base 2.26.0
  g_settings_get_has_unapplied@Base 2.26.0
+ g_settings_get_int64@Base 2.49.2
  g_settings_get_int@Base 2.26.0
  g_settings_get_mapped@Base 2.26.0
  g_settings_get_range@Base 2.28.0
  g_settings_get_string@Base 2.26.0
  g_settings_get_strv@Base 2.26.0
  g_settings_get_type@Base 2.26.0
+ g_settings_get_uint64@Base 2.49.2
  g_settings_get_uint@Base 2.30.0
  g_settings_get_user_value@Base 2.39.4
  g_settings_get_value@Base 2.26.0
@@ -1424,9 +1427,11 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_settings_set_double@Base 2.26.0
  g_settings_set_enum@Base 2.26.0
  g_settings_set_flags@Base 2.26.0
+ g_settings_set_int64@Base 2.49.2
  g_settings_set_int@Base 2.26.0
  g_settings_set_string@Base 2.26.0
  g_settings_set_strv@Base 2.26.0
+ g_settings_set_uint64@Base 2.49.2
  g_settings_set_uint@Base 2.30.0
  g_settings_set_value@Base 2.26.0
  g_settings_sync@Base 2.26.0
