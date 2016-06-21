@@ -30,8 +30,8 @@ Build-Depends: debhelper (>= 9),
                libffi-dev (>= 3.0.0)
 Standards-Version: 3.9.6
 Homepage: http://www.gtk.org/
-Vcs-Browser: https://anonscm.debian.org/viewvc/pkg-gnome/desktop/experimental/glib2.0/
-Vcs-Svn: svn://anonscm.debian.org/pkg-gnome/desktop/experimental/glib2.0/
+Vcs-Browser: https://anonscm.debian.org/viewvc/pkg-gnome/desktop/unstable/glib2.0/
+Vcs-Svn: svn://anonscm.debian.org/pkg-gnome/desktop/unstable/glib2.0/
 
 Package: @SHARED_PKG@
 Architecture: any
@@ -40,11 +40,9 @@ Depends: ${misc:Depends},
 Recommends: @DATA_PKG@,
             shared-mime-info,
             xdg-user-dirs
-Breaks: gvfs (<< 1.8),
-        glib-networking (<< 2.33.12),
+Breaks: glib-networking (<< 2.33.12),
         python-gi (<< 3.7.2),
         libgnome-desktop-3-2 (<< 3.4.2-2)
-Replaces: @DEV_PKG@ (<< 2.23.2-2)
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Description: GLib library of C routines
@@ -92,9 +90,6 @@ Depends: ${shlibs:Depends},
          ${misc:Depends},
          @SHARED_PKG@ (= ${binary:Version}),
          @DATA_PKG@
-Conflicts: @SHARED_PKG@ (<< 2.25.11-2),
-Replaces: @SHARED_PKG@ (<< 2.25.11-2),
-          @DEV_PKG@ (<< 2.25.11-2)
 Multi-Arch: foreign
 Description: Programs for the GLib library
  GLib is a library containing many useful C routines for things such
@@ -113,7 +108,7 @@ Depends: ${misc:Depends},
          @SHARED_PKG@ (= ${binary:Version}),
          @BIN_PKG@ (= ${binary:Version}),
          libpcre3-dev (>= 1:8.31),
-         pkg-config (>= 0.16.0),
+         pkg-config,
          zlib1g-dev
 Suggests: @DOC_PKG@
 Description: Development files for the GLib library
@@ -132,9 +127,8 @@ Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends},
          @SHARED_PKG@ (= ${binary:Version})
-Conflicts: libglib2.0-dbg
 Breaks: libglib2.0-dev (<< 2.43.2-2~)
-Replaces: libglib2.0-dbg, libglib2.0-dev (<< 2.43.2-2~)
+Replaces: libglib2.0-dev (<< 2.43.2-2~)
 Description: Debugging symbols for the GLib libraries
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -179,20 +173,3 @@ Multi-Arch: same
 Description: GLib Input, Output and Streaming Library (fam module)
  GIO is the input, output and streaming API of GLib. This package
  provides a fam file and directory monitoring backend for it.
-
-Package: @REFDBG_PKG@
-Section: devel
-Priority: extra
-Architecture: any
-Depends: ${misc:Depends},
-         ${shlibs:Depends},
-         @SHARED_PKG@ (= ${binary:Version})
-Multi-Arch: same
-Description: GLib library of C routines - refdbg library
- GLib is a library containing many useful C routines for things such
- as trees, hashes, lists, and strings.  It is a useful general-purpose
- C library used by projects such as GTK+, GIMP, and GNOME.
- .
- This package contains the shared library built with
- --disable-Bsymbolic so that it can be used with refdbg, a GObject
- refcount debugger.

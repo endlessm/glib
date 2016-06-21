@@ -1,3 +1,29 @@
+glib2.0 (2.48.1-2) UNRELEASED; urgency=medium
+
+  * Remove refdbg variant. Thanks to Jonny Lamb for the patch.
+    Closes: #827269.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Thu, 16 Jun 2016 17:08:23 +0200
+
+glib2.0 (2.48.1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Refresh patches.
+  * Drop obsolete Conflicts, Breaks and Replaces from pre-wheezy.
+  * Drop obsolete preinst maintainer scripts which cleaned up the
+    /usr/share/doc symlinks.
+  * Drop version requirement for pkg-config dependency. (Closes: #734479)
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 11 May 2016 01:11:42 +0200
+
+glib2.0 (2.48.0-1) unstable; urgency=medium
+
+  * New upstream stable release 2.48.0
+    + a minor build fix in the name of determinism (Closes: #812876)
+    + a few coverity fixes
+
+ -- Iain Lane <laney@debian.org>  Wed, 23 Mar 2016 17:59:23 +0000
+
 glib2.0 (2.47.92-1) experimental; urgency=medium
 
   * New upstream release.
@@ -97,6 +123,43 @@ glib2.0 (2.47.1-1) experimental; urgency=medium
   * debian/libglib2.0-0.symbols: Update with new symbols for this release.
 
  -- Iain Lane <laney@debian.org>  Wed, 04 Nov 2015 17:28:23 +0000
+
+glib2.0 (2.46.2-3) unstable; urgency=medium
+
+  * Add debian/patches/disable-failing-test-for-pcre838.patch
+    - disable regexp test that fails with new system pcre 8.38
+      which just hit Debian unstable. Needs further investigation
+      but lets not leave the build broken during the holidays.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Wed, 23 Dec 2015 17:11:16 +0100
+
+glib2.0 (2.46.2-2) unstable; urgency=medium
+
+  [ Iain Lane ]
+  * Fix typo in previous changelog entry.
+
+  [ Andreas Henriksson ]
+  * Add debian/patches/bug712848-volume-monitor-deadlock-kfreebsd.patch
+    - patch by and big thanks to Steven Chamberlain for debugging this!
+    - given lack of feedback from upstream, which would be very welcome
+      for deep changes like this, use an ifdef to only change on
+      *FreeBSD for now... (Closes: #712848)
+  * Add --no-ddebs arg to dh_strip for refdbg package build which
+    otherwise fails and I doubt we need ddeb/dbgsym for our debug
+    package.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Wed, 23 Dec 2015 11:54:51 +0100
+
+glib2.0 (2.46.2-1) unstable; urgency=medium
+
+  * Fix Vcs-* to point to unstable.
+  * New upstream stable release 2.46.2.
+    + Fixes cross compilation (Closes: #800610)
+  * Drop changes from 2.46.1-2, which are all in this upstream release.
+  * Drop debian/patches/0001-GDateTime-test-fix-occasional-failures.patch,
+    applied upstream.
+
+ -- Iain Lane <laney@debian.org>  Mon, 09 Nov 2015 12:59:12 +0000
 
 glib2.0 (2.46.1-2) unstable; urgency=medium
 

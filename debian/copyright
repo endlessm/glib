@@ -1,7 +1,7 @@
 This package was debianized by Akira TAGOH <tagoh@debian.org> on
 Thu,  7 Mar 2002 01:05:25 +0900.
 
-It was downloaded from <http://ftp.gnome.org/pub/GNOME/sources/glib/>.
+It was downloaded from <https://download.gnome.org/sources/glib/>.
 
 Original Authors
 ----------------
@@ -56,4 +56,3 @@ License:
 
 On Debian systems, the complete text of the GNU Lesser General
 Public License can be found in `/usr/share/common-licenses/LGPL'.
-

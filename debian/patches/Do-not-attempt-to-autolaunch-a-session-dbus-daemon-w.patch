@@ -53,9 +53,11 @@ Bug-Debian: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=737380
  gio/gdbusaddress.c | 7 +++++++
  1 file changed, 7 insertions(+)
 
+Index: b/gio/gdbusaddress.c
+===================================================================
 --- a/gio/gdbusaddress.c
 +++ b/gio/gdbusaddress.c
-@@ -1036,6 +1036,13 @@
+@@ -1071,6 +1071,13 @@
        goto out;
      }
  
