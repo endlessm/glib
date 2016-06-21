@@ -1,7 +1,11 @@
 glib2.0 (2.48.1-2) UNRELEASED; urgency=medium
 
+  [ Emilio Pozuelo Monfort ]
   * Remove refdbg variant. Thanks to Jonny Lamb for the patch.
     Closes: #827269.
+
+  [ Iain Lane ]
+  * Update Vcs-* for experimental
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Thu, 16 Jun 2016 17:08:23 +0200
 
