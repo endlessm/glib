@@ -1,3 +1,4 @@
+0001-gsettings-test-Wrap-guint64-literals-in-G_GUINT64_CO.patch
 01_gettext-desktopfiles.patch
 02_gettext-desktopfiles-ubuntu.patch
 03_disble_glib_compile_schemas_warning.patch
