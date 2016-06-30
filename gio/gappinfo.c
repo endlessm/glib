@@ -669,12 +669,45 @@ g_app_info_should_show (GAppInfo *appinfo)
   return (* iface->should_show) (appinfo);
 }
 
+/* FIXME: This should not be needed, but there seems to be a bug somewhere
+ * at the moment that is causing not all the messages to arrive in the
+ * portal if we unref the bus in launch_default_with_portal(), so we
+ * temporarily use the asynchronous send_message_with_reply() function
+ * to make sure we don't unref the bus until we're really done with it.
+ */
+static void
+openuri_message_sent (GObject *source_object,
+                      GAsyncResult *res,
+                      gpointer user_data)
+{
+  GDBusConnection *bus = G_DBUS_CONNECTION (source_object);
+  GDBusMessage *reply = NULL;
+  GError *error = NULL;
+
+  reply = g_dbus_connection_send_message_with_reply_finish (bus, res, &error);
+  if (reply != NULL)
+    g_object_unref (reply);
+
+  if (error != NULL)
+    {
+      g_warning ("Error using org.freedesktop.portal.OpenURI: %s", error->message);
+      g_clear_error (&error);
+    }
+
+  if (bus != NULL)
+    {
+      g_dbus_connection_flush (bus, NULL, NULL, NULL);
+      g_object_unref (bus);
+    }
+}
+
 static gboolean
 launch_default_with_portal (const char         *uri,
                             GAppLaunchContext  *context,
                             GError            **error)
 {
   GDBusConnection *session_bus;
+  GDBusMessage *message;
   GVariantBuilder opt_builder;
   const char *parent_window = NULL;
 
@@ -690,26 +723,27 @@ launch_default_with_portal (const char         *uri,
       g_strfreev (env);
     }
 
+  message = g_dbus_message_new_method_call ("org.freedesktop.portal.Desktop",
+                                            "/org/freedesktop/portal/desktop",
+                                            "org.freedesktop.portal.OpenURI",
+                                            "OpenURI");
+
   g_variant_builder_init (&opt_builder, G_VARIANT_TYPE_VARDICT);
 
-  g_dbus_connection_call (session_bus,
-                          "org.freedesktop.portal.Desktop",
-                          "/org/freedesktop/portal/desktop",
-                          "org.freedesktop.portal.OpenURI",
-                          "OpenURI",
-                          g_variant_new ("(ss@a{sv})",
-                                         parent_window ? parent_window : "",
-                                         uri,
-                                         g_variant_builder_end (&opt_builder)),
-                          NULL,
-                          G_DBUS_CALL_FLAGS_NONE,
-                          G_MAXINT,
-                          NULL,
-                          NULL,
-                          NULL);
+  g_dbus_message_set_body (message, g_variant_new ("(ss@a{sv})",
+                                                   parent_window ? parent_window : "",
+                                                   uri,
+                                                   g_variant_builder_end (&opt_builder)));
 
-  g_dbus_connection_flush (session_bus, NULL, NULL, NULL);
-  g_object_unref (session_bus);
+  g_dbus_connection_send_message_with_reply (session_bus,
+                                             message,
+                                             G_DBUS_SEND_MESSAGE_FLAGS_NONE,
+                                             G_MAXINT,
+                                             NULL,
+                                             NULL,
+                                             openuri_message_sent,
+                                             NULL);
+  g_object_unref (message);
 
   return TRUE;
 }
