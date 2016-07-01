@@ -149,7 +149,7 @@ GVfs *                g_vfs_get_default               (void);
 GLIB_AVAILABLE_IN_ALL
 GVfs *                g_vfs_get_local                 (void);
 
-GLIB_AVAILABLE_IN_2_50
+GLIB_AVAILABLE_IN_2_48
 gboolean              g_vfs_register_uri_scheme       (GVfs               *vfs,
                                                        const char         *scheme,
                                                        GVfsFileLookupFunc  uri_func,
@@ -158,7 +158,7 @@ gboolean              g_vfs_register_uri_scheme       (GVfs               *vfs,
                                                        GVfsFileLookupFunc  parse_name_func,
                                                        gpointer            parse_name_data,
                                                        GDestroyNotify      parse_name_destroy);
-GLIB_AVAILABLE_IN_2_50
+GLIB_AVAILABLE_IN_2_48
 gboolean              g_vfs_unregister_uri_scheme     (GVfs               *vfs,
                                                        const char         *scheme);
 
