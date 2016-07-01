@@ -1924,6 +1924,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_vfs_get_type@Base 2.16.0
  g_vfs_is_active@Base 2.16.0
  g_vfs_parse_name@Base 2.16.0
+ g_vfs_register_uri_scheme@Base 2.48.0
+ g_vfs_unregister_uri_scheme@Base 2.48.0
  g_volume_can_eject@Base 2.16.0
  g_volume_can_mount@Base 2.16.0
  g_volume_eject@Base 2.16.0
