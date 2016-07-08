@@ -338,11 +338,6 @@ giowin32include_HEADERS = \
 
 endif
 
-portal_sources = \
-	gportalsupport.c		\
-	gportalsupport.h		\
-	$(NULL)
-
 libgio_2_0_la_SOURCES =		\
 	gappinfo.c 		\
 	gappinfoprivate.h	\
@@ -495,7 +490,6 @@ libgio_2_0_la_SOURCES =		\
 	$(settings_sources) 	\
 	$(gdbus_sources) 	\
 	$(local_sources) 	\
-	$(portal_sources) 	\
 	$(NULL)
 
 EXTRA_DIST += strinfo.c
