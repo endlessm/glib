@@ -90,6 +90,10 @@
  * different ideas of what a given URI means.
  */
 
+struct _GAppLaunchContextPrivate {
+  char **envp;
+};
+
 typedef GAppInfoIface GAppInfoInterface;
 G_DEFINE_INTERFACE (GAppInfo, g_app_info, G_TYPE_OBJECT)
 
@@ -715,13 +719,8 @@ launch_default_with_portal (const char         *uri,
   if (session_bus == NULL)
     return FALSE;
 
-  if (context)
-    {
-      char **env;
-      env = g_app_launch_context_get_environment (context);
-      parent_window = g_environ_getenv (env, "PARENT_WINDOW_ID");
-      g_strfreev (env);
-    }
+  if (context && context->priv->envp)
+    parent_window = g_environ_getenv (context->priv->envp, "PARENT_WINDOW_ID");
 
   message = g_dbus_message_new_method_call ("org.freedesktop.portal.Desktop",
                                             "/org/freedesktop/portal/desktop",
@@ -872,10 +871,6 @@ enum {
   LAUNCH_FAILED,
   LAUNCHED,
   LAST_SIGNAL
-};
-
-struct _GAppLaunchContextPrivate {
-  char **envp;
 };
 
 static guint signals[LAST_SIGNAL] = { 0 };

@@ -18,55 +18,67 @@
 
 #include "config.h"
 
-#include <unistd.h>
-
 #include "gportalsupport.h"
+
+static gboolean flatpak_info_read;
+static gboolean use_portal;
+static gboolean network_available;
+
+static void
+read_flatpak_info (void)
+{
+  char *path;
+
+  if (flatpak_info_read)
+    return;
+
+  flatpak_info_read = TRUE;
+
+  path = g_build_filename (g_get_user_runtime_dir (), "flatpak-info", NULL);
+  if (g_file_test (path, G_FILE_TEST_EXISTS))
+    {
+      GKeyFile *keyfile;
+
+      use_portal = TRUE;
+      network_available = FALSE;
+
+      keyfile = g_key_file_new ();
+      if (g_key_file_load_from_file (keyfile, path, G_KEY_FILE_NONE, NULL))
+        {
+          char **shared = NULL;
+
+          shared = g_key_file_get_string_list (keyfile, "Context", "shared", NULL, NULL);
+          if (shared)
+            {
+              network_available = g_strv_contains ((const char * const *)shared, "network");
+              g_strfreev (shared);
+            }
+        }
+    }
+  else
+    {
+      const char *var;
+
+      var = g_getenv ("GTK_USE_PORTAL");
+      if (var && var[0] == '1')
+        use_portal = TRUE;
+      network_available = TRUE;
+    }
+
+  g_free (path);
+}
 
 gboolean
 glib_should_use_portal (void)
 {
-  const char *use_portal;
-  char *path;
-
-  path = g_strdup_printf ("%s/flatpak-info", g_get_user_runtime_dir ());
-  if (g_file_test (path, G_FILE_TEST_EXISTS))
-    use_portal = "1";
-  else
-    {
-      use_portal = g_getenv ("GTK_USE_PORTAL");
-      if (!use_portal)
-        use_portal = "";
-    }
-  g_free (path);
-
-  return g_str_equal (use_portal, "1");
+  read_flatpak_info ();
+  return use_portal;
 }
 
 gboolean
 glib_network_available_in_sandbox (void)
 {
-  char *path;
-  GKeyFile *keyfile;
-  gboolean available = TRUE;
-
-  path = g_strdup_printf ("%s/flatpak-info", g_get_user_runtime_dir ());
-
-  keyfile = g_key_file_new ();
-  if (g_key_file_load_from_file (keyfile, path, G_KEY_FILE_NONE, NULL))
-    {
-      char **shared = NULL;
-
-      shared = g_key_file_get_string_list (keyfile, "Context", "shared", NULL, NULL);
-      if (shared)
-        {
-          available = g_strv_contains ((const char * const *)shared, "network");
-          g_strfreev (shared);
-        }
-    }
-
-  g_key_file_free (keyfile);
-  g_free (path);
-
-  return available;
+  read_flatpak_info ();
+  return network_available;
 }
 

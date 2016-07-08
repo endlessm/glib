@@ -263,6 +263,7 @@ unix_sources = \
 	gcontenttypeprivate.h 	\
 	gfdonotificationbackend.c \
 	ggtknotificationbackend.c \
+	gportalnotificationbackend.c \
 	$(NULL)
 
 if OS_COCOA
@@ -338,9 +339,31 @@ giowin32include_HEADERS = \
 
 endif
 
+xdp_dbus_built_sources = xdp-dbus.c xdp-dbus.h
+BUILT_SOURCES += $(xdp_dbus_built_sources)
+
+portal_interfaces = \
+	org.freedesktop.portal.NetworkMonitor.xml \
+	org.freedesktop.portal.ProxyResolver.xml \
+	$(NULL)
+
+EXTRA_DIST += $(portal_interfaces)
+
+$(xdp_dbus_built_sources) : $(portal_interfaces)
+	$(AM_V_GEN) UNINSTALLED_GLIB_SRCDIR=$(top_srcdir) 		\
+		UNINSTALLED_GLIB_BUILDDIR=$(top_builddir) 		\
+		$(PYTHON) $(srcdir)/gdbus-2.0/codegen/gdbus-codegen.in 	\
+		--interface-prefix org.freedesktop.portal.      	\
+		--c-namespace GXdp					\
+		--generate-c-code $(builddir)/xdp-dbus			\
+		$^
+
 portal_sources = \
-	gportalsupport.c		\
-	gportalsupport.h		\
+	gnetworkmonitorportal.c 	\
+	gnetworkmonitorportal.h		\
+	gproxyresolverportal.c		\
+	gproxyresolverportal.h		\
+	$(xdp_dbus_built_sources)	\
 	$(NULL)
 
 libgio_2_0_la_SOURCES =		\
@@ -427,6 +450,8 @@ libgio_2_0_la_SOURCES =		\
 	gpollableutils.c	\
 	gpollfilemonitor.c 	\
 	gpollfilemonitor.h 	\
+	gportalsupport.c	\
+	gportalsupport.h	\
 	gproxy.c		\
 	gproxyaddress.c         \
 	gproxyaddressenumerator.c \
@@ -495,7 +520,7 @@ libgio_2_0_la_SOURCES =		\
 	$(settings_sources) 	\
 	$(gdbus_sources) 	\
 	$(local_sources) 	\
-	$(portal_sources) 	\
+	$(portal_sources)	\
 	$(NULL)
 
 EXTRA_DIST += strinfo.c
