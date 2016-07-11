@@ -20,6 +20,12 @@
 
 #include "gportalsupport.h"
 
+#include <sys/types.h>
+#include <unistd.h>
+#include <string.h>
+
+#include <gioerror.h>
+
 static gboolean flatpak_info_read;
 static gboolean use_portal;
 static gboolean network_available;
@@ -82,3 +88,66 @@ glib_network_available_in_sandbox (void)
   return network_available;
 }
 
+char *
+glib_lookup_sandboxed_app_id (GError **error)
+{
+  char *path;
+  char *content = NULL;
+  char **lines;
+  char *app_id = NULL;
+  int i;
+  guint32 pid;
+  gboolean res;
+
+  pid = getpid ();
+
+  path = g_strdup_printf ("/proc/%u/cgroup", pid);
+  res = g_file_get_contents (path, &content, NULL, error);
+  g_free (path);
+
+  if (!res)
+    {
+      g_prefix_error (error, "Can't find peer app id: ");
+      return NULL;
+    }
+
+  lines =  g_strsplit (content, "\n", -1);
+  g_free (content);
+
+  for (i = 0; lines[i] != NULL; i++)
+    {
+      if (g_str_has_prefix (lines[i], "1:name=systemd:"))
+        {
+          const char *unit = lines[i] + strlen ("1:name=systemd:");
+          char *scope = g_path_get_basename (unit);
+
+          if (g_str_has_prefix (scope, "flatpak-") &&
+              g_str_has_suffix (scope, ".scope"))
+            {
+              const char *name = scope + strlen ("flatpak-");
+              char *dash = strchr (name, '-');
+              if (dash != NULL)
+                {
+                  *dash = 0;
+                  app_id = g_strdup (name);
+                }
+            }
+          else
+            {
+              app_id = g_strdup ("");
+            }
+
+          g_free (scope);
+
+          if (app_id != NULL)
+            break;
+        }
+    }
+
+  g_strfreev (lines);
+
+  if (app_id == NULL)
+    g_set_error (error, G_IO_ERROR, G_IO_ERROR_FAILED,
+                 "Can't find peer app id: No name=systemd cgroup");
+  return app_id;
+}

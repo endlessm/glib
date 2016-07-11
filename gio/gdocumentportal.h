@@ -1,7 +1,6 @@
-
 /* GIO - GLib Input, Output and Streaming Library
  *
- * Copyright 2016 Red Hat, Inc.
+ * Copyright 2016 Endless Mobile, Inc.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -17,16 +16,15 @@
  * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __G_PORTAL_SUPPORT_H__
+#ifndef __G_DOCUMENT_PORTAL_H__
 
 #include <glib.h>
 
 G_BEGIN_DECLS
 
-gboolean glib_should_use_portal (void);
-gboolean glib_network_available_in_sandbox (void);
-
-char *glib_lookup_sandboxed_app_id (GError **error);
+char * g_document_portal_register_document (const char *uri,
+                                            const char *app_id,
+                                            GError    **error);
 
 G_END_DECLS
 
