@@ -1,3 +1,9 @@
+glib2.0 (2.49.2-3) UNRELEASED; urgency=medium
+
+  * Switch to python3.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 13 Jul 2016 17:42:46 +0200
+
 glib2.0 (2.49.2-2) experimental; urgency=medium
 
   * d/p/0001-gsettings-test-Wrap-guint64-literals-in-G_GUINT64_CO.patch:
