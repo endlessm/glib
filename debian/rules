@@ -79,6 +79,7 @@ export VERBOSE=1
 DEB_CONFIGURE_EXTRA_FLAGS := \
 			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG) \
 			--libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) \
+			--with-python=/usr/bin/python3 \
 			--with-pcre=system
 
 ifneq ($(DEB_BUILD_ARCH),$(DEB_HOST_ARCH))
@@ -110,7 +111,7 @@ binary-install/libglib2.0-0::
 	done
 
 binary-install/libglib2.0-dev::
-	dh_python2 -plibglib2.0-dev /usr/share/glib-2.0/codegen
+	dh_python3 -plibglib2.0-dev /usr/share/glib-2.0/codegen
 
 common-install-arch::
 	set -e; for file in libgio-fam.install libglib2.0-0.install \
