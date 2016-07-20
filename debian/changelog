@@ -4,6 +4,9 @@ glib2.0 (2.49.3-1) UNRELEASED; urgency=medium
   * New upstream release.
   * d/p/0001-gsettings-test-Wrap-guint64-literals-in-G_GUINT64_CO.patch:
     + Dropped, applied upstream.
+  * debian/patches/add-missing-gio-xml.patch:
+    + Add gio.xml file, which is missing from the tarball. Needed for the
+      documentation build.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 13 Jul 2016 17:42:46 +0200
 
