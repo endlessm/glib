@@ -1,0 +1,38 @@
+From 6de5595570a68e21ba83c60fbb889c07951200ab Mon Sep 17 00:00:00 2001
+From: Dan Winship <danw@gnome.org>
+Date: Tue, 19 Jul 2016 17:22:07 -0400
+Subject: [PATCH] Fix gio/tests/socket-listener
+
+g_socket_listener_add_address() is synchronous; all of the events will
+have been emitted before it returns and it doesn't queue any sources.
+The test was unintentionally depending on the fact that
+g_main_context_iterate(NULL, TRUE) would return anyway (at least the
+first time it was called), but that's no longer true after e4ee307.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=768968
+---
+ gio/tests/socket-listener.c | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+diff --git a/gio/tests/socket-listener.c b/gio/tests/socket-listener.c
+index 519d9a9..dcbbfdb 100644
+--- a/gio/tests/socket-listener.c
++++ b/gio/tests/socket-listener.c
+@@ -74,12 +74,9 @@ test_event_signal (void)
+                                  NULL,
+                                  &error);
+   g_assert_no_error (error);
+-  g_object_unref (saddr);
+-
+-  do
+-    g_main_context_iteration (NULL, TRUE);
+-  while (!success);
++  g_assert_true (success);
+ 
++  g_object_unref (saddr);
+   g_object_unref (listener);
+ }
+ 
+-- 
+2.8.1
+

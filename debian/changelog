@@ -7,6 +7,8 @@ glib2.0 (2.49.3-1) UNRELEASED; urgency=medium
   * debian/patches/add-missing-gio-xml.patch:
     + Add gio.xml file, which is missing from the tarball. Needed for the
       documentation build.
+  * debian/patches/0001-Fix-gio-tests-socket-listener.patch:
+    + Fix a test hang.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 13 Jul 2016 17:42:46 +0200
 
