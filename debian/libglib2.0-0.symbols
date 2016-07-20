@@ -1929,6 +1929,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_vfs_get_type@Base 2.16.0
  g_vfs_is_active@Base 2.16.0
  g_vfs_parse_name@Base 2.16.0
+ g_vfs_register_uri_scheme@Base 2.49.3
+ g_vfs_unregister_uri_scheme@Base 2.49.3
  g_volume_can_eject@Base 2.16.0
  g_volume_can_mount@Base 2.16.0
  g_volume_eject@Base 2.16.0
@@ -2174,6 +2176,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_compute_checksum_for_bytes@Base 2.33.14
  g_compute_checksum_for_data@Base 2.16.0
  g_compute_checksum_for_string@Base 2.16.0
+ g_compute_hmac_for_bytes@Base 2.49.3
  g_compute_hmac_for_data@Base 2.30.0
  g_compute_hmac_for_string@Base 2.30.0
  g_cond_broadcast@Base 2.31.8
@@ -2510,6 +2513,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_key_file_get_value@Base 2.12.0
  g_key_file_has_group@Base 2.12.0
  g_key_file_has_key@Base 2.12.0
+ g_key_file_load_from_bytes@Base 2.49.3
  g_key_file_load_from_data@Base 2.12.0
  g_key_file_load_from_data_dirs@Base 2.12.0
  g_key_file_load_from_dirs@Base 2.14.0
@@ -2581,6 +2585,15 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_log_set_fatal_mask@Base 2.12.0
  g_log_set_handler@Base 2.12.0
  g_log_set_handler_full@Base 2.45.3
+ g_log_set_writer_func@Base 2.49.3
+ g_log_structured@Base 2.49.3
+ g_log_structured_array@Base 2.49.3
+ g_log_writer_default@Base 2.49.3
+ g_log_writer_format_fields@Base 2.49.3
+ g_log_writer_is_journald@Base 2.49.3
+ g_log_writer_journald@Base 2.49.3
+ g_log_writer_standard_streams@Base 2.49.3
+ g_log_writer_supports_color@Base 2.49.3
  g_logv@Base 2.12.0
  g_lstat@Base 2.12.0
  g_main_context_acquire@Base 2.12.0
