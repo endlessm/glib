@@ -1,4 +1,4 @@
-glib2.0 (2.49.4-1) UNRELEASED; urgency=medium
+glib2.0 (2.49.4-1) experimental; urgency=medium
 
   * New upstream release.
   * debian/patches/add-missing-gio-xml.patch:
@@ -6,7 +6,7 @@ glib2.0 (2.49.4-1) UNRELEASED; urgency=medium
   * debian/patches/0001-Fix-gio-tests-socket-listener.patch:
     + Dropped, included upstream.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Thu, 21 Jul 2016 10:13:48 +0200
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Thu, 21 Jul 2016 18:12:05 +0200
 
 glib2.0 (2.49.3-1) experimental; urgency=medium
 
