@@ -1,6 +1,8 @@
 glib2.0 (2.49.4-1) UNRELEASED; urgency=medium
 
   * New upstream release.
+  * debian/patches/add-missing-gio-xml.patch:
+    + Dropped, gio.xml is now shipped in the tarballs.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Thu, 21 Jul 2016 10:13:48 +0200
 
