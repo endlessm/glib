@@ -9,7 +9,7 @@ glib2.0 (2.48.1-3) UNRELEASED; urgency=medium
     volume monitor
   * d/p/gregex-loosen-behaviour-testing.patch: add patch from upstream
     bug 767240 (not applied yet) to relax assertions about PCRE's behaviour,
-    which changed in 8.38
+    which changed in 8.38 (Closes: #834272)
 
  -- Simon McVittie <smcv@debian.org>  Sun, 14 Aug 2016 14:46:44 +0100
 
