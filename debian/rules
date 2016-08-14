@@ -59,6 +59,17 @@ DEB_DH_TRANSLATIONS_ARGS = -Xinstalled-tests
 # where creating /home/buildd/.dbus-keyrings fails
 export HOME=$(CURDIR)/debian/build
 
+# Put these back to their defaults if we are not running with a clean
+# environment, so that they are based on the temporary $HOME above.
+# Otherwise, some tests would try to write to the user's real XDG_DATA_HOME,
+# causing unwanted side-effects or FTBFS depending whether the user's
+# real HOME is available in the build chroot (if used)
+unexport XDG_CACHE_HOME
+unexport XDG_CONFIG_DIRS
+unexport XDG_CONFIG_HOME
+unexport XDG_DATA_HOME
+unexport XDG_DATA_DIRS
+
 # Make sure that everything that uses D-Bus is creating its own temporary
 # session rather than polluting the developer's (or failing, on buildds)
 export DBUS_SESSION_BUS_ADDRESS=this-should-not-be-used-and-will-fail:
