@@ -5,6 +5,11 @@
 
 set -e
 
+# Disable gvfs if it happens to be installed. We want to test the built-in
+# stuff
+export GIO_USE_VFS=local
+export GIO_USE_VOLUME_MONITOR=unix
+
 export XDG_RUNTIME_DIR=$ADTTMP
 
 dbus-run-session -- xvfb-run -a gnome-desktop-testing-runner glib

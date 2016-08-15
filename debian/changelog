@@ -1,3 +1,36 @@
+glib2.0 (2.49.4-2) UNRELEASED; urgency=medium
+
+  * Merge packaging from unstable.
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 15 Aug 2016 20:52:15 +0100
+
+glib2.0 (2.48.1-3) unstable; urgency=medium
+
+  * debian/tests/control: do not fail on stderr output from
+    installed-tests. If gvfs happens to be installed, it gets
+    D-Bus-activated (even if it's disabled via GIO_USE_VFS and
+    GIO_USE_VOLUME_MONITOR), resulting in logging from dbus-daemon.
+    (Closes: #821031)
+  * debian/tests/installed-tests: explicitly select built-in VFS and
+    volume monitor
+  * d/p/gregex-loosen-behaviour-testing.patch: add patch from upstream
+    bug 767240 (not applied yet) to relax assertions about PCRE's behaviour,
+    which changed in 8.38 (Closes: #834272)
+  * d/rules: unset XDG_CONFIG_HOME, XDG_CACHE_HOME, XDG_DATA_HOME,
+    XDG_CONFIG_DIRS, XDG_DATA_DIRS so that they are based on the temporary
+    HOME. This avoids FTBFS if the user doing the build has these variables
+    already set in their build environment (Closes: #834334)
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 15 Aug 2016 18:01:03 +0100
+
+glib2.0 (2.48.1-2) unstable; urgency=medium
+
+  * Remove refdbg variant. Thanks to Jonny Lamb for the patch.
+    Closes: #827269.
+  * Switch to python3.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 13 Jul 2016 17:46:31 +0200
+
 glib2.0 (2.49.4-1) experimental; urgency=medium
 
   * New upstream release.
