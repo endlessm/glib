@@ -1,5 +1,6 @@
-glib2.0 (2.48.1-3) UNRELEASED; urgency=medium
+glib2.0 (2.48.1-3) unstable; urgency=medium
 
+  * Team upload
   * debian/tests/control: do not fail on stderr output from
     installed-tests. If gvfs happens to be installed, it gets
     D-Bus-activated (even if it's disabled via GIO_USE_VFS and
@@ -15,7 +16,7 @@ glib2.0 (2.48.1-3) UNRELEASED; urgency=medium
     HOME. This avoids FTBFS if the user doing the build has these variables
     already set in their build environment (Closes: #834334)
 
- -- Simon McVittie <smcv@debian.org>  Sun, 14 Aug 2016 14:46:44 +0100
+ -- Simon McVittie <smcv@debian.org>  Mon, 15 Aug 2016 18:01:03 +0100
 
 glib2.0 (2.48.1-2) unstable; urgency=medium
 
