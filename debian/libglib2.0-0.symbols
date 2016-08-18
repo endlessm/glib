@@ -57,6 +57,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_app_info_get_type@Base 2.16.0
  g_app_info_launch@Base 2.16.0
  g_app_info_launch_default_for_uri@Base 2.16.0
+ g_app_info_launch_default_for_uri_async@Base 2.49.5
+ g_app_info_launch_default_for_uri_finish@Base 2.49.5
  g_app_info_launch_uris@Base 2.16.0
  g_app_info_monitor_get@Base 2.39.4
  g_app_info_monitor_get_type@Base 2.39.4

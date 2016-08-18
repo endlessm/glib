@@ -1,6 +1,14 @@
-glib2.0 (2.49.4-2) UNRELEASED; urgency=medium
+glib2.0 (2.49.5-1) UNRELEASED; urgency=medium
 
+  [ Simon McVittie ]
   * Merge packaging from unstable.
+
+  [ Iain Lane ]
+  * New upstream release 2.49.5
+  * debian/patches/gregex-loosen-behaviour-testing.patch: Drop this patch -
+    it's in 2.49.5.
+  * debian/libglib2.0-0.symbols: Add symbols for async
+    g_app_info_launch_default_for_uri.
 
  -- Simon McVittie <smcv@debian.org>  Mon, 15 Aug 2016 20:52:15 +0100
 
