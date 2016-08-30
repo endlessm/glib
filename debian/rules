@@ -104,10 +104,12 @@ DEB_CONFIGURE_FLAGS_deb := \
 			--enable-static \
 			--enable-installed-tests \
 			--enable-always-build-tests \
-			--enable-debug=minimum
+			--enable-debug=minimum \
+			--enable-libmount
 
 DEB_CONFIGURE_FLAGS_udeb := \
-			--disable-selinux
+			--disable-selinux \
+			--disable-libmount
 
 pre-build::
 	mkdir -p debian/stamp-makefile-check \
