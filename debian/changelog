@@ -1,3 +1,10 @@
+glib2.0 (2.49.6-1) unstable; urgency=low
+
+  * New upstream release.
+  * Limit the libmount-dev build-depedency to [linux-any].
+
+ -- Andreas Henriksson <andreas@fatal.se>  Tue, 30 Aug 2016 17:57:52 +0200
+
 glib2.0 (2.49.5-2) experimental; urgency=medium
 
   * debian/rules: Disable libmount for the udeb build; there's no
