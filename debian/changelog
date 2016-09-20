@@ -1,6 +1,7 @@
 glib2.0 (2.50.0-1) UNRELEASED; urgency=medium
 
   * New upstream release.
+  * Refresh patches.
 
  -- Michael Biebl <biebl@debian.org>  Tue, 20 Sep 2016 13:19:33 +0200
 

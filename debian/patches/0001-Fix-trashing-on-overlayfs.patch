@@ -24,7 +24,7 @@ Index: b/gio/glocalfile.c
 ===================================================================
 --- a/gio/glocalfile.c
 +++ b/gio/glocalfile.c
-@@ -1907,7 +1907,7 @@
+@@ -1909,7 +1909,7 @@
    char *basename, *trashname, *trashfile, *infoname, *infofile;
    char *original_name, *original_name_escaped;
    int i;
@@ -33,7 +33,7 @@ Index: b/gio/glocalfile.c
    gboolean is_homedir_trash;
    char delete_time[32];
    int fd;
-@@ -1932,6 +1932,19 @@
+@@ -1933,6 +1933,19 @@
  
    is_homedir_trash = FALSE;
    trashdir = NULL;

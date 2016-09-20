@@ -61,7 +61,7 @@ Index: b/glib/gkeyfile.c
    return TRUE;
  }
  
-@@ -2108,6 +2126,8 @@
+@@ -2138,6 +2156,8 @@
    GError *key_file_error;
    gchar **languages;
    gboolean free_languages = FALSE;
@@ -70,7 +70,7 @@ Index: b/glib/gkeyfile.c
    gint i;
  
    g_return_val_if_fail (key_file != NULL, NULL);
-@@ -2129,6 +2149,24 @@
+@@ -2159,6 +2179,24 @@
        free_languages = FALSE;
      }
    
@@ -95,7 +95,7 @@ Index: b/glib/gkeyfile.c
    for (i = 0; languages[i]; i++)
      {
        candidate_key = g_strdup_printf ("%s[%s]", key, languages[i]);
-@@ -2145,6 +2183,39 @@
+@@ -2175,6 +2213,39 @@
        translated_value = NULL;
     }
  
@@ -139,7 +139,7 @@ Index: b/glib/gkeyfile.h
 ===================================================================
 --- a/glib/gkeyfile.h
 +++ b/glib/gkeyfile.h
-@@ -310,6 +310,9 @@
+@@ -316,6 +316,9 @@
  #define G_KEY_FILE_DESKTOP_KEY_URL              "URL"
  #define G_KEY_FILE_DESKTOP_KEY_DBUS_ACTIVATABLE "DBusActivatable"
  #define G_KEY_FILE_DESKTOP_KEY_ACTIONS          "Actions"
