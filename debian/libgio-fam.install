@@ -1,1 +1,1 @@
-debian/install/deb/usr/lib/gio usr/lib
+usr/lib/*/gio

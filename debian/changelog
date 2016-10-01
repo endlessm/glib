@@ -13,6 +13,8 @@ glib2.0 (2.50.0-2) UNRELEASED; urgency=medium
   * Drop Build-Depends on dbus-x11. The test-suite uses a mock version of
     dbus-launch nowadays, so this dependency is no longer needed.
     (Closes: #835884)
+  * Use dh-exec to substitute ${DEB_HOST_MULTIARCH} in .install, .links and
+    .dirs files.
 
  -- Simon McVittie <smcv@debian.org>  Sat, 01 Oct 2016 16:40:46 +0100
 

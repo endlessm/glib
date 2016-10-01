@@ -6,6 +6,7 @@ Uploaders: @GNOME_TEAM@
 Build-Depends: debhelper (>= 9.20141010),
                cdbs (>= 0.4.93),
                dh-autoreconf,
+               dh-exec,
                pkg-config (>= 0.16.0),
                gettext,
                autotools-dev,
