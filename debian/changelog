@@ -1,3 +1,10 @@
+glib2.0 (2.50.0-2) UNRELEASED; urgency=medium
+
+  * Build-depend on tzdata, which is no longer transitively Essential.
+    One test needs it. (Closes: #839487)
+
+ -- Simon McVittie <smcv@debian.org>  Sat, 01 Oct 2016 16:40:46 +0100
+
 glib2.0 (2.50.0-1) unstable; urgency=medium
 
   * New upstream release.
