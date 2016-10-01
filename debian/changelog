@@ -1,4 +1,4 @@
-glib2.0 (2.50.0-2) UNRELEASED; urgency=medium
+glib2.0 (2.50.0-2) unstable; urgency=medium
 
   [ Simon McVittie ]
   * Build-depend on tzdata, which is no longer transitively Essential.
@@ -16,7 +16,7 @@ glib2.0 (2.50.0-2) UNRELEASED; urgency=medium
   * Use dh-exec to substitute ${DEB_HOST_MULTIARCH} in .install, .links and
     .dirs files.
 
- -- Simon McVittie <smcv@debian.org>  Sat, 01 Oct 2016 16:40:46 +0100
+ -- Michael Biebl <biebl@debian.org>  Sat, 01 Oct 2016 22:15:22 +0200
 
 glib2.0 (2.50.0-1) unstable; urgency=medium
 
