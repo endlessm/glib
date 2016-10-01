@@ -8,6 +8,8 @@ glib2.0 (2.50.0-2) UNRELEASED; urgency=medium
   * Fix Vcs-* to point to unstable.
   * Mark dependencies which are required to run the test-suite with
     <!nocheck>.
+  * Add explicit Build-Depends on xsltproc, docbook-xml and docbook-xsl.
+    Besides libxml2-utils, those are needed for building the man pages.
 
  -- Simon McVittie <smcv@debian.org>  Sat, 01 Oct 2016 16:40:46 +0100
 

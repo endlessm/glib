@@ -29,6 +29,9 @@ Build-Depends: debhelper (>= 9.20141010),
                python3-dbus <!nocheck>,
                python3-gi <!nocheck>,
                libxml2-utils,
+               xsltproc,
+               docbook-xml,
+               docbook-xsl,
                libffi-dev (>= 3.0.0)
 Standards-Version: 3.9.8
 Homepage: http://www.gtk.org/
