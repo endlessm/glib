@@ -6,6 +6,8 @@ glib2.0 (2.50.0-2) UNRELEASED; urgency=medium
 
   [ Michael Biebl ]
   * Fix Vcs-* to point to unstable.
+  * Mark dependencies which are required to run the test-suite with
+    <!nocheck>.
 
  -- Simon McVittie <smcv@debian.org>  Sat, 01 Oct 2016 16:40:46 +0100
 
