@@ -3376,7 +3376,7 @@ AC_ARG_ENABLE(compile-warnings,
 			      enable_compile_warnings=yes)
 AS_IF([test "x$enable_compile_warnings" = xyes], [
   CC_CHECK_FLAGS_APPEND([GLIB_WARN_CFLAGS], [CFLAGS], [\
-   -Wall -Wstrict-prototypes -Werror=declaration-after-statement \
+   -Wall -Wno-format-y2k -Wstrict-prototypes -Werror=declaration-after-statement \
    -Werror=missing-prototypes -Werror=implicit-function-declaration \
    -Werror=pointer-arith -Werror=init-self -Werror=format-security \
    -Werror=format=2 -Werror=missing-include-dirs])
