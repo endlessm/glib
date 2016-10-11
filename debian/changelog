@@ -1,9 +1,12 @@
-glib2.0 (2.50.0-3) UNRELEASED; urgency=medium
+glib2.0 (2.50.1-1) unstable; urgency=medium
 
   [ Jason Crain ]
   * libglib2.0-bin: includes a new 'gio' commandline tool (Closes: #840164)
 
- -- Andreas Henriksson <andreas@fatal.se>  Sun, 09 Oct 2016 09:52:21 +0200
+  [ Andreas Henriksson ]
+  * New upstream release.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Tue, 11 Oct 2016 14:51:05 +0200
 
 glib2.0 (2.50.0-2) unstable; urgency=medium
 
