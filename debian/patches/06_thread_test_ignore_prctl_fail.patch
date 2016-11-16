@@ -2,9 +2,11 @@ Description: Do not fail the /thread/thread4 test if prctrl() fails. This happen
 Author: Martin Pitt <martin.pitt@ubuntu.com>
 Forwarded: No, Debian buildd specific
 
+Index: b/glib/tests/thread.c
+===================================================================
 --- a/glib/tests/thread.c
 +++ b/glib/tests/thread.c
-@@ -141,9 +141,11 @@
+@@ -145,9 +145,11 @@
  
    getrlimit (RLIMIT_NPROC, &nl);
    nl.rlim_cur = 1;

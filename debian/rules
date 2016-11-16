@@ -116,7 +116,7 @@ pre-build::
 		 debian/tmp-xdg-runtime-dir
 
 binary-install/libglib2.0-0::
-	set -e; for script in postinst postrm; do \
+	set -e; for script in postinst postrm triggers; do \
 		sed -e"s/#MULTIARCH#/$(DEB_HOST_MULTIARCH)/g" \
 		    -e"s/#ARCH#/$(DEB_HOST_ARCH)/g" \
 		    debian/$(cdbs_curpkg).$$script.in \
@@ -125,17 +125,6 @@ binary-install/libglib2.0-0::
 
 binary-install/libglib2.0-dev::
 	dh_python3 -plibglib2.0-dev /usr/share/glib-2.0/codegen
-
-common-install-arch::
-	set -e; for file in libgio-fam.install libglib2.0-0.install \
-	            libglib2.0-0-dbg.install \
-	            libglib2.0-dev.install libglib2.0-udeb.install \
-		    libglib2.0-bin.links libglib2.0-dev.links \
-	            libglib2.0-0.dirs libglib2.0-0.triggers; \
-	do \
-		sed -e"s,\$${DEB_HOST_MULTIARCH},${DEB_HOST_MULTIARCH},g" \
-		        debian/$${file}.in > debian/$$file; \
-	done
 
 clean::
 	sed \

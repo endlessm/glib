@@ -57,7 +57,7 @@ Index: b/gio/gdbusaddress.c
 ===================================================================
 --- a/gio/gdbusaddress.c
 +++ b/gio/gdbusaddress.c
-@@ -1071,6 +1071,13 @@
+@@ -1079,6 +1079,13 @@
        goto out;
      }
  
