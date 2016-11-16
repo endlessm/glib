@@ -1,4 +1,4 @@
-glib2.0 (2.51.0-1) UNRELEASED; urgency=medium
+glib2.0 (2.51.0-1) experimental; urgency=medium
 
   * debian/control{,.in}: Branch to experimental
   * debian/watch: Track unstable releases again.
@@ -8,7 +8,7 @@ glib2.0 (2.51.0-1) UNRELEASED; urgency=medium
     + New API: g_utf8_make_valid
   * Update debian/libglib2.0-0.symbols.
 
- -- Iain Lane <laney@debian.org>  Wed, 16 Nov 2016 17:14:58 +0000
+ -- Iain Lane <laney@debian.org>  Wed, 16 Nov 2016 18:23:38 +0000
 
 glib2.0 (2.50.2-1) unstable; urgency=medium
 
