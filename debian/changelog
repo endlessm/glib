@@ -1,7 +1,12 @@
-glib2.0 (2.50.2-2) UNRELEASED; urgency=medium
+glib2.0 (2.51.0-1) UNRELEASED; urgency=medium
 
   * debian/control{,.in}: Branch to experimental
   * debian/watch: Track unstable releases again.
+  * New upstream release 2.51.0
+    + glib-genmarshal and glib-mkenums have gained --output options for better
+      build system integration
+    + New API: g_utf8_make_valid
+  * Update debian/libglib2.0-0.symbols.
 
  -- Iain Lane <laney@debian.org>  Wed, 16 Nov 2016 17:14:58 +0000
 

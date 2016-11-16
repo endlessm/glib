@@ -1876,6 +1876,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_is_mount_path_system_internal@Base 2.16.0
  g_unix_mount_at@Base 2.16.0
  g_unix_mount_compare@Base 2.16.0
+ g_unix_mount_for@Base 2.51.0
  g_unix_mount_free@Base 2.16.0
  g_unix_mount_get_device_path@Base 2.16.0
  g_unix_mount_get_fs_type@Base 2.16.0
@@ -3403,6 +3404,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_utf8_find_prev_char@Base 2.12.0
  g_utf8_get_char@Base 2.12.0
  g_utf8_get_char_validated@Base 2.12.0
+ g_utf8_make_valid@Base 2.51.0
  g_utf8_normalize@Base 2.12.0
  g_utf8_offset_to_pointer@Base 2.12.0
  g_utf8_pointer_to_offset@Base 2.12.0
