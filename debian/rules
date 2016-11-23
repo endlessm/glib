@@ -104,8 +104,17 @@ DEB_CONFIGURE_FLAGS_deb := \
 			--enable-static \
 			--enable-installed-tests \
 			--enable-always-build-tests \
-			--enable-debug=minimum \
+			--enable-debug=minimum
+
+# libmount is available on linux only
+ifeq ($(DEB_HOST_ARCH_OS), linux)
+  DEB_CONFIGURE_FLAGS_deb += \
 			--enable-libmount
+else
+  DEB_CONFIGURE_FLAGS_deb += \
+			--disable-libmount
+endif
+
 
 DEB_CONFIGURE_FLAGS_udeb := \
 			--disable-selinux \
