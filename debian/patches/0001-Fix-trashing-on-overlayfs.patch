@@ -1,4 +1,4 @@
-From 4411742e5d5d0b68b7d1e781bc04a0a3182917b2 Mon Sep 17 00:00:00 2001
+From 09c11e5a2bd43e1459c7a2115f177e29ed92494e Mon Sep 17 00:00:00 2001
 From: Iain Lane <iain@orangesquash.org.uk>
 Date: Tue, 21 Apr 2015 15:00:09 +0100
 Subject: [PATCH] Fix trashing on overlayfs
@@ -14,17 +14,15 @@ the file.
 
 Fix this by checking st_dev of the parent directory when we are deleting
 a file.
-
-Bug: https://bugzilla.gnome.org/show_bug.cgi?id=748248
 ---
- gio/glocalfile.c | 15 ++++++++++++++-
- 1 file changed, 14 insertions(+), 1 deletion(-)
+ gio/glocalfile.c | 20 +++++++++++++++++++-
+ 1 file changed, 19 insertions(+), 1 deletion(-)
 
-Index: b/gio/glocalfile.c
-===================================================================
+diff --git a/gio/glocalfile.c b/gio/glocalfile.c
+index 8f64777..544e0f2 100644
 --- a/gio/glocalfile.c
 +++ b/gio/glocalfile.c
-@@ -1909,7 +1909,7 @@
+@@ -1910,7 +1910,7 @@ g_local_file_trash (GFile         *file,
    char *basename, *trashname, *trashfile, *infoname, *infofile;
    char *original_name, *original_name_escaped;
    int i;
@@ -33,7 +31,7 @@ Index: b/gio/glocalfile.c
    gboolean is_homedir_trash;
    char delete_time[32];
    int fd;
-@@ -1933,6 +1933,19 @@
+@@ -1934,6 +1934,24 @@ g_local_file_trash (GFile         *file,
  
    is_homedir_trash = FALSE;
    trashdir = NULL;
@@ -44,12 +42,20 @@ Index: b/gio/glocalfile.c
 +   * this will have the same st_dev.
 +   */
 +  if (!S_ISDIR (file_stat.st_mode))
-+  {
++    {
 +      path = g_path_get_dirname (local->filename);
-+      g_lstat (path, &file_stat);
++      /* If the parent is a symlink to a different device then it might have
++       * st_dev equal to the home directory's, in which case we will end up
++       * trying to rename across a filesystem boundary, which doesn't work. So
++       * we use g_stat here instead of g_lstat, to know where the symlink
++       * points to. */
++      g_stat (path, &file_stat);
 +      g_free (path);
-+  }
++    }
 +
    if (file_stat.st_dev == home_stat.st_dev)
      {
        is_homedir_trash = TRUE;
+-- 
+2.10.2
+
