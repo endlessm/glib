@@ -1,11 +1,11 @@
-glib2.0 (2.50.2-2) UNRELEASED; urgency=medium
+glib2.0 (2.50.2-2) unstable; urgency=medium
 
   * debian/rules: disable libmount on !linux (Closes: #844052)
   * debian/patches/0001-Fix-trashing-on-overlayfs.patch: Update with new
     version from the upsstream report to hopefully fix trashing of files in
     directories which are symlinks to different devices. (Closes: #800047)
 
- -- Iain Lane <laney@debian.org>  Wed, 23 Nov 2016 13:01:05 +0000
+ -- Iain Lane <laney@debian.org>  Wed, 23 Nov 2016 16:33:21 +0000
 
 glib2.0 (2.50.2-1) unstable; urgency=medium
 
