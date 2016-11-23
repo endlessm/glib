@@ -5,6 +5,7 @@ glib2.0 (2.51.0-2) UNRELEASED; urgency=medium
     + debian/patches/0001-Fix-trashing-on-overlayfs.patch: Update with new
       version from the upstream report to hopefully fix trashing of files in
       directories which are symlinks to different devices. (Closes: #800047)
+      (LP: #1638245)
 
  -- Iain Lane <laney@debian.org>  Wed, 23 Nov 2016 16:00:56 +0000
 
