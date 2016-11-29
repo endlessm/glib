@@ -1,8 +1,197 @@
-glib2.0 (2.48.0-0) master; urgency=medium
+glib2.0 (2.50.2-0) unstable; urgency=medium
 
   * Endless release. We are forcing a lower version for jenkins.
 
- -- Philip Chimento <philip@endlessm.com>  Mon, 25 Apr 2016 15:51:04 -0700
+ -- Philip Chimento <philip@endlessm.com>  Mon, 28 Nov 2016 15:59:55 -0800
+
+glib2.0 (2.50.2-2) unstable; urgency=medium
+
+  * debian/rules: disable libmount on !linux (Closes: #844052)
+  * debian/patches/0001-Fix-trashing-on-overlayfs.patch: Update with new
+    version from the upsstream report to hopefully fix trashing of files in
+    directories which are symlinks to different devices. (Closes: #800047)
+
+ -- Iain Lane <laney@debian.org>  Wed, 23 Nov 2016 16:33:21 +0000
+
+glib2.0 (2.50.2-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Track stable releases in debian/watch.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 08 Nov 2016 00:37:05 +0100
+
+glib2.0 (2.50.1-1) unstable; urgency=medium
+
+  [ Jason Crain ]
+  * libglib2.0-bin: includes a new 'gio' commandline tool (Closes: #840164)
+
+  [ Andreas Henriksson ]
+  * New upstream release.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Tue, 11 Oct 2016 14:51:05 +0200
+
+glib2.0 (2.50.0-2) unstable; urgency=medium
+
+  [ Simon McVittie ]
+  * Build-depend on tzdata, which is no longer transitively Essential.
+    One test needs it. (Closes: #839487)
+
+  [ Michael Biebl ]
+  * Fix Vcs-* to point to unstable.
+  * Mark dependencies which are required to run the test-suite with
+    <!nocheck>.
+  * Add explicit Build-Depends on xsltproc, docbook-xml and docbook-xsl.
+    Besides libxml2-utils, those are needed for building the man pages.
+  * Drop Build-Depends on dbus-x11. The test-suite uses a mock version of
+    dbus-launch nowadays, so this dependency is no longer needed.
+    (Closes: #835884)
+  * Use dh-exec to substitute ${DEB_HOST_MULTIARCH} in .install, .links and
+    .dirs files.
+
+ -- Michael Biebl <biebl@debian.org>  Sat, 01 Oct 2016 22:15:22 +0200
+
+glib2.0 (2.50.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Refresh patches.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 20 Sep 2016 18:37:10 +0200
+
+glib2.0 (2.49.7-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Update debian/libglib2.0-0.symbols with one addition.
+
+ -- Andreas Henriksson <andreas@fatal.se>  Tue, 13 Sep 2016 14:40:14 +0200
+
+glib2.0 (2.49.6-1) unstable; urgency=low
+
+  * New upstream release.
+  * Limit the libmount-dev build-depedency to [linux-any].
+
+ -- Andreas Henriksson <andreas@fatal.se>  Tue, 30 Aug 2016 17:57:52 +0200
+
+glib2.0 (2.49.5-2) experimental; urgency=medium
+
+  * debian/rules: Disable libmount for the udeb build; there's no
+    libmount-udeb, no immediate plans to provide one, and the functionality in
+    glib isn't that interesting in the d-i context at the present time.
+
+ -- Iain Lane <laney@debian.org>  Mon, 22 Aug 2016 11:12:26 +0100
+
+glib2.0 (2.49.5-1) experimental; urgency=medium
+
+  [ Simon McVittie ]
+  * Merge packaging from unstable.
+
+  [ Iain Lane ]
+  * New upstream release 2.49.5
+  * debian/patches/gregex-loosen-behaviour-testing.patch: Drop this patch -
+    it's in 2.49.5.
+  * debian/libglib2.0-0.symbols: Add symbols for async
+    g_app_info_launch_default_for_uri.
+  * debian/control{,.in}, debian/rules: Enable libmount support
+
+ -- Iain Lane <laney@debian.org>  Thu, 18 Aug 2016 12:10:08 +0100
+
+glib2.0 (2.48.1-3) unstable; urgency=medium
+
+  * debian/tests/control: do not fail on stderr output from
+    installed-tests. If gvfs happens to be installed, it gets
+    D-Bus-activated (even if it's disabled via GIO_USE_VFS and
+    GIO_USE_VOLUME_MONITOR), resulting in logging from dbus-daemon.
+    (Closes: #821031)
+  * debian/tests/installed-tests: explicitly select built-in VFS and
+    volume monitor
+  * d/p/gregex-loosen-behaviour-testing.patch: add patch from upstream
+    bug 767240 (not applied yet) to relax assertions about PCRE's behaviour,
+    which changed in 8.38 (Closes: #834272)
+  * d/rules: unset XDG_CONFIG_HOME, XDG_CACHE_HOME, XDG_DATA_HOME,
+    XDG_CONFIG_DIRS, XDG_DATA_DIRS so that they are based on the temporary
+    HOME. This avoids FTBFS if the user doing the build has these variables
+    already set in their build environment (Closes: #834334)
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 15 Aug 2016 18:01:03 +0100
+
+glib2.0 (2.48.1-2) unstable; urgency=medium
+
+  * Remove refdbg variant. Thanks to Jonny Lamb for the patch.
+    Closes: #827269.
+  * Switch to python3.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 13 Jul 2016 17:46:31 +0200
+
+glib2.0 (2.49.4-1) experimental; urgency=medium
+
+  * New upstream release.
+  * debian/patches/add-missing-gio-xml.patch:
+    + Dropped, gio.xml is now shipped in the tarballs.
+  * debian/patches/0001-Fix-gio-tests-socket-listener.patch:
+    + Dropped, included upstream.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Thu, 21 Jul 2016 18:12:05 +0200
+
+glib2.0 (2.49.3-1) experimental; urgency=medium
+
+  * Switch to python3.
+  * New upstream release.
+  * d/p/0001-gsettings-test-Wrap-guint64-literals-in-G_GUINT64_CO.patch:
+    + Dropped, applied upstream.
+  * debian/patches/add-missing-gio-xml.patch:
+    + Add gio.xml file, which is missing from the tarball. Needed for the
+      documentation build.
+  * debian/patches/0001-Fix-gio-tests-socket-listener.patch:
+    + Fix a test hang.
+  * debian/libglib2.0-0.symbols:
+    + Update with new symbols.
+  * Standards-Version is 3.9.8. No changes needed.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Wed, 20 Jul 2016 23:23:12 +0200
+
+glib2.0 (2.49.2-2) experimental; urgency=medium
+
+  * d/p/0001-gsettings-test-Wrap-guint64-literals-in-G_GUINT64_CO.patch:
+    Cherry-pick from upstream to fix test failure on non-64 bit arches.
+
+ -- Iain Lane <laney@debian.org>  Thu, 23 Jun 2016 16:56:04 +0100
+
+glib2.0 (2.49.2-1) experimental; urgency=medium
+
+  [ Emilio Pozuelo Monfort ]
+  * Remove refdbg variant. Thanks to Jonny Lamb for the patch.
+    Closes: #827269.
+
+  [ Iain Lane ]
+  * Update Vcs-* for experimental
+  * New upstream release 2.49.2
+    + GDesktopAppInfo now allows bus activation with dashes. This is not
+      technically allowed per the Desktop Entry specification, but it happens
+      in the wild. Rather than forcing people to go through another traumatic
+      desktop file rename, accept it and translate - to _.
+    + The support for giving names to threads has been improved. Thread names
+      are now supported on Solaris as well, and the Linux support no longer
+      uses prctl() but the pthread api.
+    + GIO resources can now be overridden at runtime, using the
+      G_RESOURCE_OVERLAYS environment variable.
+    + gdbus-codegen can now generate autocleanup definitions for the types it
+      generates. Use the --c-generate-autocleanup option to control this
+    + GMainContext and GTask have gained more systemtap probes
+  * debian/watch: Update to find unstable versions
+  * debian/patches/04_homedir_env.patch: Refresh to apply correctly
+  * debian/libglib2.0-0.symbols: Update for this release
+
+ -- Iain Lane <laney@debian.org>  Tue, 21 Jun 2016 14:20:19 +0100
+
+glib2.0 (2.48.1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Refresh patches.
+  * Drop obsolete Conflicts, Breaks and Replaces from pre-wheezy.
+  * Drop obsolete preinst maintainer scripts which cleaned up the
+    /usr/share/doc symlinks.
+  * Drop version requirement for pkg-config dependency. (Closes: #734479)
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 11 May 2016 01:11:42 +0200
 
 glib2.0 (2.48.0-1) unstable; urgency=medium
 

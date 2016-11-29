@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 
 DEB_BUILDDIR = debian/build
-DEB_MAKE_FLAVORS = deb udeb refdbg
+DEB_MAKE_FLAVORS = deb udeb
 DISABLE_UPDATE_UPLOADERS := 1
 
 include /usr/share/cdbs/1/rules/autoreconf.mk
@@ -39,7 +39,6 @@ BIN_PKG := libglib$(APIVER)-bin
 UDEB_PKG := libglib$(APIVER)-udeb
 DOC_PKG := libglib$(APIVER)-doc
 DEBUG_PKG := $(SHARED_PKG)-dbg
-REFDBG_PKG := libglib$(APIVER)-$(SONAME)-refdbg
 
 DEB_MAKE_DESTDIRSKEL = $(CURDIR)/debian/install/@FLAVOR@
 
@@ -48,11 +47,8 @@ DEB_CLEAN_EXCLUDE = org.gtk.test.gschema.xml.orig
 DEB_DH_INSTALL_ARGS += --sourcedir=debian/install/deb
 DEB_DH_INSTALL_ARGS_$(TEST_PKG) += --sourcedir=debian/install/deb -X.la
 DEB_DH_INSTALL_ARGS_$(UDEB_PKG) += --sourcedir=debian/install/udeb
-DEB_DH_INSTALL_ARGS_$(REFDBG_PKG) += --sourcedir=debian/install/refdbg
 
 DEB_DH_MAKESHLIBS_ARGS_$(SHARED_PKG) += -V --add-udeb=$(UDEB_PKG) -- -c4
-DEB_DH_MAKESHLIBS_ARGS_$(REFDBG_PKG) = --no-act
-DEB_DH_STRIP_ARGS_$(REFDBG_PKG) = --no-act --no-ddebs
 # Don't put the symbols in the -dbg package
 DEB_DH_STRIP_ARGS_$(UDEB_PKG) =
 
@@ -62,6 +58,17 @@ DEB_DH_TRANSLATIONS_ARGS = -Xinstalled-tests
 # Do not clutter $HOME with ~/.dbus-keyrings and avoid failure on the buildds
 # where creating /home/buildd/.dbus-keyrings fails
 export HOME=$(CURDIR)/debian/build
+
+# Put these back to their defaults if we are not running with a clean
+# environment, so that they are based on the temporary $HOME above.
+# Otherwise, some tests would try to write to the user's real XDG_DATA_HOME,
+# causing unwanted side-effects or FTBFS depending whether the user's
+# real HOME is available in the build chroot (if used)
+unexport XDG_CACHE_HOME
+unexport XDG_CONFIG_DIRS
+unexport XDG_CONFIG_HOME
+unexport XDG_DATA_HOME
+unexport XDG_DATA_DIRS
 
 # Make sure that everything that uses D-Bus is creating its own temporary
 # session rather than polluting the developer's (or failing, on buildds)
@@ -83,6 +90,7 @@ export VERBOSE=1
 DEB_CONFIGURE_EXTRA_FLAGS := \
 			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG) \
 			--libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) \
+			--with-python=/usr/bin/python3 \
 			--with-pcre=system
 
 ifneq ($(DEB_BUILD_ARCH),$(DEB_HOST_ARCH))
@@ -98,19 +106,26 @@ DEB_CONFIGURE_FLAGS_deb := \
 			--enable-always-build-tests \
 			--enable-debug=minimum
 
-DEB_CONFIGURE_FLAGS_udeb := \
-			--disable-selinux
+# libmount is available on linux only
+ifeq ($(DEB_HOST_ARCH_OS), linux)
+  DEB_CONFIGURE_FLAGS_deb += \
+			--enable-libmount
+else
+  DEB_CONFIGURE_FLAGS_deb += \
+			--disable-libmount
+endif
 
-DEB_CONFIGURE_FLAGS_refdbg := \
-			--disable-Bsymbolic \
-			--enable-debug=yes
+
+DEB_CONFIGURE_FLAGS_udeb := \
+			--disable-selinux \
+			--disable-libmount
 
 pre-build::
 	mkdir -p debian/stamp-makefile-check \
 		 debian/tmp-xdg-runtime-dir
 
 binary-install/libglib2.0-0::
-	set -e; for script in postinst postrm; do \
+	set -e; for script in postinst postrm triggers; do \
 		sed -e"s/#MULTIARCH#/$(DEB_HOST_MULTIARCH)/g" \
 		    -e"s/#ARCH#/$(DEB_HOST_ARCH)/g" \
 		    debian/$(cdbs_curpkg).$$script.in \
@@ -118,18 +133,7 @@ binary-install/libglib2.0-0::
 	done
 
 binary-install/libglib2.0-dev::
-	dh_python2 -plibglib2.0-dev /usr/share/glib-2.0/codegen
-
-common-install-arch::
-	set -e; for file in libgio-fam.install libglib2.0-0.install \
-	            libglib2.0-0-refdbg.install libglib2.0-0-dbg.install \
-	            libglib2.0-dev.install libglib2.0-udeb.install \
-		    libglib2.0-bin.links libglib2.0-dev.links \
-	            libglib2.0-0.dirs libglib2.0-0.triggers; \
-	do \
-		sed -e"s,\$${DEB_HOST_MULTIARCH},${DEB_HOST_MULTIARCH},g" \
-		        debian/$${file}.in > debian/$$file; \
-	done
+	dh_python3 -plibglib2.0-dev /usr/share/glib-2.0/codegen
 
 clean::
 	sed \
@@ -144,7 +148,6 @@ clean::
 		-e "s#@DOC_PKG@#$(DOC_PKG)#g" \
 		-e "s#@DEBUG_PKG@#$(DEBUG_PKG)#g" \
 		-e "s#@GNOME_TEAM@#$(UPLOADERS)#g" \
-		-e "s#@REFDBG_PKG@#$(REFDBG_PKG)#g" \
 		debian/control.in > debian/control
 	rm -rf $(CURDIR)/debian/build \
 	       $(CURDIR)/debian/install \
