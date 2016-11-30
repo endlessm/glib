@@ -1743,7 +1743,7 @@ AC_ARG_ENABLE(libmount,
                               [build with libmount support [default for Linux]])],,
               [enable_libmount=$enable_libmount_default])
 AS_IF([ test "x$enable_libmount" = "xyes"],[
-PKG_CHECK_MODULES([LIBMOUNT], [mount >= 2.28], [have_libmount=yes], [have_libmount=maybe])
+PKG_CHECK_MODULES([LIBMOUNT], [mount], [have_libmount=yes], [have_libmount=maybe])
 AS_IF([ test $have_libmount = maybe ], [
   glib_save_LIBS=$LIBS
   AC_CHECK_HEADER([libmount/libmount.h], [:], [have_libmount=no])
