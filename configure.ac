@@ -63,7 +63,7 @@ AC_CONFIG_MACRO_DIR([m4macros])
 # Save this value here, since automake will set cflags later
 cflags_set=${CFLAGS:+set}
 
-AM_INIT_AUTOMAKE([1.11 -Wno-portability no-define no-dist-gzip dist-xz tar-ustar])
+AM_INIT_AUTOMAKE([1.11.2 -Wno-portability no-define no-dist-gzip dist-xz tar-ustar])
 AM_MAINTAINER_MODE([enable])
 
 # Support silent build rules. Disable
@@ -1743,7 +1743,7 @@ AC_ARG_ENABLE(libmount,
                               [build with libmount support [default for Linux]])],,
               [enable_libmount=$enable_libmount_default])
 AS_IF([ test "x$enable_libmount" = "xyes"],[
-PKG_CHECK_MODULES([LIBMOUNT], [mount >= 2.28], [have_libmount=yes], [have_libmount=maybe])
+PKG_CHECK_MODULES([LIBMOUNT], [mount], [have_libmount=yes], [have_libmount=maybe])
 AS_IF([ test $have_libmount = maybe ], [
   glib_save_LIBS=$LIBS
   AC_CHECK_HEADER([libmount/libmount.h], [:], [have_libmount=no])
@@ -3437,9 +3437,6 @@ build/win32/vs9/Makefile
 build/win32/vs9/glib-version-paths.vsprops
 build/win32/vs10/Makefile
 build/win32/vs10/glib-version-paths.props
-build/win32/vs11/Makefile
-build/win32/vs12/Makefile
-build/win32/vs14/Makefile
 glib/Makefile
 glib/libcharset/Makefile
 glib/gnulib/Makefile

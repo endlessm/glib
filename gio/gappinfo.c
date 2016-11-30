@@ -713,16 +713,27 @@ open_uri_done (GObject      *source,
 {
   GDBusConnection *connection = G_DBUS_CONNECTION (source);
   GTask *task = user_data;
+  GDBusMessage *reply;
   GVariant *res;
   GError *error = NULL;
   const char *path;
   guint signal_id;
 
-  res = g_dbus_connection_call_finish (connection, result, &error);
+  reply = g_dbus_connection_send_message_with_reply_finish (connection, result,
+                                                            &error);
+  if (error != NULL)
+    {
+      g_task_return_error (task, error);
+      g_object_unref (task);
+      return;
+    }
+
+  res = g_dbus_message_get_body (reply);
 
   if (res == NULL)
     {
-      g_task_return_error (task, error);
+      g_critical ("No return from org.freedesktop.portal.OpenURI");
+      g_task_return_pointer (task, NULL, NULL);
       g_object_unref (task);
       return;
     }
@@ -740,9 +751,15 @@ open_uri_done (GObject      *source,
                                           response_received,
                                           task, NULL);
 
-  g_object_set_data (G_OBJECT (task), "signal-id", GINT_TO_POINTER (signal_id));
+  if (connection != NULL)
+    {
+      g_dbus_connection_flush (connection, g_task_get_cancellable (task),
+                               NULL, NULL);
+      g_object_unref (connection);
+    }
 
-  g_variant_unref (res);
+  g_object_set_data (G_OBJECT (task), "signal-id", GINT_TO_POINTER (signal_id));
+  g_object_unref (reply);
 }
 
 static void
@@ -753,6 +770,7 @@ launch_default_with_portal_async (const char          *uri,
                                   gpointer             user_data)
 {
   GDBusConnection *session_bus;
+  GDBusMessage *message;
   GVariantBuilder opt_builder;
   const char *parent_window = NULL;
   GFile *file;
@@ -803,24 +821,31 @@ launch_default_with_portal_async (const char          *uri,
       dbus_callback = NULL;
     }
 
-  g_dbus_connection_call (session_bus,
-                          "org.freedesktop.portal.Desktop",
-                          "/org/freedesktop/portal/desktop",
-                          "org.freedesktop.portal.OpenURI",
-                          "OpenURI",
-                          g_variant_new ("(ss@a{sv})",
-                                         parent_window ? parent_window : "",
-                                         real_uri,
-                                         g_variant_builder_end (&opt_builder)),
-                          NULL,
-                          G_DBUS_CALL_FLAGS_NONE,
-                          G_MAXINT,
-                          cancellable,
-                          dbus_callback,
-                          task);
+  message = g_dbus_message_new_method_call ("org.freedesktop.portal.Desktop",
+                                            "/org/freedesktop/portal/desktop",
+                                            "org.freedesktop.portal.OpenURI",
+                                            "OpenURI");
 
-  g_dbus_connection_flush (session_bus, cancellable, NULL, NULL);
-  g_object_unref (session_bus);
+  g_dbus_message_set_body (message, g_variant_new ("(ss@a{sv})",
+                                                   parent_window ? parent_window : "",
+                                                   uri,
+                                                   g_variant_builder_end (&opt_builder)));
+
+  /* FIXME: This should not be needed, but there seems to be a bug somewhere
+   * at the moment that is causing not all the messages to arrive in the
+   * portal if we unref the bus in launch_default_with_portal(), so we
+   * temporarily use the asynchronous send_message_with_reply() function
+   * to make sure we don't unref the bus until we're really done with it.
+   */
+  g_dbus_connection_send_message_with_reply (session_bus,
+                                             message,
+                                             G_DBUS_SEND_MESSAGE_FLAGS_NONE,
+                                             G_MAXINT,
+                                             NULL,
+                                             cancellable,
+                                             dbus_callback,
+                                             task);
+  g_object_unref (message);
   g_free (real_uri);
 }
 
