@@ -828,7 +828,7 @@ launch_default_with_portal_async (const char          *uri,
 
   g_dbus_message_set_body (message, g_variant_new ("(ss@a{sv})",
                                                    parent_window ? parent_window : "",
-                                                   uri,
+                                                   real_uri,
                                                    g_variant_builder_end (&opt_builder)));
 
   /* FIXME: This should not be needed, but there seems to be a bug somewhere
