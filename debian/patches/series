@@ -6,7 +6,7 @@
 07_disable_tests_on_slow_archs.patch
 61_glib-compile-binaries-path.patch
 90_gio-modules-multiarch-compat.patch
-skip-brokwn-dbus-appinfo-test.patch
+skip-broken-dbus-appinfo-test.patch
 Do-not-attempt-to-autolaunch-a-session-dbus-daemon-w.patch
 81-skip-monitor-test-on-non-linux.patch
 0001-timer-test-use-volatile-for-locals.patch

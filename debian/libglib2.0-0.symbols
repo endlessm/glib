@@ -3423,6 +3423,8 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_utf8_to_utf16@Base 2.12.0
  g_utf8_validate@Base 2.12.0
  g_utime@Base 2.18.0
+ g_uuid_string_is_valid@Base 2.51.2
+ g_uuid_string_random@Base 2.51.2
  g_variant_builder_add@Base 2.24.0
  g_variant_builder_add_parsed@Base 2.26.0
  g_variant_builder_add_value@Base 2.24.0

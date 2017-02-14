@@ -1,3 +1,18 @@
+glib2.0 (2.51.2-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2.51.2 (& 2.51.1).
+    + Minimal support for UUIDs has been added
+    + A new file attribute, G_FILE_ATTRIBUTE_RECENT_MODIFIED has been added to
+      improve sorting of recent files
+    + glib-compile-resources grew a --generate-phony-targets flag
+    + GLib now installs a valgrind suppressions file for GLib and GIO
+  * debian/patches/skip-brokwn-dbus-appinfo-test.patch: Refresh (and fix the
+    typo in the filename)
+  * debian/libglib2.0-0.symbols: Add g_uuid* symbols which are new in this
+    release
+
+ -- Iain Lane <laney@debian.org>  Tue, 14 Feb 2017 13:05:49 +0000
+
 glib2.0 (2.51.0-2) experimental; urgency=medium
 
   * Merge changes from 2.50.2-2:

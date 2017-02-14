@@ -6,11 +6,11 @@ Index: b/gio/tests/Makefile.am
 ===================================================================
 --- a/gio/tests/Makefile.am
 +++ b/gio/tests/Makefile.am
-@@ -397,7 +397,6 @@
+@@ -394,7 +394,6 @@
  
  test_programs += \
  	actions					\
 -	dbus-appinfo				\
+ 	defaultvalue				\
  	gapplication				\
  	gdbus-auth				\
- 	gdbus-bz627724				\
