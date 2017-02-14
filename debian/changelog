@@ -1,4 +1,4 @@
-glib2.0 (2.51.2-1) UNRELEASED; urgency=medium
+glib2.0 (2.51.2-1) experimental; urgency=medium
 
   * New upstream release 2.51.2 (& 2.51.1).
     + Minimal support for UUIDs has been added
@@ -11,7 +11,7 @@ glib2.0 (2.51.2-1) UNRELEASED; urgency=medium
   * debian/libglib2.0-0.symbols: Add g_uuid* symbols which are new in this
     release
 
- -- Iain Lane <laney@debian.org>  Tue, 14 Feb 2017 13:05:49 +0000
+ -- Iain Lane <laney@debian.org>  Tue, 14 Feb 2017 14:16:05 +0000
 
 glib2.0 (2.51.0-2) experimental; urgency=medium
 
