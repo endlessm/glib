@@ -18,11 +18,11 @@ a file.
  gio/glocalfile.c | 20 +++++++++++++++++++-
  1 file changed, 19 insertions(+), 1 deletion(-)
 
-diff --git a/gio/glocalfile.c b/gio/glocalfile.c
-index 8f64777..544e0f2 100644
+Index: b/gio/glocalfile.c
+===================================================================
 --- a/gio/glocalfile.c
 +++ b/gio/glocalfile.c
-@@ -1910,7 +1910,7 @@ g_local_file_trash (GFile         *file,
+@@ -1909,7 +1909,7 @@
    char *basename, *trashname, *trashfile, *infoname, *infofile;
    char *original_name, *original_name_escaped;
    int i;
@@ -31,7 +31,7 @@ index 8f64777..544e0f2 100644
    gboolean is_homedir_trash;
    char delete_time[32];
    int fd;
-@@ -1934,6 +1934,24 @@ g_local_file_trash (GFile         *file,
+@@ -1933,6 +1933,24 @@
  
    is_homedir_trash = FALSE;
    trashdir = NULL;
@@ -56,6 +56,3 @@ index 8f64777..544e0f2 100644
    if (file_stat.st_dev == home_stat.st_dev)
      {
        is_homedir_trash = TRUE;
--- 
-2.10.2
-
