@@ -133,8 +133,8 @@ binary-install/libglib2.0-0::
 		    > debian/$(cdbs_curpkg).$$script ; \
 	done
 
-binary-install/libglib2.0-dev::
-	dh_python3 -plibglib2.0-dev /usr/share/glib-2.0/codegen
+binary-install/libglib2.0-dev-bin::
+	dh_python3 -plibglib2.0-dev-bin /usr/share/glib-2.0/codegen
 
 clean::
 	sed \
