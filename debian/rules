@@ -35,6 +35,7 @@ SHARED_PKG := libglib$(APIVER)-$(SONAME)
 DATA_PKG := libglib$(APIVER)-data
 TEST_PKG := libglib$(APIVER)-tests
 DEV_PKG := libglib$(APIVER)-dev
+DEVBIN_PKG := libglib$(APIVER)-dev-bin
 BIN_PKG := libglib$(APIVER)-bin
 UDEB_PKG := libglib$(APIVER)-udeb
 DOC_PKG := libglib$(APIVER)-doc
@@ -144,6 +145,7 @@ clean::
 		-e "s#@BIN_PKG@#$(BIN_PKG)#g" \
 		-e "s#@DATA_PKG@#$(DATA_PKG)#g" \
 		-e "s#@DEV_PKG@#$(DEV_PKG)#g" \
+		-e "s#@DEVBIN_PKG@#$(DEVBIN_PKG)#g" \
 		-e "s#@UDEB_PKG@#$(UDEB_PKG)#g" \
 		-e "s#@DOC_PKG@#$(DOC_PKG)#g" \
 		-e "s#@DEBUG_PKG@#$(DEBUG_PKG)#g" \
