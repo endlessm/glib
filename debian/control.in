@@ -130,6 +130,7 @@ Package: @DEVBIN_PKG@
 Section: libdevel
 Architecture: any
 Depends: ${misc:Depends},
+         ${python3:Depends},
          ${shlibs:Depends},
 Breaks: libglib2.0-dev (<< 2.51.2-2~)
 Replaces: libglib2.0-dev (<< 2.51.2-2~)
