@@ -6,13 +6,10 @@ usr/lib/*/libgthread*.so
 usr/lib/*/libgio*.so
 usr/lib/*/glib-2.0
 usr/lib/*/pkgconfig
-usr/share/glib-2.0/codegen/*.py
 usr/share/glib-2.0/schemas
 usr/share/man/man1/gobject-query.1*
 usr/share/man/man1/gtester.1*
 usr/share/man/man1/gtester-report.1*
-usr/share/man/man1/gdbus-codegen.1*
 usr/bin/gobject-query
 usr/bin/gtester-report
 usr/bin/gtester
-usr/bin/gdbus-codegen
