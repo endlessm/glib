@@ -118,6 +118,8 @@ Depends: ${misc:Depends},
          libpcre3-dev (>= 1:8.31),
          pkg-config,
          zlib1g-dev
+Breaks: libglib2.0-0-dbg (<< 2.51.4-1~)
+Replaces: libglib2.0-0-dbg (<< 2.51.4-1~)
 Suggests: @DOC_PKG@
 Description: Development files for the GLib library
  GLib is a library containing many useful C routines for things such
