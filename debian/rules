@@ -33,7 +33,7 @@ UDEB_PKG := libglib$(APIVER)-udeb
 DOC_PKG := libglib$(APIVER)-doc
 
 %:
-	dh $@ --with autoreconf,gnome,python3
+	dh $@ --with gnome,python3
 
 override_dh_auto_configure:
 	dh_auto_configure \
@@ -99,7 +99,6 @@ export VERBOSE=1
 # configure flags
 DEB_CONFIGURE_EXTRA_FLAGS := \
 			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG) \
-			--libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) \
 			--libexecdir=\$${prefix}/lib/glib2.0 \
 			--with-python=/usr/bin/python3 \
 			--with-pcre=system
