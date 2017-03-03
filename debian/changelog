@@ -31,6 +31,7 @@ glib2.0 (2.51.4-1) UNRELEASED; urgency=medium
   * Move to debhelper compat level 10
   * Remove indirection via $(SHARED_PKG), etc. variables
   * Let dh_gnome_clean update the Uploaders instead of reinventing it
+  * debian/dh_listmissing.pl: Remove
 
  -- Simon McVittie <smcv@debian.org>  Thu, 02 Mar 2017 09:15:48 +0000
 
