@@ -30,6 +30,7 @@ glib2.0 (2.51.4-1) UNRELEASED; urgency=medium
   * Install some missing files detected by dh_install --list-missing
   * Move to debhelper compat level 10
   * Remove indirection via $(SHARED_PKG), etc. variables
+  * Let dh_gnome_clean update the Uploaders instead of reinventing it
 
  -- Simon McVittie <smcv@debian.org>  Thu, 02 Mar 2017 09:15:48 +0000
 

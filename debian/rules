@@ -1,7 +1,5 @@
 #!/usr/bin/make -f
 
-DISABLE_UPDATE_UPLOADERS := 1
-
 include /usr/share/dpkg/default.mk
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
 include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
@@ -37,6 +35,9 @@ override_dh_auto_configure:
 		$(NULL)
 
 override_dh_clean:
+	rm -rf $(CURDIR)/debian/build \
+	       $(CURDIR)/debian/install \
+	       $(CURDIR)/debian/tmp-xdg-runtime-dir
 	dh_clean -Xorg.gtk.test.gschema.xml.orig
 
 override_dh_makeshlibs:
@@ -135,19 +136,6 @@ override_dh_auto_install:
 
 override_dh_python3:
 	dh_python3 -plibglib2.0-dev-bin /usr/share/glib-2.0/codegen
-
-# Don't regenerate d/control, we do that explicitly in clean
-override_dh_gnome_clean:
-	dh_gnome_clean --no-control
-
-clean:
-	sed \
-		-e "s#@GNOME_TEAM@#$(UPLOADERS)#g" \
-		debian/control.in > debian/control
-	rm -rf $(CURDIR)/debian/build \
-	       $(CURDIR)/debian/install \
-	       $(CURDIR)/debian/tmp-xdg-runtime-dir
-	dh clean --with gnome,python3
 
 override_dh_install:
 	# Unwanted bits from the .deb build
