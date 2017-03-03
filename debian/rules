@@ -19,19 +19,6 @@ LDFLAGS += -Wl,--no-as-needed
 # Make the linker work a bit harder so dynamic loading can be done faster
 LDFLAGS += -Wl,-O1
 
-APIVER := 2.0
-SONAME := 0
-
-# package names
-SHARED_PKG := libglib$(APIVER)-$(SONAME)
-DATA_PKG := libglib$(APIVER)-data
-TEST_PKG := libglib$(APIVER)-tests
-DEV_PKG := libglib$(APIVER)-dev
-DEVBIN_PKG := libglib$(APIVER)-dev-bin
-BIN_PKG := libglib$(APIVER)-bin
-UDEB_PKG := libglib$(APIVER)-udeb
-DOC_PKG := libglib$(APIVER)-doc
-
 %:
 	dh $@ --with gnome,python3
 
@@ -53,7 +40,7 @@ override_dh_clean:
 	dh_clean -Xorg.gtk.test.gschema.xml.orig
 
 override_dh_makeshlibs:
-	dh_makeshlibs -V --add-udeb=$(UDEB_PKG) -- -c4
+	dh_makeshlibs -V --add-udeb=libglib2.0-udeb -- -c4
 
 override_dh_strip:
 	dh_strip --dbgsym-migration='libglib2.0-0-dbg (<< 2.51.4-1~)'
@@ -98,7 +85,7 @@ export VERBOSE=1
 
 # configure flags
 DEB_CONFIGURE_EXTRA_FLAGS := \
-			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG) \
+			--with-html-dir=\$${prefix}/share/doc/libglib2.0-doc \
 			--libexecdir=\$${prefix}/lib/glib2.0 \
 			--with-python=/usr/bin/python3 \
 			--with-pcre=system
@@ -139,11 +126,11 @@ override_dh_auto_install:
 	set -e; for script in postinst postrm triggers; do \
 		sed -e"s/#MULTIARCH#/$(DEB_HOST_MULTIARCH)/g" \
 		    -e"s/#ARCH#/$(DEB_HOST_ARCH)/g" \
-		    debian/$(SHARED_PKG).$$script.in \
-		    > debian/$(SHARED_PKG).$$script ; \
+		    debian/libglib2.0-0.$$script.in \
+		    > debian/libglib2.0-0.$$script ; \
 	done
-	dh_auto_install -p$(TEST_PKG) --sourcedir=debian/build/deb -X.la
-	dh_auto_install -p$(UDEB_PKG) --builddirectory=debian/build/udeb --destdir=debian/install/udeb
+	dh_auto_install -plibglib2.0-tests --sourcedir=debian/build/deb -X.la
+	dh_auto_install -plibglib2.0-udeb --builddirectory=debian/build/udeb --destdir=debian/install/udeb
 	dh_auto_install --remaining-packages --builddirectory=debian/build/deb --destdir=debian/install/deb
 
 override_dh_python3:
@@ -155,16 +142,6 @@ override_dh_gnome_clean:
 
 clean:
 	sed \
-		-e "s#@SONAME@#$(SONAME)#g" \
-		-e "s#@APIVER@#$(APIVER)#g" \
-		-e "s#@VERSION@#$(DEB_UPSTREAM_VERSION)#g" \
-		-e "s#@SHARED_PKG@#$(SHARED_PKG)#g" \
-		-e "s#@BIN_PKG@#$(BIN_PKG)#g" \
-		-e "s#@DATA_PKG@#$(DATA_PKG)#g" \
-		-e "s#@DEV_PKG@#$(DEV_PKG)#g" \
-		-e "s#@DEVBIN_PKG@#$(DEVBIN_PKG)#g" \
-		-e "s#@UDEB_PKG@#$(UDEB_PKG)#g" \
-		-e "s#@DOC_PKG@#$(DOC_PKG)#g" \
 		-e "s#@GNOME_TEAM@#$(UPLOADERS)#g" \
 		debian/control.in > debian/control
 	rm -rf $(CURDIR)/debian/build \
@@ -191,5 +168,5 @@ override_dh_install:
 	rm -fr debian/install/udeb/usr/share/glib-2.0/gdb
 	rm -fr debian/install/udeb/usr/share/glib-2.0/valgrind
 	rm -fr debian/install/udeb/usr/share/man
-	dh_install -p$(UDEB_PKG) --sourcedir=debian/install/udeb --list-missing
+	dh_install -plibglib2.0-udeb --sourcedir=debian/install/udeb --list-missing
 	dh_install --remaining-packages --sourcedir=debian/install/deb --list-missing
