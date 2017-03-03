@@ -146,24 +146,6 @@ Description: Development utilities for the GLib library
  development utilities typically run during compilation and should not be
  installed directly. Use libglib2.0-dev instead.
 
-Package: @DEBUG_PKG@
-Section: debug
-Priority: extra
-Architecture: any
-Multi-Arch: same
-Depends: ${misc:Depends},
-         @SHARED_PKG@ (= ${binary:Version})
-Breaks: libglib2.0-dev (<< 2.43.2-2~)
-Replaces: libglib2.0-dev (<< 2.43.2-2~)
-Description: Debugging symbols for the GLib libraries
- GLib is a library containing many useful C routines for things such
- as trees, hashes, lists, and strings.  It is a useful general-purpose
- C library used by projects such as GTK+, GIMP, and GNOME.
- .
- This package contains detached debugging symbols.
- .
- Most people will not need this package.
-
 Package: @DATA_PKG@
 Architecture: all
 Depends: ${misc:Depends}

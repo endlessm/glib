@@ -39,7 +39,6 @@ DEVBIN_PKG := libglib$(APIVER)-dev-bin
 BIN_PKG := libglib$(APIVER)-bin
 UDEB_PKG := libglib$(APIVER)-udeb
 DOC_PKG := libglib$(APIVER)-doc
-DEBUG_PKG := $(SHARED_PKG)-dbg
 
 DEB_MAKE_DESTDIRSKEL = $(CURDIR)/debian/install/@FLAVOR@
 
@@ -50,8 +49,7 @@ DEB_DH_INSTALL_ARGS_$(TEST_PKG) += --sourcedir=debian/install/deb -X.la
 DEB_DH_INSTALL_ARGS_$(UDEB_PKG) += --sourcedir=debian/install/udeb
 
 DEB_DH_MAKESHLIBS_ARGS_$(SHARED_PKG) += -V --add-udeb=$(UDEB_PKG) -- -c4
-# Don't put the symbols in the -dbg package
-DEB_DH_STRIP_ARGS_$(UDEB_PKG) =
+DEB_DH_STRIP_ARGS = --dbgsym-migration='libglib2.0-0-dbg (<< 2.51.4-1~)'
 
 # Don't strip translations from the installed tests; makes them environment dependent.
 DEB_DH_TRANSLATIONS_ARGS = -Xinstalled-tests
@@ -148,7 +146,6 @@ clean::
 		-e "s#@DEVBIN_PKG@#$(DEVBIN_PKG)#g" \
 		-e "s#@UDEB_PKG@#$(UDEB_PKG)#g" \
 		-e "s#@DOC_PKG@#$(DOC_PKG)#g" \
-		-e "s#@DEBUG_PKG@#$(DEBUG_PKG)#g" \
 		-e "s#@GNOME_TEAM@#$(UPLOADERS)#g" \
 		debian/control.in > debian/control
 	rm -rf $(CURDIR)/debian/build \
