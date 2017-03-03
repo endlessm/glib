@@ -108,6 +108,7 @@ Description: Programs for the GLib library
 Package: libglib2.0-dev
 Section: libdevel
 Architecture: any
+Multi-Arch: same
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          ${python3:Depends},
