@@ -17,7 +17,8 @@ glib2.0 (2.51.4-1) UNRELEASED; urgency=medium
     checks for it and AC_SUBSTs it, but according to codesearch.debian.net
     no package actually seems to run it.
   * Make libglib2.0-dev Multi-Arch: same (Closes: #648621)
-  * Add missing build-dependency on dh_python
+  * Add missing build-dependency on dh-python
+    - remove obsolete Lintian override for mmissing B-D on python
   * Add Lintian overrides for some intentionally weird scripts used in tests
   * Do not install glib_gdb.py, gobject_gdb.py executable. They are libraries
     to be imported by the gdb hooks, not scripts.
