@@ -6,7 +6,9 @@ glib2.0 (2.51.2-2) UNRELEASED; urgency=medium
   * Additionally move gdbus-codegen and gtester-report to libglib2.0-dev-bin.
     They are architecture-independent, so in particular clearly
     Multi-Arch: foreign; they aren't large enough to justify a separate
-    Architecture: all package.
+    Architecture: all package. This works around dh_python3's postinst
+    snippet failing when used in a Multi-Arch: same package with more than
+    one instance installed.
   * Move gtester to libglib2.0-dev-bin. It is a test-runner that can operate
     on any executable, and does not rely on a matching architecture.
   * Move gobject-query to libglib2.0-dev-bin. It prints the same things on
