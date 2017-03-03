@@ -134,8 +134,8 @@ Architecture: any
 Depends: ${misc:Depends},
          ${python3:Depends},
          ${shlibs:Depends},
-Breaks: libglib2.0-dev (<< 2.51.2-2~)
-Replaces: libglib2.0-dev (<< 2.51.2-2~)
+Breaks: libglib2.0-dev (<< 2.51.4-1~)
+Replaces: libglib2.0-dev (<< 2.51.4-1~)
 Multi-Arch: foreign
 Description: Development utilities for the GLib library
  GLib is a library containing many useful C routines for things such
