@@ -6,4 +6,6 @@ usr/lib/*/libgthread*.so
 usr/lib/*/libgio*.so
 usr/lib/*/glib-2.0
 usr/lib/*/pkgconfig
+usr/share/gdb
+usr/share/glib-2.0/gdb
 usr/share/glib-2.0/schemas
