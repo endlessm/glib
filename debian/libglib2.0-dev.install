@@ -7,5 +7,3 @@ usr/lib/*/libgio*.so
 usr/lib/*/glib-2.0
 usr/lib/*/pkgconfig
 usr/share/glib-2.0/schemas
-usr/share/man/man1/gobject-query.1*
-usr/bin/gobject-query
