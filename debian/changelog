@@ -41,6 +41,9 @@ glib2.0 (2.51.4-1) UNRELEASED; urgency=medium
     - Don't generate a ldconfig trigger for libglib2.0-tests, which does
       not contain any public shared libraries
   * Add patch to make glib-mkenums output more reproducible (Closes: #809152)
+  * Explicitly build-depend on automake so that the aspcud resolver used for
+    experimental does not decide automake1.11 is the best solution to
+    a dependency on automake | automaken
 
  -- Simon McVittie <smcv@debian.org>  Thu, 02 Mar 2017 09:15:48 +0000
 
