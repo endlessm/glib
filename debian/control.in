@@ -71,6 +71,7 @@ Description: GLib library of C routines - installed tests
  regression testsuite.
 
 Package: libglib2.0-udeb
+Build-Profiles: <!noudeb>
 Section: debian-installer
 Package-Type: udeb
 Architecture: any
