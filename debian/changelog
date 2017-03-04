@@ -40,6 +40,7 @@ glib2.0 (2.51.4-1) UNRELEASED; urgency=medium
       libraries to be imported by the gdb hooks, not scripts.
     - Don't generate a ldconfig trigger for libglib2.0-tests, which does
       not contain any public shared libraries
+  * Add patch to make glib-mkenums output more reproducible (Closes: #809152)
 
  -- Simon McVittie <smcv@debian.org>  Thu, 02 Mar 2017 09:15:48 +0000
 
