@@ -1,7 +1,6 @@
-From d7e6c3adf959abebc061e7523fb3d5f969ff07a9 Mon Sep 17 00:00:00 2001
 From: Simon McVittie <smcv@debian.org>
 Date: Fri, 3 Mar 2017 10:53:52 +0000
-Subject: [PATCH] Install gdb Python helpers as data, not as executable scripts
+Subject: Install gdb Python helpers as data, not as executable scripts
 
 They do not start with the #!/usr/bin/python that would be necessary
 to make them run with Python rather than a shell, and they would
@@ -9,6 +8,8 @@ not be useful to run anyway: they are libraries to be imported,
 not scripts to be run.
 
 Signed-off-by: Simon McVittie <smcv@debian.org>
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=779522
+Applied-upstream: 2.51.5, commit:e3f59e482
 ---
  glib/Makefile.am    | 2 +-
  gobject/Makefile.am | 2 +-
@@ -40,6 +41,3 @@ index 948e86974..c1b74488d 100644
  
  libgobject-gdb.py: libgobject-gdb.py.in
  	$(AM_V_GEN) $(SED) -e "s|\@datadir\@|$(datadir)|" $(srcdir)/libgobject-gdb.py.in > $(builddir)/libgobject-gdb.py
--- 
-2.11.0
-
