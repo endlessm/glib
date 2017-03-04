@@ -5,6 +5,8 @@ include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
 
 GNOME_MODULE := glib
 
+export DEB_BUILD_MAINT_OPTIONS=hardening=+bindnow
+
 # Ensure the build aborts when there are still references to undefined symbols
 DEB_LDFLAGS_MAINT_APPEND += -Wl,-z,defs
 
