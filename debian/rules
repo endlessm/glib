@@ -1,21 +1,22 @@
 #!/usr/bin/make -f
 
-include /usr/share/dpkg/default.mk
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
 include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
 
 GNOME_MODULE := glib
 
 # Ensure the build aborts when there are still references to undefined symbols
-LDFLAGS += -Wl,-z,defs
+DEB_LDFLAGS_MAINT_APPEND += -Wl,-z,defs
 
 # NB: do NOT use -Wl,--as-needed to build glib; for instance the link to
 # pthread is carefully crafted to allow dlopen()ing pthread-using libs; see
 # http://mid.gmane.org/1257999019.21780.15.camel@marzipan
-LDFLAGS += -Wl,--no-as-needed
+DEB_LDFLAGS_MAINT_APPEND += -Wl,--no-as-needed
 
 # Make the linker work a bit harder so dynamic loading can be done faster
-LDFLAGS += -Wl,-O1
+DEB_LDFLAGS_MAINT_APPEND += -Wl,-O1
+
+include /usr/share/dpkg/default.mk
 
 %:
 	dh $@ --with gnome,python3

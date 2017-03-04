@@ -32,6 +32,7 @@ glib2.0 (2.51.4-1) UNRELEASED; urgency=medium
   * Remove indirection via $(SHARED_PKG), etc. variables
   * Let dh_gnome_clean update the Uploaders instead of reinventing it
   * debian/dh_listmissing.pl: Remove
+  * Use dpkg-buildflags variables to extend LDFLAGS
 
  -- Simon McVittie <smcv@debian.org>  Thu, 02 Mar 2017 09:15:48 +0000
 
