@@ -1,5 +1,6 @@
-glib2.0 (2.51.4-1) UNRELEASED; urgency=medium
+glib2.0 (2.51.4-1) experimental; urgency=medium
 
+  * Team upload
   * New upstream release 2.51.4 (and 2.51.3)
   * Build with dh instead of cdbs
     - Move to debhelper compat level 10
@@ -45,7 +46,7 @@ glib2.0 (2.51.4-1) UNRELEASED; urgency=medium
     experimental does not decide automake1.11 is the best solution to
     a dependency on automake | automaken
 
- -- Simon McVittie <smcv@debian.org>  Thu, 02 Mar 2017 09:15:48 +0000
+ -- Simon McVittie <smcv@debian.org>  Sat, 04 Mar 2017 17:00:47 +0000
 
 glib2.0 (2.51.2-1) experimental; urgency=medium
 
