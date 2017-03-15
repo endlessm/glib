@@ -12,3 +12,4 @@ Do-not-attempt-to-autolaunch-a-session-dbus-daemon-w.patch
 0001-timer-test-use-volatile-for-locals.patch
 skip-broken-timer-test.patch
 0001-Fix-trashing-on-overlayfs.patch
+tests-gdatetime-Use-a-real-rather-than-invented-time.patch

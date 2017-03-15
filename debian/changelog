@@ -4,6 +4,9 @@ glib2.0 (2.51.5-1) UNRELEASED; urgency=medium
   * Drop patches applied upstream in this release:
     - Install-gdb-Python-helpers-as-data-not-as-executable.patch
     - glib-mkenums-Sort-input-files-for-more-deterministic.patch
+  * debian/patches/tests-gdatetime-Use-a-real-rather-than-invented-time.patch:
+    Cherry-pick a patch from upstream to fix GDateTime tests when tzdata ≥
+    2017a is in use.
 
  -- Iain Lane <laney@debian.org>  Wed, 15 Mar 2017 12:32:22 +0000
 
