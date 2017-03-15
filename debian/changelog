@@ -1,3 +1,12 @@
+glib2.0 (2.51.5-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2.51.5
+  * Drop patches applied upstream in this release:
+    - Install-gdb-Python-helpers-as-data-not-as-executable.patch
+    - glib-mkenums-Sort-input-files-for-more-deterministic.patch
+
+ -- Iain Lane <laney@debian.org>  Wed, 15 Mar 2017 12:32:22 +0000
+
 glib2.0 (2.51.4-1) experimental; urgency=medium
 
   * Team upload
