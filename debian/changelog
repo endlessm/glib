@@ -1,4 +1,4 @@
-glib2.0 (2.51.5-1) UNRELEASED; urgency=medium
+glib2.0 (2.51.5-1) experimental; urgency=medium
 
   * New upstream release 2.51.5
   * Drop patches applied upstream in this release:
@@ -12,7 +12,7 @@ glib2.0 (2.51.5-1) UNRELEASED; urgency=medium
     of the library and we put libglib-2.0.so.* into /lib.
   * debian/libglib2.0-0.symbols: Add g_content_type_is_mime_type
 
- -- Iain Lane <laney@debian.org>  Wed, 15 Mar 2017 12:32:22 +0000
+ -- Iain Lane <laney@debian.org>  Wed, 15 Mar 2017 13:55:41 +0000
 
 glib2.0 (2.51.4-1) experimental; urgency=medium
 
