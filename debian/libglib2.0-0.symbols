@@ -210,6 +210,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_content_type_guess@Base 2.16.0
  g_content_type_guess_for_tree@Base 2.18.0
  g_content_type_is_a@Base 2.16.0
+ g_content_type_is_mime_type@Base 2.51.5
  g_content_type_is_unknown@Base 2.16.0
  g_content_types_get_registered@Base 2.16.0
  g_converter_convert@Base 2.24.0

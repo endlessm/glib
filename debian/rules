@@ -170,4 +170,8 @@ ifneq ($(filter %-udeb,$(binaries)),)
 	rm -fr debian/install/udeb/usr/share/man
 	dh_install -plibglib2.0-udeb --sourcedir=debian/install/udeb --list-missing
 endif
+	# Put the gdb script in .../gdb/auto-load/lib, as we install libglib*.so in there
+	mkdir -p debian/install/deb/usr/share/gdb/auto-load/lib/${DEB_HOST_MULTIARCH}/
+	mv debian/install/deb/usr/share/gdb/auto-load/usr/lib/${DEB_HOST_MULTIARCH}/libglib*so*py \
+		debian/install/deb/usr/share/gdb/auto-load/lib/${DEB_HOST_MULTIARCH}/
 	dh_install --remaining-packages --sourcedir=debian/install/deb --list-missing
