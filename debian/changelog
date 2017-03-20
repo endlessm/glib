@@ -1,3 +1,11 @@
+glib2.0 (2.52.0-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2.52.0
+  * d/p/tests-gdatetime-Use-a-real-rather-than-invented-time.patch: Drop,
+    applied in this release.
+
+ -- Iain Lane <laney@debian.org>  Wed, 15 Mar 2017 15:32:27 +0000
+
 glib2.0 (2.51.5-1) experimental; urgency=medium
 
   * New upstream release 2.51.5
