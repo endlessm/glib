@@ -1877,6 +1877,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_is_mount_path_system_internal@Base 2.16.0
  g_unix_mount_at@Base 2.16.0
  g_unix_mount_compare@Base 2.16.0
+ g_unix_mount_copy@Base 2.53.1
+ g_unix_mount_entry_get_type@Base 2.53.1
  g_unix_mount_for@Base 2.51.0
  g_unix_mount_free@Base 2.16.0
  g_unix_mount_get_device_path@Base 2.16.0
@@ -1894,11 +1896,13 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_mount_monitor_new@Base 2.16.0
  g_unix_mount_monitor_set_rate_limit@Base 2.18.0
  g_unix_mount_point_compare@Base 2.16.0
+ g_unix_mount_point_copy@Base 2.53.1
  g_unix_mount_point_free@Base 2.16.0
  g_unix_mount_point_get_device_path@Base 2.16.0
  g_unix_mount_point_get_fs_type@Base 2.16.0
  g_unix_mount_point_get_mount_path@Base 2.16.0
  g_unix_mount_point_get_options@Base 2.31.8
+ g_unix_mount_point_get_type@Base 2.53.1
  g_unix_mount_point_guess_can_eject@Base 2.16.0
  g_unix_mount_point_guess_icon@Base 2.16.0
  g_unix_mount_point_guess_name@Base 2.16.0
@@ -3715,12 +3719,14 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_enum_get_value_by_name@Base 2.12.0
  g_enum_get_value_by_nick@Base 2.12.0
  g_enum_register_static@Base 2.12.0
+ g_enum_to_string@Base 2.53.1
  g_error_get_type@Base 2.26.0
  g_flags_complete_type_info@Base 2.12.0
  g_flags_get_first_value@Base 2.12.0
  g_flags_get_value_by_name@Base 2.12.0
  g_flags_get_value_by_nick@Base 2.12.0
  g_flags_register_static@Base 2.12.0
+ g_flags_to_string@Base 2.53.1
  g_gstring_get_type@Base 2.12.0
  g_gtype_get_type@Base 2.12.0
  g_hash_table_get_type@Base 2.12.0
@@ -3756,6 +3762,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_object_get_qdata@Base 2.12.0
  g_object_get_type@Base 2.18.0
  g_object_get_valist@Base 2.12.0
+ g_object_getv@Base 2.53.1
  g_object_interface_find_property@Base 2.12.0
  g_object_interface_install_property@Base 2.12.0
  g_object_interface_list_properties@Base 2.12.0
@@ -3763,6 +3770,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_object_new@Base 2.12.0
  g_object_new_valist@Base 2.12.0
  g_object_newv@Base 2.12.0
+ g_object_new_with_properties@Base 2.53.1
  g_object_notify@Base 2.12.0
  g_object_notify_by_pspec@Base 2.26.0
  g_object_ref@Base 2.12.0
@@ -3779,6 +3787,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_object_set_qdata@Base 2.12.0
  g_object_set_qdata_full@Base 2.12.0
  g_object_set_valist@Base 2.12.0
+ g_object_setv@Base 2.53.1
  g_object_steal_data@Base 2.12.0
  g_object_steal_qdata@Base 2.12.0
  g_object_thaw_notify@Base 2.12.0

@@ -1,3 +1,15 @@
+glib2.0 (2.53.1-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2.53.1
+    + The gdbus tool gained a wait command
+    + g_unix_signal_source_new support SIGWINCH now
+    + There are now g_enum_to_string and g_flags_to_string functions
+    + A new function to instantiate objects: g_objet_new_with_properties
+    + GParameter and related APIs have been deprecated
+  * debian/libglib2.0-0.symbols: Add new symbols for 2.53.1.
+
+ -- Iain Lane <laney@debian.org>  Mon, 20 Mar 2017 23:22:26 +0000
+
 glib2.0 (2.52.0-1) experimental; urgency=medium
 
   * New upstream release 2.52.0
