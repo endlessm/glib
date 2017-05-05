@@ -1,4 +1,4 @@
-glib2.0 (2.53.1-1) UNRELEASED; urgency=medium
+glib2.0 (2.53.1-1) experimental; urgency=medium
 
   * New upstream release 2.53.1
     + The gdbus tool gained a wait command
@@ -8,7 +8,7 @@ glib2.0 (2.53.1-1) UNRELEASED; urgency=medium
     + GParameter and related APIs have been deprecated
   * debian/libglib2.0-0.symbols: Add new symbols for 2.53.1.
 
- -- Iain Lane <laney@debian.org>  Mon, 20 Mar 2017 23:22:26 +0000
+ -- Iain Lane <laney@debian.org>  Fri, 05 May 2017 18:04:15 +0100
 
 glib2.0 (2.52.0-1) experimental; urgency=medium
 
