@@ -196,11 +196,7 @@ static const gint month_item[2][12] =
 
 #else
 
-#define GET_AMPM(d)          ((g_date_time_get_hour (d) < 12)  \
-                                       /* Translators: 'before midday' indicator */ \
-                                ? C_("GDateTime", "AM") \
-                                  /* Translators: 'after midday' indicator */ \
-                                : C_("GDateTime", "PM"))
+#define GET_AMPM(d)          (get_fallback_ampm (g_date_time_get_hour (d)))
 
 /* Translators: this is the preferred format for expressing the date and the time */
 #define PREFERRED_DATE_TIME_FMT C_("GDateTime", "%a %b %e %H:%M:%S %Y")
@@ -348,6 +344,18 @@ get_weekday_name_abbr (gint day)
 }
 
 #endif  /* HAVE_LANGINFO_TIME */
+
+/* Format AM/PM indicator if the locale does not have a localized version. */
+static const gchar *
+get_fallback_ampm (gint hour)
+{
+  if (hour < 12)
+    /* Translators: 'before midday' indicator */
+    return C_("GDateTime", "AM");
+  else
+    /* Translators: 'after midday' indicator */
+    return C_("GDateTime", "PM");
+}
 
 static inline gint
 ymd_to_days (gint year,
@@ -2198,6 +2206,52 @@ format_number (GString  *str,
     g_string_append (str, tmp[--i]);
 }
 
+static gboolean
+format_ampm (GDateTime *datetime,
+             GString   *outstr,
+             gboolean   locale_is_utf8,
+             gboolean   uppercase)
+{
+  const gchar *ampm;
+  gchar       *tmp, *ampm_dup;
+  gsize        len;
+
+  ampm = GET_AMPM (datetime);
+
+  if (!ampm || ampm[0] == '\0')
+    ampm = get_fallback_ampm (g_date_time_get_hour (datetime));
+
+#if defined (HAVE_LANGINFO_TIME)
+  if (!locale_is_utf8)
+    {
+      /* This assumes that locale encoding can't have embedded NULs */
+      ampm = tmp = g_locale_to_utf8 (ampm, -1, NULL, NULL, NULL);
+      if (!tmp)
+        return FALSE;
+    }
+#endif
+  if (uppercase)
+    ampm_dup = g_utf8_strup (ampm, -1);
+  else
+    ampm_dup = g_utf8_strdown (ampm, -1);
+  len = strlen (ampm_dup);
+  if (!locale_is_utf8)
+    {
+#if defined (HAVE_LANGINFO_TIME)
+      g_free (tmp);
+#endif
+      tmp = g_locale_from_utf8 (ampm_dup, -1, NULL, &len, NULL);
+      g_free (ampm_dup);
+      if (!tmp)
+        return FALSE;
+      ampm_dup = tmp;
+    }
+  g_string_append_len (outstr, ampm_dup, len);
+  g_free (ampm_dup);
+
+  return TRUE;
+}
+
 static gboolean g_date_time_format_locale (GDateTime   *datetime,
 					   const gchar *format,
 					   GString     *outstr,
@@ -2246,7 +2300,6 @@ g_date_time_format_locale (GDateTime   *datetime,
   gboolean  alt_digits = FALSE;
   gboolean  pad_set = FALSE;
   gchar    *pad = "";
-  gchar    *ampm;
   const gchar *name;
   const gchar *tz;
 
@@ -2438,58 +2491,12 @@ g_date_time_format_locale (GDateTime   *datetime,
 	  alt_digits = TRUE;
 	  goto next_mod;
 	case 'p':
-	  ampm = (gchar *) GET_AMPM (datetime);
-#if defined (HAVE_LANGINFO_TIME)
-	  if (!locale_is_utf8)
-	    {
-	      /* This assumes that locale encoding can't have embedded NULs */
-	      ampm = tmp = g_locale_to_utf8 (ampm, -1, NULL, NULL, NULL);
-	      if (!tmp)
-		return FALSE;
-	    }
-#endif
-	  ampm = g_utf8_strup (ampm, -1);
-	  tmp_len = strlen (ampm);
-	  if (!locale_is_utf8)
-	    {
-#if defined (HAVE_LANGINFO_TIME)
-	      g_free (tmp);
-#endif
-	      tmp = g_locale_from_utf8 (ampm, -1, NULL, &tmp_len, NULL);
-	      g_free (ampm);
-	      if (!tmp)
-		return FALSE;
-	      ampm = tmp;
-	    }
-	  g_string_append_len (outstr, ampm, tmp_len);
-	  g_free (ampm);
-	  break;
+          if (!format_ampm (datetime, outstr, locale_is_utf8, TRUE))
+            return FALSE;
+          break;
 	case 'P':
-	  ampm = (gchar *) GET_AMPM (datetime);
-#if defined (HAVE_LANGINFO_TIME)
-	  if (!locale_is_utf8)
-	    {
-	      /* This assumes that locale encoding can't have embedded NULs */
-	      ampm = tmp = g_locale_to_utf8 (ampm, -1, NULL, NULL, NULL);
-	      if (!tmp)
-		return FALSE;
-	    }
-#endif
-	  ampm = g_utf8_strdown (ampm, -1);
-	  tmp_len = strlen (ampm);
-	  if (!locale_is_utf8)
-	    {
-#if defined (HAVE_LANGINFO_TIME)
-	      g_free (tmp);
-#endif
-	      tmp = g_locale_from_utf8 (ampm, -1, NULL, &tmp_len, NULL);
-	      g_free (ampm);
-	      if (!tmp)
-		return FALSE;
-	      ampm = tmp;
-	    }
-	  g_string_append_len (outstr, ampm, tmp_len);
-	  g_free (ampm);
+          if (!format_ampm (datetime, outstr, locale_is_utf8, FALSE))
+            return FALSE;
 	  break;
 	case 'r':
 	  {
