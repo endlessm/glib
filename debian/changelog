@@ -1,4 +1,4 @@
-glib2.0 (2.53.2-1) UNRELEASED; urgency=medium
+glib2.0 (2.53.2-1) experimental; urgency=medium
 
   * New upstream release 2.53.2
     + A few new number parsing functions have been added:
@@ -11,7 +11,7 @@ glib2.0 (2.53.2-1) UNRELEASED; urgency=medium
   * debian/patches/skip-broken-dbus-appinfo-test.patch: Drop - this test works
     now.
 
- -- Iain Lane <laney@debian.org>  Tue, 09 May 2017 13:10:24 +0100
+ -- Iain Lane <laney@debian.org>  Mon, 12 Jun 2017 16:25:21 +0100
 
 glib2.0 (2.53.1-1) experimental; urgency=medium
 
