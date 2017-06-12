@@ -2002,6 +2002,8 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_ascii_formatd@Base 2.12.0
  g_ascii_strcasecmp@Base 2.12.0
  g_ascii_strdown@Base 2.12.0
+ g_ascii_string_to_signed@Base 2.53.2
+ g_ascii_string_to_unsigned@Base 2.53.2
  g_ascii_strncasecmp@Base 2.12.0
  g_ascii_strtod@Base 2.12.0
  g_ascii_strtoll@Base 2.12.0
@@ -2742,6 +2744,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_node_traverse@Base 2.12.0
  g_node_unlink@Base 2.12.0
  g_nullify_pointer@Base 2.12.0
+ g_number_parser_error_quark@Base 2.53.2
  g_on_error_query@Base 2.12.0
  g_on_error_stack_trace@Base 2.12.0
  g_once_impl@Base 2.12.0
@@ -2807,6 +2810,8 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_propagate_error@Base 2.12.0
  g_propagate_prefixed_error@Base 2.16.0
  g_ptr_array_add@Base 2.12.0
+ g_ptr_array_find@Base 2.53.2
+ g_ptr_array_find_with_equal_func@Base 2.53.2
  g_ptr_array_foreach@Base 2.12.0
  g_ptr_array_free@Base 2.12.0
  g_ptr_array_insert@Base 2.39.4

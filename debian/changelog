@@ -1,3 +1,18 @@
+glib2.0 (2.53.2-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2.53.2
+    + A few new number parsing functions have been added:
+      - g_ascii_string_to_signed
+      - g_ascii_string_to_unsigned
+      These have better error handling than the existing ones.
+    + glib-mkenums now supports /*< private >*/ and /*< public >*/
+    + GSettings now consider XDG_DATA_HOME in addition to XDG_DATA_DIRS.
+  * debian/libglib2.0-0.symbols: Add new symbols for 2.53.1.
+  * debian/patches/skip-broken-dbus-appinfo-test.patch: Drop - this test works
+    now.
+
+ -- Iain Lane <laney@debian.org>  Tue, 09 May 2017 13:10:24 +0100
+
 glib2.0 (2.53.1-1) experimental; urgency=medium
 
   * New upstream release 2.53.1
