@@ -210,6 +210,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_content_type_guess@Base 2.16.0
  g_content_type_guess_for_tree@Base 2.18.0
  g_content_type_is_a@Base 2.16.0
+ g_content_type_is_mime_type@Base 2.52.3
  g_content_type_is_unknown@Base 2.16.0
  g_content_types_get_registered@Base 2.16.0
  g_converter_convert@Base 2.24.0
@@ -1876,6 +1877,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_is_mount_path_system_internal@Base 2.16.0
  g_unix_mount_at@Base 2.16.0
  g_unix_mount_compare@Base 2.16.0
+ g_unix_mount_for@Base 2.52.3
  g_unix_mount_free@Base 2.16.0
  g_unix_mount_get_device_path@Base 2.16.0
  g_unix_mount_get_fs_type@Base 2.16.0
@@ -3403,6 +3405,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_utf8_find_prev_char@Base 2.12.0
  g_utf8_get_char@Base 2.12.0
  g_utf8_get_char_validated@Base 2.12.0
+ g_utf8_make_valid@Base 2.52.3
  g_utf8_normalize@Base 2.12.0
  g_utf8_offset_to_pointer@Base 2.12.0
  g_utf8_pointer_to_offset@Base 2.12.0
@@ -3421,6 +3424,8 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_utf8_to_utf16@Base 2.12.0
  g_utf8_validate@Base 2.12.0
  g_utime@Base 2.18.0
+ g_uuid_string_is_valid@Base 2.52.3
+ g_uuid_string_random@Base 2.52.3
  g_variant_builder_add@Base 2.24.0
  g_variant_builder_add_parsed@Base 2.26.0
  g_variant_builder_add_value@Base 2.24.0
