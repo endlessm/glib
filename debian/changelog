@@ -1,6 +1,9 @@
 glib2.0 (2.52.3-1) UNRELEASED; urgency=medium
 
   * New upstream release.
+  * skip-brokwn-dbus-appinfo-test.patch,
+    tests-gdatetime-Use-a-real-rather-than-invented-time.patch:
+    + Dropped, applied upstream.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Thu, 22 Jun 2017 20:28:24 +0200
 
