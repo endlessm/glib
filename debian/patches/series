@@ -1,3 +1,6 @@
+0001-gdatetime-Fix-a-potential-overflow-in-overflow-calcu.patch
+0002-tests-Fix-GDateTime-overflow-tests-on-32-bit-archite.patch
+0003-tests-Fix-overflows-in-find_maximum_supported_tv_sec.patch
 01_gettext-desktopfiles.patch
 02_gettext-desktopfiles-ubuntu.patch
 03_disble_glib_compile_schemas_warning.patch

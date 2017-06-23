@@ -1,3 +1,13 @@
+glib2.0 (2.53.3-1) UNRELEASED; urgency=medium
+
+  * New upstream release 2.53.3.
+  * d/p/0001-gdatetime-Fix-a-potential-overflow-in-overflow-calcu.patch,
+    d/p/0002-tests-Fix-GDateTime-overflow-tests-on-32-bit-archite.patch,
+    d/p/0003-tests-Fix-overflows-in-find_maximum_supported_tv_sec.patch:
+    Cherry-picks to fix some overflow problems in GDateTime on 32 bit arches.
+
+ -- Iain Lane <laney@debian.org>  Mon, 12 Jun 2017 16:38:13 +0100
+
 glib2.0 (2.53.2-1) experimental; urgency=medium
 
   * New upstream release 2.53.2
