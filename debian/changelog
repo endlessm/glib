@@ -1,11 +1,11 @@
-glib2.0 (2.53.4-1) UNRELEASED; urgency=medium
+glib2.0 (2.53.4-1) experimental; urgency=medium
 
   * New upstream release 2.53.4
     + Unicode support has been updated to Unicode 10.0.0
     + glib-genmarshal and glib-mkenums have been rewritten in python
     + GLib can now be built with meson. autotools are still supported
 
- -- Iain Lane <laney@debian.org>  Fri, 23 Jun 2017 11:46:57 +0100
+ -- Iain Lane <laney@debian.org>  Wed, 19 Jul 2017 17:32:31 +0100
 
 glib2.0 (2.53.3-1) experimental; urgency=medium
 
