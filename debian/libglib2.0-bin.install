@@ -4,6 +4,7 @@ usr/bin/gio
 usr/bin/gresource
 usr/bin/gsettings
 usr/share/bash-completion
+usr/share/man/man1/gapplication.1*
 usr/share/man/man1/gio-querymodules.1*
 usr/share/man/man1/gio.1*
 usr/share/man/man1/glib-compile-resources.1*

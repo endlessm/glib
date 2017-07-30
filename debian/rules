@@ -1,59 +1,62 @@
 #!/usr/bin/make -f
 
-DEB_BUILDDIR = debian/build
-DEB_MAKE_FLAVORS = deb udeb
-DISABLE_UPDATE_UPLOADERS := 1
-
-include /usr/share/cdbs/1/rules/autoreconf.mk
-include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/rules/utils.mk
-include /usr/share/cdbs/1/class/gnome.mk
 include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
 include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
 
 GNOME_MODULE := glib
+binaries := $(shell dh_listpackages)
 
-# Enable parallel build support
-DEB_BUILD_PARALLEL = 1
+export DEB_BUILD_MAINT_OPTIONS=hardening=+bindnow
 
 # Ensure the build aborts when there are still references to undefined symbols
-LDFLAGS += -Wl,-z,defs
+DEB_LDFLAGS_MAINT_APPEND += -Wl,-z,defs
 
 # NB: do NOT use -Wl,--as-needed to build glib; for instance the link to
 # pthread is carefully crafted to allow dlopen()ing pthread-using libs; see
 # http://mid.gmane.org/1257999019.21780.15.camel@marzipan
-LDFLAGS += -Wl,--no-as-needed
+DEB_LDFLAGS_MAINT_APPEND += -Wl,--no-as-needed
 
 # Make the linker work a bit harder so dynamic loading can be done faster
-LDFLAGS += -Wl,-O1
+DEB_LDFLAGS_MAINT_APPEND += -Wl,-O1
 
-APIVER := 2.0
-SONAME := 0
+include /usr/share/dpkg/default.mk
 
-# package names
-SHARED_PKG := libglib$(APIVER)-$(SONAME)
-DATA_PKG := libglib$(APIVER)-data
-TEST_PKG := libglib$(APIVER)-tests
-DEV_PKG := libglib$(APIVER)-dev
-BIN_PKG := libglib$(APIVER)-bin
-UDEB_PKG := libglib$(APIVER)-udeb
-DOC_PKG := libglib$(APIVER)-doc
-DEBUG_PKG := $(SHARED_PKG)-dbg
+%:
+	dh $@ --with gnome,python3
 
-DEB_MAKE_DESTDIRSKEL = $(CURDIR)/debian/install/@FLAVOR@
+override_dh_auto_configure:
+	dh_auto_configure \
+		--builddirectory=debian/build/deb \
+		-- \
+		$(DEB_CONFIGURE_EXTRA_FLAGS) \
+		$(DEB_CONFIGURE_FLAGS_deb) \
+		$(NULL)
+ifneq ($(filter %-udeb,$(binaries)),)
+	dh_auto_configure \
+		--builddirectory=debian/build/udeb \
+		-- \
+		$(DEB_CONFIGURE_EXTRA_FLAGS) \
+		$(DEB_CONFIGURE_FLAGS_udeb) \
+		$(NULL)
+endif
 
-DEB_CLEAN_EXCLUDE = org.gtk.test.gschema.xml.orig
+override_dh_clean:
+	rm -rf $(CURDIR)/debian/build \
+	       $(CURDIR)/debian/install \
+	       $(CURDIR)/debian/tmp-xdg-runtime-dir
+	dh_clean -Xorg.gtk.test.gschema.xml.orig
 
-DEB_DH_INSTALL_ARGS += --sourcedir=debian/install/deb
-DEB_DH_INSTALL_ARGS_$(TEST_PKG) += --sourcedir=debian/install/deb -X.la
-DEB_DH_INSTALL_ARGS_$(UDEB_PKG) += --sourcedir=debian/install/udeb
+override_dh_makeshlibs:
+	dh_makeshlibs -plibglib2.0-tests -n
+	dh_makeshlibs --remaining-packages -V --add-udeb=libglib2.0-udeb -- -c4
 
-DEB_DH_MAKESHLIBS_ARGS_$(SHARED_PKG) += -V --add-udeb=$(UDEB_PKG) -- -c4
-# Don't put the symbols in the -dbg package
-DEB_DH_STRIP_ARGS_$(UDEB_PKG) =
+override_dh_strip:
+	dh_strip --dbgsym-migration='libglib2.0-0-dbg (<< 2.51.4-1~)'
 
+# (Ubuntu-specific)
 # Don't strip translations from the installed tests; makes them environment dependent.
-DEB_DH_TRANSLATIONS_ARGS = -Xinstalled-tests
+override_dh_translations:
+	dh_translations -Xinstalled-tests
 
 # Do not clutter $HOME with ~/.dbus-keyrings and avoid failure on the buildds
 # where creating /home/buildd/.dbus-keyrings fails
@@ -75,9 +78,11 @@ unexport XDG_DATA_DIRS
 export DBUS_SESSION_BUS_ADDRESS=this-should-not-be-used-and-will-fail:
 
 ifeq ($(DEB_HOST_ARCH_OS), linux)
-  DEB_MAKE_CHECK_TARGET = $(if $(filter deb, $(cdbs_make_curflavor)), -k check -j1)
+override_dh_auto_test:
+	dh_auto_test -- --builddirectory=debian/build/deb -k check -j1
 else
-  DEB_MAKE_CHECK_TARGET = $(if $(filter deb, $(cdbs_make_curflavor)), -k check -j1 || true)
+override_dh_auto_test:
+	dh_auto_test -- --builddirectory=debian/build/deb -k check -j1 || true
 endif
 
 # The tests assume this directory exists and is writable
@@ -88,8 +93,8 @@ export VERBOSE=1
 
 # configure flags
 DEB_CONFIGURE_EXTRA_FLAGS := \
-			--with-html-dir=\$${prefix}/share/doc/$(DOC_PKG) \
-			--libdir=\$${prefix}/lib/$(DEB_HOST_MULTIARCH) \
+			--with-html-dir=\$${prefix}/share/doc/libglib2.0-doc \
+			--libexecdir=\$${prefix}/lib/glib2.0 \
 			--with-python=/usr/bin/python3 \
 			--with-pcre=system
 
@@ -120,41 +125,53 @@ DEB_CONFIGURE_FLAGS_udeb := \
 			--disable-selinux \
 			--disable-libmount
 
-pre-build::
-	mkdir -p debian/stamp-makefile-check \
-		 debian/tmp-xdg-runtime-dir
+override_dh_auto_build:
+	mkdir -p debian/tmp-xdg-runtime-dir
+	dh_auto_build --builddirectory=debian/build/deb
+ifneq ($(filter %-udeb,$(binaries)),)
+	dh_auto_build --builddirectory=debian/build/udeb
+endif
 
-binary-install/libglib2.0-0::
+override_dh_auto_install:
 	set -e; for script in postinst postrm triggers; do \
 		sed -e"s/#MULTIARCH#/$(DEB_HOST_MULTIARCH)/g" \
 		    -e"s/#ARCH#/$(DEB_HOST_ARCH)/g" \
-		    debian/$(cdbs_curpkg).$$script.in \
-		    > debian/$(cdbs_curpkg).$$script ; \
+		    debian/libglib2.0-0.$$script.in \
+		    > debian/libglib2.0-0.$$script ; \
 	done
+	dh_auto_install -plibglib2.0-tests --sourcedir=debian/build/deb -X.la
+ifneq ($(filter %-udeb,$(binaries)),)
+	dh_auto_install -plibglib2.0-udeb --builddirectory=debian/build/udeb --destdir=debian/install/udeb
+endif
+	dh_auto_install --remaining-packages --builddirectory=debian/build/deb --destdir=debian/install/deb
 
-binary-install/libglib2.0-dev::
-	dh_python3 -plibglib2.0-dev /usr/share/glib-2.0/codegen
+override_dh_python3:
+	dh_python3 -plibglib2.0-dev-bin /usr/share/glib-2.0/codegen
 
-clean::
-	sed \
-		-e "s#@SONAME@#$(SONAME)#g" \
-		-e "s#@APIVER@#$(APIVER)#g" \
-		-e "s#@VERSION@#$(DEB_UPSTREAM_VERSION)#g" \
-		-e "s#@SHARED_PKG@#$(SHARED_PKG)#g" \
-		-e "s#@BIN_PKG@#$(BIN_PKG)#g" \
-		-e "s#@DATA_PKG@#$(DATA_PKG)#g" \
-		-e "s#@DEV_PKG@#$(DEV_PKG)#g" \
-		-e "s#@UDEB_PKG@#$(UDEB_PKG)#g" \
-		-e "s#@DOC_PKG@#$(DOC_PKG)#g" \
-		-e "s#@DEBUG_PKG@#$(DEBUG_PKG)#g" \
-		-e "s#@GNOME_TEAM@#$(UPLOADERS)#g" \
-		debian/control.in > debian/control
-	rm -rf $(CURDIR)/debian/build \
-	       $(CURDIR)/debian/install \
-	       $(CURDIR)/debian/stamp-makefile-check \
-	       $(CURDIR)/debian/tmp-xdg-runtime-dir
-
-list-missing:
-	# FIXME: remove this when CDBS' list-missing works with multiple flavors
-	perl -w debian/dh_listmissing.pl $(foreach f,$(DEB_MAKE_FLAVORS),debian/install/$(f)) 2>&1 | \
-	    egrep -v '(\.la|\.pyc|\.pyo) has been installed' >&2
+override_dh_install:
+	# Unwanted bits from the .deb build
+	rm -f debian/install/deb/lib/*/*.la
+	rm -f debian/install/deb/usr/lib/*/*.la
+	rm -f debian/install/deb/usr/lib/glib2.0/installed-tests/glib/*.la
+	rm -f debian/install/deb/usr/lib/glib2.0/installed-tests/glib/modules/*.la
+	rm -fr debian/install/deb/usr/share/glib-2.0/codegen/__pycache__
+	# Re-created by .links to point into /lib
+	rm -f debian/install/deb/usr/lib/*/libglib-2.0.so
+ifneq ($(filter %-udeb,$(binaries)),)
+	# Unwanted bits from the .udeb build
+	rm -f debian/install/udeb/lib/*/*.la
+	rm -f debian/install/udeb/usr/lib/*/*.la
+	rm -f debian/install/udeb/usr/lib/*/*.so
+	rm -fr debian/install/udeb/usr/share/gdb
+	rm -fr debian/install/udeb/usr/share/gettext/its
+	rm -fr debian/install/udeb/usr/share/glib-2.0/codegen
+	rm -fr debian/install/udeb/usr/share/glib-2.0/gdb
+	rm -fr debian/install/udeb/usr/share/glib-2.0/valgrind
+	rm -fr debian/install/udeb/usr/share/man
+	dh_install -plibglib2.0-udeb --sourcedir=debian/install/udeb --list-missing
+endif
+	# Put the gdb script in .../gdb/auto-load/lib, as we install libglib*.so in there
+	mkdir -p debian/install/deb/usr/share/gdb/auto-load/lib/${DEB_HOST_MULTIARCH}/
+	mv debian/install/deb/usr/share/gdb/auto-load/usr/lib/${DEB_HOST_MULTIARCH}/libglib*so*py \
+		debian/install/deb/usr/share/gdb/auto-load/lib/${DEB_HOST_MULTIARCH}/
+	dh_install --remaining-packages --sourcedir=debian/install/deb --list-missing

@@ -210,7 +210,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_content_type_guess@Base 2.16.0
  g_content_type_guess_for_tree@Base 2.18.0
  g_content_type_is_a@Base 2.16.0
- g_content_type_is_mime_type@Base 2.52.3
+ g_content_type_is_mime_type@Base 2.51.5
  g_content_type_is_unknown@Base 2.16.0
  g_content_types_get_registered@Base 2.16.0
  g_converter_convert@Base 2.24.0
@@ -1877,7 +1877,9 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_is_mount_path_system_internal@Base 2.16.0
  g_unix_mount_at@Base 2.16.0
  g_unix_mount_compare@Base 2.16.0
- g_unix_mount_for@Base 2.52.3
+ g_unix_mount_copy@Base 2.53.1
+ g_unix_mount_entry_get_type@Base 2.53.1
+ g_unix_mount_for@Base 2.51.0
  g_unix_mount_free@Base 2.16.0
  g_unix_mount_get_device_path@Base 2.16.0
  g_unix_mount_get_fs_type@Base 2.16.0
@@ -1894,11 +1896,13 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_mount_monitor_new@Base 2.16.0
  g_unix_mount_monitor_set_rate_limit@Base 2.18.0
  g_unix_mount_point_compare@Base 2.16.0
+ g_unix_mount_point_copy@Base 2.53.1
  g_unix_mount_point_free@Base 2.16.0
  g_unix_mount_point_get_device_path@Base 2.16.0
  g_unix_mount_point_get_fs_type@Base 2.16.0
  g_unix_mount_point_get_mount_path@Base 2.16.0
  g_unix_mount_point_get_options@Base 2.31.8
+ g_unix_mount_point_get_type@Base 2.53.1
  g_unix_mount_point_guess_can_eject@Base 2.16.0
  g_unix_mount_point_guess_icon@Base 2.16.0
  g_unix_mount_point_guess_name@Base 2.16.0
@@ -1998,6 +2002,8 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_ascii_formatd@Base 2.12.0
  g_ascii_strcasecmp@Base 2.12.0
  g_ascii_strdown@Base 2.12.0
+ g_ascii_string_to_signed@Base 2.53.2
+ g_ascii_string_to_unsigned@Base 2.53.2
  g_ascii_strncasecmp@Base 2.12.0
  g_ascii_strtod@Base 2.12.0
  g_ascii_strtoll@Base 2.12.0
@@ -2738,6 +2744,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_node_traverse@Base 2.12.0
  g_node_unlink@Base 2.12.0
  g_nullify_pointer@Base 2.12.0
+ g_number_parser_error_quark@Base 2.53.2
  g_on_error_query@Base 2.12.0
  g_on_error_stack_trace@Base 2.12.0
  g_once_impl@Base 2.12.0
@@ -2803,6 +2810,8 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_propagate_error@Base 2.12.0
  g_propagate_prefixed_error@Base 2.16.0
  g_ptr_array_add@Base 2.12.0
+ g_ptr_array_find@Base 2.53.2
+ g_ptr_array_find_with_equal_func@Base 2.53.2
  g_ptr_array_foreach@Base 2.12.0
  g_ptr_array_free@Base 2.12.0
  g_ptr_array_insert@Base 2.39.4
@@ -3405,7 +3414,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_utf8_find_prev_char@Base 2.12.0
  g_utf8_get_char@Base 2.12.0
  g_utf8_get_char_validated@Base 2.12.0
- g_utf8_make_valid@Base 2.52.3
+ g_utf8_make_valid@Base 2.51.0
  g_utf8_normalize@Base 2.12.0
  g_utf8_offset_to_pointer@Base 2.12.0
  g_utf8_pointer_to_offset@Base 2.12.0
@@ -3424,8 +3433,8 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_utf8_to_utf16@Base 2.12.0
  g_utf8_validate@Base 2.12.0
  g_utime@Base 2.18.0
- g_uuid_string_is_valid@Base 2.52.3
- g_uuid_string_random@Base 2.52.3
+ g_uuid_string_is_valid@Base 2.51.2
+ g_uuid_string_random@Base 2.51.2
  g_variant_builder_add@Base 2.24.0
  g_variant_builder_add_parsed@Base 2.26.0
  g_variant_builder_add_value@Base 2.24.0
@@ -3715,12 +3724,14 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_enum_get_value_by_name@Base 2.12.0
  g_enum_get_value_by_nick@Base 2.12.0
  g_enum_register_static@Base 2.12.0
+ g_enum_to_string@Base 2.53.1
  g_error_get_type@Base 2.26.0
  g_flags_complete_type_info@Base 2.12.0
  g_flags_get_first_value@Base 2.12.0
  g_flags_get_value_by_name@Base 2.12.0
  g_flags_get_value_by_nick@Base 2.12.0
  g_flags_register_static@Base 2.12.0
+ g_flags_to_string@Base 2.53.1
  g_gstring_get_type@Base 2.12.0
  g_gtype_get_type@Base 2.12.0
  g_hash_table_get_type@Base 2.12.0
@@ -3756,6 +3767,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_object_get_qdata@Base 2.12.0
  g_object_get_type@Base 2.18.0
  g_object_get_valist@Base 2.12.0
+ g_object_getv@Base 2.53.1
  g_object_interface_find_property@Base 2.12.0
  g_object_interface_install_property@Base 2.12.0
  g_object_interface_list_properties@Base 2.12.0
@@ -3763,6 +3775,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_object_new@Base 2.12.0
  g_object_new_valist@Base 2.12.0
  g_object_newv@Base 2.12.0
+ g_object_new_with_properties@Base 2.53.1
  g_object_notify@Base 2.12.0
  g_object_notify_by_pspec@Base 2.26.0
  g_object_ref@Base 2.12.0
@@ -3779,6 +3792,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_object_set_qdata@Base 2.12.0
  g_object_set_qdata_full@Base 2.12.0
  g_object_set_valist@Base 2.12.0
+ g_object_setv@Base 2.53.1
  g_object_steal_data@Base 2.12.0
  g_object_steal_qdata@Base 2.12.0
  g_object_thaw_notify@Base 2.12.0
