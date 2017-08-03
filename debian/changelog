@@ -1,4 +1,4 @@
-glib2.0 (2.53.4-3) UNRELEASED; urgency=medium
+glib2.0 (2.53.4-3) unstable; urgency=medium
 
   [ Matthias Klumpp ]
   * Update Vcs-* URLs
@@ -11,7 +11,7 @@ glib2.0 (2.53.4-3) UNRELEASED; urgency=medium
   * Add git_glib-mkenums-flags.patch:
     - Backport commit to fix mate-panel FTBFS (Closes: #870212)
 
- -- Matthias Klumpp <mak@debian.org>  Sun, 30 Jul 2017 14:07:26 +0200
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Thu, 03 Aug 2017 12:21:04 -0400
 
 glib2.0 (2.53.4-2) unstable; urgency=medium
 
