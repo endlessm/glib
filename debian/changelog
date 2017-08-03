@@ -5,6 +5,9 @@ glib2.0 (2.53.4-3) UNRELEASED; urgency=medium
 
   [ Jeremy Bicha ]
   * Bump Breaks/Replaces: libglib2.0-dev to 2.53 (Closes: #867679)
+  * Add git_glib-mkenums-utf8.patch:
+    - Backport commit to fix "glib-mkenums: UnicodeDecodeError"
+      (Closes: #870310)
 
  -- Matthias Klumpp <mak@debian.org>  Sun, 30 Jul 2017 14:07:26 +0200
 

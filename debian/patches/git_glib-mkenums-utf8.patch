@@ -1,0 +1,54 @@
+From c2dace6b8b982ca821edc29501c7635d008a8357 Mon Sep 17 00:00:00 2001
+From: Christoph Reiter <creiter@src.gnome.org>
+Date: Wed, 19 Jul 2017 11:43:47 +0200
+Subject: glib-mkenums: Use utf-8 for reading files
+
+On Windows open() defaults to ANSI and on Python 2 it doesn't take
+an encoding. Use io.open() instead which provides the same interface
+on both Python versions.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=785113
+---
+ gobject/glib-mkenums.in | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/gobject/glib-mkenums.in b/gobject/glib-mkenums.in
+index 3b9a30c..e22b317 100755
+--- a/gobject/glib-mkenums.in
++++ b/gobject/glib-mkenums.in
+@@ -14,6 +14,7 @@ import os
+ import re
+ import sys
+ import tempfile
++import io
+ 
+ VERSION_STR = '''glib-mkenums version @VERSION@
+ glib-genmarshal comes with ABSOLUTELY NO WARRANTY.
+@@ -147,7 +148,7 @@ def parse_entries(file, file_name):
+         m = re.match(r'\#include\s*<([^>]*)>', line)
+         if m:
+             newfilename = os.path.join("..", m.group(1))
+-            newfile = open(newfilename)
++            newfile = io.open(newfilename, encoding="utf-8")
+ 
+             if not parse_entries(newfile, newfilename):
+                 return False
+@@ -243,7 +244,7 @@ def read_template_file(file):
+            }
+     in_ = 'junk'
+ 
+-    ifile = open(file)
++    ifile = io.open(file, encoding="utf-8")
+     for line in ifile:
+         m = re.match(r'\/\*\*\*\s+(BEGIN|END)\s+([\w-]+)\s+\*\*\*\/', line)
+         if m:
+@@ -397,7 +398,7 @@ def process_file(curfilename):
+     firstenum = True
+ 
+     try:
+-        curfile = open(curfilename)
++        curfile = io.open(curfilename, encoding="utf-8")
+     except FileNotFoundError:
+         print_warning('No file "{}" found.'.format(curfilename))
+         return
+
