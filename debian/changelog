@@ -8,6 +8,8 @@ glib2.0 (2.53.4-3) UNRELEASED; urgency=medium
   * Add git_glib-mkenums-utf8.patch:
     - Backport commit to fix "glib-mkenums: UnicodeDecodeError"
       (Closes: #870310)
+  * Add git_glib-mkenums-flags.patch:
+    - Backport commit to fix mate-panel FTBFS (Closes: #870212)
 
  -- Matthias Klumpp <mak@debian.org>  Sun, 30 Jul 2017 14:07:26 +0200
 

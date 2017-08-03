@@ -1,0 +1,59 @@
+From 8cc99502022944917f5dd78ce1d1427582081396 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Alberts=20Muktup=C4=81vels?= <alberts.muktupavels@gmail.com>
+Date: Tue, 1 Aug 2017 12:18:42 +0300
+Subject: glib-mkenums: fix parsing of flags annotation
+
+https://bugzilla.gnome.org/show_bug.cgi?id=779332
+---
+ gobject/glib-mkenums.in |   15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
+
+--- a/gobject/glib-mkenums.in
++++ b/gobject/glib-mkenums.in
+@@ -74,7 +74,7 @@ def write_output(output):
+ 
+ # glib-mkenums.py
+ # Information about the current enumeration
+-flags = False               # Is enumeration a bitmask?
++flags = None # Is enumeration a bitmask?
+ option_underscore_name = '' # Overriden underscore variant of the enum name
+                             # for example to fix the cases we don't get the
+                             # mixed-case -> underscorized transform right.
+@@ -187,7 +187,7 @@ def parse_entries(file, file_name):
+                 value = groups[1]
+             if len(groups) > 2:
+                 options = groups[2]
+-            if not flags and value is not None and '<<' in value:
++            if flags is None and value is not None and '<<' in value:
+                 seenbitshift = 1
+ 
+             if options is not None:
+@@ -436,12 +436,17 @@ def process_file(curfilename):
+                 if 'skip' in options:
+                     continue
+                 enum_prefix = options.get('prefix', None)
+-                flags = 'flags' in options
++                flags = options.get('flags', None)
++                if 'flags' in options:
++                    if flags is None:
++                        flags = 1
++                    else:
++                        flags = int(flags)
+                 option_lowercase_name = options.get('lowercase_name', None)
+                 option_underscore_name = options.get('underscore_name', None)
+             else:
+                 enum_prefix = None
+-                flags = False
++                flags = None
+                 option_lowercase_name = None
+                 option_underscore_name = None
+ 
+@@ -466,7 +471,7 @@ def process_file(curfilename):
+             parse_entries(curfile, curfilename)
+ 
+             # figure out if this was a flags or enums enumeration
+-            if not flags:
++            if flags is None:
+                 flags = seenbitshift
+ 
+             # Autogenerate a prefix
