@@ -7,7 +7,7 @@ Section: libs
 Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
 Uploaders: Iain Lane <laney@debian.org>, Matthias Klumpp <mak@debian.org>
-Build-Depends: debhelper (>= 10~),
+Build-Depends: debhelper (>= 10.3~),
                dh-exec,
                dh-python,
                pkg-config (>= 0.16.0),

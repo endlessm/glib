@@ -1,3 +1,16 @@
+glib2.0 (2.53.5-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+  * git_glib-mkenums-utf8.patch, git_glib-mkenums-flags.patch: Drop, now
+    applied upstream.
+  * debian/rules: Don't pass -X.la to dh_auto_install - it can easily lead to
+    unwanted removals (not claiming this is happening here)
+  * debian/rules: Fix arguments to dh_auto_test so tests are run again
+  * debian/rules, debian/control{,.in}: Use dh_missing and not dh_install
+    --list-missing. Also upgrade this check to --fail-missing.
+
+ -- Iain Lane <laney@debian.org>  Thu, 10 Aug 2017 16:44:13 +0100
+
 glib2.0 (2.53.4-3) unstable; urgency=medium
 
   [ Matthias Klumpp ]
