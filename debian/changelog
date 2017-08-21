@@ -8,6 +8,8 @@ glib2.0 (2.53.5-1) UNRELEASED; urgency=medium
   * debian/rules: Fix arguments to dh_auto_test so tests are run again
   * debian/rules, debian/control{,.in}: Use dh_missing and not dh_install
     --list-missing. Also upgrade this check to --fail-missing.
+  * debian/rules: Don't run the tests under fakeroot; it makes them fail with
+    dbus-related authentication problems.
 
  -- Iain Lane <laney@debian.org>  Thu, 10 Aug 2017 16:44:13 +0100
 

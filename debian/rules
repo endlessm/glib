@@ -79,10 +79,10 @@ export DBUS_SESSION_BUS_ADDRESS=this-should-not-be-used-and-will-fail:
 
 ifeq ($(DEB_HOST_ARCH_OS), linux)
 override_dh_auto_test:
-	dh_auto_test --builddirectory=debian/build/deb -- -k check -j1
+	env -u LD_PRELOAD dh_auto_test --builddirectory=debian/build/deb -- -k check -j1
 else
 override_dh_auto_test:
-	dh_auto_test --builddirectory=debian/build/deb -- -k check -j1 || true
+	env -u LD_PRELOAD dh_auto_test --builddirectory=debian/build/deb -- -k check -j1 || true
 endif
 
 # The tests assume this directory exists and is writable
