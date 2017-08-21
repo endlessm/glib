@@ -1,4 +1,4 @@
-glib2.0 (2.53.6-1) UNRELEASED; urgency=medium
+glib2.0 (2.53.6-1) unstable; urgency=medium
 
   * New upstream release.
   * git_glib-mkenums-utf8.patch, git_glib-mkenums-flags.patch: Drop, now
@@ -11,7 +11,7 @@ glib2.0 (2.53.6-1) UNRELEASED; urgency=medium
   * debian/rules: Don't run the tests under fakeroot; it makes them fail with
     dbus-related authentication problems.
 
- -- Iain Lane <laney@debian.org>  Thu, 10 Aug 2017 16:44:13 +0100
+ -- Iain Lane <laney@debian.org>  Mon, 21 Aug 2017 17:01:22 +0100
 
 glib2.0 (2.53.4-3) unstable; urgency=medium
 
