@@ -1,14 +1,227 @@
-glib2.0 (2.50.2-0) unstable; urgency=medium
+glib2.0 (2.53.6-0) unstable; urgency=medium
 
-  * Endless release. We are forcing a lower version for jenkins.
+  * New upstream release.
+  * git_glib-mkenums-utf8.patch, git_glib-mkenums-flags.patch: Drop, now
+    applied upstream.
+  * debian/rules: Don't pass -X.la to dh_auto_install - it can easily lead to
+    unwanted removals (not claiming this is happening here)
+  * debian/rules: Fix arguments to dh_auto_test so tests are run again
+  * debian/rules, debian/control{,.in}: Use dh_missing and not dh_install
+    --list-missing. Also upgrade this check to --fail-missing.
+  * debian/rules: Don't run the tests under fakeroot; it makes them fail with
+    dbus-related authentication problems.
 
- -- Philip Chimento <philip@endlessm.com>  Mon, 28 Nov 2016 15:59:55 -0800
+ -- Iain Lane <laney@debian.org>  Mon, 21 Aug 2017 17:01:22 +0100
+
+glib2.0 (2.53.4-3) unstable; urgency=medium
+
+  [ Matthias Klumpp ]
+  * Update Vcs-* URLs
+
+  [ Jeremy Bicha ]
+  * Bump Breaks/Replaces: libglib2.0-dev to 2.53 (Closes: #867679)
+  * Add git_glib-mkenums-utf8.patch:
+    - Backport commit to fix "glib-mkenums: UnicodeDecodeError"
+      (Closes: #870310)
+  * Add git_glib-mkenums-flags.patch:
+    - Backport commit to fix mate-panel FTBFS (Closes: #870212)
+
+ -- Jeremy Bicha <jbicha@ubuntu.com>  Thu, 03 Aug 2017 12:21:04 -0400
+
+glib2.0 (2.53.4-2) unstable; urgency=medium
+
+  * Upload to unstable
+
+ -- Matthias Klumpp <mak@debian.org>  Sun, 30 Jul 2017 12:54:22 +0200
+
+glib2.0 (2.53.4-1) experimental; urgency=medium
+
+  * New upstream release 2.53.4
+    + Unicode support has been updated to Unicode 10.0.0
+    + glib-genmarshal and glib-mkenums have been rewritten in python
+    + GLib can now be built with meson. autotools are still supported
+
+ -- Iain Lane <laney@debian.org>  Wed, 19 Jul 2017 17:32:31 +0100
+
+glib2.0 (2.53.3-1) experimental; urgency=medium
+
+  * New upstream release 2.53.3.
+  * d/p/0001-gdatetime-Fix-a-potential-overflow-in-overflow-calcu.patch,
+    d/p/0002-tests-Fix-GDateTime-overflow-tests-on-32-bit-archite.patch,
+    d/p/0003-tests-Fix-overflows-in-find_maximum_supported_tv_sec.patch:
+    Cherry-picks to fix some overflow problems in GDateTime on 32 bit arches.
+
+ -- Iain Lane <laney@debian.org>  Fri, 23 Jun 2017 11:09:22 +0100
+
+glib2.0 (2.53.2-1) experimental; urgency=medium
+
+  * New upstream release 2.53.2
+    + A few new number parsing functions have been added:
+      - g_ascii_string_to_signed
+      - g_ascii_string_to_unsigned
+      These have better error handling than the existing ones.
+    + glib-mkenums now supports /*< private >*/ and /*< public >*/
+    + GSettings now consider XDG_DATA_HOME in addition to XDG_DATA_DIRS.
+  * debian/libglib2.0-0.symbols: Add new symbols for 2.53.1.
+  * debian/patches/skip-broken-dbus-appinfo-test.patch: Drop - this test works
+    now.
+
+ -- Iain Lane <laney@debian.org>  Mon, 12 Jun 2017 16:25:21 +0100
+
+glib2.0 (2.53.1-1) experimental; urgency=medium
+
+  * New upstream release 2.53.1
+    + The gdbus tool gained a wait command
+    + g_unix_signal_source_new support SIGWINCH now
+    + There are now g_enum_to_string and g_flags_to_string functions
+    + A new function to instantiate objects: g_objet_new_with_properties
+    + GParameter and related APIs have been deprecated
+  * debian/libglib2.0-0.symbols: Add new symbols for 2.53.1.
+
+ -- Iain Lane <laney@debian.org>  Fri, 05 May 2017 18:04:15 +0100
+
+glib2.0 (2.52.0-1) experimental; urgency=medium
+
+  * New upstream release 2.52.0
+  * d/p/tests-gdatetime-Use-a-real-rather-than-invented-time.patch: Drop,
+    applied in this release.
+
+ -- Iain Lane <laney@debian.org>  Mon, 20 Mar 2017 17:14:29 +0000
+
+glib2.0 (2.51.5-1) experimental; urgency=medium
+
+  * New upstream release 2.51.5
+  * Drop patches applied upstream in this release:
+    - Install-gdb-Python-helpers-as-data-not-as-executable.patch
+    - glib-mkenums-Sort-input-files-for-more-deterministic.patch
+  * debian/patches/tests-gdatetime-Use-a-real-rather-than-invented-time.patch:
+    Cherry-pick a patch from upstream to fix GDateTime tests when tzdata ≥
+    2017a is in use.
+  * debian/libglib2.0-dev.install: Install the gdb script for libglib-2.0.so.*
+    into .../lib instead of .../usr/lib - it needs to match the installed path
+    of the library and we put libglib-2.0.so.* into /lib.
+  * debian/libglib2.0-0.symbols: Add g_content_type_is_mime_type
+
+ -- Iain Lane <laney@debian.org>  Wed, 15 Mar 2017 13:55:41 +0000
+
+glib2.0 (2.51.4-1) experimental; urgency=medium
+
+  * Team upload
+  * New upstream release 2.51.4 (and 2.51.3)
+  * Build with dh instead of cdbs
+    - Move to debhelper compat level 10
+    - Use dpkg-buildflags variables to extend LDFLAGS
+    - Enable bindnow hardening
+    - Remove indirection via $(SHARED_PKG), etc. variables
+    - Let dh_gnome_clean update the Uploaders instead of reinventing it
+    - Install some missing files detected by dh_install --list-missing
+    - Fix lintian warnings about useless use of dh-exec
+    - debian/dh_listmissing.pl: Remove
+  * Improve packaging for cross-compiling (Closes: #648621, #842442)
+    - Move glib-genmarshal and related files to a new M-A:foreign package
+      libglib2.0-dev-bin. Thanks to Helmut Grohne for the patch.
+    - Additionally move gdbus-codegen and gtester-report to
+      libglib2.0-dev-bin.  They are architecture-independent, so in
+      particular clearly Multi-Arch: foreign; they aren't large enough to
+      justify a separate Architecture: all package. This works around
+      dh_python3's postinst snippet failing when used in a Multi-Arch: same
+      package with more than one instance installed.
+    - Move gtester to libglib2.0-dev-bin. It is a test-runner that can
+      operate on any executable, and does not rely on a matching architecture.
+    - Move gobject-query to libglib2.0-dev-bin. It prints the same things on
+      all architectures, and it isn't clear what use it is; glib-2.0.m4
+      checks for it and AC_SUBSTs it, but according to codesearch.debian.net
+      no package actually seems to run it.
+    - Make libglib2.0-dev Multi-Arch: same
+  * Move gdb helpers from libglib2.0-0-dbg to libglib2.0-dev, move
+    detached debug symbols from libglib2.0-0-dbg to autogenerated -dbgsym
+    packages, and remove the libglib2.0-0-dbg binary package
+  * Add support for noudeb build profile
+    - Do not do the udeb build if the noudeb profile is selected,
+      for faster test-builds
+  * Fix assorted Lintian warnings
+    - Add missing build-dependency on dh-python
+      + remove obsolete Lintian override for mmissing B-D on python
+    - Add Lintian overrides for some intentionally weird scripts used in tests
+    - Do not install glib_gdb.py, gobject_gdb.py executable. They are
+      libraries to be imported by the gdb hooks, not scripts.
+    - Don't generate a ldconfig trigger for libglib2.0-tests, which does
+      not contain any public shared libraries
+  * Add patch to make glib-mkenums output more reproducible (Closes: #809152)
+  * Explicitly build-depend on automake so that the aspcud resolver used for
+    experimental does not decide automake1.11 is the best solution to
+    a dependency on automake | automaken
+
+ -- Simon McVittie <smcv@debian.org>  Sat, 04 Mar 2017 17:00:47 +0000
+
+glib2.0 (2.51.2-1) experimental; urgency=medium
+
+  * New upstream release 2.51.2 (& 2.51.1).
+    + Minimal support for UUIDs has been added
+    + A new file attribute, G_FILE_ATTRIBUTE_RECENT_MODIFIED has been added to
+      improve sorting of recent files
+    + glib-compile-resources grew a --generate-phony-targets flag
+    + GLib now installs a valgrind suppressions file for GLib and GIO
+  * debian/patches/skip-brokwn-dbus-appinfo-test.patch: Refresh (and fix the
+    typo in the filename)
+  * debian/libglib2.0-0.symbols: Add g_uuid* symbols which are new in this
+    release
+
+ -- Iain Lane <laney@debian.org>  Tue, 14 Feb 2017 14:16:05 +0000
+
+glib2.0 (2.51.0-2) experimental; urgency=medium
+
+  * Merge changes from 2.50.2-2:
+    + debian/rules: disable libmount on !linux (Closes: #844052)
+    + debian/patches/0001-Fix-trashing-on-overlayfs.patch: Update with new
+      version from the upstream report to hopefully fix trashing of files in
+      directories which are symlinks to different devices. (Closes: #800047)
+      (LP: #1638245)
+
+ -- Iain Lane <laney@debian.org>  Wed, 23 Nov 2016 17:36:07 +0000
+
+glib2.0 (2.51.0-1) experimental; urgency=medium
+
+  * debian/control{,.in}: Branch to experimental
+  * debian/watch: Track unstable releases again.
+  * New upstream release 2.51.0
+    + glib-genmarshal and glib-mkenums have gained --output options for better
+      build system integration
+    + New API: g_utf8_make_valid
+  * Update debian/libglib2.0-0.symbols.
+
+ -- Iain Lane <laney@debian.org>  Wed, 16 Nov 2016 18:23:38 +0000
+
+glib2.0 (2.52.3-1) unstable; urgency=medium
+
+  * New upstream release.
+  * skip-brokwn-dbus-appinfo-test.patch,
+    tests-gdatetime-Use-a-real-rather-than-invented-time.patch:
+    + Dropped, applied upstream.
+  * debian/libglib2.0-0.symbols:
+    + Add new symbols.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Fri, 23 Jun 2017 21:06:46 +0200
+
+glib2.0 (2.50.3-2) unstable; urgency=medium
+
+  * debian/patches/tests-gdatetime-Use-a-real-rather-than-invented-time.patch:
+    Cherry-pick a patch from upstream to fix GDateTime tests when tzdata ≥
+    2017a is in use. (Closes: #858214)
+
+ -- Michael Biebl <biebl@debian.org>  Mon, 20 Mar 2017 00:21:57 +0100
+
+glib2.0 (2.50.3-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 15 Feb 2017 19:00:01 +0100
 
 glib2.0 (2.50.2-2) unstable; urgency=medium
 
   * debian/rules: disable libmount on !linux (Closes: #844052)
   * debian/patches/0001-Fix-trashing-on-overlayfs.patch: Update with new
-    version from the upsstream report to hopefully fix trashing of files in
+    version from the upstream report to hopefully fix trashing of files in
     directories which are symlinks to different devices. (Closes: #800047)
 
  -- Iain Lane <laney@debian.org>  Wed, 23 Nov 2016 16:33:21 +0000
