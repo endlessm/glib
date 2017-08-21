@@ -1,4 +1,4 @@
-glib2.0 (2.53.5-1) UNRELEASED; urgency=medium
+glib2.0 (2.53.6-1) UNRELEASED; urgency=medium
 
   * New upstream release.
   * git_glib-mkenums-utf8.patch, git_glib-mkenums-flags.patch: Drop, now
