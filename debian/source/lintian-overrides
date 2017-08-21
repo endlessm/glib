@@ -1,2 +1,0 @@
-# we build-depend on python:all but lintian doesn't understand that, #733733
-glib2.0 source: missing-build-dependency-for-dh_-command dh_python2 => python | python-all | python-dev | python-all-dev
