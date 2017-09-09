@@ -3,6 +3,8 @@ glib2.0 (2.53.7-1) UNRELEASED; urgency=medium
   * New upstream release.
   * debian/patches/81-skip-monitor-test-on-non-linux.patch:
     + Refreshed.
+  * debian/control.in: drop automake and autotools-dev build dependencies,
+    dh-autoreconf does that for us.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 09 Sep 2017 12:33:49 +0200
 
