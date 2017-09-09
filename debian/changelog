@@ -1,6 +1,8 @@
 glib2.0 (2.53.7-1) UNRELEASED; urgency=medium
 
   * New upstream release.
+  * debian/patches/81-skip-monitor-test-on-non-linux.patch:
+    + Refreshed.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 09 Sep 2017 12:33:49 +0200
 
