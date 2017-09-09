@@ -1,4 +1,4 @@
-glib2.0 (2.53.7-1) UNRELEASED; urgency=medium
+glib2.0 (2.53.7-1) unstable; urgency=medium
 
   * New upstream release.
   * debian/patches/81-skip-monitor-test-on-non-linux.patch:
@@ -7,7 +7,7 @@ glib2.0 (2.53.7-1) UNRELEASED; urgency=medium
     dh-autoreconf does that for us.
   * Bump Standards-Version to 4.1.0; no changes needed.
 
- -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 09 Sep 2017 12:33:49 +0200
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 09 Sep 2017 15:11:02 +0200
 
 glib2.0 (2.53.6-1) unstable; urgency=medium
 
