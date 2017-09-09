@@ -5,6 +5,7 @@ glib2.0 (2.53.7-1) UNRELEASED; urgency=medium
     + Refreshed.
   * debian/control.in: drop automake and autotools-dev build dependencies,
     dh-autoreconf does that for us.
+  * Bump Standards-Version to 4.1.0; no changes needed.
 
  -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 09 Sep 2017 12:33:49 +0200
 
