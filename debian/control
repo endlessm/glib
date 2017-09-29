@@ -6,7 +6,7 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
-Uploaders: Emilio Pozuelo Monfort <pochu@debian.org>, Iain Lane <laney@debian.org>, Matthias Klumpp <mak@debian.org>
+Uploaders: Emilio Pozuelo Monfort <pochu@debian.org>, Iain Lane <laney@debian.org>, Matthias Klumpp <mak@debian.org>, Michael Biebl <biebl@debian.org>
 Build-Depends: debhelper (>= 10.3~),
                dh-exec,
                dh-python,
