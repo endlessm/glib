@@ -6,7 +6,7 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
-Uploaders: Emilio Pozuelo Monfort <pochu@debian.org>, Iain Lane <laney@debian.org>, Matthias Klumpp <mak@debian.org>, Michael Biebl <biebl@debian.org>
+Uploaders: Emilio Pozuelo Monfort <pochu@debian.org>, Iain Lane <laney@debian.org>, Jeremy Bicha <jbicha@debian.org>, Matthias Klumpp <mak@debian.org>
 Build-Depends: debhelper (>= 10.3~),
                dh-exec,
                dh-python,
@@ -35,7 +35,7 @@ Build-Depends: debhelper (>= 10.3~),
                docbook-xml,
                docbook-xsl,
                libffi-dev (>= 3.0.0)
-Standards-Version: 4.1.0
+Standards-Version: 4.1.1
 Homepage: http://www.gtk.org/
 Vcs-Browser: https://anonscm.debian.org/viewvc/pkg-gnome/desktop/unstable/glib2.0/
 Vcs-Svn: svn://anonscm.debian.org/pkg-gnome/desktop/unstable/glib2.0/

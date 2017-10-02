@@ -2,6 +2,7 @@ glib2.0 (2.54.1-1) UNRELEASED; urgency=medium
 
   [ Jeremy Bicha ]
   * New upstream release
+  * Bump Standards-Version to 4.1.1
 
   [ Michael Biebl ]
   * Drop uploaders.mk include as it breaks the clean target.
