@@ -11,6 +11,8 @@ glib2.0 (2.54.1-2) UNRELEASED; urgency=medium
     - Note that gtk-doc-tools is still in Build-Depends, not
       Build-Depends-Indep, because we need it for autoreconf
   * Explicitly disable documentation for the udeb build
+  * Skip build-time tests for Arch:all builds - testing once per
+    architecture is sufficient
 
  -- Didier Roche <didrocks@ubuntu.com>  Thu, 05 Oct 2017 09:40:31 +0200
 
