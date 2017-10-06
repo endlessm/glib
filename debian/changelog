@@ -13,6 +13,8 @@ glib2.0 (2.54.1-2) UNRELEASED; urgency=medium
   * Explicitly disable documentation for the udeb build
   * Skip build-time tests for Arch:all builds - testing once per
     architecture is sufficient
+  * Remove unused lintian override for an example file that is no
+    longer installed
 
  -- Didier Roche <didrocks@ubuntu.com>  Thu, 05 Oct 2017 09:40:31 +0200
 
