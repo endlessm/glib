@@ -1,8 +1,16 @@
 glib2.0 (2.54.1-2) UNRELEASED; urgency=medium
 
+  [ Didier Roche ]
   * debian/patches/01_gettext-desktopfiles.patch:
     - fix untranslated desktop action names when using gettext
       (Closes: #877761)
+
+  [ Simon McVittie ]
+  * Skip gtk-doc documentation unless we are building libglib2.0-doc,
+    fixing cross-builds (Closes: #870346)
+    - Note that gtk-doc-tools is still in Build-Depends, not
+      Build-Depends-Indep, because we need it for autoreconf
+  * Explicitly disable documentation for the udeb build
 
  -- Didier Roche <didrocks@ubuntu.com>  Thu, 05 Oct 2017 09:40:31 +0200
 

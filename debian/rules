@@ -98,18 +98,17 @@ DEB_CONFIGURE_EXTRA_FLAGS := \
 			--with-python=/usr/bin/python3 \
 			--with-pcre=system
 
-ifneq ($(DEB_BUILD_ARCH),$(DEB_HOST_ARCH))
-  DEB_CONFIGURE_EXTRA_FLAGS += \
-			--disable-modular-tests \
-			--disable-gtk-doc
-endif
-
 DEB_CONFIGURE_FLAGS_deb := \
-			--enable-gtk-doc \
 			--enable-static \
 			--enable-installed-tests \
 			--enable-always-build-tests \
 			--enable-debug=minimum
+
+ifneq ($(filter libglib2.0-doc,$(binaries)),)
+DEB_CONFIGURE_FLAGS_deb += --enable-gtk-doc
+else
+DEB_CONFIGURE_FLAGS_deb += --disable-gtk-doc
+endif
 
 # libmount is available on linux only
 ifeq ($(DEB_HOST_ARCH_OS), linux)
@@ -123,7 +122,8 @@ endif
 
 DEB_CONFIGURE_FLAGS_udeb := \
 			--disable-selinux \
-			--disable-libmount
+			--disable-libmount \
+			--disable-gtk-doc
 
 override_dh_auto_build:
 	mkdir -p debian/tmp-xdg-runtime-dir
