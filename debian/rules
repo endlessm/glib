@@ -1,6 +1,5 @@
 #!/usr/bin/make -f
 
-include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
 include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
 
 GNOME_MODULE := glib
@@ -78,12 +77,18 @@ unexport XDG_DATA_DIRS
 export DBUS_SESSION_BUS_ADDRESS=this-should-not-be-used-and-will-fail:
 
 ifeq ($(DEB_HOST_ARCH_OS), linux)
-override_dh_auto_test:
-	dh_auto_test -- --builddirectory=debian/build/deb -k check -j1
+override_dh_auto_test-arch:
+	# Remove LD_PRELOAD so we don't run with fakeroot, which makes dbus-related tests fail
+	env -u LD_PRELOAD dh_auto_test --builddirectory=debian/build/deb -- -k check -j1
 else
-override_dh_auto_test:
-	dh_auto_test -- --builddirectory=debian/build/deb -k check -j1 || true
+override_dh_auto_test-arch:
+	env -u LD_PRELOAD dh_auto_test --builddirectory=debian/build/deb -- -k check -j1 || true
 endif
+
+# Skip build-time tests if all we are building is documentation; running
+# them once per architecture is plenty
+override_dh_auto_test-indep:
+	@:
 
 # The tests assume this directory exists and is writable
 export XDG_RUNTIME_DIR=$(CURDIR)/debian/tmp-xdg-runtime-dir
@@ -98,18 +103,17 @@ DEB_CONFIGURE_EXTRA_FLAGS := \
 			--with-python=/usr/bin/python3 \
 			--with-pcre=system
 
-ifneq ($(DEB_BUILD_ARCH),$(DEB_HOST_ARCH))
-  DEB_CONFIGURE_EXTRA_FLAGS += \
-			--disable-modular-tests \
-			--disable-gtk-doc
-endif
-
 DEB_CONFIGURE_FLAGS_deb := \
-			--enable-gtk-doc \
 			--enable-static \
 			--enable-installed-tests \
 			--enable-always-build-tests \
 			--enable-debug=minimum
+
+ifneq ($(filter libglib2.0-doc,$(binaries)),)
+DEB_CONFIGURE_FLAGS_deb += --enable-gtk-doc
+else
+DEB_CONFIGURE_FLAGS_deb += --disable-gtk-doc
+endif
 
 # libmount is available on linux only
 ifeq ($(DEB_HOST_ARCH_OS), linux)
@@ -123,7 +127,8 @@ endif
 
 DEB_CONFIGURE_FLAGS_udeb := \
 			--disable-selinux \
-			--disable-libmount
+			--disable-libmount \
+			--disable-gtk-doc
 
 override_dh_auto_build:
 	mkdir -p debian/tmp-xdg-runtime-dir
@@ -139,7 +144,7 @@ override_dh_auto_install:
 		    debian/libglib2.0-0.$$script.in \
 		    > debian/libglib2.0-0.$$script ; \
 	done
-	dh_auto_install -plibglib2.0-tests --sourcedir=debian/build/deb -X.la
+	dh_auto_install -plibglib2.0-tests --sourcedir=debian/build/deb
 ifneq ($(filter %-udeb,$(binaries)),)
 	dh_auto_install -plibglib2.0-udeb --builddirectory=debian/build/udeb --destdir=debian/install/udeb
 endif
@@ -168,10 +173,14 @@ ifneq ($(filter %-udeb,$(binaries)),)
 	rm -fr debian/install/udeb/usr/share/glib-2.0/gdb
 	rm -fr debian/install/udeb/usr/share/glib-2.0/valgrind
 	rm -fr debian/install/udeb/usr/share/man
-	dh_install -plibglib2.0-udeb --sourcedir=debian/install/udeb --list-missing
+	dh_install -plibglib2.0-udeb --sourcedir=debian/install/udeb
 endif
 	# Put the gdb script in .../gdb/auto-load/lib, as we install libglib*.so in there
 	mkdir -p debian/install/deb/usr/share/gdb/auto-load/lib/${DEB_HOST_MULTIARCH}/
 	mv debian/install/deb/usr/share/gdb/auto-load/usr/lib/${DEB_HOST_MULTIARCH}/libglib*so*py \
 		debian/install/deb/usr/share/gdb/auto-load/lib/${DEB_HOST_MULTIARCH}/
-	dh_install --remaining-packages --sourcedir=debian/install/deb --list-missing
+	dh_install --remaining-packages --sourcedir=debian/install/deb
+
+override_dh_missing:
+	dh_missing --sourcedir=debian/install/udeb --fail-missing
+	dh_missing --sourcedir=debian/install/deb --fail-missing

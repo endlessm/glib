@@ -1,4 +1,71 @@
-glib2.0 (2.53.6-0) unstable; urgency=medium
+glib2.0 (2.54.2-1endless0) unstable; urgency=medium
+
+  * Rebase Endless changes on latest Debian Sid package
+    - Only difference from upstream is the
+      g_get_user_special_dir_for_desktop_id() symbol
+    - Apply all 13 patches from debian/patches/ to git and drop them from
+      the Debian directory
+    - Some of these patches were not applied in the previous Endless GLib
+      package, but I can see no reason why we had diverged from Debian;
+      they’re all unconditionally applied now
+    - Rebase the code on upstream/glib-2-54, including some patches which will
+      eventually be released in 2.54.3
+
+ -- Philip Withnall <withnall@endlessm.com>  Mon, 27 Nov 2017 08:56:00 +0000
+
+glib2.0 (2.54.2-1) unstable; urgency=medium
+
+  [ Jeremy Bicha ]
+  * New upstream release
+
+  [ Didier Roche ]
+  * debian/patches/01_gettext-desktopfiles.patch:
+    - fix untranslated desktop action names when using gettext
+      (Closes: #877761)
+
+  [ Simon McVittie ]
+  * Skip gtk-doc documentation unless we are building libglib2.0-doc,
+    fixing cross-builds (Closes: #870346)
+    - Note that gtk-doc-tools is still in Build-Depends, not
+      Build-Depends-Indep, because we need it for autoreconf
+  * Explicitly disable documentation for the udeb build
+  * Skip build-time tests for Arch:all builds - testing once per
+    architecture is sufficient
+  * Remove unused lintian override for an example file that is no
+    longer installed
+
+ -- Jeremy Bicha <jbicha@debian.org>  Fri, 27 Oct 2017 21:16:41 -0400
+
+glib2.0 (2.54.1-1) unstable; urgency=medium
+
+  [ Jeremy Bicha ]
+  * New upstream release
+  * Bump Standards-Version to 4.1.1
+
+  [ Michael Biebl ]
+  * Drop uploaders.mk include as it breaks the clean target.
+    Updating the Uploaders list is already handled by the gnome dh addon.
+
+ -- Jeremy Bicha <jbicha@debian.org>  Mon, 02 Oct 2017 12:13:25 -0400
+
+glib2.0 (2.54.0-1) unstable; urgency=medium
+
+  * New upstream stable release.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Mon, 11 Sep 2017 19:11:00 +0200
+
+glib2.0 (2.53.7-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/patches/81-skip-monitor-test-on-non-linux.patch:
+    + Refreshed.
+  * debian/control.in: drop automake and autotools-dev build dependencies,
+    dh-autoreconf does that for us.
+  * Bump Standards-Version to 4.1.0; no changes needed.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Sat, 09 Sep 2017 15:11:02 +0200
+
+glib2.0 (2.53.6-1) unstable; urgency=medium
 
   * New upstream release.
   * git_glib-mkenums-utf8.patch, git_glib-mkenums-flags.patch: Drop, now
