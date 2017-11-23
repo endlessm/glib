@@ -886,6 +886,16 @@ g_key_file_load_from_fd (GKeyFile       *key_file,
                                                     G_KEY_FILE_DESKTOP_GROUP,
                                                     G_KEY_FILE_DESKTOP_KEY_GETTEXT_DOMAIN,
                                                     NULL);
+  if (!key_file->gettext_domain)
+      key_file->gettext_domain = g_key_file_get_string (key_file,
+                                                        G_KEY_FILE_DESKTOP_GROUP,
+                                                        "X-Ubuntu-Gettext-Domain",
+                                                        NULL);
+  if (!key_file->gettext_domain)
+      key_file->gettext_domain = g_key_file_get_string (key_file,
+                                                        G_KEY_FILE_DESKTOP_GROUP,
+                                                        "X-Debian-Gettext-Domain",
+                                                        NULL);
 
   return TRUE;
 }
@@ -1003,6 +1013,16 @@ g_key_file_load_from_data (GKeyFile       *key_file,
                                                     G_KEY_FILE_DESKTOP_GROUP,
                                                     G_KEY_FILE_DESKTOP_KEY_GETTEXT_DOMAIN,
                                                     NULL);
+  if (!key_file->gettext_domain)
+      key_file->gettext_domain = g_key_file_get_string (key_file,
+                                                        G_KEY_FILE_DESKTOP_GROUP,
+                                                        "X-Ubuntu-Gettext-Domain",
+                                                        NULL);
+  if (!key_file->gettext_domain)
+      key_file->gettext_domain = g_key_file_get_string (key_file,
+                                                        G_KEY_FILE_DESKTOP_GROUP,
+                                                        "X-Debian-Gettext-Domain",
+                                                        NULL);
 
   return TRUE;
 }
