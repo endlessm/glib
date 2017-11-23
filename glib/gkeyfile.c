@@ -511,6 +511,7 @@ struct _GKeyFile
   GKeyFileFlags flags;
 
   gchar **locales;
+  gchar  *gettext_domain;
 
   volatile gint ref_count;
 };
@@ -636,6 +637,7 @@ g_key_file_init (GKeyFile *key_file)
   key_file->list_separator = ';';
   key_file->flags = 0;
   key_file->locales = g_strdupv ((gchar **)g_get_language_names ());
+  key_file->gettext_domain = NULL;
 }
 
 static void
@@ -653,6 +655,12 @@ g_key_file_clear (GKeyFile *key_file)
     {
       g_string_free (key_file->parse_buffer, TRUE);
       key_file->parse_buffer = NULL;
+    }
+
+  if (key_file->gettext_domain)
+    {
+       g_free (key_file->gettext_domain);
+       key_file->gettext_domain = NULL;
     }
 
   tmp = key_file->groups;
@@ -874,6 +882,11 @@ g_key_file_load_from_fd (GKeyFile       *key_file,
       return FALSE;
     }
 
+  key_file->gettext_domain = g_key_file_get_string (key_file,
+                                                    G_KEY_FILE_DESKTOP_GROUP,
+                                                    G_KEY_FILE_DESKTOP_KEY_GETTEXT_DOMAIN,
+                                                    NULL);
+
   return TRUE;
 }
 
@@ -985,6 +998,11 @@ g_key_file_load_from_data (GKeyFile       *key_file,
       g_propagate_error (error, key_file_error);
       return FALSE;
     }
+
+  key_file->gettext_domain = g_key_file_get_string (key_file,
+                                                    G_KEY_FILE_DESKTOP_GROUP,
+                                                    G_KEY_FILE_DESKTOP_KEY_GETTEXT_DOMAIN,
+                                                    NULL);
 
   return TRUE;
 }
@@ -2213,6 +2231,8 @@ g_key_file_get_locale_string (GKeyFile     *key_file,
   GError *key_file_error;
   gchar **languages;
   gboolean free_languages = FALSE;
+  gboolean try_gettext = FALSE;
+  const gchar *msg_locale;
   gint i;
 
   g_return_val_if_fail (key_file != NULL, NULL);
@@ -2234,6 +2254,25 @@ g_key_file_get_locale_string (GKeyFile     *key_file,
       free_languages = FALSE;
     }
   
+  /* we're only interested in gettext translation if we don't have a
+   * translation in the .desktop file itself and if the key is one of the keys
+   * we know we want to translate: Name, GenericName, Comment, Keywords.
+   * Blindly doing this for all keys can give strange result for the icons,
+   * since the Icon is a locale string in the spec, eg.  We also only get
+   * translation in the mo file if the requested locale is the LC_MESSAGES one.
+   * Ideally, we should do more and change LC_MESSAGES to use the requested
+   * locale, but there's no guarantee it's installed on the system and it might
+   * have some side-effects.  Since this is a corner case, let's ignore it. */
+  msg_locale = setlocale (LC_MESSAGES, NULL);
+  try_gettext = msg_locale && key_file->gettext_domain &&
+                (strcmp (group_name, G_KEY_FILE_DESKTOP_GROUP) == 0 ||
+                 g_str_has_prefix (group_name, G_KEY_FILE_DESKTOP_ACTION_GROUP_PREFIX)) &&
+                (strcmp (key, G_KEY_FILE_DESKTOP_KEY_NAME) == 0 ||
+                 strcmp (key, G_KEY_FILE_DESKTOP_KEY_FULLNAME) == 0 ||
+                 strcmp (key, G_KEY_FILE_DESKTOP_KEY_GENERIC_NAME) == 0 ||
+                 strcmp (key, G_KEY_FILE_DESKTOP_KEY_KEYWORDS) == 0 ||
+                 strcmp (key, G_KEY_FILE_DESKTOP_KEY_COMMENT) == 0);
+
   for (i = 0; languages[i]; i++)
     {
       candidate_key = g_strdup_printf ("%s[%s]", key, languages[i]);
@@ -2249,6 +2288,39 @@ g_key_file_get_locale_string (GKeyFile     *key_file,
       g_free (translated_value);
       translated_value = NULL;
    }
+
+  /* Fallback to gettext */
+  if (try_gettext && !translated_value)
+    {
+      gchar *orig_value = g_key_file_get_string (key_file, group_name, key, NULL);
+
+      if (orig_value)
+        {
+          gboolean codeset_set;
+          const gchar *translated;
+          gboolean has_gettext;
+
+          codeset_set = bind_textdomain_codeset (key_file->gettext_domain, "UTF-8") != NULL;
+          translated = NULL;
+
+          translated = g_dgettext (key_file->gettext_domain,
+                                   orig_value);
+          has_gettext = translated != orig_value;
+
+          g_free (orig_value);
+
+          if (has_gettext)
+            {
+              if (codeset_set)
+                translated_value = g_strdup (translated);
+              else
+                translated_value = g_locale_to_utf8 (translated,
+                                                     -1, NULL, NULL, NULL);
+            }
+          else
+            translated_value = NULL;
+        }
+    }
 
   /* Fallback to untranslated key
    */
