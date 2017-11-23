@@ -1232,6 +1232,9 @@ parse_state_start_schema (ParseState  *state,
       return;
     }
 
+  // Disable this warning: it confuses users and there is unlikely to be much
+  // progress towards fixing
+  /*
   if (path && (g_str_has_prefix (path, "/apps/") ||
                g_str_has_prefix (path, "/desktop/") ||
                g_str_has_prefix (path, "/system/")))
@@ -1244,6 +1247,7 @@ parse_state_start_schema (ParseState  *state,
       g_printerr ("%s\n", message);
       g_free (message);
     }
+    */
 
   state->schema_state = schema_state_new (path, gettext_domain,
                                           extends, extends_name, list_of);
