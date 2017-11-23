@@ -406,7 +406,9 @@ test_method_calls_on_proxy (GDBusProxy *proxy)
 
       /* elapsed_msec should be 4000 msec +/- change for overhead/inaccuracy */
       g_assert_cmpint (elapsed_msec, >=, 3950);
+#if !defined(__arm__)
       g_assert_cmpint (elapsed_msec,  <, 8000);
+#endif
 
       if (g_test_verbose ())
         g_printerr (" ");
