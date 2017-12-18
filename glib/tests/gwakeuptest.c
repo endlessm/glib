@@ -89,6 +89,9 @@ struct context
 #define NUM_TOKENS       5
 #define TOKEN_TTL   100000
 
+static gint num_threads = NUM_THREADS;
+static gint token_ttl = TOKEN_TTL;
+
 static struct context contexts[NUM_THREADS];
 static GThread *threads[NUM_THREADS];
 static GWakeup *last_token_wakeup;
@@ -158,7 +161,7 @@ dispatch_token (struct token *token)
       struct context *ctx;
       gint next_ctx;
 
-      next_ctx = g_test_rand_int_range (0, NUM_THREADS);
+      next_ctx = g_test_rand_int_range (0, num_threads);
       ctx = &contexts[next_ctx];
       token->owner = ctx;
       token->ttl--;
@@ -213,6 +216,12 @@ test_threaded (void)
 {
   gint i;
 
+  if (!g_test_slow ())
+    {
+      num_threads = NUM_THREADS / 10;
+      token_ttl = TOKEN_TTL / 10;
+    }
+
   /* make sure we don't block forever */
   alarm (60);
 
@@ -230,7 +239,7 @@ test_threaded (void)
   last_token_wakeup = g_wakeup_new ();
 
   /* create contexts, assign to threads */
-  for (i = 0; i < NUM_THREADS; i++)
+  for (i = 0; i < num_threads; i++)
     {
       context_init (&contexts[i]);
       threads[i] = g_thread_new ("test", thread_func, &contexts[i]);
@@ -238,13 +247,13 @@ test_threaded (void)
 
   /* dispatch tokens */
   for (i = 0; i < NUM_TOKENS; i++)
-    dispatch_token (token_new (TOKEN_TTL));
+    dispatch_token (token_new (token_ttl));
 
   /* wait until all tokens are gone */
   wait_for_signaled (last_token_wakeup);
 
   /* ask threads to quit, join them, cleanup */
-  for (i = 0; i < NUM_THREADS; i++)
+  for (i = 0; i < num_threads; i++)
     {
       context_quit (&contexts[i]);
       g_thread_join (threads[i]);
