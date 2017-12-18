@@ -13,6 +13,9 @@ glib2.0 (2.54.2-3) UNRELEASED; urgency=medium
   * d/p/gmenumodel-test-If-something-goes-wrong-don-t-wait-foreve.patch,
     d/p/gmenumodel-test-Wait-for-the-expected-events-to-happen.patch:
     Add patches to make the GMenuModel test more patient (Closes: #884661)
+  * d/p/gwakeuptest-Be-less-parallel-unless-invoked-with-m-slow.patch:
+    Reduce number of threads and number of operations in response to
+    timeout on reproducible-builds infrastructure (mitigates: #884659)
 
  -- Simon McVittie <smcv@debian.org>  Mon, 18 Dec 2017 10:47:35 +0000
 
