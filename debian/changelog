@@ -1,5 +1,6 @@
-glib2.0 (2.54.2-3) UNRELEASED; urgency=medium
+glib2.0 (2.54.2-3) unstable; urgency=medium
 
+  * Team upload
   * d/patches: Re-export with gbp pq
   * d/patches: Use `gbp pq export`-style metadata, retrieving authors
     and dates from d/changelog where needed
@@ -17,7 +18,7 @@ glib2.0 (2.54.2-3) UNRELEASED; urgency=medium
     Reduce number of threads and number of operations in response to
     timeout on reproducible-builds infrastructure (mitigates: #884659)
 
- -- Simon McVittie <smcv@debian.org>  Mon, 18 Dec 2017 10:47:35 +0000
+ -- Simon McVittie <smcv@debian.org>  Mon, 18 Dec 2017 21:30:18 +0000
 
 glib2.0 (2.54.2-2) unstable; urgency=medium
 
