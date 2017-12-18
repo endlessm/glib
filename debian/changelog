@@ -5,6 +5,10 @@ glib2.0 (2.54.2-3) UNRELEASED; urgency=medium
   * d/patches: Re-export with gbp pq
   * d/patches: Use `gbp pq export`-style metadata, retrieving authors
     and dates from d/changelog where needed
+  * d/p/gdbus-threading-test-Allow-even-longer-for-test_method_ca.patch:
+    New patch. Allow even longer for the gdbus-threading test, and
+    re-enable it on 32-bit ARM now that the timeout is longer
+    (Closes: #884660)
 
  -- Simon McVittie <smcv@debian.org>  Mon, 18 Dec 2017 10:47:35 +0000
 
