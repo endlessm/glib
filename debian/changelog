@@ -1,10 +1,11 @@
 glib2.0 (2.54.2-3) UNRELEASED; urgency=medium
 
-  * tests/refcount/closures: Run fewer iterations on ARM64
-    (mitigates: #880883)
   * d/patches: Re-export with gbp pq
   * d/patches: Use `gbp pq export`-style metadata, retrieving authors
     and dates from d/changelog where needed
+  * d/p/closures-test-Run-fewer-iterations-on-ARM64.patch: New patch.
+    tests/refcount/closures: Run fewer iterations on ARM64
+    (mitigates: #880883)
   * d/p/gdbus-threading-test-Allow-even-longer-for-test_method_ca.patch:
     New patch. Allow even longer for the gdbus-threading test, and
     re-enable it on 32-bit ARM now that the timeout is longer
