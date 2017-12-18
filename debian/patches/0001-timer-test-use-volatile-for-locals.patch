@@ -1,6 +1,6 @@
 From: Ryan Lortie <desrt@desrt.ca>
 Date: Tue, 4 Mar 2014 09:20:38 -0500
-Subject: [PATCH] timer test: use 'volatile' for locals
+Subject: timer test: use 'volatile' for locals
 
 GCC seems to be failing to follow the letter of the C spec by allowing extra
 precision in floating point values to persist across assignments which are
@@ -8,7 +8,7 @@ optimised away.
 
 Force its hand by using 'volatile' on the locals in question.
 
-https://bugzilla.gnome.org/show_bug.cgi?id=722604
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=722604
 ---
  glib/tests/timer.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)

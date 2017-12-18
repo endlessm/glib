@@ -1,7 +1,6 @@
 From: Simon McVittie <smcv@debian.org>
 Date: Mon, 3 Feb 2014 01:14:45 +0000
-Subject: [PATCH] Do not attempt to autolaunch a session dbus-daemon with no
- DISPLAY
+Subject: Do not attempt to autolaunch a session dbus-daemon with no DISPLAY
 
 The two known use-cases for autolaunching are:
 

@@ -1,6 +1,6 @@
 From: Iain Lane <iain@orangesquash.org.uk>
 Date: Tue, 21 Apr 2015 15:00:09 +0100
-Subject: [PATCH] Fix trashing on overlayfs
+Subject: Fix trashing on overlayfs
 
 In order to determine whether to trash a file to the home directory, we
 compare its st_dev to our home directory's st_dev field.
