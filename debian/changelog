@@ -10,6 +10,9 @@ glib2.0 (2.54.2-3) UNRELEASED; urgency=medium
     New patch. Allow even longer for the gdbus-threading test, and
     re-enable it on 32-bit ARM now that the timeout is longer
     (Closes: #884660)
+  * d/p/gmenumodel-test-If-something-goes-wrong-don-t-wait-foreve.patch,
+    d/p/gmenumodel-test-Wait-for-the-expected-events-to-happen.patch:
+    Add patches to make the GMenuModel test more patient (Closes: #884661)
 
  -- Simon McVittie <smcv@debian.org>  Mon, 18 Dec 2017 10:47:35 +0000
 

@@ -13,3 +13,5 @@ skip-broken-timer-test.patch
 0001-Fix-trashing-on-overlayfs.patch
 closures-test-Run-fewer-iterations-on-ARM64.patch
 gdbus-threading-test-Allow-even-longer-for-test_method_ca.patch
+gmenumodel-test-If-something-goes-wrong-don-t-wait-foreve.patch
+gmenumodel-test-Wait-for-the-expected-events-to-happen.patch
