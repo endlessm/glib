@@ -1,13 +1,21 @@
-# Description: If a .desktop file does not have inline translations, fall back to calling gettext.
-## Description: add some description
-## Origin/Author: add some origin or author
-## Bug: bug URL
-# Ubuntu: https://launchpad.net/bugs/3935
-# Upstream: http://bugzilla.gnome.org/show_bug.cgi?id=569829
-Index: glib2.0-2.54.0/glib/gkeyfile.c
-===================================================================
---- glib2.0-2.54.0.orig/glib/gkeyfile.c
-+++ glib2.0-2.54.0/glib/gkeyfile.c
+From: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
+Date: Wed, 13 Jun 2007 10:52:27 +0200
+Subject: If a .desktop file does not have inline translations, fall back to calling gettext
+
+Patch from OpenSUSE via Ubuntu, original author unknown. Martin Pitt and
+Vincent Untz appear to be the main authors.
+
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=569829
+Bug-Ubuntu: https://launchpad.net/bugs/3935
+---
+ glib/gkeyfile.c | 72 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ glib/gkeyfile.h |  4 ++++
+ 2 files changed, 76 insertions(+)
+
+diff --git a/glib/gkeyfile.c b/glib/gkeyfile.c
+index 4a69642..b5bda97 100644
+--- a/glib/gkeyfile.c
++++ b/glib/gkeyfile.c
 @@ -459,6 +459,7 @@ struct _GKeyFile
    GKeyFileFlags flags;
  
@@ -37,7 +45,7 @@ Index: glib2.0-2.54.0/glib/gkeyfile.c
    tmp = key_file->groups;
    while (tmp != NULL)
      {
-@@ -821,6 +829,11 @@ g_key_file_load_from_fd (GKeyFile
+@@ -821,6 +829,11 @@ g_key_file_load_from_fd (GKeyFile       *key_file,
        return FALSE;
      }
  
@@ -49,7 +57,7 @@ Index: glib2.0-2.54.0/glib/gkeyfile.c
    return TRUE;
  }
  
-@@ -933,6 +946,11 @@ g_key_file_load_from_data (GKeyFile
+@@ -933,6 +946,11 @@ g_key_file_load_from_data (GKeyFile       *key_file,
        return FALSE;
      }
  
@@ -61,7 +69,7 @@ Index: glib2.0-2.54.0/glib/gkeyfile.c
    return TRUE;
  }
  
-@@ -2152,6 +2170,8 @@ g_key_file_get_locale_string (GKeyFile
+@@ -2152,6 +2170,8 @@ g_key_file_get_locale_string (GKeyFile     *key_file,
    GError *key_file_error;
    gchar **languages;
    gboolean free_languages = FALSE;
@@ -70,7 +78,7 @@ Index: glib2.0-2.54.0/glib/gkeyfile.c
    gint i;
  
    g_return_val_if_fail (key_file != NULL, NULL);
-@@ -2173,6 +2193,25 @@ g_key_file_get_locale_string (GKeyFile
+@@ -2173,6 +2193,25 @@ g_key_file_get_locale_string (GKeyFile     *key_file,
        free_languages = FALSE;
      }
    
@@ -96,7 +104,7 @@ Index: glib2.0-2.54.0/glib/gkeyfile.c
    for (i = 0; languages[i]; i++)
      {
        candidate_key = g_strdup_printf ("%s[%s]", key, languages[i]);
-@@ -2189,6 +2228,39 @@ g_key_file_get_locale_string (GKeyFile
+@@ -2189,6 +2228,39 @@ g_key_file_get_locale_string (GKeyFile     *key_file,
        translated_value = NULL;
     }
  
@@ -136,11 +144,11 @@ Index: glib2.0-2.54.0/glib/gkeyfile.c
    /* Fallback to untranslated key
     */
    if (!translated_value)
-Index: glib2.0-2.54.0/glib/gkeyfile.h
-===================================================================
---- glib2.0-2.54.0.orig/glib/gkeyfile.h
-+++ glib2.0-2.54.0/glib/gkeyfile.h
-@@ -293,6 +293,7 @@ gboolean  g_key_file_remove_group
+diff --git a/glib/gkeyfile.h b/glib/gkeyfile.h
+index 7da7107..79f71a8 100644
+--- a/glib/gkeyfile.h
++++ b/glib/gkeyfile.h
+@@ -293,6 +293,7 @@ gboolean  g_key_file_remove_group           (GKeyFile             *key_file,
  
  /* Defines for handling freedesktop.org Desktop files */
  #define G_KEY_FILE_DESKTOP_GROUP                "Desktop Entry"
@@ -148,7 +156,7 @@ Index: glib2.0-2.54.0/glib/gkeyfile.h
  
  #define G_KEY_FILE_DESKTOP_KEY_TYPE             "Type"
  #define G_KEY_FILE_DESKTOP_KEY_VERSION          "Version"
-@@ -315,6 +316,9 @@ gboolean  g_key_file_remove_group
+@@ -315,6 +316,9 @@ gboolean  g_key_file_remove_group           (GKeyFile             *key_file,
  #define G_KEY_FILE_DESKTOP_KEY_URL              "URL"
  #define G_KEY_FILE_DESKTOP_KEY_DBUS_ACTIVATABLE "DBusActivatable"
  #define G_KEY_FILE_DESKTOP_KEY_ACTIONS          "Actions"

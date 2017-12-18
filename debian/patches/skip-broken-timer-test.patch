@@ -1,11 +1,17 @@
-Description: Skip test which performs some unreliable floating point comparisons
-Forwarded: https://bugzilla.gnome.org/show_bug.cgi?id=722604
+From: Iain Lane <laney@debian.org>
+Date: Tue, 18 Mar 2014 15:43:35 +0000
+Subject: Skip test which performs some unreliable floating point comparisons
 
-Index: b/glib/tests/timer.c
-===================================================================
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=722604
+---
+ glib/tests/timer.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/glib/tests/timer.c b/glib/tests/timer.c
+index d6938f1..dbd7790 100644
 --- a/glib/tests/timer.c
 +++ b/glib/tests/timer.c
-@@ -203,7 +203,7 @@
+@@ -203,7 +203,7 @@ main (int argc, char *argv[])
  {
    g_test_init (&argc, &argv, NULL);
  

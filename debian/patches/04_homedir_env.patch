@@ -1,14 +1,23 @@
-Description: Handle the G_HOME environment variable to override the passwd entry
- This will allow to fix various kinds of build failures due to restricted
- build environments.
-Author: Josselin Mouette <joss@debian.org>
-Origin: vendor
+From: Iain Lane <laney@debian.org>
+Date: Sat, 23 Feb 2013 19:27:38 +0100
+Subject: Handle the G_HOME environment variable
 
-Index: b/docs/reference/glib/running.xml
-===================================================================
+g_get_home_dir() now respects the HOME environment variable but we'll keep
+G_HOME for now as packages in Debian rely on it.
+
+Modified from an earlier patch by Josselin Mouette.
+
+Forwarded: not-needed, Debian-specific
+---
+ docs/reference/glib/running.xml | 18 ++++++++++++++++++
+ glib/gutils.c                   | 10 +++++++++-
+ 2 files changed, 27 insertions(+), 1 deletion(-)
+
+diff --git a/docs/reference/glib/running.xml b/docs/reference/glib/running.xml
+index a02ffa4..0f3e20c 100644
 --- a/docs/reference/glib/running.xml
 +++ b/docs/reference/glib/running.xml
-@@ -244,6 +244,24 @@
+@@ -244,6 +244,24 @@ How to run and debug your GLib application
    </para>
  </formalpara>
  
@@ -33,11 +42,11 @@ Index: b/docs/reference/glib/running.xml
  </refsect2>
  
  <refsect2 id="setlocale">
-Index: b/glib/gutils.c
-===================================================================
+diff --git a/glib/gutils.c b/glib/gutils.c
+index eb44f17..11d4946 100644
 --- a/glib/gutils.c
 +++ b/glib/gutils.c
-@@ -808,6 +808,12 @@
+@@ -811,6 +811,12 @@ g_get_real_name (void)
   * should either directly check the `HOME` environment variable yourself
   * or unset it before calling any functions in GLib.
   *
@@ -50,7 +59,7 @@ Index: b/glib/gutils.c
   * Returns: (type filename): the current user's home directory
   */
  const gchar *
-@@ -820,7 +826,9 @@
+@@ -823,7 +829,9 @@ g_get_home_dir (void)
        gchar *tmp;
  
        /* We first check HOME and use it if it is set */

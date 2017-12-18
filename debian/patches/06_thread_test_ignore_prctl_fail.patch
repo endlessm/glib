@@ -1,12 +1,19 @@
-Description: Do not fail the /thread/thread4 test if prctrl() fails. This happens on the Debian buildds.
-Author: Martin Pitt <martin.pitt@ubuntu.com>
-Forwarded: No, Debian buildd specific
+From: Martin Pitt <martin.pitt@ubuntu.com>
+Date: Tue, 26 Jun 2012 19:28:14 +0200
+Subject: Do not fail the /thread/thread4 test if prctrl() fails
 
-Index: b/glib/tests/thread.c
-===================================================================
+This happens on the Debian buildds.
+
+Forwarded: no, Debian buildd specific
+---
+ glib/tests/thread.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/glib/tests/thread.c b/glib/tests/thread.c
+index 5447836..734ca9b 100644
 --- a/glib/tests/thread.c
 +++ b/glib/tests/thread.c
-@@ -145,9 +145,11 @@
+@@ -145,9 +145,11 @@ test_thread4 (void)
  
    getrlimit (RLIMIT_NPROC, &nl);
    nl.rlim_cur = 1;

@@ -1,12 +1,22 @@
-Description: Disable confusing (to users) warning about deprecated schema paths
-Author: Iain Lane <iain.lane@canonical.com>
-Forwarded: not-needed
+From: Iain Lane <iain.lane@canonical.com>
+Date: Mon, 10 Sep 2012 16:25:18 +0100
+Subject: Disable confusing (to users) warning about deprecated schema paths
 
-Index: b/gio/glib-compile-schemas.c
-===================================================================
+Disable a warning when compiling schemas which are installed
+into 'deprecated' locations. Users see this very often due to
+glib-compile-schemas being called from libglib2.0-0's trigger and it is
+not very useful for them.
+
+Forwarded: not-needed
+---
+ gio/glib-compile-schemas.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/gio/glib-compile-schemas.c b/gio/glib-compile-schemas.c
+index b8de090..97b8808 100644
 --- a/gio/glib-compile-schemas.c
 +++ b/gio/glib-compile-schemas.c
-@@ -1219,6 +1219,9 @@
+@@ -1219,6 +1219,9 @@ parse_state_start_schema (ParseState  *state,
        return;
      }
  
@@ -16,7 +26,7 @@ Index: b/gio/glib-compile-schemas.c
    if (path && (g_str_has_prefix (path, "/apps/") ||
                 g_str_has_prefix (path, "/desktop/") ||
                 g_str_has_prefix (path, "/system/")))
-@@ -1231,6 +1234,7 @@
+@@ -1231,6 +1234,7 @@ parse_state_start_schema (ParseState  *state,
        g_printerr ("%s\n", message);
        g_free (message);
      }
