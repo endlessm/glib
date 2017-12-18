@@ -1,16 +1,19 @@
 From: Steve Langasek <steve.langasek@canonical.com>
-Subject: gio: add fallback directory for pre-multiarch compatibility
 Date: Sat, 16 Jul 2011 13:12:48 -0700
+Subject: gio: add fallback directory for pre-multiarch compatibility
 
 Origin: vendor, Ubuntu
 Bug-Debian: https://bugs.debian.org/634099
 Forwarded: no, specific to Debian and its derivatives
+---
+ gio/giomodule.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Index: b/gio/giomodule.c
-===================================================================
+diff --git a/gio/giomodule.c b/gio/giomodule.c
+index 6937932..e261ff9 100644
 --- a/gio/giomodule.c
 +++ b/gio/giomodule.c
-@@ -1093,6 +1093,9 @@
+@@ -1100,6 +1100,9 @@ _g_io_modules_ensure_loaded (void)
  
        g_io_module_scope_free (scope);
  

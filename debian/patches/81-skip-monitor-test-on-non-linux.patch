@@ -1,12 +1,17 @@
 From: Emilio Pozuelo Monfort <pochu@debian.org>
-Date: Sun, 09 Mar 2014 15:06:31 +0100
+Date: Sun, 9 Mar 2014 15:06:31 +0100
 Subject: Skip the monitor test on non-linux as it currently hangs
 
 Forwarded: no
+---
+ gio/tests/monitor.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
+diff --git a/gio/tests/monitor.c b/gio/tests/monitor.c
+index 69eae34..d36cb05 100644
 --- a/gio/tests/monitor.c
 +++ b/gio/tests/monitor.c
-@@ -178,7 +178,9 @@
+@@ -202,7 +202,9 @@ main (int argc, char *argv[])
  {
    g_test_init (&argc, &argv, NULL);
  

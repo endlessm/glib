@@ -2,6 +2,7 @@ glib2.0 (2.54.2-3) UNRELEASED; urgency=medium
 
   * tests/refcount/closures: Run fewer iterations on ARM64
     (mitigates: #880883)
+  * d/patches: Re-export with gbp pq
 
  -- Simon McVittie <smcv@debian.org>  Mon, 18 Dec 2017 10:47:35 +0000
 

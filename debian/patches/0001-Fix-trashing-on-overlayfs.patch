@@ -1,4 +1,3 @@
-From 09c11e5a2bd43e1459c7a2115f177e29ed92494e Mon Sep 17 00:00:00 2001
 From: Iain Lane <iain@orangesquash.org.uk>
 Date: Tue, 21 Apr 2015 15:00:09 +0100
 Subject: [PATCH] Fix trashing on overlayfs
@@ -18,11 +17,11 @@ a file.
  gio/glocalfile.c | 20 +++++++++++++++++++-
  1 file changed, 19 insertions(+), 1 deletion(-)
 
-Index: b/gio/glocalfile.c
-===================================================================
+diff --git a/gio/glocalfile.c b/gio/glocalfile.c
+index d417c49..112e3ef 100644
 --- a/gio/glocalfile.c
 +++ b/gio/glocalfile.c
-@@ -1909,7 +1909,7 @@
+@@ -1910,7 +1910,7 @@ g_local_file_trash (GFile         *file,
    char *basename, *trashname, *trashfile, *infoname, *infofile;
    char *original_name, *original_name_escaped;
    int i;
@@ -31,7 +30,7 @@ Index: b/gio/glocalfile.c
    gboolean is_homedir_trash;
    char delete_time[32];
    int fd;
-@@ -1933,6 +1933,24 @@
+@@ -1935,6 +1935,24 @@ g_local_file_trash (GFile         *file,
  
    is_homedir_trash = FALSE;
    trashdir = NULL;
