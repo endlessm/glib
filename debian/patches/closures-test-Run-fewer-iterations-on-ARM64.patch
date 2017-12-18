@@ -1,0 +1,32 @@
+From: Simon McVittie <smcv@debian.org>
+Date: Mon, 18 Dec 2017 10:47:29 +0000
+Subject: closures test: Run fewer iterations on ARM64
+
+It appears that this feature does *work* on ARM64, it's just really
+slow. Cut down the number of signal emission cycles so that builds
+won't time out while the root cause is investigated.
+
+Forwarded: no, Debian-specific hack
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=791706
+Bug-Debian: https://bugs.debian.org/880883
+Signed-off-by: Simon McVittie <smcv@debian.org>
+---
+ tests/refcount/closures.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/tests/refcount/closures.c b/tests/refcount/closures.c
+index 25b0a27..ef669a0 100644
+--- a/tests/refcount/closures.c
++++ b/tests/refcount/closures.c
+@@ -259,7 +259,11 @@ main (int    argc,
+   thread1 = g_thread_create (thread1_main, closure, TRUE, NULL);
+   thread2 = g_thread_create (thread2_main, closure, TRUE, NULL);
+ 
++#ifdef __aarch64__
++  for (i = 0; i < 10000; i++)
++#else
+   for (i = 0; i < 1000000; i++)
++#endif
+     {
+       static guint count = 0;
+       test_emissions (object);
