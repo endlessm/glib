@@ -1,3 +1,12 @@
+glib2.0 (2.54.2-4) UNRELEASED; urgency=medium
+
+  * d/p/closures-test-Run-fewer-iterations-on-ARM64.patch:
+    Run more iterations on ARM64 than in 2.54.2-3, but fewer than in
+    2.54.2-2. If we don't run enough iterations, we get an assertion
+    failure when the main thread starves the other threads.
+
+ -- Simon McVittie <smcv@debian.org>  Tue, 19 Dec 2017 17:40:34 +0000
+
 glib2.0 (2.54.2-3) unstable; urgency=medium
 
   * Team upload
