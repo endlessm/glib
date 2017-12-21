@@ -1,5 +1,6 @@
-glib2.0 (2.54.2-4) UNRELEASED; urgency=medium
+glib2.0 (2.54.2-4) unstable; urgency=medium
 
+  * Team upload
   * d/p/closures-test-Run-fewer-iterations-on-ARM64.patch:
     Run more iterations on ARM64 than in 2.54.2-3, but fewer than in
     2.54.2-2. If we don't run enough iterations, we get an assertion
@@ -11,7 +12,7 @@ glib2.0 (2.54.2-4) UNRELEASED; urgency=medium
     Skip the gdbus-peer test during package build, so that its known
     race condition does not cause intermittent FTBFS (mitigates: #884654)
 
- -- Simon McVittie <smcv@debian.org>  Tue, 19 Dec 2017 17:40:34 +0000
+ -- Simon McVittie <smcv@debian.org>  Thu, 21 Dec 2017 14:41:40 +0000
 
 glib2.0 (2.54.2-3) unstable; urgency=medium
 
