@@ -13,6 +13,8 @@ to do better here.
 Signed-off-by: Simon McVittie <smcv@collabora.com>
 Bug: https://bugzilla.gnome.org/show_bug.cgi?id=791744
 Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=884661
+Applied-upstream: 2.55.1, commit:8fef0a9cd3b73d995a1fd81b593a7d52fd7e693a
+Applied-upstream: 2.54.3, commit:da4cdc6890152a45ca2a207c6ffa42337371299b
 ---
  gio/tests/gmenumodel.c | 18 ++++++++++++++----
  1 file changed, 14 insertions(+), 4 deletions(-)

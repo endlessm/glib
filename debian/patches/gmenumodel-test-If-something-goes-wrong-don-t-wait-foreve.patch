@@ -7,6 +7,9 @@ I'm about to add some loops that would otherwise wait indefinitely.
 Signed-off-by: Simon McVittie <smcv@collabora.com>
 Bug: https://bugzilla.gnome.org/show_bug.cgi?id=791744
 Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=884661
+Applied-upstream: 2.55.1, commit:ea159a9e1a852246f51348ddc19353dc35727700
+[This version is a backport to 2.54.x]
+Applied-upstream: 2.54.3, commit:003c392a3befe761a79eba169b3d2be65c6404b7
 ---
  gio/tests/gmenumodel.c | 30 ++++++++++++++++++++++++++++++
  1 file changed, 30 insertions(+)
