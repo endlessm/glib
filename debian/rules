@@ -79,10 +79,12 @@ export DBUS_SESSION_BUS_ADDRESS=this-should-not-be-used-and-will-fail:
 ifeq ($(DEB_HOST_ARCH_OS), linux)
 override_dh_auto_test-arch:
 	# Remove LD_PRELOAD so we don't run with fakeroot, which makes dbus-related tests fail
-	env -u LD_PRELOAD dh_auto_test --builddirectory=debian/build/deb -- -k check -j1
+	env -u LD_PRELOAD DEB_BUILD_TIME_TESTS=1 \
+	dh_auto_test --builddirectory=debian/build/deb -- -k check -j1
 else
 override_dh_auto_test-arch:
-	env -u LD_PRELOAD dh_auto_test --builddirectory=debian/build/deb -- -k check -j1 || true
+	env -u LD_PRELOAD DEB_BUILD_TIME_TESTS=1 \
+	dh_auto_test --builddirectory=debian/build/deb -- -k check -j1 || true
 endif
 
 # Skip build-time tests if all we are building is documentation; running
