@@ -1,4 +1,4 @@
-glib2.0 (2.54.2-5) UNRELEASED; urgency=medium
+glib2.0 (2.54.2-5) unstable; urgency=medium
 
   * Set Rules-Requires-Root to no. This package builds successfully
     with the same content in that mode.
@@ -12,7 +12,7 @@ glib2.0 (2.54.2-5) UNRELEASED; urgency=medium
     binary when cross-compiling (Closes: #885019)
   * Bump Standards-Version to 4.1.3
 
- -- Simon McVittie <smcv@debian.org>  Fri, 22 Dec 2017 12:52:13 +0000
+ -- Simon McVittie <smcv@debian.org>  Fri, 29 Dec 2017 22:07:56 +0000
 
 glib2.0 (2.54.2-4) unstable; urgency=medium
 
