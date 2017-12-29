@@ -2,6 +2,8 @@ glib2.0 (2.54.2-5) UNRELEASED; urgency=medium
 
   * Set Rules-Requires-Root to no. This package builds successfully
     with the same content in that mode.
+  * d/p/61_glib-compile-binaries-path.patch: Only use the multiarch
+    path for glib-compile-schemas, not for glib-compile-resources
 
  -- Simon McVittie <smcv@debian.org>  Fri, 22 Dec 2017 12:52:13 +0000
 
