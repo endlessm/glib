@@ -4,6 +4,12 @@ glib2.0 (2.54.2-5) UNRELEASED; urgency=medium
     with the same content in that mode.
   * d/p/61_glib-compile-binaries-path.patch: Only use the multiarch
     path for glib-compile-schemas, not for glib-compile-resources
+  * Install glib-compile-resources into PATH in libglib2.0-dev-bin,
+    not libglib2.0-bin: it is a development tool used at compile-time
+    - libglib2.0-dev-bin Breaks/Replaces older libglib2.0-bin
+  * Install the glib-compile-resources binary in libglib2.0-dev-bin,
+    not libglib2.0-0. This means we get an executable version of that
+    binary when cross-compiling (Closes: #885019)
 
  -- Simon McVittie <smcv@debian.org>  Fri, 22 Dec 2017 12:52:13 +0000
 
