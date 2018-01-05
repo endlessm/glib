@@ -1,0 +1,73 @@
+From: Simon McVittie <smcv@collabora.com>
+Date: Tue, 19 Dec 2017 10:58:32 +0000
+Subject: cancellable: Don't assert if finalization races with cancellation
+
+Commit 281e3010 narrowed the race between GCancellable::cancelled and
+GCancellableSource's finalize(), but did not prevent it: there was
+nothing to stop cancellation from occurring after the refcount drops
+to 0, but before g_source_unref_internal() bumps it back up to 1 to
+run finalize().
+
+GCancellable cannot be expected to detect that situation, because the
+only way it has to detect last-unref is finalize(), but in that
+situation finalize() hasn't happened yet.
+
+Instead of detecting last-unref, relax the precondition a little
+to make it detect finalization: priv is only poisoned (set to NULL)
+after the finalize() function has been called, so we can assume that
+GCancellable has already seen finalize() by then.
+
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=791754
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=884654
+Applied-upstream: 2.54.3, commit:ffb60646
+Applied-upstream: 2.55.1, commit:7f3bfcb8
+---
+ gio/gcancellable.c | 12 ++++++++++++
+ glib/gmain.c       | 10 +++++++++-
+ 2 files changed, 21 insertions(+), 1 deletion(-)
+
+diff --git a/gio/gcancellable.c b/gio/gcancellable.c
+index b875ae7..dced16e 100644
+--- a/gio/gcancellable.c
++++ b/gio/gcancellable.c
+@@ -644,6 +644,18 @@ typedef struct {
+   guint         cancelled_handler;
+ } GCancellableSource;
+ 
++/*
++ * We can't guarantee that the source still has references, so we are
++ * relying on the fact that g_source_set_ready_time() no longer makes
++ * assertions about the reference count - the source might be in the
++ * window between last-unref and finalize, during which its refcount
++ * is officially 0. However, we *can* guarantee that it's OK to
++ * dereference it in a limited way, because we know we haven't yet reached
++ * cancellable_source_finalize() - if we had, then we would have waited
++ * for signal emission to finish, then disconnected the signal handler
++ * under the lock.
++ * See https://bugzilla.gnome.org/show_bug.cgi?id=791754
++ */
+ static void
+ cancellable_source_cancelled (GCancellable *cancellable,
+ 			      gpointer      user_data)
+diff --git a/glib/gmain.c b/glib/gmain.c
+index 9e853c8..8751601 100644
+--- a/glib/gmain.c
++++ b/glib/gmain.c
+@@ -1843,7 +1843,15 @@ g_source_set_ready_time (GSource *source,
+   GMainContext *context;
+ 
+   g_return_if_fail (source != NULL);
+-  g_return_if_fail (source->ref_count > 0);
++  /* We deliberately don't check for ref_count > 0 here, because that
++   * breaks cancellable_source_cancelled() in GCancellable: it has no
++   * way to find out that the last-unref has happened until the
++   * finalize() function is called, but that's too late, because the
++   * ref_count already has already reached 0 before that time.
++   * However, priv is only poisoned (set to NULL) after finalize(),
++   * so we can use this as a simple guard against use-after-free.
++   * See https://bugzilla.gnome.org/show_bug.cgi?id=791754 */
++  g_return_if_fail (source->priv != NULL);
+ 
+   context = source->context;
+ 

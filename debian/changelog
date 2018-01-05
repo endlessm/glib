@@ -1,3 +1,14 @@
+glib2.0 (2.54.2-6) UNRELEASED; urgency=medium
+
+  * d/p/g_source_set_ready_time-Move-no-op-fast-path-under-the-lo.patch,
+    d/p/cancellable-Don-t-assert-if-finalization-races-with-cance.patch:
+    Fix a race condition when a GCancellable is cancelled in another
+    thread (Closes: #884654)
+    - d/p/gdbus-peer-Skip-test-during-Debian-package-build.patch:
+      Drop. We should no longer need to skip this test.
+
+ -- Simon McVittie <smcv@debian.org>  Fri, 05 Jan 2018 21:48:54 +0000
+
 glib2.0 (2.54.2-5) unstable; urgency=medium
 
   * Set Rules-Requires-Root to no. This package builds successfully

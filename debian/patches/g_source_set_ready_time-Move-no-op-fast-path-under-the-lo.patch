@@ -1,0 +1,48 @@
+From: Simon McVittie <smcv@collabora.com>
+Date: Sun, 24 Dec 2017 15:19:31 +0000
+Subject: g_source_set_ready_time: Move no-op fast-path under the lock
+
+If we don't take the lock, then we don't have the necessary
+"happens before" relationships to avoid this situation:
+
+* source->priv->ready_time was equal to ready_time until recently
+* another thread has set source->priv->ready_time to a different value
+* that write hasn't become visible to this thread yet
+* result: we should reset the ready_time, but we don't
+
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=791754
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=884654
+Applied-upstream: 2.54.3, commit:b6629ef8
+Applied-upstream: 2.55.1, commit:a4686b8e
+---
+ glib/gmain.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
+
+diff --git a/glib/gmain.c b/glib/gmain.c
+index 7b71297..9e853c8 100644
+--- a/glib/gmain.c
++++ b/glib/gmain.c
+@@ -1845,14 +1845,19 @@ g_source_set_ready_time (GSource *source,
+   g_return_if_fail (source != NULL);
+   g_return_if_fail (source->ref_count > 0);
+ 
+-  if (source->priv->ready_time == ready_time)
+-    return;
+-
+   context = source->context;
+ 
+   if (context)
+     LOCK_CONTEXT (context);
+ 
++  if (source->priv->ready_time == ready_time)
++    {
++      if (context)
++        UNLOCK_CONTEXT (context);
++
++      return;
++    }
++
+   source->priv->ready_time = ready_time;
+ 
+   TRACE (GLIB_SOURCE_SET_READY_TIME (source, ready_time));

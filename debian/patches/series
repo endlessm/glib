@@ -16,4 +16,5 @@ gdbus-threading-test-Allow-even-longer-for-test_method_ca.patch
 gmenumodel-test-If-something-goes-wrong-don-t-wait-foreve.patch
 gmenumodel-test-Wait-for-the-expected-events-to-happen.patch
 gwakeuptest-Be-less-parallel-unless-invoked-with-m-slow.patch
-gdbus-peer-Skip-test-during-Debian-package-build.patch
+g_source_set_ready_time-Move-no-op-fast-path-under-the-lo.patch
+cancellable-Don-t-assert-if-finalization-races-with-cance.patch
