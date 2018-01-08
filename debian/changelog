@@ -6,6 +6,8 @@ glib2.0 (2.54.2-6) UNRELEASED; urgency=medium
     thread (Closes: #884654)
     - d/p/gdbus-peer-Skip-test-during-Debian-package-build.patch:
       Drop. We should no longer need to skip this test.
+  * d/p/Do-not-attempt-to-autolaunch-a-session-dbus-daemon-w.patch:
+    Drop patch. It has not been necessary since 2.50.
 
  -- Simon McVittie <smcv@debian.org>  Fri, 05 Jan 2018 21:48:54 +0000
 
