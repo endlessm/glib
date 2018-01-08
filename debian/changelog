@@ -12,6 +12,8 @@ glib2.0 (2.54.2-6) UNRELEASED; urgency=medium
     d/p/0001-timer-test-use-volatile-for-locals.patch:
     Mark as forwarded upstream
   * d/p/series: Move successfully upstreamed patches to the top
+  * d/patches: Move non-upstreamable patches (Debian-specific changes
+    and workarounds) to d/p/debian, and to the bottom of d/p/series
 
  -- Simon McVittie <smcv@debian.org>  Fri, 05 Jan 2018 21:48:54 +0000
 
