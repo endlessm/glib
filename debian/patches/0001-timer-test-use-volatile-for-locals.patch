@@ -9,6 +9,7 @@ optimised away.
 Force its hand by using 'volatile' on the locals in question.
 
 Bug: https://bugzilla.gnome.org/show_bug.cgi?id=722604
+Forwarded: yes
 ---
  glib/tests/timer.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)

@@ -8,6 +8,9 @@ glib2.0 (2.54.2-6) UNRELEASED; urgency=medium
       Drop. We should no longer need to skip this test.
   * d/p/Do-not-attempt-to-autolaunch-a-session-dbus-daemon-w.patch:
     Drop patch. It has not been necessary since 2.50.
+  * d/p/0001-Fix-trashing-on-overlayfs.patch,
+    d/p/0001-timer-test-use-volatile-for-locals.patch:
+    Mark as forwarded upstream
 
  -- Simon McVittie <smcv@debian.org>  Fri, 05 Jan 2018 21:48:54 +0000
 
