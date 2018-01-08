@@ -1,3 +1,7 @@
+gmenumodel-test-If-something-goes-wrong-don-t-wait-foreve.patch
+gmenumodel-test-Wait-for-the-expected-events-to-happen.patch
+g_source_set_ready_time-Move-no-op-fast-path-under-the-lo.patch
+cancellable-Don-t-assert-if-finalization-races-with-cance.patch
 01_gettext-desktopfiles.patch
 02_gettext-desktopfiles-ubuntu.patch
 03_disble_glib_compile_schemas_warning.patch
@@ -12,8 +16,4 @@ skip-broken-timer-test.patch
 0001-Fix-trashing-on-overlayfs.patch
 closures-test-Run-fewer-iterations-on-ARM64.patch
 gdbus-threading-test-Allow-even-longer-for-test_method_ca.patch
-gmenumodel-test-If-something-goes-wrong-don-t-wait-foreve.patch
-gmenumodel-test-Wait-for-the-expected-events-to-happen.patch
 gwakeuptest-Be-less-parallel-unless-invoked-with-m-slow.patch
-g_source_set_ready_time-Move-no-op-fast-path-under-the-lo.patch
-cancellable-Don-t-assert-if-finalization-races-with-cance.patch
