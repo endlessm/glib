@@ -7,8 +7,9 @@ This should take 4 seconds + overhead, but on a slow or heavily
 loaded system, there's no guarantee that it won't take significantly
 longer.
 
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=792364
 Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=884660
-Forwarded: no
+Forwarded: yes
 ---
  gio/tests/gdbus-threading.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
