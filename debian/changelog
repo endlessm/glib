@@ -1,11 +1,11 @@
-glib2.0 (2.54.2-6) UNRELEASED; urgency=medium
+glib2.0 (2.54.3-1) UNRELEASED; urgency=medium
 
-  * d/p/g_source_set_ready_time-Move-no-op-fast-path-under-the-lo.patch,
-    d/p/cancellable-Don-t-assert-if-finalization-races-with-cance.patch:
-    Fix a race condition when a GCancellable is cancelled in another
-    thread (Closes: #884654)
-    - d/p/gdbus-peer-Skip-test-during-Debian-package-build.patch:
-      Drop. We should no longer need to skip this test.
+  * New upstream stable release
+    - Fix a race condition when a GCancellable is cancelled in another
+      thread (Closes: #884654)
+  * d/p/gdbus-peer-Skip-test-during-Debian-package-build.patch:
+    Drop. We should no longer need to skip this test now that #884654
+    is fixed.
   * d/p/Do-not-attempt-to-autolaunch-a-session-dbus-daemon-w.patch:
     Drop patch. It has not been necessary since 2.50.
   * d/p/0001-Fix-trashing-on-overlayfs.patch,
