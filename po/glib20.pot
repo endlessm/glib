@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=glib&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-10-27 19:11-0400\n"
+"POT-Creation-Date: 2018-01-08 16:07-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1168,7 +1168,7 @@ msgstr ""
 msgid "Error: %s is not a valid well-known bus name.\n"
 msgstr ""
 
-#: ../gio/gdesktopappinfo.c:2001 ../gio/gdesktopappinfo.c:4531
+#: ../gio/gdesktopappinfo.c:2001 ../gio/gdesktopappinfo.c:4539
 msgid "Unnamed"
 msgstr ""
 
@@ -1176,30 +1176,30 @@ msgstr ""
 msgid "Desktop file didn’t specify Exec field"
 msgstr ""
 
-#: ../gio/gdesktopappinfo.c:2694
+#: ../gio/gdesktopappinfo.c:2701
 msgid "Unable to find terminal required for application"
 msgstr ""
 
-#: ../gio/gdesktopappinfo.c:3127
+#: ../gio/gdesktopappinfo.c:3135
 #, c-format
 msgid "Can’t create user application configuration folder %s: %s"
 msgstr ""
 
-#: ../gio/gdesktopappinfo.c:3131
+#: ../gio/gdesktopappinfo.c:3139
 #, c-format
 msgid "Can’t create user MIME configuration folder %s: %s"
 msgstr ""
 
-#: ../gio/gdesktopappinfo.c:3371 ../gio/gdesktopappinfo.c:3395
+#: ../gio/gdesktopappinfo.c:3379 ../gio/gdesktopappinfo.c:3403
 msgid "Application information lacks an identifier"
 msgstr ""
 
-#: ../gio/gdesktopappinfo.c:3629
+#: ../gio/gdesktopappinfo.c:3637
 #, c-format
 msgid "Can’t create user desktop file %s"
 msgstr ""
 
-#: ../gio/gdesktopappinfo.c:3763
+#: ../gio/gdesktopappinfo.c:3771
 #, c-format
 msgid "Custom definition for %s"
 msgstr ""
@@ -2816,70 +2816,70 @@ msgstr ""
 msgid "Error when getting information for file “%s”: %s"
 msgstr ""
 
-#: ../gio/glocalfileinfo.c:2028
+#: ../gio/glocalfileinfo.c:2032
 #, c-format
 msgid "Error when getting information for file descriptor: %s"
 msgstr ""
 
-#: ../gio/glocalfileinfo.c:2073
+#: ../gio/glocalfileinfo.c:2077
 msgid "Invalid attribute type (uint32 expected)"
 msgstr ""
 
-#: ../gio/glocalfileinfo.c:2091
+#: ../gio/glocalfileinfo.c:2095
 msgid "Invalid attribute type (uint64 expected)"
 msgstr ""
 
-#: ../gio/glocalfileinfo.c:2110 ../gio/glocalfileinfo.c:2129
+#: ../gio/glocalfileinfo.c:2114 ../gio/glocalfileinfo.c:2133
 msgid "Invalid attribute type (byte string expected)"
 msgstr ""
 
-#: ../gio/glocalfileinfo.c:2164
+#: ../gio/glocalfileinfo.c:2168
 msgid "Cannot set permissions on symlinks"
 msgstr ""
 
-#: ../gio/glocalfileinfo.c:2180
+#: ../gio/glocalfileinfo.c:2184
 #, c-format
 msgid "Error setting permissions: %s"
 msgstr ""
 
-#: ../gio/glocalfileinfo.c:2231
+#: ../gio/glocalfileinfo.c:2235
 #, c-format
 msgid "Error setting owner: %s"
 msgstr ""
 
-#: ../gio/glocalfileinfo.c:2254
+#: ../gio/glocalfileinfo.c:2258
 msgid "symlink must be non-NULL"
 msgstr ""
 
-#: ../gio/glocalfileinfo.c:2264 ../gio/glocalfileinfo.c:2283
-#: ../gio/glocalfileinfo.c:2294
+#: ../gio/glocalfileinfo.c:2268 ../gio/glocalfileinfo.c:2287
+#: ../gio/glocalfileinfo.c:2298
 #, c-format
 msgid "Error setting symlink: %s"
 msgstr ""
 
-#: ../gio/glocalfileinfo.c:2273
+#: ../gio/glocalfileinfo.c:2277
 msgid "Error setting symlink: file is not a symlink"
 msgstr ""
 
-#: ../gio/glocalfileinfo.c:2399
+#: ../gio/glocalfileinfo.c:2403
 #, c-format
 msgid "Error setting modification or access time: %s"
 msgstr ""
 
-#: ../gio/glocalfileinfo.c:2422
+#: ../gio/glocalfileinfo.c:2426
 msgid "SELinux context must be non-NULL"
 msgstr ""
 
-#: ../gio/glocalfileinfo.c:2437
+#: ../gio/glocalfileinfo.c:2441
 #, c-format
 msgid "Error setting SELinux context: %s"
 msgstr ""
 
-#: ../gio/glocalfileinfo.c:2444
+#: ../gio/glocalfileinfo.c:2448
 msgid "SELinux is not enabled on this system"
 msgstr ""
 
-#: ../gio/glocalfileinfo.c:2536
+#: ../gio/glocalfileinfo.c:2540
 #, c-format
 msgid "Setting attribute %s not supported"
 msgstr ""
@@ -3084,15 +3084,15 @@ msgstr ""
 msgid "Error resolving “%s”: %s"
 msgstr ""
 
-#: ../gio/gresource.c:606 ../gio/gresource.c:857 ../gio/gresource.c:874
-#: ../gio/gresource.c:998 ../gio/gresource.c:1070 ../gio/gresource.c:1143
-#: ../gio/gresource.c:1213 ../gio/gresourcefile.c:453
+#: ../gio/gresource.c:609 ../gio/gresource.c:860 ../gio/gresource.c:877
+#: ../gio/gresource.c:1001 ../gio/gresource.c:1073 ../gio/gresource.c:1146
+#: ../gio/gresource.c:1216 ../gio/gresourcefile.c:453
 #: ../gio/gresourcefile.c:576 ../gio/gresourcefile.c:713
 #, c-format
 msgid "The resource at “%s” does not exist"
 msgstr ""
 
-#: ../gio/gresource.c:771
+#: ../gio/gresource.c:774
 #, c-format
 msgid "The resource at “%s” failed to decompress"
 msgstr ""
