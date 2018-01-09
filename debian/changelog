@@ -3,6 +3,7 @@ glib2.0 (2.54.3-1) UNRELEASED; urgency=medium
   * New upstream stable release
     - Fix a race condition when a GCancellable is cancelled in another
       thread (Closes: #884654)
+    - Drop patches for #884661, fixed upstream
   * d/p/gdbus-peer-Skip-test-during-Debian-package-build.patch:
     Drop. We should no longer need to skip this test now that #884654
     is fixed.
@@ -11,7 +12,6 @@ glib2.0 (2.54.3-1) UNRELEASED; urgency=medium
   * d/p/0001-Fix-trashing-on-overlayfs.patch,
     d/p/0001-timer-test-use-volatile-for-locals.patch:
     Mark as forwarded upstream
-  * d/p/series: Move successfully upstreamed patches to the top
   * d/patches: Move non-upstreamable patches (Debian-specific changes
     and workarounds) to d/p/debian, and to the bottom of d/p/series
   * d/watch: Only watch for the upstream stable branch

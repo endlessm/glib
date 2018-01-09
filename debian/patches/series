@@ -1,7 +1,3 @@
-gmenumodel-test-If-something-goes-wrong-don-t-wait-foreve.patch
-gmenumodel-test-Wait-for-the-expected-events-to-happen.patch
-g_source_set_ready_time-Move-no-op-fast-path-under-the-lo.patch
-cancellable-Don-t-assert-if-finalization-races-with-cance.patch
 01_gettext-desktopfiles.patch
 07_disable_tests_on_slow_archs.patch
 81-skip-monitor-test-on-non-linux.patch
