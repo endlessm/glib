@@ -1,5 +1,6 @@
 glib2.0 (2.54.3-1) UNRELEASED; urgency=medium
 
+  [ Simon McVittie ]
   * Move Vcs-* to salsa.debian.org
   * New upstream stable release
     - Fix a race condition when a GCancellable is cancelled in another
@@ -17,6 +18,10 @@ glib2.0 (2.54.3-1) UNRELEASED; urgency=medium
   * d/patches: Move non-upstreamable patches (Debian-specific changes
     and workarounds) to d/p/debian, and to the bottom of d/p/series
   * d/watch: Only watch for the upstream stable branch
+
+  [ Iain Lane ]
+  * debian/gbp.conf: Update upstream branch to upstream/2.54.x following
+    DEP-14.
 
  -- Simon McVittie <smcv@debian.org>  Fri, 05 Jan 2018 21:48:54 +0000
 
