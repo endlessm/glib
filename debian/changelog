@@ -1,5 +1,6 @@
 glib2.0 (2.54.3-1) UNRELEASED; urgency=medium
 
+  * Move Vcs-* to salsa.debian.org
   * New upstream stable release
     - Fix a race condition when a GCancellable is cancelled in another
       thread (Closes: #884654)
