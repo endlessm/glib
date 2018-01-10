@@ -2,6 +2,7 @@ glib2.0 (2.55.1-1) UNRELEASED; urgency=medium
 
   * debian/gbp.conf, debian/watch: Update for experimental
   * New upstream development release 2.55.1
+  * debian/libglib2.0-0.symbols: Update with new symbols in this release.
 
  -- Iain Lane <laney@debian.org>  Wed, 10 Jan 2018 12:15:06 +0000
 
