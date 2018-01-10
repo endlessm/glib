@@ -788,6 +788,22 @@
 <a class="link" href="glib-The-Main-Event-Loop.html#g-source-remove-by-user-data" title="g_source_remove_by_user_data ()">g_source_remove_by_user_data</a> <span class="c_punctuation">()</span>
 </td>
 </tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<span class="c_punctuation">(</span><a class="link" href="glib-The-Main-Event-Loop.html#GClearHandleFunc" title="GClearHandleFunc ()">*GClearHandleFunc</a><span class="c_punctuation">)</span> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="glib-The-Main-Event-Loop.html#g-clear-handle-id" title="g_clear_handle_id ()">g_clear_handle_id</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
 </tbody>
 </table></div>
 </div>
@@ -2476,7 +2492,7 @@ g_main_context_invoke_full (<em class="parameter"><code><a class="link" href="gl
 invocation of <em class="parameter"><code>function</code></em>
 .</p>
 <p>This function is the same as <a class="link" href="glib-The-Main-Event-Loop.html#g-main-context-invoke" title="g_main_context_invoke ()"><code class="function">g_main_context_invoke()</code></a> except that it
-lets you specify the priority incase <em class="parameter"><code>function</code></em>
+lets you specify the priority in case <em class="parameter"><code>function</code></em>
  ends up being
 scheduled as an idle and also lets you give a <a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> for <em class="parameter"><code>data</code></em>
 .</p>
@@ -3208,14 +3224,28 @@ executed.</p>
  must not be closed while the
 source is still active. Typically, you will want to call
 <a class="link" href="glib-Spawning-Processes.html#g-spawn-close-pid" title="g_spawn_close_pid ()"><code class="function">g_spawn_close_pid()</code></a> in the callback function for the source.</p>
-<p>Note further that using <a class="link" href="glib-The-Main-Event-Loop.html#g-child-watch-source-new" title="g_child_watch_source_new ()"><code class="function">g_child_watch_source_new()</code></a> is not
-compatible with calling <code class="literal">waitpid</code> with a nonpositive first
-argument in the application. Calling <code class="function">waitpid()</code> for individual
-pids will still work fine.</p>
-<p>Similarly, on POSIX platforms, the <em class="parameter"><code>pid</code></em>
- passed to this function must
-be greater than 0 (i.e. this function must wait for a specific child,
-and cannot wait for one of many children by using a nonpositive argument).</p>
+<p>On POSIX platforms, the following restrictions apply to this API
+due to limitations in POSIX process interfaces:</p>
+<div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; ">
+<li class="listitem"><p><em class="parameter"><code>pid</code></em>
+ must be a child of this process</p></li>
+<li class="listitem"><p><em class="parameter"><code>pid</code></em>
+ must be positive</p></li>
+<li class="listitem"><p>the application must not call <code class="literal">waitpid</code> with a non-positive
+first argument, for instance in another thread</p></li>
+<li class="listitem"><p>the application must not wait for <em class="parameter"><code>pid</code></em>
+ to exit by any other
+mechanism, including <code class="literal">waitpid(pid, ...)</code> or a second child-watch
+source for the same <em class="parameter"><code>pid</code></em>
+</p></li>
+<li class="listitem"><p>the application must not ignore SIGCHILD</p></li>
+</ul></div>
+<p>If any of those conditions are not met, this and related APIs will
+not work correctly. This can often be diagnosed via a GLib warning
+stating that <code class="literal">ECHILD</code> was received by <code class="literal">waitpid</code>.</p>
+<p>Calling <code class="literal">waitpid</code> for specific processes other than <em class="parameter"><code>pid</code></em>
+ remains a
+valid thing to do.</p>
 <div class="refsect3">
 <a name="g-child-watch-source-new.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -3257,7 +3287,9 @@ the spawn function for the child watching to work.</p>
  must not be closed while the
 source is still active. Typically, you will want to call
 <a class="link" href="glib-Spawning-Processes.html#g-spawn-close-pid" title="g_spawn_close_pid ()"><code class="function">g_spawn_close_pid()</code></a> in the callback function for the source.</p>
-<p>GLib supports only a single callback per process id.</p>
+<p>GLib supports only a single callback per process id.
+On POSIX platforms, the same restrictions mentioned for
+<a class="link" href="glib-The-Main-Event-Loop.html#g-child-watch-source-new" title="g_child_watch_source_new ()"><code class="function">g_child_watch_source_new()</code></a> apply to this function.</p>
 <p>This internally creates a main loop source using 
 <a class="link" href="glib-The-Main-Event-Loop.html#g-child-watch-source-new" title="g_child_watch_source_new ()"><code class="function">g_child_watch_source_new()</code></a> and attaches it to the main loop context 
 using <a class="link" href="glib-The-Main-Event-Loop.html#g-source-attach" title="g_source_attach ()"><code class="function">g_source_attach()</code></a>. You can do these steps manually if you 
@@ -3323,7 +3355,9 @@ successfully.</p>
  must not be closed while the source
 is still active.  Typically, you should invoke <a class="link" href="glib-Spawning-Processes.html#g-spawn-close-pid" title="g_spawn_close_pid ()"><code class="function">g_spawn_close_pid()</code></a>
 in the callback function for the source.</p>
-<p>GLib supports only a single callback per process id.</p>
+<p>GLib supports only a single callback per process id.
+On POSIX platforms, the same restrictions mentioned for
+<a class="link" href="glib-The-Main-Event-Loop.html#g-child-watch-source-new" title="g_child_watch_source_new ()"><code class="function">g_child_watch_source_new()</code></a> apply to this function.</p>
 <p>This internally creates a main loop source using 
 <a class="link" href="glib-The-Main-Event-Loop.html#g-child-watch-source-new" title="g_child_watch_source_new ()"><code class="function">g_child_watch_source_new()</code></a> and attaches it to the main loop context 
 using <a class="link" href="glib-The-Main-Event-Loop.html#g-source-attach" title="g_source_attach ()"><code class="function">g_source_attach()</code></a>. You can do these steps manually if you 
@@ -3390,9 +3424,12 @@ directly if you need to block until a file descriptor is ready, but
 don't want to run the full main loop.</p>
 <p>Each element of <em class="parameter"><code>fds</code></em>
  is a <a class="link" href="glib-The-Main-Event-Loop.html#GPollFD" title="struct GPollFD"><span class="type">GPollFD</span></a> describing a single file
-descriptor to poll. The <code class="literal">fd</code> field indicates the file descriptor,
-and the <code class="literal">events</code> field indicates the events to poll for. On return,
-the <code class="literal">revents</code> fields will be filled with the events that actually
+descriptor to poll. The <em class="parameter"><code>fd</code></em>
+ field indicates the file descriptor,
+and the <em class="parameter"><code>events</code></em>
+ field indicates the events to poll for. On return,
+the <em class="parameter"><code>revents</code></em>
+ fields will be filled with the events that actually
 occurred.</p>
 <p>On POSIX systems, the file descriptors in <em class="parameter"><code>fds</code></em>
  can be any sort of
@@ -3431,7 +3468,8 @@ Windows, the easiest solution is to construct all of your
 <div class="refsect3">
 <a name="g-poll.returns"></a><h4>Returns</h4>
 <p> the number of entries in <em class="parameter"><code>fds</code></em>
-whose <code class="literal">revents</code> fields
+whose <em class="parameter"><code>revents</code></em>
+fields
 were filled in, or 0 if the operation timed out, or -1 on error or
 if the call was interrupted.</p>
 </div>
@@ -4227,7 +4265,7 @@ so yourself, from the source dispatch function.</p>
 <p>Note that if you have a pair of sources where the ready time of one
 suggests that it will be delivered first but the priority for the
 other suggests that it would be delivered first, and the ready time
-for both sources is reached during the same main context iteration
+for both sources is reached during the same main context iteration,
 then the order of dispatch is undefined.</p>
 <p>It is a no-op to call this function on a <a class="link" href="glib-The-Main-Event-Loop.html#GSource" title="struct GSource"><span class="type">GSource</span></a> which has already been
 destroyed with <a class="link" href="glib-The-Main-Event-Loop.html#g-source-destroy" title="g_source_destroy ()"><code class="function">g_source_destroy()</code></a>.</p>
@@ -4707,14 +4745,13 @@ g_source_get_current_time (<em class="parameter"><code><a class="link" href="gli
 <a name="g-source-remove"></a><h3>g_source_remove ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>
 g_source_remove (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint ()"><span class="type">guint</span></a> tag</code></em>);</pre>
-<p>Removes the source with the given id from the default main context.</p>
-<p>The id of a <a class="link" href="glib-The-Main-Event-Loop.html#GSource" title="struct GSource"><span class="type">GSource</span></a> is given by <a class="link" href="glib-The-Main-Event-Loop.html#g-source-get-id" title="g_source_get_id ()"><code class="function">g_source_get_id()</code></a>, or will be
+<p>Removes the source with the given ID from the default main context. You must
+use <a class="link" href="glib-The-Main-Event-Loop.html#g-source-destroy" title="g_source_destroy ()"><code class="function">g_source_destroy()</code></a> for sources added to a non-default main context.</p>
+<p>The ID of a <a class="link" href="glib-The-Main-Event-Loop.html#GSource" title="struct GSource"><span class="type">GSource</span></a> is given by <a class="link" href="glib-The-Main-Event-Loop.html#g-source-get-id" title="g_source_get_id ()"><code class="function">g_source_get_id()</code></a>, or will be
 returned by the functions <a class="link" href="glib-The-Main-Event-Loop.html#g-source-attach" title="g_source_attach ()"><code class="function">g_source_attach()</code></a>, <a class="link" href="glib-The-Main-Event-Loop.html#g-idle-add" title="g_idle_add ()"><code class="function">g_idle_add()</code></a>,
 <a class="link" href="glib-The-Main-Event-Loop.html#g-idle-add-full" title="g_idle_add_full ()"><code class="function">g_idle_add_full()</code></a>, <a class="link" href="glib-The-Main-Event-Loop.html#g-timeout-add" title="g_timeout_add ()"><code class="function">g_timeout_add()</code></a>, <a class="link" href="glib-The-Main-Event-Loop.html#g-timeout-add-full" title="g_timeout_add_full ()"><code class="function">g_timeout_add_full()</code></a>,
 <a class="link" href="glib-The-Main-Event-Loop.html#g-child-watch-add" title="g_child_watch_add ()"><code class="function">g_child_watch_add()</code></a>, <a class="link" href="glib-The-Main-Event-Loop.html#g-child-watch-add-full" title="g_child_watch_add_full ()"><code class="function">g_child_watch_add_full()</code></a>, <a class="link" href="glib-IO-Channels.html#g-io-add-watch" title="g_io_add_watch ()"><code class="function">g_io_add_watch()</code></a>, and
 <a class="link" href="glib-IO-Channels.html#g-io-add-watch-full" title="g_io_add_watch_full ()"><code class="function">g_io_add_watch_full()</code></a>.</p>
-<p>See also <a class="link" href="glib-The-Main-Event-Loop.html#g-source-destroy" title="g_source_destroy ()"><code class="function">g_source_destroy()</code></a>. You must use <a class="link" href="glib-The-Main-Event-Loop.html#g-source-destroy" title="g_source_destroy ()"><code class="function">g_source_destroy()</code></a> for sources
-added to a non-default main context.</p>
 <p>It is a programmer error to attempt to remove a non-existent source.</p>
 <p>More specifically: source IDs can be reissued after a source has been
 destroyed and therefore it is never valid to use this function with a
@@ -4808,6 +4845,73 @@ data, only one will be destroyed.</p>
 <a name="g-source-remove-by-user-data.returns"></a><h4>Returns</h4>
 <p> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if a source was found and removed. </p>
 </div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="GClearHandleFunc"></a><h3>GClearHandleFunc ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+<span class="c_punctuation">(</span>*GClearHandleFunc<span class="c_punctuation">)</span> (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint ()"><span class="type">guint</span></a> handle_id</code></em>);</pre>
+<p>Specifies the type of function passed to <a class="link" href="glib-The-Main-Event-Loop.html#g-clear-handle-id" title="g_clear_handle_id ()"><code class="function">g_clear_handle_id()</code></a>.
+The implementation is expected to free the resource identified
+by <em class="parameter"><code>handle_id</code></em>
+; for instance, if <em class="parameter"><code>handle_id</code></em>
+ is a <a class="link" href="glib-The-Main-Event-Loop.html#GSource" title="struct GSource"><span class="type">GSource</span></a> ID,
+<a class="link" href="glib-The-Main-Event-Loop.html#g-source-remove" title="g_source_remove ()"><code class="function">g_source_remove()</code></a> can be used.</p>
+<div class="refsect3">
+<a name="GClearHandleFunc.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>handle_id</p></td>
+<td class="parameter_description"><p>the handle ID to clear</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<p class="since">Since: <a class="link" href="api-index-2-56.html#api-index-2.56">2.56</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-clear-handle-id"></a><h3>g_clear_handle_id ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+g_clear_handle_id (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint ()"><span class="type">guint</span></a> *tag_ptr</code></em>,
+                   <em class="parameter"><code><a class="link" href="glib-The-Main-Event-Loop.html#GClearHandleFunc" title="GClearHandleFunc ()"><span class="type">GClearHandleFunc</span></a> clear_func</code></em>);</pre>
+<p>Clears a numeric handler, such as a <a class="link" href="glib-The-Main-Event-Loop.html#GSource" title="struct GSource"><span class="type">GSource</span></a> ID.</p>
+<p><em class="parameter"><code>tag_ptr</code></em>
+ must be a valid pointer to the variable holding the handler.</p>
+<p>If the ID is zero then this function does nothing.
+Otherwise, <code class="function">clear_func()</code> is called with the ID as a parameter, and the tag is
+set to zero.</p>
+<p>A macro is also included that allows this function to be used without
+pointer casts.</p>
+<p><span class="annotation">[<acronym title="Exposed in C code, not necessarily available in other languages."><span class="acronym">skip</span></acronym>]</span></p>
+<div class="refsect3">
+<a name="g-clear-handle-id.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>tag_ptr</p></td>
+<td class="parameter_description"><p>a pointer to the handler ID. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL must not be passed as the value in, out, in-out; or as a return value."><span class="acronym">not nullable</span></acronym>]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>clear_func</p></td>
+<td class="parameter_description"><p>the function to call to clear the handler. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL must not be passed as the value in, out, in-out; or as a return value."><span class="acronym">not nullable</span></acronym>]</span></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p class="since">Since: <a class="link" href="api-index-2-56.html#api-index-2.56">2.56</a></p>
 </div>
 </div>
 <div class="refsect1">
@@ -5027,8 +5131,8 @@ values returned which were &gt;= 0.  Since 2.36 this may
 be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>, in which case the effect is as if the function always returns
 <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> with a timeout of -1.  If <em class="parameter"><code>prepare</code></em>
 returns a
-timeout and the source also has a 'ready time' set then the
-nearer of the two will be used.</p></td>
+timeout and the source also has a ready time set, then the
+lower of the two will be used.</p></td>
 <td class="struct_member_annotations"> </td>
 </tr>
 <tr>
@@ -5046,24 +5150,24 @@ be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code
 <td class="struct_member_description"><p>Called to dispatch the event source, after it has returned
 <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> in either its <em class="parameter"><code>prepare</code></em>
 or its <em class="parameter"><code>check</code></em>
-function. The <em class="parameter"><code>dispatch</code></em>
-function is passed in a callback function and data. The callback
-function may be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the source was never connected to a callback
-using <a class="link" href="glib-The-Main-Event-Loop.html#g-source-set-callback" title="g_source_set_callback ()"><code class="function">g_source_set_callback()</code></a>. The <em class="parameter"><code>dispatch</code></em>
-function should call the
-callback function with <em class="parameter"><code>user_data</code></em>
-and whatever additional parameters
-are needed for this type of event source. The return value of the
-<em class="parameter"><code>dispatch</code></em>
-function should be <a class="link" href="glib-The-Main-Event-Loop.html#G-SOURCE-REMOVE:CAPS" title="G_SOURCE_REMOVE"><span class="type">G_SOURCE_REMOVE</span></a> if the source should be
-removed or <a class="link" href="glib-The-Main-Event-Loop.html#G-SOURCE-CONTINUE:CAPS" title="G_SOURCE_CONTINUE"><span class="type">G_SOURCE_CONTINUE</span></a> to keep it.</p></td>
+function, or if a ready time
+has been reached. The <em class="parameter"><code>dispatch</code></em>
+function receives a callback function and
+user data. The callback function may be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the source was never
+connected to a callback using <a class="link" href="glib-The-Main-Event-Loop.html#g-source-set-callback" title="g_source_set_callback ()"><code class="function">g_source_set_callback()</code></a>. The <em class="parameter"><code>dispatch</code></em>
+function should call the callback function with <em class="parameter"><code>user_data</code></em>
+and whatever
+additional parameters are needed for this type of event source. The
+return value of the <em class="parameter"><code>dispatch</code></em>
+function should be <a class="link" href="glib-The-Main-Event-Loop.html#G-SOURCE-REMOVE:CAPS" title="G_SOURCE_REMOVE"><span class="type">G_SOURCE_REMOVE</span></a> if the
+source should be removed or <a class="link" href="glib-The-Main-Event-Loop.html#G-SOURCE-CONTINUE:CAPS" title="G_SOURCE_CONTINUE"><span class="type">G_SOURCE_CONTINUE</span></a> to keep it.</p></td>
 <td class="struct_member_annotations"> </td>
 </tr>
 <tr>
 <td class="struct_member_name"><p><em class="structfield"><code><a name="GSourceFuncs.finalize"></a>finalize</code></em> ()</p></td>
 <td class="struct_member_description"><p>Called when the source is finalized. At this point, the source
 will have been destroyed, had its callback cleared, and have been removed
-from its <a class="link" href="glib-The-Main-Event-Loop.html#GMainContext" title="GMainContext"><span class="type">GMainContext</span></a>, but it will still have its final reference count;
+from its <a class="link" href="glib-The-Main-Event-Loop.html#GMainContext" title="GMainContext"><span class="type">GMainContext</span></a>, but it will still have its final reference count,
 so methods can be called on it from within this function.</p></td>
 <td class="struct_member_annotations"> </td>
 </tr>

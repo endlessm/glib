@@ -3096,7 +3096,8 @@ function also establishes a binding between the writability of
  has
 a boolean property by that name). See <a class="link" href="GSettings.html#g-settings-bind-writable" title="g_settings_bind_writable ()"><code class="function">g_settings_bind_writable()</code></a>
 for more details about writable bindings.</p>
-<p>Note that the lifecycle of the binding is tied to the object,
+<p>Note that the lifecycle of the binding is tied to <em class="parameter"><code>object</code></em>
+,
 and that you can have only one binding per object property.
 If you bind the same property twice on the same object, the second
 binding overrides the first one.</p>
@@ -3160,7 +3161,8 @@ and the property <em class="parameter"><code>property</code></em>
 .</p>
 <p>The binding uses the provided mapping functions to map between
 settings and property values.</p>
-<p>Note that the lifecycle of the binding is tied to the object,
+<p>Note that the lifecycle of the binding is tied to <em class="parameter"><code>object</code></em>
+,
 and that you can have only one binding per object property.
 If you bind the same property twice on the same object, the second
 binding overrides the first one.</p>
@@ -3258,7 +3260,8 @@ property, not the other way.</p>
 value as it passes from the setting to the object, i.e. <em class="parameter"><code>property</code></em>
 
 will be set to <a href="../glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the key is not writable.</p>
-<p>Note that the lifecycle of the binding is tied to the object,
+<p>Note that the lifecycle of the binding is tied to <em class="parameter"><code>object</code></em>
+,
 and that you can have only one binding per object property.
 If you bind the same property twice on the same object, the second
 binding overrides the first one.</p>
@@ -3551,7 +3554,7 @@ directions.</p>
 <div class="refsect2">
 <a name="GSettings--backend"></a><h3>The <code class="literal">“backend”</code> property</h3>
 <pre class="programlisting">  “backend”                  <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> *</pre>
-<p>The GSettingsBackend for this settings object.</p>
+<p>The name of the context that the settings are stored in.</p>
 <p>Flags: Read / Write / Construct Only</p>
 </div>
 <hr>

@@ -295,6 +295,9 @@ then reloaded, and reinitialized), <em class="parameter"><code>module</code></em
 be the same as they were previously.</p>
 <p>As long as any instances of the type exist, the type plugin will
 not be unloaded.</p>
+<p>Since 2.56 if <em class="parameter"><code>module</code></em>
+ is <a href="../glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> this will call <a class="link" href="gobject-Type-Information.html#g-type-register-static" title="g_type_register_static ()"><code class="function">g_type_register_static()</code></a>
+instead. This can be used when making a static build of the module.</p>
 <div class="refsect3">
 <a name="g-type-module-register-type.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -306,8 +309,8 @@ not be unloaded.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>module</p></td>
-<td class="parameter_description"><p>a <a class="link" href="GTypeModule.html" title="GTypeModule"><span class="type">GTypeModule</span></a></p></td>
-<td class="parameter_annotations"> </td>
+<td class="parameter_description"><p>a <a class="link" href="GTypeModule.html" title="GTypeModule"><span class="type">GTypeModule</span></a>. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>parent_type</p></td>
@@ -350,6 +353,9 @@ in the given type plugin. If the interface was already registered
 for the type in this plugin, nothing will be done.</p>
 <p>As long as any instances of the type exist, the type plugin will
 not be unloaded.</p>
+<p>Since 2.56 if <em class="parameter"><code>module</code></em>
+ is <a href="../glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> this will call <a class="link" href="gobject-Type-Information.html#g-type-add-interface-static" title="g_type_add_interface_static ()"><code class="function">g_type_add_interface_static()</code></a>
+instead. This can be used when making a static build of the module.</p>
 <div class="refsect3">
 <a name="g-type-module-add-interface.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -361,8 +367,8 @@ not be unloaded.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>module</p></td>
-<td class="parameter_description"><p>a <a class="link" href="GTypeModule.html" title="GTypeModule"><span class="type">GTypeModule</span></a></p></td>
-<td class="parameter_annotations"> </td>
+<td class="parameter_description"><p>a <a class="link" href="GTypeModule.html" title="GTypeModule"><span class="type">GTypeModule</span></a>. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>instance_type</p></td>
@@ -397,6 +403,9 @@ the <a class="link" href="gobject-Type-Information.html#GType" title="GType"><sp
 is newly registered, and the resulting <a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> identifier returned.</p>
 <p>As long as any instances of the type exist, the type plugin will
 not be unloaded.</p>
+<p>Since 2.56 if <em class="parameter"><code>module</code></em>
+ is <a href="../glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> this will call <a class="link" href="gobject-Type-Information.html#g-type-register-static" title="g_type_register_static ()"><code class="function">g_type_register_static()</code></a>
+instead. This can be used when making a static build of the module.</p>
 <div class="refsect3">
 <a name="g-type-module-register-enum.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -408,8 +417,8 @@ not be unloaded.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>module</p></td>
-<td class="parameter_description"><p>a <a class="link" href="GTypeModule.html" title="GTypeModule"><span class="type">GTypeModule</span></a></p></td>
-<td class="parameter_annotations"> </td>
+<td class="parameter_description"><p>a <a class="link" href="GTypeModule.html" title="GTypeModule"><span class="type">GTypeModule</span></a>. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>name</p></td>
@@ -447,6 +456,9 @@ the <a class="link" href="gobject-Type-Information.html#GType" title="GType"><sp
 is newly registered, and the resulting <a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> identifier returned.</p>
 <p>As long as any instances of the type exist, the type plugin will
 not be unloaded.</p>
+<p>Since 2.56 if <em class="parameter"><code>module</code></em>
+ is <a href="../glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> this will call <a class="link" href="gobject-Type-Information.html#g-type-register-static" title="g_type_register_static ()"><code class="function">g_type_register_static()</code></a>
+instead. This can be used when making a static build of the module.</p>
 <div class="refsect3">
 <a name="g-type-module-register-flags.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -458,8 +470,8 @@ not be unloaded.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>module</p></td>
-<td class="parameter_description"><p>a <a class="link" href="GTypeModule.html" title="GTypeModule"><span class="type">GTypeModule</span></a></p></td>
-<td class="parameter_annotations"> </td>
+<td class="parameter_description"><p>a <a class="link" href="GTypeModule.html" title="GTypeModule"><span class="type">GTypeModule</span></a>. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>name</p></td>

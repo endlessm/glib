@@ -970,6 +970,8 @@ g_get_tmp_dir (void)
  * name can be determined, a default fixed string "localhost" is
  * returned.
  *
+ * The encoding of the returned string is UTF-8.
+ *
  * Returns: the host name of the machine.
  *
  * Since: 2.8
@@ -982,16 +984,25 @@ g_get_host_name (void)
   if (g_once_init_enter (&hostname))
     {
       gboolean failed;
-      gchar tmp[100];
+      gchar *utmp;
 
 #ifndef G_OS_WIN32
-      failed = (gethostname (tmp, sizeof (tmp)) == -1);
+      gchar *tmp = g_malloc (sizeof (gchar) * 100);
+      failed = (gethostname (tmp, sizeof (gchar) * 100) == -1);
+      if (failed)
+        g_clear_pointer (&tmp, g_free);
+      utmp = tmp;
 #else
-      DWORD size = sizeof (tmp);
-      failed = (!GetComputerName (tmp, &size));
+      wchar_t tmp[MAX_COMPUTERNAME_LENGTH + 1];
+      DWORD size = sizeof (tmp) / sizeof (tmp[0]);
+      failed = (!GetComputerNameW (tmp, &size));
+      if (!failed)
+        utmp = g_utf16_to_utf8 (tmp, size, NULL, NULL, NULL);
+      if (utmp == NULL)
+        failed = TRUE;
 #endif
 
-      g_once_init_leave (&hostname, g_strdup (failed ? "localhost" : tmp));
+      g_once_init_leave (&hostname, failed ? g_strdup ("localhost") : utmp);
     }
 
   return hostname;
@@ -2171,6 +2182,8 @@ g_format_size (guint64 size)
  *     suffixes. IEC units should only be used for reporting things with
  *     a strong "power of 2" basis, like RAM sizes or RAID stripe sizes.
  *     Network and storage sizes should be reported in the normal SI units.
+ * @G_FORMAT_SIZE_BITS: set the size as a quantity in bits, rather than
+ *     bytes, and return units in bits. For example, ‘Mb’ rather than ‘MB’.
  *
  * Flags to modify the format of the string returned by g_format_size_full().
  */
@@ -2197,63 +2210,118 @@ gchar *
 g_format_size_full (guint64          size,
                     GFormatSizeFlags flags)
 {
+  struct Format
+  {
+    guint64 factor;
+    char string[9];
+  };
+
+  typedef enum
+  {
+    FORMAT_BYTES,
+    FORMAT_BYTES_IEC,
+    FORMAT_BITS,
+    FORMAT_BITS_IEC
+  } FormatIndex;
+
+  const struct Format formats[4][6] = {
+    {
+      { KILOBYTE_FACTOR, N_("%.1f kB") },
+      { MEGABYTE_FACTOR, N_("%.1f MB") },
+      { GIGABYTE_FACTOR, N_("%.1f GB") },
+      { TERABYTE_FACTOR, N_("%.1f TB") },
+      { PETABYTE_FACTOR, N_("%.1f PB") },
+      { EXABYTE_FACTOR,  N_("%.1f EB") }
+    },
+    {
+      { KIBIBYTE_FACTOR, N_("%.1f KiB") },
+      { MEBIBYTE_FACTOR, N_("%.1f MiB") },
+      { GIBIBYTE_FACTOR, N_("%.1f GiB") },
+      { TEBIBYTE_FACTOR, N_("%.1f TiB") },
+      { PEBIBYTE_FACTOR, N_("%.1f PiB") },
+      { EXBIBYTE_FACTOR, N_("%.1f EiB") }
+    },
+    {
+      { KILOBYTE_FACTOR, N_("%.1f kb") },
+      { MEGABYTE_FACTOR, N_("%.1f Mb") },
+      { GIGABYTE_FACTOR, N_("%.1f Gb") },
+      { TERABYTE_FACTOR, N_("%.1f Tb") },
+      { PETABYTE_FACTOR, N_("%.1f Pb") },
+      { EXABYTE_FACTOR,  N_("%.1f Eb") }
+    },
+    {
+      { KIBIBYTE_FACTOR, N_("%.1f Kib") },
+      { MEBIBYTE_FACTOR, N_("%.1f Mib") },
+      { GIBIBYTE_FACTOR, N_("%.1f Gib") },
+      { TEBIBYTE_FACTOR, N_("%.1f Tib") },
+      { PEBIBYTE_FACTOR, N_("%.1f Pib") },
+      { EXBIBYTE_FACTOR, N_("%.1f Eib") }
+    }
+  };
+
   GString *string;
+  FormatIndex index;
 
   string = g_string_new (NULL);
 
-  if (flags & G_FORMAT_SIZE_IEC_UNITS)
+  switch (flags & ~G_FORMAT_SIZE_LONG_FORMAT)
     {
-      if (size < KIBIBYTE_FACTOR)
+    case G_FORMAT_SIZE_DEFAULT:
+      index = FORMAT_BYTES;
+      break;
+    case (G_FORMAT_SIZE_DEFAULT | G_FORMAT_SIZE_IEC_UNITS):
+      index = FORMAT_BYTES_IEC;
+      break;
+    case G_FORMAT_SIZE_BITS:
+      index = FORMAT_BITS;
+      break;
+    case (G_FORMAT_SIZE_BITS | G_FORMAT_SIZE_IEC_UNITS):
+      index = FORMAT_BITS_IEC;
+      break;
+    default:
+      g_assert_not_reached ();
+    }
+
+
+  if (size < formats[index][0].factor)
+    {
+      const char * format;
+
+      if (index == FORMAT_BYTES || index == FORMAT_BYTES_IEC)
         {
-          g_string_printf (string,
-                           g_dngettext(GETTEXT_PACKAGE, "%u byte", "%u bytes", (guint) size),
-                           (guint) size);
-          flags &= ~G_FORMAT_SIZE_LONG_FORMAT;
+          format = g_dngettext (GETTEXT_PACKAGE, "%u byte", "%u bytes", (guint) size);
+        }
+      else
+        {
+          format = g_dngettext (GETTEXT_PACKAGE, "%u bit", "%u bits", (guint) size);
         }
 
-      else if (size < MEBIBYTE_FACTOR)
-        g_string_printf (string, _("%.1f KiB"), (gdouble) size / (gdouble) KIBIBYTE_FACTOR);
-      else if (size < GIBIBYTE_FACTOR)
-        g_string_printf (string, _("%.1f MiB"), (gdouble) size / (gdouble) MEBIBYTE_FACTOR);
+      g_string_printf (string, format, (guint) size);
 
-      else if (size < TEBIBYTE_FACTOR)
-        g_string_printf (string, _("%.1f GiB"), (gdouble) size / (gdouble) GIBIBYTE_FACTOR);
-
-      else if (size < PEBIBYTE_FACTOR)
-        g_string_printf (string, _("%.1f TiB"), (gdouble) size / (gdouble) TEBIBYTE_FACTOR);
-
-      else if (size < EXBIBYTE_FACTOR)
-        g_string_printf (string, _("%.1f PiB"), (gdouble) size / (gdouble) PEBIBYTE_FACTOR);
-
-      else
-        g_string_printf (string, _("%.1f EiB"), (gdouble) size / (gdouble) EXBIBYTE_FACTOR);
+      flags &= ~G_FORMAT_SIZE_LONG_FORMAT;
     }
   else
     {
-      if (size < KILOBYTE_FACTOR)
+      const gsize n = G_N_ELEMENTS (formats[index]);
+      gsize i;
+
+      /*
+       * Point the last format (the highest unit) by default
+       * and then then scan all formats, starting with the 2nd one
+       * because the 1st is already managed by with the plural form
+       */
+      const struct Format * f = &formats[index][n - 1];
+
+      for (i = 1; i < n; i++)
         {
-          g_string_printf (string,
-                           g_dngettext(GETTEXT_PACKAGE, "%u byte", "%u bytes", (guint) size),
-                           (guint) size);
-          flags &= ~G_FORMAT_SIZE_LONG_FORMAT;
+          if (size < formats[index][i].factor)
+            {
+              f = &formats[index][i - 1];
+              break;
+            }
         }
 
-      else if (size < MEGABYTE_FACTOR)
-        g_string_printf (string, _("%.1f kB"), (gdouble) size / (gdouble) KILOBYTE_FACTOR);
-
-      else if (size < GIGABYTE_FACTOR)
-        g_string_printf (string, _("%.1f MB"), (gdouble) size / (gdouble) MEGABYTE_FACTOR);
-
-      else if (size < TERABYTE_FACTOR)
-        g_string_printf (string, _("%.1f GB"), (gdouble) size / (gdouble) GIGABYTE_FACTOR);
-      else if (size < PETABYTE_FACTOR)
-        g_string_printf (string, _("%.1f TB"), (gdouble) size / (gdouble) TERABYTE_FACTOR);
-
-      else if (size < EXABYTE_FACTOR)
-        g_string_printf (string, _("%.1f PB"), (gdouble) size / (gdouble) PETABYTE_FACTOR);
-
-      else
-        g_string_printf (string, _("%.1f EB"), (gdouble) size / (gdouble) EXABYTE_FACTOR);
+      g_string_printf (string, _(f->string), (gdouble) size / (gdouble) f->factor);
     }
 
   if (flags & G_FORMAT_SIZE_LONG_FORMAT)
@@ -2278,19 +2346,27 @@ g_format_size_full (guint64          size,
        */
       guint plural_form = size < 1000 ? size : size % 1000 + 1000;
 
-      /* Second problem: we need to translate the string "%u byte" and
-       * "%u bytes" for pluralisation, but the correct number format to
+      /* Second problem: we need to translate the string "%u byte/bit" and
+       * "%u bytes/bits" for pluralisation, but the correct number format to
        * use for a gsize is different depending on which architecture
        * we're on.
        *
-       * Solution: format the number separately and use "%s bytes" on
+       * Solution: format the number separately and use "%s bytes/bits" on
        * all platforms.
        */
       const gchar *translated_format;
       gchar *formatted_number;
 
-      /* Translators: the %s in "%s bytes" will always be replaced by a number. */
-      translated_format = g_dngettext(GETTEXT_PACKAGE, "%s byte", "%s bytes", plural_form);
+      if (index == FORMAT_BYTES || index == FORMAT_BYTES_IEC)
+        {
+          /* Translators: the %s in "%s bytes" will always be replaced by a number. */
+          translated_format = g_dngettext (GETTEXT_PACKAGE, "%s byte", "%s bytes", plural_form);
+        }
+      else
+        {
+          /* Translators: the %s in "%s bits" will always be replaced by a number. */
+          translated_format = g_dngettext (GETTEXT_PACKAGE, "%s bit", "%s bits", plural_form);
+        }
       /* XXX: Windows doesn't support the "'" format modifier, so we
        * must not use it there.  Instead, just display the number
        * without separation.  Bug #655336 is open until a solution is

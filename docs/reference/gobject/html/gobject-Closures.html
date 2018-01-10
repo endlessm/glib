@@ -675,8 +675,8 @@ and transform the return value back into a <a class="link" href="gobject-Generic
 to a function and maybe a data argument, and the marshaller
 converts between <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> and native C types. The GObject
 library provides the <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a> type for this purpose. Bindings for
-other languages need marshallers which convert between <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a>&lt;!--
---&gt;s and suitable representations in the runtime of the language in
+other languages need marshallers which convert between <a href="gobject-Generic-values.html#GValue"><span class="type">GValues</span></a>
+and suitable representations in the runtime of the language in
 order to use functions written in that languages as callbacks.</p>
 <p>Within GObject, closures play an important role in the
 implementation of signals. When a signal is registered, the
@@ -1032,7 +1032,8 @@ is no longer used</p></td>
 </div>
 <div class="refsect3">
 <a name="g-cclosure-new.returns"></a><h4>Returns</h4>
-<p> a new <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a></p>
+<p>a floating reference to a new <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a>. </p>
+<p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
 </div>
 <hr>
@@ -1078,8 +1079,8 @@ is no longer used</p></td>
 </div>
 <div class="refsect3">
 <a name="g-cclosure-new-swap.returns"></a><h4>Returns</h4>
-<p>a new <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a>. </p>
-<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+<p>a floating reference to a new <a class="link" href="gobject-Closures.html#GCClosure" title="struct GCClosure"><span class="type">GCClosure</span></a>. </p>
+<p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
 </div>
 <hr>
@@ -1791,8 +1792,8 @@ field of the newly allocated <a class="link" href="gobject-Closures.html#GClosur
 </div>
 <div class="refsect3">
 <a name="g-closure-new-simple.returns"></a><h4>Returns</h4>
-<p>a newly allocated <a class="link" href="gobject-Closures.html#GClosure" title="struct GClosure"><span class="type">GClosure</span></a>. </p>
-<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+<p>a floating reference to a new <a class="link" href="gobject-Closures.html#GClosure" title="struct GClosure"><span class="type">GClosure</span></a>. </p>
+<p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
 </div>
 <hr>

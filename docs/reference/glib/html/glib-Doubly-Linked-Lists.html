@@ -906,6 +906,9 @@ g_list_free_full (<em class="parameter"><code><a class="link" href="glib-Doubly-
 <p>Convenience method, which frees all the memory used by a <a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="struct GList"><span class="type">GList</span></a>,
 and calls <em class="parameter"><code>free_func</code></em>
  on every element's data.</p>
+<p><em class="parameter"><code>free_func</code></em>
+ must not modify the list (eg, by removing the freed
+element from it).</p>
 <div class="refsect3">
 <a name="g-list-free-full.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -1428,6 +1431,10 @@ g_list_foreach (<em class="parameter"><code><a class="link" href="glib-Doubly-Li
                 <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GFunc" title="GFunc ()"><span class="type">GFunc</span></a> func</code></em>,
                 <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>Calls a function for each element of a <a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="struct GList"><span class="type">GList</span></a>.</p>
+<p>It is safe for <em class="parameter"><code>func</code></em>
+ to remove the element from <em class="parameter"><code>list</code></em>
+, but it must
+not modify any part of the list after that element.</p>
 <div class="refsect3">
 <a name="g-list-foreach.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">

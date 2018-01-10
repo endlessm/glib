@@ -194,6 +194,7 @@
    <File RelativePath="..\..\gio\ginputstream.c" />
    <File RelativePath="..\..\gio\gioerror.c" />
    <File RelativePath="..\..\gio\giomodule.c" />
+   <File RelativePath="..\..\gio\giomodule-priv.c" />
    <File RelativePath="..\..\gio\gioscheduler.c" />
    <File RelativePath="..\..\gio\giostream.c" />
    <File RelativePath="..\..\gio\gloadableicon.c" />

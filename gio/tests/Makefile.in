@@ -132,7 +132,9 @@ check_PROGRAMS = $(am__EXEEXT_22)
 @OS_UNIX_TRUE@	socket-address				\
 @OS_UNIX_TRUE@	stream-rw_all				\
 @OS_UNIX_TRUE@	unix-fd					\
+@OS_UNIX_TRUE@	unix-mounts				\
 @OS_UNIX_TRUE@	unix-streams				\
+@OS_UNIX_TRUE@	g-file-info-filesystem-readonly		\
 @OS_UNIX_TRUE@	$(NULL)
 
 @OS_UNIX_TRUE@am__append_15 = basic-application dbus-launch $(NULL) \
@@ -331,7 +333,9 @@ am__EXEEXT_1 =
 @OS_UNIX_TRUE@	gdbus-peer-object-manager$(EXEEXT) \
 @OS_UNIX_TRUE@	live-g-file$(EXEEXT) socket-address$(EXEEXT) \
 @OS_UNIX_TRUE@	stream-rw_all$(EXEEXT) unix-fd$(EXEEXT) \
-@OS_UNIX_TRUE@	unix-streams$(EXEEXT) $(am__EXEEXT_1)
+@OS_UNIX_TRUE@	unix-mounts$(EXEEXT) unix-streams$(EXEEXT) \
+@OS_UNIX_TRUE@	g-file-info-filesystem-readonly$(EXEEXT) \
+@OS_UNIX_TRUE@	$(am__EXEEXT_1)
 @OS_COCOA_FALSE@@OS_UNIX_TRUE@am__EXEEXT_3 = mimeapps$(EXEEXT)
 @OS_UNIX_TRUE@am__EXEEXT_4 = gdbus-connection-flush$(EXEEXT) \
 @OS_UNIX_TRUE@	gdbus-non-socket$(EXEEXT)
@@ -414,6 +418,7 @@ am__EXEEXT_20 = gio-du$(EXEEXT) echo-server$(EXEEXT) \
 	gapplication-example-cmdline$(EXEEXT) \
 	gapplication-example-cmdline2$(EXEEXT) \
 	gapplication-example-cmdline3$(EXEEXT) \
+	gapplication-example-cmdline4$(EXEEXT) \
 	gapplication-example-dbushooks$(EXEEXT) \
 	gapplication-example-open$(EXEEXT) \
 	gdbus-example-export$(EXEEXT) gdbus-example-own-name$(EXEEXT) \
@@ -652,6 +657,16 @@ g_file_info_DEPENDENCIES = $(top_builddir)/gio/libgio-2.0.la \
 	$(top_builddir)/gobject/libgobject-2.0.la \
 	$(top_builddir)/gmodule/libgmodule-2.0.la \
 	$(top_builddir)/glib/libglib-2.0.la $(am__DEPENDENCIES_1)
+g_file_info_filesystem_readonly_SOURCES =  \
+	g-file-info-filesystem-readonly.c
+g_file_info_filesystem_readonly_OBJECTS =  \
+	g-file-info-filesystem-readonly.$(OBJEXT)
+g_file_info_filesystem_readonly_LDADD = $(LDADD)
+g_file_info_filesystem_readonly_DEPENDENCIES =  \
+	$(top_builddir)/gio/libgio-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/glib/libglib-2.0.la $(am__DEPENDENCIES_1)
 g_icon_SOURCES = g-icon.c
 g_icon_OBJECTS = g-icon.$(OBJEXT)
 g_icon_LDADD = $(LDADD)
@@ -704,6 +719,16 @@ gapplication_example_cmdline3_OBJECTS =  \
 	gapplication-example-cmdline3.$(OBJEXT)
 gapplication_example_cmdline3_LDADD = $(LDADD)
 gapplication_example_cmdline3_DEPENDENCIES =  \
+	$(top_builddir)/gio/libgio-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/glib/libglib-2.0.la $(am__DEPENDENCIES_1)
+gapplication_example_cmdline4_SOURCES =  \
+	gapplication-example-cmdline4.c
+gapplication_example_cmdline4_OBJECTS =  \
+	gapplication-example-cmdline4.$(OBJEXT)
+gapplication_example_cmdline4_LDADD = $(LDADD)
+gapplication_example_cmdline4_DEPENDENCIES =  \
 	$(top_builddir)/gio/libgio-2.0.la \
 	$(top_builddir)/gobject/libgobject-2.0.la \
 	$(top_builddir)/gmodule/libgmodule-2.0.la \
@@ -831,8 +856,9 @@ gdbus_connection_slow_DEPENDENCIES =  \
 	$(top_builddir)/gobject/libgobject-2.0.la \
 	$(top_builddir)/gmodule/libgmodule-2.0.la \
 	$(top_builddir)/glib/libglib-2.0.la $(am__DEPENDENCIES_1)
-am_gdbus_daemon_OBJECTS = gdbus-daemon.$(OBJEXT) gdbusdaemon.$(OBJEXT)
-nodist_gdbus_daemon_OBJECTS = gdbus-daemon-generated.$(OBJEXT)
+am_gdbus_daemon_OBJECTS = gdbus-daemon.$(OBJEXT)
+nodist_gdbus_daemon_OBJECTS = gdbus-daemon-generated.$(OBJEXT) \
+	gdbus-daemon-impl.$(OBJEXT)
 gdbus_daemon_OBJECTS = $(am_gdbus_daemon_OBJECTS) \
 	$(nodist_gdbus_daemon_OBJECTS)
 gdbus_daemon_LDADD = $(LDADD)
@@ -1458,6 +1484,13 @@ unix_fd_DEPENDENCIES = $(top_builddir)/gio/libgio-2.0.la \
 	$(top_builddir)/gobject/libgobject-2.0.la \
 	$(top_builddir)/gmodule/libgmodule-2.0.la \
 	$(top_builddir)/glib/libglib-2.0.la $(am__DEPENDENCIES_1)
+unix_mounts_SOURCES = unix-mounts.c
+unix_mounts_OBJECTS = unix-mounts.$(OBJEXT)
+unix_mounts_LDADD = $(LDADD)
+unix_mounts_DEPENDENCIES = $(top_builddir)/gio/libgio-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/glib/libglib-2.0.la $(am__DEPENDENCIES_1)
 unix_streams_SOURCES = unix-streams.c
 unix_streams_OBJECTS = unix-streams.$(OBJEXT)
 unix_streams_LDADD = $(LDADD)
@@ -1529,10 +1562,12 @@ SOURCES = $(libresourceplugin_la_SOURCES) $(actions_SOURCES) appinfo.c \
 	data-input-stream.c data-output-stream.c \
 	$(dbus_appinfo_SOURCES) dbus-launch.c defaultvalue.c \
 	desktop-app-info.c echo-server.c file.c fileattributematcher.c \
-	filter-cat.c filter-streams.c g-file.c g-file-info.c g-icon.c \
+	filter-cat.c filter-streams.c g-file.c g-file-info.c \
+	g-file-info-filesystem-readonly.c g-icon.c \
 	$(gapplication_SOURCES) gapplication-example-actions.c \
 	gapplication-example-cmdline.c gapplication-example-cmdline2.c \
 	gapplication-example-cmdline3.c \
+	gapplication-example-cmdline4.c \
 	gapplication-example-dbushooks.c gapplication-example-open.c \
 	gdbus-addresses.c $(gdbus_auth_SOURCES) \
 	$(gdbus_bz627724_SOURCES) $(gdbus_close_pending_SOURCES) \
@@ -1572,7 +1607,8 @@ SOURCES = $(libresourceplugin_la_SOURCES) $(actions_SOURCES) appinfo.c \
 	socket-service.c srvtarget.c stream-rw_all.c task.c \
 	testfilemonitor.c thumbnail-verification.c \
 	$(tls_certificate_SOURCES) $(tls_interaction_SOURCES) \
-	unix-fd.c unix-streams.c vfs.c volumemonitor.c win32-streams.c
+	unix-fd.c unix-mounts.c unix-streams.c vfs.c volumemonitor.c \
+	win32-streams.c
 DIST_SOURCES = $(am__libresourceplugin_la_SOURCES_DIST) \
 	$(am__actions_SOURCES_DIST) appinfo.c appinfo-test.c \
 	appmonitor.c apps.c async-close-output-stream.c \
@@ -1582,11 +1618,13 @@ DIST_SOURCES = $(am__libresourceplugin_la_SOURCES_DIST) \
 	data-input-stream.c data-output-stream.c \
 	$(am__dbus_appinfo_SOURCES_DIST) dbus-launch.c defaultvalue.c \
 	desktop-app-info.c echo-server.c file.c fileattributematcher.c \
-	filter-cat.c filter-streams.c g-file.c g-file-info.c g-icon.c \
+	filter-cat.c filter-streams.c g-file.c g-file-info.c \
+	g-file-info-filesystem-readonly.c g-icon.c \
 	$(am__gapplication_SOURCES_DIST) \
 	gapplication-example-actions.c gapplication-example-cmdline.c \
 	gapplication-example-cmdline2.c \
 	gapplication-example-cmdline3.c \
+	gapplication-example-cmdline4.c \
 	gapplication-example-dbushooks.c gapplication-example-open.c \
 	gdbus-addresses.c $(am__gdbus_auth_SOURCES_DIST) \
 	$(am__gdbus_bz627724_SOURCES_DIST) \
@@ -1631,7 +1669,8 @@ DIST_SOURCES = $(am__libresourceplugin_la_SOURCES_DIST) \
 	socket-service.c srvtarget.c stream-rw_all.c task.c \
 	testfilemonitor.c thumbnail-verification.c \
 	$(tls_certificate_SOURCES) $(tls_interaction_SOURCES) \
-	unix-fd.c unix-streams.c vfs.c volumemonitor.c win32-streams.c
+	unix-fd.c unix-mounts.c unix-streams.c vfs.c volumemonitor.c \
+	win32-streams.c
 RECURSIVE_TARGETS = all-recursive check-recursive cscopelist-recursive \
 	ctags-recursive dvi-recursive html-recursive info-recursive \
 	install-data-recursive install-dvi-recursive \
@@ -1926,6 +1965,7 @@ GIO = @GIO@
 GIO_MODULE_DIR = @GIO_MODULE_DIR@
 GLIBC21 = @GLIBC21@
 GLIB_BINARY_AGE = @GLIB_BINARY_AGE@
+GLIB_CHARSETALIAS_DIR = @GLIB_CHARSETALIAS_DIR@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
 GLIB_HIDDEN_VISIBILITY_CFLAGS = @GLIB_HIDDEN_VISIBILITY_CFLAGS@
@@ -1965,7 +2005,6 @@ G_THREAD_LIBS_EXTRA = @G_THREAD_LIBS_EXTRA@
 G_THREAD_LIBS_FOR_GTHREAD = @G_THREAD_LIBS_FOR_GTHREAD@
 HTML_DIR = @HTML_DIR@
 ICONV_LIBS = @ICONV_LIBS@
-INDENT = @INDENT@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -2025,7 +2064,6 @@ PCRE_LIBS = @PCRE_LIBS@
 PCRE_REQUIRES = @PCRE_REQUIRES@
 PCRE_WARN_CFLAGS = @PCRE_WARN_CFLAGS@
 PERL = @PERL@
-PERL_PATH = @PERL_PATH@
 PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
@@ -2040,7 +2078,6 @@ PYTHON_PLATFORM = @PYTHON_PLATFORM@
 PYTHON_PREFIX = @PYTHON_PREFIX@
 PYTHON_VERSION = @PYTHON_VERSION@
 RANLIB = @RANLIB@
-REBUILD = @REBUILD@
 SED = @SED@
 SELINUX_LIBS = @SELINUX_LIBS@
 SET_MAKE = @SET_MAKE@
@@ -2123,13 +2160,10 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-AM_TESTS_ENVIRONMENT = \
-	G_TEST_SRCDIR="$(abs_srcdir)" 		\
-	G_TEST_BUILDDIR="$(abs_builddir)" 	\
-	G_DEBUG=gc-friendly 			\
-	MALLOC_CHECK_=2 			\
-	MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256))
-
+AM_TESTS_ENVIRONMENT = G_TEST_SRCDIR="$(abs_srcdir)" \
+	G_TEST_BUILDDIR="$(abs_builddir)" G_DEBUG=gc-friendly \
+	MALLOC_CHECK_=2 MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) \
+	GIO_MODULE_DIR=
 LOG_DRIVER = env AM_TAP_AWK='$(AWK)' $(SHELL) $(top_srcdir)/tap-driver.sh
 LOG_COMPILER = $(top_srcdir)/tap-test
 NULL = 
@@ -2137,9 +2171,10 @@ NULL =
 # initialize variables for unconditional += appending
 BUILT_SOURCES = $(am__append_29) giotypefuncs.inc
 BUILT_EXTRA_DIST = 
-CLEANFILES = *.log *.trs $(am__append_13) $(am__append_22) \
-	$(am__append_31) $(am__append_40) xgen-giosrc.c xgen-gio \
-	giotypefuncs.inc
+CLEANFILES = *.log *.trs $(am__append_13) gdbus-daemon-impl.c \
+	gdbus-daemon-generated.c gdbus-daemon-generated.h \
+	$(am__append_22) $(am__append_31) $(am__append_40) \
+	xgen-giosrc.c xgen-gio giotypefuncs.inc
 DISTCLEANFILES = 
 MAINTAINERCLEANFILES = 
 EXTRA_DIST = $(all_dist_test_scripts) $(all_dist_test_data) \
@@ -2217,8 +2252,9 @@ test_data = $(NULL) $(am__append_37)
 uninstalled_test_extra_programs = gio-du echo-server filter-cat \
 	gapplication-example-actions gapplication-example-cmdline \
 	gapplication-example-cmdline2 gapplication-example-cmdline3 \
-	gapplication-example-dbushooks gapplication-example-open \
-	gdbus-example-export gdbus-example-own-name gdbus-example-peer \
+	gapplication-example-cmdline4 gapplication-example-dbushooks \
+	gapplication-example-open gdbus-example-export \
+	gdbus-example-own-name gdbus-example-peer \
 	gdbus-example-proxy-subclass gdbus-example-server \
 	gdbus-example-subtree gdbus-example-watch-name \
 	gdbus-example-watch-proxy gsubprocess-testprog httpd proxy \
@@ -2254,6 +2290,7 @@ schema_tests = \
 	enum-with-chained-alias.gschema.xml		\
 	enum-with-choice.gschema.xml			\
 	enum-with-invalid-alias.gschema.xml		\
+	enum-with-invalid-value.gschema.xml		\
 	enum-with-repeated-alias.gschema.xml		\
 	enum-with-repeated-nick.gschema.xml		\
 	enum-with-repeated-value.gschema.xml		\
@@ -2341,12 +2378,10 @@ socket_client_SOURCES = \
 	gtlsconsoleinteraction.c		\
 	gtlsconsoleinteraction.h
 
+gdbus_daemon_SOURCES = gdbus-daemon.c
 nodist_gdbus_daemon_SOURCES = \
-	$(top_builddir)/gio/gdbus-daemon-generated.c
-
-gdbus_daemon_SOURCES = \
-	gdbus-daemon.c				\
-	$(top_srcdir)/gio/gdbusdaemon.c
+	gdbus-daemon-generated.c \
+	gdbus-daemon-impl.c
 
 @OS_UNIX_TRUE@home_desktop_files = \
 @OS_UNIX_TRUE@	epiphany-weather-for-toronto-island-9c6a4e022b17686306243dada811d550d25eb1fb.desktop	\
@@ -2733,6 +2768,10 @@ g-file-info$(EXEEXT): $(g_file_info_OBJECTS) $(g_file_info_DEPENDENCIES) $(EXTRA
 	@rm -f g-file-info$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(g_file_info_OBJECTS) $(g_file_info_LDADD) $(LIBS)
 
+g-file-info-filesystem-readonly$(EXEEXT): $(g_file_info_filesystem_readonly_OBJECTS) $(g_file_info_filesystem_readonly_DEPENDENCIES) $(EXTRA_g_file_info_filesystem_readonly_DEPENDENCIES) 
+	@rm -f g-file-info-filesystem-readonly$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(g_file_info_filesystem_readonly_OBJECTS) $(g_file_info_filesystem_readonly_LDADD) $(LIBS)
+
 g-icon$(EXEEXT): $(g_icon_OBJECTS) $(g_icon_DEPENDENCIES) $(EXTRA_g_icon_DEPENDENCIES) 
 	@rm -f g-icon$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(g_icon_OBJECTS) $(g_icon_LDADD) $(LIBS)
@@ -2756,6 +2795,10 @@ gapplication-example-cmdline2$(EXEEXT): $(gapplication_example_cmdline2_OBJECTS)
 gapplication-example-cmdline3$(EXEEXT): $(gapplication_example_cmdline3_OBJECTS) $(gapplication_example_cmdline3_DEPENDENCIES) $(EXTRA_gapplication_example_cmdline3_DEPENDENCIES) 
 	@rm -f gapplication-example-cmdline3$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(gapplication_example_cmdline3_OBJECTS) $(gapplication_example_cmdline3_LDADD) $(LIBS)
+
+gapplication-example-cmdline4$(EXEEXT): $(gapplication_example_cmdline4_OBJECTS) $(gapplication_example_cmdline4_DEPENDENCIES) $(EXTRA_gapplication_example_cmdline4_DEPENDENCIES) 
+	@rm -f gapplication-example-cmdline4$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(gapplication_example_cmdline4_OBJECTS) $(gapplication_example_cmdline4_LDADD) $(LIBS)
 
 gapplication-example-dbushooks$(EXEEXT): $(gapplication_example_dbushooks_OBJECTS) $(gapplication_example_dbushooks_DEPENDENCIES) $(EXTRA_gapplication_example_dbushooks_DEPENDENCIES) 
 	@rm -f gapplication-example-dbushooks$(EXEEXT)
@@ -3105,6 +3148,10 @@ unix-fd$(EXEEXT): $(unix_fd_OBJECTS) $(unix_fd_DEPENDENCIES) $(EXTRA_unix_fd_DEP
 	@rm -f unix-fd$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(unix_fd_OBJECTS) $(unix_fd_LDADD) $(LIBS)
 
+unix-mounts$(EXEEXT): $(unix_mounts_OBJECTS) $(unix_mounts_DEPENDENCIES) $(EXTRA_unix_mounts_DEPENDENCIES) 
+	@rm -f unix-mounts$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(unix_mounts_OBJECTS) $(unix_mounts_LDADD) $(LIBS)
+
 unix-streams$(EXEEXT): $(unix_streams_OBJECTS) $(unix_streams_DEPENDENCIES) $(EXTRA_unix_streams_DEPENDENCIES) 
 	@rm -f unix-streams$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(unix_streams_OBJECTS) $(unix_streams_LDADD) $(LIBS)
@@ -3189,6 +3236,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/fileattributematcher.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/filter-cat.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/filter-streams.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/g-file-info-filesystem-readonly.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/g-file-info.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/g-file.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/g-icon.Po@am__quote@
@@ -3196,6 +3244,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gapplication-example-cmdline.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gapplication-example-cmdline2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gapplication-example-cmdline3.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gapplication-example-cmdline4.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gapplication-example-dbushooks.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gapplication-example-open.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gapplication.Po@am__quote@
@@ -3209,6 +3258,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-connection-slow.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-connection.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-daemon-generated.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-daemon-impl.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-daemon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-error.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-example-export.Po@am__quote@
@@ -3250,7 +3300,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_test_codegen_old-gdbus-test-codegen-generated.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_test_codegen_old-gdbus-test-codegen.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus_test_codegen_old-gdbus-tests.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusdaemon.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gio-du.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/giomodule.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glistmodel.Po@am__quote@
@@ -3304,59 +3353,35 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tls-certificate.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/tls-interaction.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/unix-fd.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/unix-mounts.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/unix-streams.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vfs.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/volumemonitor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/win32-streams.Po@am__quote@
 
 .c.o:
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
+@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
+@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ $<
 
 .c.obj:
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
+@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
+@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
 .c.lo:
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LTCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+@am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.lo$$||'`;\
+@am__fastdepCC_TRUE@	$(LTCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
+@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Plo
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
-
-gdbusdaemon.o: $(top_srcdir)/gio/gdbusdaemon.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gdbusdaemon.o -MD -MP -MF $(DEPDIR)/gdbusdaemon.Tpo -c -o gdbusdaemon.o `test -f '$(top_srcdir)/gio/gdbusdaemon.c' || echo '$(srcdir)/'`$(top_srcdir)/gio/gdbusdaemon.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gdbusdaemon.Tpo $(DEPDIR)/gdbusdaemon.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/gio/gdbusdaemon.c' object='gdbusdaemon.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gdbusdaemon.o `test -f '$(top_srcdir)/gio/gdbusdaemon.c' || echo '$(srcdir)/'`$(top_srcdir)/gio/gdbusdaemon.c
-
-gdbusdaemon.obj: $(top_srcdir)/gio/gdbusdaemon.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gdbusdaemon.obj -MD -MP -MF $(DEPDIR)/gdbusdaemon.Tpo -c -o gdbusdaemon.obj `if test -f '$(top_srcdir)/gio/gdbusdaemon.c'; then $(CYGPATH_W) '$(top_srcdir)/gio/gdbusdaemon.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/gio/gdbusdaemon.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gdbusdaemon.Tpo $(DEPDIR)/gdbusdaemon.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_srcdir)/gio/gdbusdaemon.c' object='gdbusdaemon.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gdbusdaemon.obj `if test -f '$(top_srcdir)/gio/gdbusdaemon.c'; then $(CYGPATH_W) '$(top_srcdir)/gio/gdbusdaemon.c'; else $(CYGPATH_W) '$(srcdir)/$(top_srcdir)/gio/gdbusdaemon.c'; fi`
-
-gdbus-daemon-generated.o: $(top_builddir)/gio/gdbus-daemon-generated.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gdbus-daemon-generated.o -MD -MP -MF $(DEPDIR)/gdbus-daemon-generated.Tpo -c -o gdbus-daemon-generated.o `test -f '$(top_builddir)/gio/gdbus-daemon-generated.c' || echo '$(srcdir)/'`$(top_builddir)/gio/gdbus-daemon-generated.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gdbus-daemon-generated.Tpo $(DEPDIR)/gdbus-daemon-generated.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_builddir)/gio/gdbus-daemon-generated.c' object='gdbus-daemon-generated.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gdbus-daemon-generated.o `test -f '$(top_builddir)/gio/gdbus-daemon-generated.c' || echo '$(srcdir)/'`$(top_builddir)/gio/gdbus-daemon-generated.c
-
-gdbus-daemon-generated.obj: $(top_builddir)/gio/gdbus-daemon-generated.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gdbus-daemon-generated.obj -MD -MP -MF $(DEPDIR)/gdbus-daemon-generated.Tpo -c -o gdbus-daemon-generated.obj `if test -f '$(top_builddir)/gio/gdbus-daemon-generated.c'; then $(CYGPATH_W) '$(top_builddir)/gio/gdbus-daemon-generated.c'; else $(CYGPATH_W) '$(srcdir)/$(top_builddir)/gio/gdbus-daemon-generated.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gdbus-daemon-generated.Tpo $(DEPDIR)/gdbus-daemon-generated.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$(top_builddir)/gio/gdbus-daemon-generated.c' object='gdbus-daemon-generated.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gdbus-daemon-generated.obj `if test -f '$(top_builddir)/gio/gdbus-daemon-generated.c'; then $(CYGPATH_W) '$(top_builddir)/gio/gdbus-daemon-generated.c'; else $(CYGPATH_W) '$(srcdir)/$(top_builddir)/gio/gdbus-daemon-generated.c'; fi`
 
 gdbus_proxy_threads-gdbus-sessionbus.o: gdbus-sessionbus.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gdbus_proxy_threads_CFLAGS) $(CFLAGS) -MT gdbus_proxy_threads-gdbus-sessionbus.o -MD -MP -MF $(DEPDIR)/gdbus_proxy_threads-gdbus-sessionbus.Tpo -c -o gdbus_proxy_threads-gdbus-sessionbus.o `test -f 'gdbus-sessionbus.c' || echo '$(srcdir)/'`gdbus-sessionbus.c
@@ -4160,9 +4185,23 @@ unix-fd.log: unix-fd$(EXEEXT)
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
 	"$$tst" $(AM_TESTS_FD_REDIRECT)
+unix-mounts.log: unix-mounts$(EXEEXT)
+	@p='unix-mounts$(EXEEXT)'; \
+	b='unix-mounts'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
 unix-streams.log: unix-streams$(EXEEXT)
 	@p='unix-streams$(EXEEXT)'; \
 	b='unix-streams'; \
+	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
+	--log-file $$b.log --trs-file $$b.trs \
+	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
+	"$$tst" $(AM_TESTS_FD_REDIRECT)
+g-file-info-filesystem-readonly.log: g-file-info-filesystem-readonly$(EXEEXT)
+	@p='g-file-info-filesystem-readonly$(EXEEXT)'; \
+	b='g-file-info-filesystem-readonly'; \
 	$(am__check_pre) $(LOG_DRIVER) --test-name "$$f" \
 	--log-file $$b.log --trs-file $$b.trs \
 	$(am__common_driver_flags) $(AM_LOG_DRIVER_FLAGS) $(LOG_DRIVER_FLAGS) -- $(LOG_COMPILE) \
@@ -4657,11 +4696,30 @@ uninstall-am: uninstall-installed_testLTLIBRARIES \
 
 
 @ENABLE_INSTALLED_TESTS_TRUE@%.test: %$(EXEEXT) Makefile
-@ENABLE_INSTALLED_TESTS_TRUE@	$(AM_V_GEN) (echo '[Test]' > $@.tmp; \
+@ENABLE_INSTALLED_TESTS_TRUE@	$(AM_V_GEN) ($(MKDIR_P) $(@D); \
+@ENABLE_INSTALLED_TESTS_TRUE@	echo '[Test]' > $@.tmp; \
 @ENABLE_INSTALLED_TESTS_TRUE@	echo 'Type=session' >> $@.tmp; \
 @ENABLE_INSTALLED_TESTS_TRUE@	echo 'Exec=$(installed_testdir)/$(notdir $<) --tap' >> $@.tmp; \
 @ENABLE_INSTALLED_TESTS_TRUE@	echo 'Output=TAP' >> $@.tmp; \
 @ENABLE_INSTALLED_TESTS_TRUE@	mv $@.tmp $@)
+
+# With subdir-objects we need to create a link to the original
+# file in the right directory, otherwise libtool will complain
+# that it cannot find the wrapper file
+gdbus-daemon-impl.c: $(top_srcdir)/gio/gdbusdaemon.c
+	$(AM_V_GEN) $(LN_S) $^ $@
+
+# These files are only generated on Windows builds inside GIO,
+# but we want them on non-Windows builds for the tests
+gdbus-daemon-generated.h gdbus-daemon-generated.c: $(top_srcdir)/gio/dbus-daemon.xml $(GDBUS_PYTHON_DEPS)
+	$(AM_V_GEN) UNINSTALLED_GLIB_SRCDIR=$(top_srcdir) \
+		UNINSTALLED_GLIB_BUILDDIR=$(top_builddir) \
+		$(PYTHON) $(top_srcdir)/gio/gdbus-2.0/codegen/gdbus-codegen.in \
+		--interface-prefix org. \
+		--generate-c-code gdbus-daemon-generated \
+		--c-namespace _G \
+		$(top_srcdir)/gio/dbus-daemon.xml \
+		$(NULL)
 @OS_COCOA_FALSE@@OS_UNIX_TRUE@clean-local: clean-mimeapps
 @OS_COCOA_FALSE@@OS_UNIX_TRUE@clean-mimeapps:
 @OS_COCOA_FALSE@@OS_UNIX_TRUE@	rm -rf xdgdatadir xdgdatahome xdgconfighome

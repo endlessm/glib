@@ -591,7 +591,8 @@ g_sequence_foreach (<em class="parameter"><code><a class="link" href="glib-Seque
 <p>Calls <em class="parameter"><code>func</code></em>
  for each item in the sequence passing <em class="parameter"><code>user_data</code></em>
 
-to the function.</p>
+to the function. <em class="parameter"><code>func</code></em>
+ must not modify the sequence itself.</p>
 <div class="refsect3">
 <a name="g-sequence-foreach.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -636,7 +637,9 @@ g_sequence_foreach_range (<em class="parameter"><code><a class="link" href="glib
 , <em class="parameter"><code>end</code></em>
 ) passing
 <em class="parameter"><code>user_data</code></em>
- to the function.</p>
+ to the function. <em class="parameter"><code>func</code></em>
+ must not modify the sequence
+itself.</p>
 <div class="refsect3">
 <a name="g-sequence-foreach-range.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">

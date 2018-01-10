@@ -424,7 +424,8 @@ the data should not be modified or freed.</p>
 to register it with <a class="link" href="GResource.html#g-resources-register" title="g_resources_register ()"><code class="function">g_resources_register()</code></a>.</p>
 <p>Note: <em class="parameter"><code>data</code></em>
  must be backed by memory that is at least pointer aligned.
-Otherwise this function will fail and exit the process.</p>
+Otherwise this function will internally create a copy of the memory since
+GLib 2.56, or in older versions fail and exit the process.</p>
 <div class="refsect3">
 <a name="g-resource-new-from-data.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">

@@ -1325,7 +1325,8 @@ is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code
 g_mem_set_vtable (<em class="parameter"><code><a class="link" href="glib-Memory-Allocation.html#GMemVTable" title="struct GMemVTable"><span class="type">GMemVTable</span></a> *vtable</code></em>);</pre>
 <div class="warning">
 <p><code class="literal">g_mem_set_vtable</code> has been deprecated since version 2.46 and should not be used in newly-written code.</p>
-<p>Use other memory profiling tools instead</p>
+<p>This function now does nothing. Use other memory
+profiling tools instead</p>
 </div>
 <p>This function used to let you override the memory allocation function.
 However, its use was incompatible with the use of global constructors

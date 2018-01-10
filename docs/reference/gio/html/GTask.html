@@ -361,11 +361,13 @@ task object around through your asynchronous operation.
 Eventually, you will call a method such as
 <a class="link" href="GTask.html#g-task-return-pointer" title="g_task_return_pointer ()"><code class="function">g_task_return_pointer()</code></a> or <a class="link" href="GTask.html#g-task-return-error" title="g_task_return_error ()"><code class="function">g_task_return_error()</code></a>, which will
 save the value you give it and then invoke the task's callback
-function (waiting until the next iteration of the main
-loop first, if necessary). The caller will pass the <a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> back
-to the operation's finish function (as a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>), and
-you can use <a class="link" href="GTask.html#g-task-propagate-pointer" title="g_task_propagate_pointer ()"><code class="function">g_task_propagate_pointer()</code></a> or the like to extract
-the return value.</p>
+function in the
+<a href="../glib-The-Main-Event-Loop.html#g-main-context-push-thread-default">thread-default main context</a>
+where it was created (waiting until the next iteration of the main
+loop first, if necessary). The caller will pass the <a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> back to
+the operation's finish function (as a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>), and you can
+can use <a class="link" href="GTask.html#g-task-propagate-pointer" title="g_task_propagate_pointer ()"><code class="function">g_task_propagate_pointer()</code></a> or the like to extract the
+return value.</p>
 <p>Here is an example for using GTask as a GAsyncResult:</p>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
@@ -832,9 +834,10 @@ Cake <span class="gtkdoc opt">*</span>
 <div class="refsect3">
 <a name="id-1.4.5.4.9.5"></a><h4>Asynchronous operations from synchronous ones</h4>
 <p>You can use <a class="link" href="GTask.html#g-task-run-in-thread" title="g_task_run_in_thread ()"><code class="function">g_task_run_in_thread()</code></a> to turn a synchronous
-operation into an asynchronous one, by running it in a thread
-which will then dispatch the result back to the caller's
-<a href="../glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a> when it completes.</p>
+operation into an asynchronous one, by running it in a thread.
+When it completes, the result will be dispatched to the
+<a href="../glib-The-Main-Event-Loop.html#g-main-context-push-thread-default">thread-default main context</a>
+where the <a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> was created.</p>
 <p>Running a task in a thread:</p>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
@@ -1216,7 +1219,7 @@ in idle" distinction. (<a class="link" href="GTask.html" title="GTask"><span cla
 whether the task's callback can be invoked directly, or
 if it needs to be sent to another <a href="../glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>, or delayed
 until the next iteration of the current <a href="../glib-The-Main-Event-Loop.html#GMainContext"><span class="type">GMainContext</span></a>.)</p></li>
-<li class="listitem"><p>The "finish" functions for <span class="type">GTask-based</span> operations are generally
+<li class="listitem"><p>The "finish" functions for <a class="link" href="GTask.html" title="GTask"><span class="type">GTask</span></a> based operations are generally
 much simpler than <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> ones, normally consisting
 of only a single call to <a class="link" href="GTask.html#g-task-propagate-pointer" title="g_task_propagate_pointer ()"><code class="function">g_task_propagate_pointer()</code></a> or the like.
 Since <a class="link" href="GTask.html#g-task-propagate-pointer" title="g_task_propagate_pointer ()"><code class="function">g_task_propagate_pointer()</code></a> "steals" the return value from
@@ -1869,7 +1872,7 @@ g_task_get_source_object (<em class="parameter"><code><a class="link" href="GTas
 <a name="g-task-get-source-object.returns"></a><h4>Returns</h4>
 <p><em class="parameter"><code>task</code></em>
 's source object, or <a href="../glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p>
-<p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> GObject]</span></p>
+<p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>][<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> GObject]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-2-36.html#api-index-2.36">2.36</a></p>
 </div>

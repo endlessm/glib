@@ -358,14 +358,16 @@ gvariant_SOURCES = gvariant.c
 gvariant_OBJECTS = gvariant.$(OBJEXT)
 gvariant_LDADD = $(LDADD)
 gvariant_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
-am_gwakeup_OBJECTS = gwakeuptest.$(OBJEXT) gwakeup.$(OBJEXT)
+am__dirstamp = $(am__leading_dot)dirstamp
+am_gwakeup_OBJECTS = gwakeuptest.$(OBJEXT) \
+	../../glib/gwakeup.$(OBJEXT)
 gwakeup_OBJECTS = $(am_gwakeup_OBJECTS)
 gwakeup_LDADD = $(LDADD)
 gwakeup_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
 am__gwakeup_fallback_SOURCES_DIST = gwakeuptest.c ../../glib/gwakeup.c
 @HAVE_EVENTFD_TRUE@am_gwakeup_fallback_OBJECTS =  \
 @HAVE_EVENTFD_TRUE@	gwakeup_fallback-gwakeuptest.$(OBJEXT) \
-@HAVE_EVENTFD_TRUE@	gwakeup_fallback-gwakeup.$(OBJEXT)
+@HAVE_EVENTFD_TRUE@	../../glib/gwakeup_fallback-gwakeup.$(OBJEXT)
 gwakeup_fallback_OBJECTS = $(am_gwakeup_fallback_OBJECTS)
 gwakeup_fallback_LDADD = $(LDADD)
 gwakeup_fallback_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la
@@ -944,6 +946,7 @@ GIO = @GIO@
 GIO_MODULE_DIR = @GIO_MODULE_DIR@
 GLIBC21 = @GLIBC21@
 GLIB_BINARY_AGE = @GLIB_BINARY_AGE@
+GLIB_CHARSETALIAS_DIR = @GLIB_CHARSETALIAS_DIR@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
 GLIB_HIDDEN_VISIBILITY_CFLAGS = @GLIB_HIDDEN_VISIBILITY_CFLAGS@
@@ -983,7 +986,6 @@ G_THREAD_LIBS_EXTRA = @G_THREAD_LIBS_EXTRA@
 G_THREAD_LIBS_FOR_GTHREAD = @G_THREAD_LIBS_FOR_GTHREAD@
 HTML_DIR = @HTML_DIR@
 ICONV_LIBS = @ICONV_LIBS@
-INDENT = @INDENT@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -1043,7 +1045,6 @@ PCRE_LIBS = @PCRE_LIBS@
 PCRE_REQUIRES = @PCRE_REQUIRES@
 PCRE_WARN_CFLAGS = @PCRE_WARN_CFLAGS@
 PERL = @PERL@
-PERL_PATH = @PERL_PATH@
 PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
@@ -1058,7 +1059,6 @@ PYTHON_PLATFORM = @PYTHON_PLATFORM@
 PYTHON_PREFIX = @PYTHON_PREFIX@
 PYTHON_VERSION = @PYTHON_VERSION@
 RANLIB = @RANLIB@
-REBUILD = @REBUILD@
 SED = @SED@
 SELINUX_LIBS = @SELINUX_LIBS@
 SET_MAKE = @SET_MAKE@
@@ -1559,10 +1559,21 @@ guuid$(EXEEXT): $(guuid_OBJECTS) $(guuid_DEPENDENCIES) $(EXTRA_guuid_DEPENDENCIE
 gvariant$(EXEEXT): $(gvariant_OBJECTS) $(gvariant_DEPENDENCIES) $(EXTRA_gvariant_DEPENDENCIES) 
 	@rm -f gvariant$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(gvariant_OBJECTS) $(gvariant_LDADD) $(LIBS)
+../../glib/$(am__dirstamp):
+	@$(MKDIR_P) ../../glib
+	@: > ../../glib/$(am__dirstamp)
+../../glib/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) ../../glib/$(DEPDIR)
+	@: > ../../glib/$(DEPDIR)/$(am__dirstamp)
+../../glib/gwakeup.$(OBJEXT): ../../glib/$(am__dirstamp) \
+	../../glib/$(DEPDIR)/$(am__dirstamp)
 
 gwakeup$(EXEEXT): $(gwakeup_OBJECTS) $(gwakeup_DEPENDENCIES) $(EXTRA_gwakeup_DEPENDENCIES) 
 	@rm -f gwakeup$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(gwakeup_OBJECTS) $(gwakeup_LDADD) $(LIBS)
+../../glib/gwakeup_fallback-gwakeup.$(OBJEXT):  \
+	../../glib/$(am__dirstamp) \
+	../../glib/$(DEPDIR)/$(am__dirstamp)
 
 gwakeup-fallback$(EXEEXT): $(gwakeup_fallback_OBJECTS) $(gwakeup_fallback_DEPENDENCIES) $(EXTRA_gwakeup_fallback_DEPENDENCIES) 
 	@rm -f gwakeup-fallback$(EXEEXT)
@@ -1833,10 +1844,13 @@ uninstall-installed_testSCRIPTS:
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f ../../glib/*.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@../../glib/$(DEPDIR)/gwakeup.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@../../glib/$(DEPDIR)/gwakeup_fallback-gwakeup.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/1bit-mutex.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/1bit_emufutex-1bit-mutex.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/642026.Po@am__quote@
@@ -1864,8 +1878,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gpoll.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/guuid.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvariant.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gwakeup.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gwakeup_fallback-gwakeup.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gwakeup_fallback-gwakeuptest.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gwakeuptest.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/hash.Po@am__quote@
@@ -1926,22 +1938,25 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utils.Po@am__quote@
 
 .c.o:
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
+@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
+@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ $<
 
 .c.obj:
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
+@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
+@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
 .c.lo:
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LTCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+@am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.lo$$||'`;\
+@am__fastdepCC_TRUE@	$(LTCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
+@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Plo
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
@@ -1988,20 +2003,6 @@ atomic-atomic.obj: atomic.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(atomic_CFLAGS) $(CFLAGS) -c -o atomic-atomic.obj `if test -f 'atomic.c'; then $(CYGPATH_W) 'atomic.c'; else $(CYGPATH_W) '$(srcdir)/atomic.c'; fi`
 
-gwakeup.o: ../../glib/gwakeup.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gwakeup.o -MD -MP -MF $(DEPDIR)/gwakeup.Tpo -c -o gwakeup.o `test -f '../../glib/gwakeup.c' || echo '$(srcdir)/'`../../glib/gwakeup.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gwakeup.Tpo $(DEPDIR)/gwakeup.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='../../glib/gwakeup.c' object='gwakeup.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gwakeup.o `test -f '../../glib/gwakeup.c' || echo '$(srcdir)/'`../../glib/gwakeup.c
-
-gwakeup.obj: ../../glib/gwakeup.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gwakeup.obj -MD -MP -MF $(DEPDIR)/gwakeup.Tpo -c -o gwakeup.obj `if test -f '../../glib/gwakeup.c'; then $(CYGPATH_W) '../../glib/gwakeup.c'; else $(CYGPATH_W) '$(srcdir)/../../glib/gwakeup.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gwakeup.Tpo $(DEPDIR)/gwakeup.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='../../glib/gwakeup.c' object='gwakeup.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gwakeup.obj `if test -f '../../glib/gwakeup.c'; then $(CYGPATH_W) '../../glib/gwakeup.c'; else $(CYGPATH_W) '$(srcdir)/../../glib/gwakeup.c'; fi`
-
 gwakeup_fallback-gwakeuptest.o: gwakeuptest.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gwakeup_fallback_CFLAGS) $(CFLAGS) -MT gwakeup_fallback-gwakeuptest.o -MD -MP -MF $(DEPDIR)/gwakeup_fallback-gwakeuptest.Tpo -c -o gwakeup_fallback-gwakeuptest.o `test -f 'gwakeuptest.c' || echo '$(srcdir)/'`gwakeuptest.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gwakeup_fallback-gwakeuptest.Tpo $(DEPDIR)/gwakeup_fallback-gwakeuptest.Po
@@ -2016,19 +2017,19 @@ gwakeup_fallback-gwakeuptest.obj: gwakeuptest.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gwakeup_fallback_CFLAGS) $(CFLAGS) -c -o gwakeup_fallback-gwakeuptest.obj `if test -f 'gwakeuptest.c'; then $(CYGPATH_W) 'gwakeuptest.c'; else $(CYGPATH_W) '$(srcdir)/gwakeuptest.c'; fi`
 
-gwakeup_fallback-gwakeup.o: ../../glib/gwakeup.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gwakeup_fallback_CFLAGS) $(CFLAGS) -MT gwakeup_fallback-gwakeup.o -MD -MP -MF $(DEPDIR)/gwakeup_fallback-gwakeup.Tpo -c -o gwakeup_fallback-gwakeup.o `test -f '../../glib/gwakeup.c' || echo '$(srcdir)/'`../../glib/gwakeup.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gwakeup_fallback-gwakeup.Tpo $(DEPDIR)/gwakeup_fallback-gwakeup.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='../../glib/gwakeup.c' object='gwakeup_fallback-gwakeup.o' libtool=no @AMDEPBACKSLASH@
+../../glib/gwakeup_fallback-gwakeup.o: ../../glib/gwakeup.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gwakeup_fallback_CFLAGS) $(CFLAGS) -MT ../../glib/gwakeup_fallback-gwakeup.o -MD -MP -MF ../../glib/$(DEPDIR)/gwakeup_fallback-gwakeup.Tpo -c -o ../../glib/gwakeup_fallback-gwakeup.o `test -f '../../glib/gwakeup.c' || echo '$(srcdir)/'`../../glib/gwakeup.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) ../../glib/$(DEPDIR)/gwakeup_fallback-gwakeup.Tpo ../../glib/$(DEPDIR)/gwakeup_fallback-gwakeup.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='../../glib/gwakeup.c' object='../../glib/gwakeup_fallback-gwakeup.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gwakeup_fallback_CFLAGS) $(CFLAGS) -c -o gwakeup_fallback-gwakeup.o `test -f '../../glib/gwakeup.c' || echo '$(srcdir)/'`../../glib/gwakeup.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gwakeup_fallback_CFLAGS) $(CFLAGS) -c -o ../../glib/gwakeup_fallback-gwakeup.o `test -f '../../glib/gwakeup.c' || echo '$(srcdir)/'`../../glib/gwakeup.c
 
-gwakeup_fallback-gwakeup.obj: ../../glib/gwakeup.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gwakeup_fallback_CFLAGS) $(CFLAGS) -MT gwakeup_fallback-gwakeup.obj -MD -MP -MF $(DEPDIR)/gwakeup_fallback-gwakeup.Tpo -c -o gwakeup_fallback-gwakeup.obj `if test -f '../../glib/gwakeup.c'; then $(CYGPATH_W) '../../glib/gwakeup.c'; else $(CYGPATH_W) '$(srcdir)/../../glib/gwakeup.c'; fi`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gwakeup_fallback-gwakeup.Tpo $(DEPDIR)/gwakeup_fallback-gwakeup.Po
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='../../glib/gwakeup.c' object='gwakeup_fallback-gwakeup.obj' libtool=no @AMDEPBACKSLASH@
+../../glib/gwakeup_fallback-gwakeup.obj: ../../glib/gwakeup.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gwakeup_fallback_CFLAGS) $(CFLAGS) -MT ../../glib/gwakeup_fallback-gwakeup.obj -MD -MP -MF ../../glib/$(DEPDIR)/gwakeup_fallback-gwakeup.Tpo -c -o ../../glib/gwakeup_fallback-gwakeup.obj `if test -f '../../glib/gwakeup.c'; then $(CYGPATH_W) '../../glib/gwakeup.c'; else $(CYGPATH_W) '$(srcdir)/../../glib/gwakeup.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) ../../glib/$(DEPDIR)/gwakeup_fallback-gwakeup.Tpo ../../glib/$(DEPDIR)/gwakeup_fallback-gwakeup.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='../../glib/gwakeup.c' object='../../glib/gwakeup_fallback-gwakeup.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gwakeup_fallback_CFLAGS) $(CFLAGS) -c -o gwakeup_fallback-gwakeup.obj `if test -f '../../glib/gwakeup.c'; then $(CYGPATH_W) '../../glib/gwakeup.c'; else $(CYGPATH_W) '$(srcdir)/../../glib/gwakeup.c'; fi`
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(gwakeup_fallback_CFLAGS) $(CFLAGS) -c -o ../../glib/gwakeup_fallback-gwakeup.obj `if test -f '../../glib/gwakeup.c'; then $(CYGPATH_W) '../../glib/gwakeup.c'; else $(CYGPATH_W) '$(srcdir)/../../glib/gwakeup.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -2956,6 +2957,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f ../../glib/$(DEPDIR)/$(am__dirstamp)
+	-rm -f ../../glib/$(am__dirstamp)
 	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
 
 maintainer-clean-generic:
@@ -2971,7 +2974,7 @@ clean-am: clean-checkLTLIBRARIES clean-checkPROGRAMS clean-generic \
 	mostlyclean-am
 
 distclean: distclean-am
-	-rm -rf ./$(DEPDIR)
+	-rm -rf ../../glib/$(DEPDIR) ./$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -3020,7 +3023,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-	-rm -rf ./$(DEPDIR)
+	-rm -rf ../../glib/$(DEPDIR) ./$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -3073,7 +3076,8 @@ uninstall-am: uninstall-installed_testLTLIBRARIES \
 
 
 @ENABLE_INSTALLED_TESTS_TRUE@%.test: %$(EXEEXT) Makefile
-@ENABLE_INSTALLED_TESTS_TRUE@	$(AM_V_GEN) (echo '[Test]' > $@.tmp; \
+@ENABLE_INSTALLED_TESTS_TRUE@	$(AM_V_GEN) ($(MKDIR_P) $(@D); \
+@ENABLE_INSTALLED_TESTS_TRUE@	echo '[Test]' > $@.tmp; \
 @ENABLE_INSTALLED_TESTS_TRUE@	echo 'Type=session' >> $@.tmp; \
 @ENABLE_INSTALLED_TESTS_TRUE@	echo 'Exec=$(installed_testdir)/$(notdir $<) --tap' >> $@.tmp; \
 @ENABLE_INSTALLED_TESTS_TRUE@	echo 'Output=TAP' >> $@.tmp; \

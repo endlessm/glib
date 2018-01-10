@@ -4502,6 +4502,14 @@ marked as trusted and a new reference to it is returned.</p>
 <p>It makes sense to call this function if you've received <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a>
 data from untrusted sources and you want to ensure your serialised
 output is definitely in normal form.</p>
+<p>If <em class="parameter"><code>value</code></em>
+ is already in normal form, a new reference will be returned
+(which will be floating if <em class="parameter"><code>value</code></em>
+ is floating). If it is not in normal form,
+the newly created <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> will be returned with a single non-floating
+reference. Typically, <a class="link" href="glib-GVariant.html#g-variant-take-ref" title="g_variant_take_ref ()"><code class="function">g_variant_take_ref()</code></a> should be called on the return
+value from this function to guarantee ownership of a single non-floating
+reference to it.</p>
 <div class="refsect3">
 <a name="g-variant-get-normal-form.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">

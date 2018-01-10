@@ -81,6 +81,7 @@
  * - g_file_new_for_commandline_arg() for a command line argument.
  * - g_file_new_tmp() to create a temporary file from a template.
  * - g_file_parse_name() from a UTF-8 string gotten from g_file_get_parse_name().
+ * - g_file_new_build_filename() to create a file from path elements.
  *
  * One way to think of a #GFile is as an abstraction of a pathname. For
  * normal files the system pathname is what is stored internally, but as
@@ -4368,7 +4369,7 @@ g_file_query_writable_namespaces (GFile         *file,
  *
  * Sets an attribute in the file with attribute name @attribute to @value.
  *
- * Some attributes can be unset by setting @attribute to
+ * Some attributes can be unset by setting @type to
  * %G_FILE_ATTRIBUTE_TYPE_INVALID and @value_p to %NULL.
  *
  * If @cancellable is not %NULL, then the operation can be cancelled by
@@ -6440,6 +6441,41 @@ g_file_parse_name (const char *parse_name)
   return g_vfs_parse_name (g_vfs_get_default (), parse_name);
 }
 
+/**
+ * g_file_new_build_filename:
+ * @first_element: (type filename): the first element in the path
+ * @...: remaining elements in path, terminated by %NULL
+ *
+ * Constructs a #GFile from a series of elements using the correct
+ * separator for filenames.
+ *
+ * Using this function is equivalent to calling g_build_filename(),
+ * followed by g_file_new_for_path() on the result.
+ *
+ * Returns: (transfer full): a new #GFile
+ *
+ * Since: 2.56
+ */
+GFile *
+g_file_new_build_filename (const gchar *first_element,
+                           ...)
+{
+  gchar *str;
+  GFile *file;
+  va_list args;
+
+  g_return_val_if_fail (first_element != NULL, NULL);
+
+  va_start (args, first_element);
+  str = g_build_filename_valist (first_element, &args);
+  va_end (args);
+
+  file = g_file_new_for_path (str);
+  g_free (str);
+
+  return file;
+}
+
 static gboolean
 is_valid_scheme_character (char c)
 {
@@ -6498,7 +6534,7 @@ new_for_cmdline_arg (const gchar *arg,
 
 /**
  * g_file_new_for_commandline_arg:
- * @arg: a command line string
+ * @arg: (type filename): a command line string
  *
  * Creates a #GFile with the given argument from the command line.
  * The value of @arg can be either a URI, an absolute path or a
@@ -6528,7 +6564,7 @@ g_file_new_for_commandline_arg (const char *arg)
 
 /**
  * g_file_new_for_commandline_arg_and_cwd:
- * @arg: a command line string
+ * @arg: (type filename): a command line string
  * @cwd: (type filename): the current working directory of the commandline
  *
  * Creates a #GFile with the given argument from the command line.
@@ -6957,9 +6993,11 @@ load_contents_open_callback (GObject      *obj,
  * g_file_load_partial_contents_async: (skip)
  * @file: input #GFile
  * @cancellable: optional #GCancellable object, %NULL to ignore
- * @read_more_callback: a #GFileReadMoreCallback to receive partial data
+ * @read_more_callback: (scope call) (closure user_data): a
+ *     #GFileReadMoreCallback to receive partial data
  *     and to specify whether further data should be read
- * @callback: a #GAsyncReadyCallback to call when the request is satisfied
+ * @callback: (scope async) (closure user_data): a #GAsyncReadyCallback to call
+ *     when the request is satisfied
  * @user_data: the data to pass to the callback functions
  *
  * Reads the partial contents of a file. A #GFileReadMoreCallback should
@@ -8053,4 +8091,192 @@ g_file_supports_thread_contexts (GFile *file)
 
  iface = G_FILE_GET_IFACE (file);
  return iface->supports_thread_contexts;
+}
+
+/**
+ * g_file_load_bytes:
+ * @file: a #GFile
+ * @cancellable: (nullable): a #GCancellable or %NULL
+ * @etag_out: (out) (nullable) (optional): a location to place the current
+ *     entity tag for the file, or %NULL if the entity tag is not needed
+ * @error: a location for a #GError or %NULL
+ *
+ * Loads the contents of @file and returns it as #GBytes.
+ *
+ * If @file is a resource:// based URI, the resulting bytes will reference the
+ * embedded resource instead of a copy. Otherwise, this is equivalent to calling
+ * g_file_load_contents() and g_bytes_new_take().
+ *
+ * For resources, @etag_out will be set to %NULL.
+ *
+ * The data contained in the resulting #GBytes is always zero-terminated, but
+ * this is not included in the #GBytes length. The resulting #GBytes should be
+ * freed with g_bytes_unref() when no longer in use.
+ *
+ * Returns: (transfer full): a #GBytes or %NULL and @error is set
+ *
+ * Since: 2.56
+ */
+GBytes *
+g_file_load_bytes (GFile         *file,
+                   GCancellable  *cancellable,
+                   gchar        **etag_out,
+                   GError       **error)
+{
+  gchar *contents;
+  gsize len;
+
+  g_return_val_if_fail (G_IS_FILE (file), NULL);
+  g_return_val_if_fail (cancellable == NULL || G_IS_CANCELLABLE (cancellable), NULL);
+  g_return_val_if_fail (error == NULL || *error == NULL, NULL);
+
+  if (etag_out != NULL)
+    *etag_out = NULL;
+
+  if (g_file_has_uri_scheme (file, "resource"))
+    {
+      GBytes *bytes;
+      gchar *uri, *unescaped;
+
+      uri = g_file_get_uri (file);
+      unescaped = g_uri_unescape_string (uri + strlen ("resource://"), NULL);
+      g_free (uri);
+
+      bytes = g_resources_lookup_data (unescaped, G_RESOURCE_LOOKUP_FLAGS_NONE, error);
+      g_free (unescaped);
+
+      return bytes;
+    }
+
+  /* contents is guaranteed to be \0 terminated */
+  if (g_file_load_contents (file, cancellable, &contents, &len, etag_out, error))
+    return g_bytes_new_take (g_steal_pointer (&contents), len);
+
+  return NULL;
+}
+
+static void
+g_file_load_bytes_cb (GObject      *object,
+                      GAsyncResult *result,
+                      gpointer      user_data)
+{
+  GFile *file = G_FILE (object);
+  GTask *task = user_data;
+  GError *error = NULL;
+  gchar *etag = NULL;
+  gchar *contents = NULL;
+  gsize len = 0;
+
+  g_file_load_contents_finish (file, result, &contents, &len, &etag, &error);
+  g_task_set_task_data (task, g_steal_pointer (&etag), g_free);
+
+  if (error != NULL)
+    g_task_return_error (task, g_steal_pointer (&error));
+  else
+    g_task_return_pointer (task,
+                           g_bytes_new_take (g_steal_pointer (&contents), len),
+                           (GDestroyNotify)g_bytes_unref);
+
+  g_object_unref (task);
+}
+
+/**
+ * g_file_load_bytes_async:
+ * @file: a #GFile
+ * @cancellable: (nullable): a #GCancellable or %NULL
+ * @callback: (scope async): a #GAsyncReadyCallback to call when the
+ *     request is satisfied
+ * @user_data: (closure): the data to pass to callback function
+ *
+ * Asynchronously loads the contents of @file as #GBytes.
+ *
+ * If @file is a resource:// based URI, the resulting bytes will reference the
+ * embedded resource instead of a copy. Otherwise, this is equivalent to calling
+ * g_file_load_contents_async() and g_bytes_new_take().
+ *
+ * @callback should call g_file_load_bytes_finish() to get the result of this
+ * asynchronous operation.
+ *
+ * See g_file_load_bytes() for more information.
+ *
+ * Since: 2.56
+ */
+void
+g_file_load_bytes_async (GFile               *file,
+                         GCancellable        *cancellable,
+                         GAsyncReadyCallback  callback,
+                         gpointer             user_data)
+{
+  GError *error = NULL;
+  GBytes *bytes;
+  GTask *task;
+
+  g_return_if_fail (G_IS_FILE (file));
+  g_return_if_fail (cancellable == NULL || G_IS_CANCELLABLE (cancellable));
+
+  task = g_task_new (file, cancellable, callback, user_data);
+  g_task_set_source_tag (task, g_file_load_bytes_async);
+
+  if (!g_file_has_uri_scheme (file, "resource"))
+    {
+      g_file_load_contents_async (file,
+                                  cancellable,
+                                  g_file_load_bytes_cb,
+                                  g_steal_pointer (&task));
+      return;
+    }
+
+  bytes = g_file_load_bytes (file, cancellable, NULL, &error);
+
+  if (bytes == NULL)
+    g_task_return_error (task, g_steal_pointer (&error));
+  else
+    g_task_return_pointer (task,
+                           g_steal_pointer (&bytes),
+                           (GDestroyNotify)g_bytes_unref);
+
+  g_object_unref (task);
+}
+
+/**
+ * g_file_load_bytes_finish:
+ * @file: a #GFile
+ * @result: a #GAsyncResult provided to the callback
+ * @etag_out: (out) (nullable) (optional): a location to place the current
+ *     entity tag for the file, or %NULL if the entity tag is not needed
+ * @error: a location for a #GError, or %NULL
+ *
+ * Completes an asynchronous request to g_file_load_bytes_async().
+ *
+ * For resources, @etag_out will be set to %NULL.
+ *
+ * The data contained in the resulting #GBytes is always zero-terminated, but
+ * this is not included in the #GBytes length. The resulting #GBytes should be
+ * freed with g_bytes_unref() when no longer in use.
+ *
+ * See g_file_load_bytes() for more information.
+ *
+ * Returns: (transfer full): a #GBytes or %NULL and @error is set
+ *
+ * Since: 2.56
+ */
+GBytes *
+g_file_load_bytes_finish (GFile         *file,
+                          GAsyncResult  *result,
+                          gchar        **etag_out,
+                          GError       **error)
+{
+  GBytes *bytes;
+
+  g_return_val_if_fail (G_IS_FILE (file), NULL);
+  g_return_val_if_fail (G_IS_TASK (result), NULL);
+  g_return_val_if_fail (g_task_is_valid (G_TASK (result), file), NULL);
+  g_return_val_if_fail (error == NULL || *error == NULL, NULL);
+
+  bytes = g_task_propagate_pointer (G_TASK (result), error);
+
+  if (etag_out != NULL)
+    *etag_out = g_strdup (g_task_get_task_data (G_TASK (result)));
+
+  return bytes;
 }

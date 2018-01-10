@@ -948,7 +948,7 @@ g_param_spec_pool_insert (GParamSpecPool *pool,
       g_mutex_lock (&pool->mutex);
       pspec->owner_type = owner_type;
       g_param_spec_ref (pspec);
-      g_hash_table_insert (pool->hash_table, pspec, pspec);
+      g_hash_table_add (pool->hash_table, pspec);
       g_mutex_unlock (&pool->mutex);
     }
   else
@@ -1529,7 +1529,7 @@ g_value_dup_param (const GValue *value)
  *
  * Gets the default value of @pspec as a pointer to a #GValue.
  *
- * The #GValue will remain value for the life of @pspec.
+ * The #GValue will remain valid for the life of @pspec.
  *
  * Returns: a pointer to a #GValue which must not be modified
  *

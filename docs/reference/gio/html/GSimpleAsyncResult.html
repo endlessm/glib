@@ -325,9 +325,10 @@ or it can use <a href="../glib-Threads.html#GThread"><span class="type">GThreads
 from the point where it is called. <a class="link" href="GSimpleAsyncResult.html#g-simple-async-result-complete-in-idle" title="g_simple_async_result_complete_in_idle ()"><code class="function">g_simple_async_result_complete_in_idle()</code></a>
 will finish it from an idle handler in the 
 <a href="../glib-The-Main-Event-Loop.html#g-main-context-push-thread-default">thread-default main context</a>
-. <a class="link" href="GSimpleAsyncResult.html#g-simple-async-result-run-in-thread" title="g_simple_async_result_run_in_thread ()"><code class="function">g_simple_async_result_run_in_thread()</code></a> will run the
-job in a separate thread and then deliver the result to the
-thread-default main context.</p>
+where the <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> was created.
+<a class="link" href="GSimpleAsyncResult.html#g-simple-async-result-run-in-thread" title="g_simple_async_result_run_in_thread ()"><code class="function">g_simple_async_result_run_in_thread()</code></a> will run the job in a
+separate thread and then use
+<a class="link" href="GSimpleAsyncResult.html#g-simple-async-result-complete-in-idle" title="g_simple_async_result_complete_in_idle ()"><code class="function">g_simple_async_result_complete_in_idle()</code></a> to deliver the result.</p>
 <p>To set the results of an asynchronous function,
 <a class="link" href="GSimpleAsyncResult.html#g-simple-async-result-set-op-res-gpointer" title="g_simple_async_result_set_op_res_gpointer ()"><code class="function">g_simple_async_result_set_op_res_gpointer()</code></a>,
 <a class="link" href="GSimpleAsyncResult.html#g-simple-async-result-set-op-res-gboolean" title="g_simple_async_result_set_op_res_gboolean ()"><code class="function">g_simple_async_result_set_op_res_gboolean()</code></a>, and

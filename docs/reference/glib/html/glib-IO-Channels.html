@@ -538,9 +538,9 @@ order to meaningfully use this function your code should use the
 same C runtime as GLib uses, which is msvcrt.dll. Note that in
 current Microsoft compilers it is near impossible to convince it to
 build code that would use msvcrt.dll. The last Microsoft compiler
-version that supported using msvcrt.dll as the C runtime was version</p>
-<div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>The GNU compiler and toolchain for Windows, also known as Mingw,
-fully supports msvcrt.dll.</p></li></ol></div>
+version that supported using msvcrt.dll as the C runtime was version 6.
+The GNU compiler and toolchain for Windows, also known as Mingw,
+fully supports msvcrt.dll.</p>
 <p>If you have created a <a class="link" href="glib-IO-Channels.html#GIOChannel" title="struct GIOChannel"><span class="type">GIOChannel</span></a> for a file descriptor and started
 watching (polling) it, you shouldn't call <code class="function">read()</code> on the file
 descriptor. This is because adding polling for a file descriptor is

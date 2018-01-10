@@ -54,6 +54,18 @@
 <tr>
 <td class="define_keyword">#define</td>
 <td class="function_name">
+<a class="link" href="glib-Miscellaneous-Macros.html#g-autolist" title="g_autolist()">g_autolist</a><span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name">
+<a class="link" href="glib-Miscellaneous-Macros.html#g-autoslist" title="g_autoslist()">g_autoslist</a><span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="define_keyword">#define</td>
+<td class="function_name">
 <a class="link" href="glib-Miscellaneous-Macros.html#G-DEFINE-AUTOPTR-CLEANUP-FUNC:CAPS" title="G_DEFINE_AUTOPTR_CLEANUP_FUNC()">G_DEFINE_AUTOPTR_CLEANUP_FUNC</a><span class="c_punctuation">()</span>
 </td>
 </tr>
@@ -478,6 +490,78 @@ before it goes out of scope.</p>
 </div>
 <hr>
 <div class="refsect2">
+<a name="g-autolist"></a><h3>g_autolist()</h3>
+<pre class="programlisting">#define             g_autolist(TypeName)</pre>
+<p>Helper to declare a list variable with automatic deep cleanup.</p>
+<p>The list is deeply freed, in a way appropriate to the specified type, when the
+variable goes out of scope.  The type must support this.</p>
+<p>This feature is only supported on GCC and clang.  This macro is not
+defined on other compilers and should not be used in programs that
+are intended to be portable to those compilers.</p>
+<p>This is meant to be used to declare lists of a type with a cleanup
+function.  The type of the variable is a GList *.  You
+must not add your own '*'.</p>
+<p>This macro can be used to avoid having to do explicit cleanups of
+local variables when exiting functions.  It often vastly simplifies
+handling of error conditions, removing the need for various tricks
+such as 'goto out' or repeating of cleanup code.  It is also helpful
+for non-error cases.</p>
+<p>See also <a class="link" href="glib-Miscellaneous-Macros.html#g-autoslist" title="g_autoslist()"><code class="function">g_autoslist()</code></a>, <a class="link" href="glib-Miscellaneous-Macros.html#g-autoptr" title="g_autoptr()"><code class="function">g_autoptr()</code></a> and <a class="link" href="glib-Memory-Allocation.html#g-steal-pointer" title="g_steal_pointer ()"><code class="function">g_steal_pointer()</code></a>.</p>
+<div class="refsect3">
+<a name="g-autolist.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>TypeName</p></td>
+<td class="parameter_description"><p>a supported variable type</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<p class="since">Since: <a class="link" href="api-index-2-56.html#api-index-2.56">2.56</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-autoslist"></a><h3>g_autoslist()</h3>
+<pre class="programlisting">#define             g_autoslist(TypeName)</pre>
+<p>Helper to declare a singly linked list variable with automatic deep cleanup.</p>
+<p>The list is deeply freed, in a way appropriate to the specified type, when the
+variable goes out of scope.  The type must support this.</p>
+<p>This feature is only supported on GCC and clang.  This macro is not
+defined on other compilers and should not be used in programs that
+are intended to be portable to those compilers.</p>
+<p>This is meant to be used to declare lists of a type with a cleanup
+function.  The type of the variable is a GSList *.  You
+must not add your own '*'.</p>
+<p>This macro can be used to avoid having to do explicit cleanups of
+local variables when exiting functions.  It often vastly simplifies
+handling of error conditions, removing the need for various tricks
+such as 'goto out' or repeating of cleanup code.  It is also helpful
+for non-error cases.</p>
+<p>See also <a class="link" href="glib-Miscellaneous-Macros.html#g-autolist" title="g_autolist()"><code class="function">g_autolist()</code></a>, <a class="link" href="glib-Miscellaneous-Macros.html#g-autoptr" title="g_autoptr()"><code class="function">g_autoptr()</code></a> and <a class="link" href="glib-Memory-Allocation.html#g-steal-pointer" title="g_steal_pointer ()"><code class="function">g_steal_pointer()</code></a>.</p>
+<div class="refsect3">
+<a name="g-autoslist.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>TypeName</p></td>
+<td class="parameter_description"><p>a supported variable type</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<p class="since">Since: <a class="link" href="api-index-2-56.html#api-index-2.56">2.56</a></p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="G-DEFINE-AUTOPTR-CLEANUP-FUNC:CAPS"></a><h3>G_DEFINE_AUTOPTR_CLEANUP_FUNC()</h3>
 <pre class="programlisting">#define             G_DEFINE_AUTOPTR_CLEANUP_FUNC(TypeName, func)</pre>
 <p>Defines the appropriate cleanup function for a pointer type.</p>
@@ -879,6 +963,28 @@ the following would only match on compilers such as GCC 4.8 or newer.</p>
 </div>
 
 <p></p>
+<div class="refsect3">
+<a name="G-GNUC-CHECK-VERSION.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>major</p></td>
+<td class="parameter_description"><p>major version to check against</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>minor</p></td>
+<td class="parameter_description"><p>minor version to check against</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
 <p class="since">Since: <a class="link" href="api-index-2-42.html#api-index-2.42">2.42</a></p>
 </div>
 <hr>
