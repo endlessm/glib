@@ -58,6 +58,7 @@
    <ClCompile Include="..\..\gio\ginputstream.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\gio\gioerror.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\gio\giomodule.c"><Filter>Source Files</Filter></ClCompile>
+   <ClCompile Include="..\..\gio\giomodule-priv.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\gio\gioscheduler.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\gio\giostream.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\gio\gloadableicon.c"><Filter>Source Files</Filter></ClCompile>

@@ -524,6 +524,10 @@ g_resource_new_from_table (GvdbTable *table)
  * If you want to use this resource in the global resource namespace you need
  * to register it with g_resources_register().
  *
+ * Note: @data must be backed by memory that is at least pointer aligned.
+ * Otherwise this function will internally create a copy of the memory since
+ * GLib 2.56, or in older versions fail and exit the process.
+ *
  * Returns: (transfer full): a new #GResource, or %NULL on error
  *
  * Since: 2.32
@@ -533,6 +537,14 @@ g_resource_new_from_data (GBytes  *data,
                           GError **error)
 {
   GvdbTable *table;
+  gboolean unref_data = FALSE;
+
+  if (((guintptr) g_bytes_get_data (data, NULL)) % sizeof (gpointer) != 0)
+    {
+      data = g_bytes_new (g_bytes_get_data (data, NULL),
+                          g_bytes_get_size (data));
+      unref_data = TRUE;
+    }
 
   table = gvdb_table_new_from_data (g_bytes_get_data (data, NULL),
                                     g_bytes_get_size (data),
@@ -541,6 +553,9 @@ g_resource_new_from_data (GBytes  *data,
                                     (GvdbRefFunc)g_bytes_ref,
                                     (GDestroyNotify)g_bytes_unref,
                                     error);
+
+  if (unref_data)
+    g_bytes_unref (data);
 
   if (table == NULL)
     return NULL;
@@ -847,9 +862,17 @@ g_resource_enumerate_children (GResource             *resource,
                                GResourceLookupFlags   lookup_flags,
                                GError               **error)
 {
+  gchar local_str[256];
+  const gchar *path_with_slash;
   gchar **children;
+  gchar *free_path = NULL;
   gsize path_len;
-  char *path_with_slash;
+
+  /*
+   * Size of 256 is arbitrarily chosen based on being large enough
+   * for pretty much everything we come across, but not cumbersome
+   * on the stack. It also matches common cacheline sizes.
+   */
 
   if (*path == 0)
     {
@@ -860,13 +883,35 @@ g_resource_enumerate_children (GResource             *resource,
     }
 
   path_len = strlen (path);
-  if (path[path_len-1] != '/')
-    path_with_slash = g_strconcat (path, "/", NULL);
+
+  if G_UNLIKELY (path[path_len-1] != '/')
+    {
+      if (path_len < sizeof (local_str) - 2)
+        {
+          /*
+           * We got a path that does not have a trailing /. It is not the
+           * ideal use of this API as we require trailing / for our lookup
+           * into gvdb. Some degenerate application configurations can hit
+           * this code path quite a bit, so we try to avoid using the
+           * g_strconcat()/g_free().
+           */
+          memcpy (local_str, path, path_len);
+          local_str[path_len] = '/';
+          local_str[path_len+1] = 0;
+          path_with_slash = local_str;
+        }
+      else
+        {
+          path_with_slash = free_path = g_strconcat (path, "/", NULL);
+        }
+    }
   else
-    path_with_slash = g_strdup (path);
+    {
+      path_with_slash = path;
+    }
 
   children = gvdb_table_list (resource->table, path_with_slash);
-  g_free (path_with_slash);
+  g_free (free_path);
 
   if (children == NULL)
     {

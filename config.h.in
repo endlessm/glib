@@ -292,6 +292,9 @@
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
 
+/* Define to 1 if you have the `mkostemp' function. */
+#undef HAVE_MKOSTEMP
+
 /* Define to 1 if you have the `mmap' function. */
 #undef HAVE_MMAP
 
@@ -378,6 +381,9 @@
 
 /* Define if you have the 'sig_atomic_t' type. */
 #undef HAVE_SIG_ATOMIC_T
+
+/* SIOCGIFADDR is available */
+#undef HAVE_SIOCGIFADDR
 
 /* Define to 1 if you have the `snprintf' function. */
 #undef HAVE_SNPRINTF
@@ -787,7 +793,7 @@
 /* Define to 1 if you need to in order for `stat' and other things to work. */
 #undef _POSIX_SOURCE
 
-/* Target the Windows XP API */
+/* Target the Windows 7 API */
 #undef _WIN32_WINNT
 
 /* Needed to get declarations for msg_control and msg_controllen on Solaris */

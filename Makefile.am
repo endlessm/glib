@@ -84,6 +84,7 @@ meson_build_files = \
 	gio/kqueue/meson.build \
 	gio/meson.build \
 	gio/tests/meson.build \
+	gio/tests/gengiotypefuncs.py \
 	gio/tests/modules/meson.build \
 	gio/tests/gdbus-object-manager-example/meson.build \
 	gio/tests/de/LC_MESSAGES/meson.build \
@@ -148,7 +149,7 @@ valgrinddir = $(datadir)/glib-2.0/valgrind
 dist_valgrind_DATA = glib.supp
 
 # build documentation when doing distcheck
-DISTCHECK_CONFIGURE_FLAGS = --enable-debug --enable-gtk-doc --enable-man --disable-maintainer-mode
+AM_DISTCHECK_CONFIGURE_FLAGS = --enable-debug --enable-gtk-doc --enable-man --disable-maintainer-mode
 
 DISTCLEANFILES += config.lt
 

@@ -8,7 +8,7 @@
 <link rel="up" href="volume_mon.html" title="Volumes and Drives">
 <link rel="prev" href="GDrive.html" title="GDrive">
 <link rel="next" href="icons.html" title="Icons">
-<meta name="generator" content="GTK-Doc V1.25.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.26.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -322,6 +322,22 @@
 <a class="link" href="gio-Unix-Mounts.html#g-unix-is-mount-path-system-internal" title="g_unix_is_mount_path_system_internal ()">g_unix_is_mount_path_system_internal</a> <span class="c_punctuation">()</span>
 </td>
 </tr>
+<tr>
+<td class="function_type">
+<a href="../glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="gio-Unix-Mounts.html#g-unix-is-system-fs-type" title="g_unix_is_system_fs_type ()">g_unix_is_system_fs_type</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="../glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="gio-Unix-Mounts.html#g-unix-is-system-device-path" title="g_unix_is_system_device_path ()">g_unix_is_system_device_path</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
 </tbody>
 </table></div>
 </div>
@@ -387,7 +403,7 @@
 <div class="refsect1">
 <a name="gio-Unix-Mounts.description"></a><h2>Description</h2>
 <p>Routines for managing mounted UNIX mount points and paths.</p>
-<p>Note that <code class="literal">&lt;gio/gunixmounts.h&gt;</code> belongs to the UNIX-specific GIO
+<p>Note that <code class="literal">&amp;lt;gio/gunixmounts.h&gt;</code> belongs to the UNIX-specific GIO
 interfaces, thus you have to use the <code class="literal">gio-unix-2.0.pc</code> pkg-config
 file when using it.</p>
 </div>
@@ -475,7 +491,7 @@ g_unix_mount_copy (<em class="parameter"><code><a class="link" href="gio-Unix-Mo
 </div>
 <div class="refsect3">
 <a name="g-unix-mount-copy.returns"></a><h4>Returns</h4>
-<p> a new <a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry"><span class="type">GUnixMountEntry</span></a>. </p>
+<p>a new <a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry"><span class="type">GUnixMountEntry</span></a>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 <p class="since">Since: 2.54</p>
@@ -503,7 +519,7 @@ g_unix_mount_get_mount_path (<em class="parameter"><code><a class="link" href="g
 </div>
 <div class="refsect3">
 <a name="g-unix-mount-get-mount-path.returns"></a><h4>Returns</h4>
-<p> the mount path for <em class="parameter"><code>mount_entry</code></em>
+<p>the mount path for <em class="parameter"><code>mount_entry</code></em>
 . </p>
 <p><span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> filename]</span></p>
 </div>
@@ -531,7 +547,7 @@ g_unix_mount_get_device_path (<em class="parameter"><code><a class="link" href="
 </div>
 <div class="refsect3">
 <a name="g-unix-mount-get-device-path.returns"></a><h4>Returns</h4>
-<p> a string containing the device path. </p>
+<p>a string containing the device path. </p>
 <p><span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> filename]</span></p>
 </div>
 </div>
@@ -593,7 +609,12 @@ is read only.</p>
 <a name="g-unix-mount-is-system-internal"></a><h3>g_unix_mount_is_system_internal ()</h3>
 <pre class="programlisting"><a href="../glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
 g_unix_mount_is_system_internal (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);</pre>
-<p>Checks if a unix mount is a system path.</p>
+<p>Checks if a Unix mount is a system mount. This is the Boolean OR of
+<a class="link" href="gio-Unix-Mounts.html#g-unix-is-system-fs-type" title="g_unix_is_system_fs_type ()"><code class="function">g_unix_is_system_fs_type()</code></a>, <a class="link" href="gio-Unix-Mounts.html#g-unix-is-system-device-path" title="g_unix_is_system_device_path ()"><code class="function">g_unix_is_system_device_path()</code></a> and
+<a class="link" href="gio-Unix-Mounts.html#g-unix-is-mount-path-system-internal" title="g_unix_is_mount_path_system_internal ()"><code class="function">g_unix_is_mount_path_system_internal()</code></a> on <em class="parameter"><code>mount_entry</code></em>
+’s properties.</p>
+<p>The definition of what a ‘system’ mount entry is may change over time as new
+file system types and device paths are ignored.</p>
 <div class="refsect3">
 <a name="g-unix-mount-is-system-internal.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -637,7 +658,7 @@ g_unix_mount_guess_icon (<em class="parameter"><code><a class="link" href="gio-U
 </div>
 <div class="refsect3">
 <a name="g-unix-mount-guess-icon.returns"></a><h4>Returns</h4>
-<p> a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a>. </p>
+<p>a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 </div>
@@ -664,7 +685,7 @@ g_unix_mount_guess_symbolic_icon (<em class="parameter"><code><a class="link" hr
 </div>
 <div class="refsect3">
 <a name="g-unix-mount-guess-symbolic-icon.returns"></a><h4>Returns</h4>
-<p> a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a>. </p>
+<p>a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-2-34.html#api-index-2.34">2.34</a></p>
@@ -834,7 +855,7 @@ g_unix_mount_point_copy (<em class="parameter"><code><a class="link" href="gio-U
 </div>
 <div class="refsect3">
 <a name="g-unix-mount-point-copy.returns"></a><h4>Returns</h4>
-<p> a new <a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint"><span class="type">GUnixMountPoint</span></a>. </p>
+<p>a new <a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint"><span class="type">GUnixMountPoint</span></a>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 <p class="since">Since: 2.54</p>
@@ -862,7 +883,7 @@ g_unix_mount_point_get_mount_path (<em class="parameter"><code><a class="link" h
 </div>
 <div class="refsect3">
 <a name="g-unix-mount-point-get-mount-path.returns"></a><h4>Returns</h4>
-<p> a string containing the mount path. </p>
+<p>a string containing the mount path. </p>
 <p><span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> filename]</span></p>
 </div>
 </div>
@@ -889,7 +910,7 @@ g_unix_mount_point_get_device_path (<em class="parameter"><code><a class="link" 
 </div>
 <div class="refsect3">
 <a name="g-unix-mount-point-get-device-path.returns"></a><h4>Returns</h4>
-<p> a string containing the device path. </p>
+<p>a string containing the device path. </p>
 <p><span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> filename]</span></p>
 </div>
 </div>
@@ -1047,7 +1068,7 @@ g_unix_mount_point_guess_icon (<em class="parameter"><code><a class="link" href=
 </div>
 <div class="refsect3">
 <a name="g-unix-mount-point-guess-icon.returns"></a><h4>Returns</h4>
-<p> a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a>. </p>
+<p>a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 </div>
@@ -1075,7 +1096,7 @@ g_unix_mount_point_guess_symbolic_icon
 </div>
 <div class="refsect3">
 <a name="g-unix-mount-point-guess-symbolic-icon.returns"></a><h4>Returns</h4>
-<p> a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a>. </p>
+<p>a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-2-34.html#api-index-2.34">2.34</a></p>
@@ -1155,14 +1176,14 @@ allowing for checking if the mounts have changed with
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>time_read</p></td>
-<td class="parameter_description"><p> guint64 to contain a timestamp. </p></td>
+<td class="parameter_description"><p>guint64 to contain a timestamp. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="NULL may be passed instead of a pointer to a location."><span class="acronym">optional</span></acronym>]</span></td>
 </tr></tbody>
 </table></div>
 </div>
 <div class="refsect3">
 <a name="g-unix-mount-points-get.returns"></a><h4>Returns</h4>
-<p>    a <a href="../glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of the UNIX mountpoints. </p>
+<p>a <a href="../glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of the UNIX mountpoints. </p>
 <p><span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GUnixMountPoint][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 </div>
@@ -1186,14 +1207,14 @@ with <a class="link" href="gio-Unix-Mounts.html#g-unix-mounts-changed-since" tit
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>time_read</p></td>
-<td class="parameter_description"><p> guint64 to contain a timestamp, or <a href="../glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
+<td class="parameter_description"><p>guint64 to contain a timestamp, or <a href="../glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="NULL may be passed instead of a pointer to a location."><span class="acronym">optional</span></acronym>]</span></td>
 </tr></tbody>
 </table></div>
 </div>
 <div class="refsect3">
 <a name="g-unix-mounts-get.returns"></a><h4>Returns</h4>
-<p>    a <a href="../glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of the UNIX mounts. </p>
+<p>a <a href="../glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of the UNIX mounts. </p>
 <p><span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GUnixMountEntry][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 </div>
@@ -1218,12 +1239,12 @@ if the mounts have changed since with <a class="link" href="gio-Unix-Mounts.html
 <tbody>
 <tr>
 <td class="parameter_name"><p>mount_path</p></td>
-<td class="parameter_description"><p> path for a possible unix mount. </p></td>
+<td class="parameter_description"><p>path for a possible unix mount. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> filename]</span></td>
 </tr>
 <tr>
 <td class="parameter_name"><p>time_read</p></td>
-<td class="parameter_description"><p> guint64 to contain a timestamp. </p></td>
+<td class="parameter_description"><p>guint64 to contain a timestamp. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="NULL may be passed instead of a pointer to a location."><span class="acronym">optional</span></acronym>]</span></td>
 </tr>
 </tbody>
@@ -1231,7 +1252,7 @@ if the mounts have changed since with <a class="link" href="gio-Unix-Mounts.html
 </div>
 <div class="refsect3">
 <a name="g-unix-mount-at.returns"></a><h4>Returns</h4>
-<p> a <a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry"><span class="type">GUnixMountEntry</span></a>. </p>
+<p>a <a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry"><span class="type">GUnixMountEntry</span></a>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 </div>
@@ -1303,7 +1324,7 @@ entries).</p>
 the same main context as you called this function.</p>
 <div class="refsect3">
 <a name="g-unix-mount-monitor-get.returns"></a><h4>Returns</h4>
-<p> the <a class="link" href="gio-Unix-Mounts.html#GUnixMountMonitor"><span class="type">GUnixMountMonitor</span></a>. </p>
+<p>the <a class="link" href="gio-Unix-Mounts.html#GUnixMountMonitor"><span class="type">GUnixMountMonitor</span></a>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 <p class="since">Since: <a class="link" href="api-index-2-44.html#api-index-2.44">2.44</a></p>
@@ -1387,7 +1408,7 @@ casual user.</p>
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>mount_path</p></td>
-<td class="parameter_description"><p> a mount path, e.g. <code class="literal">/media/disk</code> or <code class="literal">/usr</code>. </p></td>
+<td class="parameter_description"><p>a mount path, e.g. <code class="literal">/media/disk</code> or <code class="literal">/usr</code>. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="Override the parsed C type with given type."><span class="acronym">type</span></acronym> filename]</span></td>
 </tr></tbody>
 </table></div>
@@ -1398,6 +1419,75 @@ casual user.</p>
 is considered an implementation detail
 of the OS.</p>
 </div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-unix-is-system-fs-type"></a><h3>g_unix_is_system_fs_type ()</h3>
+<pre class="programlisting"><a href="../glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+g_unix_is_system_fs_type (<em class="parameter"><code>const <span class="type">char</span> *fs_type</code></em>);</pre>
+<p>Determines if <em class="parameter"><code>fs_type</code></em>
+ is considered a type of file system which is only
+used in implementation of the OS. This is primarily used for hiding
+mounted volumes that are intended as APIs for programs to read, and system
+administrators at a shell; rather than something that should, for example,
+appear in a GUI. For example, the Linux <code class="literal">/proc</code> filesystem.</p>
+<p>The list of file system types considered ‘system’ ones may change over time.</p>
+<div class="refsect3">
+<a name="g-unix-is-system-fs-type.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>fs_type</p></td>
+<td class="parameter_description"><p>a file system type, e.g. <code class="literal">procfs</code> or <code class="literal">tmpfs</code></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="g-unix-is-system-fs-type.returns"></a><h4>Returns</h4>
+<p> <a href="../glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>fs_type</code></em>
+is considered an implementation detail of the OS.</p>
+</div>
+<p class="since">Since: 2.56</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-unix-is-system-device-path"></a><h3>g_unix_is_system_device_path ()</h3>
+<pre class="programlisting"><a href="../glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+g_unix_is_system_device_path (<em class="parameter"><code>const <span class="type">char</span> *device_path</code></em>);</pre>
+<p>Determines if <em class="parameter"><code>device_path</code></em>
+ is considered a block device path which is only
+used in implementation of the OS. This is primarily used for hiding
+mounted volumes that are intended as APIs for programs to read, and system
+administrators at a shell; rather than something that should, for example,
+appear in a GUI. For example, the Linux <code class="literal">/proc</code> filesystem.</p>
+<p>The list of device paths considered ‘system’ ones may change over time.</p>
+<div class="refsect3">
+<a name="g-unix-is-system-device-path.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>device_path</p></td>
+<td class="parameter_description"><p>a device path, e.g. <code class="literal">/dev/loop0</code> or <code class="literal">nfsd</code></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="g-unix-is-system-device-path.returns"></a><h4>Returns</h4>
+<p> <a href="../glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>device_path</code></em>
+is considered an implementation detail of
+the OS.</p>
+</div>
+<p class="since">Since: 2.56</p>
 </div>
 </div>
 <div class="refsect1">
@@ -1488,6 +1578,6 @@ user_function (<a class="link" href="gio-Unix-Mounts.html#GUnixMountMonitor"><sp
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.25.1</div>
+<hr>Generated by GTK-Doc V1.26.1</div>
 </body>
 </html>

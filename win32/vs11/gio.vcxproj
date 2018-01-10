@@ -217,6 +217,7 @@
    <ClCompile Include="..\..\gio\ginputstream.c" />
    <ClCompile Include="..\..\gio\gioerror.c" />
    <ClCompile Include="..\..\gio\giomodule.c" />
+   <ClCompile Include="..\..\gio\giomodule-priv.c" />
    <ClCompile Include="..\..\gio\gioscheduler.c" />
    <ClCompile Include="..\..\gio\giostream.c" />
    <ClCompile Include="..\..\gio\gloadableicon.c" />

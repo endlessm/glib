@@ -273,7 +273,7 @@ ensure_keyring_directory (GError **error)
                            G_IO_ERROR_FAILED,
                            _("Permissions on directory “%s” are malformed. Expected mode 0700, got 0%o"),
                            path,
-                           statbuf.st_mode & 0777);
+                           (guint) (statbuf.st_mode & 0777));
               g_free (path);
               path = NULL;
               goto out;
@@ -284,7 +284,7 @@ ensure_keyring_directory (GError **error)
 #endif
 #endif
         }
-        goto out;
+      goto out;
     }
 
   if (g_mkdir (path, 0700) != 0)
@@ -389,7 +389,6 @@ keyring_lookup_entry (const gchar  *cookie_context,
       gchar **tokens;
       gchar *endp;
       gint line_id;
-      guint64 line_when;
 
       if (line[0] == '\0')
         continue;
@@ -422,8 +421,7 @@ keyring_lookup_entry (const gchar  *cookie_context,
           goto out;
         }
 
-      line_when = g_ascii_strtoll (tokens[1], &endp, 10);
-      line_when = line_when; /* To avoid -Wunused-but-set-variable */
+      (void)g_ascii_strtoll (tokens[1], &endp, 10); /* do not care what the timestamp is */
       if (*endp != '\0')
         {
           g_set_error (error,
@@ -490,7 +488,9 @@ keyring_acquire_lock (const gchar  *path,
   gchar *lock;
   gint ret;
   guint num_tries;
+#ifdef EEXISTS
   guint num_create_tries;
+#endif
   int errsv;
 
   g_return_val_if_fail (path != NULL, FALSE);
@@ -512,8 +512,8 @@ keyring_acquire_lock (const gchar  *path,
    *         real locking implementations are still flaky on network filesystems
    */
 
-  num_create_tries = 0;
 #ifdef EEXISTS
+  num_create_tries = 0;
  again:
 #endif
   num_tries = 0;
@@ -562,7 +562,6 @@ keyring_acquire_lock (const gchar  *path,
             goto again;
         }
 #endif
-      num_create_tries = num_create_tries; /* To avoid -Wunused-but-set-variable */
       g_set_error (error,
                    G_IO_ERROR,
                    g_io_error_from_errno (errsv),
@@ -753,7 +752,6 @@ keyring_generate_entry (const gchar  *cookie_context,
               g_strfreev (tokens);
               goto out;
             }
-          line_when = line_when; /* To avoid -Wunused-but-set-variable */
 
 
           /* D-Bus spec says:

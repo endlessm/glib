@@ -25,14 +25,17 @@
 #include <locale.h>
 
 #define ASSERT_DATE(dt,y,m,d) G_STMT_START { \
+  g_assert_nonnull ((dt)); \
   g_assert_cmpint ((y), ==, g_date_time_get_year ((dt))); \
   g_assert_cmpint ((m), ==, g_date_time_get_month ((dt))); \
   g_assert_cmpint ((d), ==, g_date_time_get_day_of_month ((dt))); \
 } G_STMT_END
-#define ASSERT_TIME(dt,H,M,S) G_STMT_START { \
+#define ASSERT_TIME(dt,H,M,S,U) G_STMT_START { \
+  g_assert_nonnull ((dt)); \
   g_assert_cmpint ((H), ==, g_date_time_get_hour ((dt))); \
   g_assert_cmpint ((M), ==, g_date_time_get_minute ((dt))); \
   g_assert_cmpint ((S), ==, g_date_time_get_second ((dt))); \
+  g_assert_cmpint ((U), ==, g_date_time_get_microsecond ((dt))); \
 } G_STMT_END
 
 static void
@@ -340,7 +343,7 @@ test_GDateTime_hash (void)
   h = g_hash_table_new_full (g_date_time_hash, g_date_time_equal,
                              (GDestroyNotify)g_date_time_unref,
                              NULL);
-  g_hash_table_insert (h, g_date_time_new_now_local (), NULL);
+  g_hash_table_add (h, g_date_time_new_now_local ());
   g_hash_table_remove_all (h);
   g_hash_table_destroy (h);
 }
@@ -466,6 +469,311 @@ test_GDateTime_new_from_timeval_utc (void)
   g_assert_cmpint (tv.tv_sec, ==, tv2.tv_sec);
   g_assert_cmpint (tv.tv_usec, ==, tv2.tv_usec);
   g_date_time_unref (dt);
+}
+
+static void
+test_GDateTime_new_from_iso8601 (void)
+{
+  GDateTime *dt;
+  GTimeZone *tz;
+
+  /* Need non-empty string */
+  dt = g_date_time_new_from_iso8601 ("", NULL);
+  g_assert_null (dt);
+
+  /* Needs to be correctly formatted */
+  dt = g_date_time_new_from_iso8601 ("not a date", NULL);
+  g_assert_null (dt);
+
+  /* Check common case */
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 8, 24);
+  ASSERT_TIME (dt, 22, 10, 42, 0);
+  g_date_time_unref (dt);
+
+  /* Timezone is required in text or passed as arg */
+  tz = g_time_zone_new_utc ();
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T22:10:42", tz);
+  ASSERT_DATE (dt, 2016, 8, 24);
+  g_date_time_unref (dt);
+  g_time_zone_unref (tz);
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T22:10:42", NULL);
+  g_assert_null (dt);
+
+  /* Can't have whitespace */
+  dt = g_date_time_new_from_iso8601 ("2016 08 24T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T22:10:42Z ", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 (" 2016-08-24T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Check lowercase time separator or space allowed */
+  dt = g_date_time_new_from_iso8601 ("2016-08-24t22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 8, 24);
+  ASSERT_TIME (dt, 22, 10, 42, 0);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-08-24 22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 8, 24);
+  ASSERT_TIME (dt, 22, 10, 42, 0);
+  g_date_time_unref (dt);
+
+  /* Check dates without separators allowed */
+  dt = g_date_time_new_from_iso8601 ("20160824T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 8, 24);
+  ASSERT_TIME (dt, 22, 10, 42, 0);
+  g_date_time_unref (dt);
+
+  /* Months are two digits */
+  dt = g_date_time_new_from_iso8601 ("2016-1-01T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Days are two digits */
+  dt = g_date_time_new_from_iso8601 ("2016-01-1T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Need consistent usage of separators */
+  dt = g_date_time_new_from_iso8601 ("2016-0824T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("201608-24T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Check month within valid range */
+  dt = g_date_time_new_from_iso8601 ("2016-00-13T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-13-13T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Check day within valid range */
+  dt = g_date_time_new_from_iso8601 ("2016-01-00T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-01-31T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 1, 31);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-01-32T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-02-29T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 2, 29);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-02-30T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2017-02-28T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2017, 2, 28);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2017-02-29T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-03-31T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 3, 31);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-03-32T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-04-30T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 4, 30);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-04-31T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-05-31T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 5, 31);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-05-32T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-06-30T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 6, 30);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-06-31T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-07-31T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 7, 31);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-07-32T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-08-31T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 8, 31);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-08-32T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-09-30T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 9, 30);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-09-31T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-10-31T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 10, 31);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-10-32T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-11-30T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 11, 30);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-11-31T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-12-31T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 12, 31);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-12-32T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Check ordinal days work */
+  dt = g_date_time_new_from_iso8601 ("2016-237T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 8, 24);
+  ASSERT_TIME (dt, 22, 10, 42, 0);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016237T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 8, 24);
+  ASSERT_TIME (dt, 22, 10, 42, 0);
+  g_date_time_unref (dt);
+
+  /* Check ordinal leap days */
+  dt = g_date_time_new_from_iso8601 ("2016-366T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 12, 31);
+  ASSERT_TIME (dt, 22, 10, 42, 0);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2017-365T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2017, 12, 31);
+  ASSERT_TIME (dt, 22, 10, 42, 0);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2017-366T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Days start at 1 */
+  dt = g_date_time_new_from_iso8601 ("2016-000T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Limited to number of days in the year (2016 is a leap year) */
+  dt = g_date_time_new_from_iso8601 ("2016-367T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Days are two digits */
+  dt = g_date_time_new_from_iso8601 ("2016-1T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-12T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Check week days work */
+  dt = g_date_time_new_from_iso8601 ("2016-W34-3T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 8, 24);
+  ASSERT_TIME (dt, 22, 10, 42, 0);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016W343T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 8, 24);
+  ASSERT_TIME (dt, 22, 10, 42, 0);
+  g_date_time_unref (dt);
+
+  /* We don't support weeks without weekdays (valid ISO 8601) */
+  dt = g_date_time_new_from_iso8601 ("2016-W34T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016W34T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Weeks are two digits */
+  dt = g_date_time_new_from_iso8601 ("2016-W3-1T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Weeks start at 1 */
+  dt = g_date_time_new_from_iso8601 ("2016-W00-1T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Week one might be in the previous year */
+  dt = g_date_time_new_from_iso8601 ("2015-W01-1T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2014, 12, 29);
+  g_date_time_unref (dt);
+
+  /* Last week might be in next year */
+  dt = g_date_time_new_from_iso8601 ("2015-W53-7T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 1, 3);
+  g_date_time_unref (dt);
+
+  /* Week 53 doesn't always exist */
+  dt = g_date_time_new_from_iso8601 ("2016-W53-1T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Limited to number of days in the week */
+  dt = g_date_time_new_from_iso8601 ("2016-W34-0T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-W34-8T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Days are one digit */
+  dt = g_date_time_new_from_iso8601 ("2016-W34-99T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Check week day changes depending on year */
+  dt = g_date_time_new_from_iso8601 ("2017-W34-1T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2017, 8, 21);
+  g_date_time_unref (dt);
+
+  /* Check week day changes depending on leap years */
+  dt = g_date_time_new_from_iso8601 ("1900-W01-1T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 1900, 1, 1);
+  g_date_time_unref (dt);
+
+  /* YYYY-MM not allowed (NOT valid ISO 8601) */
+  dt = g_date_time_new_from_iso8601 ("2016-08T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* We don't support omitted year (valid ISO 8601) */
+  dt = g_date_time_new_from_iso8601 ("--08-24T22:10:42Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("--0824T22:10:42Z", NULL);
+  g_assert_null (dt);
+
+  /* Check subseconds work */
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T22:10:42.123456Z", NULL);
+  ASSERT_DATE (dt, 2016, 8, 24);
+  ASSERT_TIME (dt, 22, 10, 42, 123456);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T22:10:42,123456Z", NULL);
+  ASSERT_DATE (dt, 2016, 8, 24);
+  ASSERT_TIME (dt, 22, 10, 42, 123456);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T22:10:42.Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T221042.123456Z", NULL);
+  ASSERT_DATE (dt, 2016, 8, 24);
+  ASSERT_TIME (dt, 22, 10, 42, 123456);
+  g_date_time_unref (dt);
+
+  /* We don't support times without minutes / seconds (valid ISO 8601) */
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T22Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T22:10Z", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T2210Z", NULL);
+  g_assert_null (dt);
+
+  /* UTC time uses 'Z' */
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T22:10:42Z", NULL);
+  ASSERT_DATE (dt, 2016, 8, 24);
+  ASSERT_TIME (dt, 22, 10, 42, 0);
+  g_assert_cmpint (g_date_time_get_utc_offset (dt), ==, 0);
+  g_date_time_unref (dt);
+
+  /* Check timezone works */
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T22:10:42+12:00", NULL);
+  ASSERT_DATE (dt, 2016, 8, 24);
+  ASSERT_TIME (dt, 22, 10, 42, 0);
+  g_assert_cmpint (g_date_time_get_utc_offset (dt), ==, 12 * G_TIME_SPAN_HOUR);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T22:10:42+12", NULL);
+  ASSERT_DATE (dt, 2016, 8, 24);
+  ASSERT_TIME (dt, 22, 10, 42, 0);
+  g_assert_cmpint (g_date_time_get_utc_offset (dt), ==, 12 * G_TIME_SPAN_HOUR);
+  g_date_time_unref (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T22:10:42-02", NULL);
+  ASSERT_DATE (dt, 2016, 8, 24);
+  ASSERT_TIME (dt, 22, 10, 42, 0);
+  g_assert_cmpint (g_date_time_get_utc_offset (dt), ==, -2 * G_TIME_SPAN_HOUR);
+  g_date_time_unref (dt);
+
+  /* Timezone seconds not allowed */
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T22-12:00:00", NULL);
+  g_assert_null (dt);
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T22-12:00:00.000", NULL);
+  g_assert_null (dt);
+
+  /* Timezone hours two digits */
+  dt = g_date_time_new_from_iso8601 ("2016-08-24T22-2Z", NULL);
+  g_assert_null (dt);
 }
 
 static void
@@ -1107,14 +1415,13 @@ test_non_utf8_printf (void)
   setlocale (LC_ALL, "ja_JP.eucjp");
   if (strstr (setlocale (LC_ALL, NULL), "ja_JP") == NULL)
     {
-      g_test_message ("locale ja_JP.eucjp not available, skipping non-UTF8 tests");
+      g_test_skip ("locale ja_JP.eucjp not available, skipping non-UTF8 tests");
       g_free (oldlocale);
       return;
     }
   if (g_get_charset (NULL))
     {
-      g_test_message ("locale ja_JP.eucjp may be available, but glib seems to think that it's equivalent to UTF-8, skipping non-UTF-8 tests.");
-      g_test_message ("This is a known issue on Darwin");
+      g_test_skip ("locale ja_JP.eucjp may be available, but glib seems to think that it's equivalent to UTF-8, skipping non-UTF-8 tests. This is a known issue on Darwin");
       setlocale (LC_ALL, oldlocale);
       g_free (oldlocale);
       return;
@@ -1125,14 +1432,14 @@ test_non_utf8_printf (void)
    */
   TEST_PRINTF ("%a", "\345\234\237");
   TEST_PRINTF ("%A", "\345\234\237\346\233\234\346\227\245");
-#ifndef HAVE_CARBON /* OSX just returns the number */
+#ifndef __APPLE__ /* OSX just returns the number */
   TEST_PRINTF ("%b", "10\346\234\210");
 #endif
   TEST_PRINTF ("%B", "10\346\234\210");
   TEST_PRINTF ("%d", "24");
   TEST_PRINTF_DATE (2009, 1, 1, "%d", "01");
   TEST_PRINTF ("%e", "24"); // fixme
-#ifndef HAVE_CARBON /* OSX just returns the number */
+#ifndef __APPLE__ /* OSX just returns the number */
   TEST_PRINTF ("%h", "10\346\234\210");
 #endif
   TEST_PRINTF ("%H", "00");
@@ -1149,7 +1456,7 @@ test_non_utf8_printf (void)
   TEST_PRINTF_TIME (10, 13, 13, "%l", "10");
   TEST_PRINTF ("%m", "10");
   TEST_PRINTF ("%M", "00");
-#ifndef HAVE_CARBON /* OSX returns latin "AM", not japanese */
+#ifndef __APPLE__ /* OSX returns latin "AM", not japanese */
   TEST_PRINTF ("%p", "\345\215\210\345\211\215");
   TEST_PRINTF_TIME (13, 13, 13, "%p", "\345\215\210\345\276\214");
   TEST_PRINTF ("%P", "\345\215\210\345\211\215");
@@ -1162,7 +1469,7 @@ test_non_utf8_printf (void)
   TEST_PRINTF ("%S", "00");
   TEST_PRINTF ("%t", "	");
   TEST_PRINTF ("%u", "6");
-#ifndef HAVE_CARBON /* OSX returns YYYY/MM/DD in ASCII */
+#ifndef __APPLE__ /* OSX returns YYYY/MM/DD in ASCII */
   TEST_PRINTF ("%x", "2009\345\271\26410\346\234\21024\346\227\245");
 #endif
   TEST_PRINTF ("%X", "00\346\231\20200\345\210\20600\347\247\222");
@@ -1237,7 +1544,7 @@ test_modifiers (void)
       TEST_PRINTF_DATE (2011, 7, 1, "%_Om", " \333\267");        /* ' 7' */
     }
   else
-    g_test_message ("locale fa_IR not available, skipping O modifier tests");
+    g_test_skip ("locale fa_IR not available, skipping O modifier tests");
   setlocale (LC_ALL, oldlocale);
   g_free (oldlocale);
 }
@@ -1511,6 +1818,27 @@ test_strftime (void)
 }
 #pragma GCC diagnostic pop
 
+/* Check that g_date_time_format() correctly returns %NULL for format
+ * placeholders which are not supported in the current locale. */
+static void
+test_GDateTime_strftime_error_handling (void)
+{
+  gchar *oldlocale;
+
+  oldlocale = g_strdup (setlocale (LC_ALL, NULL));
+  setlocale (LC_ALL, "de_DE.utf-8");
+  if (strstr (setlocale (LC_ALL, NULL), "de_DE") != NULL)
+    {
+      /* de_DE doesn’t ever write time in 12-hour notation, so %r is
+       * unsupported for it. */
+      TEST_PRINTF_TIME (23, 0, 0, "%r", NULL);
+    }
+  else
+    g_test_skip ("locale de_DE not available, skipping error handling tests");
+  setlocale (LC_ALL, oldlocale);
+  g_free (oldlocale);
+}
+
 static void
 test_find_interval (void)
 {
@@ -1775,6 +2103,21 @@ test_posix_parse (void)
   g_time_zone_unref (tz);
 }
 
+static void
+test_GDateTime_floating_point (void)
+{
+  GDateTime *dt;
+  GTimeZone *tz;
+
+  g_test_bug ("697715");
+
+  tz = g_time_zone_new ("-03:00");
+  dt = g_date_time_new (tz, 2010, 5, 24,  8, 0, 1.000001);
+  g_time_zone_unref (tz);
+  g_assert_cmpint (g_date_time_get_microsecond (dt), ==, 1);
+  g_date_time_unref (dt);
+}
+
 gint
 main (gint   argc,
       gchar *argv[])
@@ -1813,11 +2156,13 @@ main (gint   argc,
   g_test_add_func ("/GDateTime/new_from_timeval", test_GDateTime_new_from_timeval);
   g_test_add_func ("/GDateTime/new_from_timeval_utc", test_GDateTime_new_from_timeval_utc);
   g_test_add_func ("/GDateTime/new_from_timeval/overflow", test_GDateTime_new_from_timeval_overflow);
+  g_test_add_func ("/GDateTime/new_from_iso8601", test_GDateTime_new_from_iso8601);
   g_test_add_func ("/GDateTime/new_full", test_GDateTime_new_full);
   g_test_add_func ("/GDateTime/now", test_GDateTime_now);
   g_test_add_func ("/GDateTime/printf", test_GDateTime_printf);
   g_test_add_func ("/GDateTime/non_utf8_printf", test_non_utf8_printf);
   g_test_add_func ("/GDateTime/strftime", test_strftime);
+  g_test_add_func ("/GDateTime/strftime/error_handling", test_GDateTime_strftime_error_handling);
   g_test_add_func ("/GDateTime/modifiers", test_modifiers);
   g_test_add_func ("/GDateTime/to_local", test_GDateTime_to_local);
   g_test_add_func ("/GDateTime/to_unix", test_GDateTime_to_unix);
@@ -1831,6 +2176,7 @@ main (gint   argc,
   g_test_add_func ("/GTimeZone/adjust-time", test_adjust_time);
   g_test_add_func ("/GTimeZone/no-header", test_no_header);
   g_test_add_func ("/GTimeZone/posix-parse", test_posix_parse);
+  g_test_add_func ("/GTimeZone/floating-point", test_GDateTime_floating_point);
 
   return g_test_run ();
 }

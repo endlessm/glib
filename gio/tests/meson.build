@@ -1,5 +1,9 @@
 common_gio_tests_deps = [libglib_dep, libgmodule_dep, libgobject_dep, libgio_dep]
 
+if host_system == 'darwin'
+common_gio_tests_deps += [libintl]
+endif
+
 subdir('gdbus-object-manager-example')
 
 gengiotypefuncs_prog = find_program('gengiotypefuncs.py')
@@ -67,6 +71,7 @@ test_extra_programs = [
 test_env = [
   'G_TEST_SRCDIR=' + meson.current_source_dir(),
   'G_TEST_BUILDDIR=' + meson.current_build_dir(),
+  'GIO_MODULE_DIR=',
 ]
 
 test_c_args = [
@@ -113,7 +118,9 @@ if host_machine.system() != 'windows'
     'socket-address',
     'stream-rw_all',
     'unix-fd',
+    'unix-mounts',
     'unix-streams',
+    'g-file-info-filesystem-readonly',
     'gschema-compile',
   ]
 
@@ -145,6 +152,7 @@ if host_machine.system() != 'windows'
         input :   ['test-codegen.xml'],
         output :  ['gdbus-test-codegen-generated.h',
                    'gdbus-test-codegen-generated.c'],
+        depend_files : gdbus_codegen_built_files,
         command : [python, gdbus_codegen,
                    '--interface-prefix', 'org.project.',
                    '--output-directory', '@OUTDIR@',
@@ -301,6 +309,7 @@ uninstalled_test_extra_programs = [
   ['gapplication-example-cmdline'],
   ['gapplication-example-cmdline2'],
   ['gapplication-example-cmdline3'],
+  ['gapplication-example-cmdline4'],
   ['gapplication-example-dbushooks'],
   ['gapplication-example-open'],
   ['gdbus-daemon', gdbus_daemon_sources],

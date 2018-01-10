@@ -8,7 +8,7 @@
 <link rel="up" href="glib-core.html" title="GLib Core Application Support">
 <link rel="prev" href="glib-The-Main-Event-Loop.html" title="The Main Event Loop">
 <link rel="next" href="glib-Thread-Pools.html" title="Thread Pools">
-<meta name="generator" content="GTK-Doc V1.25.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.26.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -688,7 +688,7 @@ Note that <a class="link" href="glib-Threads.html#g-thread-join" title="g_thread
 <tbody>
 <tr>
 <td class="parameter_name"><p>name</p></td>
-<td class="parameter_description"><p> an (optional) name for the new thread. </p></td>
+<td class="parameter_description"><p>an (optional) name for the new thread. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></td>
 </tr>
 <tr>
@@ -734,7 +734,7 @@ it allows for the possibility of failure.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>name</p></td>
-<td class="parameter_description"><p> an (optional) name for the new thread. </p></td>
+<td class="parameter_description"><p>an (optional) name for the new thread. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="NULL may be passed as the value in, out, in-out; or as a return value."><span class="acronym">nullable</span></acronym>]</span></td>
 </tr>
 <tr>
@@ -1774,7 +1774,8 @@ the write lock on <em class="parameter"><code>rw_lock</code></em>
  or blocks waiting for it, the current
 thread will block. Read locks can be taken recursively.</p>
 <p>It is implementation-defined how many threads are allowed to
-hold read locks on the same lock simultaneously.</p>
+hold read locks on the same lock simultaneously. If the limit is hit,
+or if a deadlock is detected, a critical warning will be emitted.</p>
 <div class="refsect3">
 <a name="g-rw-lock-reader-lock.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -2188,7 +2189,7 @@ while calling this function, though not required.</p>
 </pre>
 <p>A macro to assist with the static initialisation of a <a class="link" href="glib-Threads.html#GPrivate" title="struct GPrivate"><span class="type">GPrivate</span></a>.</p>
 <p>This macro is useful for the case that a <a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> function
-should be associated the key.  This is needed when the key will be
+should be associated with the key.  This is needed when the key will be
 used to point at memory that should be deallocated when the thread
 exits.</p>
 <p>Additionally, the <a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> will also be called on the previous
@@ -2521,7 +2522,7 @@ like this:</p>
 </colgroup>
 <tbody><tr>
 <td class="parameter_name"><p>location</p></td>
-<td class="parameter_description"><p> location of a static initializable variable
+<td class="parameter_description"><p>location of a static initializable variable
 containing 0. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="NULL must not be passed as the value in, out, in-out; or as a return value."><span class="acronym">not nullable</span></acronym>]</span></td>
 </tr></tbody>
@@ -2556,7 +2557,7 @@ initialization variable.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>location</p></td>
-<td class="parameter_description"><p> location of a static initializable variable
+<td class="parameter_description"><p>location of a static initializable variable
 containing 0. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="NULL must not be passed as the value in, out, in-out; or as a return value."><span class="acronym">not nullable</span></acronym>]</span></td>
 </tr>
@@ -2727,7 +2728,7 @@ the pointer.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>address</p></td>
-<td class="parameter_description"><p> a pointer to a <span class="type">gpointer-sized</span> value. </p></td>
+<td class="parameter_description"><p>a pointer to a <span class="type">gpointer-sized</span> value. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="NULL must not be passed as the value in, out, in-out; or as a return value."><span class="acronym">not nullable</span></acronym>]</span></td>
 </tr>
 <tr>
@@ -2761,7 +2762,7 @@ the pointer.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>address</p></td>
-<td class="parameter_description"><p> a pointer to a <span class="type">gpointer-sized</span> value. </p></td>
+<td class="parameter_description"><p>a pointer to a <span class="type">gpointer-sized</span> value. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="NULL must not be passed as the value in, out, in-out; or as a return value."><span class="acronym">not nullable</span></acronym>]</span></td>
 </tr>
 <tr>
@@ -2799,7 +2800,7 @@ the pointer.</p>
 <tbody>
 <tr>
 <td class="parameter_name"><p>address</p></td>
-<td class="parameter_description"><p> a pointer to a <span class="type">gpointer-sized</span> value. </p></td>
+<td class="parameter_description"><p>a pointer to a <span class="type">gpointer-sized</span> value. </p></td>
 <td class="parameter_annotations"><span class="annotation">[<acronym title="NULL must not be passed as the value in, out, in-out; or as a return value."><span class="acronym">not nullable</span></acronym>]</span></td>
 </tr>
 <tr>
@@ -3318,6 +3319,6 @@ controlled by a <a class="link" href="glib-Threads.html#GOnce" title="struct GOn
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.25.1</div>
+<hr>Generated by GTK-Doc V1.26.1</div>
 </body>
 </html>

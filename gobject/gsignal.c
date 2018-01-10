@@ -76,7 +76,7 @@
  * 4. Invocation of user provided signal handlers (where the @after flag is set)
  *
  * 5. Invocation of the object method handler for %G_SIGNAL_RUN_CLEANUP signals
- 
+ *
  * The user-provided signal handlers are called in the order they were
  * connected in.
  *
@@ -3804,6 +3804,8 @@ invalid_closure_notify (gpointer  instance,
   SIGNAL_LOCK ();
 
   handler = handler_lookup (instance, 0, closure, &signal_id);
+  /* See https://bugzilla.gnome.org/show_bug.cgi?id=730296 for discussion about this... */
+  g_assert (handler != NULL);
   g_assert (handler->closure == closure);
 
   handler->sequential_number = 0;

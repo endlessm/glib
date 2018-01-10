@@ -171,49 +171,26 @@ create_cfstring_from_cstr (const gchar *cstr)
   return CFStringCreateWithCString (NULL, cstr, kCFStringEncodingUTF8);
 }
 
+#ifdef G_ENABLE_DEBUG
 static gchar *
 create_cstr_from_cfstring (CFStringRef str)
 {
-  const gchar *cstr;
+  g_return_val_if_fail (str != NULL, NULL);
+
   CFIndex length = CFStringGetLength (str);
-  char *buffer = NULL;
-
-  if (str == NULL)
-    return NULL;
-
-  cstr = CFStringGetCStringPtr (str, kCFStringEncodingUTF8);
-  /* CFStringGetCStringPtr returns "NULL if the internal storage of
-   * theString does not allow [a pointer] to be returned efficiently".
-   * (Apple's docs don't say what that means). In that case we must
-   * use CFStringGetCString as a fallback.
-   */
-  if (cstr != NULL)
+  CFIndex maxlen = CFStringGetMaximumSizeForEncoding (length, kCFStringEncodingUTF8);
+  gchar *buffer = g_malloc (maxlen + 1);
+  Boolean success = CFStringGetCString (str, (char *) buffer, maxlen,
+                                        kCFStringEncodingUTF8);
+  if (success)
+    return buffer;
+  else
     {
-        CFRelease (str);
-        return g_strdup (cstr);
+      g_free (buffer);
+      return NULL;
     }
-  
-  buffer = g_malloc0 (length + 1);
-  /* Start off with a buffer size sufficient for the most likely case
-   * that the CFString is ASCII so the UTF8 representation will be 1
-   * byte per code point. Keep trying up to 4 bytes per code point,
-   * the max allowed by RFC3629.
-   */
-  for (int i = 1; i <= 4; ++i)
-    {
-      if (CFStringGetCString (str, buffer, length, kCFStringEncodingUTF8))
-      {
-        CFRelease (str);
-        return buffer;
-      }
-      length += length;
-      buffer = g_realloc (buffer, length + 1);
-    }
-  
-  g_free (buffer);
-  CFRelease (str);
-  return NULL;
 }
+#endif
 
 static char *
 url_escape_hostname (const char *url)
@@ -358,13 +335,18 @@ get_bundle_for_id (CFStringRef bundle_id)
     }
   else
 #else
-  if (LSFindApplicationForInfo (kLSUnknownCreator, bundle_id, NULL, NULL, &app_url))
+  if (LSFindApplicationForInfo (kLSUnknownCreator, bundle_id, NULL, NULL, &app_url) == kLSApplicationNotFoundErr)
 #endif
     {
 #ifdef G_ENABLE_DEBUG /* This can fail often, no reason to alloc strings */
       gchar *id_str = create_cstr_from_cfstring (bundle_id);
-      g_debug ("Application not found for id \"%s\".", id_str);
-      g_free (id_str);
+      if (id_str)
+        {
+          g_debug ("Application not found for id \"%s\".", id_str);
+          g_free (id_str);
+        }
+      else
+        g_debug ("Application not found for unconvertable bundle id.");
 #endif
       return NULL;
     }
@@ -624,7 +606,7 @@ g_osx_app_info_get_all_for_scheme (const char *cscheme)
       info = G_APP_INFO (g_osx_app_info_new (bundle));
       info_list = g_list_append (info_list, info);
     }
-
+  CFRelease (bundle_list);
   return info_list;
 }
 
@@ -669,7 +651,7 @@ g_app_info_get_all_for_type (const char *content_type)
       info = G_APP_INFO (g_osx_app_info_new (bundle));
       info_list = g_list_append (info_list, info);
     }
-
+  CFRelease (bundle_list);
   return info_list;
 }
 

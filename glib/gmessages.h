@@ -411,7 +411,7 @@ void g_assert_warning         (const char *log_domain,
 static void g_error (const gchar *format, ...) G_GNUC_NORETURN G_ANALYZER_NORETURN;
 static void g_critical (const gchar *format, ...) G_ANALYZER_NORETURN;
 
-static void
+static inline void
 g_error (const gchar *format,
          ...)
 {
@@ -422,7 +422,7 @@ g_error (const gchar *format,
 
   for(;;) ;
 }
-static void
+static inline void
 g_message (const gchar *format,
            ...)
 {
@@ -431,7 +431,7 @@ g_message (const gchar *format,
   g_logv (G_LOG_DOMAIN, G_LOG_LEVEL_MESSAGE, format, args);
   va_end (args);
 }
-static void
+static inline void
 g_critical (const gchar *format,
             ...)
 {
@@ -440,7 +440,7 @@ g_critical (const gchar *format,
   g_logv (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, format, args);
   va_end (args);
 }
-static void
+static inline void
 g_warning (const gchar *format,
            ...)
 {
@@ -449,7 +449,7 @@ g_warning (const gchar *format,
   g_logv (G_LOG_DOMAIN, G_LOG_LEVEL_WARNING, format, args);
   va_end (args);
 }
-static void
+static inline void
 g_info (const gchar *format,
         ...)
 {
@@ -458,7 +458,7 @@ g_info (const gchar *format,
   g_logv (G_LOG_DOMAIN, G_LOG_LEVEL_INFO, format, args);
   va_end (args);
 }
-static void
+static inline void
 g_debug (const gchar *format,
          ...)
 {
@@ -533,8 +533,19 @@ GPrintFunc      g_set_printerr_handler  (GPrintFunc      func);
  * the result is usually that a critical message is logged and the current
  * function returns.
  *
- * If G_DISABLE_CHECKS is defined then the check is not performed.  You
+ * If `G_DISABLE_CHECKS` is defined then the check is not performed.  You
  * should therefore not depend on any side effects of @expr.
+ *
+ * To debug failure of a g_return_if_fail() check, run the code under a debugger
+ * with `G_DEBUG=fatal-criticals` or `G_DEBUG=fatal-warnings` defined in the
+ * environment (see [Running GLib Applications](glib-running.html)):
+ *
+ * |[
+ *   G_DEBUG=fatal-warnings gdb ./my-program
+ * ]|
+ *
+ * Any unrelated failures can be skipped over in
+ * [gdb](https://www.gnu.org/software/gdb/) using the `continue` command.
  */
 #define g_return_if_fail(expr) G_STMT_START{ (void)0; }G_STMT_END
 
@@ -557,8 +568,10 @@ GPrintFunc      g_set_printerr_handler  (GPrintFunc      func);
  * the result is usually that a critical message is logged and @val is
  * returned from the current function.
  *
- * If G_DISABLE_CHECKS is defined then the check is not performed.  You
+ * If `G_DISABLE_CHECKS` is defined then the check is not performed.  You
  * should therefore not depend on any side effects of @expr.
+ *
+ * See g_return_if_fail() for guidance on how to debug failure of this check.
  */
 #define g_return_val_if_fail(expr,val) G_STMT_START{ (void)0; }G_STMT_END
 
@@ -567,6 +580,8 @@ GPrintFunc      g_set_printerr_handler  (GPrintFunc      func);
  *
  * Logs a critical message and returns from the current function.
  * This can only be used in functions which do not return a value.
+ *
+ * See g_return_if_fail() for guidance on how to debug failure of this check.
  */
 #define g_return_if_reached() G_STMT_START{ return; }G_STMT_END
 
@@ -575,6 +590,8 @@ GPrintFunc      g_set_printerr_handler  (GPrintFunc      func);
  * @val: the value to return from the current function
  *
  * Logs a critical message and returns @val.
+ *
+ * See g_return_if_fail() for guidance on how to debug failure of this check.
  */
 #define g_return_val_if_reached(val) G_STMT_START{ return (val); }G_STMT_END
 

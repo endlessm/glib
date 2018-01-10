@@ -99,7 +99,7 @@ g_bytes_new (gconstpointer data,
 /**
  * g_bytes_new_take:
  * @data: (transfer full) (array length=size) (element-type guint8) (nullable):
-          the data to be used for the bytes
+ *        the data to be used for the bytes
  * @size: the size of @data
  *
  * Creates a new #GBytes from @data.
@@ -130,7 +130,7 @@ g_bytes_new_take (gpointer data,
 /**
  * g_bytes_new_static: (skip)
  * @data: (transfer full) (array length=size) (element-type guint8) (nullable):
-          the data to be used for the bytes
+ *        the data to be used for the bytes
  * @size: the size of @data
  *
  * Creates a new #GBytes from static data.
@@ -152,7 +152,7 @@ g_bytes_new_static (gconstpointer data,
 /**
  * g_bytes_new_with_free_func: (skip)
  * @data: (array length=size) (element-type guint8) (nullable):
-          the data to be used for the bytes
+ *        the data to be used for the bytes
  * @size: the size of @data
  * @free_func: the function to call to release the data
  * @user_data: data to pass to @free_func
@@ -294,7 +294,7 @@ g_bytes_ref (GBytes *bytes)
  * @bytes: (nullable): a #GBytes
  *
  * Releases a reference on @bytes.  This may result in the bytes being
- * freed.
+ * freed. If @bytes is %NULL, it will return immediately.
  *
  * Since: 2.32
  */
@@ -407,7 +407,8 @@ try_steal_and_unref (GBytes         *bytes,
 {
   gpointer result;
 
-  if (bytes->free_func != free_func || bytes->data == NULL)
+  if (bytes->free_func != free_func || bytes->data == NULL ||
+      bytes->user_data != bytes->data)
     return NULL;
 
   /* Are we the only reference? */
