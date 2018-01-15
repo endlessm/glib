@@ -1,0 +1,42 @@
+From: Iain Lane <iain@orangesquash.org.uk>
+Date: Fri, 12 Jan 2018 11:24:47 +0000
+Subject: gdatetime: Mark the usecs as volatile
+
+On i386, we were seeing that this calculation was producing an incorrect
+result, probably because usec was being stored in an 80-bit register
+before being written back into a 64-bit float in memory. If we mark the
+variables as volatile, they are not stored in registers and we avoid
+this bug.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=792410
+---
+ glib/gdatetime.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/glib/gdatetime.c b/glib/gdatetime.c
+index c74fa2a..4bb13d1 100644
+--- a/glib/gdatetime.c
++++ b/glib/gdatetime.c
+@@ -1294,7 +1294,11 @@ g_date_time_new (GTimeZone *tz,
+ {
+   GDateTime *datetime;
+   gint64 full_time;
+-  gint64 usec;
++  /* keep these variables as volatile. We do not want them ending up in
++   * registers - them doing so may cause us to hit precision problems on i386.
++   * See: https://bugzilla.gnome.org/show_bug.cgi?id=792410 */
++  volatile gint64 usec;
++  volatile gdouble usecd;
+ 
+   g_return_val_if_fail (tz != NULL, NULL);
+ 
+@@ -1328,7 +1332,8 @@ g_date_time_new (GTimeZone *tz,
+    * FP numbers work.
+    * See https://bugzilla.gnome.org/show_bug.cgi?id=697715. */
+   usec = seconds * USEC_PER_SECOND;
+-  if ((usec + 1) * 1e-6 <= seconds) {
++  usecd = (usec + 1) * 1e-6;
++  if (usecd <= seconds) {
+     usec++;
+   }
+ 

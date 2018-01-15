@@ -3,8 +3,12 @@ glib2.0 (2.55.1-1) UNRELEASED; urgency=medium
   * debian/gbp.conf, debian/watch: Update for experimental
   * New upstream development release 2.55.1
   * debian/libglib2.0-0.symbols: Update with new symbols in this release.
+  * debian/patches/gdatetime-Avoid-repeated-floating-point-multiplies-w.patch,
+    debian/patches/gdatetime-Mark-the-usecs-as-volatile.patch: Cherry-pick two
+    patches from upstream. Fix some precision problems within GDateTime, that
+    in some cases resulted in incorrect answers on i386.
 
- -- Iain Lane <laney@debian.org>  Wed, 10 Jan 2018 12:15:06 +0000
+ -- Iain Lane <laney@debian.org>  Mon, 15 Jan 2018 12:23:15 +0000
 
 glib2.0 (2.54.3-1) unstable; urgency=medium
 
