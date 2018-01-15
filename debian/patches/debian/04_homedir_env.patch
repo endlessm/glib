@@ -43,7 +43,7 @@ index a02ffa4..0f3e20c 100644
  
  <refsect2 id="setlocale">
 diff --git a/glib/gutils.c b/glib/gutils.c
-index eb44f17..11d4946 100644
+index de4401a..ac97223 100644
 --- a/glib/gutils.c
 +++ b/glib/gutils.c
 @@ -811,6 +811,12 @@ g_get_real_name (void)

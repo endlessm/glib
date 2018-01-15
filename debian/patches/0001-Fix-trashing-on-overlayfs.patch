@@ -21,10 +21,10 @@ Forwarded: yes
  1 file changed, 19 insertions(+), 1 deletion(-)
 
 diff --git a/gio/glocalfile.c b/gio/glocalfile.c
-index d417c49..112e3ef 100644
+index e748145..2da94ce 100644
 --- a/gio/glocalfile.c
 +++ b/gio/glocalfile.c
-@@ -1910,7 +1910,7 @@ g_local_file_trash (GFile         *file,
+@@ -1979,7 +1979,7 @@ g_local_file_trash (GFile         *file,
    char *basename, *trashname, *trashfile, *infoname, *infofile;
    char *original_name, *original_name_escaped;
    int i;
@@ -33,7 +33,7 @@ index d417c49..112e3ef 100644
    gboolean is_homedir_trash;
    char delete_time[32];
    int fd;
-@@ -1935,6 +1935,24 @@ g_local_file_trash (GFile         *file,
+@@ -2004,6 +2004,24 @@ g_local_file_trash (GFile         *file,
  
    is_homedir_trash = FALSE;
    trashdir = NULL;
