@@ -1,4 +1,4 @@
-glib2.0 (2.55.1-1) UNRELEASED; urgency=medium
+glib2.0 (2.55.1-1) experimental; urgency=medium
 
   * debian/gbp.conf, debian/watch: Update for experimental
   * New upstream development release 2.55.1
@@ -8,7 +8,7 @@ glib2.0 (2.55.1-1) UNRELEASED; urgency=medium
     patches from upstream. Fix some precision problems within GDateTime, that
     in some cases resulted in incorrect answers on i386.
 
- -- Iain Lane <laney@debian.org>  Mon, 15 Jan 2018 12:23:15 +0000
+ -- Iain Lane <laney@debian.org>  Mon, 15 Jan 2018 12:26:35 +0000
 
 glib2.0 (2.54.3-1) unstable; urgency=medium
 
