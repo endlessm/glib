@@ -9,7 +9,7 @@ longer.
 
 Bug: https://bugzilla.gnome.org/show_bug.cgi?id=792364
 Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=884660
-Forwarded: yes
+Applied-upstream: 2.54.4, commit:56b2983b77a4cf3892493bbeb9f790be12b44fff
 ---
  gio/tests/gdbus-threading.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

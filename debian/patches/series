@@ -1,10 +1,10 @@
+gdbus-threading-test-Allow-even-longer-for-test_method_ca.patch
 01_gettext-desktopfiles.patch
 07_disable_tests_on_slow_archs.patch
 81-skip-monitor-test-on-non-linux.patch
 0001-timer-test-use-volatile-for-locals.patch
 skip-broken-timer-test.patch
 0001-Fix-trashing-on-overlayfs.patch
-gdbus-threading-test-Allow-even-longer-for-test_method_ca.patch
 gwakeuptest-Be-less-parallel-unless-invoked-with-m-slow.patch
 debian/02_gettext-desktopfiles-ubuntu.patch
 debian/03_disble_glib_compile_schemas_warning.patch
