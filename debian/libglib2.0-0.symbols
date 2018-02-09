@@ -2599,6 +2599,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_log_set_writer_func@Base 2.49.3
  g_log_structured@Base 2.49.3
  g_log_structured_array@Base 2.49.3
+ g_log_structured_standard@Base 2.54.2-1endless1
  g_log_variant@Base 2.49.7
  g_log_writer_default@Base 2.49.3
  g_log_writer_format_fields@Base 2.49.3
