@@ -1,3 +1,10 @@
+glib2.0 (2.54.2-1endless1) unstable; urgency=medium
+
+  * Backport structured logging changes to enable -Wformat warnings again
+    https://bugzilla.gnome.org/show_bug.cgi?id=793074
+
+ -- Philip Withnall <withnall@endlessm.com>  Fri, 09 Feb 2018 16:38:00 +0000
+
 glib2.0 (2.54.2-1endless0) unstable; urgency=medium
 
   * Rebase Endless changes on latest Debian Sid package
