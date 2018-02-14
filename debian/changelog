@@ -7,6 +7,7 @@ glib2.0 (2.55.2-1) UNRELEASED; urgency=medium
     debian/patches/gdatetime-Avoid-repeated-floating-point-multiplies-w.patch,
     debian/patches/gdatetime-Mark-the-usecs-as-volatile.patch:
     Drop, applied upstream in this release.
+  * debian/libglib2.0-0.symbols: New symbols for 2.55.2
 
  -- Iain Lane <laney@debian.org>  Wed, 14 Feb 2018 13:50:51 +0000
 

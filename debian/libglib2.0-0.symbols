@@ -873,6 +873,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_output_stream_query_info_async@Base 2.16.0
  g_file_output_stream_query_info_finish@Base 2.16.0
  g_file_parse_name@Base 2.16.0
+ g_file_peek_path@Base 2.55.2
  g_file_poll_mountable@Base 2.22.0
  g_file_poll_mountable_finish@Base 2.22.0
  g_file_query_default_handler@Base 2.16.0
@@ -2530,6 +2531,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_key_file_get_integer@Base 2.12.0
  g_key_file_get_integer_list@Base 2.12.0
  g_key_file_get_keys@Base 2.12.0
+ g_key_file_get_locale_for_key@Base 2.55.2
  g_key_file_get_locale_string@Base 2.12.0
  g_key_file_get_locale_string_list@Base 2.12.0
  g_key_file_get_start_group@Base 2.12.0
@@ -2614,6 +2616,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_log_set_writer_func@Base 2.49.3
  g_log_structured@Base 2.49.3
  g_log_structured_array@Base 2.49.3
+ g_log_structured_standard@Base 2.55.2
  g_log_variant@Base 2.49.7
  g_log_writer_default@Base 2.49.3
  g_log_writer_format_fields@Base 2.49.3
