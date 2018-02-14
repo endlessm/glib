@@ -380,7 +380,8 @@ am__libgio_2_0_la_SOURCES_DIST = gappinfo.c gappinfoprivate.h \
 	gwin32registrykey.h gwin32mount.c gwin32mount.h \
 	gwin32volumemonitor.c gwin32volumemonitor.h \
 	gwin32inputstream.c gwin32outputstream.c gwin32outputstream.h \
-	gwin32networking.h gvdb/gvdb-format.h gvdb/gvdb-reader.h \
+	gwin32networking.h gwin32networkmonitor.c \
+	gwin32networkmonitor.h gvdb/gvdb-format.h gvdb/gvdb-reader.h \
 	gvdb/gvdb-reader.c gdelayedsettingsbackend.h \
 	gdelayedsettingsbackend.c gkeyfilesettingsbackend.c \
 	gmemorysettingsbackend.c gnullsettingsbackend.c \
@@ -568,7 +569,8 @@ am__objects_20 = $(am__objects_19) libgio_2_0_la-gwin32registrykey.lo \
 	libgio_2_0_la-gwin32mount.lo \
 	libgio_2_0_la-gwin32volumemonitor.lo \
 	libgio_2_0_la-gwin32inputstream.lo \
-	libgio_2_0_la-gwin32outputstream.lo $(am__objects_1)
+	libgio_2_0_la-gwin32outputstream.lo \
+	libgio_2_0_la-gwin32networkmonitor.lo $(am__objects_1)
 @OS_WIN32_TRUE@am__objects_21 = $(am__objects_20)
 am__dirstamp = $(am__leading_dot)dirstamp
 am__objects_22 = gvdb/libgio_2_0_la-gvdb-reader.lo \
@@ -1560,6 +1562,8 @@ win32_actual_sources = \
 	gwin32outputstream.c \
 	gwin32outputstream.h \
 	gwin32networking.h \
+	gwin32networkmonitor.c \
+	gwin32networkmonitor.h \
 	$(NULL)
 
 win32_more_sources_for_vcproj = \
@@ -2602,6 +2606,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gwin32appinfo.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gwin32inputstream.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gwin32mount.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gwin32networkmonitor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gwin32outputstream.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gwin32registrykey.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gwin32volumemonitor.Plo@am__quote@
@@ -4119,6 +4124,13 @@ libgio_2_0_la-gwin32outputstream.lo: gwin32outputstream.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gwin32outputstream.c' object='libgio_2_0_la-gwin32outputstream.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gwin32outputstream.lo `test -f 'gwin32outputstream.c' || echo '$(srcdir)/'`gwin32outputstream.c
+
+libgio_2_0_la-gwin32networkmonitor.lo: gwin32networkmonitor.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gwin32networkmonitor.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gwin32networkmonitor.Tpo -c -o libgio_2_0_la-gwin32networkmonitor.lo `test -f 'gwin32networkmonitor.c' || echo '$(srcdir)/'`gwin32networkmonitor.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gwin32networkmonitor.Tpo $(DEPDIR)/libgio_2_0_la-gwin32networkmonitor.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gwin32networkmonitor.c' object='libgio_2_0_la-gwin32networkmonitor.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gwin32networkmonitor.lo `test -f 'gwin32networkmonitor.c' || echo '$(srcdir)/'`gwin32networkmonitor.c
 
 gvdb/libgio_2_0_la-gvdb-reader.lo: gvdb/gvdb-reader.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT gvdb/libgio_2_0_la-gvdb-reader.lo -MD -MP -MF gvdb/$(DEPDIR)/libgio_2_0_la-gvdb-reader.Tpo -c -o gvdb/libgio_2_0_la-gvdb-reader.lo `test -f 'gvdb/gvdb-reader.c' || echo '$(srcdir)/'`gvdb/gvdb-reader.c

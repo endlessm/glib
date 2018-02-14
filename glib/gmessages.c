@@ -1476,17 +1476,17 @@ log_level_to_color (GLogLevelFlags log_level,
     return "";
 
   if (log_level & G_LOG_LEVEL_ERROR)
-    return "\033[1;31m";
+    return "\033[1;31m"; /* red */
   else if (log_level & G_LOG_LEVEL_CRITICAL)
-    return "\033[1;35m";
+    return "\033[1;35m"; /* magenta */
   else if (log_level & G_LOG_LEVEL_WARNING)
-    return "\033[1;33m";
+    return "\033[1;33m"; /* yellow */
   else if (log_level & G_LOG_LEVEL_MESSAGE)
-    return "\033[1;32m";
+    return "\033[1;32m"; /* green */
   else if (log_level & G_LOG_LEVEL_INFO)
-    return "\033[1;32m";
+    return "\033[1;32m"; /* green */
   else if (log_level & G_LOG_LEVEL_DEBUG)
-    return "\033[1;32m";
+    return "\033[1;32m"; /* green */
 
   /* No color for custom log levels. */
   return "";
@@ -1974,6 +1974,59 @@ g_log_structured_array (GLogLevelFlags   log_level,
   /* Abort if the message was fatal. */
   if (log_level & G_LOG_FATAL_MASK)
     _g_log_abort (!(log_level & G_LOG_FLAG_RECURSION));
+}
+
+/* Semi-private helper function to implement the g_message() (etc.) macros
+ * with support for G_GNUC_PRINTF so that @message_format can be checked
+ * with -Wformat. */
+void
+g_log_structured_standard (const gchar    *log_domain,
+                           GLogLevelFlags  log_level,
+                           const gchar    *file,
+                           const gchar    *line,
+                           const gchar    *func,
+                           const gchar    *message_format,
+                           ...)
+{
+  GLogField fields[] =
+    {
+      { "PRIORITY", log_level_to_priority (log_level), -1 },
+      { "CODE_FILE", file, -1 },
+      { "CODE_LINE", line, -1 },
+      { "CODE_FUNC", func, -1 },
+      /* Filled in later: */
+      { "MESSAGE", NULL, -1 },
+      /* If @log_domain is %NULL, we will not pass this field: */
+      { "GLIB_DOMAIN", log_domain, -1 },
+    };
+  gsize n_fields;
+  gchar *message_allocated = NULL;
+  gchar buffer[1025];
+  va_list args;
+
+  va_start (args, message_format);
+
+  if (log_level & G_LOG_FLAG_RECURSION)
+    {
+      /* we use a stack buffer of fixed size, since we're likely
+       * in an out-of-memory situation
+       */
+      gsize size G_GNUC_UNUSED;
+
+      size = _g_vsnprintf (buffer, sizeof (buffer), message_format, args);
+      fields[4].value = buffer;
+    }
+  else
+    {
+      fields[4].value = message_allocated = g_strdup_vprintf (message_format, args);
+    }
+
+  va_end (args);
+
+  n_fields = G_N_ELEMENTS (fields) - ((log_domain == NULL) ? 1 : 0);
+  g_log_structured_array (log_level, fields, n_fields);
+
+  g_free (message_allocated);
 }
 
 /**
@@ -2556,6 +2609,7 @@ g_log_writer_standard_streams (GLogLevelFlags   log_level,
   out = g_log_writer_format_fields (log_level, fields, n_fields,
                                     g_log_writer_supports_color (fileno (stream)));
   _g_fprintf (stream, "%s\n", out);
+  fflush (stream);
   g_free (out);
 
   return G_LOG_WRITER_HANDLED;

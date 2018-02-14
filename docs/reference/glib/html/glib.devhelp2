@@ -1538,6 +1538,7 @@
     <keyword type="function" name="g_key_file_get_value ()" link="glib-Key-value-file-parser.html#g-key-file-get-value" since="2.6"/>
     <keyword type="function" name="g_key_file_get_string ()" link="glib-Key-value-file-parser.html#g-key-file-get-string" since="2.6"/>
     <keyword type="function" name="g_key_file_get_locale_string ()" link="glib-Key-value-file-parser.html#g-key-file-get-locale-string" since="2.6"/>
+    <keyword type="function" name="g_key_file_get_locale_for_key ()" link="glib-Key-value-file-parser.html#g-key-file-get-locale-for-key" since="2.56"/>
     <keyword type="function" name="g_key_file_get_boolean ()" link="glib-Key-value-file-parser.html#g-key-file-get-boolean" since="2.6"/>
     <keyword type="function" name="g_key_file_get_integer ()" link="glib-Key-value-file-parser.html#g-key-file-get-integer" since="2.6"/>
     <keyword type="function" name="g_key_file_get_int64 ()" link="glib-Key-value-file-parser.html#g-key-file-get-int64" since="2.26"/>
@@ -2500,6 +2501,7 @@
     <keyword type="constant" name="G_CONVERT_ERROR_BAD_URI" link="glib-Character-Set-Conversion.html#G-CONVERT-ERROR-BAD-URI:CAPS"/>
     <keyword type="constant" name="G_CONVERT_ERROR_NOT_ABSOLUTE_PATH" link="glib-Character-Set-Conversion.html#G-CONVERT-ERROR-NOT-ABSOLUTE-PATH:CAPS"/>
     <keyword type="constant" name="G_CONVERT_ERROR_NO_MEMORY" link="glib-Character-Set-Conversion.html#G-CONVERT-ERROR-NO-MEMORY:CAPS"/>
+    <keyword type="constant" name="G_CONVERT_ERROR_EMBEDDED_NUL" link="glib-Character-Set-Conversion.html#G-CONVERT-ERROR-EMBEDDED-NUL:CAPS"/>
     <keyword type="constant" name="G_UNICODE_CONTROL" link="glib-Unicode-Manipulation.html#G-UNICODE-CONTROL:CAPS"/>
     <keyword type="constant" name="G_UNICODE_FORMAT" link="glib-Unicode-Manipulation.html#G-UNICODE-FORMAT:CAPS"/>
     <keyword type="constant" name="G_UNICODE_UNASSIGNED" link="glib-Unicode-Manipulation.html#G-UNICODE-UNASSIGNED:CAPS"/>

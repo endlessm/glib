@@ -333,6 +333,7 @@
    <File RelativePath="..\..\gio\gwin32volumemonitor.c" />
    <File RelativePath="..\..\gio\gwin32inputstream.c" />
    <File RelativePath="..\..\gio\gwin32outputstream.c" />
+   <File RelativePath="..\..\gio\gwin32networkmonitor.c" />
    <File RelativePath="..\..\gio\gwin32appinfo.c" />
    <File RelativePath="..\..\gio\gcontenttype-win32.c" />
    <File RelativePath="..\..\gio\gregistrysettingsbackend.c" />

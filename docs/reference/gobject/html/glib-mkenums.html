@@ -8,7 +8,7 @@
 <link rel="up" href="rn02.html" title="Tools Reference">
 <link rel="prev" href="rn02.html" title="Tools Reference">
 <link rel="next" href="glib-genmarshal.html" title="glib-genmarshal">
-<meta name="generator" content="GTK-Doc V1.26.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.27 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -34,16 +34,15 @@
 </div>
 <div class="refsect1">
 <a name="id-1.5.2.5"></a><h2>Description</h2>
-<p><span class="command"><strong>glib-mkenums</strong></span> is a small perl-script utility that
-parses C code to extract enum definitions and produces enum descriptions based
-on text templates specified by the user. Most frequently this script is used to
-produce C code that contains enum values as strings so programs can provide
-value name strings for introspection.
+<p><span class="command"><strong>glib-mkenums</strong></span> is a small utility that parses C code to
+extract enum definitions and produces enum descriptions based on text templates
+specified by the user. Typically, you can use this tool to generate enumeration
+types for the GType type system, for #GObject properties and signal marshalling;
+additionally, you can use it to generate enumeration values of #GSettings schemas.
 </p>
 <p><span class="command"><strong>glib-mkenums</strong></span> takes a list of valid C code files as
-input. The options specified control the text that is output, certain
-substitutions are performed on the text templates for keywords enclosed
-in @ characters.
+input. The options specified control the text that generated, substituting various
+keywords enclosed in @ characters in the templates.
 </p>
 <div class="refsect2">
 <a name="id-1.5.2.5.4"></a><h3>Production text substitutions</h3>
@@ -61,11 +60,11 @@ the following example enum definition is assumed:
 3
 4
 5</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="gtkdoc kwc">typedef</span> <span class="gtkdoc kwb">enum</span>
-<span class="gtkdoc opt">{</span>
-  PREFIX_THE_XVALUE    <span class="gtkdoc opt">=</span> <span class="number">1</span> <span class="gtkdoc opt">&lt;&lt;</span> <span class="number">3</span><span class="gtkdoc opt">,</span>
-  PREFIX_ANOTHER_VALUE <span class="gtkdoc opt">=</span> <span class="number">1</span> <span class="gtkdoc opt">&lt;&lt;</span> <span class="number">4</span>
-<span class="gtkdoc opt">}</span> PrefixTheXEnum<span class="gtkdoc opt">;</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">typedef</span><span class="normal"> </span><span class="keyword">enum</span>
+<span class="cbracket">{</span>
+<span class="normal">  PREFIX_THE_XVALUE    </span><span class="symbol">=</span><span class="normal"> </span><span class="number">1</span><span class="normal"> </span><span class="symbol">&lt;&lt;</span><span class="normal"> </span><span class="number">3</span><span class="symbol">,</span>
+<span class="normal">  PREFIX_ANOTHER_VALUE </span><span class="symbol">=</span><span class="normal"> </span><span class="number">1</span><span class="normal"> </span><span class="symbol">&lt;&lt;</span><span class="normal"> </span><span class="number">4</span>
+<span class="cbracket">}</span><span class="normal"> PrefixTheXEnum</span><span class="symbol">;</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -84,34 +83,34 @@ the following example enum definition is assumed:
 <td><p>
 The name of the enum currently being processed, enum names are assumed to be
 properly namespaced and to use mixed capitalization to separate
-words (e.g. PrefixTheXEnum).
+words (e.g. <code class="literal">PrefixTheXEnum</code>).
 </p></td>
 </tr>
 <tr>
 <td><p><span class="term">@enum_name@</span></p></td>
 <td><p>
 The enum name with words lowercase and word-separated by underscores
-(e.g. prefix_the_xenum).
+(e.g. <code class="literal">prefix_the_xenum</code>).
 </p></td>
 </tr>
 <tr>
 <td><p><span class="term">@ENUMNAME@</span></p></td>
 <td><p>
 The enum name with words uppercase and word-separated by underscores
-(e.g. PREFIX_THE_XENUM).
+(e.g. <code class="literal">PREFIX_THE_XENUM</code>).
 </p></td>
 </tr>
 <tr>
 <td><p><span class="term">@ENUMSHORT@</span></p></td>
 <td><p>
 The enum name with words uppercase and word-separated by underscores,
-prefix stripped (e.g. THE_XENUM).
+prefix stripped (e.g. <code class="literal">THE_XENUM</code>).
 </p></td>
 </tr>
 <tr>
 <td><p><span class="term">@ENUMPREFIX@</span></p></td>
 <td><p>
-The prefix of the enum name (e.g. PREFIX).
+The prefix of the enum name (e.g. <code class="literal">PREFIX</code>).
 </p></td>
 </tr>
 <tr>
@@ -120,7 +119,7 @@ The prefix of the enum name (e.g. PREFIX).
 The enum value name currently being processed with words uppercase and
 word-separated by underscores,
 this is the assumed literal notation of enum values in the C sources
-(e.g. PREFIX_THE_XVALUE).
+(e.g. <code class="literal">PREFIX_THE_XVALUE</code>).
 </p></td>
 </tr>
 <tr>
@@ -129,18 +128,16 @@ this is the assumed literal notation of enum values in the C sources
 A nick name for the enum value currently being processed, this is usually
 generated by stripping common prefix words of all the enum values of the
 current enum, the words are lowercase and underscores are substituted by a
-minus (e.g. the-xvalue).
+minus (e.g. <code class="literal">the-xvalue</code>).
 </p></td>
 </tr>
 <tr>
 <td><p><span class="term">@valuenum@</span></p></td>
 <td><p>
-The integer value for the enum value currently being processed.  This is
-calculated by using <span class="command"><strong>perl</strong></span> to attempt to evaluate the
-expression as it appears in the C source code.  If evaluation fails then
-<span class="command"><strong>glib-mkenums</strong></span> will exit with an error status, but this
-only happens if <code class="literal">@valuenum@</code> appears in your value
-production template.  (Since: 2.26)
+The integer value for the enum value currently being processed. If the
+evaluation fails then <span class="command"><strong>glib-mkenums</strong></span> will exit with an
+error status, but this only happens if <code class="literal">@valuenum@</code>
+appears in your value production template. (Since: 2.26)
 </p></td>
 </tr>
 <tr>
@@ -171,7 +168,8 @@ The name of the input file currently being processed (e.g. foo.h).
 <tr>
 <td><p><span class="term">@basename@</span></p></td>
 <td><p>
-The base name of the input file currently being processed (e.g. foo.h). (Since: 2.22)
+The base name of the input file currently being processed (e.g. foo.h). Typically
+you want to use <code class="literal">@basename@</code> in place of <code class="literal">@filename@</code> in your templates, to improve the reproducibility of the build. (Since: 2.22)
 </p></td>
 </tr>
 </tbody>
@@ -191,7 +189,7 @@ indicate this enum definition to be skipped, or for it to be treated as
 a flags definition, or to specify the common prefix to be stripped from
 all values to generate value nicknames, respectively. The "underscore_name"
 option can be used to specify the word separation used in the *_get_type()
-function. For instance, /*&lt; underscore_name=gnome_vfs_uri_hide_options &gt;*/.
+function. For instance, <code class="literal">/*&lt; underscore_name=gnome_vfs_uri_hide_options &gt;*/</code>.
 </p>
 <p>
 Per value definition, the options "skip" and "nick" are supported.
@@ -214,17 +212,17 @@ Examples:
 9
 10
 11</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="gtkdoc kwc">typedef</span> <span class="gtkdoc kwb">enum</span> <span class="comment">/*&lt; skip &gt;*/</span>
-<span class="gtkdoc opt">{</span>
-  PREFIX_FOO
-<span class="gtkdoc opt">}</span> PrefixThisEnumWillBeSkipped<span class="gtkdoc opt">;</span>
-<span class="gtkdoc kwc">typedef</span> <span class="gtkdoc kwb">enum</span> <span class="comment">/*&lt; flags,prefix=PREFIX &gt;*/</span>
-<span class="gtkdoc opt">{</span>
-  PREFIX_THE_ZEROTH_VALUE<span class="gtkdoc opt">,</span>	<span class="comment">/*&lt; skip &gt;*/</span>
-  PREFIX_THE_FIRST_VALUE<span class="gtkdoc opt">,</span>
-  PREFIX_THE_SECOND_VALUE<span class="gtkdoc opt">,</span>
-  PREFIX_THE_THIRD_VALUE<span class="gtkdoc opt">,</span>	<span class="comment">/*&lt; nick=the-last-value &gt;*/</span>
-<span class="gtkdoc opt">}</span> PrefixTheFlagsEnum<span class="gtkdoc opt">;</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">typedef</span><span class="normal"> </span><span class="keyword">enum</span><span class="normal"> </span><span class="comment">/*&lt; skip &gt;*/</span>
+<span class="cbracket">{</span>
+<span class="normal">  PREFIX_FOO</span>
+<span class="cbracket">}</span><span class="normal"> PrefixThisEnumWillBeSkipped</span><span class="symbol">;</span>
+<span class="keyword">typedef</span><span class="normal"> </span><span class="keyword">enum</span><span class="normal"> </span><span class="comment">/*&lt; flags,prefix=PREFIX &gt;*/</span>
+<span class="cbracket">{</span>
+<span class="normal">  PREFIX_THE_ZEROTH_VALUE</span><span class="symbol">,</span><span class="normal">  </span><span class="comment">/*&lt; skip &gt;*/</span>
+<span class="normal">  PREFIX_THE_FIRST_VALUE</span><span class="symbol">,</span>
+<span class="normal">  PREFIX_THE_SECOND_VALUE</span><span class="symbol">,</span>
+<span class="normal">  PREFIX_THE_THIRD_VALUE</span><span class="symbol">,</span><span class="normal">   </span><span class="comment">/*&lt; nick=the-last-value &gt;*/</span>
+<span class="cbracket">}</span><span class="normal"> PrefixTheFlagsEnum</span><span class="symbol">;</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -444,9 +442,9 @@ the compiler and linker flags for GLib.
         <td class="listing_lines" align="right"><pre>1
 2
 3</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="function">PKG_PROG_PKG_CONFIG</span><span class="gtkdoc opt">([</span><span class="number">0.28</span><span class="gtkdoc opt">])</span>
+        <td class="listing_code"><pre class="programlisting"><span class="function">PKG_PROG_PKG_CONFIG</span><span class="symbol">([</span><span class="number">0.28</span><span class="symbol">])</span>
 
-<span class="function">PKG_CHECK_VAR</span><span class="gtkdoc opt">([</span>GLIB_MKENUMS<span class="gtkdoc opt">], [</span>glib<span class="gtkdoc opt">-</span><span class="number">2.0</span><span class="gtkdoc opt">], [</span>glib_mkenums<span class="gtkdoc opt">])</span></pre></td>
+<span class="function">PKG_CHECK_VAR</span><span class="symbol">([</span><span class="normal">GLIB_MKENUMS</span><span class="symbol">],</span><span class="normal"> </span><span class="symbol">[</span><span class="normal">glib</span><span class="symbol">-</span><span class="number">2.0</span><span class="symbol">],</span><span class="normal"> </span><span class="symbol">[</span><span class="normal">glib_mkenums</span><span class="symbol">])</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -481,27 +479,27 @@ like these:
 19
 20
 21</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="gtkdoc ppc"># A list of headers to inspect</span>
-project_headers <span class="gtkdoc opt">=</span> \
-        project<span class="gtkdoc opt">-</span>foo<span class="gtkdoc opt">.</span>h \
-        project<span class="gtkdoc opt">-</span>bar<span class="gtkdoc opt">.</span>h \
-        project<span class="gtkdoc opt">-</span>baz<span class="gtkdoc opt">.</span>h
+        <td class="listing_code"><pre class="programlisting"><span class="preproc"># A</span><span class="normal"> list of headers to inspect</span>
+<span class="normal">project_headers </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">\</span>
+<span class="normal">        project</span><span class="symbol">-</span><span class="normal">foo</span><span class="symbol">.</span><span class="normal">h </span><span class="symbol">\</span>
+<span class="normal">        project</span><span class="symbol">-</span><span class="normal">bar</span><span class="symbol">.</span><span class="normal">h </span><span class="symbol">\</span>
+<span class="normal">        project</span><span class="symbol">-</span><span class="normal">baz</span><span class="symbol">.</span><span class="normal">h</span>
 
-<span class="gtkdoc kwb">enum</span><span class="gtkdoc opt">-</span>types<span class="gtkdoc opt">.</span>h<span class="gtkdoc opt">:</span> $<span class="gtkdoc opt">(</span>project_headers<span class="gtkdoc opt">)</span> <span class="gtkdoc kwb">enum</span><span class="gtkdoc opt">-</span>types<span class="gtkdoc opt">.</span>h<span class="gtkdoc opt">.</span>in
-        $<span class="gtkdoc opt">(</span>AM_V_GEN<span class="gtkdoc opt">)</span>$<span class="gtkdoc opt">(</span>GLIB_MKENUMS<span class="gtkdoc opt">)</span> \
-                <span class="gtkdoc opt">--</span><span class="gtkdoc kwc">template</span><span class="gtkdoc opt">=</span><span class="gtkdoc kwb">enum</span><span class="gtkdoc opt">-</span>types<span class="gtkdoc opt">.</span>h<span class="gtkdoc opt">.</span>in \
-                <span class="gtkdoc opt">--</span>output<span class="gtkdoc opt">=</span>$&#64; \
-                $<span class="gtkdoc opt">(</span>project_headers<span class="gtkdoc opt">)</span>
+<span class="keyword">enum</span><span class="symbol">-</span><span class="normal">types</span><span class="symbol">.</span><span class="normal">h</span><span class="symbol">:</span><span class="normal"> $</span><span class="symbol">(</span><span class="normal">project_headers</span><span class="symbol">)</span><span class="normal"> </span><span class="keyword">enum</span><span class="symbol">-</span><span class="normal">types</span><span class="symbol">.</span><span class="normal">h</span><span class="symbol">.</span><span class="normal">in</span>
+<span class="normal">        $</span><span class="symbol">(</span><span class="normal">AM_V_GEN</span><span class="symbol">)</span><span class="normal">$</span><span class="symbol">(</span><span class="normal">GLIB_MKENUMS</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">\</span>
+<span class="normal">                </span><span class="symbol">--</span><span class="normal">template</span><span class="symbol">=</span><span class="keyword">enum</span><span class="symbol">-</span><span class="normal">types</span><span class="symbol">.</span><span class="normal">h</span><span class="symbol">.</span><span class="normal">in </span><span class="symbol">\</span>
+<span class="normal">                </span><span class="symbol">--</span><span class="normal">output</span><span class="symbol">=</span><span class="normal">$@ </span><span class="symbol">\</span>
+<span class="normal">                $</span><span class="symbol">(</span><span class="normal">project_headers</span><span class="symbol">)</span>
 
-<span class="gtkdoc kwb">enum</span><span class="gtkdoc opt">-</span>types<span class="gtkdoc opt">.</span>c<span class="gtkdoc opt">:</span> $<span class="gtkdoc opt">(</span>project_headers<span class="gtkdoc opt">)</span> <span class="gtkdoc kwb">enum</span><span class="gtkdoc opt">-</span>types<span class="gtkdoc opt">.</span>c<span class="gtkdoc opt">.</span>in <span class="gtkdoc kwb">enum</span><span class="gtkdoc opt">-</span>types<span class="gtkdoc opt">.</span>h
-        $<span class="gtkdoc opt">(</span>AM_V_GEN<span class="gtkdoc opt">)</span>$<span class="gtkdoc opt">(</span>GLIB_MKENUMS<span class="gtkdoc opt">)</span> \
-                <span class="gtkdoc opt">--</span><span class="gtkdoc kwc">template</span><span class="gtkdoc opt">=</span><span class="gtkdoc kwb">enum</span><span class="gtkdoc opt">-</span>types<span class="gtkdoc opt">.</span>c<span class="gtkdoc opt">.</span>in \
-                <span class="gtkdoc opt">--</span>output<span class="gtkdoc opt">=</span>$&#64; \
-                $<span class="gtkdoc opt">(</span>project_headers<span class="gtkdoc opt">)</span>
+<span class="keyword">enum</span><span class="symbol">-</span><span class="normal">types</span><span class="symbol">.</span><span class="normal">c</span><span class="symbol">:</span><span class="normal"> $</span><span class="symbol">(</span><span class="normal">project_headers</span><span class="symbol">)</span><span class="normal"> </span><span class="keyword">enum</span><span class="symbol">-</span><span class="normal">types</span><span class="symbol">.</span><span class="normal">c</span><span class="symbol">.</span><span class="usertype">in</span><span class="normal"> </span><span class="keyword">enum</span><span class="symbol">-</span><span class="normal">types</span><span class="symbol">.</span><span class="normal">h</span>
+<span class="normal">        $</span><span class="symbol">(</span><span class="normal">AM_V_GEN</span><span class="symbol">)</span><span class="normal">$</span><span class="symbol">(</span><span class="normal">GLIB_MKENUMS</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">\</span>
+<span class="normal">                </span><span class="symbol">--</span><span class="normal">template</span><span class="symbol">=</span><span class="keyword">enum</span><span class="symbol">-</span><span class="normal">types</span><span class="symbol">.</span><span class="normal">c</span><span class="symbol">.</span><span class="normal">in </span><span class="symbol">\</span>
+<span class="normal">                </span><span class="symbol">--</span><span class="normal">output</span><span class="symbol">=</span><span class="normal">$@ </span><span class="symbol">\</span>
+<span class="normal">                $</span><span class="symbol">(</span><span class="normal">project_headers</span><span class="symbol">)</span>
 
-BUILT_SOURCES <span class="gtkdoc opt">+=</span> <span class="gtkdoc kwb">enum</span><span class="gtkdoc opt">-</span>types<span class="gtkdoc opt">.</span>h <span class="gtkdoc kwb">enum</span><span class="gtkdoc opt">-</span>types<span class="gtkdoc opt">.</span>c
-CLEANFILES <span class="gtkdoc opt">+=</span> <span class="gtkdoc kwb">enum</span><span class="gtkdoc opt">-</span>types<span class="gtkdoc opt">.</span>h <span class="gtkdoc kwb">enum</span><span class="gtkdoc opt">-</span>types<span class="gtkdoc opt">.</span>c
-EXTRA_DIST <span class="gtkdoc opt">+=</span> <span class="gtkdoc kwb">enum</span><span class="gtkdoc opt">-</span>types<span class="gtkdoc opt">.</span>h<span class="gtkdoc opt">.</span>in <span class="gtkdoc kwb">enum</span><span class="gtkdoc opt">-</span>types<span class="gtkdoc opt">.</span>c<span class="gtkdoc opt">.</span>in</pre></td>
+<span class="normal">BUILT_SOURCES </span><span class="symbol">+=</span><span class="normal"> </span><span class="keyword">enum</span><span class="symbol">-</span><span class="normal">types</span><span class="symbol">.</span><span class="usertype">h</span><span class="normal"> </span><span class="keyword">enum</span><span class="symbol">-</span><span class="normal">types</span><span class="symbol">.</span><span class="normal">c</span>
+<span class="normal">CLEANFILES </span><span class="symbol">+=</span><span class="normal"> </span><span class="keyword">enum</span><span class="symbol">-</span><span class="normal">types</span><span class="symbol">.</span><span class="usertype">h</span><span class="normal"> </span><span class="keyword">enum</span><span class="symbol">-</span><span class="normal">types</span><span class="symbol">.</span><span class="normal">c</span>
+<span class="normal">EXTRA_DIST </span><span class="symbol">+=</span><span class="normal"> </span><span class="keyword">enum</span><span class="symbol">-</span><span class="normal">types</span><span class="symbol">.</span><span class="normal">h</span><span class="symbol">.</span><span class="usertype">in</span><span class="normal"> </span><span class="keyword">enum</span><span class="symbol">-</span><span class="normal">types</span><span class="symbol">.</span><span class="normal">c</span><span class="symbol">.</span><span class="normal">in</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -541,26 +539,26 @@ header file; a header template file will typically look like this:
 21
 22</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="comment">/*** BEGIN file-header ***/</span>
-<span class="gtkdoc ppc">#pragma once</span>
+<span class="preproc">#pragma</span><span class="normal"> once</span>
 
 <span class="comment">/* Include the main project header */</span>
-<span class="gtkdoc ppc">#include</span> <span class="gtkdoc pps">&quot;project.h&quot;</span><span class="gtkdoc ppc"></span>
+<span class="preproc">#include</span><span class="normal"> </span><span class="string">"project.h"</span>
 
-G_BEGIN_DECLS
+<span class="normal"><a href="../glib-Miscellaneous-Macros.html#G-BEGIN-DECLS:CAPS">G_BEGIN_DECLS</a></span>
 <span class="comment">/*** END file-header ***/</span>
 
 <span class="comment">/*** BEGIN file-production ***/</span>
 
-<span class="comment">/* enumerations from &quot;&#64;filename&#64;&quot; */</span>
+<span class="comment">/* enumerations from "@filename@" */</span>
 <span class="comment">/*** END file-production ***/</span>
 
 <span class="comment">/*** BEGIN value-header ***/</span>
-GType &#64;enum_name&#64;<span class="function">_get_type</span> <span class="gtkdoc opt">(</span><span class="gtkdoc kwb">void</span><span class="gtkdoc opt">)</span> G_GNUC_CONST<span class="gtkdoc opt">;</span>
-<span class="gtkdoc ppc">#define &#64;ENUMPREFIX&#64;_TYPE_&#64;ENUMSHORT&#64; (&#64;enum_name&#64;_get_type ())</span>
+<span class="normal"><a href="gobject-Type-Information.html#GType">GType</a> @enum_name@</span><span class="function">_get_type</span><span class="normal"> </span><span class="symbol">(</span><span class="type">void</span><span class="symbol">)</span><span class="normal"> <a href="../glib-Miscellaneous-Macros.html#G-GNUC-CONST:CAPS">G_GNUC_CONST</a></span><span class="symbol">;</span>
+<span class="preproc">#define</span><span class="normal"> @ENUMPREFIX@_TYPE_@ENUMSHORT@ </span><span class="symbol">(</span><span class="normal">@enum_name@</span><span class="function">_get_type</span><span class="normal"> </span><span class="symbol">())</span>
 <span class="comment">/*** END value-header ***/</span>
 
 <span class="comment">/*** BEGIN file-tail ***/</span>
-G_END_DECLS
+<span class="normal"><a href="../glib-Miscellaneous-Macros.html#G-END-DECLS:CAPS">G_END_DECLS</a></span>
 <span class="comment">/*** END file-tail ***/</span></pre></td>
       </tr>
     </tbody>
@@ -615,41 +613,41 @@ file, similar to this:
 37
 38</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="comment">/*** BEGIN file-header ***/</span>
-<span class="gtkdoc ppc">#include</span> <span class="gtkdoc pps">&quot;config.h&quot;</span><span class="gtkdoc ppc"></span>
-<span class="gtkdoc ppc">#include</span> <span class="gtkdoc pps">&quot;enum-types.h&quot;</span><span class="gtkdoc ppc"></span>
+<span class="preproc">#include</span><span class="normal"> </span><span class="string">"config.h"</span>
+<span class="preproc">#include</span><span class="normal"> </span><span class="string">"enum-types.h"</span>
 
 <span class="comment">/*** END file-header ***/</span>
 
 <span class="comment">/*** BEGIN file-production ***/</span>
-<span class="comment">/* enumerations from &quot;&#64;filename&#64;&quot; */</span>
+<span class="comment">/* enumerations from "@filename@" */</span>
 <span class="comment">/*** END file-production ***/</span>
 
 <span class="comment">/*** BEGIN value-header ***/</span>
-GType
-&#64;enum_name&#64;<span class="function">_get_type</span> <span class="gtkdoc opt">(</span><span class="gtkdoc kwb">void</span><span class="gtkdoc opt">)</span>
-<span class="gtkdoc opt">{</span>
-  <span class="gtkdoc kwb">static</span> <span class="gtkdoc kwc">volatile</span> gsize g_&#64;type&#64;_type_id__volatile<span class="gtkdoc opt">;</span>
+<span class="normal"><a href="gobject-Type-Information.html#GType">GType</a></span>
+<span class="normal">@enum_name@</span><span class="function">_get_type</span><span class="normal"> </span><span class="symbol">(</span><span class="type">void</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="keyword">static</span><span class="normal"> </span><span class="keyword">volatile</span><span class="normal"> </span><span class="usertype">gsize</span><span class="normal"> g_@type@_type_id__volatile</span><span class="symbol">;</span>
 
-  <span class="keyword">if</span> <span class="gtkdoc opt">(</span><span class="function"><a href="../glib-Threads.html#g-once-init-enter">g_once_init_enter</a></span> <span class="gtkdoc opt">(&amp;</span>g_define_type_id__volatile<span class="gtkdoc opt">))</span>
-    <span class="gtkdoc opt">{</span>
-      <span class="gtkdoc kwb">static const</span> G&#64;Type&#64;Value values<span class="gtkdoc opt">[] = {</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="../glib-Threads.html#g-once-init-enter">g_once_init_enter</a></span><span class="normal"> </span><span class="symbol">(&amp;</span><span class="normal">g_define_type_id__volatile</span><span class="symbol">))</span>
+<span class="normal">    </span><span class="cbracket">{</span>
+<span class="normal">      </span><span class="keyword">static</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> G@Type@</span><span class="usertype">Value</span><span class="normal"> values</span><span class="symbol">[]</span><span class="normal"> </span><span class="symbol">=</span><span class="normal"> </span><span class="cbracket">{</span>
 <span class="comment">/*** END value-header ***/</span>
 
 <span class="comment">/*** BEGIN value-production ***/</span>
-            <span class="gtkdoc opt">{</span> &#64;VALUENAME&#64;<span class="gtkdoc opt">,</span> <span class="string">&quot;&#64;VALUENAME&#64;&quot;</span><span class="gtkdoc opt">,</span> <span class="string">&quot;&#64;valuenick&#64;&quot;</span> <span class="gtkdoc opt">},</span>
+<span class="normal">            </span><span class="cbracket">{</span><span class="normal"> @VALUENAME@</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"@VALUENAME@"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"@valuenick@"</span><span class="normal"> </span><span class="cbracket">}</span><span class="symbol">,</span>
 <span class="comment">/*** END value-production ***/</span>
 
 <span class="comment">/*** BEGIN value-tail ***/</span>
-            <span class="gtkdoc opt">{</span> <span class="number">0</span><span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">,</span> NULL <span class="gtkdoc opt">}</span>
-      <span class="gtkdoc opt">};</span>
+<span class="normal">            </span><span class="cbracket">{</span><span class="normal"> </span><span class="number">0</span><span class="symbol">,</span><span class="normal"> <a href="../glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> <a href="../glib-Standard-Macros.html#NULL:CAPS">NULL</a> </span><span class="cbracket">}</span>
+<span class="normal">      </span><span class="cbracket">}</span><span class="symbol">;</span>
 
-      GType g_&#64;type&#64;_type_id <span class="gtkdoc opt">=</span>
-        g_&#64;type&#64;<span class="function">_register_static</span> <span class="gtkdoc opt">(</span><span class="function"><a href="../glib-Quarks.html#g-intern-static-string">g_intern_static_string</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;&#64;EnumName&#64;&quot;</span><span class="gtkdoc opt">),</span> values<span class="gtkdoc opt">);</span>
+<span class="normal">      </span><span class="usertype">GType</span><span class="normal"> g_@type@_type_id </span><span class="symbol">=</span>
+<span class="normal">        g_@type@</span><span class="function">_register_static</span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="../glib-Quarks.html#g-intern-static-string">g_intern_static_string</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"@EnumName@"</span><span class="symbol">),</span><span class="normal"> values</span><span class="symbol">);</span>
 
-      <span class="function"><a href="../glib-Threads.html#g-once-init-leave">g_once_init_leave</a></span> <span class="gtkdoc opt">(&amp;</span>g_&#64;type&#64;_type_id__volatile<span class="gtkdoc opt">,</span> g_&#64;type&#64;_type_id<span class="gtkdoc opt">);</span>
-    <span class="gtkdoc opt">}</span>
-  <span class="keyword">return</span> g_&#64;type&#64;_type_id__volatile<span class="gtkdoc opt">;</span>
-<span class="gtkdoc opt">}</span>
+<span class="normal">      </span><span class="function"><a href="../glib-Threads.html#g-once-init-leave">g_once_init_leave</a></span><span class="normal"> </span><span class="symbol">(&amp;</span><span class="normal">g_@type@_type_id__volatile</span><span class="symbol">,</span><span class="normal"> g_@type@_type_id</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+<span class="normal">  </span><span class="keyword">return</span><span class="normal"> g_@type@_type_id__volatile</span><span class="symbol">;</span>
+<span class="cbracket">}</span>
 
 <span class="comment">/*** END value-tail ***/</span></pre></td>
       </tr>
@@ -666,6 +664,6 @@ GType
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.26.1</div>
+<hr>Generated by GTK-Doc V1.27</div>
 </body>
 </html>

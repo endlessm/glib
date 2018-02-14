@@ -8,7 +8,7 @@
 <link rel="up" href="gdbus-convenience.html" title="High-level D-Bus Support">
 <link rel="prev" href="GDBusInterfaceSkeleton.html" title="GDBusInterfaceSkeleton">
 <link rel="next" href="GDBusObject.html" title="GDBusObject">
-<meta name="generator" content="GTK-Doc V1.26.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.27 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -374,7 +374,7 @@ GDBusProxy implements
 interface on a remote object. A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> can be constructed for
 both well-known and unique names.</p>
 <p>By default, <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> will cache all properties (and listen to
-changes) of the remote object, and proxy all signals that gets
+changes) of the remote object, and proxy all signals that get
 emitted. This behaviour can be changed by passing suitable
 <a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> when the proxy is created. If the proxy is for a
 well-known name, the property cache is flushed when the name owner
@@ -1138,11 +1138,11 @@ convenient 'inline' use of <a href="../glib-GVariant.html#g-variant-new"><code c
 3
 4
 5</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="GDBusProxy.html#g-dbus-proxy-set-cached-property">g_dbus_proxy_set_cached_property</a></span> <span class="gtkdoc opt">(</span>proxy<span class="gtkdoc opt">,</span>
-                                  <span class="string">&quot;SomeProperty&quot;</span><span class="gtkdoc opt">,</span>
-                                  <span class="function"><a href="../glib-GVariant.html#g-variant-new">g_variant_new</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;(si)&quot;</span><span class="gtkdoc opt">,</span>
-                                                <span class="string">&quot;A String&quot;</span><span class="gtkdoc opt">,</span>
-                                                <span class="number">42</span><span class="gtkdoc opt">));</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="GDBusProxy.html#g-dbus-proxy-set-cached-property">g_dbus_proxy_set_cached_property</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">proxy</span><span class="symbol">,</span>
+<span class="normal">                                  </span><span class="string">"SomeProperty"</span><span class="symbol">,</span>
+<span class="normal">                                  </span><span class="function"><a href="../glib-GVariant.html#g-variant-new">g_variant_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"(si)"</span><span class="symbol">,</span>
+<span class="normal">                                                </span><span class="string">"A String"</span><span class="symbol">,</span>
+<span class="normal">                                                </span><span class="number">42</span><span class="symbol">));</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -1337,16 +1337,16 @@ convenient 'inline' use of <a href="../glib-GVariant.html#g-variant-new"><code c
 8
 9
 10</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="GDBusProxy.html#g-dbus-proxy-call">g_dbus_proxy_call</a></span> <span class="gtkdoc opt">(</span>proxy<span class="gtkdoc opt">,</span>
-                   <span class="string">&quot;TwoStrings&quot;</span><span class="gtkdoc opt">,</span>
-                   <span class="function"><a href="../glib-GVariant.html#g-variant-new">g_variant_new</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;(ss)&quot;</span><span class="gtkdoc opt">,</span>
-                                  <span class="string">&quot;Thing One&quot;</span><span class="gtkdoc opt">,</span>
-                                  <span class="string">&quot;Thing Two&quot;</span><span class="gtkdoc opt">),</span>
-                   G_DBUS_CALL_FLAGS_NONE<span class="gtkdoc opt">,</span>
-                   <span class="gtkdoc opt">-</span><span class="number">1</span><span class="gtkdoc opt">,</span>
-                   NULL<span class="gtkdoc opt">,</span>
-                   <span class="gtkdoc opt">(</span>GAsyncReadyCallback<span class="gtkdoc opt">)</span> two_strings_done<span class="gtkdoc opt">,</span>
-                   <span class="gtkdoc opt">&amp;</span>data<span class="gtkdoc opt">);</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="GDBusProxy.html#g-dbus-proxy-call">g_dbus_proxy_call</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">proxy</span><span class="symbol">,</span>
+<span class="normal">                   </span><span class="string">"TwoStrings"</span><span class="symbol">,</span>
+<span class="normal">                   </span><span class="function"><a href="../glib-GVariant.html#g-variant-new">g_variant_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"(ss)"</span><span class="symbol">,</span>
+<span class="normal">                                  </span><span class="string">"Thing One"</span><span class="symbol">,</span>
+<span class="normal">                                  </span><span class="string">"Thing Two"</span><span class="symbol">),</span>
+<span class="normal">                   <a href="GDBusConnection.html#G-DBUS-CALL-FLAGS-NONE:CAPS">G_DBUS_CALL_FLAGS_NONE</a></span><span class="symbol">,</span>
+<span class="normal">                   </span><span class="symbol">-</span><span class="number">1</span><span class="symbol">,</span>
+<span class="normal">                   <a href="../glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
+<span class="normal">                   </span><span class="symbol">(</span><span class="normal"><a href="GAsyncResult.html#GAsyncReadyCallback">GAsyncReadyCallback</a></span><span class="symbol">)</span><span class="normal"> two_strings_done</span><span class="symbol">,</span>
+<span class="normal">                   </span><span class="symbol">&amp;</span><span class="normal">data</span><span class="symbol">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -1514,15 +1514,15 @@ convenient 'inline' use of <a href="../glib-GVariant.html#g-variant-new"><code c
 7
 8
 9</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="GDBusProxy.html#g-dbus-proxy-call-sync">g_dbus_proxy_call_sync</a></span> <span class="gtkdoc opt">(</span>proxy<span class="gtkdoc opt">,</span>
-                        <span class="string">&quot;TwoStrings&quot;</span><span class="gtkdoc opt">,</span>
-                        <span class="function"><a href="../glib-GVariant.html#g-variant-new">g_variant_new</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;(ss)&quot;</span><span class="gtkdoc opt">,</span>
-                                       <span class="string">&quot;Thing One&quot;</span><span class="gtkdoc opt">,</span>
-                                       <span class="string">&quot;Thing Two&quot;</span><span class="gtkdoc opt">),</span>
-                        G_DBUS_CALL_FLAGS_NONE<span class="gtkdoc opt">,</span>
-                        <span class="gtkdoc opt">-</span><span class="number">1</span><span class="gtkdoc opt">,</span>
-                        NULL<span class="gtkdoc opt">,</span>
-                        <span class="gtkdoc opt">&amp;</span>error<span class="gtkdoc opt">);</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="GDBusProxy.html#g-dbus-proxy-call-sync">g_dbus_proxy_call_sync</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">proxy</span><span class="symbol">,</span>
+<span class="normal">                        </span><span class="string">"TwoStrings"</span><span class="symbol">,</span>
+<span class="normal">                        </span><span class="function"><a href="../glib-GVariant.html#g-variant-new">g_variant_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"(ss)"</span><span class="symbol">,</span>
+<span class="normal">                                       </span><span class="string">"Thing One"</span><span class="symbol">,</span>
+<span class="normal">                                       </span><span class="string">"Thing Two"</span><span class="symbol">),</span>
+<span class="normal">                        <a href="GDBusConnection.html#G-DBUS-CALL-FLAGS-NONE:CAPS">G_DBUS_CALL_FLAGS_NONE</a></span><span class="symbol">,</span>
+<span class="normal">                        </span><span class="symbol">-</span><span class="number">1</span><span class="symbol">,</span>
+<span class="normal">                        <a href="../glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
+<span class="normal">                        </span><span class="symbol">&amp;</span><span class="normal">error</span><span class="symbol">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -2146,6 +2146,6 @@ user_function (<a class="link" href="GDBusProxy.html" title="GDBusProxy"><span c
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.26.1</div>
+<hr>Generated by GTK-Doc V1.27</div>
 </body>
 </html>

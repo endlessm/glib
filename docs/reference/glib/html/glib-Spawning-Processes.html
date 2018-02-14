@@ -8,7 +8,7 @@
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-Timers.html" title="Timers">
 <link rel="next" href="glib-File-Utilities.html" title="File Utilities">
-<meta name="generator" content="GTK-Doc V1.26.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.27 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -192,45 +192,45 @@ stream interfaces for communication with child processes.</p>
 37
 38
 39</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="gtkdoc kwb">const</span> gchar <span class="gtkdoc opt">*</span> <span class="gtkdoc kwb">const</span> argv<span class="gtkdoc opt">[] = {</span> <span class="string">&quot;my-favourite-program&quot;</span><span class="gtkdoc opt">,</span> <span class="string">&quot;--args&quot;</span><span class="gtkdoc opt">,</span> NULL <span class="gtkdoc opt">};</span>
-gint child_stdout<span class="gtkdoc opt">,</span> child_stderr<span class="gtkdoc opt">;</span>
-GPid child_pid<span class="gtkdoc opt">;</span>
-<span class="function"><a href="glib-Miscellaneous-Macros.html#g-autoptr">g_autoptr</a></span><span class="gtkdoc opt">(</span>GError<span class="gtkdoc opt">)</span> error <span class="gtkdoc opt">=</span> NULL<span class="gtkdoc opt">;</span>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">const</span><span class="normal"> <a href="glib-Basic-Types.html#gchar">gchar</a> </span><span class="symbol">*</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> argv</span><span class="symbol">[]</span><span class="normal"> </span><span class="symbol">=</span><span class="normal"> </span><span class="cbracket">{</span><span class="normal"> </span><span class="string">"my-favourite-program"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"--args"</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a> </span><span class="cbracket">}</span><span class="symbol">;</span>
+<span class="usertype">gint</span><span class="normal"> child_stdout</span><span class="symbol">,</span><span class="normal"> child_stderr</span><span class="symbol">;</span>
+<span class="usertype">GPid</span><span class="normal"> child_pid</span><span class="symbol">;</span>
+<span class="function"><a href="glib-Miscellaneous-Macros.html#g-autoptr">g_autoptr</a></span><span class="symbol">(</span><span class="normal"><a href="glib-Error-Reporting.html#GError">GError</a></span><span class="symbol">)</span><span class="normal"> error </span><span class="symbol">=</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
 
-<span class="gtkdoc slc">// Spawn child process.</span>
-<span class="function"><a href="glib-Spawning-Processes.html#g-spawn-async-with-pipes">g_spawn_async_with_pipes</a></span> <span class="gtkdoc opt">(</span>NULL<span class="gtkdoc opt">,</span> argv<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">,</span> G_SPAWN_DO_NOT_REAP_CHILD<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">,</span>
-                          NULL<span class="gtkdoc opt">, &amp;</span>child_pid<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">, &amp;</span>child_stdout<span class="gtkdoc opt">,</span>
-                          <span class="gtkdoc opt">&amp;</span>child_stderr<span class="gtkdoc opt">, &amp;</span>error<span class="gtkdoc opt">);</span>
-<span class="keyword">if</span> <span class="gtkdoc opt">(</span>error <span class="gtkdoc opt">!=</span> NULL<span class="gtkdoc opt">)</span>
-  <span class="gtkdoc opt">{</span>
-    <span class="function"><a href="glib-Message-Logging.html#g-error">g_error</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;Spawning child failed: %s&quot;</span><span class="gtkdoc opt">,</span> error<span class="gtkdoc opt">-&gt;</span>message<span class="gtkdoc opt">);</span>
-    <span class="keyword">return</span><span class="gtkdoc opt">;</span>
-  <span class="gtkdoc opt">}</span>
+<span class="comment">// Spawn child process.</span>
+<span class="function"><a href="glib-Spawning-Processes.html#g-spawn-async-with-pipes">g_spawn_async_with_pipes</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> argv</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> <a href="glib-Spawning-Processes.html#G-SPAWN-DO-NOT-REAP-CHILD:CAPS">G_SPAWN_DO_NOT_REAP_CHILD</a></span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
+<span class="normal">                          <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">child_pid</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">child_stdout</span><span class="symbol">,</span>
+<span class="normal">                          </span><span class="symbol">&amp;</span><span class="normal">child_stderr</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">error</span><span class="symbol">);</span>
+<span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">error </span><span class="symbol">!=</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">)</span>
+<span class="normal">  </span><span class="cbracket">{</span>
+<span class="normal">    </span><span class="function"><a href="glib-Message-Logging.html#g-error">g_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"Spawning child failed: %s"</span><span class="symbol">,</span><span class="normal"> error</span><span class="symbol">-&gt;</span><span class="normal">message</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="keyword">return</span><span class="symbol">;</span>
+<span class="normal">  </span><span class="cbracket">}</span>
 
-<span class="gtkdoc slc">// Add a child watch function which will be called when the child process</span>
-<span class="gtkdoc slc">// exits.</span>
-<span class="function"><a href="glib-The-Main-Event-Loop.html#g-child-watch-add">g_child_watch_add</a></span> <span class="gtkdoc opt">(</span>child_pid<span class="gtkdoc opt">,</span> child_watch_cb<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">);</span>
+<span class="comment">// Add a child watch function which will be called when the child process</span>
+<span class="comment">// exits.</span>
+<span class="function"><a href="glib-The-Main-Event-Loop.html#g-child-watch-add">g_child_watch_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">child_pid</span><span class="symbol">,</span><span class="normal"> child_watch_cb</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
 
-<span class="gtkdoc slc">// You could watch for output on &#64;child_stdout and &#64;child_stderr using</span>
-<span class="gtkdoc slc">// #GUnixInputStream or #GIOChannel here.</span>
+<span class="comment">// You could watch for output on @child_stdout and @child_stderr using</span>
+<span class="comment">// #GUnixInputStream or #GIOChannel here.</span>
 
-<span class="gtkdoc kwb">static void</span>
-<span class="function">child_watch_cb</span> <span class="gtkdoc opt">(</span>GPid     pid<span class="gtkdoc opt">,</span>
-                gint     status<span class="gtkdoc opt">,</span>
-                gpointer user_data<span class="gtkdoc opt">)</span>
-<span class="gtkdoc opt">{</span>
-  <span class="function"><a href="glib-Message-Logging.html#g-message">g_message</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;Child %&quot;</span> G_PID_FORMAT <span class="string">&quot; exited %s&quot;</span><span class="gtkdoc opt">,</span> pid<span class="gtkdoc opt">,</span>
-             <span class="function"><a href="glib-Spawning-Processes.html#g-spawn-check-exit-status">g_spawn_check_exit_status</a></span> <span class="gtkdoc opt">(</span>status<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">) ?</span> <span class="string">&quot;normally&quot;</span> <span class="gtkdoc opt">:</span> <span class="string">&quot;abnormally&quot;</span><span class="gtkdoc opt">);</span>
+<span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
+<span class="function">child_watch_cb</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">GPid</span><span class="normal">     pid</span><span class="symbol">,</span>
+<span class="normal">                </span><span class="usertype">gint</span><span class="normal">     status</span><span class="symbol">,</span>
+<span class="normal">                </span><span class="usertype">gpointer</span><span class="normal"> user_data</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="function"><a href="glib-Message-Logging.html#g-message">g_message</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"Child %"</span><span class="normal"> <a href="glib-The-Main-Event-Loop.html#G-PID-FORMAT:CAPS">G_PID_FORMAT</a> </span><span class="string">" exited %s"</span><span class="symbol">,</span><span class="normal"> pid</span><span class="symbol">,</span>
+<span class="normal">             </span><span class="function"><a href="glib-Spawning-Processes.html#g-spawn-check-exit-status">g_spawn_check_exit_status</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">status</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">?</span><span class="normal"> </span><span class="string">"normally"</span><span class="normal"> </span><span class="symbol">:</span><span class="normal"> </span><span class="string">"abnormally"</span><span class="symbol">);</span>
 
-  <span class="gtkdoc slc">// Free any resources associated with the child here, such as I/O channels</span>
-  <span class="gtkdoc slc">// on its stdout and stderr FDs. If you have no code to put in the</span>
-  <span class="gtkdoc slc">// child_watch_cb() callback, you can remove it and the g_child_watch_add()</span>
-  <span class="gtkdoc slc">// call, but you must also remove the G_SPAWN_DO_NOT_REAP_CHILD flag,</span>
-  <span class="gtkdoc slc">// otherwise the child process will stay around as a zombie until this</span>
-  <span class="gtkdoc slc">// process exits.</span>
+<span class="normal">  </span><span class="comment">// Free any resources associated with the child here, such as I/O channels</span>
+<span class="normal">  </span><span class="comment">// on its stdout and stderr FDs. If you have no code to put in the</span>
+<span class="normal">  </span><span class="comment">// child_watch_cb() callback, you can remove it and the g_child_watch_add()</span>
+<span class="normal">  </span><span class="comment">// call, but you must also remove the G_SPAWN_DO_NOT_REAP_CHILD flag,</span>
+<span class="normal">  </span><span class="comment">// otherwise the child process will stay around as a zombie until this</span>
+<span class="normal">  </span><span class="comment">// process exits.</span>
 
-  <span class="function"><a href="glib-Spawning-Processes.html#g-spawn-close-pid">g_spawn_close_pid</a></span> <span class="gtkdoc opt">(</span>pid<span class="gtkdoc opt">);</span>
-<span class="gtkdoc opt">}</span></pre></td>
+<span class="normal">  </span><span class="function"><a href="glib-Spawning-Processes.html#g-spawn-close-pid">g_spawn_close_pid</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">pid</span><span class="symbol">);</span>
+<span class="cbracket">}</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -1244,6 +1244,6 @@ will be the program exit code.</p>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.26.1</div>
+<hr>Generated by GTK-Doc V1.27</div>
 </body>
 </html>

@@ -617,7 +617,9 @@
  * goffset:
  *
  * A signed integer type that is used for file offsets,
- * corresponding to the C99 type off64_t.
+ * corresponding to the POSIX type `off_t` as if compiling with
+ * `_FILE_OFFSET_BITS` set to 64. #goffset is always 64 bits wide, even on
+ * 32-bit architectures.
  * Values of this type can range from #G_MINOFFSET to
  * #G_MAXOFFSET.
  *
@@ -2597,9 +2599,9 @@
  *
  *   membuf = g_malloc (8192);
  *
- *   /<!-- -->* Some computation on membuf *<!-- -->/
+ *   // Some computation on membuf
  *
- *   /<!-- -->* membuf will be automatically freed here *<!-- -->/
+ *   // membuf will be automatically freed here
  *   return TRUE;
  * }
  * ]|

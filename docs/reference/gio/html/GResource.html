@@ -8,7 +8,7 @@
 <link rel="up" href="resources.html" title="Resources">
 <link rel="prev" href="resources.html" title="Resources">
 <link rel="next" href="permissions.html" title="Permissions">
-<meta name="generator" content="GTK-Doc V1.26.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.27 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -216,7 +216,7 @@
 </div>
 <div class="refsect1">
 <a name="GResource.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">    <a href="/home/mclasen/gnome/share/gtk-doc/html/gobject/gobject-Boxed-Types.html">GBoxed</a>
+<pre class="screen">    <a href="/usr/share/gtk-doc/html/gobject/gobject-Boxed-Types.html">GBoxed</a>
     <span class="lineart">╰──</span> GResource
 </pre>
 </div>
@@ -279,15 +279,15 @@ are combined into a binary resource bundle.</p>
 7
 8
 9</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="gtkdoc opt">&lt;?</span>xml version<span class="gtkdoc opt">=</span><span class="string">&quot;1.0&quot;</span> encoding<span class="gtkdoc opt">=</span><span class="string">&quot;UTF-8&quot;</span><span class="gtkdoc opt">?&gt;</span>
-<span class="gtkdoc opt">&lt;</span>gresources<span class="gtkdoc opt">&gt;</span>
-  <span class="gtkdoc opt">&lt;</span>gresource prefix<span class="gtkdoc opt">=</span><span class="string">&quot;/org/gtk/Example&quot;</span><span class="gtkdoc opt">&gt;</span>
-    <span class="gtkdoc opt">&lt;</span>file<span class="gtkdoc opt">&gt;</span>data<span class="gtkdoc opt">/</span>splashscreen<span class="gtkdoc opt">.</span>png<span class="gtkdoc opt">&lt;/</span>file<span class="gtkdoc opt">&gt;</span>
-    <span class="gtkdoc opt">&lt;</span>file compressed<span class="gtkdoc opt">=</span><span class="string">&quot;true&quot;</span><span class="gtkdoc opt">&gt;</span>dialog<span class="gtkdoc opt">.</span>ui<span class="gtkdoc opt">&lt;/</span>file<span class="gtkdoc opt">&gt;</span>
-    <span class="gtkdoc opt">&lt;</span>file preprocess<span class="gtkdoc opt">=</span><span class="string">&quot;xml-stripblanks&quot;</span><span class="gtkdoc opt">&gt;</span>menumarkup<span class="gtkdoc opt">.</span>xml<span class="gtkdoc opt">&lt;/</span>file<span class="gtkdoc opt">&gt;</span>
-    <span class="gtkdoc opt">&lt;</span>file alias<span class="gtkdoc opt">=</span><span class="string">&quot;example.css&quot;</span><span class="gtkdoc opt">&gt;</span>data<span class="gtkdoc opt">/</span>example<span class="gtkdoc opt">.</span>css<span class="gtkdoc opt">&lt;/</span>file<span class="gtkdoc opt">&gt;</span>
-  <span class="gtkdoc opt">&lt;/</span>gresource<span class="gtkdoc opt">&gt;</span>
-<span class="gtkdoc opt">&lt;/</span>gresources<span class="gtkdoc opt">&gt;</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="symbol">&lt;?</span><span class="usertype">xml</span><span class="normal"> version</span><span class="symbol">=</span><span class="string">"1.0"</span><span class="normal"> encoding</span><span class="symbol">=</span><span class="string">"UTF-8"</span><span class="symbol">?&gt;</span>
+<span class="symbol">&lt;</span><span class="normal">gresources</span><span class="symbol">&gt;</span>
+<span class="normal">  </span><span class="symbol">&lt;</span><span class="usertype">gresource</span><span class="normal"> prefix</span><span class="symbol">=</span><span class="string">"/org/gtk/Example"</span><span class="symbol">&gt;</span>
+<span class="normal">    </span><span class="symbol">&lt;</span><span class="normal">file</span><span class="symbol">&gt;</span><span class="normal">data</span><span class="symbol">/</span><span class="normal">splashscreen</span><span class="symbol">.</span><span class="normal">png</span><span class="symbol">&lt;/</span><span class="normal">file</span><span class="symbol">&gt;</span>
+<span class="normal">    </span><span class="symbol">&lt;</span><span class="usertype">file</span><span class="normal"> compressed</span><span class="symbol">=</span><span class="string">"true"</span><span class="symbol">&gt;</span><span class="normal">dialog</span><span class="symbol">.</span><span class="normal">ui</span><span class="symbol">&lt;/</span><span class="normal">file</span><span class="symbol">&gt;</span>
+<span class="normal">    </span><span class="symbol">&lt;</span><span class="usertype">file</span><span class="normal"> preprocess</span><span class="symbol">=</span><span class="string">"xml-stripblanks"</span><span class="symbol">&gt;</span><span class="normal">menumarkup</span><span class="symbol">.</span><span class="normal">xml</span><span class="symbol">&lt;/</span><span class="normal">file</span><span class="symbol">&gt;</span>
+<span class="normal">    </span><span class="symbol">&lt;</span><span class="usertype">file</span><span class="normal"> alias</span><span class="symbol">=</span><span class="string">"example.css"</span><span class="symbol">&gt;</span><span class="normal">data</span><span class="symbol">/</span><span class="normal">example</span><span class="symbol">.</span><span class="normal">css</span><span class="symbol">&lt;/</span><span class="normal">file</span><span class="symbol">&gt;</span>
+<span class="normal">  </span><span class="symbol">&lt;/</span><span class="normal">gresource</span><span class="symbol">&gt;</span>
+<span class="symbol">&lt;/</span><span class="normal">gresources</span><span class="symbol">&gt;</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -303,10 +303,10 @@ are combined into a binary resource bundle.</p>
 2
 3
 4</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="gtkdoc opt">/</span>org<span class="gtkdoc opt">/</span>gtk<span class="gtkdoc opt">/</span>Example<span class="gtkdoc opt">/</span>data<span class="gtkdoc opt">/</span>splashscreen<span class="gtkdoc opt">.</span>png
-<span class="gtkdoc opt">/</span>org<span class="gtkdoc opt">/</span>gtk<span class="gtkdoc opt">/</span>Example<span class="gtkdoc opt">/</span>dialog<span class="gtkdoc opt">.</span>ui
-<span class="gtkdoc opt">/</span>org<span class="gtkdoc opt">/</span>gtk<span class="gtkdoc opt">/</span>Example<span class="gtkdoc opt">/</span>menumarkup<span class="gtkdoc opt">.</span>xml
-<span class="gtkdoc opt">/</span>org<span class="gtkdoc opt">/</span>gtk<span class="gtkdoc opt">/</span>Example<span class="gtkdoc opt">/</span>example<span class="gtkdoc opt">.</span>css</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="symbol">/</span><span class="normal">org</span><span class="symbol">/</span><span class="normal">gtk</span><span class="symbol">/</span><span class="normal">Example</span><span class="symbol">/</span><span class="normal">data</span><span class="symbol">/</span><span class="normal">splashscreen</span><span class="symbol">.</span><span class="normal">png</span>
+<span class="symbol">/</span><span class="normal">org</span><span class="symbol">/</span><span class="normal">gtk</span><span class="symbol">/</span><span class="normal">Example</span><span class="symbol">/</span><span class="normal">dialog</span><span class="symbol">.</span><span class="normal">ui</span>
+<span class="symbol">/</span><span class="normal">org</span><span class="symbol">/</span><span class="normal">gtk</span><span class="symbol">/</span><span class="normal">Example</span><span class="symbol">/</span><span class="normal">menumarkup</span><span class="symbol">.</span><span class="normal">xml</span>
+<span class="symbol">/</span><span class="normal">org</span><span class="symbol">/</span><span class="normal">gtk</span><span class="symbol">/</span><span class="normal">Example</span><span class="symbol">/</span><span class="normal">example</span><span class="symbol">.</span><span class="normal">css</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -351,7 +351,7 @@ during resource lookups.</p>
     <tbody>
       <tr>
         <td class="listing_lines" align="right"><pre>1</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="gtkdoc opt">/</span>org<span class="gtkdoc opt">/</span>gtk<span class="gtkdoc opt">/</span>libgtk<span class="gtkdoc opt">=/</span>home<span class="gtkdoc opt">/</span>desrt<span class="gtkdoc opt">/</span>gtk<span class="gtkdoc opt">-</span>overlay</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="symbol">/</span><span class="normal">org</span><span class="symbol">/</span><span class="normal">gtk</span><span class="symbol">/</span><span class="normal">libgtk</span><span class="symbol">=/</span><span class="normal">home</span><span class="symbol">/</span><span class="normal">desrt</span><span class="symbol">/</span><span class="normal">gtk</span><span class="symbol">-</span><span class="normal">overlay</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -1207,6 +1207,6 @@ from a <a class="link" href="GResource.html" title="GResource"><span class="type
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.26.1</div>
+<hr>Generated by GTK-Doc V1.27</div>
 </body>
 </html>

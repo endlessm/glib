@@ -1,5 +1,5 @@
 project('glib', 'c', 'cpp',
-  version : '2.55.1',
+  version : '2.55.2',
   meson_version : '>= 0.44.0',
   default_options : [
     'warning_level=1',
@@ -65,7 +65,9 @@ add_project_arguments('-D_GNU_SOURCE', language: 'c')
 
 # Disable strict aliasing;
 # see https://bugzilla.gnome.org/show_bug.cgi?id=791622
-add_project_arguments('-fno-strict-aliasing', language: 'c')
+if cc.has_argument('-fno-strict-aliasing')
+  add_project_arguments('-fno-strict-aliasing', language: 'c')
+endif
 
 ########################
 # Configuration begins #
@@ -997,10 +999,14 @@ if host_system == 'windows'
   else
     glibconfig_conf.set_quoted('g_pollfd_format', '%#x')
   endif
+  glibconfig_conf.set('g_dir_separator', '\\\\')
+  glibconfig_conf.set('g_searchpath_separator', ';')
 else
   glibconfig_conf.set('g_pid_type', 'int')
   glibconfig_conf.set_quoted('g_pid_format', 'i')
   glibconfig_conf.set_quoted('g_pollfd_format', '%d')
+  glibconfig_conf.set('g_dir_separator', '/')
+  glibconfig_conf.set('g_searchpath_separator', ':')
 endif
 
 if sizet_size == short_size
@@ -1289,7 +1295,7 @@ if host_cpu_family == 'x86' or host_cpu_family == 'x86_64' or host_cpu_family ==
 elif host_cpu_family.startswith('sparc') or host_cpu_family.startswith('alpha') or host_cpu_family.startswith('powerpc') or host_cpu_family == 'ia64'
   glib_memory_barrier_needed = true
 else
-  error('Unknown host cpu: ' + host_cpu_family)
+  warning('Unknown host cpu: ' + host_cpu_family)
   glib_memory_barrier_needed = true
 endif
 glibconfig_conf.set('G_ATOMIC_OP_MEMORY_BARRIER_NEEDED', glib_memory_barrier_needed)
