@@ -3,7 +3,8 @@ glib2.0 (2.55.2-1) UNRELEASED; urgency=medium
   * debian/control{,.in}: Update Vcs-* to specify debian/experimental branch.
   * New upstream release 2.55.2:
     + GFile now has API to get the path without copying
-  * debian/patches/gdbus-threading-test-Allow-even-longer-for-test_method_ca.patch:
+  * debian/patches/gdbus-threading-test-Allow-even-longer-for-test_method_ca.patch,
+    debian/patches/gdatetime-Avoid-repeated-floating-point-multiplies-w.patch:
     Drop, applied upstream in this release.
 
  -- Iain Lane <laney@debian.org>  Wed, 14 Feb 2018 13:50:51 +0000
