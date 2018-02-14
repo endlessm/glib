@@ -8,7 +8,7 @@
 <link rel="up" href="glib-core.html" title="GLib Core Application Support">
 <link rel="prev" href="glib-Warnings-and-Assertions.html" title="Warnings and Assertions">
 <link rel="next" href="glib-utilities.html" title="GLib Utilities">
-<meta name="generator" content="GTK-Doc V1.26.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.27 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -617,7 +617,7 @@ environment variable (see
     <tbody>
       <tr>
         <td class="listing_lines" align="right"><pre>1</pre></td>
-        <td class="listing_code"><pre class="programlisting">G_DEBUG<span class="gtkdoc opt">=</span>fatal<span class="gtkdoc opt">-</span>warnings gdb <span class="gtkdoc opt">./</span>my<span class="gtkdoc opt">-</span>program</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal">G_DEBUG</span><span class="symbol">=</span><span class="normal">fatal</span><span class="symbol">-</span><span class="usertype">warnings</span><span class="normal"> gdb </span><span class="symbol">./</span><span class="normal">my</span><span class="symbol">-</span><span class="normal">program</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -667,7 +667,7 @@ setting the <code class="literal">G_DEBUG</code> environment variable (see
     <tbody>
       <tr>
         <td class="listing_lines" align="right"><pre>1</pre></td>
-        <td class="listing_code"><pre class="programlisting">G_DEBUG<span class="gtkdoc opt">=</span>fatal<span class="gtkdoc opt">-</span>warnings gdb <span class="gtkdoc opt">./</span>my<span class="gtkdoc opt">-</span>program</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal">G_DEBUG</span><span class="symbol">=</span><span class="normal">fatal</span><span class="symbol">-</span><span class="usertype">warnings</span><span class="normal"> gdb </span><span class="symbol">./</span><span class="normal">my</span><span class="symbol">-</span><span class="normal">program</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -829,8 +829,8 @@ in the default domain:</p>
       <tr>
         <td class="listing_lines" align="right"><pre>1
 2</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="glib-Message-Logging.html#g-log-set-handler">g_log_set_handler</a></span> <span class="gtkdoc opt">(</span>NULL<span class="gtkdoc opt">,</span> G_LOG_LEVEL_WARNING <span class="gtkdoc opt">|</span> G_LOG_FLAG_FATAL
-                   <span class="gtkdoc opt">|</span> G_LOG_FLAG_RECURSION<span class="gtkdoc opt">,</span> my_log_handler<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">);</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="glib-Message-Logging.html#g-log-set-handler">g_log_set_handler</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-LEVEL-WARNING:CAPS">G_LOG_LEVEL_WARNING</a> </span><span class="symbol">|</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-FLAG-FATAL:CAPS">G_LOG_FLAG_FATAL</a></span>
+<span class="normal">                   </span><span class="symbol">|</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-FLAG-RECURSION:CAPS">G_LOG_FLAG_RECURSION</a></span><span class="symbol">,</span><span class="normal"> my_log_handler</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -844,8 +844,8 @@ in the default domain:</p>
       <tr>
         <td class="listing_lines" align="right"><pre>1
 2</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="glib-Message-Logging.html#g-log-set-handler">g_log_set_handler</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;Gtk&quot;</span><span class="gtkdoc opt">,</span> G_LOG_LEVEL_CRITICAL <span class="gtkdoc opt">|</span> G_LOG_FLAG_FATAL
-                   <span class="gtkdoc opt">|</span> G_LOG_FLAG_RECURSION<span class="gtkdoc opt">,</span> my_log_handler<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">);</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="glib-Message-Logging.html#g-log-set-handler">g_log_set_handler</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"Gtk"</span><span class="symbol">,</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-LEVEL-CRITICAL:CAPS">G_LOG_LEVEL_CRITICAL</a> </span><span class="symbol">|</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-FLAG-FATAL:CAPS">G_LOG_FLAG_FATAL</a></span>
+<span class="normal">                   </span><span class="symbol">|</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-FLAG-RECURSION:CAPS">G_LOG_FLAG_RECURSION</a></span><span class="symbol">,</span><span class="normal"> my_log_handler</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -859,8 +859,8 @@ in the default domain:</p>
       <tr>
         <td class="listing_lines" align="right"><pre>1
 2</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="glib-Message-Logging.html#g-log-set-handler">g_log_set_handler</a></span> <span class="gtkdoc opt">(</span><span class="string">&quot;GLib&quot;</span><span class="gtkdoc opt">,</span> G_LOG_LEVEL_MASK <span class="gtkdoc opt">|</span> G_LOG_FLAG_FATAL
-                   <span class="gtkdoc opt">|</span> G_LOG_FLAG_RECURSION<span class="gtkdoc opt">,</span> my_log_handler<span class="gtkdoc opt">,</span> NULL<span class="gtkdoc opt">);</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="glib-Message-Logging.html#g-log-set-handler">g_log_set_handler</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"GLib"</span><span class="symbol">,</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-LEVEL-MASK:CAPS">G_LOG_LEVEL_MASK</a> </span><span class="symbol">|</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-FLAG-FATAL:CAPS">G_LOG_FLAG_FATAL</a></span>
+<span class="normal">                   </span><span class="symbol">|</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-FLAG-RECURSION:CAPS">G_LOG_FLAG_RECURSION</a></span><span class="symbol">,</span><span class="normal"> my_log_handler</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -1241,11 +1241,11 @@ glib.h.</p>
 3
 4
 5</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="glib-Message-Logging.html#g-log-structured">g_log_structured</a></span> <span class="gtkdoc opt">(</span>G_LOG_DOMAIN<span class="gtkdoc opt">,</span> G_LOG_LEVEL_DEBUG<span class="gtkdoc opt">,</span>
-                  <span class="string">&quot;MESSAGE_ID&quot;</span><span class="gtkdoc opt">,</span> <span class="string">&quot;06d4df59e6c24647bfe69d2c27ef0b4e&quot;</span><span class="gtkdoc opt">,</span>
-                  <span class="string">&quot;MY_APPLICATION_CUSTOM_FIELD&quot;</span><span class="gtkdoc opt">,</span> <span class="string">&quot;some debug string&quot;</span><span class="gtkdoc opt">,</span>
-                  <span class="string">&quot;MESSAGE&quot;</span><span class="gtkdoc opt">,</span> <span class="string">&quot;This is a debug message about pointer %p and integer %u.&quot;</span><span class="gtkdoc opt">,</span>
-                  some_pointer<span class="gtkdoc opt">,</span> some_integer<span class="gtkdoc opt">);</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="glib-Message-Logging.html#g-log-structured">g_log_structured</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Message-Logging.html#G-LOG-DOMAIN:CAPS">G_LOG_DOMAIN</a></span><span class="symbol">,</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-LEVEL-DEBUG:CAPS">G_LOG_LEVEL_DEBUG</a></span><span class="symbol">,</span>
+<span class="normal">                  </span><span class="string">"MESSAGE_ID"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"06d4df59e6c24647bfe69d2c27ef0b4e"</span><span class="symbol">,</span>
+<span class="normal">                  </span><span class="string">"MY_APPLICATION_CUSTOM_FIELD"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"some debug string"</span><span class="symbol">,</span>
+<span class="normal">                  </span><span class="string">"MESSAGE"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"This is a debug message about pointer %p and integer %u."</span><span class="symbol">,</span>
+<span class="normal">                  some_pointer</span><span class="symbol">,</span><span class="normal"> some_integer</span><span class="symbol">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -1273,13 +1273,13 @@ interpreted as a string.</p>
 5
 6
 7</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="gtkdoc kwb">const</span> GLogField fields<span class="gtkdoc opt">[] = {</span>
-  <span class="gtkdoc opt">{</span> <span class="string">&quot;MESSAGE&quot;</span><span class="gtkdoc opt">,</span> <span class="string">&quot;This is a debug message.&quot;</span><span class="gtkdoc opt">, -</span><span class="number">1</span> <span class="gtkdoc opt">},</span>
-  <span class="gtkdoc opt">{</span> <span class="string">&quot;MESSAGE_ID&quot;</span><span class="gtkdoc opt">,</span> <span class="string">&quot;fcfb2e1e65c3494386b74878f1abf893&quot;</span><span class="gtkdoc opt">, -</span><span class="number">1</span> <span class="gtkdoc opt">},</span>
-  <span class="gtkdoc opt">{</span> <span class="string">&quot;MY_APPLICATION_CUSTOM_FIELD&quot;</span><span class="gtkdoc opt">,</span> <span class="string">&quot;some debug string&quot;</span><span class="gtkdoc opt">, -</span><span class="number">1</span> <span class="gtkdoc opt">},</span>
-  <span class="gtkdoc opt">{</span> <span class="string">&quot;MY_APPLICATION_STATE&quot;</span><span class="gtkdoc opt">,</span> state_object<span class="gtkdoc opt">,</span> <span class="number">0</span> <span class="gtkdoc opt">},</span>
-<span class="gtkdoc opt">};</span>
-<span class="function"><a href="glib-Message-Logging.html#g-log-structured-array">g_log_structured_array</a></span> <span class="gtkdoc opt">(</span>G_LOG_LEVEL_DEBUG<span class="gtkdoc opt">,</span> fields<span class="gtkdoc opt">,</span> <span class="function"><a href="glib-Standard-Macros.html#G-N-ELEMENTS:CAPS">G_N_ELEMENTS</a></span> <span class="gtkdoc opt">(</span>fields<span class="gtkdoc opt">));</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">const</span><span class="normal"> </span><span class="usertype">GLogField</span><span class="normal"> fields</span><span class="symbol">[]</span><span class="normal"> </span><span class="symbol">=</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">  </span><span class="cbracket">{</span><span class="normal"> </span><span class="string">"MESSAGE"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"This is a debug message."</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">-</span><span class="number">1</span><span class="normal"> </span><span class="cbracket">}</span><span class="symbol">,</span>
+<span class="normal">  </span><span class="cbracket">{</span><span class="normal"> </span><span class="string">"MESSAGE_ID"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"fcfb2e1e65c3494386b74878f1abf893"</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">-</span><span class="number">1</span><span class="normal"> </span><span class="cbracket">}</span><span class="symbol">,</span>
+<span class="normal">  </span><span class="cbracket">{</span><span class="normal"> </span><span class="string">"MY_APPLICATION_CUSTOM_FIELD"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"some debug string"</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">-</span><span class="number">1</span><span class="normal"> </span><span class="cbracket">}</span><span class="symbol">,</span>
+<span class="normal">  </span><span class="cbracket">{</span><span class="normal"> </span><span class="string">"MY_APPLICATION_STATE"</span><span class="symbol">,</span><span class="normal"> state_object</span><span class="symbol">,</span><span class="normal"> </span><span class="number">0</span><span class="normal"> </span><span class="cbracket">}</span><span class="symbol">,</span>
+<span class="cbracket">}</span><span class="symbol">;</span>
+<span class="function"><a href="glib-Message-Logging.html#g-log-structured-array">g_log_structured_array</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Message-Logging.html#G-LOG-LEVEL-DEBUG:CAPS">G_LOG_LEVEL_DEBUG</a></span><span class="symbol">,</span><span class="normal"> fields</span><span class="symbol">,</span><span class="normal"> </span><span class="function"><a href="glib-Standard-Macros.html#G-N-ELEMENTS:CAPS">G_N_ELEMENTS</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">fields</span><span class="symbol">));</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -1590,7 +1590,7 @@ the following construct without needing any additional error handling:</p>
     <tbody>
       <tr>
         <td class="listing_lines" align="right"><pre>1</pre></td>
-        <td class="listing_code"><pre class="programlisting">is_journald <span class="gtkdoc opt">=</span> <span class="function"><a href="glib-Message-Logging.html#g-log-writer-is-journald">g_log_writer_is_journald</a></span> <span class="gtkdoc opt">(</span><span class="function">fileno</span> <span class="gtkdoc opt">(</span>stderr<span class="gtkdoc opt">));</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal">is_journald </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-Message-Logging.html#g-log-writer-is-journald">g_log_writer_is_journald</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function">fileno</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">stderr</span><span class="symbol">));</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -1878,7 +1878,7 @@ environment variable.</p>
     <tbody>
       <tr>
         <td class="listing_lines" align="right"><pre>1</pre></td>
-        <td class="listing_code"><pre class="programlisting">AM_CPPFLAGS <span class="gtkdoc opt">= -</span>DG_LOG_DOMAIN<span class="gtkdoc opt">=</span><span class="gtkdoc esc">\&quot;</span>Gtk<span class="gtkdoc esc">\&quot;</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal">AM_CPPFLAGS </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">-</span><span class="normal">DG_LOG_DOMAIN</span><span class="symbol">=\</span><span class="string">"Gtk</span><span class="specialchar">\"</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -2077,6 +2077,6 @@ handling it (and hence a fallback writer should be used).</p>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.26.1</div>
+<hr>Generated by GTK-Doc V1.27</div>
 </body>
 </html>

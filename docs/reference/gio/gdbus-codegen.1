@@ -2,7 +2,7 @@
 .\"     Title: gdbus-codegen
 .\"    Author: David Zeuthen <zeuthen@gmail.com>
 .\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
-.\"      Date: 01/08/2018
+.\"      Date: 02/06/2018
 .\"    Manual: User Commands
 .\"    Source: GIO
 .\"  Language: English
@@ -31,14 +31,18 @@
 gdbus-codegen \- D\-Bus code and documentation generator
 .SH "SYNOPSIS"
 .HP \w'\fBgdbus\-codegen\fR\ 'u
-\fBgdbus\-codegen\fR [\fB\-h\fR,\ \fB\-\-help\fR] [\fB\-\-interface\-prefix\fR\ \fIorg\&.project\&.Prefix\fR] [\fB\-\-generate\-c\-code\fR\ \fIOUTFILES\fR] [\fB\-\-c\-namespace\fR\ \fIYourProject\fR] [\fB\-\-c\-generate\-object\-manager\fR] [\fB\-\-c\-generate\-autocleanup\fR\ none|objects|all] [\fB\-\-output\-directory\fR\ \fIOUTDIR\fR] [\fB\-\-generate\-docbook\fR\ \fIOUTFILES\fR] [\fB\-\-xml\-files\fR\ \fIFILE\fR] [\fB\-\-annotate\fR\ \fIELEMENT\fR\ \fIKEY\fR\ \fIVALUE\fR]...  FILE [FILE...]
+\fBgdbus\-codegen\fR [\fB\-h\fR,\ \fB\-\-help\fR] [\fB\-\-interface\-prefix\fR\ \fIorg\&.project\&.Prefix\fR] [\fB\-\-generate\-c\-code\fR\ \fIOUTFILES\fR] [\fB\-\-c\-namespace\fR\ \fIYourProject\fR] [\fB\-\-c\-generate\-object\-manager\fR] [\fB\-\-c\-generate\-autocleanup\fR\ none|objects|all] [\fB\-\-output\-directory\fR\ \fIOUTDIR\fR] [\fB\-\-generate\-docbook\fR\ \fIOUTFILES\fR] [\fB\-\-pragma\-once\fR] [\fB\-\-xml\-files\fR\ \fIFILE\fR] [\fB\-\-header\fR] [\fB\-\-body\fR] [\fB\-\-output\fR\ \fIOUTFILE\fR] [\fB\-\-annotate\fR\ \fIELEMENT\fR\ \fIKEY\fR\ \fIVALUE\fR]...  FILE [FILE...]
 .SH "DESCRIPTION"
 .PP
 \fBgdbus\-codegen\fR
-is used to generate code and/or documentation for one or more D\-Bus interfaces\&. The tool reads
+is used to generate code and/or documentation for one or more D\-Bus interfaces\&.
+.PP
+\fBgdbus\-codegen\fR
+reads
 \m[blue]\fBD\-Bus Introspection XML\fR\m[]\&\s-2\u[1]\d\s+2
-files and generates output files\&. The tool currently supports generating C code (via
-\fB\-\-generate\-c\-code\fR) and Docbook XML (via
+from files passed as additional arguments on the command line and generates output files\&. It currently supports generating C source code (via
+\fB\-\-body\fR) or header (via
+\fB\-\-header\fR) and Docbook XML (via
 \fB\-\-generate\-docbook\fR)\&.
 .SH "GENERATING C CODE"
 .PP
@@ -48,6 +52,20 @@ When generating C code, a #GInterface
 \fBFooBarProxy\fR
 and
 \fBFooBarSkeleton\fR, implementing said interface are also generated\&. The former is derived from #GDBusProxy and intended for use on the client side while the latter is derived from the #GDBusInterfaceSkeleton type making it easy to export on a #GDBusConnection either directly or via a #GDBusObjectManagerServer instance\&.
+.PP
+For C code generation either
+\fB\-\-body\fR
+that generates source code, or
+\fB\-\-header\fR
+that generates headers, can be used\&. These options must be used along with
+\fB\-\-output\fR, which is used to specify the file to output to\&.
+.PP
+Both files can be generated at the same time by using
+\fB\-\-generate\-c\-code\fR, but this option is deprecated\&. In this case
+\fB\-\-output\fR
+cannot be used due to the generation of multiple files\&. Instead pass
+\fB\-\-output\-directory\fR
+to specify the directory to put the output files in\&. By default the current directory will be used\&.
 .PP
 The name of each generated C type is derived from the D\-Bus interface name stripped with the prefix given with
 \fB\-\-interface\-prefix\fR
@@ -100,7 +118,7 @@ Show help and exit\&.
 .PP
 \fB\-\-xml\-files\fR \fIFILE\fR
 .RS 4
-The D\-Bus introspection XML file\&.
+This option is deprecated; use positional arguments instead\&. The D\-Bus introspection XML file\&.
 .RE
 .PP
 \fB\-\-interface\-prefix\fR \fIorg\&.project\&.Prefix\&.\fR
@@ -118,6 +136,10 @@ NAME
 is a place\-holder for the interface name, e\&.g\&.
 net\&.Corp\&.FooBar
 and so on\&.
+.sp
+Pass
+\fB\-\-output\-directory\fR
+to specify the directory to put the output files in\&. By default the current directory will be used\&.
 .RE
 .PP
 \fB\-\-generate\-c\-code\fR \fIOUTFILES\fR
@@ -146,6 +168,13 @@ or
 (see above)\&.
 .RE
 .PP
+\fB\-\-pragma\-once\fR
+.RS 4
+If this option is passed, the
+\m[blue]\fB#pragma once\fR\m[]\&\s-2\u[5]\d\s+2
+preprocessor directive is used instead of include guards\&.
+.RE
+.PP
 \fB\-\-c\-generate\-object\-manager\fR
 .RS 4
 If this option is passed, suitable #GDBusObject, #GDBusObjectProxy, #GDBusObjectSkeleton and #GDBusObjectManagerClient subclasses are generated\&.
@@ -159,6 +188,62 @@ This option influences what types autocleanup functions are generated for\&. \*(
 \fB\-\-output\-directory\fR \fIOUTDIR\fR
 .RS 4
 Directory to output generated source to\&. Equivalent to changing directory before generation\&.
+.sp
+This option cannot be used with neither
+\fB\-\-body\fR
+nor
+\fB\-\-header\fR, and
+\fB\-\-output\fR
+must be used\&.
+.RE
+.PP
+\fB\-\-header\fR
+.RS 4
+If this option is passed, it will generate the header code and write it to the disk by using the path and file name provided by
+\fB\-\-output\fR\&.
+.sp
+Using
+\fB\-\-generate\-c\-code\fR,
+\fB\-\-generate\-docbook\fR
+or
+\fB\-\-output\-directory\fR
+are not allowed to be used along with
+\fB\-\-header\fR
+and
+\fB\-\-body\fR
+options, because these options are used to generate only one file\&.
+.RE
+.PP
+\fB\-\-body\fR
+.RS 4
+If this option is passed, it will generate the source code and write it to the disk by using the path and file name provided by
+\fB\-\-output\fR\&.
+.sp
+Using
+\fB\-\-generate\-c\-code\fR,
+\fB\-\-generate\-docbook\fR
+or
+\fB\-\-output\-directory\fR
+are not allowed to be used along with
+\fB\-\-header\fR
+and
+\fB\-\-body\fR
+options, because these options are used to generate only one file\&.
+.RE
+.PP
+\fB\-\-output\fR \fIOUTFILE\fR
+.RS 4
+The full path where the header (\fB\-\-header\fR) or the source code (\fB\-\-body\fR) will be written, using the path and filename provided by
+\fB\-\-output\fR\&. The full path could be something like
+$($OUTFILE)\&.{c,h}\&.
+.sp
+Using
+\fB\-\-generate\-c\-code\fR,
+\fB\-\-generate\-docbook\fR
+or
+\fB\-\-output\-directory\fR
+is not allowed along with
+\fB\-\-output\fR, because the latter is used to generate only one file\&.
 .RE
 .PP
 \fB\-\-annotate\fR \fIELEMENT\fR \fIKEY\fR \fIVALUE\fR
@@ -290,7 +375,7 @@ org\&.gtk\&.GDBus\&.DocString
 annotation, note that parser used by
 \fBgdbus\-codegen\fR
 parses XML comments in a way similar to
-\m[blue]\fBgtk\-doc\fR\m[]\&\s-2\u[5]\d\s+2:
+\m[blue]\fBgtk\-doc\fR\m[]\&\s-2\u[6]\d\s+2:
 .sp .if n \{\ .RS 4 .\} .nf <!\-\- net\&.Corp\&.Bar: @short_description: A short description A <emphasis>longer</emphasis> description\&. This is a new paragraph\&. \-\-> <interface name="net\&.corp\&.Bar"> <!\-\- FooMethod: @greeting: The docs for greeting parameter\&. @response: The docs for response parameter\&. The docs for the actual method\&. \-\-> <method name="FooMethod"> <arg name="greeting" direction="in" type="s"/> <arg name="response" direction="out" type="s"/> </method> <!\-\- BarSignal: @blah: The docs for blah parameter\&. @boo: The docs for boo parameter\&. @since: 2\&.30 The docs for the actual signal\&. \-\-> <signal name="BarSignal"> <arg name="blah" type="s"/> <arg name="boo" type="s"/> </signal> <!\-\- BazProperty: The docs for the property\&. \-\-> <property name="BazProperty" type="s" access="read"/> </interface> .fi .if n \{\ .RE .\}
 .PP
 Note that
@@ -310,9 +395,9 @@ are all expanded to links to the respective interface, method, signal and proper
 and
 %
 characters are rendered as
-\m[blue]\fBparameter\fR\m[]\&\s-2\u[6]\d\s+2
+\m[blue]\fBparameter\fR\m[]\&\s-2\u[7]\d\s+2
 and
-\m[blue]\fBconstant\fR\m[]\&\s-2\u[7]\d\s+2
+\m[blue]\fBconstant\fR\m[]\&\s-2\u[8]\d\s+2
 respectively\&.
 .PP
 If both XML comments and
@@ -582,7 +667,7 @@ methods\&. Use the standard #GObject::notify signal to listen to property change
 .PP
 Note that all property access is via #GDBusProxy
 \*(Aqs property cache so no I/O is ever done when reading properties\&. Also note that setting a property will cause the
-\m[blue]\fBorg\&.freedesktop\&.DBus\&.Properties\&.Set\fR\m[]\&\s-2\u[8]\d\s+2
+\m[blue]\fBorg\&.freedesktop\&.DBus\&.Properties\&.Set\fR\m[]\&\s-2\u[9]\d\s+2
 method to be called on the remote object\&. This call, however, is asynchronous so setting a property won\*(Aqt block\&. Further, the change is delayed and no error checking is possible\&.
 .SS "Server\-side usage"
 .PP
@@ -671,7 +756,7 @@ on_handle_hello_world (MyAppFrobber           *interface,
 To facilitate atomic changesets (multiple properties changing at the same time), #GObject::notify signals are queued up when received\&. The queue is drained in an idle handler (which is called from the
 thread\-default main loop
 of the thread where the skeleton object was contructed) and will cause emissions of the
-\m[blue]\fBorg\&.freedesktop\&.DBus\&.Properties::PropertiesChanged\fR\m[]\&\s-2\u[8]\d\s+2
+\m[blue]\fBorg\&.freedesktop\&.DBus\&.Properties::PropertiesChanged\fR\m[]\&\s-2\u[9]\d\s+2
 signal with all the properties that have changed\&. Use g_dbus_interface_skeleton_flush() or g_dbus_object_skeleton_flush() to empty the queue immediately\&. Use g_object_freeze_notify() and g_object_thaw_notify() for atomic changesets if on a different thread\&.
 .SH "C TYPE MAPPING"
 .PP
@@ -715,9 +800,9 @@ org\&.gtk\&.GDBus\&.Since
 annotation using a greater version number than previous versions\&.
 .PP
 The generated C code currently happens to be annotated with
-\m[blue]\fBgtk\-doc\fR\m[]\&\s-2\u[5]\d\s+2
+\m[blue]\fBgtk\-doc\fR\m[]\&\s-2\u[6]\d\s+2
 /
-\m[blue]\fBGObject Introspection\fR\m[]\&\s-2\u[9]\d\s+2
+\m[blue]\fBGObject Introspection\fR\m[]\&\s-2\u[10]\d\s+2
 comments / annotations\&. The layout and contents might change in the future so no guarantees about e\&.g\&.
 SECTION
 usage etc\&. is given\&.
@@ -754,26 +839,31 @@ CamelCase
 \%http://en.wikipedia.org/wiki/CamelCase
 .RE
 .IP " 5." 4
+#pragma once
+.RS 4
+\%https://en.wikipedia.org/wiki/Pragma_once
+.RE
+.IP " 6." 4
 gtk-doc
 .RS 4
 \%http://www.gtk.org/gtk-doc/
 .RE
-.IP " 6." 4
+.IP " 7." 4
 parameter
 .RS 4
 \%http://www.docbook.org/tdg/en/html/parameter.html
 .RE
-.IP " 7." 4
+.IP " 8." 4
 constant
 .RS 4
 \%http://www.docbook.org/tdg/en/html/constant.html
 .RE
-.IP " 8." 4
+.IP " 9." 4
 org.freedesktop.DBus.Properties.Set
 .RS 4
 \%http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties
 .RE
-.IP " 9." 4
+.IP "10." 4
 GObject Introspection
 .RS 4
 \%https://wiki.gnome.org/Projects/GObjectIntrospection

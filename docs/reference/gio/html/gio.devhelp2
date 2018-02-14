@@ -294,6 +294,7 @@
     <keyword type="function" name="g_file_equal ()" link="GFile.html#g-file-equal"/>
     <keyword type="function" name="g_file_get_basename ()" link="GFile.html#g-file-get-basename"/>
     <keyword type="function" name="g_file_get_path ()" link="GFile.html#g-file-get-path"/>
+    <keyword type="function" name="g_file_peek_path ()" link="GFile.html#g-file-peek-path" since="2.56"/>
     <keyword type="function" name="g_file_get_uri ()" link="GFile.html#g-file-get-uri"/>
     <keyword type="function" name="g_file_get_parse_name ()" link="GFile.html#g-file-get-parse-name"/>
     <keyword type="function" name="g_file_get_parent ()" link="GFile.html#g-file-get-parent"/>
@@ -931,9 +932,9 @@
     <keyword type="function" name="g_data_input_stream_read_upto ()" link="GDataInputStream.html#g-data-input-stream-read-upto" since="2.26"/>
     <keyword type="function" name="g_data_input_stream_read_upto_async ()" link="GDataInputStream.html#g-data-input-stream-read-upto-async" since="2.26"/>
     <keyword type="function" name="g_data_input_stream_read_upto_finish ()" link="GDataInputStream.html#g-data-input-stream-read-upto-finish" since="2.24"/>
-    <keyword type="function" name="g_data_input_stream_read_until ()" link="GDataInputStream.html#g-data-input-stream-read-until"/>
-    <keyword type="function" name="g_data_input_stream_read_until_async ()" link="GDataInputStream.html#g-data-input-stream-read-until-async" since="2.20"/>
-    <keyword type="function" name="g_data_input_stream_read_until_finish ()" link="GDataInputStream.html#g-data-input-stream-read-until-finish" since="2.20"/>
+    <keyword type="function" name="g_data_input_stream_read_until ()" link="GDataInputStream.html#g-data-input-stream-read-until" deprecated=""/>
+    <keyword type="function" name="g_data_input_stream_read_until_async ()" link="GDataInputStream.html#g-data-input-stream-read-until-async" deprecated="" since="2.20"/>
+    <keyword type="function" name="g_data_input_stream_read_until_finish ()" link="GDataInputStream.html#g-data-input-stream-read-until-finish" deprecated="" since="2.20"/>
     <keyword type="struct" name="GDataInputStream" link="GDataInputStream.html#GDataInputStream-struct"/>
     <keyword type="enum" name="enum GDataStreamByteOrder" link="GDataInputStream.html#GDataStreamByteOrder"/>
     <keyword type="enum" name="enum GDataStreamNewlineType" link="GDataInputStream.html#GDataStreamNewlineType"/>
@@ -1760,8 +1761,8 @@
     <keyword type="function" name="g_tls_client_connection_get_server_identity ()" link="GTlsClientConnection.html#g-tls-client-connection-get-server-identity" since="2.28"/>
     <keyword type="function" name="g_tls_client_connection_set_validation_flags ()" link="GTlsClientConnection.html#g-tls-client-connection-set-validation-flags" since="2.28"/>
     <keyword type="function" name="g_tls_client_connection_get_validation_flags ()" link="GTlsClientConnection.html#g-tls-client-connection-get-validation-flags" since="2.28"/>
-    <keyword type="function" name="g_tls_client_connection_set_use_ssl3 ()" link="GTlsClientConnection.html#g-tls-client-connection-set-use-ssl3" since="2.28"/>
-    <keyword type="function" name="g_tls_client_connection_get_use_ssl3 ()" link="GTlsClientConnection.html#g-tls-client-connection-get-use-ssl3" since="2.28"/>
+    <keyword type="function" name="g_tls_client_connection_set_use_ssl3 ()" link="GTlsClientConnection.html#g-tls-client-connection-set-use-ssl3" deprecated="" since="2.28"/>
+    <keyword type="function" name="g_tls_client_connection_get_use_ssl3 ()" link="GTlsClientConnection.html#g-tls-client-connection-get-use-ssl3" deprecated="" since="2.28"/>
     <keyword type="function" name="g_tls_client_connection_get_accepted_cas ()" link="GTlsClientConnection.html#g-tls-client-connection-get-accepted-cas" since="2.28"/>
     <keyword type="function" name="g_tls_client_connection_copy_session_state ()" link="GTlsClientConnection.html#g-tls-client-connection-copy-session-state" since="2.46"/>
     <keyword type="struct" name="GTlsClientConnection" link="GTlsClientConnection.html#GTlsClientConnection-struct"/>

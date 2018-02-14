@@ -10,7 +10,7 @@
 	/>
 	<UserMacro
 		Name="GlibVersion"
-		Value="2.55.1"
+		Value="2.55.2"
 	/>
 	<UserMacro
 		Name="ApiVersion"

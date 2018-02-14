@@ -928,7 +928,7 @@ static gboolean
 get_iso8601_seconds (const gchar *text, gsize length, gdouble *value)
 {
   gint i;
-  gdouble multiplier = 0.1, v = 0;
+  gdouble divisor = 1, v = 0;
 
   if (length < 2)
     return FALSE;
@@ -952,11 +952,11 @@ get_iso8601_seconds (const gchar *text, gsize length, gdouble *value)
       const gchar c = text[i];
       if (c < '0' || c > '9')
         return FALSE;
-      v += (c - '0') * multiplier;
-      multiplier *= 0.1;
+      v = v * 10 + (c - '0');
+      divisor *= 10;
     }
 
-  *value = v;
+  *value = v / divisor;
   return TRUE;
 }
 
@@ -1294,7 +1294,11 @@ g_date_time_new (GTimeZone *tz,
 {
   GDateTime *datetime;
   gint64 full_time;
-  gint64 usec;
+  /* keep these variables as volatile. We do not want them ending up in
+   * registers - them doing so may cause us to hit precision problems on i386.
+   * See: https://bugzilla.gnome.org/show_bug.cgi?id=792410 */
+  volatile gint64 usec;
+  volatile gdouble usecd;
 
   g_return_val_if_fail (tz != NULL, NULL);
 
@@ -1328,7 +1332,8 @@ g_date_time_new (GTimeZone *tz,
    * FP numbers work.
    * See https://bugzilla.gnome.org/show_bug.cgi?id=697715. */
   usec = seconds * USEC_PER_SECOND;
-  if ((usec + 1) * 1e-6 <= seconds) {
+  usecd = (usec + 1) * 1e-6;
+  if (usecd <= seconds) {
     usec++;
   }
 

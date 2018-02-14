@@ -8,7 +8,7 @@
 <link rel="up" href="rn01.html" title="API Reference">
 <link rel="prev" href="gobject-Signals.html" title="Signals">
 <link rel="next" href="gobject-Value-arrays.html" title="Value arrays">
-<meta name="generator" content="GTK-Doc V1.26.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.27 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -1326,9 +1326,9 @@ sequences like:</p>
         <td class="listing_lines" align="right"><pre>1
 2
 3</pre></td>
-        <td class="listing_code"><pre class="programlisting">closure <span class="gtkdoc opt">=</span> <span class="function"><a href="gobject-Closures.html#g-cclosure-new">g_cclosure_new</a></span> <span class="gtkdoc opt">(</span>cb_func<span class="gtkdoc opt">,</span> cb_data<span class="gtkdoc opt">);</span>
-<span class="function"><a href="gobject-Closures.html#g-source-set-closure">g_source_set_closure</a></span> <span class="gtkdoc opt">(</span>source<span class="gtkdoc opt">,</span> closure<span class="gtkdoc opt">);</span>
-<span class="function"><a href="gobject-Closures.html#g-closure-unref">g_closure_unref</a></span> <span class="gtkdoc opt">(</span>closure<span class="gtkdoc opt">);</span> <span class="gtkdoc slc">// GObject doesn&apos;t really need this</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal"><a href="chapter-signal.html#closure">closure</a> </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="gobject-Closures.html#g-cclosure-new">g_cclosure_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cb_func</span><span class="symbol">,</span><span class="normal"> cb_data</span><span class="symbol">);</span>
+<span class="function"><a href="gobject-Closures.html#g-source-set-closure">g_source_set_closure</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">source</span><span class="symbol">,</span><span class="normal"> <a href="chapter-signal.html#closure">closure</a></span><span class="symbol">);</span>
+<span class="function"><a href="gobject-Closures.html#g-closure-unref">g_closure_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="chapter-signal.html#closure">closure</a></span><span class="symbol">);</span><span class="normal"> </span><span class="comment">// GObject doesn't really need this</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -1342,7 +1342,7 @@ initial reference count, if it is unowned, we instead can write:</p>
     <tbody>
       <tr>
         <td class="listing_lines" align="right"><pre>1</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="gobject-Closures.html#g-source-set-closure">g_source_set_closure</a></span> <span class="gtkdoc opt">(</span>source<span class="gtkdoc opt">,</span> <span class="function"><a href="gobject-Closures.html#g-cclosure-new">g_cclosure_new</a></span> <span class="gtkdoc opt">(</span>cb_func<span class="gtkdoc opt">,</span> cb_data<span class="gtkdoc opt">));</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="gobject-Closures.html#g-source-set-closure">g_source_set_closure</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">source</span><span class="symbol">,</span><span class="normal"> </span><span class="function"><a href="gobject-Closures.html#g-cclosure-new">g_cclosure_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">cb_func</span><span class="symbol">,</span><span class="normal"> cb_data</span><span class="symbol">));</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -1368,19 +1368,19 @@ of storing a closure for later notification looks like:</p>
 11
 12
 13</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="gtkdoc kwb">static</span> GClosure <span class="gtkdoc opt">*</span>notify_closure <span class="gtkdoc opt">=</span> NULL<span class="gtkdoc opt">;</span>
-<span class="gtkdoc kwb">void</span>
-<span class="function">foo_notify_set_closure</span> <span class="gtkdoc opt">(</span>GClosure <span class="gtkdoc opt">*</span>closure<span class="gtkdoc opt">)</span>
-<span class="gtkdoc opt">{</span>
-  <span class="keyword">if</span> <span class="gtkdoc opt">(</span>notify_closure<span class="gtkdoc opt">)</span>
-    <span class="function"><a href="gobject-Closures.html#g-closure-unref">g_closure_unref</a></span> <span class="gtkdoc opt">(</span>notify_closure<span class="gtkdoc opt">);</span>
-  notify_closure <span class="gtkdoc opt">=</span> closure<span class="gtkdoc opt">;</span>
-  <span class="keyword">if</span> <span class="gtkdoc opt">(</span>notify_closure<span class="gtkdoc opt">)</span>
-    <span class="gtkdoc opt">{</span>
-      <span class="function"><a href="gobject-Closures.html#g-closure-ref">g_closure_ref</a></span> <span class="gtkdoc opt">(</span>notify_closure<span class="gtkdoc opt">);</span>
-      <span class="function"><a href="gobject-Closures.html#g-closure-sink">g_closure_sink</a></span> <span class="gtkdoc opt">(</span>notify_closure<span class="gtkdoc opt">);</span>
-    <span class="gtkdoc opt">}</span>
-<span class="gtkdoc opt">}</span></pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">static</span><span class="normal"> </span><span class="usertype">GClosure</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">notify_closure </span><span class="symbol">=</span><span class="normal"> <a href="../glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
+<span class="type">void</span>
+<span class="function">foo_notify_set_closure</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">GClosure</span><span class="normal"> </span><span class="symbol">*</span><span class="normal"><a href="chapter-signal.html#closure">closure</a></span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">notify_closure</span><span class="symbol">)</span>
+<span class="normal">    </span><span class="function"><a href="gobject-Closures.html#g-closure-unref">g_closure_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">notify_closure</span><span class="symbol">);</span>
+<span class="normal">  notify_closure </span><span class="symbol">=</span><span class="normal"> <a href="chapter-signal.html#closure">closure</a></span><span class="symbol">;</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">notify_closure</span><span class="symbol">)</span>
+<span class="normal">    </span><span class="cbracket">{</span>
+<span class="normal">      </span><span class="function"><a href="gobject-Closures.html#g-closure-ref">g_closure_ref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">notify_closure</span><span class="symbol">);</span>
+<span class="normal">      </span><span class="function"><a href="gobject-Closures.html#g-closure-sink">g_closure_sink</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">notify_closure</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+<span class="cbracket">}</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -1730,36 +1730,36 @@ implementing new types of closures.</p>
 28
 29
 30</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="gtkdoc kwc">typedef</span> <span class="gtkdoc kwb">struct</span> _MyClosure MyClosure<span class="gtkdoc opt">;</span>
-<span class="gtkdoc kwb">struct</span> _MyClosure
-<span class="gtkdoc opt">{</span>
-  GClosure closure<span class="gtkdoc opt">;</span>
-  <span class="gtkdoc slc">// extra data goes here</span>
-<span class="gtkdoc opt">};</span>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">typedef</span><span class="normal"> </span><span class="keyword">struct</span><span class="normal"> </span><span class="classname">_MyClosure</span><span class="normal"> MyClosure</span><span class="symbol">;</span>
+<span class="keyword">struct</span><span class="normal"> </span><span class="classname">_MyClosure</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="usertype">GClosure</span><span class="normal"> <a href="chapter-signal.html#closure">closure</a></span><span class="symbol">;</span>
+<span class="normal">  </span><span class="comment">// extra data goes here</span>
+<span class="cbracket">}</span><span class="symbol">;</span>
 
-<span class="gtkdoc kwb">static void</span>
-<span class="function">my_closure_finalize</span> <span class="gtkdoc opt">(</span>gpointer  notify_data<span class="gtkdoc opt">,</span>
-                     GClosure <span class="gtkdoc opt">*</span>closure<span class="gtkdoc opt">)</span>
-<span class="gtkdoc opt">{</span>
-  MyClosure <span class="gtkdoc opt">*</span>my_closure <span class="gtkdoc opt">= (</span>MyClosure <span class="gtkdoc opt">*)</span>closure<span class="gtkdoc opt">;</span>
+<span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
+<span class="function">my_closure_finalize</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">gpointer</span><span class="normal">  notify_data</span><span class="symbol">,</span>
+<span class="normal">                     </span><span class="usertype">GClosure</span><span class="normal"> </span><span class="symbol">*</span><span class="normal"><a href="chapter-signal.html#closure">closure</a></span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="usertype">MyClosure</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">my_closure </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">MyClosure </span><span class="symbol">*)</span><span class="normal"><a href="chapter-signal.html#closure">closure</a></span><span class="symbol">;</span>
 
-  <span class="gtkdoc slc">// free extra data here</span>
-<span class="gtkdoc opt">}</span>
+<span class="normal">  </span><span class="comment">// free extra data here</span>
+<span class="cbracket">}</span>
 
-MyClosure <span class="gtkdoc opt">*</span><span class="function">my_closure_new</span> <span class="gtkdoc opt">(</span>gpointer data<span class="gtkdoc opt">)</span>
-<span class="gtkdoc opt">{</span>
-  GClosure <span class="gtkdoc opt">*</span>closure<span class="gtkdoc opt">;</span>
-  MyClosure <span class="gtkdoc opt">*</span>my_closure<span class="gtkdoc opt">;</span>
+<span class="usertype">MyClosure</span><span class="normal"> </span><span class="symbol">*</span><span class="function">my_closure_new</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">gpointer</span><span class="normal"> data</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="usertype">GClosure</span><span class="normal"> </span><span class="symbol">*</span><span class="normal"><a href="chapter-signal.html#closure">closure</a></span><span class="symbol">;</span>
+<span class="normal">  </span><span class="usertype">MyClosure</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">my_closure</span><span class="symbol">;</span>
 
-  closure <span class="gtkdoc opt">=</span> <span class="function"><a href="gobject-Closures.html#g-closure-new-simple">g_closure_new_simple</a></span> <span class="gtkdoc opt">(</span><span class="keyword">sizeof</span> <span class="gtkdoc opt">(</span>MyClosure<span class="gtkdoc opt">),</span> data<span class="gtkdoc opt">);</span>
-  my_closure <span class="gtkdoc opt">= (</span>MyClosure <span class="gtkdoc opt">*)</span> closure<span class="gtkdoc opt">;</span>
+<span class="normal">  <a href="chapter-signal.html#closure">closure</a> </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="gobject-Closures.html#g-closure-new-simple">g_closure_new_simple</a></span><span class="normal"> </span><span class="symbol">(</span><span class="keyword">sizeof</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">MyClosure</span><span class="symbol">),</span><span class="normal"> data</span><span class="symbol">);</span>
+<span class="normal">  my_closure </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">MyClosure </span><span class="symbol">*)</span><span class="normal"> <a href="chapter-signal.html#closure">closure</a></span><span class="symbol">;</span>
 
-  <span class="gtkdoc slc">// initialize extra data here</span>
+<span class="normal">  </span><span class="comment">// initialize extra data here</span>
 
-  <span class="function"><a href="gobject-Closures.html#g-closure-add-finalize-notifier">g_closure_add_finalize_notifier</a></span> <span class="gtkdoc opt">(</span>closure<span class="gtkdoc opt">,</span> notify_data<span class="gtkdoc opt">,</span>
-                                   my_closure_finalize<span class="gtkdoc opt">);</span>
-  <span class="keyword">return</span> my_closure<span class="gtkdoc opt">;</span>
-<span class="gtkdoc opt">}</span></pre></td>
+<span class="normal">  </span><span class="function"><a href="gobject-Closures.html#g-closure-add-finalize-notifier">g_closure_add_finalize_notifier</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="chapter-signal.html#closure">closure</a></span><span class="symbol">,</span><span class="normal"> notify_data</span><span class="symbol">,</span>
+<span class="normal">                                   my_closure_finalize</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="keyword">return</span><span class="normal"> my_closure</span><span class="symbol">;</span>
+<span class="cbracket">}</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -5122,6 +5122,6 @@ marshaller, see <a class="link" href="gobject-Closures.html#g-closure-set-marsha
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.26.1</div>
+<hr>Generated by GTK-Doc V1.27</div>
 </body>
 </html>
