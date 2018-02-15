@@ -1,4 +1,3 @@
-gmain-Partial-revert-of-recent-wakeup-changes-to-gmain.c.patch
 01_gettext-desktopfiles.patch
 07_disable_tests_on_slow_archs.patch
 81-skip-monitor-test-on-non-linux.patch
