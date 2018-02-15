@@ -1,4 +1,4 @@
-glib2.0 (2.55.2-1) UNRELEASED; urgency=medium
+glib2.0 (2.55.2-1) experimental; urgency=medium
 
   * debian/control{,.in}: Update Vcs-* to specify debian/experimental branch.
   * New upstream release 2.55.2:
@@ -9,7 +9,7 @@ glib2.0 (2.55.2-1) UNRELEASED; urgency=medium
     Drop, applied upstream in this release.
   * debian/libglib2.0-0.symbols: New symbols for 2.55.2
 
- -- Iain Lane <laney@debian.org>  Wed, 14 Feb 2018 13:50:51 +0000
+ -- Iain Lane <laney@debian.org>  Thu, 15 Feb 2018 10:23:05 +0000
 
 glib2.0 (2.55.1-1) experimental; urgency=medium
 
