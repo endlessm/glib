@@ -1,3 +1,11 @@
+glib2.0 (2.55.2-2) UNRELEASED; urgency=medium
+
+  * Merge changes from unstable, in particular:
+    + d/libglib2.0-dev.prerm: Add an empty prerm to make sure that we have a
+      way to recover from #887629 in stretch (Closes: #887863)
+
+ -- Iain Lane <laney@debian.org>  Thu, 15 Feb 2018 11:54:46 +0000
+
 glib2.0 (2.55.2-1) experimental; urgency=medium
 
   * debian/control{,.in}: Update Vcs-* to specify debian/experimental branch.
@@ -22,6 +30,20 @@ glib2.0 (2.55.1-1) experimental; urgency=medium
     in some cases resulted in incorrect answers on i386.
 
  -- Iain Lane <laney@debian.org>  Mon, 15 Jan 2018 12:26:35 +0000
+
+glib2.0 (2.54.3-2) unstable; urgency=medium
+
+  * Team upload
+  * d/libglib2.0-dev.prerm: Add an empty prerm to make sure that we have
+    a way to recover from #887629 in stretch (Closes: #887863)
+  * d/p/gdbus-threading-test-Allow-even-longer-for-test_method_ca.patch:
+    Mark as applied upstream
+  * d/p/gmain-Partial-revert-of-recent-wakeup-changes-to-gmain.c.patch:
+    Apply patch from upstream glib-2-54 branch to revert GWakeup changes
+    that appear to have broken WebKit and/or LibreOffice
+    (Closes: #887492)
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 22 Jan 2018 12:39:58 +0000
 
 glib2.0 (2.54.3-1) unstable; urgency=medium
 
