@@ -15,7 +15,7 @@ Bug-Ubuntu: https://launchpad.net/bugs/3935
  2 files changed, 76 insertions(+)
 
 diff --git a/glib/gkeyfile.c b/glib/gkeyfile.c
-index 732e05b..37af894 100644
+index 59730f7..a8d84dd 100644
 --- a/glib/gkeyfile.c
 +++ b/glib/gkeyfile.c
 @@ -511,6 +511,7 @@ struct _GKeyFile
@@ -147,10 +147,10 @@ index 732e05b..37af894 100644
     */
    if (!translated_value)
 diff --git a/glib/gkeyfile.h b/glib/gkeyfile.h
-index 7da7107..79f71a8 100644
+index 7849551..532da2b 100644
 --- a/glib/gkeyfile.h
 +++ b/glib/gkeyfile.h
-@@ -293,6 +293,7 @@ gboolean  g_key_file_remove_group           (GKeyFile             *key_file,
+@@ -298,6 +298,7 @@ gboolean  g_key_file_remove_group           (GKeyFile             *key_file,
  
  /* Defines for handling freedesktop.org Desktop files */
  #define G_KEY_FILE_DESKTOP_GROUP                "Desktop Entry"
@@ -158,7 +158,7 @@ index 7da7107..79f71a8 100644
  
  #define G_KEY_FILE_DESKTOP_KEY_TYPE             "Type"
  #define G_KEY_FILE_DESKTOP_KEY_VERSION          "Version"
-@@ -315,6 +316,9 @@ gboolean  g_key_file_remove_group           (GKeyFile             *key_file,
+@@ -320,6 +321,9 @@ gboolean  g_key_file_remove_group           (GKeyFile             *key_file,
  #define G_KEY_FILE_DESKTOP_KEY_URL              "URL"
  #define G_KEY_FILE_DESKTOP_KEY_DBUS_ACTIVATABLE "DBusActivatable"
  #define G_KEY_FILE_DESKTOP_KEY_ACTIONS          "Actions"

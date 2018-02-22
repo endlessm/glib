@@ -3,6 +3,13 @@ glib2.0 (2.55.2-2) UNRELEASED; urgency=medium
   * Merge changes from unstable, in particular:
     + d/libglib2.0-dev.prerm: Add an empty prerm to make sure that we have a
       way to recover from #887629 in stretch (Closes: #887863)
+  * d/p/0001-gdbus-tool-Ignore-unknown-options-for-the-emit-subco.patch,
+    d/p/0002-gdbus-tool-Make-dest-optional-for-emit-again.patch,
+    d/p/0003-gdbus-tool-Don-t-repeatedly-complete-signal.patch,
+    d/p/0004-gdbus-tool-Factor-out-common-GOptionContext-construc.patch:
+    Cherry-pick from upstream. Fix `gdbus emit' to not require `--dest', and
+    improve its bash completion. Should fix the dbus-test-runner autopkgtest,
+    which relied on this behaviour.
 
  -- Iain Lane <laney@debian.org>  Thu, 15 Feb 2018 11:54:46 +0000
 

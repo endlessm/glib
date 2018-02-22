@@ -1,3 +1,7 @@
+0001-gdbus-tool-Ignore-unknown-options-for-the-emit-subco.patch
+0002-gdbus-tool-Make-dest-optional-for-emit-again.patch
+0003-gdbus-tool-Don-t-repeatedly-complete-signal.patch
+0004-gdbus-tool-Factor-out-common-GOptionContext-construc.patch
 01_gettext-desktopfiles.patch
 07_disable_tests_on_slow_archs.patch
 81-skip-monitor-test-on-non-linux.patch

@@ -1,0 +1,110 @@
+From: Iain Lane <iain@orangesquash.org.uk>
+Date: Wed, 21 Feb 2018 12:22:08 +0000
+Subject: gdbus-tool: Make --dest optional for emit again
+
+Commit faf94409083f40ed096565b4f948852323bad697 made the bash completion more
+robust, but in doing so it made the optional --dest argument to `gdbus emit'
+mandatory by mistake.
+
+Remove the error case when --dest is not specified. To keep the completion
+working, we shuffle the cases around. --dest should be offered up for
+completion after --session/--system/--address have been supplied, so we can
+complete its argument. Additionally, if --dest isn't specified then we can't
+complete --object-path or --signal, so guard these completions accordingly.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=793597
+
+Origin: upstream, commit:2a2717062b879e1f9b30230ffe8e59fa6d54181c
+---
+ gio/gdbus-tool.c | 44 ++++++++++++++++++++++----------------------
+ 1 file changed, 22 insertions(+), 22 deletions(-)
+
+diff --git a/gio/gdbus-tool.c b/gio/gdbus-tool.c
+index e71f5ba..d8f098b 100644
+--- a/gio/gdbus-tool.c
++++ b/gio/gdbus-tool.c
+@@ -653,28 +653,24 @@ handle_emit (gint        *argc,
+       print_names (c, FALSE);
+       goto out;
+     }
+-  if (opt_emit_dest == NULL)
+-    {
+-      if (request_completion)
+-        g_print ("--dest \n");
+-      else
+-        g_printerr (_("Error: Destination is not specified\n"));
+-      goto out;
+-    }
+-  if (request_completion && g_strcmp0 ("--dest", completion_prev) == 0)
++  if (request_completion && opt_emit_dest != NULL && g_strcmp0 ("--dest", completion_prev) == 0)
+     {
+       print_names (c, g_str_has_prefix (opt_emit_dest, ":"));
+       goto out;
+     }
+ 
+-  if (!request_completion && !g_dbus_is_unique_name (opt_emit_dest))
++  if (!request_completion && opt_emit_dest != NULL && !g_dbus_is_unique_name (opt_emit_dest))
+     {
+       g_printerr (_("Error: %s is not a valid unique bus name.\n"), opt_emit_dest);
+       goto out;
+     }
+ 
++  if (opt_emit_dest == NULL && opt_emit_object_path == NULL && request_completion)
++    {
++      g_print ("--dest \n");
++    }
+   /* validate and complete object path */
+-  if (complete_paths)
++  if (opt_emit_dest != NULL && complete_paths)
+     {
+       print_paths (c, opt_emit_dest, "/");
+       goto out;
+@@ -689,17 +685,20 @@ handle_emit (gint        *argc,
+     }
+   if (request_completion && g_strcmp0 ("--object-path", completion_prev) == 0)
+     {
+-      gchar *p;
+-      s = g_strdup (opt_emit_object_path);
+-      p = strrchr (s, '/');
+-      if (p != NULL)
++      if (opt_emit_dest != NULL)
+         {
+-          if (p == s)
+-            p++;
+-          *p = '\0';
++          gchar *p;
++          s = g_strdup (opt_emit_object_path);
++          p = strrchr (s, '/');
++          if (p != NULL)
++            {
++              if (p == s)
++                p++;
++              *p = '\0';
++            }
++          print_paths (c, opt_emit_dest, s);
++          g_free (s);
+         }
+-      print_paths (c, opt_emit_dest, s);
+-      g_free (s);
+       goto out;
+     }
+   if (!request_completion && !g_variant_is_object_path (opt_emit_object_path))
+@@ -709,7 +708,7 @@ handle_emit (gint        *argc,
+     }
+ 
+   /* validate and complete signal (interface + signal name) */
+-  if (complete_signals)
++  if (opt_emit_dest != NULL && opt_emit_object_path != NULL && complete_signals)
+     {
+       print_methods_and_signals (c, opt_emit_dest, opt_emit_object_path, FALSE, TRUE);
+       goto out;
+@@ -722,7 +721,8 @@ handle_emit (gint        *argc,
+         g_printerr (_("Error: Signal name is not specified\n"));
+       goto out;
+     }
+-  if (request_completion && g_strcmp0 ("--signal", completion_prev) == 0)
++  if (request_completion && opt_emit_dest != NULL && opt_emit_object_path != NULL &&
++      g_strcmp0 ("--signal", completion_prev) == 0)
+     {
+       print_methods_and_signals (c, opt_emit_dest, opt_emit_object_path, FALSE, TRUE);
+       goto out;
