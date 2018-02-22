@@ -1,4 +1,4 @@
-glib2.0 (2.55.2-2) UNRELEASED; urgency=medium
+glib2.0 (2.55.2-2) experimental; urgency=medium
 
   * Merge changes from unstable, in particular:
     + d/libglib2.0-dev.prerm: Add an empty prerm to make sure that we have a
@@ -11,7 +11,7 @@ glib2.0 (2.55.2-2) UNRELEASED; urgency=medium
     improve its bash completion. Should fix the dbus-test-runner autopkgtest,
     which relied on this behaviour.
 
- -- Iain Lane <laney@debian.org>  Thu, 15 Feb 2018 11:54:46 +0000
+ -- Iain Lane <laney@debian.org>  Thu, 22 Feb 2018 10:02:17 +0000
 
 glib2.0 (2.55.2-1) experimental; urgency=medium
 
