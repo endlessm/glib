@@ -1,3 +1,12 @@
+glib2.0 (2.54.2-1endless2) unstable; urgency=medium
+
+  * Backport new utility functions:
+    - g_clear_handle_id(): https://bugzilla.gnome.org/show_bug.cgi?id=788489
+    - g_date_time_new_from_iso8601():
+      https://bugzilla.gnome.org/show_bug.cgi?id=753459
+
+ -- Philip Withnall <withnall@endlessm.com>  Fri, 09 Mar 2018 15:05:00 +0000
+
 glib2.0 (2.54.2-1endless1) unstable; urgency=medium
 
   * Backport structured logging changes to enable -Wformat warnings again

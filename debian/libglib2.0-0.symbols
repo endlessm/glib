@@ -2173,6 +2173,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_child_watch_source_new@Base 2.12.0
  g_chmod@Base 2.12.0
  g_clear_error@Base 2.12.0
+ g_clear_handle_id@Base 2.54.2-1endless2
  g_clear_pointer@Base 2.33.14
  g_close@Base 2.35.8
  g_completion_add_items@Base 2.12.0
@@ -2291,6 +2292,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_date_time_hash@Base 2.26.0
  g_date_time_is_daylight_savings@Base 2.26.0
  g_date_time_new@Base 2.26.0
+ g_date_time_new_from_iso8601@Base 2.54.2-1endless2
  g_date_time_new_from_timeval_local@Base 2.26.0
  g_date_time_new_from_timeval_utc@Base 2.26.0
  g_date_time_new_from_unix_local@Base 2.26.0
