@@ -1,5 +1,6 @@
-glib2.0 (2.56.0-1) UNRELEASED; urgency=medium
+glib2.0 (2.56.0-1) experimental; urgency=medium
 
+  * Team upload
   * New upstream stable release 2.56.0
   * d/p/000?-gdbus-tool-*.patch:
     Drop patches that came from upstream
@@ -9,7 +10,7 @@ glib2.0 (2.56.0-1) UNRELEASED; urgency=medium
     Cherry-pick GApplication ID fixes from upstream 2.56 branch
     (GNOME #793400)
 
- -- Simon McVittie <smcv@debian.org>  Tue, 13 Mar 2018 18:40:29 +0000
+ -- Simon McVittie <smcv@debian.org>  Tue, 13 Mar 2018 18:53:02 +0000
 
 glib2.0 (2.55.2-2) experimental; urgency=medium
 
