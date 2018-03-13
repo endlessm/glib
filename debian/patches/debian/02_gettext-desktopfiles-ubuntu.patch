@@ -12,7 +12,7 @@ Forwarded: no
  1 file changed, 20 insertions(+)
 
 diff --git a/glib/gkeyfile.c b/glib/gkeyfile.c
-index a8d84dd..3de78b3 100644
+index f1475d7..2b9021a 100644
 --- a/glib/gkeyfile.c
 +++ b/glib/gkeyfile.c
 @@ -885,6 +885,16 @@ g_key_file_load_from_fd (GKeyFile       *key_file,

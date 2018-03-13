@@ -14,10 +14,10 @@ Forwarded: not-needed, Debian-specific
  2 files changed, 27 insertions(+), 1 deletion(-)
 
 diff --git a/docs/reference/glib/running.xml b/docs/reference/glib/running.xml
-index a02ffa4..0f3e20c 100644
+index ef536f4..8f8fc30 100644
 --- a/docs/reference/glib/running.xml
 +++ b/docs/reference/glib/running.xml
-@@ -244,6 +244,24 @@ How to run and debug your GLib application
+@@ -254,6 +254,24 @@ How to run and debug your GLib application
    </para>
  </formalpara>
  

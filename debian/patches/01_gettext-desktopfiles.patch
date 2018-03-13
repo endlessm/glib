@@ -15,7 +15,7 @@ Bug-Ubuntu: https://launchpad.net/bugs/3935
  2 files changed, 76 insertions(+)
 
 diff --git a/glib/gkeyfile.c b/glib/gkeyfile.c
-index 59730f7..a8d84dd 100644
+index ae3bbbc..f1475d7 100644
 --- a/glib/gkeyfile.c
 +++ b/glib/gkeyfile.c
 @@ -511,6 +511,7 @@ struct _GKeyFile
