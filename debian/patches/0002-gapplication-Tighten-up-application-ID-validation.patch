@@ -1,0 +1,188 @@
+From: Philip Withnall <withnall@endlessm.com>
+Date: Wed, 28 Feb 2018 12:45:30 +0000
+Subject: gapplication: Tighten up application ID validation
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+
+VGlnaHRlbiB1cCB0aGUgdmFsaWRhdGlvbiBvZiBhcHBsaWNhdGlvbiBJRHMgc28gdGhleSBhcmUg
+YWx3YXlzIGV4YWN0bHkKRC1CdXMgd2VsbC1rbm93biBuYW1lcy4gVGhpcyBpcyBhIHNsaWdodCBj
+aGFuZ2UgdG8gdGhlIGFjY2VwdGVkIGZvcm1hdCwKYnV0IHNpbmNlIGFueW9uZSB1c2luZyB0aGUg
+QVBJIHdpdGggYW4gYXBwbGljYXRpb24gSUQgd2hpY2ggd2FzCnByZXZpb3VzbHkgdmFsaWQsIGJ1
+dCB3aGljaCB3YXMgbm90IGEgdmFsaWQgRC1CdXMgd2VsbC1rbm93biBuYW1lLCB3b3VsZApoYXZl
+IHJlY2VpdmVkIGFuIGVycm9yIGZyb20gRC1CdXMgd2hlbiB0aGVpciBhcHBsaWNhdGlvbiB0cmll
+ZCB0bwpyZWdpc3RlciBvbiB0aGUgYnVzLCBJIHRoaW5rIHRoaXMgYnJlYWsgaXMgYWNjZXB0YWJs
+ZS4KCkl0IHdpbGwgYWZmZWN0IGFueSBhcHBsaWNhdGlvbnMgd2hpY2ggaGF2ZSBhcHBsaWNhdGlv
+biBJRHMgd2hpY2ggYXJlIG5vdAp2YWxpZCBELUJ1cyB3ZWxsLWtub3duIG5hbWVzLCBhbmQgd2hp
+Y2ggdXNlIHRoZSBHX0FQUExJQ0FUSU9OX05PTl9VTklRVUUKZmxhZy4gRnJvbSBhIHF1aWNrIHNl
+YXJjaCBpbiBEZWJpYW4gQ29kZXNlYXJjaCwgbm8gQyBhcHBsaWNhdGlvbnMgdXNlCnRoYXQgZmxh
+Zy4KClVwZGF0ZSB0aGUgZG9jdW1lbnRhdGlvbiB0byB1c2UgdGhlIHJ1bGVzIGZyb20gdGhlIEQt
+QnVzIHNwZWNpZmljYXRpb24sCmluY2x1ZGluZyB0aGUgbGF0ZXN0IGFkdmljZSBkaXNjb3VyYWdp
+bmcgdXNlIG9mIGh5cGhlbnM6CgpodHRwczovL2RidXMuZnJlZWRlc2t0b3Aub3JnL2RvYy9kYnVz
+LXNwZWNpZmljYXRpb24uaHRtbCNtZXNzYWdlLXByb3RvY29sLW5hbWVzLWJ1cwoKVXBkYXRlIHRo
+ZSB0ZXN0czoKIOKAoiBBZGQgdGhlIGV4YW1wbGVzIGZyb20gdGhlIGRvY3VtZW50YXRpb24gdG8g
+dmFsaWRhdGUgdGhlbS4KIOKAoiBFc3BlY2lhbGx5IHRoZSB2ZW5lcmFibGUgNy16aXAub3JnIGV4
+YW1wbGUuCiDigKIgTW92ZSBhIGNvdXBsZSBvZiB0ZXN0cyBmcm9tIGV4cGVjdGVkLWZhaWx1cmUg
+dG8gZXhwZWN0ZWQtc3VjY2VzczoKICAgdGhleSBhcmUgdmFsaWQgRC1CdXMgd2VsbC1rbm93biBu
+YW1lcyBldmVuIGlmIHRoZXnigJlyZSBhIGJpdCB3ZWlyZC4KClNpZ25lZC1vZmYtYnk6IFBoaWxp
+cCBXaXRobmFsbCA8d2l0aG5hbGxAZW5kbGVzc20uY29tPgoKaHR0cHM6Ly9idWd6aWxsYS5nbm9t
+ZS5vcmcvc2hvd19idWcuY2dpP2lkPTc5MzQwMAooY2hlcnJ5IHBpY2tlZCBmcm9tIGNvbW1pdCA2
+Njk0OGFlMjMxZjc1YTU0OGM4YTJlYjdiM2E5ZDY0Y2ZkNzI4YjhlKQo=
+---
+ gio/gapplication.c       | 90 +++++++++++++++++++++---------------------------
+ gio/tests/gapplication.c |  9 +++--
+ 2 files changed, 46 insertions(+), 53 deletions(-)
+
+diff --git a/gio/gapplication.c b/gio/gapplication.c
+index 67e6c16..d4a0cd7 100644
+--- a/gio/gapplication.c
++++ b/gio/gapplication.c
+@@ -85,10 +85,11 @@
+  * instance and g_application_run() promptly returns. See the code
+  * examples below.
+  *
+- * If used, the expected form of an application identifier is very close
+- * to that of of a
+- * [D-Bus bus name](http://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-interface).
+- * Examples include: "com.example.MyApp", "org.example.internal-apps.Calculator".
++ * If used, the expected form of an application identifier is the same as
++ * that of of a
++ * [D-Bus well-known bus name](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-bus).
++ * Examples include: `com.example.MyApp`, `org.example.internal_apps.Calculator`,
++ * `org._7_zip.Archiver`.
+  * For details on valid application identifiers, see g_application_id_is_valid().
+  *
+  * On Linux, the application identifier is claimed as a well-known bus name
+@@ -1640,67 +1641,54 @@ g_application_class_init (GApplicationClass *class)
+  * A valid ID is required for calls to g_application_new() and
+  * g_application_set_application_id().
+  *
++ * Application identifiers follow the same format as
++ * [D-Bus well-known bus names](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-bus).
+  * For convenience, the restrictions on application identifiers are
+  * reproduced here:
+  *
+- * - Application identifiers must contain only the ASCII characters
+- *   "[A-Z][a-z][0-9]_-." and must not begin with a digit.
++ * - Application identifiers are composed of 1 or more elements separated by a
++ *   period (`.`) character. All elements must contain at least one character.
+  *
+- * - Application identifiers must contain at least one '.' (period)
+- *   character (and thus at least two elements).
++ * - Each element must only contain the ASCII characters `[A-Z][a-z][0-9]_-`,
++ *   with `-` discouraged in new application identifiers. Each element must not
++ *   begin with a digit.
+  *
+- * - Application identifiers must not begin or end with a '.' (period)
+- *   character.
++ * - Application identifiers must contain at least one `.` (period) character
++ *   (and thus at least two elements).
+  *
+- * - Application identifiers must not contain consecutive '.' (period)
+- *   characters.
++ * - Application identifiers must not begin with a `.` (period) character.
+  *
+  * - Application identifiers must not exceed 255 characters.
+  *
++ * Note that the hyphen (`-`) character is allowed in application identifiers,
++ * but is problematic or not allowed in various specifications and APIs that
++ * refer to D-Bus, such as
++ * [Flatpak application IDs](http://docs.flatpak.org/en/latest/introduction.html#identifiers),
++ * the
++ * [`DBusActivatable` interface in the Desktop Entry Specification](https://specifications.freedesktop.org/desktop-entry-spec/desktop-entry-spec-latest.html#dbus),
++ * and the convention that an application's "main" interface and object path
++ * resemble its application identifier and bus name. To avoid situations that
++ * require special-case handling, it is recommended that new application
++ * identifiers consistently replace hyphens with underscores.
++ *
++ * Like D-Bus interface names, application identifiers should start with the
++ * reversed DNS domain name of the author of the interface (in lower-case), and
++ * it is conventional for the rest of the application identifier to consist of
++ * words run together, with initial capital letters.
++ *
++ * As with D-Bus interface names, if the author's DNS domain name contains
++ * hyphen/minus characters they should be replaced by underscores, and if it
++ * contains leading digits they should be escaped by prepending an underscore.
++ * For example, if the owner of 7-zip.org used an application identifier for an
++ * archiving application, it might be named `org._7_zip.Archiver`.
++ *
+  * Returns: %TRUE if @application_id is valid
+  */
+ gboolean
+ g_application_id_is_valid (const gchar *application_id)
+ {
+-  gsize len;
+-  gboolean allow_dot;
+-  gboolean has_dot;
+-
+-  len = strlen (application_id);
+-
+-  if (len > 255)
+-    return FALSE;
+-
+-  if (!g_ascii_isalpha (application_id[0]))
+-    return FALSE;
+-
+-  if (application_id[len-1] == '.')
+-    return FALSE;
+-
+-  application_id++;
+-  allow_dot = TRUE;
+-  has_dot = FALSE;
+-  for (; *application_id; application_id++)
+-    {
+-      if (g_ascii_isalnum (*application_id) ||
+-          (*application_id == '-') ||
+-          (*application_id == '_'))
+-        {
+-          allow_dot = TRUE;
+-        }
+-      else if (allow_dot && *application_id == '.')
+-        {
+-          has_dot = TRUE;
+-          allow_dot = FALSE;
+-        }
+-      else
+-        return FALSE;
+-    }
+-
+-  if (!has_dot)
+-    return FALSE;
+-
+-  return TRUE;
++  return g_dbus_is_name (application_id) &&
++         !g_dbus_is_unique_name (application_id);
+ }
+ 
+ /* Public Constructor {{{1 */
+diff --git a/gio/tests/gapplication.c b/gio/tests/gapplication.c
+index 3e964c0..336135c 100644
+--- a/gio/tests/gapplication.c
++++ b/gio/tests/gapplication.c
+@@ -435,11 +435,10 @@ appid (void)
+   g_assert_false (g_application_id_is_valid ("a/b"));
+   g_assert_false (g_application_id_is_valid ("a\nb"));
+   g_assert_false (g_application_id_is_valid ("a\nb"));
+-  g_assert_false (g_application_id_is_valid ("_a.b"));
+-  g_assert_false (g_application_id_is_valid ("-a.b"));
+   g_assert_false (g_application_id_is_valid ("emoji_picker"));
+   g_assert_false (g_application_id_is_valid ("emoji-picker"));
+   g_assert_false (g_application_id_is_valid ("emojipicker"));
++  g_assert_false (g_application_id_is_valid ("my.Terminal.0123"));
+   id = g_new0 (gchar, 261);
+   memset (id, 'a', 260);
+   id[1] = '.';
+@@ -451,7 +450,13 @@ appid (void)
+   g_assert_true (g_application_id_is_valid ("A.B"));
+   g_assert_true (g_application_id_is_valid ("A-.B"));
+   g_assert_true (g_application_id_is_valid ("a_b.c-d"));
++  g_assert_true (g_application_id_is_valid ("_a.b"));
++  g_assert_true (g_application_id_is_valid ("-a.b"));
+   g_assert_true (g_application_id_is_valid ("org.gnome.SessionManager"));
++  g_assert_true (g_application_id_is_valid ("my.Terminal._0123"));
++  g_assert_true (g_application_id_is_valid ("com.example.MyApp"));
++  g_assert_true (g_application_id_is_valid ("com.example.internal_apps.Calculator"));
++  g_assert_true (g_application_id_is_valid ("org._7_zip.Archiver"));
+ }
+ 
+ static gboolean nodbus_activated;

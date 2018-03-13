@@ -4,6 +4,10 @@ glib2.0 (2.56.0-1) UNRELEASED; urgency=medium
   * d/p/000?-gdbus-tool-*.patch:
     Drop patches that came from upstream
   * Refresh remaining patches
+  * d/p/0001-tests-Use-modern-test-assertions-in-GApplication-tes.patch,
+    d/p/0002-gapplication-Tighten-up-application-ID-validation.patch:
+    Cherry-pick GApplication ID fixes from upstream 2.56 branch
+    (GNOME #793400)
 
  -- Simon McVittie <smcv@debian.org>  Tue, 13 Mar 2018 18:40:29 +0000
 
