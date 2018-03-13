@@ -4259,7 +4259,7 @@ g_variant_dict_unref (GVariantDict *dict)
  * returned.  If @endptr is non-%NULL then it is updated to point to the
  * first character after the format string.
  *
- * If @limit is non-%NULL then @limit (and any charater after it) will
+ * If @limit is non-%NULL then @limit (and any character after it) will
  * not be accessed and the effect is otherwise equivalent to if the
  * character at @limit were nul.
  *
@@ -5282,7 +5282,7 @@ g_variant_valist_get (const gchar **str,
  * GVariant *new_variant;
  *
  * new_variant = g_variant_new ("(t^as)",
- *                              /<!-- -->* This cast is required. *<!-- -->/
+ *                              // This cast is required.
  *                              (guint64) some_flags,
  *                              some_strings);
  * ]|
@@ -5854,6 +5854,13 @@ g_variant_deep_copy (GVariant *value)
  * It makes sense to call this function if you've received #GVariant
  * data from untrusted sources and you want to ensure your serialised
  * output is definitely in normal form.
+ *
+ * If @value is already in normal form, a new reference will be returned
+ * (which will be floating if @value is floating). If it is not in normal form,
+ * the newly created #GVariant will be returned with a single non-floating
+ * reference. Typically, g_variant_take_ref() should be called on the return
+ * value from this function to guarantee ownership of a single non-floating
+ * reference to it.
  *
  * Returns: (transfer full): a trusted #GVariant
  *

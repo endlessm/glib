@@ -64,7 +64,7 @@
  * duplicating, and manipulating strings.
  *
  * Note that the functions g_printf(), g_fprintf(), g_sprintf(),
- * g_snprintf(), g_vprintf(), g_vfprintf(), g_vsprintf() and g_vsnprintf()
+ * g_vprintf(), g_vfprintf(), g_vsprintf() and g_vasprintf()
  * are declared in the header `gprintf.h` which is not included in `glib.h`
  * (otherwise using `glib.h` would drag in `stdio.h`), so you'll have to
  * explicitly include `<glib/gprintf.h>` in order to use the GLib
@@ -703,7 +703,7 @@ g_ascii_strtod (const gchar *nptr,
   struct lconv *locale_data;
 #endif
   const char *decimal_point;
-  int decimal_point_len;
+  gsize decimal_point_len;
   const char *p, *decimal_point_pos;
   const char *end = NULL; /* Silence gcc */
   int strtod_errno;
@@ -920,7 +920,7 @@ g_ascii_formatd (gchar       *buffer,
   struct lconv *locale_data;
 #endif
   const char *decimal_point;
-  int decimal_point_len;
+  gsize decimal_point_len;
   gchar *p;
   int rest_len;
   gchar format_char;
@@ -980,8 +980,8 @@ g_ascii_formatd (gchar       *buffer,
           p++;
           if (decimal_point_len > 1)
             {
-              rest_len = strlen (p + (decimal_point_len-1));
-              memmove (p, p + (decimal_point_len-1), rest_len);
+              rest_len = strlen (p + (decimal_point_len - 1));
+              memmove (p, p + (decimal_point_len - 1), rest_len);
               p[rest_len] = 0;
             }
         }
@@ -1522,9 +1522,9 @@ g_ascii_strdown (const gchar *str,
   g_return_val_if_fail (str != NULL, NULL);
 
   if (len < 0)
-    len = strlen (str);
+    len = (gssize) strlen (str);
 
-  result = g_strndup (str, len);
+  result = g_strndup (str, (gsize) len);
   for (s = result; *s; s++)
     *s = g_ascii_tolower (*s);
 
@@ -1552,9 +1552,9 @@ g_ascii_strup (const gchar *str,
   g_return_val_if_fail (str != NULL, NULL);
 
   if (len < 0)
-    len = strlen (str);
+    len = (gssize) strlen (str);
 
-  result = g_strndup (str, len);
+  result = g_strndup (str, (gsize) len);
   for (s = result; *s; s++)
     *s = g_ascii_toupper (*s);
 
@@ -2841,8 +2841,8 @@ gboolean
 g_str_has_suffix (const gchar *str,
                   const gchar *suffix)
 {
-  int str_len;
-  int suffix_len;
+  gsize str_len;
+  gsize suffix_len;
 
   g_return_val_if_fail (str != NULL, FALSE);
   g_return_val_if_fail (suffix != NULL, FALSE);
@@ -3095,11 +3095,11 @@ g_str_tokenize_and_fold (const gchar   *string,
  * call g_str_tokenize_and_fold() on the search term and
  * perform lookups into that index.
  *
- * As some examples, searching for "fred" would match the potential hit
- * "Smith, Fred" and also "Frédéric".  Searching for "Fréd" would match
- * "Frédéric" but not "Frederic" (due to the one-directional nature of
- * accent matching).  Searching "fo" would match "Foo" and "Bar Foo
- * Baz", but not "SFO" (because no word as "fo" as a prefix).
+ * As some examples, searching for ‘fred’ would match the potential hit
+ * ‘Smith, Fred’ and also ‘Frédéric’.  Searching for ‘Fréd’ would match
+ * ‘Frédéric’ but not ‘Frederic’ (due to the one-directional nature of
+ * accent matching).  Searching ‘fo’ would match ‘Foo’ and ‘Bar Foo
+ * Baz’, but not ‘SFO’ (because no word has ‘fo’ as a prefix).
  *
  * Returns: %TRUE if @potential_hit is a hit
  *

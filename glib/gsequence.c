@@ -61,6 +61,12 @@
  * g_sequence_move_range() will not invalidate the iterators pointing
  * to it. The only operation that will invalidate an iterator is when
  * the element it points to is removed from any sequence.
+ *
+ * To sort the data, either use g_sequence_insert_sorted() or
+ * g_sequence_insert_sorted_iter() to add data to the #GSequence or, if
+ * you want to add a large amount of data, it is more efficient to call
+ * g_sequence_sort() or g_sequence_sort_iter() after doing unsorted
+ * insertions.
  */
 
 /**
@@ -175,10 +181,11 @@ get_sequence (GSequenceNode *node)
   return (GSequence *)node_get_last (node)->data;
 }
 
-static void
-check_iter_access (GSequenceIter *iter)
+static gboolean
+seq_is_end (GSequence     *seq,
+            GSequenceIter *iter)
 {
-  check_seq_access (get_sequence (iter));
+  return seq->end_node == iter;
 }
 
 static gboolean
@@ -294,7 +301,8 @@ g_sequence_free (GSequence *seq)
  * @user_data: user data passed to @func
  *
  * Calls @func for each item in the range (@begin, @end) passing
- * @user_data to the function.
+ * @user_data to the function. @func must not modify the sequence
+ * itself.
  *
  * Since: 2.14
  */
@@ -335,7 +343,7 @@ g_sequence_foreach_range (GSequenceIter *begin,
  * @user_data: user data passed to @func
  *
  * Calls @func for each item in the sequence passing @user_data
- * to the function.
+ * to the function. @func must not modify the sequence itself.
  *
  * Since: 2.14
  */
@@ -411,13 +419,17 @@ g_sequence_iter_compare (GSequenceIter *a,
                          GSequenceIter *b)
 {
   gint a_pos, b_pos;
+  GSequence *seq_a, *seq_b;
 
   g_return_val_if_fail (a != NULL, 0);
   g_return_val_if_fail (b != NULL, 0);
-  g_return_val_if_fail (get_sequence (a) == get_sequence (b), 0);
 
-  check_iter_access (a);
-  check_iter_access (b);
+  seq_a = get_sequence (a);
+  seq_b = get_sequence (b);
+  g_return_val_if_fail (seq_a == seq_b, 0);
+
+  check_seq_access (seq_a);
+  check_seq_access (seq_b);
 
   a_pos = node_get_pos (a);
   b_pos = node_get_pos (b);
@@ -501,11 +513,13 @@ GSequenceIter *
 g_sequence_insert_before (GSequenceIter *iter,
                           gpointer       data)
 {
+  GSequence *seq;
   GSequenceNode *node;
 
   g_return_val_if_fail (iter != NULL, NULL);
 
-  check_iter_access (iter);
+  seq = get_sequence (iter);
+  check_seq_access (seq);
 
   node = node_new (data);
 
@@ -532,11 +546,11 @@ g_sequence_remove (GSequenceIter *iter)
   GSequence *seq;
 
   g_return_if_fail (iter != NULL);
-  g_return_if_fail (!is_end (iter));
-
-  check_iter_access (iter);
 
   seq = get_sequence (iter);
+  g_return_if_fail (!seq_is_end (seq, iter));
+
+  check_seq_access (seq);
 
   node_unlink (iter);
   node_free (iter, seq);
@@ -558,10 +572,12 @@ void
 g_sequence_remove_range (GSequenceIter *begin,
                          GSequenceIter *end)
 {
-  g_return_if_fail (get_sequence (begin) == get_sequence (end));
+  GSequence *seq_begin, *seq_end;
 
-  check_iter_access (begin);
-  check_iter_access (end);
+  seq_begin = get_sequence (begin);
+  seq_end = get_sequence (end);
+  g_return_if_fail (seq_begin == seq_end);
+  /* check_seq_access() calls are done by g_sequence_move_range() */
 
   g_sequence_move_range (NULL, begin, end);
 }
@@ -588,20 +604,25 @@ g_sequence_move_range (GSequenceIter *dest,
                        GSequenceIter *begin,
                        GSequenceIter *end)
 {
-  GSequence *src_seq;
+  GSequence *src_seq, *end_seq, *dest_seq;
   GSequenceNode *first;
 
   g_return_if_fail (begin != NULL);
   g_return_if_fail (end != NULL);
 
-  check_iter_access (begin);
-  check_iter_access (end);
-  if (dest)
-    check_iter_access (dest);
-
   src_seq = get_sequence (begin);
+  check_seq_access (src_seq);
 
-  g_return_if_fail (src_seq == get_sequence (end));
+  end_seq = get_sequence (end);
+  check_seq_access (end_seq);
+
+  if (dest)
+    {
+      dest_seq = get_sequence (dest);
+      check_seq_access (dest_seq);
+    }
+
+  g_return_if_fail (src_seq == end_seq);
 
   /* Dest points to begin or end? */
   if (dest == begin || dest == end)
@@ -612,14 +633,12 @@ g_sequence_move_range (GSequenceIter *dest,
     return;
 
   /* dest points somewhere in the (begin, end) range? */
-  if (dest && get_sequence (dest) == src_seq &&
+  if (dest && dest_seq == src_seq &&
       g_sequence_iter_compare (dest, begin) > 0 &&
       g_sequence_iter_compare (dest, end) < 0)
     {
       return;
     }
-
-  src_seq = get_sequence (begin);
 
   first = node_get_first (begin);
 
@@ -694,6 +713,10 @@ g_sequence_sort (GSequence        *seq,
  * if the first item comes before the second, and a positive value
  * if the second  item comes before the first.
  *
+ * Note that when adding a large amount of data to a #GSequence,
+ * it is more efficient to do unsorted insertions and then call
+ * g_sequence_sort() or g_sequence_sort_iter().
+ *
  * Returns: (transfer none): a #GSequenceIter pointing to the new item.
  *
  * Since: 2.14
@@ -740,14 +763,18 @@ g_sequence_sort_changed (GSequenceIter    *iter,
                          GCompareDataFunc  cmp_func,
                          gpointer          cmp_data)
 {
+  GSequence *seq;
   SortInfo info;
 
-  g_return_if_fail (!is_end (iter));
+  g_return_if_fail (iter != NULL);
+
+  seq = get_sequence (iter);
+  /* check_seq_access() call is done by g_sequence_sort_changed_iter() */
+  g_return_if_fail (!seq_is_end (seq, iter));
 
   info.cmp_func = cmp_func;
   info.cmp_data = cmp_data;
-  info.end_node = get_sequence (iter)->end_node;
-  check_iter_access (iter);
+  info.end_node = seq->end_node;
 
   g_sequence_sort_changed_iter (iter, iter_compare, &info);
 }
@@ -771,10 +798,7 @@ g_sequence_sort_changed (GSequenceIter    *iter,
  * consider using g_sequence_lookup().
  *
  * This function will fail if the data contained in the sequence is
- * unsorted.  Use g_sequence_insert_sorted() or
- * g_sequence_insert_sorted_iter() to add data to your sequence or, if
- * you want to add a large amount of data, call g_sequence_sort() after
- * doing unsorted insertions.
+ * unsorted.
  *
  * Returns: (transfer none): an #GSequenceIter pointing to the position where @data
  *     would have been inserted according to @cmp_func and @cmp_data
@@ -818,10 +842,7 @@ g_sequence_search (GSequence        *seq,
  * the second item comes before the first.
  *
  * This function will fail if the data contained in the sequence is
- * unsorted.  Use g_sequence_insert_sorted() or
- * g_sequence_insert_sorted_iter() to add data to your sequence or, if
- * you want to add a large amount of data, call g_sequence_sort() after
- * doing unsorted insertions.
+ * unsorted.
  *
  * Returns: (transfer none) (nullable): an #GSequenceIter pointing to the position of the
  *     first item found equal to @data according to @cmp_func and
@@ -927,9 +948,12 @@ g_sequence_sort_changed_iter (GSequenceIter            *iter,
   GSequenceIter *next, *prev;
 
   g_return_if_fail (iter != NULL);
-  g_return_if_fail (!is_end (iter));
   g_return_if_fail (iter_cmp != NULL);
-  check_iter_access (iter);
+
+  seq = get_sequence (iter);
+  g_return_if_fail (!seq_is_end (seq, iter));
+
+  check_seq_access (seq);
 
   /* If one of the neighbours is equal to iter, then
    * don't move it. This ensures that sort_changed() is
@@ -944,8 +968,6 @@ g_sequence_sort_changed_iter (GSequenceIter            *iter,
 
   if (!is_end (next) && iter_cmp (next, iter, cmp_data) == 0)
     return;
-
-  seq = get_sequence (iter);
 
   seq->access_prohibited = TRUE;
 
@@ -983,6 +1005,10 @@ g_sequence_sort_changed_iter (GSequenceIter            *iter,
  * return 0 if the iterators are equal, a negative value if the
  * first iterator comes before the second, and a positive value
  * if the second iterator comes before the first.
+ *
+ * Note that when adding a large amount of data to a #GSequence,
+ * it is more efficient to do unsorted insertions and then call
+ * g_sequence_sort() or g_sequence_sort_iter().
  *
  * Returns: (transfer none): a #GSequenceIter pointing to the new item
  *
@@ -1050,10 +1076,7 @@ g_sequence_insert_sorted_iter (GSequence                *seq,
  * consider using g_sequence_lookup_iter().
  *
  * This function will fail if the data contained in the sequence is
- * unsorted.  Use g_sequence_insert_sorted() or
- * g_sequence_insert_sorted_iter() to add data to your sequence or, if
- * you want to add a large amount of data, call g_sequence_sort() after
- * doing unsorted insertions.
+ * unsorted.
  *
  * Returns: (transfer none): a #GSequenceIter pointing to the position in @seq
  *     where @data would have been inserted according to @iter_cmp
@@ -1108,10 +1131,7 @@ g_sequence_search_iter (GSequence                *seq,
  * value if the second iterator comes before the first.
  *
  * This function will fail if the data contained in the sequence is
- * unsorted.  Use g_sequence_insert_sorted() or
- * g_sequence_insert_sorted_iter() to add data to your sequence or, if
- * you want to add a large amount of data, call g_sequence_sort() after
- * doing unsorted insertions.
+ * unsorted.
  *
  * Returns: (transfer none) (nullable): an #GSequenceIter pointing to the position of
  *     the first item found equal to @data according to @cmp_func
@@ -1212,9 +1232,9 @@ g_sequence_set (GSequenceIter *iter,
   GSequence *seq;
 
   g_return_if_fail (iter != NULL);
-  g_return_if_fail (!is_end (iter));
 
   seq = get_sequence (iter);
+  g_return_if_fail (!seq_is_end (seq, iter));
 
   /* If @data is identical to iter->data, it is destroyed
    * here. This will work right in case of ref-counted objects. Also

@@ -194,6 +194,7 @@
    <File RelativePath="..\..\gio\ginputstream.c" />
    <File RelativePath="..\..\gio\gioerror.c" />
    <File RelativePath="..\..\gio\giomodule.c" />
+   <File RelativePath="..\..\gio\giomodule-priv.c" />
    <File RelativePath="..\..\gio\gioscheduler.c" />
    <File RelativePath="..\..\gio\giostream.c" />
    <File RelativePath="..\..\gio\gloadableicon.c" />
@@ -332,6 +333,7 @@
    <File RelativePath="..\..\gio\gwin32volumemonitor.c" />
    <File RelativePath="..\..\gio\gwin32inputstream.c" />
    <File RelativePath="..\..\gio\gwin32outputstream.c" />
+   <File RelativePath="..\..\gio\gwin32networkmonitor.c" />
    <File RelativePath="..\..\gio\gwin32appinfo.c" />
    <File RelativePath="..\..\gio\gcontenttype-win32.c" />
    <File RelativePath="..\..\gio\gregistrysettingsbackend.c" />

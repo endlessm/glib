@@ -136,9 +136,9 @@ g_app_info_dup (GAppInfo *appinfo)
  *
  * Checks if two #GAppInfos are equal.
  *
- * Note that the check <em>may not</em> compare each individual field, and
- * only does an identity check. In case detecting changes in the contents
- * is needed, program code must additionally compare relevant fields.
+ * Note that the check <emphasis>may not</emphasis> compare each individual
+ * field, and only does an identity check. In case detecting changes in the 
+ * contents is needed, program code must additionally compare relevant fields.
  *
  * Returns: %TRUE if @appinfo1 is equal to @appinfo2. %FALSE otherwise.
  **/
@@ -536,11 +536,11 @@ g_app_info_get_icon (GAppInfo *appinfo)
  * g_app_info_launch:
  * @appinfo: a #GAppInfo
  * @files: (nullable) (element-type GFile): a #GList of #GFile objects
- * @launch_context: (nullable): a #GAppLaunchContext or %NULL
+ * @context: (nullable): a #GAppLaunchContext or %NULL
  * @error: a #GError
  * 
  * Launches the application. Passes @files to the launched application
- * as arguments, using the optional @launch_context to get information
+ * as arguments, using the optional @context to get information
  * about the details of the launcher (like what screen it is on).
  * On error, @error will be set accordingly.
  *
@@ -565,7 +565,7 @@ g_app_info_get_icon (GAppInfo *appinfo)
  * process. This can be used to ignore `GIO_LAUNCHED_DESKTOP_FILE`,
  * should it be inherited by further processes. The `DISPLAY` and
  * `DESKTOP_STARTUP_ID` environment variables are also set, based
- * on information provided in @launch_context.
+ * on information provided in @context.
  *
  * Returns: %TRUE on successful launch, %FALSE otherwise.
  **/
@@ -631,11 +631,11 @@ g_app_info_supports_files (GAppInfo *appinfo)
  * g_app_info_launch_uris:
  * @appinfo: a #GAppInfo
  * @uris: (nullable) (element-type utf8): a #GList containing URIs to launch.
- * @launch_context: (nullable): a #GAppLaunchContext or %NULL
+ * @context: (nullable): a #GAppLaunchContext or %NULL
  * @error: a #GError
  * 
  * Launches the application. This passes the @uris to the launched application
- * as arguments, using the optional @launch_context to get information
+ * as arguments, using the optional @context to get information
  * about the details of the launcher (like what screen it is on).
  * On error, @error will be set accordingly.
  *
@@ -727,7 +727,7 @@ launch_default_for_uri (const char         *uri,
 /**
  * g_app_info_launch_default_for_uri:
  * @uri: the uri to show
- * @launch_context: (nullable): an optional #GAppLaunchContext
+ * @context: (nullable): an optional #GAppLaunchContext
  * @error: (nullable): return location for an error, or %NULL
  *
  * Utility function that launches the default application
@@ -768,7 +768,7 @@ g_app_info_launch_default_for_uri (const char         *uri,
  * g_app_info_launch_default_for_uri_async:
  * @uri: the uri to show
  * @context: (nullable): an optional #GAppLaunchContext
- * cancellable: (nullable): a #GCancellable
+ * @cancellable: (nullable): a #GCancellable
  * @callback: (nullable): a #GASyncReadyCallback to call when the request is done
  * @user_data: (nullable): data to pass to @callback
  *
@@ -987,8 +987,8 @@ g_app_launch_context_init (GAppLaunchContext *context)
 /**
  * g_app_launch_context_setenv:
  * @context: a #GAppLaunchContext
- * @variable: the environment variable to set
- * @value: the value for to set the variable to.
+ * @variable: (type filename): the environment variable to set
+ * @value: (type filename): the value for to set the variable to.
  *
  * Arranges for @variable to be set to @value in the child's
  * environment when @context is used to launch an application.
@@ -1010,7 +1010,7 @@ g_app_launch_context_setenv (GAppLaunchContext *context,
 /**
  * g_app_launch_context_unsetenv:
  * @context: a #GAppLaunchContext
- * @variable: the environment variable to remove
+ * @variable: (type filename): the environment variable to remove
  *
  * Arranges for @variable to be unset in the child's environment
  * when @context is used to launch an application.
@@ -1037,8 +1037,8 @@ g_app_launch_context_unsetenv (GAppLaunchContext *context,
  * This is a %NULL-terminated array of strings, where each string has
  * the form `KEY=VALUE`.
  *
- * Returns: (array zero-terminated=1) (transfer full): the
- *     child's environment
+ * Returns: (array zero-terminated=1) (element-type filename) (transfer full):
+ *     the child's environment
  *
  * Since: 2.32
  */

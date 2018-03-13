@@ -58,6 +58,7 @@
    <ClCompile Include="..\..\gio\ginputstream.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\gio\gioerror.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\gio\giomodule.c"><Filter>Source Files</Filter></ClCompile>
+   <ClCompile Include="..\..\gio\giomodule-priv.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\gio\gioscheduler.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\gio\giostream.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\gio\gloadableicon.c"><Filter>Source Files</Filter></ClCompile>
@@ -196,6 +197,7 @@
    <ClCompile Include="..\..\gio\gwin32volumemonitor.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\gio\gwin32inputstream.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\gio\gwin32outputstream.c"><Filter>Source Files</Filter></ClCompile>
+   <ClCompile Include="..\..\gio\gwin32networkmonitor.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\gio\gwin32appinfo.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\gio\gcontenttype-win32.c"><Filter>Source Files</Filter></ClCompile>
    <ClCompile Include="..\..\gio\gregistrysettingsbackend.c"><Filter>Source Files</Filter></ClCompile>

@@ -252,21 +252,24 @@ am__libglib_2_0_la_SOURCES_DIST = deprecated/gallocator.c \
 	gmarkup.c gmem.c gmessages.c gmirroringtable.h gnode.c \
 	goption.c gpattern.c gpoll.c gprimes.c gqsort.c gquark.c \
 	gqueue.c grand.c gregex.c gscanner.c gscripttable.h \
-	gsequence.c gshell.c gslice.c gslist.c gstdio.c gstrfuncs.c \
-	gstring.c gstringchunk.c gtestutils.c gthread.c \
-	gthreadprivate.h gthreadpool.c gtimer.c gtimezone.c \
-	gtranslit.c gtranslit-data.h gtrashstack.c gtree.c guniprop.c \
-	gutf8.c gunibreak.h gunibreak.c gunichartables.h gunicollate.c \
-	gunicomp.h gunidecomp.h gunidecomp.c gunicodeprivate.h \
-	gurifuncs.c gutils.c guuid.c gvariant.h gvariant.c \
-	gvariant-core.h gvariant-core.c gvariant-internal.h \
+	gsequence.c gshell.c gslice.c gslist.c gstdio.c \
+	gstdioprivate.h gstrfuncs.c gstring.c gstringchunk.c \
+	gtestutils.c gthread.c gthreadprivate.h gthreadpool.c gtimer.c \
+	gtimezone.c gtranslit.c gtranslit-data.h gtrashstack.c gtree.c \
+	guniprop.c gutf8.c gunibreak.h gunibreak.c gunichartables.h \
+	gunicollate.c gunicomp.h gunidecomp.h gunidecomp.c \
+	gunicodeprivate.h gurifuncs.c gutils.c guuid.c gvariant.h \
+	gvariant.c gvariant-core.h gvariant-core.c gvariant-internal.h \
 	gvariant-parser.c gvariant-serialiser.h gvariant-serialiser.c \
 	gvarianttypeinfo.h gvarianttypeinfo.c gvarianttype.c \
 	gversion.c gwakeup.h gwakeup.c gprintf.c gprintfint.h \
 	valgrind.h glib-unix.c gthread-win32.c gthread-posix.c
-am__objects_1 = libglib_2_0_la-gallocator.lo libglib_2_0_la-gcache.lo \
-	libglib_2_0_la-gcompletion.lo libglib_2_0_la-grel.lo \
-	libglib_2_0_la-gthread-deprecated.lo
+am__dirstamp = $(am__leading_dot)dirstamp
+am__objects_1 = deprecated/libglib_2_0_la-gallocator.lo \
+	deprecated/libglib_2_0_la-gcache.lo \
+	deprecated/libglib_2_0_la-gcompletion.lo \
+	deprecated/libglib_2_0_la-grel.lo \
+	deprecated/libglib_2_0_la-gthread-deprecated.lo
 @OS_UNIX_TRUE@am__objects_2 = libglib_2_0_la-glib-unix.lo
 @THREADS_WIN32_TRUE@am__objects_3 = libglib_2_0_la-gthread-win32.lo
 @THREADS_POSIX_TRUE@@THREADS_WIN32_FALSE@am__objects_4 = libglib_2_0_la-gthread-posix.lo
@@ -701,6 +704,7 @@ GIO = @GIO@
 GIO_MODULE_DIR = @GIO_MODULE_DIR@
 GLIBC21 = @GLIBC21@
 GLIB_BINARY_AGE = @GLIB_BINARY_AGE@
+GLIB_CHARSETALIAS_DIR = @GLIB_CHARSETALIAS_DIR@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
 GLIB_HIDDEN_VISIBILITY_CFLAGS = @GLIB_HIDDEN_VISIBILITY_CFLAGS@
@@ -740,7 +744,6 @@ G_THREAD_LIBS_EXTRA = @G_THREAD_LIBS_EXTRA@
 G_THREAD_LIBS_FOR_GTHREAD = @G_THREAD_LIBS_FOR_GTHREAD@
 HTML_DIR = @HTML_DIR@
 ICONV_LIBS = @ICONV_LIBS@
-INDENT = @INDENT@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -800,7 +803,6 @@ PCRE_LIBS = @PCRE_LIBS@
 PCRE_REQUIRES = @PCRE_REQUIRES@
 PCRE_WARN_CFLAGS = @PCRE_WARN_CFLAGS@
 PERL = @PERL@
-PERL_PATH = @PERL_PATH@
 PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
@@ -815,7 +817,6 @@ PYTHON_PLATFORM = @PYTHON_PLATFORM@
 PYTHON_PREFIX = @PYTHON_PREFIX@
 PYTHON_VERSION = @PYTHON_VERSION@
 RANLIB = @RANLIB@
-REBUILD = @REBUILD@
 SED = @SED@
 SELINUX_LIBS = @SELINUX_LIBS@
 SET_MAKE = @SET_MAKE@
@@ -1052,14 +1053,14 @@ libglib_2_0_la_SOURCES = $(deprecated_sources) glib_probes.d garray.c \
 	gmarkup.c gmem.c gmessages.c gmirroringtable.h gnode.c \
 	goption.c gpattern.c gpoll.c gprimes.c gqsort.c gquark.c \
 	gqueue.c grand.c gregex.c gscanner.c gscripttable.h \
-	gsequence.c gshell.c gslice.c gslist.c gstdio.c gstrfuncs.c \
-	gstring.c gstringchunk.c gtestutils.c gthread.c \
-	gthreadprivate.h gthreadpool.c gtimer.c gtimezone.c \
-	gtranslit.c gtranslit-data.h gtrashstack.c gtree.c guniprop.c \
-	gutf8.c gunibreak.h gunibreak.c gunichartables.h gunicollate.c \
-	gunicomp.h gunidecomp.h gunidecomp.c gunicodeprivate.h \
-	gurifuncs.c gutils.c guuid.c gvariant.h gvariant.c \
-	gvariant-core.h gvariant-core.c gvariant-internal.h \
+	gsequence.c gshell.c gslice.c gslist.c gstdio.c \
+	gstdioprivate.h gstrfuncs.c gstring.c gstringchunk.c \
+	gtestutils.c gthread.c gthreadprivate.h gthreadpool.c gtimer.c \
+	gtimezone.c gtranslit.c gtranslit-data.h gtrashstack.c gtree.c \
+	guniprop.c gutf8.c gunibreak.h gunibreak.c gunichartables.h \
+	gunicollate.c gunicomp.h gunidecomp.h gunidecomp.c \
+	gunicodeprivate.h gurifuncs.c gutils.c guuid.c gvariant.h \
+	gvariant.c gvariant-core.h gvariant-core.c gvariant-internal.h \
 	gvariant-parser.c gvariant-serialiser.h gvariant-serialiser.c \
 	gvarianttypeinfo.h gvarianttypeinfo.c gvarianttype.c \
 	gversion.c gwakeup.h gwakeup.c gprintf.c gprintfint.h \
@@ -1356,6 +1357,23 @@ clean-noinstLTLIBRARIES:
 	  echo rm -f $${locs}; \
 	  rm -f $${locs}; \
 	}
+deprecated/$(am__dirstamp):
+	@$(MKDIR_P) deprecated
+	@: > deprecated/$(am__dirstamp)
+deprecated/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) deprecated/$(DEPDIR)
+	@: > deprecated/$(DEPDIR)/$(am__dirstamp)
+deprecated/libglib_2_0_la-gallocator.lo: deprecated/$(am__dirstamp) \
+	deprecated/$(DEPDIR)/$(am__dirstamp)
+deprecated/libglib_2_0_la-gcache.lo: deprecated/$(am__dirstamp) \
+	deprecated/$(DEPDIR)/$(am__dirstamp)
+deprecated/libglib_2_0_la-gcompletion.lo: deprecated/$(am__dirstamp) \
+	deprecated/$(DEPDIR)/$(am__dirstamp)
+deprecated/libglib_2_0_la-grel.lo: deprecated/$(am__dirstamp) \
+	deprecated/$(DEPDIR)/$(am__dirstamp)
+deprecated/libglib_2_0_la-gthread-deprecated.lo:  \
+	deprecated/$(am__dirstamp) \
+	deprecated/$(DEPDIR)/$(am__dirstamp)
 
 libglib-2.0.la: $(libglib_2_0_la_OBJECTS) $(libglib_2_0_la_DEPENDENCIES) $(EXTRA_libglib_2_0_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(libglib_2_0_la_LINK) -rpath $(libdir) $(libglib_2_0_la_OBJECTS) $(libglib_2_0_la_LIBADD) $(LIBS)
@@ -1568,6 +1586,8 @@ uninstall-installed_testSCRIPTS:
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
+	-rm -f deprecated/*.$(OBJEXT)
+	-rm -f deprecated/*.lo
 
 distclean-compile:
 	-rm -f *.tab.c
@@ -1577,7 +1597,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gspawn-win64-helper-console.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gspawn-win64-helper.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtester.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gallocator.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-garray.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gasyncqueue.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gatomic.Plo@am__quote@
@@ -1586,10 +1605,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gbitlock.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gbookmarkfile.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gbytes.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gcache.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gcharset.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gchecksum.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gcompletion.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gconvert.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gdataset.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gdate.Plo@am__quote@
@@ -1627,7 +1644,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gqueue.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-grand.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gregex.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-grel.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gscanner.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gsequence.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gshell.Plo@am__quote@
@@ -1640,7 +1656,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gstring.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gstringchunk.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gtestutils.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gthread-deprecated.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gthread-posix.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gthread-win32.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gthread.Plo@am__quote@
@@ -1667,62 +1682,70 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gversion.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gwakeup.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libglib_2_0_la-gwin32.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@deprecated/$(DEPDIR)/libglib_2_0_la-gallocator.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@deprecated/$(DEPDIR)/libglib_2_0_la-gcache.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@deprecated/$(DEPDIR)/libglib_2_0_la-gcompletion.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@deprecated/$(DEPDIR)/libglib_2_0_la-grel.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@deprecated/$(DEPDIR)/libglib_2_0_la-gthread-deprecated.Plo@am__quote@
 
 .c.o:
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
+@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
+@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ $<
 
 .c.obj:
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+@am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.obj$$||'`;\
+@am__fastdepCC_TRUE@	$(COMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ `$(CYGPATH_W) '$<'` &&\
+@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Po
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(COMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
 .c.lo:
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LTCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
+@am__fastdepCC_TRUE@	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.lo$$||'`;\
+@am__fastdepCC_TRUE@	$(LTCOMPILE) -MT $@ -MD -MP -MF $$depbase.Tpo -c -o $@ $< &&\
+@am__fastdepCC_TRUE@	$(am__mv) $$depbase.Tpo $$depbase.Plo
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LTCOMPILE) -c -o $@ $<
 
-libglib_2_0_la-gallocator.lo: deprecated/gallocator.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gallocator.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gallocator.Tpo -c -o libglib_2_0_la-gallocator.lo `test -f 'deprecated/gallocator.c' || echo '$(srcdir)/'`deprecated/gallocator.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gallocator.Tpo $(DEPDIR)/libglib_2_0_la-gallocator.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gallocator.c' object='libglib_2_0_la-gallocator.lo' libtool=yes @AMDEPBACKSLASH@
+deprecated/libglib_2_0_la-gallocator.lo: deprecated/gallocator.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT deprecated/libglib_2_0_la-gallocator.lo -MD -MP -MF deprecated/$(DEPDIR)/libglib_2_0_la-gallocator.Tpo -c -o deprecated/libglib_2_0_la-gallocator.lo `test -f 'deprecated/gallocator.c' || echo '$(srcdir)/'`deprecated/gallocator.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) deprecated/$(DEPDIR)/libglib_2_0_la-gallocator.Tpo deprecated/$(DEPDIR)/libglib_2_0_la-gallocator.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gallocator.c' object='deprecated/libglib_2_0_la-gallocator.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gallocator.lo `test -f 'deprecated/gallocator.c' || echo '$(srcdir)/'`deprecated/gallocator.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o deprecated/libglib_2_0_la-gallocator.lo `test -f 'deprecated/gallocator.c' || echo '$(srcdir)/'`deprecated/gallocator.c
 
-libglib_2_0_la-gcache.lo: deprecated/gcache.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gcache.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gcache.Tpo -c -o libglib_2_0_la-gcache.lo `test -f 'deprecated/gcache.c' || echo '$(srcdir)/'`deprecated/gcache.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gcache.Tpo $(DEPDIR)/libglib_2_0_la-gcache.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gcache.c' object='libglib_2_0_la-gcache.lo' libtool=yes @AMDEPBACKSLASH@
+deprecated/libglib_2_0_la-gcache.lo: deprecated/gcache.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT deprecated/libglib_2_0_la-gcache.lo -MD -MP -MF deprecated/$(DEPDIR)/libglib_2_0_la-gcache.Tpo -c -o deprecated/libglib_2_0_la-gcache.lo `test -f 'deprecated/gcache.c' || echo '$(srcdir)/'`deprecated/gcache.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) deprecated/$(DEPDIR)/libglib_2_0_la-gcache.Tpo deprecated/$(DEPDIR)/libglib_2_0_la-gcache.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gcache.c' object='deprecated/libglib_2_0_la-gcache.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gcache.lo `test -f 'deprecated/gcache.c' || echo '$(srcdir)/'`deprecated/gcache.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o deprecated/libglib_2_0_la-gcache.lo `test -f 'deprecated/gcache.c' || echo '$(srcdir)/'`deprecated/gcache.c
 
-libglib_2_0_la-gcompletion.lo: deprecated/gcompletion.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gcompletion.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gcompletion.Tpo -c -o libglib_2_0_la-gcompletion.lo `test -f 'deprecated/gcompletion.c' || echo '$(srcdir)/'`deprecated/gcompletion.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gcompletion.Tpo $(DEPDIR)/libglib_2_0_la-gcompletion.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gcompletion.c' object='libglib_2_0_la-gcompletion.lo' libtool=yes @AMDEPBACKSLASH@
+deprecated/libglib_2_0_la-gcompletion.lo: deprecated/gcompletion.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT deprecated/libglib_2_0_la-gcompletion.lo -MD -MP -MF deprecated/$(DEPDIR)/libglib_2_0_la-gcompletion.Tpo -c -o deprecated/libglib_2_0_la-gcompletion.lo `test -f 'deprecated/gcompletion.c' || echo '$(srcdir)/'`deprecated/gcompletion.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) deprecated/$(DEPDIR)/libglib_2_0_la-gcompletion.Tpo deprecated/$(DEPDIR)/libglib_2_0_la-gcompletion.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gcompletion.c' object='deprecated/libglib_2_0_la-gcompletion.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gcompletion.lo `test -f 'deprecated/gcompletion.c' || echo '$(srcdir)/'`deprecated/gcompletion.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o deprecated/libglib_2_0_la-gcompletion.lo `test -f 'deprecated/gcompletion.c' || echo '$(srcdir)/'`deprecated/gcompletion.c
 
-libglib_2_0_la-grel.lo: deprecated/grel.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-grel.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-grel.Tpo -c -o libglib_2_0_la-grel.lo `test -f 'deprecated/grel.c' || echo '$(srcdir)/'`deprecated/grel.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-grel.Tpo $(DEPDIR)/libglib_2_0_la-grel.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/grel.c' object='libglib_2_0_la-grel.lo' libtool=yes @AMDEPBACKSLASH@
+deprecated/libglib_2_0_la-grel.lo: deprecated/grel.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT deprecated/libglib_2_0_la-grel.lo -MD -MP -MF deprecated/$(DEPDIR)/libglib_2_0_la-grel.Tpo -c -o deprecated/libglib_2_0_la-grel.lo `test -f 'deprecated/grel.c' || echo '$(srcdir)/'`deprecated/grel.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) deprecated/$(DEPDIR)/libglib_2_0_la-grel.Tpo deprecated/$(DEPDIR)/libglib_2_0_la-grel.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/grel.c' object='deprecated/libglib_2_0_la-grel.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-grel.lo `test -f 'deprecated/grel.c' || echo '$(srcdir)/'`deprecated/grel.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o deprecated/libglib_2_0_la-grel.lo `test -f 'deprecated/grel.c' || echo '$(srcdir)/'`deprecated/grel.c
 
-libglib_2_0_la-gthread-deprecated.lo: deprecated/gthread-deprecated.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-gthread-deprecated.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-gthread-deprecated.Tpo -c -o libglib_2_0_la-gthread-deprecated.lo `test -f 'deprecated/gthread-deprecated.c' || echo '$(srcdir)/'`deprecated/gthread-deprecated.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libglib_2_0_la-gthread-deprecated.Tpo $(DEPDIR)/libglib_2_0_la-gthread-deprecated.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gthread-deprecated.c' object='libglib_2_0_la-gthread-deprecated.lo' libtool=yes @AMDEPBACKSLASH@
+deprecated/libglib_2_0_la-gthread-deprecated.lo: deprecated/gthread-deprecated.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT deprecated/libglib_2_0_la-gthread-deprecated.lo -MD -MP -MF deprecated/$(DEPDIR)/libglib_2_0_la-gthread-deprecated.Tpo -c -o deprecated/libglib_2_0_la-gthread-deprecated.lo `test -f 'deprecated/gthread-deprecated.c' || echo '$(srcdir)/'`deprecated/gthread-deprecated.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) deprecated/$(DEPDIR)/libglib_2_0_la-gthread-deprecated.Tpo deprecated/$(DEPDIR)/libglib_2_0_la-gthread-deprecated.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='deprecated/gthread-deprecated.c' object='deprecated/libglib_2_0_la-gthread-deprecated.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o libglib_2_0_la-gthread-deprecated.lo `test -f 'deprecated/gthread-deprecated.c' || echo '$(srcdir)/'`deprecated/gthread-deprecated.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -c -o deprecated/libglib_2_0_la-gthread-deprecated.lo `test -f 'deprecated/gthread-deprecated.c' || echo '$(srcdir)/'`deprecated/gthread-deprecated.c
 
 libglib_2_0_la-garray.lo: garray.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libglib_2_0_la_CFLAGS) $(CFLAGS) -MT libglib_2_0_la-garray.lo -MD -MP -MF $(DEPDIR)/libglib_2_0_la-garray.Tpo -c -o libglib_2_0_la-garray.lo `test -f 'garray.c' || echo '$(srcdir)/'`garray.c
@@ -2324,6 +2347,7 @@ mostlyclean-libtool:
 
 clean-libtool:
 	-rm -rf .libs _libs
+	-rm -rf deprecated/.libs deprecated/_libs
 install-dist_gdbDATA: $(dist_gdb_DATA)
 	@$(NORMAL_INSTALL)
 	@list='$(dist_gdb_DATA)'; test -n "$(gdbdir)" || list=; \
@@ -2855,6 +2879,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-rm -f deprecated/$(DEPDIR)/$(am__dirstamp)
+	-rm -f deprecated/$(am__dirstamp)
 	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
 
 maintainer-clean-generic:
@@ -2872,7 +2898,7 @@ clean-am: clean-binPROGRAMS clean-checkLTLIBRARIES clean-checkPROGRAMS \
 	mostlyclean-am
 
 distclean: distclean-recursive
-	-rm -rf ./$(DEPDIR)
+	-rm -rf ./$(DEPDIR) deprecated/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -2927,7 +2953,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-recursive
-	-rm -rf ./$(DEPDIR)
+	-rm -rf ./$(DEPDIR) deprecated/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -3213,6 +3239,7 @@ dist-hook: $(BUILT_EXTRA_DIST) $(top_builddir)/win32/vs9/glib.vcproj $(top_build
 	  if test -f $$f; then d=.; else d=$(srcdir); fi; \
 	  cp $$d/$$f $(distdir) || exit 1; done
 
+all-local: libglib-gdb.py
 libglib-gdb.py: libglib-gdb.py.in
 	$(AM_V_GEN) $(SED) -e "s|\@datadir\@|$(datadir)|" $(srcdir)/libglib-gdb.py.in > $(builddir)/libglib-gdb.py
 

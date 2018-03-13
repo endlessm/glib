@@ -2,7 +2,7 @@
 .\"     Title: gsettings
 .\"    Author: Ryan Lortie
 .\" Generator: DocBook XSL Stylesheets vsnapshot <http://docbook.sf.net/>
-.\"      Date: 01/08/2018
+.\"      Date: 03/12/2018
 .\"    Manual: User Commands
 .\"    Source: GIO
 .\"  Language: English
@@ -47,7 +47,7 @@ gsettings \- GSettings configuration tool
 .HP \w'\fBgsettings\fR\ 'u
 \fBgsettings\fR reset\-recursively \fISCHEMA\fR\ [:\fIPATH\fR] 
 .HP \w'\fBgsettings\fR\ 'u
-\fBgsettings\fR list\-schemas
+\fBgsettings\fR list\-schemas [\-\-print\-paths]
 .HP \w'\fBgsettings\fR\ 'u
 \fBgsettings\fR list\-relocatable\-schemas
 .HP \w'\fBgsettings\fR\ 'u
@@ -140,7 +140,9 @@ Reset all keys under the given
 .RS 4
 Lists the installed, non\-relocatable schemas\&. See
 \fBlist\-relocatable\-schemas\fR
-if you are interested in relocatable schemas\&.
+if you are interested in relocatable schemas\&. If
+[\fB\-\-print\-paths\fR]
+is given, the path where each schema is mapped is also printed\&.
 .RE
 .PP
 \fBlist\-relocatable\-schemas\fR

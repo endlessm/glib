@@ -1,6 +1,6 @@
 project('glib', 'c', 'cpp',
-  version : '2.54.3',
-  meson_version : '>= 0.38.1',
+  version : '2.56.0',
+  meson_version : '>= 0.44.0',
   default_options : [
     'warning_level=1',
     'c_std=gnu89'
@@ -54,11 +54,20 @@ glib_libdir = join_paths(glib_prefix, get_option('libdir'))
 glib_datadir = join_paths(glib_prefix, get_option('datadir'))
 glib_pkgdatadir = join_paths(glib_datadir, 'glib-2.0')
 glib_includedir = join_paths(glib_prefix, get_option('includedir'))
-glib_giomodulesdir = join_paths(glib_libdir, 'gio', 'modules')
+glib_giomodulesdir = get_option('gio_module_dir')
+if glib_giomodulesdir == ''
+  glib_giomodulesdir = join_paths(glib_libdir, 'gio', 'modules')
+endif
 
 glib_pkgconfigreldir = join_paths(glib_libdir, 'pkgconfig')
 
 add_project_arguments('-D_GNU_SOURCE', language: 'c')
+
+# Disable strict aliasing;
+# see https://bugzilla.gnome.org/show_bug.cgi?id=791622
+if cc.has_argument('-fno-strict-aliasing')
+  add_project_arguments('-fno-strict-aliasing', language: 'c')
+endif
 
 ########################
 # Configuration begins #
@@ -118,6 +127,11 @@ if get_option('default_library') != 'static'
     glib_conf.set('_GLIB_EXTERN', '__attribute__((visibility("default"))) extern')
     glib_hidden_visibility_args = ['-fvisibility=hidden']
   endif
+endif
+
+if host_system == 'windows' and get_option('default_library') == 'static'
+    glibconfig_conf.set('GLIB_STATIC_COMPILATION', '1')
+    glibconfig_conf.set('GOBJECT_STATIC_COMPILATION', '1')
 endif
 
 # FIXME: what about Cygwin (G_WITH_CYGWIN)
@@ -254,6 +268,27 @@ foreach m : struct_members
   else
   endif
 endforeach
+
+# Compiler flags
+if cc.get_id() == 'gcc' or cc.get_id() == 'clang'
+  test_c_args = [
+    '-Wall',
+    '-Wduplicated-branches',
+    '-Wstrict-prototypes',
+    '-Werror=declaration-after-statement',
+    '-Werror=format=2',
+    '-Werror=format-security',
+    '-Werror=implicit-function-declaration',
+    '-Werror=init-self',
+    '-Werror=missing-include-dirs',
+    '-Werror=missing-prototypes',
+    '-Werror=pointer-arith',
+  ]
+else
+  test_c_args = []
+endif
+
+add_project_arguments(cc.get_supported_arguments(test_c_args), language: 'c')
 
 # Windows Support (Vista+)
 if host_system == 'windows'
@@ -451,6 +486,16 @@ else
 endif
 message('Checking whether to use statfs or statvfs .. ' + stat_func_to_use)
 
+if host_system == 'linux'
+  if cc.has_function('mkostemp',
+                     prefix: '''#define _GNU_SOURCE
+                                #include <stdlib.h>''')
+    glib_conf.set('HAVE_MKOSTEMP', 1)
+  endif
+endif
+
+platform_ldflags=[]
+
 # Mac OS X Carbon support
 glib_have_carbon = cc.compiles('''#include <Carbon/Carbon.h>
                                   #include <CoreServices/CoreServices.h>''',
@@ -461,6 +506,7 @@ glib_have_os_x_9_or_later = false
 if glib_have_carbon
   glib_conf.set('HAVE_CARBON', true)
   CARBON_LIBS='-Wl,-framework,Carbon' # FIXME: propagate to .pc files as well
+  platform_ldflags += [CARBON_LIBS]
   glib_have_os_x_9_or_later = cc.compiles('''#include <AvailabilityMacros.h>
                                              #if MAC_OS_X_VERSION_MIN_REQUIRED < 1090
                                              #error Compiling for minimum OS X version before 10.9
@@ -478,7 +524,8 @@ glib_have_cocoa = cc.compiles('''#include <Cocoa/Cocoa.h>
 
 if glib_have_cocoa
   glib_conf.set('HAVE_COCOA', true)
-  COCOA_LIBS='-Wl,-framework,Foundation' # FIXME: propagate to .pc files as well
+  COCOA_LIBS='-Wl,-framework,Foundation -Wl,-framework,AppKit' # FIXME: propagate to .pc files as well
+  platform_ldflags += [COCOA_LIBS]
 else
   COCOA_LIBS=''
 endif
@@ -743,6 +790,54 @@ if cc.links('''#include <langinfo.h>
   glib_conf.set('HAVE_LANGINFO_OUTDIGIT', 1)
 endif
 
+# Check for nl_langinfo and alternative month names
+if cc.links('''#ifndef _GNU_SOURCE
+              # define _GNU_SOURCE
+              #endif
+              #include <langinfo.h>
+               int main (int argc, char ** argv) {
+                 char *str;
+                 str = nl_langinfo (ALTMON_1);
+                 str = nl_langinfo (ALTMON_2);
+                 str = nl_langinfo (ALTMON_3);
+                 str = nl_langinfo (ALTMON_4);
+                 str = nl_langinfo (ALTMON_5);
+                 str = nl_langinfo (ALTMON_6);
+                 str = nl_langinfo (ALTMON_7);
+                 str = nl_langinfo (ALTMON_8);
+                 str = nl_langinfo (ALTMON_9);
+                 str = nl_langinfo (ALTMON_10);
+                 str = nl_langinfo (ALTMON_11);
+                 str = nl_langinfo (ALTMON_12);
+                 return 0;
+               }''', name : 'nl_langinfo (ALTMON_n)')
+  glib_conf.set('HAVE_LANGINFO_ALTMON', 1)
+endif
+
+# Check for nl_langinfo and abbreviated alternative month names
+if cc.links('''#ifndef _GNU_SOURCE
+              # define _GNU_SOURCE
+              #endif
+              #include <langinfo.h>
+               int main (int argc, char ** argv) {
+                 char *str;
+                 str = nl_langinfo (_NL_ALTMON_1);
+                 str = nl_langinfo (_NL_ALTMON_2);
+                 str = nl_langinfo (_NL_ALTMON_3);
+                 str = nl_langinfo (_NL_ALTMON_4);
+                 str = nl_langinfo (_NL_ALTMON_5);
+                 str = nl_langinfo (_NL_ALTMON_6);
+                 str = nl_langinfo (_NL_ALTMON_7);
+                 str = nl_langinfo (_NL_ALTMON_8);
+                 str = nl_langinfo (_NL_ALTMON_9);
+                 str = nl_langinfo (_NL_ALTMON_10);
+                 str = nl_langinfo (_NL_ALTMON_11);
+                 str = nl_langinfo (_NL_ALTMON_12);
+                 return 0;
+               }''', name : 'nl_langinfo (_NL_ALTMON_n)')
+  glib_conf.set('HAVE_LANGINFO_ABALTMON', 1)
+endif
+
 # Check if C compiler supports the 'signed' keyword
 if not cc.compiles('''signed char x;''', name : 'signed')
   glib_conf.set('signed', '/* NOOP */')
@@ -973,10 +1068,14 @@ if host_system == 'windows'
   else
     glibconfig_conf.set_quoted('g_pollfd_format', '%#x')
   endif
+  glibconfig_conf.set('g_dir_separator', '\\\\')
+  glibconfig_conf.set('g_searchpath_separator', ';')
 else
   glibconfig_conf.set('g_pid_type', 'int')
   glibconfig_conf.set_quoted('g_pid_format', 'i')
   glibconfig_conf.set_quoted('g_pollfd_format', '%d')
+  glibconfig_conf.set('g_dir_separator', '/')
+  glibconfig_conf.set('g_searchpath_separator', ':')
 endif
 
 if sizet_size == short_size
@@ -1058,6 +1157,7 @@ glibconfig_conf.set('g_module_suffix', g_module_suffix)
 glibconfig_conf.set('GLIB_MAJOR_VERSION', major_version)
 glibconfig_conf.set('GLIB_MINOR_VERSION', minor_version)
 glibconfig_conf.set('GLIB_MICRO_VERSION', micro_version)
+glibconfig_conf.set('GLIB_VERSION', glib_version)
 
 glibconfig_conf.set('glib_void_p', voidp_size)
 glibconfig_conf.set('glib_long', long_size)
@@ -1264,7 +1364,7 @@ if host_cpu_family == 'x86' or host_cpu_family == 'x86_64' or host_cpu_family ==
 elif host_cpu_family.startswith('sparc') or host_cpu_family.startswith('alpha') or host_cpu_family.startswith('powerpc') or host_cpu_family == 'ia64'
   glib_memory_barrier_needed = true
 else
-  error('Unknown host cpu: ' + host_cpu_family)
+  warning('Unknown host cpu: ' + host_cpu_family)
   glib_memory_barrier_needed = true
 endif
 glibconfig_conf.set('G_ATOMIC_OP_MEMORY_BARRIER_NEEDED', glib_memory_barrier_needed)
@@ -1364,10 +1464,6 @@ endif
 
 # Tests for iconv
 #
-# First, we check if the C library provides iconv, then GNU libiconv, then
-# a native implementation
-# FIXME: add option as well
-#
 # USE_LIBICONV_GNU: Using GNU libiconv
 # USE_LIBICONV_NATIVE: Using a native impl of iconv in a separate library
 #
@@ -1378,22 +1474,35 @@ endif
 if host_system == 'windows'
   libiconv = []
   glib_conf.set('USE_LIBICONV_NATIVE', true)
-# Check C library; never check MinGW C library
-elif cc.has_function('iconv_open')
-  libiconv = []
-# Check for libiconv
-elif cc.has_header_symbol('iconv.h', 'libiconv_open')
-  glib_conf.set('USE_LIBICONV_GNU', true)
-  libiconv = [cc.find_library('iconv')]
-# Check for a custom iconv implementation
-elif cc.has_header_symbol('iconv.h', 'iconv_open')
-  glib_conf.set('USE_LIBICONV_NATIVE', true)
-  libiconv = [cc.find_library('iconv')]
 else
-  error('No iconv() implementation found in C library or libiconv')
+  found_iconv = false
+  iconv_opt = get_option('iconv')
+  if iconv_opt == 'libc'
+    if cc.has_function('iconv_open')
+      libiconv = []
+      found_iconv = true
+    endif
+  elif iconv_opt == 'gnu'
+    if cc.has_header_symbol('iconv.h', 'libiconv_open')
+      glib_conf.set('USE_LIBICONV_GNU', true)
+      libiconv = [cc.find_library('iconv')]
+      found_iconv = true
+    endif
+  elif iconv_opt == 'native'
+    if cc.has_header_symbol('iconv.h', 'iconv_open')
+      glib_conf.set('USE_LIBICONV_NATIVE', true)
+      libiconv = [cc.find_library('iconv')]
+      found_iconv = true
+    endif
+  endif
+
+  if not found_iconv
+    error('No iconv() implementation found in C library or libiconv')
+  endif
+
 endif
 
-if get_option('with-pcre') == 'internal'
+if get_option('internal_pcre')
   pcre = []
   use_system_pcre = false
 else
@@ -1456,7 +1565,7 @@ else
       if libz_dep.found()
         zlib_libname = '-lzlib'
       else
-        zlib_dep = subproject('zlib').get_variable('zlib_dep')
+        libz_dep = subproject('zlib').get_variable('zlib_dep')
       endif
     endif
   endif
@@ -1480,21 +1589,58 @@ xgettext = find_program('xgettext', required : false)
 # libmount is only used by gio, but we need to fetch the libs to generate the
 # pkg-config file below
 libmount_dep = []
-libmount_opt = get_option('enable-libmount')
-if host_system == 'linux' and libmount_opt != 'no'
-  libmount_dep = [dependency('mount', version : '>=2.28', required : false)]
-  if not libmount_dep[0].found()
-    libmount_dep = [cc.find_library('mount')]
-    libmount_h = cc.has_header('libmount/libmount.h')
-    libmount_needed = libmount_opt == 'yes' and host_system == 'linux'
-    if libmount_needed and (not libmount_dep[0].found() or not libmount_h)
-      error('Need libmount but couldn\'t find it')
-    endif
-  endif
+if host_system == 'linux' and get_option('libmount')
+  libmount_dep = [dependency('mount', version : '>=2.23', required : true)]
 endif
 
 if host_system == 'windows'
   winsock2 = cc.find_library('ws2_32')
+endif
+
+selinux_dep = []
+if host_system == 'linux' and get_option('selinux')
+  selinux_dep = [dependency('libselinux')]
+  glib_conf.set('SELINUX_LIBS', '-lselinux')
+  glib_conf.set('HAVE_SELINUX', 1)
+endif
+
+xattr_dep = []
+if host_system != 'windows' and get_option('xattr')
+  # either glibc or libattr can provide xattr support
+  # for both of them, we check for getxattr being in
+  # the library and a valid xattr header.
+
+  # try glibc
+  if cc.has_function('getxattr') and cc.has_header('sys/xattr.h')
+    glib_conf.set('HAVE_SYS_XATTR_H', 1)
+    glib_conf_prefix = glib_conf_prefix + '#define @0@ 1\n'.format('HAVE_SYS_XATTR_H')
+  #failure. try libattr
+  elif cc.has_header_symbol('attr/xattr.h', 'getxattr')
+    glib_conf.set('HAVE_ATTR_XATTR_H', 1)
+    glib_conf_prefix = glib_conf_prefix + '#define @0@ 1\n'.format('HAVE_ATTR_XATTR_H')
+    xattr_dep = [cc.find_library('xattr')]
+  else
+    error('No getxattr implementation found in C library or libxattr')
+  endif
+
+  glib_conf.set('HAVE_XATTR', 1)
+  if cc.compiles(glib_conf_prefix + '''
+                 #include <stdio.h>
+                 #ifdef HAVE_SYS_TYPES_H
+                 #include <sys/types.h>
+                 #endif
+                 #ifdef HAVE_SYS_XATTR_H
+                 #include <sys/xattr.h>
+                 #elif HAVE_ATTR_XATTR_H
+                 #include <attr/xattr.h>
+                 #endif
+
+                 int main (void) {
+                   ssize_t len = getxattr("", "", NULL, 0, 0, XATTR_NOFOLLOW);
+                 }''',
+                 name : 'XATTR_NOFOLLOW')
+    glib_conf.set('HAVE_XATTR_NOFOLLOW', 1)
+  endif
 endif
 
 python = import('python3').find_python()
@@ -1525,16 +1671,17 @@ endif
 if use_system_pcre
   glib_conf.set('PCRE_LIBS', '-lpcre')
 endif
-if libmount_dep.length() == 1 and libmount_dep[0].found()
+if libmount_dep.length() != 0
   glib_conf.set('LIBMOUNT_LIBS', '-lmount')
+  glib_conf.set('HAVE_LIBMOUNT', 1)
 endif
-glib_conf.set('GIO_MODULE_DIR', '${libdir}/gio/modules')
+glib_conf.set('GIO_MODULE_DIR', glib_giomodulesdir)
 # FIXME: Missing:
-# @G_MODULE_LIBS@ @SELINUX_LIBS@ @COCOA_LIBS@ @CARBON_LIBS@ @G_LIBS_EXTRA@
+# @G_MODULE_LIBS@ @COCOA_LIBS@ @CARBON_LIBS@ @G_LIBS_EXTRA@
 # @PCRE_REQUIRES@ @GLIB_EXTRA_CFLAGS@ @G_THREAD_CFLAGS@
 
 # Tracing: dtrace
-want_dtrace = get_option('enable-dtrace')
+want_dtrace = get_option('dtrace')
 enable_dtrace = false
 
 # Since dtrace support is opt-in we just error out if it was requested but
@@ -1561,22 +1708,23 @@ if want_dtrace
 endif
 
 # systemtap
-want_systemtap = get_option('enable-systemtap')
+want_systemtap = get_option('systemtap')
 enable_systemtap = false
 
 if want_systemtap and enable_dtrace
-  tapset_install_dir = get_option('tapset-install-dir')
+  tapset_install_dir = get_option('tapset_install_dir')
   if tapset_install_dir == ''
-    tapset_install_dir = join_paths(get_option('datadir'), 'systemtap/tapset')
+    tapset_install_dir = join_paths(get_option('datadir'), 'systemtap/tapset', host_machine.cpu_family())
   endif
   stp_cdata = configuration_data()
   stp_cdata.set('ABS_GLIB_RUNTIME_LIBDIR', glib_libdir)
-  stp_cdata.set('LT_CURRENT', minor_version.to_int() * 100)
-  stp_cdata.set('LT_REVISION', micro_version.to_int())
+  stp_cdata.set('LT_CURRENT', minor_version * 100)
+  stp_cdata.set('LT_REVISION', micro_version)
   enable_systemtap = true
 endif
 
 
+windows = import('windows')
 subdir('glib')
 subdir('gobject')
 subdir('gthread')
@@ -1643,11 +1791,8 @@ if host_system == 'windows'
   install_headers([ 'msvc_recommended_pragmas.h' ], subdir : 'glib-2.0')
 endif
 
-if get_option('with-man') != 'no'
-  xsltproc = find_program('xsltproc', required : false)
-  if not xsltproc.found() and get_option('with-man') == 'yes'
-    error('man pages enabled and xsltproc not found')
-  endif
+if get_option('man')
+  xsltproc = find_program('xsltproc', required : true)
   xsltproc_command = [
     xsltproc,
     '--nonet',
