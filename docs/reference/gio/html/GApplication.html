@@ -481,13 +481,13 @@ GApplication implements
 <p>A <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> is the foundation of an application.  It wraps some
 low-level platform-specific services and is intended to act as the
 foundation for higher-level application classes such as
-<a href="../gtk4/GtkApplication.html#GtkApplication-struct"><span class="type">GtkApplication</span></a> or <span class="type">MxApplication</span>.  In general, you should not use
+<span class="type">GtkApplication</span> or <span class="type">MxApplication</span>.  In general, you should not use
 this class outside of a higher level framework.</p>
 <p>GApplication provides convenient life cycle management by maintaining
 a "use count" for the primary application instance. The use count can
 be changed using <a class="link" href="GApplication.html#g-application-hold" title="g_application_hold ()"><code class="function">g_application_hold()</code></a> and <a class="link" href="GApplication.html#g-application-release" title="g_application_release ()"><code class="function">g_application_release()</code></a>. If
 it drops to zero, the application exits. Higher-level classes such as
-<a href="../gtk4/GtkApplication.html#GtkApplication-struct"><span class="type">GtkApplication</span></a> employ the use count to ensure that the application
+<span class="type">GtkApplication</span> employ the use count to ensure that the application
 stays alive as long as it has any opened windows.</p>
 <p>Another feature that GApplication (optionally) provides is process
 uniqueness. Applications can make use of this functionality by
@@ -566,7 +566,7 @@ The environment is only added to the platform data if the
 <a class="link" href="GApplication.html#G-APPLICATION-SEND-ENVIRONMENT:CAPS"><code class="literal">G_APPLICATION_SEND_ENVIRONMENT</code></a> flag is set. <a class="link" href="GApplication.html" title="GApplication"><span class="type">GApplication</span></a> subclasses
 can add their own platform data by overriding the <em class="parameter"><code>add_platform_data</code></em>
 
-virtual function. For instance, <a href="../gtk4/GtkApplication.html#GtkApplication-struct"><span class="type">GtkApplication</span></a> adds startup notification
+virtual function. For instance, <span class="type">GtkApplication</span> adds startup notification
 data in this way.</p>
 <p>To parse commandline arguments you may handle the
 <a class="link" href="GApplication.html#GApplication-command-line" title="The “command-line” signal"><span class="type">“command-line”</span></a> signal or override the <code class="function">local_command_line()</code>
@@ -910,7 +910,7 @@ the application ID after that point will not have an impact on the
 resource base path.</p>
 <p>As an example, if the application has an ID of "org.example.app" then
 the default resource base path will be "/org/example/app".  If this
-is a <a href="../gtk4/GtkApplication.html#GtkApplication-struct"><span class="type">GtkApplication</span></a> (and you have not manually changed the path)
+is a <span class="type">GtkApplication</span> (and you have not manually changed the path)
 then Gtk will then search for the menus of the application at
 "/org/example/app/gtk/menus.ui".</p>
 <p>See <a class="link" href="GResource.html" title="GResource"><span class="type">GResource</span></a> for more information about adding resources to your
@@ -1264,7 +1264,7 @@ calling only the 'shutdown' function before doing so.</p>
 Take care if your code has called <a class="link" href="GApplication.html#g-application-hold" title="g_application_hold ()"><code class="function">g_application_hold()</code></a> on the application and
 is therefore still expecting it to exist.
 (Note that you may have called <a class="link" href="GApplication.html#g-application-hold" title="g_application_hold ()"><code class="function">g_application_hold()</code></a> indirectly, for example
-through <a href="../gtk4/GtkApplication.html#gtk-application-add-window"><code class="function">gtk_application_add_window()</code></a>.)</p>
+through <code class="function">gtk_application_add_window()</code>.)</p>
 <p>The result of calling <a class="link" href="GApplication.html#g-application-run" title="g_application_run ()"><code class="function">g_application_run()</code></a> again after it returns is
 unspecified.</p>
 <div class="refsect3">

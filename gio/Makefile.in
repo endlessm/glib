@@ -163,52 +163,46 @@ TESTS = $(am__EXEEXT_2)
 @OS_UNIX_TRUE@am__append_15 = xdgmime
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@am__append_16 = gio-2.0.lib
 @OS_WIN32_TRUE@am__append_17 = $(win32_settings_sources)
-@OS_COCOA_TRUE@am__append_18 = $(cocoa_settings_sources)
-@HAVE_INOTIFY_TRUE@am__append_19 = inotify
+@HAVE_INOTIFY_TRUE@am__append_18 = inotify
+@HAVE_INOTIFY_TRUE@am__append_19 = inotify/libinotify.la
 @HAVE_INOTIFY_TRUE@am__append_20 = inotify/libinotify.la
-@HAVE_INOTIFY_TRUE@am__append_21 = inotify/libinotify.la
-@HAVE_KQUEUE_TRUE@am__append_22 = kqueue
+@HAVE_KQUEUE_TRUE@am__append_21 = kqueue
+@HAVE_KQUEUE_TRUE@am__append_22 = kqueue/libkqueue.la
 @HAVE_KQUEUE_TRUE@am__append_23 = kqueue/libkqueue.la
-@HAVE_KQUEUE_TRUE@am__append_24 = kqueue/libkqueue.la
-@OS_WIN32_TRUE@am__append_25 = win32
+@OS_WIN32_TRUE@am__append_24 = win32
+@OS_WIN32_TRUE@am__append_25 = win32/libgiowin32.la
 @OS_WIN32_TRUE@am__append_26 = win32/libgiowin32.la
-@OS_WIN32_TRUE@am__append_27 = win32/libgiowin32.la
-@HAVE_FAM_TRUE@am__append_28 = fam
+@HAVE_FAM_TRUE@am__append_27 = fam
+@OS_UNIX_TRUE@am__append_28 = xdgmime/libxdgmime.la
 @OS_UNIX_TRUE@am__append_29 = xdgmime/libxdgmime.la
-@OS_UNIX_TRUE@am__append_30 = xdgmime/libxdgmime.la
-@OS_COCOA_FALSE@@OS_UNIX_TRUE@am__append_31 = gdesktopappinfo.h
-@MAC_OS_X_9_TRUE@@OS_COCOA_TRUE@@OS_UNIX_TRUE@am__append_32 = gcocoanotificationbackend.c
-@HAVE_NETLINK_TRUE@@OS_UNIX_TRUE@am__append_33 = \
+@OS_COCOA_FALSE@@OS_UNIX_TRUE@am__append_30 = gdesktopappinfo.h
+@HAVE_NETLINK_TRUE@@OS_UNIX_TRUE@am__append_31 = \
 @HAVE_NETLINK_TRUE@@OS_UNIX_TRUE@	gnetworkmonitornetlink.c \
 @HAVE_NETLINK_TRUE@@OS_UNIX_TRUE@	gnetworkmonitornetlink.h \
 @HAVE_NETLINK_TRUE@@OS_UNIX_TRUE@	gnetworkmonitornm.c	 \
 @HAVE_NETLINK_TRUE@@OS_UNIX_TRUE@	gnetworkmonitornm.h	 \
 @HAVE_NETLINK_TRUE@@OS_UNIX_TRUE@	$(NULL)
 
-@OS_WIN32_TRUE@am__append_34 = gwin32appinfo.c gwin32appinfo.h
-@OS_WIN32_TRUE@am__append_35 = gcontenttype-win32.c
-@OS_WIN32_TRUE@am__append_36 = -lshlwapi -lws2_32 -ldnsapi -liphlpapi
-@OS_COCOA_TRUE@am__append_37 = gosxcontenttype.c
-@OS_COCOA_TRUE@am__append_38 = gosxappinfo.c gosxappinfo.h
-@OS_COCOA_FALSE@@OS_UNIX_TRUE@am__append_39 = gcontenttype.c
-@OS_COCOA_FALSE@@OS_UNIX_TRUE@am__append_40 = gdesktopappinfo.c
-
-# This is dumb.  The ObjC source file should be properly named .m
-@OS_COCOA_TRUE@am__append_41 = -xobjective-c
-@OS_COCOA_TRUE@am__append_42 = -Wl,-framework,Foundation -Wl,-framework,AppKit
-@HAVE_LIBMOUNT_TRUE@am__append_43 = $(LIBMOUNT_CFLAGS)
-@HAVE_LIBMOUNT_TRUE@am__append_44 = $(LIBMOUNT_LIBS)
+@OS_WIN32_TRUE@am__append_32 = gwin32appinfo.c gwin32appinfo.h
+@OS_WIN32_TRUE@am__append_33 = gcontenttype-win32.c
+@OS_WIN32_TRUE@am__append_34 = -lshlwapi -lws2_32 -ldnsapi -liphlpapi
+@OS_COCOA_FALSE@@OS_UNIX_TRUE@am__append_35 = gcontenttype.c
+@OS_COCOA_FALSE@@OS_UNIX_TRUE@am__append_36 = gdesktopappinfo.c
+@OS_COCOA_TRUE@am__append_37 = libgio-objc-2.0.la
+@OS_COCOA_TRUE@am__append_38 = libgio-objc-2.0.la
+@HAVE_LIBMOUNT_TRUE@am__append_39 = $(LIBMOUNT_CFLAGS)
+@HAVE_LIBMOUNT_TRUE@am__append_40 = $(LIBMOUNT_LIBS)
 bin_PROGRAMS = gio-querymodules$(EXEEXT) glib-compile-schemas$(EXEEXT) \
 	glib-compile-resources$(EXEEXT) gsettings$(EXEEXT) \
 	gdbus$(EXEEXT) $(am__EXEEXT_1) gresource$(EXEEXT) gio$(EXEEXT)
-@ENABLE_DTRACE_TRUE@am__append_45 = gio_probes.h gio_probes.lo
-@ENABLE_DTRACE_TRUE@am__append_46 = gio_probes.h gio_probes.h.tmp
-@ENABLE_DTRACE_TRUE@am__append_47 = gio_probes.lo
-@ENABLE_SYSTEMTAP_TRUE@am__append_48 = $(tapset_DATA)
+@ENABLE_DTRACE_TRUE@am__append_41 = gio_probes.h gio_probes.lo
+@ENABLE_DTRACE_TRUE@am__append_42 = gio_probes.h gio_probes.h.tmp
+@ENABLE_DTRACE_TRUE@am__append_43 = gio_probes.lo
+@ENABLE_SYSTEMTAP_TRUE@am__append_44 = $(tapset_DATA)
 
 # ------------------------------------------------------------------------
 # gapplication(1) tool
-@OS_COCOA_FALSE@@OS_UNIX_TRUE@am__append_49 = gapplication
+@OS_COCOA_FALSE@@OS_UNIX_TRUE@am__append_45 = gapplication
 subdir = gio
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4macros/attributes.m4 \
@@ -273,9 +267,17 @@ am__installdirs = "$(DESTDIR)$(installed_testdir)" \
 LTLIBRARIES = $(installed_test_LTLIBRARIES) $(lib_LTLIBRARIES) \
 	$(noinst_LTLIBRARIES)
 am__DEPENDENCIES_1 =
-am__DEPENDENCIES_2 = $(am__append_20) $(am__append_23) \
-	$(am__append_26) $(am__append_29) $(am__DEPENDENCIES_1)
+am__DEPENDENCIES_2 = $(am__append_19) $(am__append_22) \
+	$(am__append_25) $(am__append_28) $(am__DEPENDENCIES_1)
 @HAVE_LIBMOUNT_TRUE@am__DEPENDENCIES_3 = $(am__DEPENDENCIES_1)
+libgio_2_0_la_DEPENDENCIES =  \
+	$(top_builddir)/gobject/libgobject-2.0.la \
+	$(top_builddir)/gmodule/libgmodule-2.0.la \
+	$(top_builddir)/glib/libglib-2.0.la $(am__DEPENDENCIES_2) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__append_38) $(am__DEPENDENCIES_3) \
+	$(am__append_43)
 am__libgio_2_0_la_SOURCES_DIST = gappinfo.c gappinfoprivate.h \
 	gasynchelper.c gasynchelper.h gasyncinitable.c gasyncresult.c \
 	gbufferedinputstream.c gbufferedoutputstream.c gbytesicon.c \
@@ -359,9 +361,8 @@ am__libgio_2_0_la_SOURCES_DIST = gappinfo.c gappinfoprivate.h \
 	glocalvfs.h gsocks4proxy.c gsocks4proxy.h gsocks4aproxy.c \
 	gsocks4aproxy.h gsocks5proxy.c gsocks5proxy.h \
 	thumbnail-verify.h thumbnail-verify.c gwin32appinfo.c \
-	gwin32appinfo.h gosxappinfo.c gosxappinfo.h gdesktopappinfo.c \
-	gcontenttype-win32.c gosxcontenttype.c gcontenttype.c \
-	gfiledescriptorbased.c gunixconnection.c \
+	gwin32appinfo.h gdesktopappinfo.c gcontenttype-win32.c \
+	gcontenttype.c gfiledescriptorbased.c gunixconnection.c \
 	gunixcredentialsmessage.c gunixfdlist.c gunixfdmessage.c \
 	gunixmount.c gunixmount.h gunixmounts.c gunixsocketaddress.c \
 	gunixvolume.c gunixvolume.h gunixvolumemonitor.c \
@@ -372,8 +373,7 @@ am__libgio_2_0_la_SOURCES_DIST = gappinfo.c gappinfoprivate.h \
 	gopenuriportal.h gportalsupport.c gportalsupport.h \
 	gnetworkmonitorportal.c gnetworkmonitorportal.h \
 	gproxyresolverportal.c gproxyresolverportal.h xdp-dbus.c \
-	xdp-dbus.h gcocoanotificationbackend.c \
-	gnetworkmonitornetlink.c gnetworkmonitornetlink.h \
+	xdp-dbus.h gnetworkmonitornetlink.c gnetworkmonitornetlink.h \
 	gnetworkmonitornm.c gnetworkmonitornm.h gdbusdaemon.c \
 	gdbusdaemon.h gdbus-daemon-generated.c \
 	gdbus-daemon-generated.h gwin32registrykey.c \
@@ -388,8 +388,7 @@ am__libgio_2_0_la_SOURCES_DIST = gappinfo.c gappinfoprivate.h \
 	gsettingsbackendinternal.h gsettingsbackend.c \
 	gsettingsschema.h gsettingsschema-internal.h gsettingsschema.c \
 	gsettings-mapping.h gsettings-mapping.c gsettings.c \
-	gregistrysettingsbackend.h gregistrysettingsbackend.c \
-	gnextstepsettingsbackend.c
+	gregistrysettingsbackend.h gregistrysettingsbackend.c
 am__objects_1 =
 am__objects_2 = libgio_2_0_la-gapplication.lo \
 	libgio_2_0_la-gapplicationcommandline.lo \
@@ -527,23 +526,20 @@ am__objects_5 = libgio_2_0_la-gappinfo.lo \
 	libgio_2_0_la-gliststore.lo $(am__objects_2) $(am__objects_3) \
 	$(am__objects_4) $(am__objects_1)
 @OS_WIN32_TRUE@am__objects_6 = libgio_2_0_la-gwin32appinfo.lo
-@OS_COCOA_TRUE@am__objects_7 = libgio_2_0_la-gosxappinfo.lo
-@OS_COCOA_FALSE@@OS_UNIX_TRUE@am__objects_8 = libgio_2_0_la-gdesktopappinfo.lo
-am__objects_9 = $(am__objects_6) $(am__objects_7) $(am__objects_8)
-@OS_WIN32_TRUE@am__objects_10 = libgio_2_0_la-gcontenttype-win32.lo
-@OS_COCOA_TRUE@am__objects_11 = libgio_2_0_la-gosxcontenttype.lo
-@OS_COCOA_FALSE@@OS_UNIX_TRUE@am__objects_12 =  \
+@OS_COCOA_FALSE@@OS_UNIX_TRUE@am__objects_7 = libgio_2_0_la-gdesktopappinfo.lo
+am__objects_8 = $(am__objects_6) $(am__objects_7)
+@OS_WIN32_TRUE@am__objects_9 = libgio_2_0_la-gcontenttype-win32.lo
+@OS_COCOA_FALSE@@OS_UNIX_TRUE@am__objects_10 =  \
 @OS_COCOA_FALSE@@OS_UNIX_TRUE@	libgio_2_0_la-gcontenttype.lo
-am__objects_13 = $(am__objects_10) $(am__objects_11) $(am__objects_12)
-am__objects_14 = libgio_2_0_la-xdp-dbus.lo
-am__objects_15 = libgio_2_0_la-gnetworkmonitorportal.lo \
-	libgio_2_0_la-gproxyresolverportal.lo $(am__objects_14) \
+am__objects_11 = $(am__objects_9) $(am__objects_10)
+am__objects_12 = libgio_2_0_la-xdp-dbus.lo
+am__objects_13 = libgio_2_0_la-gnetworkmonitorportal.lo \
+	libgio_2_0_la-gproxyresolverportal.lo $(am__objects_12) \
 	$(am__objects_1)
-@MAC_OS_X_9_TRUE@@OS_COCOA_TRUE@@OS_UNIX_TRUE@am__objects_16 = libgio_2_0_la-gcocoanotificationbackend.lo
-@HAVE_NETLINK_TRUE@@OS_UNIX_TRUE@am__objects_17 = libgio_2_0_la-gnetworkmonitornetlink.lo \
+@HAVE_NETLINK_TRUE@@OS_UNIX_TRUE@am__objects_14 = libgio_2_0_la-gnetworkmonitornetlink.lo \
 @HAVE_NETLINK_TRUE@@OS_UNIX_TRUE@	libgio_2_0_la-gnetworkmonitornm.lo \
 @HAVE_NETLINK_TRUE@@OS_UNIX_TRUE@	$(am__objects_1)
-@OS_UNIX_TRUE@am__objects_18 = libgio_2_0_la-gfiledescriptorbased.lo \
+@OS_UNIX_TRUE@am__objects_15 = libgio_2_0_la-gfiledescriptorbased.lo \
 @OS_UNIX_TRUE@	libgio_2_0_la-gunixconnection.lo \
 @OS_UNIX_TRUE@	libgio_2_0_la-gunixcredentialsmessage.lo \
 @OS_UNIX_TRUE@	libgio_2_0_la-gunixfdlist.lo \
@@ -561,19 +557,19 @@ am__objects_15 = libgio_2_0_la-gnetworkmonitorportal.lo \
 @OS_UNIX_TRUE@	libgio_2_0_la-gdocumentportal.lo \
 @OS_UNIX_TRUE@	libgio_2_0_la-gopenuriportal.lo \
 @OS_UNIX_TRUE@	libgio_2_0_la-gportalsupport.lo \
-@OS_UNIX_TRUE@	$(am__objects_15) $(am__objects_1) \
-@OS_UNIX_TRUE@	$(am__objects_16) $(am__objects_17)
-am__objects_19 = libgio_2_0_la-gdbusdaemon.lo \
+@OS_UNIX_TRUE@	$(am__objects_13) $(am__objects_1) \
+@OS_UNIX_TRUE@	$(am__objects_14)
+am__objects_16 = libgio_2_0_la-gdbusdaemon.lo \
 	libgio_2_0_la-gdbus-daemon-generated.lo $(am__objects_1)
-am__objects_20 = $(am__objects_19) libgio_2_0_la-gwin32registrykey.lo \
+am__objects_17 = $(am__objects_16) libgio_2_0_la-gwin32registrykey.lo \
 	libgio_2_0_la-gwin32mount.lo \
 	libgio_2_0_la-gwin32volumemonitor.lo \
 	libgio_2_0_la-gwin32inputstream.lo \
 	libgio_2_0_la-gwin32outputstream.lo \
 	libgio_2_0_la-gwin32networkmonitor.lo $(am__objects_1)
-@OS_WIN32_TRUE@am__objects_21 = $(am__objects_20)
+@OS_WIN32_TRUE@am__objects_18 = $(am__objects_17)
 am__dirstamp = $(am__leading_dot)dirstamp
-am__objects_22 = gvdb/libgio_2_0_la-gvdb-reader.lo \
+am__objects_19 = gvdb/libgio_2_0_la-gvdb-reader.lo \
 	libgio_2_0_la-gdelayedsettingsbackend.lo \
 	libgio_2_0_la-gkeyfilesettingsbackend.lo \
 	libgio_2_0_la-gmemorysettingsbackend.lo \
@@ -581,16 +577,13 @@ am__objects_22 = gvdb/libgio_2_0_la-gvdb-reader.lo \
 	libgio_2_0_la-gsettingsbackend.lo \
 	libgio_2_0_la-gsettingsschema.lo \
 	libgio_2_0_la-gsettings-mapping.lo libgio_2_0_la-gsettings.lo
-@OS_WIN32_TRUE@am__objects_23 =  \
+@OS_WIN32_TRUE@am__objects_20 =  \
 @OS_WIN32_TRUE@	libgio_2_0_la-gregistrysettingsbackend.lo
-@OS_WIN32_TRUE@am__objects_24 = $(am__objects_23)
-@OS_COCOA_TRUE@am__objects_25 =  \
-@OS_COCOA_TRUE@	libgio_2_0_la-gnextstepsettingsbackend.lo
-@OS_COCOA_TRUE@am__objects_26 = $(am__objects_25)
-am__objects_27 = $(am__objects_22) $(am__objects_24) $(am__objects_26)
-am_libgio_2_0_la_OBJECTS = $(am__objects_5) $(am__objects_9) \
-	$(am__objects_13) $(am__objects_18) $(am__objects_21) \
-	$(am__objects_27) $(am__objects_1)
+@OS_WIN32_TRUE@am__objects_21 = $(am__objects_20)
+am__objects_22 = $(am__objects_19) $(am__objects_21)
+am_libgio_2_0_la_OBJECTS = $(am__objects_5) $(am__objects_8) \
+	$(am__objects_11) $(am__objects_15) $(am__objects_18) \
+	$(am__objects_22) $(am__objects_1)
 libgio_2_0_la_OBJECTS = $(am_libgio_2_0_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -599,6 +592,21 @@ am__v_lt_1 =
 libgio_2_0_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(libgio_2_0_la_CFLAGS) \
 	$(CFLAGS) $(libgio_2_0_la_LDFLAGS) $(LDFLAGS) -o $@
+libgio_objc_2_0_la_LIBADD =
+am__libgio_objc_2_0_la_SOURCES_DIST = gnextstepsettingsbackend.c \
+	gosxcontenttype.c gosxappinfo.c gosxappinfo.h \
+	gcocoanotificationbackend.c
+@OS_COCOA_TRUE@am_libgio_objc_2_0_la_OBJECTS =  \
+@OS_COCOA_TRUE@	libgio_objc_2_0_la-gnextstepsettingsbackend.lo \
+@OS_COCOA_TRUE@	libgio_objc_2_0_la-gosxcontenttype.lo \
+@OS_COCOA_TRUE@	libgio_objc_2_0_la-gosxappinfo.lo \
+@OS_COCOA_TRUE@	libgio_objc_2_0_la-gcocoanotificationbackend.lo
+libgio_objc_2_0_la_OBJECTS = $(am_libgio_objc_2_0_la_OBJECTS)
+libgio_objc_2_0_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
+	$(libgio_objc_2_0_la_CFLAGS) $(CFLAGS) \
+	$(libgio_objc_2_0_la_LDFLAGS) $(LDFLAGS) -o $@
+@OS_COCOA_TRUE@am_libgio_objc_2_0_la_rpath =
 @OS_COCOA_FALSE@@OS_UNIX_TRUE@am__EXEEXT_1 = gapplication$(EXEEXT)
 am__EXEEXT_2 =
 @ENABLE_ALWAYS_BUILD_TESTS_FALSE@am__EXEEXT_3 = $(am__EXEEXT_2)
@@ -700,12 +708,13 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(libgio_2_0_la_SOURCES) $(gapplication_SOURCES) \
-	$(gdbus_SOURCES) $(gio_SOURCES) $(gio_querymodules_SOURCES) \
-	$(glib_compile_resources_SOURCES) \
+SOURCES = $(libgio_2_0_la_SOURCES) $(libgio_objc_2_0_la_SOURCES) \
+	$(gapplication_SOURCES) $(gdbus_SOURCES) $(gio_SOURCES) \
+	$(gio_querymodules_SOURCES) $(glib_compile_resources_SOURCES) \
 	$(glib_compile_schemas_SOURCES) $(gresource_SOURCES) \
 	$(gsettings_SOURCES)
 DIST_SOURCES = $(am__libgio_2_0_la_SOURCES_DIST) \
+	$(am__libgio_objc_2_0_la_SOURCES_DIST) \
 	$(am__gapplication_SOURCES_DIST) $(gdbus_SOURCES) \
 	$(gio_SOURCES) $(gio_querymodules_SOURCES) \
 	$(glib_compile_resources_SOURCES) \
@@ -1224,12 +1233,12 @@ NULL =
 BUILT_SOURCES = $(xdp_dbus_built_sources) gconstructor_as_data.h \
 	gioenumtypes.h gioenumtypes.c gdbus-daemon-generated.c \
 	gdbus-daemon-generated.h gnetworking.h $(NULL) \
-	$(am__append_45)
+	$(am__append_41)
 BUILT_EXTRA_DIST = gio.rc
 CLEANFILES = *.log *.trs $(am__append_14) $(xdp_dbus_built_sources) \
 	gdbus-daemon-generated.c gdbus-daemon-generated.h \
-	gio-public-headers.txt gconstructor_as_data.h $(am__append_46) \
-	$(am__append_48)
+	gio-public-headers.txt gconstructor_as_data.h $(am__append_42) \
+	$(am__append_44)
 DISTCLEANFILES = gioenumtypes.h gioenumtypes.c
 MAINTAINERCLEANFILES = 
 
@@ -1288,7 +1297,7 @@ TEST_PROGS = $(strip $(test_programs) $(test_scripts) \
 installed_test_LTLIBRARIES = $(am__append_13)
 installed_test_SCRIPTS = $(am__append_11)
 nobase_installed_test_DATA = $(am__append_12)
-noinst_LTLIBRARIES = $(am__append_2)
+noinst_LTLIBRARIES = $(am__append_2) $(am__append_37)
 noinst_SCRIPTS = $(am__append_4)
 noinst_DATA = $(am__append_5) $(am__append_16)
 check_LTLIBRARIES = $(am__append_6)
@@ -1318,8 +1327,8 @@ all_test_ltlibs = $(test_ltlibraries) $(uninstalled_test_ltlibraries) $(installe
 @ENABLE_INSTALLED_TESTS_TRUE@                      $(dist_test_scripts) $(dist_installed_test_scripts)
 
 @ENABLE_INSTALLED_TESTS_TRUE@installed_test_meta_DATA = $(installed_testcases:=.test)
-SUBDIRS = gdbus-2.0/codegen $(am__append_15) $(am__append_19) \
-	$(am__append_22) $(am__append_25) . tests $(am__append_28)
+SUBDIRS = gdbus-2.0/codegen $(am__append_15) $(am__append_18) \
+	$(am__append_21) $(am__append_24) . tests $(am__append_27)
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@install_ms_lib_cmd = $(INSTALL) gio-2.0.lib $(DESTDIR)$(libdir)
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@uninstall_ms_lib_cmd = -rm $(DESTDIR)$(libdir)/gio-2.0.lib
 AM_CPPFLAGS = \
@@ -1420,14 +1429,10 @@ settings_base_sources = \
 	gsettings-mapping.c		\
 	gsettings.c
 
-settings_sources = $(settings_base_sources) $(am__append_17) \
-	$(am__append_18)
+settings_sources = $(settings_base_sources) $(am__append_17)
 @OS_WIN32_TRUE@win32_settings_sources = \
 @OS_WIN32_TRUE@	gregistrysettingsbackend.h	\
 @OS_WIN32_TRUE@	gregistrysettingsbackend.c
-
-@OS_COCOA_TRUE@cocoa_settings_sources = \
-@OS_COCOA_TRUE@	gnextstepsettingsbackend.c
 
 application_headers = \
 	gapplication.h			\
@@ -1507,14 +1512,13 @@ local_sources = \
 	thumbnail-verify.c		\
 	$(NULL)
 
-platform_libadd = $(am__append_20) $(am__append_23) $(am__append_26) \
-	$(am__append_29) $(am__append_36)
-platform_deps = $(am__append_21) $(am__append_24) $(am__append_27) \
-	$(am__append_30)
-appinfo_sources = $(am__append_34) $(am__append_38) $(am__append_40)
-appinfo_headers = $(am__append_31)
-contenttype_sources = $(am__append_35) $(am__append_37) \
-	$(am__append_39)
+platform_libadd = $(am__append_19) $(am__append_22) $(am__append_25) \
+	$(am__append_28) $(am__append_34)
+platform_deps = $(am__append_20) $(am__append_23) $(am__append_26) \
+	$(am__append_29)
+appinfo_sources = $(am__append_32) $(am__append_36)
+appinfo_headers = $(am__append_30)
+contenttype_sources = $(am__append_33) $(am__append_35)
 @OS_UNIX_TRUE@unix_sources = gfiledescriptorbased.c gunixconnection.c \
 @OS_UNIX_TRUE@	gunixcredentialsmessage.c gunixfdlist.c \
 @OS_UNIX_TRUE@	gunixfdmessage.c gunixmount.c gunixmount.h \
@@ -1528,7 +1532,7 @@ contenttype_sources = $(am__append_35) $(am__append_37) \
 @OS_UNIX_TRUE@	gdocumentportal.h gopenuriportal.c \
 @OS_UNIX_TRUE@	gopenuriportal.h gportalsupport.c \
 @OS_UNIX_TRUE@	gportalsupport.h $(portal_sources) $(NULL) \
-@OS_UNIX_TRUE@	$(am__append_32) $(am__append_33)
+@OS_UNIX_TRUE@	$(am__append_31)
 @OS_UNIX_TRUE@giounixincludedir = $(includedir)/gio-unix-2.0/gio
 @OS_UNIX_TRUE@giounixinclude_HEADERS = \
 @OS_UNIX_TRUE@	gfiledescriptorbased.h  \
@@ -1766,17 +1770,35 @@ libgio_2_0_la_LIBADD = $(top_builddir)/gobject/libgobject-2.0.la \
 	$(top_builddir)/gmodule/libgmodule-2.0.la \
 	$(top_builddir)/glib/libglib-2.0.la $(platform_libadd) \
 	$(ZLIB_LIBS) $(SELINUX_LIBS) $(GLIB_LIBS) $(XATTR_LIBS) \
-	$(NETWORK_LIBS) $(NULL) $(am__append_44) $(am__append_47)
+	$(NETWORK_LIBS) $(NULL) $(am__append_38) $(am__append_40) \
+	$(am__append_43)
 libgio_2_0_la_CPPFLAGS = $(ZLIB_CFLAGS) $(AM_CPPFLAGS)
 @PLATFORM_WIN32_TRUE@no_undefined = -no-undefined
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@gio_win32_res = gio-win32-res.o
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@gio_win32_res_ldflag = -Wl,$(gio_win32_res)
 libgio_2_0_la_CFLAGS = $(AM_CFLAGS) $(GLIB_HIDDEN_VISIBILITY_CFLAGS) \
-	$(am__append_41) $(am__append_43)
-libgio_2_0_la_LDFLAGS = $(GLIB_LINK_FLAGS) $(gio_win32_res_ldflag) \
+	$(am__append_39)
+libgio_2_0_la_LDFLAGS = $(GLIB_LINK_FLAGS) \
+	$(gio_win32_res_ldflag) \
 	-version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE) \
-	-export-dynamic $(no_undefined) $(am__append_42)
-libgio_2_0_la_DEPENDENCIES = $(gio_win32_res) $(gio_def) $(platform_deps)
+	-export-dynamic $(no_undefined)
+
+
+# Let's avoid polluting the CFLAGS of libgio with -xobjective-c
+# We cannot simply rename the ObjC files to .m because it plays
+# tricks with Automake. For further reference, see:
+# https://bugzilla.gnome.org/show_bug.cgi?id=672777
+@OS_COCOA_TRUE@libgio_objc_2_0_la_CFLAGS = $(libgio_2_0_la_CFLAGS) -xobjective-c
+@OS_COCOA_TRUE@libgio_objc_2_0_la_CPPFLAGS = $(libgio_2_0_la_CPPFLAGS)
+@OS_COCOA_TRUE@libgio_objc_2_0_la_LDFLAGS = $(libgio_2_0_la_LDFLAGS) -Wl,-framework,Foundation -Wl,-framework,AppKit
+@OS_COCOA_TRUE@libgio_objc_2_0_la_SOURCES = \
+@OS_COCOA_TRUE@	gnextstepsettingsbackend.c \
+@OS_COCOA_TRUE@	gosxcontenttype.c \
+@OS_COCOA_TRUE@	gosxappinfo.c \
+@OS_COCOA_TRUE@	gosxappinfo.h \
+@OS_COCOA_TRUE@	gcocoanotificationbackend.c
+
+EXTRA_libgio_2_0_la_DEPENDENCIES = $(gio_win32_res) $(gio_def) $(platform_deps)
 gio_headers = \
 	gappinfo.h 		\
 	gasyncinitable.h	\
@@ -2172,6 +2194,9 @@ gvdb/libgio_2_0_la-gvdb-reader.lo: gvdb/$(am__dirstamp) \
 
 libgio-2.0.la: $(libgio_2_0_la_OBJECTS) $(libgio_2_0_la_DEPENDENCIES) $(EXTRA_libgio_2_0_la_DEPENDENCIES) 
 	$(AM_V_CCLD)$(libgio_2_0_la_LINK) -rpath $(libdir) $(libgio_2_0_la_OBJECTS) $(libgio_2_0_la_LIBADD) $(LIBS)
+
+libgio-objc-2.0.la: $(libgio_objc_2_0_la_OBJECTS) $(libgio_objc_2_0_la_DEPENDENCIES) $(EXTRA_libgio_objc_2_0_la_DEPENDENCIES) 
+	$(AM_V_CCLD)$(libgio_objc_2_0_la_LINK) $(am_libgio_objc_2_0_la_rpath) $(libgio_objc_2_0_la_OBJECTS) $(libgio_objc_2_0_la_LIBADD) $(LIBS)
 install-binPROGRAMS: $(bin_PROGRAMS)
 	@$(NORMAL_INSTALL)
 	@list='$(bin_PROGRAMS)'; test -n "$(bindir)" || list=; \
@@ -2407,7 +2432,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gbytesicon.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gcancellable.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gcharsetconverter.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gcocoanotificationbackend.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gcontenttype-win32.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gcontenttype.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gcontextspecificgroup.Plo@am__quote@
@@ -2518,13 +2542,10 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gnetworkmonitornm.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gnetworkmonitorportal.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gnetworkservice.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gnextstepsettingsbackend.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gnotification.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gnotificationbackend.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gnullsettingsbackend.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gopenuriportal.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gosxappinfo.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gosxcontenttype.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-goutputstream.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gpermission.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gpollableinputstream.Plo@am__quote@
@@ -2614,6 +2635,10 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-gzlibdecompressor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-thumbnail-verify.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_2_0_la-xdp-dbus.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_objc_2_0_la-gcocoanotificationbackend.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_objc_2_0_la-gnextstepsettingsbackend.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_objc_2_0_la-gosxappinfo.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libgio_objc_2_0_la-gosxcontenttype.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@gvdb/$(DEPDIR)/gvdb-builder.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@gvdb/$(DEPDIR)/libgio_2_0_la-gvdb-reader.Plo@am__quote@
 
@@ -3873,13 +3898,6 @@ libgio_2_0_la-gwin32appinfo.lo: gwin32appinfo.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gwin32appinfo.lo `test -f 'gwin32appinfo.c' || echo '$(srcdir)/'`gwin32appinfo.c
 
-libgio_2_0_la-gosxappinfo.lo: gosxappinfo.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gosxappinfo.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gosxappinfo.Tpo -c -o libgio_2_0_la-gosxappinfo.lo `test -f 'gosxappinfo.c' || echo '$(srcdir)/'`gosxappinfo.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gosxappinfo.Tpo $(DEPDIR)/libgio_2_0_la-gosxappinfo.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gosxappinfo.c' object='libgio_2_0_la-gosxappinfo.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gosxappinfo.lo `test -f 'gosxappinfo.c' || echo '$(srcdir)/'`gosxappinfo.c
-
 libgio_2_0_la-gdesktopappinfo.lo: gdesktopappinfo.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gdesktopappinfo.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gdesktopappinfo.Tpo -c -o libgio_2_0_la-gdesktopappinfo.lo `test -f 'gdesktopappinfo.c' || echo '$(srcdir)/'`gdesktopappinfo.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gdesktopappinfo.Tpo $(DEPDIR)/libgio_2_0_la-gdesktopappinfo.Plo
@@ -3893,13 +3911,6 @@ libgio_2_0_la-gcontenttype-win32.lo: gcontenttype-win32.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gcontenttype-win32.c' object='libgio_2_0_la-gcontenttype-win32.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gcontenttype-win32.lo `test -f 'gcontenttype-win32.c' || echo '$(srcdir)/'`gcontenttype-win32.c
-
-libgio_2_0_la-gosxcontenttype.lo: gosxcontenttype.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gosxcontenttype.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gosxcontenttype.Tpo -c -o libgio_2_0_la-gosxcontenttype.lo `test -f 'gosxcontenttype.c' || echo '$(srcdir)/'`gosxcontenttype.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gosxcontenttype.Tpo $(DEPDIR)/libgio_2_0_la-gosxcontenttype.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gosxcontenttype.c' object='libgio_2_0_la-gosxcontenttype.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gosxcontenttype.lo `test -f 'gosxcontenttype.c' || echo '$(srcdir)/'`gosxcontenttype.c
 
 libgio_2_0_la-gcontenttype.lo: gcontenttype.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gcontenttype.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gcontenttype.Tpo -c -o libgio_2_0_la-gcontenttype.lo `test -f 'gcontenttype.c' || echo '$(srcdir)/'`gcontenttype.c
@@ -4055,13 +4066,6 @@ libgio_2_0_la-xdp-dbus.lo: xdp-dbus.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-xdp-dbus.lo `test -f 'xdp-dbus.c' || echo '$(srcdir)/'`xdp-dbus.c
 
-libgio_2_0_la-gcocoanotificationbackend.lo: gcocoanotificationbackend.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gcocoanotificationbackend.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gcocoanotificationbackend.Tpo -c -o libgio_2_0_la-gcocoanotificationbackend.lo `test -f 'gcocoanotificationbackend.c' || echo '$(srcdir)/'`gcocoanotificationbackend.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gcocoanotificationbackend.Tpo $(DEPDIR)/libgio_2_0_la-gcocoanotificationbackend.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gcocoanotificationbackend.c' object='libgio_2_0_la-gcocoanotificationbackend.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gcocoanotificationbackend.lo `test -f 'gcocoanotificationbackend.c' || echo '$(srcdir)/'`gcocoanotificationbackend.c
-
 libgio_2_0_la-gnetworkmonitornetlink.lo: gnetworkmonitornetlink.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gnetworkmonitornetlink.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gnetworkmonitornetlink.Tpo -c -o libgio_2_0_la-gnetworkmonitornetlink.lo `test -f 'gnetworkmonitornetlink.c' || echo '$(srcdir)/'`gnetworkmonitornetlink.c
 @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gnetworkmonitornetlink.Tpo $(DEPDIR)/libgio_2_0_la-gnetworkmonitornetlink.Plo
@@ -4202,12 +4206,33 @@ libgio_2_0_la-gregistrysettingsbackend.lo: gregistrysettingsbackend.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gregistrysettingsbackend.lo `test -f 'gregistrysettingsbackend.c' || echo '$(srcdir)/'`gregistrysettingsbackend.c
 
-libgio_2_0_la-gnextstepsettingsbackend.lo: gnextstepsettingsbackend.c
-@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_2_0_la-gnextstepsettingsbackend.lo -MD -MP -MF $(DEPDIR)/libgio_2_0_la-gnextstepsettingsbackend.Tpo -c -o libgio_2_0_la-gnextstepsettingsbackend.lo `test -f 'gnextstepsettingsbackend.c' || echo '$(srcdir)/'`gnextstepsettingsbackend.c
-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_2_0_la-gnextstepsettingsbackend.Tpo $(DEPDIR)/libgio_2_0_la-gnextstepsettingsbackend.Plo
-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gnextstepsettingsbackend.c' object='libgio_2_0_la-gnextstepsettingsbackend.lo' libtool=yes @AMDEPBACKSLASH@
+libgio_objc_2_0_la-gnextstepsettingsbackend.lo: gnextstepsettingsbackend.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_objc_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_objc_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_objc_2_0_la-gnextstepsettingsbackend.lo -MD -MP -MF $(DEPDIR)/libgio_objc_2_0_la-gnextstepsettingsbackend.Tpo -c -o libgio_objc_2_0_la-gnextstepsettingsbackend.lo `test -f 'gnextstepsettingsbackend.c' || echo '$(srcdir)/'`gnextstepsettingsbackend.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_objc_2_0_la-gnextstepsettingsbackend.Tpo $(DEPDIR)/libgio_objc_2_0_la-gnextstepsettingsbackend.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gnextstepsettingsbackend.c' object='libgio_objc_2_0_la-gnextstepsettingsbackend.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_2_0_la-gnextstepsettingsbackend.lo `test -f 'gnextstepsettingsbackend.c' || echo '$(srcdir)/'`gnextstepsettingsbackend.c
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_objc_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_objc_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_objc_2_0_la-gnextstepsettingsbackend.lo `test -f 'gnextstepsettingsbackend.c' || echo '$(srcdir)/'`gnextstepsettingsbackend.c
+
+libgio_objc_2_0_la-gosxcontenttype.lo: gosxcontenttype.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_objc_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_objc_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_objc_2_0_la-gosxcontenttype.lo -MD -MP -MF $(DEPDIR)/libgio_objc_2_0_la-gosxcontenttype.Tpo -c -o libgio_objc_2_0_la-gosxcontenttype.lo `test -f 'gosxcontenttype.c' || echo '$(srcdir)/'`gosxcontenttype.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_objc_2_0_la-gosxcontenttype.Tpo $(DEPDIR)/libgio_objc_2_0_la-gosxcontenttype.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gosxcontenttype.c' object='libgio_objc_2_0_la-gosxcontenttype.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_objc_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_objc_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_objc_2_0_la-gosxcontenttype.lo `test -f 'gosxcontenttype.c' || echo '$(srcdir)/'`gosxcontenttype.c
+
+libgio_objc_2_0_la-gosxappinfo.lo: gosxappinfo.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_objc_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_objc_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_objc_2_0_la-gosxappinfo.lo -MD -MP -MF $(DEPDIR)/libgio_objc_2_0_la-gosxappinfo.Tpo -c -o libgio_objc_2_0_la-gosxappinfo.lo `test -f 'gosxappinfo.c' || echo '$(srcdir)/'`gosxappinfo.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_objc_2_0_la-gosxappinfo.Tpo $(DEPDIR)/libgio_objc_2_0_la-gosxappinfo.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gosxappinfo.c' object='libgio_objc_2_0_la-gosxappinfo.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_objc_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_objc_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_objc_2_0_la-gosxappinfo.lo `test -f 'gosxappinfo.c' || echo '$(srcdir)/'`gosxappinfo.c
+
+libgio_objc_2_0_la-gcocoanotificationbackend.lo: gcocoanotificationbackend.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_objc_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_objc_2_0_la_CFLAGS) $(CFLAGS) -MT libgio_objc_2_0_la-gcocoanotificationbackend.lo -MD -MP -MF $(DEPDIR)/libgio_objc_2_0_la-gcocoanotificationbackend.Tpo -c -o libgio_objc_2_0_la-gcocoanotificationbackend.lo `test -f 'gcocoanotificationbackend.c' || echo '$(srcdir)/'`gcocoanotificationbackend.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libgio_objc_2_0_la-gcocoanotificationbackend.Tpo $(DEPDIR)/libgio_objc_2_0_la-gcocoanotificationbackend.Plo
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='gcocoanotificationbackend.c' object='libgio_objc_2_0_la-gcocoanotificationbackend.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgio_objc_2_0_la_CPPFLAGS) $(CPPFLAGS) $(libgio_objc_2_0_la_CFLAGS) $(CFLAGS) -c -o libgio_objc_2_0_la-gcocoanotificationbackend.lo `test -f 'gcocoanotificationbackend.c' || echo '$(srcdir)/'`gcocoanotificationbackend.c
 
 gresource-gresource-tool.o: gresource-tool.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(gresource_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gresource-gresource-tool.o -MD -MP -MF $(DEPDIR)/gresource-gresource-tool.Tpo -c -o gresource-gresource-tool.o `test -f 'gresource-tool.c' || echo '$(srcdir)/'`gresource-tool.c

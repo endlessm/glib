@@ -46,6 +46,11 @@
 
 #include "config.h"
 
+/* langinfo.h in glibc 2.27 defines ALTMON_* only if _GNU_SOURCE is defined.  */
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE 1
+#endif
+
 #include <stdlib.h>
 #include <string.h>
 
@@ -171,6 +176,7 @@ static const guint16 days_in_year[2][13] =
 #define GET_AMPM(d) ((g_date_time_get_hour (d) < 12) ? \
                      nl_langinfo (AM_STR) : \
                      nl_langinfo (PM_STR))
+#define GET_AMPM_IS_LOCALE TRUE
 
 #define PREFERRED_DATE_TIME_FMT nl_langinfo (D_T_FMT)
 #define PREFERRED_DATE_FMT nl_langinfo (D_FMT)
@@ -190,13 +196,18 @@ static const gint month_item[2][12] =
 };
 
 #define WEEKDAY_ABBR(d) nl_langinfo (weekday_item[0][g_date_time_get_day_of_week (d) - 1])
+#define WEEKDAY_ABBR_IS_LOCALE TRUE
 #define WEEKDAY_FULL(d) nl_langinfo (weekday_item[1][g_date_time_get_day_of_week (d) - 1])
+#define WEEKDAY_FULL_IS_LOCALE TRUE
 #define MONTH_ABBR(d) nl_langinfo (month_item[0][g_date_time_get_month (d) - 1])
+#define MONTH_ABBR_IS_LOCALE TRUE
 #define MONTH_FULL(d) nl_langinfo (month_item[1][g_date_time_get_month (d) - 1])
+#define MONTH_FULL_IS_LOCALE TRUE
 
 #else
 
 #define GET_AMPM(d)          (get_fallback_ampm (g_date_time_get_hour (d)))
+#define GET_AMPM_IS_LOCALE   FALSE
 
 /* Translators: this is the preferred format for expressing the date and the time */
 #define PREFERRED_DATE_TIME_FMT C_("GDateTime", "%a %b %e %H:%M:%S %Y")
@@ -211,16 +222,41 @@ static const gint month_item[2][12] =
 #define PREFERRED_12HR_TIME_FMT C_("GDateTime", "%I:%M:%S %p")
 
 #define WEEKDAY_ABBR(d)       (get_weekday_name_abbr (g_date_time_get_day_of_week (d)))
+#define WEEKDAY_ABBR_IS_LOCALE FALSE
 #define WEEKDAY_FULL(d)       (get_weekday_name (g_date_time_get_day_of_week (d)))
-#define MONTH_ABBR(d)         (get_month_name_abbr (g_date_time_get_month (d)))
-#define MONTH_FULL(d)         (get_month_name (g_date_time_get_month (d)))
+/* We don't yet know if nl_langinfo (MON_n) returns standalone or complete-date
+ * format forms but if nl_langinfo (ALTMON_n) is not supported then we will
+ * have to use MONTH_FULL as standalone.  The same if nl_langinfo () does not
+ * exist at all.  MONTH_ABBR is similar: if nl_langinfo (_NL_ABALTMON_n) is not
+ * supported then we will use MONTH_ABBR as standalone.
+ */
+#define MONTH_ABBR(d)         (get_month_name_abbr_standalone (g_date_time_get_month (d)))
+#define MONTH_ABBR_IS_LOCALE  FALSE
+#define MONTH_FULL(d)         (get_month_name_standalone (g_date_time_get_month (d)))
+#define MONTH_FULL_IS_LOCALE  FALSE
 
 static const gchar *
-get_month_name (gint month)
+get_month_name_standalone (gint month)
 {
   switch (month)
     {
     case 1:
+      /* Translators: Some languages (Baltic, Slavic, Greek, and some more)
+       * need different grammatical forms of month names depending on whether
+       * they are standalone or in a complete date context, with the day
+       * number.  Some other languages may prefer starting with uppercase when
+       * they are standalone and with lowercase when they are in a complete
+       * date context.  Here are full month names in a form appropriate when
+       * they are used standalone.  If your system is Linux with the glibc
+       * version 2.27 (released Feb 1, 2018) or newer or if it is from the BSD
+       * family (which includes OS X) then you can refer to the date command
+       * line utility and see what the command `date +%OB' produces.  Also in
+       * the latest Linux the command `locale alt_mon' in your native locale
+       * produces a complete list of month names almost ready to copy and
+       * paste here.  Note that in most of the languages (western European,
+       * non-European) there is no difference between the standalone and
+       * complete date form.
+       */
       return C_("full month name", "January");
     case 2:
       return C_("full month name", "February");
@@ -253,11 +289,28 @@ get_month_name (gint month)
 }
 
 static const gchar *
-get_month_name_abbr (gint month)
+get_month_name_abbr_standalone (gint month)
 {
   switch (month)
     {
     case 1:
+      /* Translators: Some languages need different grammatical forms of
+       * month names depending on whether they are standalone or in a complete
+       * date context, with the day number.  Some may prefer starting with
+       * uppercase when they are standalone and with lowercase when they are
+       * in a full date context.  However, as these names are abbreviated
+       * the grammatical difference is visible probably only in Belarusian
+       * and Russian.  In other languages there is no difference between
+       * the standalone and complete date form when they are abbreviated.
+       * If your system is Linux with the glibc version 2.27 (released
+       * Feb 1, 2018) or newer then you can refer to the date command line
+       * utility and see what the command `date +%Ob' produces.  Also in
+       * the latest Linux the command `locale ab_alt_mon' in your native
+       * locale produces a complete list of month names almost ready to copy
+       * and paste here.  Note that this feature is not yet supported by any
+       * other platform.  Here are abbreviated month names in a form
+       * appropriate when they are used standalone.
+       */
       return C_("abbreviated month name", "Jan");
     case 2:
       return C_("abbreviated month name", "Feb");
@@ -344,6 +397,179 @@ get_weekday_name_abbr (gint day)
 }
 
 #endif  /* HAVE_LANGINFO_TIME */
+
+#ifdef HAVE_LANGINFO_ALTMON
+
+/* If nl_langinfo () supports ALTMON_n then MON_n returns full date format
+ * forms and ALTMON_n returns standalone forms.
+ */
+
+#define MONTH_FULL_WITH_DAY(d) MONTH_FULL(d)
+#define MONTH_FULL_WITH_DAY_IS_LOCALE MONTH_FULL_IS_LOCALE
+
+static const gint alt_month_item[12] =
+{
+  ALTMON_1, ALTMON_2, ALTMON_3, ALTMON_4, ALTMON_5, ALTMON_6,
+  ALTMON_7, ALTMON_8, ALTMON_9, ALTMON_10, ALTMON_11, ALTMON_12
+};
+
+#define MONTH_FULL_STANDALONE(d) nl_langinfo (alt_month_item[g_date_time_get_month (d) - 1])
+#define MONTH_FULL_STANDALONE_IS_LOCALE TRUE
+
+#else
+
+/* If nl_langinfo () does not support ALTMON_n then either MON_n returns
+ * standalone forms or nl_langinfo (MON_n) does not work so we have defined
+ * it as standalone form.
+ */
+
+#define MONTH_FULL_STANDALONE(d) MONTH_FULL(d)
+#define MONTH_FULL_STANDALONE_IS_LOCALE MONTH_FULL_IS_LOCALE
+#define MONTH_FULL_WITH_DAY(d) (get_month_name_with_day (g_date_time_get_month (d)))
+#define MONTH_FULL_WITH_DAY_IS_LOCALE FALSE
+
+static const gchar *
+get_month_name_with_day (gint month)
+{
+  switch (month)
+    {
+    case 1:
+      /* Translators: Some languages need different grammatical forms of
+       * month names depending on whether they are standalone or in a full
+       * date context, with the day number.  Some may prefer starting with
+       * uppercase when they are standalone and with lowercase when they are
+       * in a full date context.  Here are full month names in a form
+       * appropriate when they are used in a full date context, with the
+       * day number.  If your system is Linux with the glibc version 2.27
+       * (released Feb 1, 2018) or newer or if it is from the BSD family
+       * (which includes OS X) then you can refer to the date command line
+       * utility and see what the command `date +%B' produces.  Also in
+       * the latest Linux the command `locale mon' in your native locale
+       * produces a complete list of month names almost ready to copy and
+       * paste here.  In older Linux systems due to a bug the result is
+       * incorrect in some languages.  Note that in most of the languages
+       * (western European, non-European) there is no difference between the
+       * standalone and complete date form.
+       */
+      return C_("full month name with day", "January");
+    case 2:
+      return C_("full month name with day", "February");
+    case 3:
+      return C_("full month name with day", "March");
+    case 4:
+      return C_("full month name with day", "April");
+    case 5:
+      return C_("full month name with day", "May");
+    case 6:
+      return C_("full month name with day", "June");
+    case 7:
+      return C_("full month name with day", "July");
+    case 8:
+      return C_("full month name with day", "August");
+    case 9:
+      return C_("full month name with day", "September");
+    case 10:
+      return C_("full month name with day", "October");
+    case 11:
+      return C_("full month name with day", "November");
+    case 12:
+      return C_("full month name with day", "December");
+
+    default:
+      g_warning ("Invalid month number %d", month);
+    }
+
+  return NULL;
+}
+
+#endif  /* HAVE_LANGINFO_ALTMON */
+
+#ifdef HAVE_LANGINFO_ABALTMON
+
+/* If nl_langinfo () supports _NL_ABALTMON_n then ABMON_n returns full
+ * date format forms and _NL_ABALTMON_n returns standalone forms.
+ */
+
+#define MONTH_ABBR_WITH_DAY(d) MONTH_ABBR(d)
+#define MONTH_ABBR_WITH_DAY_IS_LOCALE MONTH_ABBR_IS_LOCALE
+
+static const gint ab_alt_month_item[12] =
+{
+  _NL_ABALTMON_1, _NL_ABALTMON_2, _NL_ABALTMON_3, _NL_ABALTMON_4,
+  _NL_ABALTMON_5, _NL_ABALTMON_6, _NL_ABALTMON_7, _NL_ABALTMON_8,
+  _NL_ABALTMON_9, _NL_ABALTMON_10, _NL_ABALTMON_11, _NL_ABALTMON_12
+};
+
+#define MONTH_ABBR_STANDALONE(d) nl_langinfo (ab_alt_month_item[g_date_time_get_month (d) - 1])
+#define MONTH_ABBR_STANDALONE_IS_LOCALE TRUE
+
+#else
+
+/* If nl_langinfo () does not support _NL_ABALTMON_n then either ABMON_n
+ * returns standalone forms or nl_langinfo (ABMON_n) does not work so we
+ * have defined it as standalone form. Now it's time to swap.
+ */
+
+#define MONTH_ABBR_STANDALONE(d) MONTH_ABBR(d)
+#define MONTH_ABBR_STANDALONE_IS_LOCALE MONTH_ABBR_IS_LOCALE
+#define MONTH_ABBR_WITH_DAY(d) (get_month_name_abbr_with_day (g_date_time_get_month (d)))
+#define MONTH_ABBR_WITH_DAY_IS_LOCALE FALSE
+
+static const gchar *
+get_month_name_abbr_with_day (gint month)
+{
+  switch (month)
+    {
+    case 1:
+      /* Translators: Some languages need different grammatical forms of
+       * month names depending on whether they are standalone or in a full
+       * date context, with the day number.  Some may prefer starting with
+       * uppercase when they are standalone and with lowercase when they are
+       * in a full date context.  Here are abbreviated month names in a form
+       * appropriate when they are used in a full date context, with the
+       * day number.  However, as these names are abbreviated the grammatical
+       * difference is visible probably only in Belarusian and Russian.
+       * In other languages there is no difference between the standalone
+       * and complete date form when they are abbreviated.  If your system
+       * is Linux with the glibc version 2.27 (released Feb 1, 2018) or newer
+       * then you can refer to the date command line utility and see what the
+       * command `date +%b' produces.  Also in the latest Linux the command
+       * `locale abmon' in your native locale produces a complete list of
+       * month names almost ready to copy and paste here.  In other systems
+       * due to a bug the result is incorrect in some languages.
+       */
+      return C_("abbreviated month name with day", "Jan");
+    case 2:
+      return C_("abbreviated month name with day", "Feb");
+    case 3:
+      return C_("abbreviated month name with day", "Mar");
+    case 4:
+      return C_("abbreviated month name with day", "Apr");
+    case 5:
+      return C_("abbreviated month name with day", "May");
+    case 6:
+      return C_("abbreviated month name with day", "Jun");
+    case 7:
+      return C_("abbreviated month name with day", "Jul");
+    case 8:
+      return C_("abbreviated month name with day", "Aug");
+    case 9:
+      return C_("abbreviated month name with day", "Sep");
+    case 10:
+      return C_("abbreviated month name with day", "Oct");
+    case 11:
+      return C_("abbreviated month name with day", "Nov");
+    case 12:
+      return C_("abbreviated month name with day", "Dec");
+
+    default:
+      g_warning ("Invalid month number %d", month);
+    }
+
+  return NULL;
+}
+
+#endif  /* HAVE_LANGINFO_ABALTMON */
 
 /* Format AM/PM indicator if the locale does not have a localized version. */
 static const gchar *
@@ -1449,6 +1675,9 @@ g_date_time_add (GDateTime *datetime,
  * Creates a copy of @datetime and adds the specified number of years to the
  * copy. Add negative values to subtract years.
  *
+ * As with g_date_time_add_months(), if the resulting date would be 29th
+ * February on a non-leap year, the day will be clamped to 28th February.
+ *
  * Returns: the newly created #GDateTime which should be freed with
  *   g_date_time_unref().
  *
@@ -1483,6 +1712,11 @@ g_date_time_add_years (GDateTime *datetime,
  *
  * Creates a copy of @datetime and adds the specified number of months to the
  * copy. Add negative values to subtract months.
+ *
+ * The day of the month of the resulting #GDateTime is clamped to the number
+ * of days in the updated calendar month. For example, if adding 1 month to
+ * 31st January 2018, the result would be 28th February 2018. In 2020 (a leap
+ * year), the result would be 29th February.
  *
  * Returns: the newly created #GDateTime which should be freed with
  *   g_date_time_unref().
@@ -2580,25 +2814,21 @@ format_ampm (GDateTime *datetime,
   if (!ampm || ampm[0] == '\0')
     ampm = get_fallback_ampm (g_date_time_get_hour (datetime));
 
-#if defined (HAVE_LANGINFO_TIME)
-  if (!locale_is_utf8)
+  if (!locale_is_utf8 && GET_AMPM_IS_LOCALE)
     {
       /* This assumes that locale encoding can't have embedded NULs */
       ampm = tmp = g_locale_to_utf8 (ampm, -1, NULL, NULL, NULL);
       if (!tmp)
         return FALSE;
     }
-#endif
   if (uppercase)
     ampm_dup = g_utf8_strup (ampm, -1);
   else
     ampm_dup = g_utf8_strdown (ampm, -1);
   len = strlen (ampm_dup);
-  if (!locale_is_utf8)
+  if (!locale_is_utf8 && GET_AMPM_IS_LOCALE)
     {
-#if defined (HAVE_LANGINFO_TIME)
       g_free (tmp);
-#endif
       tmp = g_locale_from_utf8 (ampm_dup, -1, NULL, &len, NULL);
       g_free (ampm_dup);
       if (!tmp)
@@ -2701,8 +2931,7 @@ g_date_time_format_locale (GDateTime   *datetime,
 	  name = WEEKDAY_ABBR (datetime);
           if (g_strcmp0 (name, "") == 0)
             return FALSE;
-#if !defined (HAVE_LANGINFO_TIME)
-	  if (!locale_is_utf8)
+	  if (!locale_is_utf8 && !WEEKDAY_ABBR_IS_LOCALE)
 	    {
 	      tmp = g_locale_from_utf8 (name, -1, NULL, &tmp_len, NULL);
 	      if (!tmp)
@@ -2711,7 +2940,6 @@ g_date_time_format_locale (GDateTime   *datetime,
 	      g_free (tmp);
 	    }
 	  else
-#endif
 	    {
 	      g_string_append (outstr, name);
 	    }
@@ -2720,8 +2948,7 @@ g_date_time_format_locale (GDateTime   *datetime,
 	  name = WEEKDAY_FULL (datetime);
           if (g_strcmp0 (name, "") == 0)
             return FALSE;
-#if !defined (HAVE_LANGINFO_TIME)
-	  if (!locale_is_utf8)
+	  if (!locale_is_utf8 && !WEEKDAY_FULL_IS_LOCALE)
 	    {
 	      tmp = g_locale_from_utf8 (name, -1, NULL, &tmp_len, NULL);
 	      if (!tmp)
@@ -2730,17 +2957,18 @@ g_date_time_format_locale (GDateTime   *datetime,
 	      g_free (tmp);
 	    }
 	  else
-#endif
 	    {
 	      g_string_append (outstr, name);
 	    }
 	  break;
 	case 'b':
-	  name = MONTH_ABBR (datetime);
+	  name = alt_digits ? MONTH_ABBR_STANDALONE (datetime)
+			    : MONTH_ABBR_WITH_DAY (datetime);
           if (g_strcmp0 (name, "") == 0)
             return FALSE;
-#if !defined (HAVE_LANGINFO_TIME)
-	  if (!locale_is_utf8)
+	  if (!locale_is_utf8 &&
+	      ((alt_digits && !MONTH_ABBR_STANDALONE_IS_LOCALE) ||
+	       (!alt_digits && !MONTH_ABBR_WITH_DAY_IS_LOCALE)))
 	    {
 	      tmp = g_locale_from_utf8 (name, -1, NULL, &tmp_len, NULL);
 	      if (!tmp)
@@ -2749,17 +2977,18 @@ g_date_time_format_locale (GDateTime   *datetime,
 	      g_free (tmp);
 	    }
 	  else
-#endif
 	    {
 	      g_string_append (outstr, name);
 	    }
 	  break;
 	case 'B':
-	  name = MONTH_FULL (datetime);
+	  name = alt_digits ? MONTH_FULL_STANDALONE (datetime)
+			    : MONTH_FULL_WITH_DAY (datetime);
           if (g_strcmp0 (name, "") == 0)
             return FALSE;
-#if !defined (HAVE_LANGINFO_TIME)
-	  if (!locale_is_utf8)
+	  if (!locale_is_utf8 &&
+	      ((alt_digits && !MONTH_FULL_STANDALONE_IS_LOCALE) ||
+	       (!alt_digits && !MONTH_FULL_WITH_DAY_IS_LOCALE)))
 	    {
 	      tmp = g_locale_from_utf8 (name, -1, NULL, &tmp_len, NULL);
 	      if (!tmp)
@@ -2768,7 +2997,6 @@ g_date_time_format_locale (GDateTime   *datetime,
 	      g_free (tmp);
 	    }
 	  else
-#endif
 	    {
 	      g_string_append (outstr, name);
 	    }
@@ -2809,11 +3037,13 @@ g_date_time_format_locale (GDateTime   *datetime,
 			 g_date_time_get_week_numbering_year (datetime));
 	  break;
 	case 'h':
-	  name = MONTH_ABBR (datetime);
+	  name = alt_digits ? MONTH_ABBR_STANDALONE (datetime)
+			    : MONTH_ABBR_WITH_DAY (datetime);
           if (g_strcmp0 (name, "") == 0)
             return FALSE;
-#if !defined (HAVE_LANGINFO_TIME)
-	  if (!locale_is_utf8)
+	  if (!locale_is_utf8 &&
+	      ((alt_digits && !MONTH_ABBR_STANDALONE_IS_LOCALE) ||
+	       (!alt_digits && !MONTH_ABBR_WITH_DAY_IS_LOCALE)))
 	    {
 	      tmp = g_locale_from_utf8 (name, -1, NULL, &tmp_len, NULL);
 	      if (!tmp)
@@ -2822,7 +3052,6 @@ g_date_time_format_locale (GDateTime   *datetime,
 	      g_free (tmp);
 	    }
 	  else
-#endif
 	    {
 	      g_string_append (outstr, name);
 	    }
@@ -3079,6 +3308,14 @@ g_date_time_format_locale (GDateTime   *datetime,
  *   for the specifier.
  * - 0: Pad a numeric result with zeros. This overrides the default padding
  *   for the specifier.
+ *
+ * Additionally, when O is used with B, b, or h, it produces the alternative
+ * form of a month name. The alternative form should be used when the month
+ * name is used without a day number (e.g., standalone). It is required in
+ * some languages (Baltic, Slavic, Greek, and more) due to their grammatical
+ * rules. For other languages there is no difference. \%OB is a GNU and BSD
+ * strftime() extension expected to be added to the future POSIX specification,
+ * \%Ob and \%Oh are GNU strftime() extensions. Since: 2.56
  *
  * Returns: a newly allocated string formatted to the requested format
  *     or %NULL in the case that there was an error (such as a format specifier

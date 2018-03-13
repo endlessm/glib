@@ -990,7 +990,9 @@ g_array_set_clear_func (<em class="parameter"><code><a class="link" href="glib-A
 <p>The <em class="parameter"><code>clear_func</code></em>
  will be called when an element in the array
 data segment is removed and when the array is freed and data
-segment is deallocated as well.</p>
+segment is deallocated as well. <em class="parameter"><code>clear_func</code></em>
+ will be passed a
+pointer to the element to clear, rather than the element itself.</p>
 <p>Note that in contrast with other uses of <a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a>
 functions, <em class="parameter"><code>clear_func</code></em>
  is expected to clear the contents of

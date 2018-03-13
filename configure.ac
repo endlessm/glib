@@ -30,8 +30,8 @@ m4_define(glib_configure_ac)
 # <mclasen> on the unstable (ie master), interface age = 0
 
 m4_define([glib_major_version], [2])
-m4_define([glib_minor_version], [55])
-m4_define([glib_micro_version], [2])
+m4_define([glib_minor_version], [56])
+m4_define([glib_micro_version], [0])
 m4_define([glib_interface_age], [0])
 m4_define([glib_binary_age],
           [m4_eval(100 * glib_minor_version + glib_micro_version)])
@@ -230,7 +230,7 @@ AC_SUBST([CARBON_LIBS])
 ac_cv_have_os_x_9_or_later="no"
 AS_IF([test "x$glib_have_cocoa" = "xyes"], [
   AC_DEFINE(HAVE_COCOA, 1, [define to 1 if Cocoa is available])
-  COCOA_LIBS="-Wl,-framework,Foundation"
+  COCOA_LIBS="-Wl,-framework,Foundation -Wl,-framework,AppKit"
   LDFLAGS="$LDFLAGS $COCOA_LIBS"
   AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
 #include <AvailabilityMacros.h>
@@ -1274,6 +1274,50 @@ AC_CACHE_CHECK([for nl_langinfo (_NL_CTYPE_OUTDIGITn_MB)], glib_cv_langinfo_outd
 if test x$glib_cv_langinfo_outdigit = xyes; then
   AC_DEFINE(HAVE_LANGINFO_OUTDIGIT,1,[Have nl_langinfo (_NL_CTYPE_OUTDIGITn_MB)])
 fi
+
+dnl Check for nl_langinfo and ALTMON_n
+AC_CACHE_CHECK([for nl_langinfo (ALTMON_n)], glib_cv_langinfo_altmon,[
+        AC_LINK_IFELSE([AC_LANG_PROGRAM([#include <langinfo.h>],
+                [char *str;
+                 str = nl_langinfo (ALTMON_1);
+                 str = nl_langinfo (ALTMON_2);
+                 str = nl_langinfo (ALTMON_3);
+                 str = nl_langinfo (ALTMON_4);
+                 str = nl_langinfo (ALTMON_5);
+                 str = nl_langinfo (ALTMON_6);
+                 str = nl_langinfo (ALTMON_7);
+                 str = nl_langinfo (ALTMON_8);
+                 str = nl_langinfo (ALTMON_9);
+                 str = nl_langinfo (ALTMON_10);
+                 str = nl_langinfo (ALTMON_11);
+                 str = nl_langinfo (ALTMON_12);])],
+                [glib_cv_langinfo_altmon=yes],
+                [glib_cv_langinfo_altmon=no])])
+if test x$glib_cv_langinfo_altmon = xyes; then
+  AC_DEFINE(HAVE_LANGINFO_ALTMON,1,[Have nl_langinfo (ALTMON_n)])
+fi
+
+dnl Check for nl_langinfo and _NL_ABALTMON_n
+AC_CACHE_CHECK([for nl_langinfo (_NL_ABALTMON_n)], glib_cv_langinfo_abaltmon,[
+        AC_LINK_IFELSE([AC_LANG_PROGRAM([#include <langinfo.h>],
+                [char *str;
+                 str = nl_langinfo (_NL_ABALTMON_1);
+                 str = nl_langinfo (_NL_ABALTMON_2);
+                 str = nl_langinfo (_NL_ABALTMON_3);
+                 str = nl_langinfo (_NL_ABALTMON_4);
+                 str = nl_langinfo (_NL_ABALTMON_5);
+                 str = nl_langinfo (_NL_ABALTMON_6);
+                 str = nl_langinfo (_NL_ABALTMON_7);
+                 str = nl_langinfo (_NL_ABALTMON_8);
+                 str = nl_langinfo (_NL_ABALTMON_9);
+                 str = nl_langinfo (_NL_ABALTMON_10);
+                 str = nl_langinfo (_NL_ABALTMON_11);
+                 str = nl_langinfo (_NL_ABALTMON_12);])],
+                [glib_cv_langinfo_abaltmon=yes],
+                [glib_cv_langinfo_abaltmon=no])])
+if test x$glib_cv_langinfo_abaltmon = xyes; then
+  AC_DEFINE(HAVE_LANGINFO_ABALTMON,1,[Have nl_langinfo (_NL_ABALTMON_n)])
+fi
 AC_LANG_RESTORE
 
 dnl ****************************************
@@ -1798,22 +1842,7 @@ AC_ARG_ENABLE(libmount,
                               [build with libmount support [default for Linux]])],,
               [enable_libmount=$enable_libmount_default])
 AS_IF([ test "x$enable_libmount" = "xyes"],[
-PKG_CHECK_MODULES([LIBMOUNT], [mount >= 2.28], [have_libmount=yes], [have_libmount=maybe])
-AS_IF([ test $have_libmount = maybe ], [
-  glib_save_LIBS=$LIBS
-  AC_CHECK_HEADER([libmount/libmount.h], [:], [have_libmount=no])
-
-  # We used to check for mnt_unref_table(), but now for compat with
-  # e.g. RHEL7 just use mnt_free_table().  Let's keep this check
-  # anyways.
-  AC_CHECK_LIB([mount], [mnt_free_table], [:], [have_libmount=no])
-  LIBS=$glib_save_LIBS
-
-  if test $have_libmount != no; then
-    LIBMOUNT_LIBS=-lmount
-    have_libmount=yes
-  fi
-])
+PKG_CHECK_MODULES([LIBMOUNT], [mount >= 2.23], [have_libmount=yes], [have_libmount=no])
 if test $have_libmount = no ; then
    AC_MSG_ERROR([*** Could not find libmount])
 fi
@@ -3457,7 +3486,8 @@ AC_ARG_ENABLE(compile-warnings,
 			      enable_compile_warnings=yes)
 AS_IF([test "x$enable_compile_warnings" != xno], [
   CC_CHECK_FLAGS_APPEND([GLIB_WARN_CFLAGS], [CFLAGS], [\
-   -Wall -Wstrict-prototypes -Werror=declaration-after-statement \
+   -Wall -Wstrict-prototypes -Wduplicated-branches \
+   -Werror=declaration-after-statement \
    -Werror=missing-prototypes -Werror=implicit-function-declaration \
    -Werror=pointer-arith -Werror=init-self -Werror=format-security \
    -Werror=format=2 -Werror=missing-include-dirs])

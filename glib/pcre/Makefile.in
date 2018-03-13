@@ -781,7 +781,6 @@ all_test_ltlibs = $(test_ltlibraries) $(uninstalled_test_ltlibraries) $(installe
 @ENABLE_INSTALLED_TESTS_TRUE@installed_test_meta_DATA = $(installed_testcases:=.test)
 libpcre_la_CPPFLAGS = \
 	-DG_LOG_DOMAIN=\"GLib-GRegex\" \
-	-DHAVE_CONFIG_H \
 	-DHAVE_MEMMOVE \
 	-DSUPPORT_UCP \
 	-DSUPPORT_UTF \

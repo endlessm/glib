@@ -679,6 +679,9 @@ value is freed using that function. If you supplied a
 <em class="parameter"><code>key_destroy_func</code></em>
  when creating the <a class="link" href="glib-Hash-Tables.html#GHashTable" title="GHashTable"><span class="type">GHashTable</span></a>, the passed
 key is freed using that function.</p>
+<p>Starting from GLib 2.40, this function returns a boolean value to
+indicate whether the newly added value was already in the hash table
+or not.</p>
 <div class="refsect3">
 <a name="g-hash-table-insert.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -727,6 +730,9 @@ the <a class="link" href="glib-Hash-Tables.html#GHashTable" title="GHashTable"><
 If you supplied a <em class="parameter"><code>key_destroy_func</code></em>
  when creating the
 <a class="link" href="glib-Hash-Tables.html#GHashTable" title="GHashTable"><span class="type">GHashTable</span></a>, the old key is freed using that function.</p>
+<p>Starting from GLib 2.40, this function returns a boolean value to
+indicate whether the newly added value was already in the hash table
+or not.</p>
 <div class="refsect3">
 <a name="g-hash-table-replace.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -772,6 +778,9 @@ key and the value.</p>
 <p>When a hash table only ever contains keys that have themselves as the
 corresponding value it is able to be stored more efficiently.  See
 the discussion in the section description.</p>
+<p>Starting from GLib 2.40, this function returns a boolean value to
+indicate whether the newly added value was already in the hash table
+or not.</p>
 <div class="refsect3">
 <a name="g-hash-table-add.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">

@@ -1090,6 +1090,8 @@ g_date_time_add_years (<em class="parameter"><code><a class="link" href="glib-GD
 <p>Creates a copy of <em class="parameter"><code>datetime</code></em>
  and adds the specified number of years to the
 copy. Add negative values to subtract years.</p>
+<p>As with <a class="link" href="glib-GDateTime.html#g-date-time-add-months" title="g_date_time_add_months ()"><code class="function">g_date_time_add_months()</code></a>, if the resulting date would be 29th
+February on a non-leap year, the day will be clamped to 28th February.</p>
 <div class="refsect3">
 <a name="g-date-time-add-years.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -1128,6 +1130,10 @@ g_date_time_add_months (<em class="parameter"><code><a class="link" href="glib-G
 <p>Creates a copy of <em class="parameter"><code>datetime</code></em>
  and adds the specified number of months to the
 copy. Add negative values to subtract months.</p>
+<p>The day of the month of the resulting <a class="link" href="glib-GDateTime.html#GDateTime" title="GDateTime"><span class="type">GDateTime</span></a> is clamped to the number
+of days in the updated calendar month. For example, if adding 1 month to
+31st January 2018, the result would be 28th February 2018. In 2020 (a leap
+year), the result would be 29th February.</p>
 <div class="refsect3">
 <a name="g-date-time-add-months.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -2364,6 +2370,13 @@ for the specifier.</p></li>
 <li class="listitem"><p>0: Pad a numeric result with zeros. This overrides the default padding
 for the specifier.</p></li>
 </ul></div>
+<p>Additionally, when O is used with B, b, or h, it produces the alternative
+form of a month name. The alternative form should be used when the month
+name is used without a day number (e.g., standalone). It is required in
+some languages (Baltic, Slavic, Greek, and more) due to their grammatical
+rules. For other languages there is no difference. %OB is a GNU and BSD
+<code class="function">strftime()</code> extension expected to be added to the future POSIX specification,
+%Ob and %Oh are GNU <code class="function">strftime()</code> extensions. Since: 2.56</p>
 <div class="refsect3">
 <a name="g-date-time-format.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">

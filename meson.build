@@ -1,5 +1,5 @@
 project('glib', 'c', 'cpp',
-  version : '2.55.2',
+  version : '2.56.0',
   meson_version : '>= 0.44.0',
   default_options : [
     'warning_level=1',
@@ -269,6 +269,27 @@ foreach m : struct_members
   endif
 endforeach
 
+# Compiler flags
+if cc.get_id() == 'gcc' or cc.get_id() == 'clang'
+  test_c_args = [
+    '-Wall',
+    '-Wduplicated-branches',
+    '-Wstrict-prototypes',
+    '-Werror=declaration-after-statement',
+    '-Werror=format=2',
+    '-Werror=format-security',
+    '-Werror=implicit-function-declaration',
+    '-Werror=init-self',
+    '-Werror=missing-include-dirs',
+    '-Werror=missing-prototypes',
+    '-Werror=pointer-arith',
+  ]
+else
+  test_c_args = []
+endif
+
+add_project_arguments(cc.get_supported_arguments(test_c_args), language: 'c')
+
 # Windows Support (Vista+)
 if host_system == 'windows'
   glib_conf.set('_WIN32_WINNT', '0x0601')
@@ -503,7 +524,7 @@ glib_have_cocoa = cc.compiles('''#include <Cocoa/Cocoa.h>
 
 if glib_have_cocoa
   glib_conf.set('HAVE_COCOA', true)
-  COCOA_LIBS='-Wl,-framework,Foundation' # FIXME: propagate to .pc files as well
+  COCOA_LIBS='-Wl,-framework,Foundation -Wl,-framework,AppKit' # FIXME: propagate to .pc files as well
   platform_ldflags += [COCOA_LIBS]
 else
   COCOA_LIBS=''
@@ -767,6 +788,54 @@ if cc.links('''#include <langinfo.h>
                  return 0;
                }''', name : 'nl_langinfo (_NL_CTYPE_OUTDIGITn_MB)')
   glib_conf.set('HAVE_LANGINFO_OUTDIGIT', 1)
+endif
+
+# Check for nl_langinfo and alternative month names
+if cc.links('''#ifndef _GNU_SOURCE
+              # define _GNU_SOURCE
+              #endif
+              #include <langinfo.h>
+               int main (int argc, char ** argv) {
+                 char *str;
+                 str = nl_langinfo (ALTMON_1);
+                 str = nl_langinfo (ALTMON_2);
+                 str = nl_langinfo (ALTMON_3);
+                 str = nl_langinfo (ALTMON_4);
+                 str = nl_langinfo (ALTMON_5);
+                 str = nl_langinfo (ALTMON_6);
+                 str = nl_langinfo (ALTMON_7);
+                 str = nl_langinfo (ALTMON_8);
+                 str = nl_langinfo (ALTMON_9);
+                 str = nl_langinfo (ALTMON_10);
+                 str = nl_langinfo (ALTMON_11);
+                 str = nl_langinfo (ALTMON_12);
+                 return 0;
+               }''', name : 'nl_langinfo (ALTMON_n)')
+  glib_conf.set('HAVE_LANGINFO_ALTMON', 1)
+endif
+
+# Check for nl_langinfo and abbreviated alternative month names
+if cc.links('''#ifndef _GNU_SOURCE
+              # define _GNU_SOURCE
+              #endif
+              #include <langinfo.h>
+               int main (int argc, char ** argv) {
+                 char *str;
+                 str = nl_langinfo (_NL_ALTMON_1);
+                 str = nl_langinfo (_NL_ALTMON_2);
+                 str = nl_langinfo (_NL_ALTMON_3);
+                 str = nl_langinfo (_NL_ALTMON_4);
+                 str = nl_langinfo (_NL_ALTMON_5);
+                 str = nl_langinfo (_NL_ALTMON_6);
+                 str = nl_langinfo (_NL_ALTMON_7);
+                 str = nl_langinfo (_NL_ALTMON_8);
+                 str = nl_langinfo (_NL_ALTMON_9);
+                 str = nl_langinfo (_NL_ALTMON_10);
+                 str = nl_langinfo (_NL_ALTMON_11);
+                 str = nl_langinfo (_NL_ALTMON_12);
+                 return 0;
+               }''', name : 'nl_langinfo (_NL_ALTMON_n)')
+  glib_conf.set('HAVE_LANGINFO_ABALTMON', 1)
 endif
 
 # Check if C compiler supports the 'signed' keyword
@@ -1521,13 +1590,7 @@ xgettext = find_program('xgettext', required : false)
 # pkg-config file below
 libmount_dep = []
 if host_system == 'linux' and get_option('libmount')
-  libmount_dep = [dependency('mount', version : '>=2.28', required : false)]
-  if not libmount_dep[0].found()
-    libmount_dep = [cc.find_library('mount', required : true)]
-    if not cc.has_header('libmount/libmount.h')
-      error('libmount support needs libmount/libmount.h header')
-    endif
-  endif
+  libmount_dep = [dependency('mount', version : '>=2.23', required : true)]
 endif
 
 if host_system == 'windows'
@@ -1655,8 +1718,8 @@ if want_systemtap and enable_dtrace
   endif
   stp_cdata = configuration_data()
   stp_cdata.set('ABS_GLIB_RUNTIME_LIBDIR', glib_libdir)
-  stp_cdata.set('LT_CURRENT', minor_version.to_int() * 100)
-  stp_cdata.set('LT_REVISION', micro_version.to_int())
+  stp_cdata.set('LT_CURRENT', minor_version * 100)
+  stp_cdata.set('LT_REVISION', micro_version)
   enable_systemtap = true
 endif
 

@@ -1411,7 +1411,7 @@ parameters avoids the need to write a wrapper function.</p>
         <td class="listing_lines" align="right"><pre>1
 2</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="function"><a href="gobject-Signals.html#g-signal-connect-swapped">g_signal_connect_swapped</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">button</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"clicked"</span><span class="symbol">,</span>
-<span class="normal">                          </span><span class="symbol">(</span><span class="normal"><a href="gobject-Closures.html#GCallback">GCallback</a></span><span class="symbol">)</span><span class="normal"> <a href="../gtk4/GtkWidget.html#gtk-widget-hide">gtk_widget_hide</a></span><span class="symbol">,</span><span class="normal"> other_widget</span><span class="symbol">);</span></pre></td>
+<span class="normal">                          </span><span class="symbol">(</span><span class="normal"><a href="gobject-Closures.html#GCallback">GCallback</a></span><span class="symbol">)</span><span class="normal"> gtk_widget_hide</span><span class="symbol">,</span><span class="normal"> other_widget</span><span class="symbol">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -1436,7 +1436,7 @@ parameters avoids the need to write a wrapper function.</p>
         <td class="listing_code"><pre class="programlisting"><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
 <span class="function">button_clicked_cb</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">GtkButton</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">button</span><span class="symbol">,</span><span class="normal"> </span><span class="usertype">GtkWidget</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">other_widget</span><span class="symbol">)</span>
 <span class="cbracket">{</span>
-<span class="normal">    </span><span class="function"><a href="../gtk4/GtkWidget.html#gtk-widget-hide">gtk_widget_hide</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">other_widget</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="function">gtk_widget_hide</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">other_widget</span><span class="symbol">);</span>
 <span class="cbracket">}</span>
 
 <span class="symbol">...</span>
@@ -3374,7 +3374,7 @@ to the corresponding argument of <a class="link" href="gobject-Signals.html#g-si
         <td class="listing_code"><pre class="programlisting"><span class="function"><a href="gobject-Signals.html#g-signal-new">g_signal_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"size_request"</span><span class="symbol">,</span>
 <span class="normal">  </span><span class="function"><a href="gobject-Type-Information.html#G-TYPE-FROM-CLASS:CAPS">G_TYPE_FROM_CLASS</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">gobject_class</span><span class="symbol">),</span>
 <span class="normal">     <a href="gobject-Signals.html#G-SIGNAL-RUN-FIRST:CAPS">G_SIGNAL_RUN_FIRST</a></span><span class="symbol">,</span>
-<span class="normal">     </span><span class="function"><a href="../glib-Standard-Macros.html#G-STRUCT-OFFSET:CAPS">G_STRUCT_OFFSET</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="../gtk4/GtkWidget.html#GtkWidgetClass">GtkWidgetClass</a></span><span class="symbol">,</span><span class="normal"> size_request</span><span class="symbol">),</span>
+<span class="normal">     </span><span class="function"><a href="../glib-Standard-Macros.html#G-STRUCT-OFFSET:CAPS">G_STRUCT_OFFSET</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">GtkWidgetClass</span><span class="symbol">,</span><span class="normal"> size_request</span><span class="symbol">),</span>
 <span class="normal">     <a href="../glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> <a href="../glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
 <span class="normal">     _gtk_marshal_VOID__BOXED</span><span class="symbol">,</span>
 <span class="normal">     <a href="gobject-Type-Information.html#G-TYPE-NONE:CAPS">G_TYPE_NONE</a></span><span class="symbol">,</span><span class="normal"> </span><span class="number">1</span><span class="symbol">,</span>

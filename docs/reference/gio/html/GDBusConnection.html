@@ -2483,7 +2483,10 @@ g_dbus_connection_emit_signal (<em class="parameter"><code><a class="link" href=
 <p>Emits a signal.</p>
 <p>If the parameters GVariant is floating, it is consumed.</p>
 <p>This can only fail if <em class="parameter"><code>parameters</code></em>
- is not compatible with the D-Bus protocol.</p>
+ is not compatible with the D-Bus protocol
+(<a class="link" href="gio-GIOError.html#G-IO-ERROR-INVALID-ARGUMENT:CAPS"><code class="literal">G_IO_ERROR_INVALID_ARGUMENT</code></a>), or if <em class="parameter"><code>connection</code></em>
+ has been closed
+(<a class="link" href="gio-GIOError.html#G-IO-ERROR-CLOSED:CAPS"><code class="literal">G_IO_ERROR_CLOSED</code></a>).</p>
 <div class="refsect3">
 <a name="g-dbus-connection-emit-signal.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">

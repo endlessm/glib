@@ -146,7 +146,7 @@ convenient than the bare UNIX <code class="function">fork()</code> and <code cla
 and asynchronous variants (<a class="link" href="glib-Spawning-Processes.html#g-spawn-async" title="g_spawn_async ()"><code class="function">g_spawn_async()</code></a>, <a class="link" href="glib-Spawning-Processes.html#g-spawn-async-with-pipes" title="g_spawn_async_with_pipes ()"><code class="function">g_spawn_async_with_pipes()</code></a>),
 as well as convenience variants that take a complete shell-like
 commandline (<a class="link" href="glib-Spawning-Processes.html#g-spawn-command-line-sync" title="g_spawn_command_line_sync ()"><code class="function">g_spawn_command_line_sync()</code></a>, <a class="link" href="glib-Spawning-Processes.html#g-spawn-command-line-async" title="g_spawn_command_line_async ()"><code class="function">g_spawn_command_line_async()</code></a>).</p>
-<p>See <a href="../gio/GSubprocess.html#GSubprocess-struct"><span class="type">GSubprocess</span></a> in GIO for a higher-level API that provides
+<p>See <a href="../GSubprocess.html#GSubprocess-struct"><span class="type">GSubprocess</span></a> in GIO for a higher-level API that provides
 stream interfaces for communication with child processes.</p>
 <p>An example of using <a class="link" href="glib-Spawning-Processes.html#g-spawn-async-with-pipes" title="g_spawn_async_with_pipes ()"><code class="function">g_spawn_async_with_pipes()</code></a>:</p>
 <div class="informalexample">
@@ -397,7 +397,7 @@ standard error. If you use this flag, <em class="parameter"><code>standard_error
  must be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
 <a class="link" href="glib-Spawning-Processes.html#G-SPAWN-CHILD-INHERITS-STDIN:CAPS"><code class="literal">G_SPAWN_CHILD_INHERITS_STDIN</code></a> means that the child will inherit the parent's
 standard input (by default, the child's standard input is attached to
-/dev/null). If you use this flag, <em class="parameter"><code>standard_input</code></em>
+<code class="literal">/dev/null</code>). If you use this flag, <em class="parameter"><code>standard_input</code></em>
  must be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
 <a class="link" href="glib-Spawning-Processes.html#G-SPAWN-FILE-AND-ARGV-ZERO:CAPS"><code class="literal">G_SPAWN_FILE_AND_ARGV_ZERO</code></a> means that the first element of <em class="parameter"><code>argv</code></em>
  is
@@ -443,8 +443,8 @@ The caller of <a class="link" href="glib-Spawning-Processes.html#g-spawn-async-w
 when they are no longer in use. If these parameters are <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>, the
 corresponding pipe won't be created.</p>
 <p>If <em class="parameter"><code>standard_input</code></em>
- is NULL, the child's standard input is attached to 
-/dev/null unless <a class="link" href="glib-Spawning-Processes.html#G-SPAWN-CHILD-INHERITS-STDIN:CAPS"><code class="literal">G_SPAWN_CHILD_INHERITS_STDIN</code></a> is set.</p>
+ is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>, the child's standard input is attached to
+<code class="literal">/dev/null</code> unless <a class="link" href="glib-Spawning-Processes.html#G-SPAWN-CHILD-INHERITS-STDIN:CAPS"><code class="literal">G_SPAWN_CHILD_INHERITS_STDIN</code></a> is set.</p>
 <p>If <em class="parameter"><code>standard_error</code></em>
  is NULL, the child's standard error goes to the same 
 location as the parent's standard error unless <a class="link" href="glib-Spawning-Processes.html#G-SPAWN-STDERR-TO-DEV-NULL:CAPS"><code class="literal">G_SPAWN_STDERR_TO_DEV_NULL</code></a> 
@@ -472,8 +472,8 @@ and <em class="parameter"><code>standard_error</code></em>
 process reference must be closed using <a class="link" href="glib-Spawning-Processes.html#g-spawn-close-pid" title="g_spawn_close_pid ()"><code class="function">g_spawn_close_pid()</code></a>.</p>
 <p>If you are writing a GTK+ application, and the program you are spawning is a
 graphical application too, then to ensure that the spawned program opens its
-windows on the right screen, you may want to use <a href="../gdk4/gdk4-Application-launching.html#GdkAppLaunchContext-struct"><span class="type">GdkAppLaunchContext</span></a>,
-<a href="../gio/GAppInfo.html#GAppLaunchContext-struct"><span class="type">GAppLaunchContext</span></a>, or set the <code class="literal">DISPLAY</code> environment variable.</p>
+windows on the right screen, you may want to use <span class="type">GdkAppLaunchContext</span>,
+<a href="../GAppInfo.html#GAppLaunchContext-struct"><span class="type">GAppLaunchContext</span></a>, or set the <code class="literal">DISPLAY</code> environment variable.</p>
 <div class="refsect3">
 <a name="g-spawn-async-with-pipes.parameters"></a><h4>Parameters</h4>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
@@ -568,8 +568,8 @@ simply calls the <a class="link" href="glib-Spawning-Processes.html#g-spawn-asyn
 reference when you don't need it any more.</p>
 <p>If you are writing a GTK+ application, and the program you are spawning is a
 graphical application too, then to ensure that the spawned program opens its
-windows on the right screen, you may want to use <a href="../gdk4/gdk4-Application-launching.html#GdkAppLaunchContext-struct"><span class="type">GdkAppLaunchContext</span></a>,
-<a href="../gio/GAppInfo.html#GAppLaunchContext-struct"><span class="type">GAppLaunchContext</span></a>, or set the <code class="literal">DISPLAY</code> environment variable.</p>
+windows on the right screen, you may want to use <span class="type">GdkAppLaunchContext</span>,
+<a href="../GAppInfo.html#GAppLaunchContext-struct"><span class="type">GAppLaunchContext</span></a>, or set the <code class="literal">DISPLAY</code> environment variable.</p>
 <p>Note that the returned <em class="parameter"><code>child_pid</code></em>
  on Windows is a handle to the child
 process and not its identifier. Process handles and process identifiers

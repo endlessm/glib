@@ -216,7 +216,7 @@
 </div>
 <div class="refsect1">
 <a name="GResource.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">    <a href="/usr/share/gtk-doc/html/gobject/gobject-Boxed-Types.html">GBoxed</a>
+<pre class="screen">    GBoxed
     <span class="lineart">╰──</span> GResource
 </pre>
 </div>
@@ -229,7 +229,7 @@
 <a name="GResource.description"></a><h2>Description</h2>
 <p>Applications and libraries often contain binary or textual data that is
 really part of the application, rather than user data. For instance
-<a href="../gtk4/GtkBuilder.html#GtkBuilder-struct"><span class="type">GtkBuilder</span></a> .ui files, splashscreen images, GMenu markup XML, CSS files,
+<span class="type">GtkBuilder</span> .ui files, splashscreen images, GMenu markup XML, CSS files,
 icons, etc. These are often shipped as files in <code class="literal">$datadir/appname</code>, or
 manually included as literal strings in the code.</p>
 <p>The <a class="link" href="GResource.html" title="GResource"><span class="type">GResource</span></a> API and the glib-compile-resources program
@@ -328,7 +328,7 @@ register the resource so its files can be accessed using
 using API calls like <a class="link" href="GResource.html#g-resources-open-stream" title="g_resources_open_stream ()"><code class="function">g_resources_open_stream()</code></a> to stream the data or <a class="link" href="GResource.html#g-resources-lookup-data" title="g_resources_lookup_data ()"><code class="function">g_resources_lookup_data()</code></a> to get a direct pointer
 to the data. You can also use URIs like "resource:///org/gtk/Example/data/splashscreen.png" with <a class="link" href="GFile.html" title="GFile"><span class="type">GFile</span></a> to access
 the resource data.</p>
-<p>Some higher-level APIs, such as <a href="../gtk4/GtkApplication.html#GtkApplication-struct"><span class="type">GtkApplication</span></a>, will automatically load
+<p>Some higher-level APIs, such as <span class="type">GtkApplication</span>, will automatically load
 resources from certain well-known paths in the resource namespace as a
 convenience. See the documentation for those APIs for details.</p>
 <p>There are two forms of the generated source, the default version uses the compiler support for constructor

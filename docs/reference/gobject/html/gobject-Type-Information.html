@@ -4240,7 +4240,7 @@ present time) intended to be subclassed.</p>
 <span class="preproc">#include</span><span class="normal"> </span><span class="string">&lt;gtk/gtk.h&gt;</span>
 
 <span class="preproc">#define</span><span class="normal"> </span><span class="usertype">MY_APP_TYPE_WINDOW</span><span class="normal"> </span><span class="function">my_app_window_get_type</span><span class="normal"> </span><span class="symbol">()</span>
-<span class="function"><a href="gobject-Type-Information.html#G-DECLARE-FINAL-TYPE:CAPS">G_DECLARE_FINAL_TYPE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">MyAppWindow</span><span class="symbol">,</span><span class="normal"> my_app_window</span><span class="symbol">,</span><span class="normal"> MY_APP</span><span class="symbol">,</span><span class="normal"> WINDOW</span><span class="symbol">,</span><span class="normal"> <a href="../gtk4/GtkWindow.html#GtkWindow-struct">GtkWindow</a></span><span class="symbol">)</span>
+<span class="function"><a href="gobject-Type-Information.html#G-DECLARE-FINAL-TYPE:CAPS">G_DECLARE_FINAL_TYPE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">MyAppWindow</span><span class="symbol">,</span><span class="normal"> my_app_window</span><span class="symbol">,</span><span class="normal"> MY_APP</span><span class="symbol">,</span><span class="normal"> WINDOW</span><span class="symbol">,</span><span class="normal"> GtkWindow</span><span class="symbol">)</span>
 
 <span class="normal">MyAppWindow </span><span class="symbol">*</span><span class="normal">    </span><span class="function">my_app_window_new</span><span class="normal">    </span><span class="symbol">(</span><span class="type">void</span><span class="symbol">);</span>
 
@@ -4356,7 +4356,7 @@ to be subclassed.</p>
 
 <span class="preproc">#define</span><span class="normal"> </span><span class="usertype">GTK_TYPE_FROBBER</span><span class="normal"> </span><span class="function">gtk_frobber_get_type</span><span class="normal"> </span><span class="symbol">()</span>
 <span class="normal">GDK_AVAILABLE_IN_3_12</span>
-<span class="function"><a href="gobject-Type-Information.html#G-DECLARE-DERIVABLE-TYPE:CAPS">G_DECLARE_DERIVABLE_TYPE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">GtkFrobber</span><span class="symbol">,</span><span class="normal"> gtk_frobber</span><span class="symbol">,</span><span class="normal"> GTK</span><span class="symbol">,</span><span class="normal"> FROBBER</span><span class="symbol">,</span><span class="normal"> <a href="../gtk4/GtkWidget.html#GtkWidget-struct">GtkWidget</a></span><span class="symbol">)</span>
+<span class="function"><a href="gobject-Type-Information.html#G-DECLARE-DERIVABLE-TYPE:CAPS">G_DECLARE_DERIVABLE_TYPE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">GtkFrobber</span><span class="symbol">,</span><span class="normal"> gtk_frobber</span><span class="symbol">,</span><span class="normal"> GTK</span><span class="symbol">,</span><span class="normal"> FROBBER</span><span class="symbol">,</span><span class="normal"> GtkWidget</span><span class="symbol">)</span>
 
 <span class="keyword">struct</span><span class="normal"> </span><span class="classname">_GtkFrobberClass</span>
 <span class="cbracket">{</span>
@@ -4368,7 +4368,7 @@ to be subclassed.</p>
 <span class="normal">  </span><span class="usertype">gpointer</span><span class="normal"> padding</span><span class="symbol">[</span><span class="number">12</span><span class="symbol">];</span>
 <span class="cbracket">}</span><span class="symbol">;</span>
 
-<span class="normal"><a href="../gtk4/GtkWidget.html#GtkWidget-struct">GtkWidget</a> </span><span class="symbol">*</span><span class="normal">    </span><span class="function">gtk_frobber_new</span><span class="normal">   </span><span class="symbol">(</span><span class="type">void</span><span class="symbol">);</span>
+<span class="normal">GtkWidget </span><span class="symbol">*</span><span class="normal">    </span><span class="function">gtk_frobber_new</span><span class="normal">   </span><span class="symbol">(</span><span class="type">void</span><span class="symbol">);</span>
 
 <span class="symbol">...</span>
 
@@ -5374,7 +5374,7 @@ Similar to <a class="link" href="gobject-Type-Information.html#G-DEFINE-BOXED-TY
 2
 3
 4</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="gobject-Type-Information.html#G-DEFINE-BOXED-TYPE-WITH-CODE:CAPS">G_DEFINE_BOXED_TYPE_WITH_CODE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="../gdk4/gdk4-Points-Rectangles-and-Regions.html#GdkRectangle-struct">GdkRectangle</a></span><span class="symbol">,</span><span class="normal"> gdk_rectangle</span><span class="symbol">,</span>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="gobject-Type-Information.html#G-DEFINE-BOXED-TYPE-WITH-CODE:CAPS">G_DEFINE_BOXED_TYPE_WITH_CODE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">GdkRectangle</span><span class="symbol">,</span><span class="normal"> gdk_rectangle</span><span class="symbol">,</span>
 <span class="normal">                               gdk_rectangle_copy</span><span class="symbol">,</span>
 <span class="normal">                               gdk_rectangle_free</span><span class="symbol">,</span>
 <span class="normal">                               </span><span class="function">register_rectangle_transform_funcs</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">g_define_type_id</span><span class="symbol">))</span></pre></td>
