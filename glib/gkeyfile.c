@@ -119,7 +119,7 @@
  * are optional.
  * Space before and after the '=' character are ignored. Newline, tab,
  * carriage return and backslash characters in value are escaped as \n,
- * \t, \r, and \\, respectively. To preserve leading spaces in values,
+ * \t, \r, and \\\\, respectively. To preserve leading spaces in values,
  * these can also be escaped as \s.
  *
  * Key files can store strings (possibly with localized variants), integers,
@@ -152,6 +152,58 @@
  * multiple groups with the same name; they are merged together.
  * Another difference is that keys and group names in key files are not
  * restricted to ASCII characters.
+ *
+ * Here is an example of loading a key file and reading a value:
+ * |[<!-- language="C" -->
+ * g_autoptr(GError) error = NULL;
+ * g_autoptr(GKeyFile) key_file = g_key_file_new ();
+ *
+ * if (!g_key_file_load_from_file (key_file, "key-file.ini", flags, &error))
+ *   {
+ *     if (!g_error_matches (error, G_FILE_ERROR, G_FILE_ERROR_NOENT))
+ *       g_warning ("Error loading key file: %s", error->message);
+ *     return;
+ *   }
+ *
+ * g_autofree gchar *val = g_key_file_get_string (key_file, "Group Name", "SomeKey", &error);
+ * if (val == NULL &&
+ *     !g_error_matches (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_KEY_NOT_FOUND))
+ *   {
+ *     g_warning ("Error finding key in key file: %s", error->message);
+ *     return;
+ *   }
+ * else if (val == NULL)
+ *   {
+ *     // Fall back to a default value.
+ *     val = g_strdup ("default-value");
+ *   }
+ * ]|
+ *
+ * Here is an example of creating and saving a key file:
+ * |[<!-- language="C" -->
+ * g_autoptr(GKeyFile) key_file = g_key_file_new ();
+ * const gchar *val = …;
+ * g_autoptr(GError) error = NULL;
+ *
+ * g_key_file_set_string (key_file, "Group Name", "SomeKey", val);
+ *
+ * // Save as a file.
+ * if (!g_key_file_save_to_file (key_file, "key-file.ini", &error))
+ *   {
+ *     g_warning ("Error saving key file: %s", error->message);
+ *     return;
+ *   }
+ *
+ * // Or store to a GBytes for use elsewhere.
+ * gsize data_len;
+ * g_autofree guint8 *data = (guint8 *) g_key_file_to_data (key_file, &data_len, &error);
+ * if (data == NULL)
+ *   {
+ *     g_warning ("Error saving key file: %s", error->message);
+ *     return;
+ *   }
+ * g_autoptr(GBytes) bytes = g_bytes_new_take (g_steal_pointer (&data), data_len);
+ * ]|
  */
 
 /**
@@ -737,7 +789,7 @@ find_file_in_data_dirs (const gchar   *file,
                              "found in search dirs"));
     }
 
-  if (output_file != NULL && fd > 0)
+  if (output_file != NULL && fd != -1)
     *output_file = g_strdup (path);
 
   g_free (path);
@@ -2131,6 +2183,10 @@ g_key_file_set_locale_string (GKeyFile     *key_file,
  * translated in the given @locale if available.  If @locale is
  * %NULL then the current locale is assumed. 
  *
+ * If @locale is to be non-%NULL, or if the current locale will change over
+ * the lifetime of the #GKeyFile, it must be loaded with
+ * %G_KEY_FILE_KEEP_TRANSLATIONS in order to load strings for all locales.
+ *
  * If @key cannot be found then %NULL is returned and @error is set 
  * to #G_KEY_FILE_ERROR_KEY_NOT_FOUND. If the value associated
  * with @key cannot be interpreted or no suitable translation can
@@ -2207,6 +2263,71 @@ g_key_file_get_locale_string (GKeyFile     *key_file,
 }
 
 /**
+ * g_key_file_get_locale_for_key:
+ * @key_file: a #GKeyFile
+ * @group_name: a group name
+ * @key: a key
+ * @locale: (nullable): a locale identifier or %NULL
+ *
+ * Returns the actual locale which the result of
+ * g_key_file_get_locale_string() or g_key_file_get_locale_string_list()
+ * came from.
+ *
+ * If calling g_key_file_get_locale_string() or
+ * g_key_file_get_locale_string_list() with exactly the same @key_file,
+ * @group_name, @key and @locale, the result of those functions will
+ * have originally been tagged with the locale that is the result of
+ * this function.
+ *
+ * Returns: (nullable): the locale from the file, or %NULL if the key was not
+ *   found or the entry in the file was was untranslated
+ *
+ * Since: 2.56
+ */
+gchar *
+g_key_file_get_locale_for_key (GKeyFile    *key_file,
+                               const gchar *group_name,
+                               const gchar *key,
+                               const gchar *locale)
+{
+  gchar **languages_allocated = NULL;
+  const gchar * const *languages;
+  gchar *result = NULL;
+  gsize i;
+
+  g_return_val_if_fail (key_file != NULL, NULL);
+  g_return_val_if_fail (group_name != NULL, NULL);
+  g_return_val_if_fail (key != NULL, NULL);
+
+  if (locale != NULL)
+    {
+      languages_allocated = g_get_locale_variants (locale);
+      languages = (const gchar * const *) languages_allocated;
+    }
+  else
+    languages = g_get_language_names ();
+
+  for (i = 0; languages[i] != NULL; i++)
+    {
+      gchar *candidate_key, *translated_value;
+
+      candidate_key = g_strdup_printf ("%s[%s]", key, languages[i]);
+      translated_value = g_key_file_get_string (key_file, group_name, candidate_key, NULL);
+      g_free (translated_value);
+      g_free (candidate_key);
+
+      if (translated_value != NULL)
+        break;
+   }
+
+  result = g_strdup (languages[i]);
+
+  g_strfreev (languages_allocated);
+
+  return result;
+}
+
+/**
  * g_key_file_get_locale_string_list:
  * @key_file: a #GKeyFile
  * @group_name: a group name
@@ -2218,7 +2339,11 @@ g_key_file_get_locale_string (GKeyFile     *key_file,
  * Returns the values associated with @key under @group_name
  * translated in the given @locale if available.  If @locale is
  * %NULL then the current locale is assumed.
-
+ *
+ * If @locale is to be non-%NULL, or if the current locale will change over
+ * the lifetime of the #GKeyFile, it must be loaded with
+ * %G_KEY_FILE_KEEP_TRANSLATIONS in order to load strings for all locales.
+ *
  * If @key cannot be found then %NULL is returned and @error is set 
  * to #G_KEY_FILE_ERROR_KEY_NOT_FOUND. If the values associated
  * with @key cannot be interpreted or no suitable translations

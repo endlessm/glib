@@ -1,4 +1,4 @@
-gobject_install_headers = files([
+gobject_install_headers = files(
   'gobject-autocleanups.h',
   'glib-types.h',
   'gbinding.h',
@@ -19,11 +19,10 @@ gobject_install_headers = files([
   'gvaluecollector.h',
   'gvaluetypes.h',
   'gobjectnotifyqueue.c', # sic
-])
+)
 install_headers(gobject_install_headers, subdir : 'glib-2.0/gobject')
 
-gobject_c_sources = [
-#  'gobject_probes.d',
+gobject_sources = files(
   'gatomicarray.c',
   'gbinding.c',
   'gboxed.c',
@@ -31,7 +30,6 @@ gobject_c_sources = [
   'genums.c',
   'gmarshal.c',
   'gobject.c',
-  'gobject_trace.h',
   'gparam.c',
   'gparamspecs.c',
   'gsignal.c',
@@ -43,7 +41,17 @@ gobject_c_sources = [
   'gvaluearray.c',
   'gvaluetransform.c',
   'gvaluetypes.c',
-]
+)
+
+if host_system == 'windows'
+  gobject_win_rc = configure_file(
+    input: 'gobject.rc.in',
+    output: 'gobject.rc',
+    configuration: glibconfig_conf,
+  )
+  gobject_win_res = windows.compile_resources(gobject_win_rc)
+  gobject_sources += [gobject_win_res]
+endif
 
 if enable_dtrace
   gobject_dtrace_obj = dtrace_obj_gen.process('gobject_probes.d')
@@ -53,9 +61,9 @@ else
   gobject_dtrace_hdr = []
 endif
 
-libgobject = shared_library('gobject-2.0',
+libgobject = library('gobject-2.0',
   gobject_dtrace_obj, gobject_dtrace_hdr,
-  sources : [gobject_c_sources],
+  sources : gobject_sources,
   version : library_version,
   soversion : soversion,
   install : true,
@@ -76,7 +84,6 @@ python_tools_conf.set('VERSION', glib_version)
 python_tools_conf.set('PYTHON', python.path())
 
 foreach tool: python_tools
-  # FIXME: Ensure we set the appropriate permissions
   tool_bin = configure_file(
     input : tool + '.in',
     output : tool,
@@ -91,7 +98,6 @@ endforeach
 
 executable('gobject-query', 'gobject-query.c',
   install : true,
-  c_args : ['-DHAVE_CONFIG_H=1'],
   dependencies : [libglib_dep, libgobject_dep])
 
 install_data('gobject_gdb.py', install_dir : join_paths(glib_pkgdatadir, 'gdb'))
@@ -101,8 +107,7 @@ configure_file(
   input: 'libgobject-gdb.py.in',
   output: 'libgobject-2.0.so.@0@-gdb.py'.format(library_version),
   configuration: gdb_conf,
-  install: true,
-  install_dir: join_paths(get_option('datadir'), 'gdb/auto-load/' + get_option('libdir'))
+  install_dir: gdb_install_dir,
 )
 
 if enable_systemtap

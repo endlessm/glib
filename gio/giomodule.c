@@ -202,14 +202,14 @@ g_io_module_scope_block (GIOModuleScope *scope,
   g_return_if_fail (basename != NULL);
 
   key = g_strdup (basename);
-  g_hash_table_insert (scope->basenames, key, key);
+  g_hash_table_add (scope->basenames, key);
 }
 
 static gboolean
 _g_io_module_scope_contains (GIOModuleScope *scope,
                              const gchar    *basename)
 {
-  return g_hash_table_lookup (scope->basenames, basename) ? TRUE : FALSE;
+  return g_hash_table_contains (scope->basenames, basename);
 }
 
 struct _GIOModule {
@@ -291,6 +291,43 @@ g_io_module_finalize (GObject *object)
 }
 
 static gboolean
+load_symbols (GIOModule *module)
+{
+  gchar *name;
+  gchar *load_symname;
+  gchar *unload_symname;
+  gboolean ret;
+
+  name = _g_io_module_extract_name (module->filename);
+  load_symname = g_strconcat ("g_io_", name, "_load", NULL);
+  unload_symname = g_strconcat ("g_io_", name, "_unload", NULL);
+
+  ret = g_module_symbol (module->library,
+                         load_symname,
+                         (gpointer) &module->load) &&
+        g_module_symbol (module->library,
+                         unload_symname,
+                         (gpointer) &module->unload);
+
+  if (!ret)
+    {
+      /* Fallback to old names */
+      ret = g_module_symbol (module->library,
+                             "g_io_module_load",
+                             (gpointer) &module->load) &&
+            g_module_symbol (module->library,
+                             "g_io_module_unload",
+                             (gpointer) &module->unload);
+    }
+
+  g_free (name);
+  g_free (load_symname);
+  g_free (unload_symname);
+
+  return ret;
+}
+
+static gboolean
 g_io_module_load_module (GTypeModule *gmodule)
 {
   GIOModule *module = G_IO_MODULE (gmodule);
@@ -310,12 +347,7 @@ g_io_module_load_module (GTypeModule *gmodule)
     }
 
   /* Make sure that the loaded library contains the required methods */
-  if (! g_module_symbol (module->library,
-                         "g_io_module_load",
-                         (gpointer) &module->load) ||
-      ! g_module_symbol (module->library,
-                         "g_io_module_unload",
-                         (gpointer) &module->unload))
+  if (!load_symbols (module))
     {
       g_printerr ("%s\n", g_module_error ());
       g_module_close (module->library);
@@ -932,6 +964,7 @@ extern GType g_cocoa_notification_backend_get_type (void);
 #ifdef G_PLATFORM_WIN32
 
 #include <windows.h>
+extern GType _g_win32_network_monitor_get_type (void);
 
 static HMODULE gio_dll = NULL;
 
@@ -1147,6 +1180,9 @@ _g_io_modules_ensure_loaded (void)
 #ifdef HAVE_NETLINK
       g_type_ensure (_g_network_monitor_netlink_get_type ());
       g_type_ensure (_g_network_monitor_nm_get_type ());
+#endif
+#ifdef G_OS_WIN32
+      g_type_ensure (_g_win32_network_monitor_get_type ());
 #endif
     }
 

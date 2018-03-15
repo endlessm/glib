@@ -63,9 +63,14 @@ static GMemVTable glib_mem_vtable = {
  * 
  * These functions provide support for allocating and freeing memory.
  * 
- * If any call to allocate memory fails, the application is terminated.
- * This also means that there is no need to check if the call succeeded.
- * 
+ * If any call to allocate memory using functions g_new(), g_new0(), g_renew(),
+ * g_malloc(), g_malloc0(), g_malloc0_n(), g_realloc(), and g_realloc_n()
+ * fails, the application is terminated. This also means that there is no
+ * need to check if the call succeeded. On the other hand, g_try_...() family
+ * of functions returns %NULL on failure that can be used as a check
+ * for unsuccessful memory allocation. The application is not terminated
+ * in this case.
+ *
  * It's important to match g_malloc() (and wrappers such as g_new()) with
  * g_free(), g_slice_alloc() (and wrappers such as g_slice_new()) with
  * g_slice_free(), plain malloc() with free(), and (if you're using C++)
@@ -475,7 +480,8 @@ g_mem_is_system_malloc (void)
  * in GLib and GIO, because those use the GLib allocators before main is
  * reached. Therefore this function is now deprecated and is just a stub.
  *
- * Deprecated: 2.46: Use other memory profiling tools instead
+ * Deprecated: 2.46: This function now does nothing. Use other memory
+ * profiling tools instead
  */
 void
 g_mem_set_vtable (GMemVTable *vtable)

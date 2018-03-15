@@ -229,6 +229,12 @@
 /* Define to 1 if you have the `kqueue' function. */
 #undef HAVE_KQUEUE
 
+/* Have nl_langinfo (_NL_ABALTMON_n) */
+#undef HAVE_LANGINFO_ABALTMON
+
+/* Have nl_langinfo (ALTMON_n) */
+#undef HAVE_LANGINFO_ALTMON
+
 /* Define if you have <langinfo.h> and nl_langinfo(CODESET). */
 #undef HAVE_LANGINFO_CODESET
 
@@ -292,6 +298,9 @@
 /* Define to 1 if you have the <memory.h> header file. */
 #undef HAVE_MEMORY_H
 
+/* Define to 1 if you have the `mkostemp' function. */
+#undef HAVE_MKOSTEMP
+
 /* Define to 1 if you have the `mmap' function. */
 #undef HAVE_MMAP
 
@@ -349,6 +358,18 @@
 /* Define to 1 if you have the 'res_init' function. */
 #undef HAVE_RES_INIT
 
+/* Define to 1 if you have the 'res_nclose' function. */
+#undef HAVE_RES_NCLOSE
+
+/* Define to 1 if you have the 'res_ndestroy' function. */
+#undef HAVE_RES_NDESTROY
+
+/* Define to 1 if you have the 'res_ninit' function. */
+#undef HAVE_RES_NINIT
+
+/* Define to 1 if you have the 'res_nquery' function. */
+#undef HAVE_RES_NQUERY
+
 /* Define to 1 if RTLD_GLOBAL is available */
 #undef HAVE_RTLD_GLOBAL
 
@@ -378,6 +399,9 @@
 
 /* Define if you have the 'sig_atomic_t' type. */
 #undef HAVE_SIG_ATOMIC_T
+
+/* SIOCGIFADDR is available */
+#undef HAVE_SIOCGIFADDR
 
 /* Define to 1 if you have the `snprintf' function. */
 #undef HAVE_SNPRINTF
@@ -787,7 +811,7 @@
 /* Define to 1 if you need to in order for `stat' and other things to work. */
 #undef _POSIX_SOURCE
 
-/* Target the Windows XP API */
+/* Target the Windows 7 API */
 #undef _WIN32_WINNT
 
 /* Needed to get declarations for msg_control and msg_controllen on Solaris */

@@ -161,6 +161,7 @@ libglib_2_0_la_SOURCES = 	\
 	gslice.c		\
 	gslist.c		\
 	gstdio.c		\
+	gstdioprivate.h		\
 	gstrfuncs.c		\
 	gstring.c		\
 	gstringchunk.c		\
@@ -478,6 +479,7 @@ dist-hook: $(BUILT_EXTRA_DIST) $(top_builddir)/win32/vs9/glib.vcproj $(top_build
 gdbdir = $(datadir)/glib-2.0/gdb
 dist_gdb_DATA = glib_gdb.py
 
+all-local: libglib-gdb.py
 libglib-gdb.py: libglib-gdb.py.in
 	$(AM_V_GEN) $(SED) -e "s|\@datadir\@|$(datadir)|" $(srcdir)/libglib-gdb.py.in > $(builddir)/libglib-gdb.py
 

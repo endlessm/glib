@@ -3,9 +3,7 @@ include $(top_srcdir)/glib.mk
 SUBDIRS = gdbus-2.0/codegen
 
 if OS_UNIX
-if !OS_COCOA
 SUBDIRS += xdgmime
-endif
 endif
 
 if OS_WIN32_AND_DLL_COMPILATION
@@ -92,7 +90,18 @@ gdbus_sources = 							\
 # These are not built into the library yet
 EXTRA_DIST += gdbusdaemon.c gdbusdaemon.h dbus-daemon.xml
 
-gdbus-daemon-generated.h gdbus-daemon-generated.c: $(srcdir)/dbus-daemon.xml $(srcdir)/gdbus-2.0/codegen/gdbus-codegen.in
+GDBUS_PYTHON_DEPS = 					\
+	$(srcdir)/gdbus-2.0/codegen/gdbus-codegen.in	\
+	$(srcdir)/gdbus-2.0/codegen/codegen_main.py 	\
+	$(srcdir)/gdbus-2.0/codegen/parser.py 		\
+	$(srcdir)/gdbus-2.0/codegen/codegen_docbook.py 	\
+	$(srcdir)/gdbus-2.0/codegen/codegen.py 		\
+	$(srcdir)/gdbus-2.0/codegen/__init__.py 	\
+	$(srcdir)/gdbus-2.0/codegen/dbustypes.py 	\
+	$(builddir)/gdbus-2.0/codegen/config.py 	\
+	$(srcdir)/gdbus-2.0/codegen/utils.py
+
+gdbus-daemon-generated.h gdbus-daemon-generated.c: $(srcdir)/dbus-daemon.xml $(GDBUS_PYTHON_DEPS)
 	$(AM_V_GEN) UNINSTALLED_GLIB_SRCDIR=$(top_srcdir) \
 		UNINSTALLED_GLIB_BUILDDIR=$(top_builddir) \
 		$(PYTHON) $(srcdir)/gdbus-2.0/codegen/gdbus-codegen.in \
@@ -133,13 +142,6 @@ win32_settings_sources = \
 	gregistrysettingsbackend.c
 
 settings_sources += $(win32_settings_sources)
-endif
-
-if OS_COCOA
-cocoa_settings_sources = \
-	gnextstepsettingsbackend.c
-
-settings_sources += $(cocoa_settings_sources)
 endif
 
 application_headers = \
@@ -251,10 +253,9 @@ SUBDIRS += fam
 endif
 
 if OS_UNIX
-if !OS_COCOA
 platform_libadd += xdgmime/libxdgmime.la
 platform_deps += xdgmime/libxdgmime.la
-
+if !OS_COCOA
 appinfo_headers += gdesktopappinfo.h
 endif
 
@@ -287,12 +288,6 @@ unix_sources = \
 	gportalsupport.h	\
 	$(portal_sources)	\
 	$(NULL)
-
-if OS_COCOA
-if MAC_OS_X_9
-unix_sources += gcocoanotificationbackend.c
-endif
-endif
 
 giounixincludedir=$(includedir)/gio-unix-2.0/gio
 giounixinclude_HEADERS = \
@@ -337,6 +332,8 @@ win32_actual_sources = \
 	gwin32outputstream.c \
 	gwin32outputstream.h \
 	gwin32networking.h \
+	gwin32networkmonitor.c \
+	gwin32networkmonitor.h \
 	$(NULL)
 
 win32_more_sources_for_vcproj = \
@@ -397,11 +394,6 @@ portal_sources = \
 	gproxyresolverportal.h		\
 	$(xdp_dbus_built_sources)	\
 	$(NULL)
-
-if OS_COCOA
-contenttype_sources += gosxcontenttype.c
-appinfo_sources += gosxappinfo.c gosxappinfo.h
-endif
 
 if OS_UNIX
 if !OS_COCOA
@@ -468,6 +460,7 @@ gio_base_sources =		\
 	gioenums.h		\
 	gioerror.c 		\
 	giomodule.c 		\
+	giomodule-priv.c	\
 	giomodule-priv.h	\
 	gioscheduler.c 		\
 	giostream.c		\
@@ -608,9 +601,22 @@ libgio_2_0_la_LDFLAGS = $(GLIB_LINK_FLAGS) \
 	-export-dynamic $(no_undefined)
 
 if OS_COCOA
-# This is dumb.  The ObjC source file should be properly named .m
-libgio_2_0_la_CFLAGS += -xobjective-c
-libgio_2_0_la_LDFLAGS += -Wl,-framework,Foundation -Wl,-framework,AppKit
+# Let's avoid polluting the CFLAGS of libgio with -xobjective-c
+# We cannot simply rename the ObjC files to .m because it plays
+# tricks with Automake. For further reference, see:
+# https://bugzilla.gnome.org/show_bug.cgi?id=672777
+libgio_objc_2_0_la_CFLAGS = $(libgio_2_0_la_CFLAGS) -xobjective-c
+libgio_objc_2_0_la_CPPFLAGS = $(libgio_2_0_la_CPPFLAGS)
+libgio_objc_2_0_la_LDFLAGS = $(libgio_2_0_la_LDFLAGS) -Wl,-framework,Foundation -Wl,-framework,AppKit
+libgio_objc_2_0_la_SOURCES = \
+	gnextstepsettingsbackend.c \
+	gosxcontenttype.c \
+	gosxappinfo.c \
+	gosxappinfo.h \
+	gcocoanotificationbackend.c
+
+noinst_LTLIBRARIES += libgio-objc-2.0.la
+libgio_2_0_la_LIBADD += libgio-objc-2.0.la
 endif
 
 if HAVE_LIBMOUNT
@@ -618,7 +624,7 @@ libgio_2_0_la_CFLAGS += $(LIBMOUNT_CFLAGS)
 libgio_2_0_la_LIBADD += $(LIBMOUNT_LIBS)
 endif
 
-libgio_2_0_la_DEPENDENCIES = $(gio_win32_res) $(gio_def) $(platform_deps)
+EXTRA_libgio_2_0_la_DEPENDENCIES = $(gio_win32_res) $(gio_def) $(platform_deps)
 
 gio-win32-res.o: gio.rc
 	$(WINDRES) gio.rc $@
@@ -754,7 +760,7 @@ BUILT_SOURCES += 		\
 	$(NULL)
 
 EXTRA_DIST += 			\
-	data-to-c.pl		\
+	data-to-c.py		\
 	gioenumtypes.h.template	\
 	gioenumtypes.c.template	\
 	gio.rc.in		\
@@ -807,15 +813,15 @@ glib_compile_resources_SOURCES = \
 	gvdb/gvdb-builder.c		\
 	glib-compile-resources.c
 
-gio_querymodules_SOURCES = gio-querymodules.c
+gio_querymodules_SOURCES = gio-querymodules.c giomodule-priv.c
 gio_querymodules_LDADD	 = libgio-2.0.la 		\
 	$(top_builddir)/gobject/libgobject-2.0.la	\
 	$(top_builddir)/gmodule/libgmodule-2.0.la	\
 	$(top_builddir)/glib/libglib-2.0.la		\
 	$(NULL)
 
-gconstructor_as_data.h: $(top_srcdir)/glib/gconstructor.h data-to-c.pl
-	$(AM_V_GEN) $(srcdir)/data-to-c.pl $(top_srcdir)/glib/gconstructor.h gconstructor_code > $@.tmp && mv $@.tmp $@
+gconstructor_as_data.h: $(top_srcdir)/glib/gconstructor.h data-to-c.py
+	$(AM_V_GEN) $(srcdir)/data-to-c.py $(top_srcdir)/glib/gconstructor.h gconstructor_code $@
 
 glib_compile_schemas_LDADD = $(top_builddir)/glib/libglib-2.0.la
 glib_compile_schemas_SOURCES = \

@@ -217,6 +217,7 @@
    <ClCompile Include="..\..\gio\ginputstream.c" />
    <ClCompile Include="..\..\gio\gioerror.c" />
    <ClCompile Include="..\..\gio\giomodule.c" />
+   <ClCompile Include="..\..\gio\giomodule-priv.c" />
    <ClCompile Include="..\..\gio\gioscheduler.c" />
    <ClCompile Include="..\..\gio\giostream.c" />
    <ClCompile Include="..\..\gio\gloadableicon.c" />
@@ -355,6 +356,7 @@
    <ClCompile Include="..\..\gio\gwin32volumemonitor.c" />
    <ClCompile Include="..\..\gio\gwin32inputstream.c" />
    <ClCompile Include="..\..\gio\gwin32outputstream.c" />
+   <ClCompile Include="..\..\gio\gwin32networkmonitor.c" />
    <ClCompile Include="..\..\gio\gwin32appinfo.c" />
    <ClCompile Include="..\..\gio\gcontenttype-win32.c" />
    <ClCompile Include="..\..\gio\gregistrysettingsbackend.c" />

@@ -1,5 +1,5 @@
-gdbus-threading-test-Allow-even-longer-for-test_method_ca.patch
-gmain-Partial-revert-of-recent-wakeup-changes-to-gmain.c.patch
+0001-tests-Use-modern-test-assertions-in-GApplication-tes.patch
+0002-gapplication-Tighten-up-application-ID-validation.patch
 01_gettext-desktopfiles.patch
 07_disable_tests_on_slow_archs.patch
 81-skip-monitor-test-on-non-linux.patch

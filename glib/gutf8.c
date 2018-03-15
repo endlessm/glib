@@ -421,6 +421,9 @@ g_utf8_pointer_to_offset (const gchar *str,
  * must be valid UTF-8 encoded text. (Use g_utf8_validate() on all
  * text before trying to use UTF-8 utility functions with it.)
  * 
+ * Note you must ensure @dest is at least 4 * @n to fit the
+ * largest possible UTF-8 characters
+ *
  * Returns: @dest
  */
 gchar *
@@ -1803,7 +1806,7 @@ g_utf8_make_valid (const gchar *str,
   if (string == NULL)
     return g_strndup (str, len);
   
-  g_string_append (string, remainder);
+  g_string_append_len (string, remainder, remaining_bytes);
   g_string_append_c (string, '\0');
 
   g_assert (g_utf8_validate (string->str, -1, NULL));

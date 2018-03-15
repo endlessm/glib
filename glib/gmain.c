@@ -268,7 +268,7 @@ struct _GMainContext
   guint owner_count;
   GSList *waiters;
 
-  gint ref_count;
+  volatile gint ref_count;
 
   GHashTable *sources;              /* guint -> GSource */
 
@@ -299,7 +299,7 @@ struct _GMainContext
 
 struct _GSourceCallback
 {
-  guint ref_count;
+  volatile gint ref_count;
   GSourceFunc func;
   gpointer    data;
   GDestroyNotify notify;
@@ -309,7 +309,7 @@ struct _GMainLoop
 {
   GMainContext *context;
   gboolean is_running;
-  gint ref_count;
+  volatile gint ref_count;
 };
 
 struct _GTimeoutSource
@@ -753,7 +753,7 @@ static GPrivate thread_context_stack = G_PRIVATE_INIT (free_context_stack);
  * g_main_context_push_thread_default() / g_main_context_pop_thread_default()
  * pair, otherwise threads that are re-used will end up never explicitly
  * releasing the #GMainContext reference they hold.
-
+ *
  * In some cases you may want to schedule a single operation in a
  * non-default context, or temporarily use a non-default context in
  * the main thread. In that case, you can wrap the call to the
@@ -1118,29 +1118,6 @@ source_remove_from_context (GSource      *source,
     }
 }
 
-/* See https://bugzilla.gnome.org/show_bug.cgi?id=761102 for
- * the introduction of this.
- *
- * The main optimization is to avoid waking up the main
- * context if a change is made by the current owner.
- */
-static void
-conditional_wakeup (GMainContext *context)
-{
-  /* We want to signal wakeups in two cases:
-   *  1 When the context is owned by another thread
-   *  2 When the context owner is NULL (two subcases)
-   *   2a Possible if the context has never been acquired
-   *   2b Or if the context has no current owner
-   *
-   * At least case 2a) is necessary to ensure backwards compatibility with
-   * qemu's use of GMainContext.
-   * https://bugzilla.gnome.org/show_bug.cgi?id=761102#c14
-   */
-  if (context->owner != G_THREAD_SELF)
-    g_wakeup_signal (context->wakeup);
-}
-
 static guint
 g_source_attach_unlocked (GSource      *source,
                           GMainContext *context,
@@ -1187,8 +1164,8 @@ g_source_attach_unlocked (GSource      *source,
   /* If another thread has acquired the context, wake it up since it
    * might be in poll() right now.
    */
-  if (do_wakeup)
-    conditional_wakeup (context);
+  if (do_wakeup && context->owner && context->owner != G_THREAD_SELF)
+    g_wakeup_signal (context->wakeup);
 
   return source->source_id;
 }
@@ -1555,7 +1532,7 @@ g_source_callback_ref (gpointer cb_data)
 {
   GSourceCallback *callback = cb_data;
 
-  callback->ref_count++;
+  g_atomic_int_inc (&callback->ref_count);
 }
 
 static void
@@ -1563,8 +1540,7 @@ g_source_callback_unref (gpointer cb_data)
 {
   GSourceCallback *callback = cb_data;
 
-  callback->ref_count--;
-  if (callback->ref_count == 0)
+  if (g_atomic_int_dec_and_test (&callback->ref_count))
     {
       if (callback->notify)
         callback->notify (callback->data);
@@ -1829,7 +1805,7 @@ g_source_get_priority (GSource *source)
  * Note that if you have a pair of sources where the ready time of one
  * suggests that it will be delivered first but the priority for the
  * other suggests that it would be delivered first, and the ready time
- * for both sources is reached during the same main context iteration
+ * for both sources is reached during the same main context iteration,
  * then the order of dispatch is undefined.
  *
  * It is a no-op to call this function on a #GSource which has already been
@@ -1878,7 +1854,7 @@ g_source_set_ready_time (GSource *source,
     {
       /* Quite likely that we need to change the timeout on the poll */
       if (!SOURCE_BLOCKED (source))
-        conditional_wakeup (context);
+        g_wakeup_signal (context->wakeup);
       UNLOCK_CONTEXT (context);
     }
 }
@@ -2140,6 +2116,21 @@ g_source_unref_internal (GSource      *source,
           source->ref_count--;
 	}
 
+      if (old_cb_funcs)
+        {
+          /* Temporarily increase the ref count again so that GSource methods
+           * can be called from callback_funcs.unref(). */
+          source->ref_count++;
+          if (context)
+            UNLOCK_CONTEXT (context);
+
+          old_cb_funcs->unref (old_cb_data);
+
+          if (context)
+            LOCK_CONTEXT (context);
+          source->ref_count--;
+        }
+
       g_free (source->name);
       source->name = NULL;
 
@@ -2164,20 +2155,9 @@ g_source_unref_internal (GSource      *source,
 
       g_free (source);
     }
-  
+
   if (!have_lock && context)
     UNLOCK_CONTEXT (context);
-
-  if (old_cb_funcs)
-    {
-      if (have_lock)
-	UNLOCK_CONTEXT (context);
-      
-      old_cb_funcs->unref (old_cb_data);
-
-      if (have_lock)
-	LOCK_CONTEXT (context);
-    }
 }
 
 /**
@@ -2336,16 +2316,14 @@ g_main_context_find_source_by_user_data (GMainContext *context,
  * g_source_remove:
  * @tag: the ID of the source to remove.
  *
- * Removes the source with the given id from the default main context.
+ * Removes the source with the given ID from the default main context. You must
+ * use g_source_destroy() for sources added to a non-default main context.
  *
- * The id of a #GSource is given by g_source_get_id(), or will be
+ * The ID of a #GSource is given by g_source_get_id(), or will be
  * returned by the functions g_source_attach(), g_idle_add(),
  * g_idle_add_full(), g_timeout_add(), g_timeout_add_full(),
  * g_child_watch_add(), g_child_watch_add_full(), g_io_add_watch(), and
  * g_io_add_watch_full().
- *
- * See also g_source_destroy(). You must use g_source_destroy() for sources
- * added to a non-default main context.
  *
  * It is a programmer error to attempt to remove a non-existent source.
  *
@@ -2428,6 +2406,40 @@ g_source_remove_by_funcs_user_data (GSourceFuncs *funcs,
     }
   else
     return FALSE;
+}
+
+/**
+ * g_clear_handle_id: (skip)
+ * @tag_ptr: (not nullable): a pointer to the handler ID
+ * @clear_func: (not nullable): the function to call to clear the handler
+ *
+ * Clears a numeric handler, such as a #GSource ID.
+ *
+ * @tag_ptr must be a valid pointer to the variable holding the handler.
+ *
+ * If the ID is zero then this function does nothing.
+ * Otherwise, clear_func() is called with the ID as a parameter, and the tag is
+ * set to zero.
+ *
+ * A macro is also included that allows this function to be used without
+ * pointer casts.
+ *
+ * Since: 2.56
+ */
+#undef g_clear_handle_id
+void
+g_clear_handle_id (guint            *tag_ptr,
+                   GClearHandleFunc  clear_func)
+{
+  guint _handle_id;
+
+  _handle_id = *tag_ptr;
+  if (_handle_id > 0)
+    {
+      *tag_ptr = 0;
+      if (clear_func != NULL)
+        clear_func (_handle_id);
+    }
 }
 
 #ifdef G_OS_UNIX
@@ -4318,7 +4330,7 @@ g_main_context_add_poll_unlocked (GMainContext *context,
   context->poll_changed = TRUE;
 
   /* Now wake up the main loop if it is waiting in the poll() */
-  conditional_wakeup (context);
+  g_wakeup_signal (context->wakeup);
 }
 
 /**
@@ -4378,7 +4390,7 @@ g_main_context_remove_poll_unlocked (GMainContext *context,
   context->poll_changed = TRUE;
 
   /* Now wake up the main loop if it is waiting in the poll() */
-  conditional_wakeup (context);
+  g_wakeup_signal (context->wakeup);
 }
 
 /**
@@ -5030,7 +5042,7 @@ dispatch_unix_signals_unlocked (void)
   GSList *node;
   gint i;
 
-  /* clear this first incase another one arrives while we're processing */
+  /* clear this first in case another one arrives while we're processing */
   any_unix_signal_pending = FALSE;
 
   /* We atomically test/clear the bit from the global array in case
@@ -5085,7 +5097,7 @@ dispatch_unix_signals_unlocked (void)
                     }
                   else if (pid == -1 && errno == ECHILD)
                     {
-                      g_warning ("GChildWatchSource: Exit status of a child process was requested but ECHILD was received by waitpid(). Most likely the process is ignoring SIGCHLD, or some other thread is invoking waitpid() with a nonpositive first argument; either behavior can break applications that use g_child_watch_add()/g_spawn_sync() either directly or indirectly.");
+                      g_warning ("GChildWatchSource: Exit status of a child process was requested but ECHILD was received by waitpid(). See the documentation of g_child_watch_source_new() for possible causes.");
                       source->child_exited = TRUE;
                       source->child_status = 0;
                       wake_source ((GSource *) source);
@@ -5326,14 +5338,24 @@ g_unix_signal_handler (int signum)
  * source is still active. Typically, you will want to call
  * g_spawn_close_pid() in the callback function for the source.
  *
- * Note further that using g_child_watch_source_new() is not
- * compatible with calling `waitpid` with a nonpositive first
- * argument in the application. Calling waitpid() for individual
- * pids will still work fine.
+ * On POSIX platforms, the following restrictions apply to this API
+ * due to limitations in POSIX process interfaces:
  *
- * Similarly, on POSIX platforms, the @pid passed to this function must
- * be greater than 0 (i.e. this function must wait for a specific child,
- * and cannot wait for one of many children by using a nonpositive argument).
+ * * @pid must be a child of this process
+ * * @pid must be positive
+ * * the application must not call `waitpid` with a non-positive
+ *   first argument, for instance in another thread
+ * * the application must not wait for @pid to exit by any other
+ *   mechanism, including `waitpid(pid, ...)` or a second child-watch
+ *   source for the same @pid
+ * * the application must not ignore SIGCHILD
+ *
+ * If any of those conditions are not met, this and related APIs will
+ * not work correctly. This can often be diagnosed via a GLib warning
+ * stating that `ECHILD` was received by `waitpid`.
+ *
+ * Calling `waitpid` for specific processes other than @pid remains a
+ * valid thing to do.
  *
  * Returns: the newly-created child watch source
  *
@@ -5398,6 +5420,8 @@ g_child_watch_source_new (GPid pid)
  * in the callback function for the source.
  * 
  * GLib supports only a single callback per process id.
+ * On POSIX platforms, the same restrictions mentioned for
+ * g_child_watch_source_new() apply to this function.
  *
  * This internally creates a main loop source using 
  * g_child_watch_source_new() and attaches it to the main loop context 
@@ -5456,6 +5480,8 @@ g_child_watch_add_full (gint            priority,
  * g_spawn_close_pid() in the callback function for the source.
  *
  * GLib supports only a single callback per process id.
+ * On POSIX platforms, the same restrictions mentioned for
+ * g_child_watch_source_new() apply to this function.
  *
  * This internally creates a main loop source using 
  * g_child_watch_source_new() and attaches it to the main loop context 
@@ -5681,7 +5707,7 @@ g_main_context_invoke (GMainContext *context,
  * invocation of @function.
  *
  * This function is the same as g_main_context_invoke() except that it
- * lets you specify the priority incase @function ends up being
+ * lets you specify the priority in case @function ends up being
  * scheduled as an idle and also lets you give a #GDestroyNotify for @data.
  *
  * @notify should not assume that it is called from any particular

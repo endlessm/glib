@@ -1,8 +1,62 @@
-glib2.0 (2.54.3-3) UNRELEASED; urgency=medium
+glib2.0 (2.56.0-2) UNRELEASED; urgency=medium
 
   * d/tests/build: Don't rely on having unmerged /usr
 
  -- Simon McVittie <smcv@debian.org>  Tue, 13 Mar 2018 23:15:23 +0000
+
+glib2.0 (2.56.0-1) experimental; urgency=medium
+
+  * Team upload
+  * New upstream stable release 2.56.0
+  * d/p/000?-gdbus-tool-*.patch:
+    Drop patches that came from upstream
+  * Refresh remaining patches
+  * d/p/0001-tests-Use-modern-test-assertions-in-GApplication-tes.patch,
+    d/p/0002-gapplication-Tighten-up-application-ID-validation.patch:
+    Cherry-pick GApplication ID fixes from upstream 2.56 branch
+    (GNOME #793400)
+
+ -- Simon McVittie <smcv@debian.org>  Tue, 13 Mar 2018 18:53:02 +0000
+
+glib2.0 (2.55.2-2) experimental; urgency=medium
+
+  * Merge changes from unstable, in particular:
+    + d/libglib2.0-dev.prerm: Add an empty prerm to make sure that we have a
+      way to recover from #887629 in stretch (Closes: #887863)
+  * d/p/0001-gdbus-tool-Ignore-unknown-options-for-the-emit-subco.patch,
+    d/p/0002-gdbus-tool-Make-dest-optional-for-emit-again.patch,
+    d/p/0003-gdbus-tool-Don-t-repeatedly-complete-signal.patch,
+    d/p/0004-gdbus-tool-Factor-out-common-GOptionContext-construc.patch:
+    Cherry-pick from upstream. Fix `gdbus emit' to not require `--dest', and
+    improve its bash completion. Should fix the dbus-test-runner autopkgtest,
+    which relied on this behaviour.
+
+ -- Iain Lane <laney@debian.org>  Thu, 22 Feb 2018 10:02:17 +0000
+
+glib2.0 (2.55.2-1) experimental; urgency=medium
+
+  * debian/control{,.in}: Update Vcs-* to specify debian/experimental branch.
+  * New upstream release 2.55.2:
+    + GFile now has API to get the path without copying
+  * debian/patches/gdbus-threading-test-Allow-even-longer-for-test_method_ca.patch,
+    debian/patches/gdatetime-Avoid-repeated-floating-point-multiplies-w.patch,
+    debian/patches/gdatetime-Mark-the-usecs-as-volatile.patch:
+    Drop, applied upstream in this release.
+  * debian/libglib2.0-0.symbols: New symbols for 2.55.2
+
+ -- Iain Lane <laney@debian.org>  Thu, 15 Feb 2018 10:23:05 +0000
+
+glib2.0 (2.55.1-1) experimental; urgency=medium
+
+  * debian/gbp.conf, debian/watch: Update for experimental
+  * New upstream development release 2.55.1
+  * debian/libglib2.0-0.symbols: Update with new symbols in this release.
+  * debian/patches/gdatetime-Avoid-repeated-floating-point-multiplies-w.patch,
+    debian/patches/gdatetime-Mark-the-usecs-as-volatile.patch: Cherry-pick two
+    patches from upstream. Fix some precision problems within GDateTime, that
+    in some cases resulted in incorrect answers on i386.
+
+ -- Iain Lane <laney@debian.org>  Mon, 15 Jan 2018 12:26:35 +0000
 
 glib2.0 (2.54.3-2) unstable; urgency=medium
 

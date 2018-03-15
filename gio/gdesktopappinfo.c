@@ -2494,7 +2494,7 @@ prepend_terminal_to_vector (int    *argc,
       if (check == NULL)
         {
           check = g_strdup ("xterm");
-          g_warning ("couldn't find a terminal, falling back to xterm");
+          g_debug ("Couldn’t find a terminal: falling back to xterm");
         }
       term_argv[0] = check;
       term_argv[1] = g_strdup ("-e");
@@ -3011,7 +3011,7 @@ g_desktop_app_info_launch (GAppInfo           *appinfo,
  * @uris: (element-type utf8): List of URIs
  * @launch_context: (nullable): a #GAppLaunchContext
  * @spawn_flags: #GSpawnFlags, used for each process
- * @user_setup: (scope call) (nullable): a #GSpawnChildSetupFunc, used once
+ * @user_setup: (scope async) (nullable): a #GSpawnChildSetupFunc, used once
  *     for each process.
  * @user_setup_data: (closure user_setup) (nullable): User data for @user_setup
  * @pid_callback: (scope call) (nullable): Callback for child processes
@@ -3714,7 +3714,7 @@ g_desktop_app_info_delete (GAppInfo *appinfo)
 /* Create for commandline {{{2 */
 /**
  * g_app_info_create_from_commandline:
- * @commandline: the commandline to use
+ * @commandline: (type filename): the commandline to use
  * @application_name: (nullable): the application name, or %NULL to use @commandline
  * @flags: flags that can specify details of the created #GAppInfo
  * @error: a #GError location to store the error occurring, %NULL to ignore.
@@ -4414,6 +4414,33 @@ g_desktop_app_info_get_string (GDesktopAppInfo *info,
 
   return g_key_file_get_string (info->keyfile,
                                 G_KEY_FILE_DESKTOP_GROUP, key, NULL);
+}
+
+/**
+ * g_desktop_app_info_get_locale_string:
+ * @info: a #GDesktopAppInfo
+ * @key: the key to look up
+ *
+ * Looks up a localized string value in the keyfile backing @info
+ * translated to the current locale.
+ *
+ * The @key is looked up in the "Desktop Entry" group.
+ *
+ * Returns: (nullable): a newly allocated string, or %NULL if the key
+ *     is not found
+ *
+ * Since: 2.56
+ */
+char *
+g_desktop_app_info_get_locale_string (GDesktopAppInfo *info,
+                                      const char      *key)
+{
+  g_return_val_if_fail (G_IS_DESKTOP_APP_INFO (info), NULL);
+  g_return_val_if_fail (key != NULL && *key != '\0', NULL);
+
+  return g_key_file_get_locale_string (info->keyfile,
+                                       G_KEY_FILE_DESKTOP_GROUP,
+                                       key, NULL, NULL);
 }
 
 /**
