@@ -1,5 +1,6 @@
 glib2.0 (2.56.0-2) UNRELEASED; urgency=medium
 
+  * WAIT FOR GNOME-DESKTOP3 TRANSITION TO COMPLETE BEFORE UPLOADING
   * Merge from experimental to unstable
   * d/tests/build: Don't rely on having unmerged /usr
   * d/watch: Only watch for stable releases
