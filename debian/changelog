@@ -1,12 +1,13 @@
-glib2.0 (2.56.0-2) UNRELEASED; urgency=medium
+glib2.0 (2.56.0-2) unstable; urgency=medium
 
+  [ Simon McVittie ]
   * Merge from experimental to unstable
   * d/tests/build: Don't rely on having unmerged /usr
   * d/watch: Only watch for stable releases
   * d/gbp.conf: Use debian/master, upstream/2.56.x branches
   * d/control: Update Vcs-* for default branch
 
- -- Simon McVittie <smcv@debian.org>  Tue, 13 Mar 2018 23:15:23 +0000
+ -- Jeremy Bicha <jbicha@debian.org>  Sat, 17 Mar 2018 08:49:26 -0400
 
 glib2.0 (2.56.0-1) experimental; urgency=medium
 
