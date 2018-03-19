@@ -1,5 +1,6 @@
 Tests: build
 Depends: libglib2.0-dev, build-essential
+Restrictions: allow-stderr
 
 Tests: installed-tests
 Depends: libglib2.0-tests, dbus-x11, dbus (>= 1.8), xauth, xvfb, gnome-desktop-testing
