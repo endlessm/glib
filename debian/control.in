@@ -25,6 +25,7 @@ Build-Depends: debhelper (>= 10.3~),
                xterm <!nocheck>,
                python3:any (>= 2.7.5-5~),
                python3-dbus <!nocheck>,
+               python3-distutils,
                python3-gi <!nocheck>,
                libxml2-utils,
                xsltproc,
@@ -135,6 +136,7 @@ Architecture: any
 Depends: ${misc:Depends},
          ${python3:Depends},
          ${shlibs:Depends},
+         python3-distuils
 Breaks: libglib2.0-bin (<< 2.54.2-5~),
         libglib2.0-dev (<< 2.53)
 Replaces: libglib2.0-bin (<< 2.54.2-5~),
