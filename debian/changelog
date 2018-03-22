@@ -1,3 +1,10 @@
+glib2.0 (2.56.0-4) UNRELEASED; urgency=medium
+
+  * Fix typo: libglib2.0-dev-bin Depends on python3-distutils, not
+    distuils (Closes: #893773)
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 22 Mar 2018 09:06:13 +0000
+
 glib2.0 (2.56.0-3) unstable; urgency=medium
 
   [ Iain Lane ]

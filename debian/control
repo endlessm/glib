@@ -140,7 +140,7 @@ Architecture: any
 Depends: ${misc:Depends},
          ${python3:Depends},
          ${shlibs:Depends},
-         python3-distuils
+         python3-distutils
 Breaks: libglib2.0-bin (<< 2.54.2-5~),
         libglib2.0-dev (<< 2.53)
 Replaces: libglib2.0-bin (<< 2.54.2-5~),
