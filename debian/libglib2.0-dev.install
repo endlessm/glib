@@ -1,5 +1,6 @@
 usr/include/*
 usr/lib/*/lib*.a
+usr/lib/*/libglib*.so
 usr/lib/*/libgobject*.so
 usr/lib/*/libgmodule*.so
 usr/lib/*/libgthread*.so

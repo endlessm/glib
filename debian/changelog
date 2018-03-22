@@ -1,8 +1,14 @@
 glib2.0 (2.56.0-5) UNRELEASED; urgency=medium
 
+  [ Simon McVittie ]
   * Use `set -e` in the (empty) prerm to avoid a Lintian warning
   * Add Lintian override for the empty prerm used to work around
     #887629
+
+  [ Michael Biebl ]
+  * Stop installing libglib to /lib.
+    Late mounting of /usr is no longer support, so this is not necessary
+    anymore.
 
  -- Simon McVittie <smcv@debian.org>  Thu, 22 Mar 2018 10:17:44 +0000
 

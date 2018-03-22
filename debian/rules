@@ -157,16 +157,12 @@ override_dh_python3:
 
 override_dh_install:
 	# Unwanted bits from the .deb build
-	rm -f debian/install/deb/lib/*/*.la
 	rm -f debian/install/deb/usr/lib/*/*.la
 	rm -f debian/install/deb/usr/lib/glib2.0/installed-tests/glib/*.la
 	rm -f debian/install/deb/usr/lib/glib2.0/installed-tests/glib/modules/*.la
 	rm -fr debian/install/deb/usr/share/glib-2.0/codegen/__pycache__
-	# Re-created by .links to point into /lib
-	rm -f debian/install/deb/usr/lib/*/libglib-2.0.so
 ifneq ($(filter %-udeb,$(binaries)),)
 	# Unwanted bits from the .udeb build
-	rm -f debian/install/udeb/lib/*/*.la
 	rm -f debian/install/udeb/usr/lib/*/*.la
 	rm -f debian/install/udeb/usr/lib/*/*.so
 	rm -fr debian/install/udeb/usr/share/gdb

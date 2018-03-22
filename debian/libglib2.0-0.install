@@ -1,5 +1,5 @@
 #!/usr/bin/dh-exec
-usr/lib/*/libglib*.so.* lib/${DEB_HOST_MULTIARCH}
+usr/lib/*/libglib*.so.*
 usr/lib/*/libgobject*.so.*
 usr/lib/*/libgmodule*.so.*
 usr/lib/*/libgthread*.so.*
