@@ -1,0 +1,2 @@
+# Workaround for #887629 in stretch, see #887863
+libglib2.0-dev: maintainer-script-empty prerm
