@@ -6,7 +6,7 @@ glib2.0 (2.56.0-3) unstable; urgency=medium
 
   [ Jeremy Bicha ]
   * Depend and Build-Depend on python3-distutils to fix build failures
-    since python3 no longer depends on python3-distutils
+    since python3 no longer depends on python3-distutils (Closes: #893736)
 
  -- Jeremy Bicha <jbicha@debian.org>  Thu, 22 Mar 2018 00:27:02 -0400
 
