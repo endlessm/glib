@@ -45,9 +45,6 @@ Depends: ${misc:Depends},
 Recommends: libglib2.0-data,
             shared-mime-info,
             xdg-user-dirs
-Breaks: glib-networking (<< 2.33.12),
-        python-gi (<< 3.7.2),
-        libgnome-desktop-3-2 (<< 3.4.2-2)
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Description: GLib library of C routines

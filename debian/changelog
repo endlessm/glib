@@ -9,7 +9,8 @@ glib2.0 (2.56.0-5) UNRELEASED; urgency=medium
   * Stop installing libglib to /lib.
     Late mounting of /usr is no longer supported, so this is not necessary
     anymore.
-  * Drop maintscript migration code pre-jessie.
+  * Drop maintscript migration code from pre-jessie.
+  * Drop obsolete Breaks.
 
  -- Simon McVittie <smcv@debian.org>  Thu, 22 Mar 2018 10:17:44 +0000
 
