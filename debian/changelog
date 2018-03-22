@@ -1,4 +1,4 @@
-glib2.0 (2.56.0-3) UNRELEASED; urgency=medium
+glib2.0 (2.56.0-3) unstable; urgency=medium
 
   [ Iain Lane ]
   * debian/tests/build: Add Restrictions: allow-stderr. We run this test with
@@ -8,7 +8,7 @@ glib2.0 (2.56.0-3) UNRELEASED; urgency=medium
   * Depend and Build-Depend on python3-distutils to fix build failures
     since python3 no longer depends on python3-distutils
 
- -- Iain Lane <laney@debian.org>  Mon, 19 Mar 2018 17:47:45 +0000
+ -- Jeremy Bicha <jbicha@debian.org>  Thu, 22 Mar 2018 00:27:02 -0400
 
 glib2.0 (2.56.0-2) unstable; urgency=medium
 
