@@ -1,4 +1,4 @@
-glib2.0 (2.56.0-5) UNRELEASED; urgency=medium
+glib2.0 (2.56.0-5) unstable; urgency=medium
 
   [ Simon McVittie ]
   * Use `set -e` in the (empty) prerm to avoid a Lintian warning
@@ -12,7 +12,7 @@ glib2.0 (2.56.0-5) UNRELEASED; urgency=medium
   * Drop maintscript migration code from pre-jessie.
   * Drop obsolete Breaks.
 
- -- Simon McVittie <smcv@debian.org>  Thu, 22 Mar 2018 10:17:44 +0000
+ -- Michael Biebl <biebl@debian.org>  Sun, 01 Apr 2018 17:59:50 +0200
 
 glib2.0 (2.56.0-4) unstable; urgency=medium
 
