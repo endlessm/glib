@@ -1,3 +1,11 @@
+glib2.0 (2.56.0-6) UNRELEASED; urgency=medium
+
+  * d/p/0002-gapplication-Tighten-up-application-ID-validation.patch:
+    Transliterate commit message into ASCII so git-buildpackage doesn't
+    export it as a blob of base64
+
+ -- Simon McVittie <smcv@debian.org>  Tue, 03 Apr 2018 11:37:02 +0100
+
 glib2.0 (2.56.0-5) unstable; urgency=medium
 
   [ Simon McVittie ]

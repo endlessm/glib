@@ -1,33 +1,34 @@
 From: Philip Withnall <withnall@endlessm.com>
 Date: Wed, 28 Feb 2018 12:45:30 +0000
 Subject: gapplication: Tighten up application ID validation
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
 
-VGlnaHRlbiB1cCB0aGUgdmFsaWRhdGlvbiBvZiBhcHBsaWNhdGlvbiBJRHMgc28gdGhleSBhcmUg
-YWx3YXlzIGV4YWN0bHkKRC1CdXMgd2VsbC1rbm93biBuYW1lcy4gVGhpcyBpcyBhIHNsaWdodCBj
-aGFuZ2UgdG8gdGhlIGFjY2VwdGVkIGZvcm1hdCwKYnV0IHNpbmNlIGFueW9uZSB1c2luZyB0aGUg
-QVBJIHdpdGggYW4gYXBwbGljYXRpb24gSUQgd2hpY2ggd2FzCnByZXZpb3VzbHkgdmFsaWQsIGJ1
-dCB3aGljaCB3YXMgbm90IGEgdmFsaWQgRC1CdXMgd2VsbC1rbm93biBuYW1lLCB3b3VsZApoYXZl
-IHJlY2VpdmVkIGFuIGVycm9yIGZyb20gRC1CdXMgd2hlbiB0aGVpciBhcHBsaWNhdGlvbiB0cmll
-ZCB0bwpyZWdpc3RlciBvbiB0aGUgYnVzLCBJIHRoaW5rIHRoaXMgYnJlYWsgaXMgYWNjZXB0YWJs
-ZS4KCkl0IHdpbGwgYWZmZWN0IGFueSBhcHBsaWNhdGlvbnMgd2hpY2ggaGF2ZSBhcHBsaWNhdGlv
-biBJRHMgd2hpY2ggYXJlIG5vdAp2YWxpZCBELUJ1cyB3ZWxsLWtub3duIG5hbWVzLCBhbmQgd2hp
-Y2ggdXNlIHRoZSBHX0FQUExJQ0FUSU9OX05PTl9VTklRVUUKZmxhZy4gRnJvbSBhIHF1aWNrIHNl
-YXJjaCBpbiBEZWJpYW4gQ29kZXNlYXJjaCwgbm8gQyBhcHBsaWNhdGlvbnMgdXNlCnRoYXQgZmxh
-Zy4KClVwZGF0ZSB0aGUgZG9jdW1lbnRhdGlvbiB0byB1c2UgdGhlIHJ1bGVzIGZyb20gdGhlIEQt
-QnVzIHNwZWNpZmljYXRpb24sCmluY2x1ZGluZyB0aGUgbGF0ZXN0IGFkdmljZSBkaXNjb3VyYWdp
-bmcgdXNlIG9mIGh5cGhlbnM6CgpodHRwczovL2RidXMuZnJlZWRlc2t0b3Aub3JnL2RvYy9kYnVz
-LXNwZWNpZmljYXRpb24uaHRtbCNtZXNzYWdlLXByb3RvY29sLW5hbWVzLWJ1cwoKVXBkYXRlIHRo
-ZSB0ZXN0czoKIOKAoiBBZGQgdGhlIGV4YW1wbGVzIGZyb20gdGhlIGRvY3VtZW50YXRpb24gdG8g
-dmFsaWRhdGUgdGhlbS4KIOKAoiBFc3BlY2lhbGx5IHRoZSB2ZW5lcmFibGUgNy16aXAub3JnIGV4
-YW1wbGUuCiDigKIgTW92ZSBhIGNvdXBsZSBvZiB0ZXN0cyBmcm9tIGV4cGVjdGVkLWZhaWx1cmUg
-dG8gZXhwZWN0ZWQtc3VjY2VzczoKICAgdGhleSBhcmUgdmFsaWQgRC1CdXMgd2VsbC1rbm93biBu
-YW1lcyBldmVuIGlmIHRoZXnigJlyZSBhIGJpdCB3ZWlyZC4KClNpZ25lZC1vZmYtYnk6IFBoaWxp
-cCBXaXRobmFsbCA8d2l0aG5hbGxAZW5kbGVzc20uY29tPgoKaHR0cHM6Ly9idWd6aWxsYS5nbm9t
-ZS5vcmcvc2hvd19idWcuY2dpP2lkPTc5MzQwMAooY2hlcnJ5IHBpY2tlZCBmcm9tIGNvbW1pdCA2
-Njk0OGFlMjMxZjc1YTU0OGM4YTJlYjdiM2E5ZDY0Y2ZkNzI4YjhlKQo=
+Tighten up the validation of application IDs so they are always exactly
+D-Bus well-known names. This is a slight change to the accepted format,
+but since anyone using the API with an application ID which was
+previously valid, but which was not a valid D-Bus well-known name, would
+have received an error from D-Bus when their application tried to
+register on the bus, I think this break is acceptable.
+
+It will affect any applications which have application IDs which are not
+valid D-Bus well-known names, and which use the G_APPLICATION_NON_UNIQUE
+flag. From a quick search in Debian Codesearch, no C applications use
+that flag.
+
+Update the documentation to use the rules from the D-Bus specification,
+including the latest advice discouraging use of hyphens:
+
+https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-bus
+
+Update the tests:
+ - Add the examples from the documentation to validate them.
+ - Especially the venerable 7-zip.org example.
+ - Move a couple of tests from expected-failure to expected-success:
+   they are valid D-Bus well-known names even if they're a bit weird.
+
+Signed-off-by: Philip Withnall <withnall@endlessm.com>
+
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=793400
+Origin: upstream, commit:66948ae231f75a548c8a2eb7b3a9d64cfd728b8e
 ---
  gio/gapplication.c       | 90 +++++++++++++++++++++---------------------------
  gio/tests/gapplication.c |  9 +++--
