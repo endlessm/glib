@@ -1,0 +1,73 @@
+From: Simon McVittie <smcv@debian.org>
+Date: Wed, 4 Apr 2018 08:35:39 +0100
+Subject: g_test_dbus_down: Ensure next test does not use old connection
+
+There's a race condition somewhere in GTestDBus that can result in
+the next test being started at a time when g_bus_get() would still
+return the connection that is in the process of closing. This can
+be reproduced reasonably reliably by running the gapplication test
+10K times in a loop.
+
+Instead of relying on waiting for the weak reference to be released,
+we can force the issue by clearing it.
+
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=768996
+Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=894677
+Forwarded: yes
+---
+ gio/gdbusconnection.c | 16 ++++++++++++++++
+ gio/gdbusprivate.h    |  1 +
+ gio/gtestdbus.c       |  1 +
+ 3 files changed, 18 insertions(+)
+
+diff --git a/gio/gdbusconnection.c b/gio/gdbusconnection.c
+index 6f7e5fe..2c74a73 100644
+--- a/gio/gdbusconnection.c
++++ b/gio/gdbusconnection.c
+@@ -7233,6 +7233,22 @@ _g_bus_get_singleton_if_exists (GBusType bus_type)
+   return ret;
+ }
+ 
++/* May be called from any thread. Must not hold message_bus_lock. */
++void
++_g_bus_forget_singleton (GBusType bus_type)
++{
++  GWeakRef *singleton;
++
++  G_LOCK (message_bus_lock);
++
++  singleton = message_bus_get_singleton (bus_type, NULL);
++
++  if (singleton != NULL)
++    g_weak_ref_set (singleton, NULL);
++
++  G_UNLOCK (message_bus_lock);
++}
++
+ /**
+  * g_bus_get_sync:
+  * @bus_type: a #GBusType
+diff --git a/gio/gdbusprivate.h b/gio/gdbusprivate.h
+index 6a6a080..625177b 100644
+--- a/gio/gdbusprivate.h
++++ b/gio/gdbusprivate.h
+@@ -143,6 +143,7 @@ void _g_dbus_object_proxy_remove_interface (GDBusObjectProxy *proxy,
+ 
+ /* Implemented in gdbusconnection.c */
+ GDBusConnection *_g_bus_get_singleton_if_exists (GBusType bus_type);
++void             _g_bus_forget_singleton        (GBusType bus_type);
+ 
+ G_END_DECLS
+ 
+diff --git a/gio/gtestdbus.c b/gio/gtestdbus.c
+index 6eaf060..227f5b2 100644
+--- a/gio/gtestdbus.c
++++ b/gio/gtestdbus.c
+@@ -823,6 +823,7 @@ g_test_dbus_down (GTestDBus *self)
+     _g_object_dispose_and_wait_weak_notify (connection);
+ 
+   g_test_dbus_unset ();
++  _g_bus_forget_singleton (G_BUS_TYPE_SESSION);
+   self->priv->up = FALSE;
+ }
+ 

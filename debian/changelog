@@ -3,6 +3,9 @@ glib2.0 (2.56.0-6) UNRELEASED; urgency=medium
   * d/p/0002-gapplication-Tighten-up-application-ID-validation.patch:
     Transliterate commit message into ASCII so git-buildpackage doesn't
     export it as a blob of base64
+  * d/p/g_test_dbus_down-Ensure-next-test-does-not-use-old-c.patch:
+    Add patch to address a race condition that sometimes makes D-Bus-based
+    tests fail (Closes: #894677)
 
  -- Simon McVittie <smcv@debian.org>  Tue, 03 Apr 2018 11:37:02 +0100
 
