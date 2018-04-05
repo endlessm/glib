@@ -9,6 +9,7 @@ Vincent Untz appear to be the main authors.
 
 Bug: https://bugzilla.gnome.org/show_bug.cgi?id=569829
 Bug-Ubuntu: https://launchpad.net/bugs/3935
+Applied-upstream: no, rejected because "this will be solved soon" (in 2013)
 ---
  glib/gkeyfile.c | 72 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  glib/gkeyfile.h |  4 ++++

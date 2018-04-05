@@ -3,6 +3,7 @@ Date: Tue, 18 Mar 2014 15:43:35 +0000
 Subject: Skip test which performs some unreliable floating point comparisons
 
 Bug: https://bugzilla.gnome.org/show_bug.cgi?id=722604
+Forwarded: no
 ---
  glib/tests/timer.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

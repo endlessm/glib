@@ -8,8 +8,8 @@ Introduces no functional changes.
 
 Signed-off-by: Philip Withnall <withnall@endlessm.com>
 
-https://bugzilla.gnome.org/show_bug.cgi?id=793400
-(cherry picked from commit d754e017eaf867e8d1d1cdf9a058dd323c898c9d)
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=793400
+Origin: upstream, 2.56.1, commit:d754e017eaf867e8d1d1cdf9a058dd323c898c9d
 ---
  gio/tests/gapplication.c | 42 +++++++++++++++++++++---------------------
  1 file changed, 21 insertions(+), 21 deletions(-)

@@ -6,6 +6,7 @@ glib2.0 (2.56.0-6) UNRELEASED; urgency=medium
   * d/p/g_test_dbus_down-Ensure-next-test-does-not-use-old-c.patch:
     Add patch to address a race condition that sometimes makes D-Bus-based
     tests fail (Closes: #894677)
+  * d/patches: Improve metadata on various patches
 
  -- Simon McVittie <smcv@debian.org>  Tue, 03 Apr 2018 11:37:02 +0100
 

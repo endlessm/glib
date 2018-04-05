@@ -2,7 +2,17 @@ From: Simon McVittie <smcv@debian.org>
 Date: Mon, 18 Dec 2017 18:06:05 +0000
 Subject: gwakeuptest: Be less parallel unless invoked with -m slow
 
+This is a workaround for test failures on the reproducible-builds
+infrastructure, where a multi-threaded stress-test sometimes takes longer
+to finish on x86_64 than it would have done on slow architectures like
+arm and mips on the official Debian autobuilders. It is not clear why.
+
+This change will make this test more likely to pass, but less likely to
+detect bugs.
+
 Signed-off-by: Simon McVittie <smcv@debian.org>
+Bug-Debian: https://bugs.debian.org/884659
+Forwarded: no
 ---
  glib/tests/gwakeuptest.c | 17 +++++++++++++----
  1 file changed, 13 insertions(+), 4 deletions(-)
