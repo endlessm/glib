@@ -6,7 +6,7 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
-Uploaders: Emilio Pozuelo Monfort <pochu@debian.org>, Iain Lane <laney@debian.org>, Jeremy Bicha <jbicha@debian.org>
+Uploaders: Iain Lane <laney@debian.org>, Jeremy Bicha <jbicha@debian.org>, Michael Biebl <biebl@debian.org>
 Build-Depends: debhelper (>= 10.3~),
                dh-exec,
                dh-python,
@@ -49,9 +49,6 @@ Depends: ${misc:Depends},
 Recommends: libglib2.0-data,
             shared-mime-info,
             xdg-user-dirs
-Breaks: glib-networking (<< 2.33.12),
-        python-gi (<< 3.7.2),
-        libgnome-desktop-3-2 (<< 3.4.2-2)
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Description: GLib library of C routines
