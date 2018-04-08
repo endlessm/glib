@@ -1,7 +1,12 @@
 glib2.0 (2.56.1-1) UNRELEASED; urgency=medium
 
+  [ Tim Lunn ]
   * New upstream release 
   * Drop patches included in new release
+
+  [ Simon McVittie ]
+  * Explicitly use autoconf build system, even with debhelper 11.2
+    (see #895174)
 
  -- Tim Lunn <tim@feathertop.org>  Sun, 08 Apr 2018 10:02:26 +1000
 
