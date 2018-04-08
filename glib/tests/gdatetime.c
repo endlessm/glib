@@ -1330,8 +1330,12 @@ GDateTime *__dt = g_date_time_new_local (2009, 10, 24, 0, 0, 0);\
 #define TEST_PRINTF_DATE(y,m,d,f,o)             G_STMT_START {  \
   GDateTime *dt = g_date_time_new_local (y, m, d, 0, 0, 0);     \
   gchar *p = g_date_time_format (dt, (f));                      \
-  g_assert_cmpstr (p, ==, (o));                                 \
+  gchar *o_casefold = g_utf8_casefold (o, -1);                  \
+  gchar *p_casefold = g_utf8_casefold (p, -1);                  \
+  g_assert_cmpstr (p_casefold, ==, (o_casefold));               \
   g_date_time_unref (dt);                                       \
+  g_free (p_casefold);                                          \
+  g_free (o_casefold);                                          \
   g_free (p);                                   } G_STMT_END
 
 #define TEST_PRINTF_TIME(h,m,s,f,o)             G_STMT_START { \
@@ -1638,7 +1642,7 @@ test_month_names (void)
       TEST_PRINTF_DATE (2018,  4,  1, "%OB", "Απρίλιος");
       TEST_PRINTF_DATE (2018,  5,  1, "%OB", "Μάιος");
       TEST_PRINTF_DATE (2018,  6,  1, "%OB", "Ιούνιος");
-      TEST_PRINTF_DATE (2018,  7,  1,  "%b", "Ιούλ");
+      TEST_PRINTF_DATE (2018,  7,  1,  "%b", "Ιουλ");
       TEST_PRINTF_DATE (2018,  8,  1, "%Ob", "Αύγ");
     }
   else
@@ -1668,8 +1672,8 @@ test_month_names (void)
       TEST_PRINTF_DATE (2018,  4,  1, "%OB", "balandis");
       TEST_PRINTF_DATE (2018,  5,  1, "%OB", "gegužė");
       TEST_PRINTF_DATE (2018,  6,  1, "%OB", "birželis");
-      TEST_PRINTF_DATE (2018,  7,  1,  "%b", "Lie");
-      TEST_PRINTF_DATE (2018,  8,  1, "%Ob", "Rgp");
+      TEST_PRINTF_DATE (2018,  7,  1,  "%b", "liep.");
+      TEST_PRINTF_DATE (2018,  8,  1, "%Ob", "rugp.");
     }
   else
     g_test_skip ("locale lt_LT not available, skipping Lithuanian month names test");
