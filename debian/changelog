@@ -1,6 +1,7 @@
 glib2.0 (2.56.1-1) UNRELEASED; urgency=medium
 
   * New upstream release 
+  * Drop patches included in new release
 
  -- Tim Lunn <tim@feathertop.org>  Sun, 08 Apr 2018 10:02:26 +1000
 
