@@ -1,4 +1,4 @@
-glib2.0 (2.56.1-1) UNRELEASED; urgency=medium
+glib2.0 (2.56.1-1) unstable; urgency=medium
 
   [ Tim Lunn ]
   * New upstream release 
@@ -11,7 +11,7 @@ glib2.0 (2.56.1-1) UNRELEASED; urgency=medium
   * Explicitly use autoconf build system, even with debhelper 11.2
     (see #895174)
 
- -- Tim Lunn <tim@feathertop.org>  Sun, 08 Apr 2018 10:02:26 +1000
+ -- Tim Lunn <tim@feathertop.org>  Mon, 09 Apr 2018 19:03:24 +1000
 
 glib2.0 (2.56.0-6) unstable; urgency=medium
 
