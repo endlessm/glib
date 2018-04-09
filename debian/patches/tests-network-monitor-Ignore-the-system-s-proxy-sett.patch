@@ -1,0 +1,44 @@
+From: Iain Lane <iain@orangesquash.org.uk>
+Date: Thu, 29 Mar 2018 11:39:15 +0100
+Subject: tests/network-monitor: Ignore the system's proxy settings
+
+If glib-networking is installed and built with libproxy support, this
+test will use it. If a proxy is set in the environment, we might get
+correctly told to go through it for certain acesses. However, this isn't
+going to work, because the testsuite monkeys with the network monitor to
+tell it that all addresses - including the proxy - aren't reachable.
+
+We're trying to check if adding networks to a GNetworkMonitor works in
+general. Proxies just get in the way here, so let's unset the
+environment variables and pretend the system doesn't have one.
+
+Origin: vendor, Ubuntu
+Forwarded: https://bugzilla.gnome.org/show_bug.cgi?id=794801
+Signed-Off-By: Iain Lane <laney@debian.org>
+---
+ gio/tests/network-monitor.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/gio/tests/network-monitor.c b/gio/tests/network-monitor.c
+index d0f7ebd..8beb901 100644
+--- a/gio/tests/network-monitor.c
++++ b/gio/tests/network-monitor.c
+@@ -543,6 +543,18 @@ main (int argc, char **argv)
+ 
+   g_test_init (&argc, &argv, NULL);
+ 
++  /* GNetworkMonitor will resolve addresses through a proxy if one is set and a
++   * GIO module is available to handle it. In these tests we deliberately
++   * change the idea of a reachable network to exclude the proxy, which will
++   * lead to negative results. We're not trying to test the proxy-resolving
++   * functionality (that would be for e.g. glib-networking's testsuite), so
++   * let's ignore the system's settings and pretend there is no proxy.
++   */
++  g_unsetenv ("http_proxy");
++  g_unsetenv ("https_proxy");
++  g_unsetenv ("ftp_proxy");
++  g_unsetenv ("no_proxy");
++
+   init_test (&net127);
+   init_test (&net10);
+   init_test (&net192);
