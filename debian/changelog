@@ -3,6 +3,9 @@ glib2.0 (2.56.1-1) UNRELEASED; urgency=medium
   [ Tim Lunn ]
   * New upstream release 
   * Drop patches included in new release
+  * libglib2.0-0.triggers: Use interest-noawait triggers, generating caches
+    doesn't need to block configuration. flagged by lintian
+    uses-implicit-await-trigger warning.
 
   [ Simon McVittie ]
   * Explicitly use autoconf build system, even with debhelper 11.2
