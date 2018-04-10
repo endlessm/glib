@@ -1,4 +1,4 @@
-glib2.0 (2.56.1-2) UNRELEASED; urgency=medium
+glib2.0 (2.56.1-2) unstable; urgency=medium
 
   [ Tim Lunn ]
   * libglib2.0-0.triggers:use interest-await trigger for schemas
@@ -10,7 +10,7 @@ glib2.0 (2.56.1-2) UNRELEASED; urgency=medium
     system's network, and these settings interfere with that. This fixes a
     failure in the Ubuntu autopkgtest machines, which have a proxy set.
 
- -- Iain Lane <laney@debian.org>  Mon, 09 Apr 2018 12:36:40 +0100
+ -- Iain Lane <laney@debian.org>  Tue, 10 Apr 2018 18:12:27 +0100
 
 glib2.0 (2.56.1-1) unstable; urgency=medium
 
