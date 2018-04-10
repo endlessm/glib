@@ -1,0 +1,43 @@
+From: Iain Lane <iain@orangesquash.org.uk>
+Date: Thu, 29 Mar 2018 11:39:15 +0100
+Subject: tests/network-monitor: Always use the dummy proxy resolver
+
+If glib-networking is installed and built with libproxy support, this
+test will use it. If a proxy is set in the environment, we might get
+correctly told to go through it for certain accesses. However, this isn't
+going to work, because the testsuite monkeys with the network monitor to
+tell it that all addresses - including the proxy - aren't reachable.
+
+We're trying to check if adding networks to a GNetworkMonitor works in
+general. Proxies just get in the way here, so let's use the built in
+dummy proxy resolver which just tells us that all URLs are directly
+accessible.
+
+Bug-Upstream: https://bugzilla.gnome.org/show_bug.cgi?id=794801
+Origin: upstream, commit:  ec20cb4402cb33a1504e3ab31e9b173603e9b780
+Applied-Upstream: 2.56.2
+---
+ gio/tests/network-monitor.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/gio/tests/network-monitor.c b/gio/tests/network-monitor.c
+index d0f7ebd..33e9176 100644
+--- a/gio/tests/network-monitor.c
++++ b/gio/tests/network-monitor.c
+@@ -543,6 +543,16 @@ main (int argc, char **argv)
+ 
+   g_test_init (&argc, &argv, NULL);
+ 
++  /* GNetworkMonitor will resolve addresses through a proxy if one is set and a
++   * GIO module is available to handle it. In these tests we deliberately
++   * change the idea of a reachable network to exclude the proxy, which will
++   * lead to negative results. We're not trying to test the proxy-resolving
++   * functionality (that would be for e.g. glib-networking's testsuite), so
++   * let's just use the dummy proxy resolver, which always pretends the
++   * passed-in URL is directly resolvable.
++   */
++  g_setenv ("GIO_USE_PROXY_RESOLVER", "dummy", TRUE);
++
+   init_test (&net127);
+   init_test (&net10);
+   init_test (&net192);

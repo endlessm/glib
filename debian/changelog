@@ -3,6 +3,13 @@ glib2.0 (2.56.1-2) UNRELEASED; urgency=medium
   [ Tim Lunn ]
   * libglib2.0-0.triggers:use interest-await trigger for schemas 
 
+  [ Iain Lane ]
+  * debian/patches/tests-network-monitor-Always-use-the-dummy-proxy-res.patch:
+    Take patch from upstream to ignore the system's proxy settings for the
+    network-monitor test - it's testing an "abstract" network unrelated to the
+    system's network, and these settings interfere with that. This fixes a
+    failure in the Ubuntu autopkgtest machines, which have a proxy set.
+
  -- Iain Lane <laney@debian.org>  Mon, 09 Apr 2018 12:36:40 +0100
 
 glib2.0 (2.56.1-1) unstable; urgency=medium
