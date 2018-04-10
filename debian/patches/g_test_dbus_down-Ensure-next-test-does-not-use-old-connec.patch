@@ -13,7 +13,7 @@ we can force the issue by clearing it.
 
 Bug: https://bugzilla.gnome.org/show_bug.cgi?id=768996
 Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=894677
-Forwarded: yes
+Applied-upstream: 2.57.0, commit:3d50691a30270de8c880a5ad6b0be2f8ec36a673
 ---
  gio/gdbusconnection.c | 16 ++++++++++++++++
  gio/gdbusprivate.h    |  1 +
