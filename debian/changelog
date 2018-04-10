@@ -1,7 +1,7 @@
 glib2.0 (2.56.1-2) UNRELEASED; urgency=medium
 
   [ Tim Lunn ]
-  * libglib2.0-0.triggers:use interest-await trigger for schemas 
+  * libglib2.0-0.triggers:use interest-await trigger for schemas
 
   [ Iain Lane ]
   * debian/patches/tests-network-monitor-Always-use-the-dummy-proxy-res.patch:
