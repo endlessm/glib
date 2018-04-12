@@ -990,6 +990,8 @@ g_date_time_new_week (GTimeZone *tz, gint year, gint week, gint week_day, gint h
 
   dt = g_date_time_new (tz, year, 1, 4, 0, 0, 0);
   g_date_time_get_week_number (dt, NULL, &jan4_week_day, NULL);
+  g_date_time_unref (dt);
+
   ordinal_day = (week * 7) + week_day - (jan4_week_day + 3);
   if (ordinal_day < 0)
     {
@@ -2314,6 +2316,24 @@ g_date_time_get_utc_offset (GDateTime *datetime)
   offset = g_time_zone_get_offset (datetime->tz, datetime->interval);
 
   return (gint64) offset * USEC_PER_SECOND;
+}
+
+/**
+ * g_date_time_get_timezone:
+ * @datetime: a #GDateTime
+ *
+ * Get the time zone for this @datetime.
+ *
+ * Returns: (transfer none): the time zone
+ * Since: 2.54
+ */
+GTimeZone *
+g_date_time_get_timezone (GDateTime *datetime)
+{
+  g_return_val_if_fail (datetime != NULL, NULL);
+
+  g_assert (datetime->tz != NULL);
+  return datetime->tz;
 }
 
 /**
