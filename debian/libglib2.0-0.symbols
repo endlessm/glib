@@ -2283,6 +2283,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_date_time_get_month@Base 2.26.0
  g_date_time_get_second@Base 2.26.0
  g_date_time_get_seconds@Base 2.26.0
+ g_date_time_get_timezone@Base 2.54.2-1endless3
  g_date_time_get_timezone_abbreviation@Base 2.26.0
  g_date_time_get_utc_offset@Base 2.26.0
  g_date_time_get_week_numbering_year@Base 2.28.0
@@ -3301,6 +3302,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_time_zone_adjust_time@Base 2.28.0
  g_time_zone_find_interval@Base 2.28.0
  g_time_zone_get_abbreviation@Base 2.28.0
+ g_time_zone_get_identifier@Base 2.54.2-1endless3
  g_time_zone_get_offset@Base 2.28.0
  g_time_zone_is_dst@Base 2.28.0
  g_time_zone_new@Base 2.26.0
