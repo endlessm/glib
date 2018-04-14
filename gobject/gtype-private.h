@@ -100,7 +100,7 @@ void        _g_closure_invoke_va (GClosure       *closure,
  *
  * Currently private.
  */
-#define _G_DEFINE_TYPE_EXTENDED_WITH_PRELUDE(TN, t_n, T_P, _f_, _P_, _C_)	    _G_DEFINE_TYPE_EXTENDED_BEGIN_PRE (TN, t_n, T_P) {_P_;} _G_DEFINE_TYPE_EXTENDED_BEGIN_REGISTER (TN, t_n, T_P, _f_){_C_;} _G_DEFINE_TYPE_EXTENDED_END()
+#define _G_DEFINE_TYPE_EXTENDED_WITH_PRELUDE(TN, t_n, T_P, _f_, _P_, _C_)	    _G_DEFINE_TYPE_EXTENDED_BEGIN_PRE (TN, t_n, T_P) {_P_;} _G_DEFINE_TYPE_EXTENDED_BEGIN_REGISTER (TN, t_n, T_P, _f_){_C_;} _G_DEFINE_TYPE_EXTENDED_END(t_n)
 
 G_END_DECLS
 
