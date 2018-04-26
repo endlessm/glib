@@ -1607,7 +1607,7 @@ guint     g_type_get_type_registration_serial (void);
  * 
  * Since: 2.4
  */
-#define G_DEFINE_TYPE_WITH_CODE(TN, t_n, T_P, _C_)	    _G_DEFINE_TYPE_EXTENDED_BEGIN (TN, t_n, T_P, 0) {_C_;} _G_DEFINE_TYPE_EXTENDED_END()
+#define G_DEFINE_TYPE_WITH_CODE(TN, t_n, T_P, _C_)	    _G_DEFINE_TYPE_EXTENDED_BEGIN (TN, t_n, T_P, 0) {_C_;} _G_DEFINE_TYPE_EXTENDED_END(t_n)
 /**
  * G_DEFINE_TYPE_WITH_PRIVATE:
  * @TN: The name of the new type, in Camel case.
@@ -1658,7 +1658,7 @@ guint     g_type_get_type_registration_serial (void);
  * 
  * Since: 2.4
  */
-#define G_DEFINE_ABSTRACT_TYPE_WITH_CODE(TN, t_n, T_P, _C_) _G_DEFINE_TYPE_EXTENDED_BEGIN (TN, t_n, T_P, G_TYPE_FLAG_ABSTRACT) {_C_;} _G_DEFINE_TYPE_EXTENDED_END()
+#define G_DEFINE_ABSTRACT_TYPE_WITH_CODE(TN, t_n, T_P, _C_) _G_DEFINE_TYPE_EXTENDED_BEGIN (TN, t_n, T_P, G_TYPE_FLAG_ABSTRACT) {_C_;} _G_DEFINE_TYPE_EXTENDED_END(t_n)
 /**
  * G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE:
  * @TN: The name of the new type, in Camel case.
@@ -1734,7 +1734,7 @@ guint     g_type_get_type_registration_serial (void);
  *
  * Since: 2.4
  */
-#define G_DEFINE_TYPE_EXTENDED(TN, t_n, T_P, _f_, _C_)	    _G_DEFINE_TYPE_EXTENDED_BEGIN (TN, t_n, T_P, _f_) {_C_;} _G_DEFINE_TYPE_EXTENDED_END()
+#define G_DEFINE_TYPE_EXTENDED(TN, t_n, T_P, _f_, _C_)	    _G_DEFINE_TYPE_EXTENDED_BEGIN (TN, t_n, T_P, _f_) {_C_;} _G_DEFINE_TYPE_EXTENDED_END(t_n)
 
 /**
  * G_DEFINE_INTERFACE:
@@ -1960,32 +1960,41 @@ type_name##_get_instance_private (TypeName *self) \
   return (G_STRUCT_MEMBER_P (self, TypeName##_private_offset)); \
 } \
 \
-GType \
-type_name##_get_type (void) \
+G_GNUC_NO_INLINE \
+static GType \
+type_name##_get_type_once (void) \
 { \
-  static volatile gsize g_define_type_id__volatile = 0;
+  GType g_define_type_id = 0;
   /* Prelude goes here */
 
 /* Added for _G_DEFINE_TYPE_EXTENDED_WITH_PRELUDE */
 #define _G_DEFINE_TYPE_EXTENDED_BEGIN_REGISTER(TypeName, type_name, TYPE_PARENT, flags) \
+  g_define_type_id = \
+    g_type_register_static_simple (TYPE_PARENT, \
+                                   g_intern_static_string (#TypeName), \
+                                   sizeof (TypeName##Class), \
+                                   (GClassInitFunc)(void (*)(void)) type_name##_class_intern_init, \
+                                   sizeof (TypeName), \
+                                   (GInstanceInitFunc)(void (*)(void)) type_name##_init, \
+                                   (GTypeFlags) flags); \
+  { /* custom code follows */
+#define _G_DEFINE_TYPE_EXTENDED_END(type_name)	\
+  } /* following custom code */	\
+\
+  return g_define_type_id;	\
+} /* closes type_name##_get_type_once() */ \
+\
+GType \
+type_name##_get_type (void) \
+{ \
+  static volatile gsize g_define_type_id__volatile = 0; \
   if (g_once_init_enter (&g_define_type_id__volatile))  \
     { \
-      GType g_define_type_id = \
-        g_type_register_static_simple (TYPE_PARENT, \
-                                       g_intern_static_string (#TypeName), \
-                                       sizeof (TypeName##Class), \
-                                       (GClassInitFunc) type_name##_class_intern_init, \
-                                       sizeof (TypeName), \
-                                       (GInstanceInitFunc) type_name##_init, \
-                                       (GTypeFlags) flags); \
-      { /* custom code follows */
-#define _G_DEFINE_TYPE_EXTENDED_END()	\
-        /* following custom code */	\
-      }					\
+      GType g_define_type_id = type_name##_get_type_once (); \
       g_once_init_leave (&g_define_type_id__volatile, g_define_type_id); \
-    }					\
-  return g_define_type_id__volatile;	\
-} /* closes type_name##_get_type() */
+    } \
+  return g_define_type_id__volatile; \
+} /* closes type_name##_get_type_once() */
 
 /* This was defined before we had G_DEFINE_TYPE_WITH_CODE_AND_PRELUDE, it's simplest
  * to keep it.
@@ -2063,49 +2072,45 @@ type_name##_get_type (void) \
  *
  * Since: 2.26
  */
-#define G_DEFINE_BOXED_TYPE_WITH_CODE(TypeName, type_name, copy_func, free_func, _C_) _G_DEFINE_BOXED_TYPE_BEGIN (TypeName, type_name, copy_func, free_func) {_C_;} _G_DEFINE_TYPE_EXTENDED_END()
+#define G_DEFINE_BOXED_TYPE_WITH_CODE(TypeName, type_name, copy_func, free_func, _C_) _G_DEFINE_BOXED_TYPE_BEGIN (TypeName, type_name, copy_func, free_func) {_C_;} _G_DEFINE_TYPE_EXTENDED_END(type_name)
 
 /* Only use this in non-C++ on GCC >= 2.7, except for Darwin/ppc64.
  * See https://bugzilla.gnome.org/show_bug.cgi?id=647145
  */
 #if !defined (__cplusplus) && (__GNUC__ > 2 || (__GNUC__ == 2 && __GNUC_MINOR__ >= 7)) && !(defined (__APPLE__) && defined (__ppc64__))
 #define _G_DEFINE_BOXED_TYPE_BEGIN(TypeName, type_name, copy_func, free_func) \
-GType \
-type_name##_get_type (void) \
+G_GNUC_NO_INLINE \
+static GType \
+type_name##_get_type_once (void) \
 { \
-  static volatile gsize g_define_type_id__volatile = 0; \
-  if (g_once_init_enter (&g_define_type_id__volatile))  \
-    { \
-      GType (* _g_register_boxed) \
-        (const gchar *, \
-         union \
-           { \
-             TypeName * (*do_copy_type) (TypeName *); \
-             TypeName * (*do_const_copy_type) (const TypeName *); \
-             GBoxedCopyFunc do_copy_boxed; \
-           } __attribute__((__transparent_union__)), \
-         union \
-           { \
-             void (* do_free_type) (TypeName *); \
-             GBoxedFreeFunc do_free_boxed; \
-           } __attribute__((__transparent_union__)) \
-        ) = g_boxed_type_register_static; \
-      GType g_define_type_id = \
-        _g_register_boxed (g_intern_static_string (#TypeName), copy_func, free_func); \
-      { /* custom code follows */
+  GType (* _g_register_boxed) \
+    (const gchar *, \
+     union \
+       { \
+         TypeName * (*do_copy_type) (TypeName *); \
+         TypeName * (*do_const_copy_type) (const TypeName *); \
+         GBoxedCopyFunc do_copy_boxed; \
+       } __attribute__((__transparent_union__)), \
+     union \
+       { \
+         void (* do_free_type) (TypeName *); \
+         GBoxedFreeFunc do_free_boxed; \
+       } __attribute__((__transparent_union__)) \
+    ) = g_boxed_type_register_static; \
+  GType g_define_type_id = \
+    _g_register_boxed (g_intern_static_string (#TypeName), copy_func, free_func); \
+  { /* custom code follows */
 #else
 #define _G_DEFINE_BOXED_TYPE_BEGIN(TypeName, type_name, copy_func, free_func) \
-GType \
-type_name##_get_type (void) \
+G_GNUC_NO_INLINE \
+static GType \
+type_name##_get_type_once (void) \
 { \
-  static volatile gsize g_define_type_id__volatile = 0; \
-  if (g_once_init_enter (&g_define_type_id__volatile))  \
-    { \
-      GType g_define_type_id = \
-        g_boxed_type_register_static (g_intern_static_string (#TypeName), \
-                                      (GBoxedCopyFunc) copy_func, \
-                                      (GBoxedFreeFunc) free_func); \
-      { /* custom code follows */
+  GType g_define_type_id = \
+    g_boxed_type_register_static (g_intern_static_string (#TypeName), \
+                                  (GBoxedCopyFunc) copy_func, \
+                                  (GBoxedFreeFunc) free_func); \
+  { /* custom code follows */
 #endif /* __GNUC__ */
 
 /**
@@ -2133,18 +2138,16 @@ type_name##_get_type (void) \
  *
  * Since: 2.26
  */
-#define G_DEFINE_POINTER_TYPE_WITH_CODE(TypeName, type_name, _C_) _G_DEFINE_POINTER_TYPE_BEGIN (TypeName, type_name) {_C_;} _G_DEFINE_TYPE_EXTENDED_END()
+#define G_DEFINE_POINTER_TYPE_WITH_CODE(TypeName, type_name, _C_) _G_DEFINE_POINTER_TYPE_BEGIN (TypeName, type_name) {_C_;} _G_DEFINE_TYPE_EXTENDED_END(type_name)
 
 #define _G_DEFINE_POINTER_TYPE_BEGIN(TypeName, type_name) \
-GType \
-type_name##_get_type (void) \
+G_GNUC_NO_INLINE \
+static GType \
+type_name##_get_type_once (void) \
 { \
-  static volatile gsize g_define_type_id__volatile = 0; \
-  if (g_once_init_enter (&g_define_type_id__volatile))  \
-    { \
-      GType g_define_type_id = \
-        g_pointer_type_register_static (g_intern_static_string (#TypeName)); \
-      { /* custom code follows */
+  GType g_define_type_id = \
+    g_pointer_type_register_static (g_intern_static_string (#TypeName)); \
+  { /* custom code follows */
 
 /* --- protected (for fundamental type implementations) --- */
 GLIB_AVAILABLE_IN_ALL
