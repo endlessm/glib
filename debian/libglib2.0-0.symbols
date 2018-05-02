@@ -2158,6 +2158,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_cache_new@Base 2.12.0
  g_cache_remove@Base 2.12.0
  g_cache_value_foreach@Base 2.12.0
+ g_canonicalize_filename@Base 2.54.2+dev29.40819e3-6bem1
  g_chdir@Base 2.12.0
  g_checksum_copy@Base 2.16.0
  g_checksum_free@Base 2.16.0
