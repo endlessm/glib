@@ -793,7 +793,7 @@ gio.def: libgio-2.0.la
 gio-2.0.lib: libgio-2.0.la gio.def
 	$(AM_V_GEN) lib.exe -machine:@LIB_EXE_MACHINE_FLAG@ -name:libgio-2.0-$(LT_CURRENT_MINUS_AGE).dll -def:$(builddir)/gio.def -out:$@
 
-bin_PROGRAMS = gio-querymodules glib-compile-schemas glib-compile-resources gsettings
+bin_PROGRAMS = gio-querymodules glib-compile-schemas glib-compile-resources gsettings gio-launch-desktop
 
 glib_compile_resources_LDADD = libgio-2.0.la 		\
 	$(top_builddir)/gobject/libgobject-2.0.la	\
@@ -813,6 +813,8 @@ gio_querymodules_LDADD	 = libgio-2.0.la 		\
 	$(top_builddir)/gmodule/libgmodule-2.0.la	\
 	$(top_builddir)/glib/libglib-2.0.la		\
 	$(NULL)
+
+gio_launch_desktop_SOURCES = gio-launch-desktop.c
 
 gconstructor_as_data.h: $(top_srcdir)/glib/gconstructor.h data-to-c.pl
 	$(AM_V_GEN) $(srcdir)/data-to-c.pl $(top_srcdir)/glib/gconstructor.h gconstructor_code > $@.tmp && mv $@.tmp $@
