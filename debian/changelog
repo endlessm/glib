@@ -2,6 +2,7 @@ glib2.0 (2.56.1-3) UNRELEASED; urgency=medium
 
   * d/p/g_test_dbus_down-Ensure-next-test-does-not-use-old-c.patch:
     Mark as applied upstream for 2.57
+  * d/watch: Look for odd-numbered releases
 
  -- Simon McVittie <smcv@debian.org>  Tue, 10 Apr 2018 23:23:44 +0100
 
