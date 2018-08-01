@@ -211,47 +211,6 @@
 #define ENABLE_VIRTUAL_TERMINAL_PROCESSING 0x0004
 #endif
 
-/* XXX: Remove once XP support really dropped */
-#if _WIN32_WINNT < 0x0600
-
-typedef enum _FILE_INFO_BY_HANDLE_CLASS
-{
-  FileBasicInfo                   = 0,
-  FileStandardInfo                = 1,
-  FileNameInfo                    = 2,
-  FileRenameInfo                  = 3,
-  FileDispositionInfo             = 4,
-  FileAllocationInfo              = 5,
-  FileEndOfFileInfo               = 6,
-  FileStreamInfo                  = 7,
-  FileCompressionInfo             = 8,
-  FileAttributeTagInfo            = 9,
-  FileIdBothDirectoryInfo         = 10,
-  FileIdBothDirectoryRestartInfo  = 11,
-  FileIoPriorityHintInfo          = 12,
-  FileRemoteProtocolInfo          = 13,
-  FileFullDirectoryInfo           = 14,
-  FileFullDirectoryRestartInfo    = 15,
-  FileStorageInfo                 = 16,
-  FileAlignmentInfo               = 17,
-  FileIdInfo                      = 18,
-  FileIdExtdDirectoryInfo         = 19,
-  FileIdExtdDirectoryRestartInfo  = 20,
-  MaximumFileInfoByHandlesClass
-} FILE_INFO_BY_HANDLE_CLASS;
-
-typedef struct _FILE_NAME_INFO
-{
-  DWORD FileNameLength;
-  WCHAR FileName[1];
-} FILE_NAME_INFO;
-
-typedef BOOL (WINAPI fGetFileInformationByHandleEx) (HANDLE,
-                                                     FILE_INFO_BY_HANDLE_CLASS,
-                                                     LPVOID,
-                                                     DWORD);
-#endif
-
 #if defined (_MSC_VER) && (_MSC_VER >=1400)
 /* This is ugly, but we need it for isatty() in case we have bad fd's,
  * otherwise Windows will abort() the program on msvcrt80.dll and later
@@ -387,6 +346,16 @@ myInvalidParameterHandler(const wchar_t *expression,
  * preferred for that instead, as it allows calling functions to perform actions
  * conditional on the type of error.
  *
+ * Warning messages are intended to be used in the event of unexpected
+ * external conditions (system misconfiguration, missing files,
+ * other trusted programs violating protocol, invalid contents in
+ * trusted files, etc.)
+ *
+ * If attempting to deal with programmer errors (for example, incorrect function
+ * parameters) then you should use %G_LOG_LEVEL_CRITICAL instead.
+ *
+ * g_warn_if_reached() and g_warn_if_fail() log at %G_LOG_LEVEL_WARNING.
+ *
  * You can make warnings fatal at runtime by setting the `G_DEBUG`
  * environment variable (see
  * [Running GLib Applications](glib-running.html)):
@@ -413,19 +382,24 @@ myInvalidParameterHandler(const wchar_t *expression,
  *     into the format string (as with printf())
  *
  * Logs a "critical warning" (#G_LOG_LEVEL_CRITICAL).
- * It's more or less application-defined what constitutes
- * a critical vs. a regular warning. You could call
- * g_log_set_always_fatal() to make critical warnings exit
- * the program, then use g_critical() for fatal errors, for
- * example.
  *
- * You can also make critical warnings fatal at runtime by
+ * Critical warnings are intended to be used in the event of an error
+ * that originated in the current process (a programmer error).
+ * Logging of a critical error is by definition an indication of a bug
+ * somewhere in the current program (or its libraries).
+ *
+ * g_return_if_fail(), g_return_val_if_fail(), g_return_if_reached() and
+ * g_return_val_if_reached() log at %G_LOG_LEVEL_CRITICAL.
+ *
+ * You can make critical warnings fatal at runtime by
  * setting the `G_DEBUG` environment variable (see
  * [Running GLib Applications](glib-running.html)):
  *
  * |[
  *   G_DEBUG=fatal-warnings gdb ./my-program
  * ]|
+ *
+ * You can also use g_log_set_always_fatal().
  *
  * Any unrelated failures can be skipped over in
  * [gdb](https://www.gnu.org/software/gdb/) using the `continue` command.
@@ -777,6 +751,11 @@ g_log_set_always_fatal (GLogLevelFlags fatal_mask)
  * messages, programs must install a custom log writer function using
  * g_log_set_writer_func(). See
  * [Using Structured Logging][using-structured-logging].
+ *
+ * This function is mostly intended to be used with
+ * %G_LOG_LEVEL_CRITICAL.  You should typically not set
+ * %G_LOG_LEVEL_WARNING, %G_LOG_LEVEL_MESSAGE, %G_LOG_LEVEL_INFO or
+ * %G_LOG_LEVEL_DEBUG as fatal except inside of test programs.
  *
  * Returns: the old fatal mask for the log domain
  */
@@ -1513,40 +1492,18 @@ static gboolean
 win32_is_pipe_tty (int fd)
 {
   gboolean result = FALSE;
-  int error;
   HANDLE h_fd;
   FILE_NAME_INFO *info = NULL;
   gint info_size = sizeof (FILE_NAME_INFO) + sizeof (WCHAR) * MAX_PATH;
   wchar_t *name = NULL;
   gint length;
 
-  /* XXX: Remove once XP support really dropped */
-#if _WIN32_WINNT < 0x0600
-  HANDLE h_kerneldll = NULL;
-  fGetFileInformationByHandleEx *GetFileInformationByHandleEx;
-#endif
-
   h_fd = (HANDLE) _get_osfhandle (fd);
 
   if (h_fd == INVALID_HANDLE_VALUE || GetFileType (h_fd) != FILE_TYPE_PIPE)
     goto done_query;
 
-  /* The following check is available on Vista or later, so on XP, no color support */
   /* mintty uses a pipe, in the form of \{cygwin|msys}-xxxxxxxxxxxxxxxx-ptyN-{from|to}-master */
-
-  /* XXX: Remove once XP support really dropped */
-#if _WIN32_WINNT < 0x0600
-  h_kerneldll = LoadLibraryW (L"kernel32.dll");
-
-  if (h_kerneldll == NULL)
-    goto done_query;
-
-  GetFileInformationByHandleEx =
-    (fGetFileInformationByHandleEx *) GetProcAddress (h_kerneldll, "GetFileInformationByHandleEx");
-
-  if (GetFileInformationByHandleEx == NULL)
-    goto done_query;
-#endif
 
   info = g_try_malloc (info_size);
 
@@ -1594,12 +1551,6 @@ win32_is_pipe_tty (int fd)
 done_query:
   if (info != NULL)
     g_free (info);
-
-  /* XXX: Remove once XP support really dropped */
-#if _WIN32_WINNT < 0x0600
-  if (h_kerneldll != NULL)
-    FreeLibrary (h_kerneldll);
-#endif
 
   return result;
 }

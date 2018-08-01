@@ -572,7 +572,7 @@ g_socket (gint     domain,
 
   if (fd < 0)
     {
-      int errsv = get_socket_errno ();
+      errsv = get_socket_errno ();
 
       g_set_error (error, G_IO_ERROR, socket_io_error_from_errno (errsv),
 		   _("Unable to create socket: %s"), socket_strerror (errsv));
@@ -2380,6 +2380,13 @@ g_socket_multicast_group_operation_ssm (GSocket       *socket,
     case G_SOCKET_FAMILY_IPV4:
       {
 #ifdef IP_ADD_SOURCE_MEMBERSHIP
+
+#ifdef BROKEN_IP_MREQ_SOURCE_STRUCT
+#define S_ADDR_FIELD(src) src.imr_interface
+#else
+#define S_ADDR_FIELD(src) src.imr_interface.s_addr
+#endif
+
         gint optname;
         struct ip_mreq_source mc_req_src;
 
@@ -2397,7 +2404,7 @@ g_socket_multicast_group_operation_ssm (GSocket       *socket,
         memset (&mc_req_src, 0, sizeof (mc_req_src));
 
         /* By default use the default IPv4 multicast interface. */
-        mc_req_src.imr_interface.s_addr = g_htonl (INADDR_ANY);
+        S_ADDR_FIELD(mc_req_src) = g_htonl (INADDR_ANY);
 
         if (iface)
           {
@@ -2412,7 +2419,7 @@ g_socket_multicast_group_operation_ssm (GSocket       *socket,
                 return FALSE;
               }
             /* (0.0.0.iface_index) only works on Windows. */
-            mc_req_src.imr_interface.s_addr = g_htonl (iface_index);
+            S_ADDR_FIELD(mc_req_src) = g_htonl (iface_index);
 #elif defined (HAVE_SIOCGIFADDR)
             int ret;
             struct ifreq ifr;
@@ -2442,7 +2449,7 @@ g_socket_multicast_group_operation_ssm (GSocket       *socket,
               }
 
             iface_addr = (struct sockaddr_in *) &ifr.ifr_addr;
-            mc_req_src.imr_interface.s_addr = iface_addr->sin_addr.s_addr;
+            S_ADDR_FIELD(mc_req_src) = iface_addr->sin_addr.s_addr;
 #endif  /* defined(G_OS_WIN32) && defined (HAVE_IF_NAMETOINDEX) */
           }
         memcpy (&mc_req_src.imr_multiaddr, g_inet_address_to_bytes (group),
@@ -2455,6 +2462,9 @@ g_socket_multicast_group_operation_ssm (GSocket       *socket,
             join_group ? IP_ADD_SOURCE_MEMBERSHIP : IP_DROP_SOURCE_MEMBERSHIP;
         result = setsockopt (socket->priv->fd, IPPROTO_IP, optname,
                              &mc_req_src, sizeof (mc_req_src));
+
+#undef S_ADDR_FIELD
+
 #else
         g_set_error (error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
             join_group ?
@@ -2947,9 +2957,11 @@ g_socket_check_connect_result (GSocket  *socket,
 gssize
 g_socket_get_available_bytes (GSocket *socket)
 {
-#ifdef G_OS_WIN32
+#ifndef SO_NREAD
   const gint bufsize = 64 * 1024;
   static guchar *buf = NULL;
+#endif
+#ifdef G_OS_WIN32
   u_long avail;
 #else
   gint avail;
@@ -2957,25 +2969,37 @@ g_socket_get_available_bytes (GSocket *socket)
 
   g_return_val_if_fail (G_IS_SOCKET (socket), -1);
 
-#if defined (SO_NREAD)
+#ifdef SO_NREAD
   if (!g_socket_get_option (socket, SOL_SOCKET, SO_NREAD, &avail, NULL))
       return -1;
-#elif !defined (G_OS_WIN32)
-  if (ioctl (socket->priv->fd, FIONREAD, &avail) < 0)
-    avail = -1;
 #else
   if (socket->priv->type == G_SOCKET_TYPE_DATAGRAM)
     {
       if (G_UNLIKELY (g_once_init_enter (&buf)))
         g_once_init_leave (&buf, g_malloc (bufsize));
 
+      /* On datagram sockets, FIONREAD ioctl is not reliable because many
+       * systems add internal header size to the reported size, making it
+       * unusable for this function. */
       avail = recv (socket->priv->fd, buf, bufsize, MSG_PEEK);
-      if (avail == -1 && get_socket_errno () == WSAEWOULDBLOCK)
-        avail = 0;
+      if (avail == -1)
+        {
+          int errsv = get_socket_errno ();
+#ifdef G_OS_WIN32
+          if (errsv == WSAEWOULDBLOCK)
+#else
+          if (errsv == EWOULDBLOCK || errsv == EAGAIN)
+#endif
+            avail = 0;
+        }
     }
   else
     {
+#ifdef G_OS_WIN32
       if (ioctlsocket (socket->priv->fd, FIONREAD, &avail) < 0)
+#else
+      if (ioctl (socket->priv->fd, FIONREAD, &avail) < 0)
+#endif
         avail = -1;
     }
 #endif
@@ -3241,7 +3265,7 @@ g_socket_send_with_timeout (GSocket       *socket,
     {
       win32_unset_event_mask (socket, FD_WRITE);
 
-      if ((ret = send (socket->priv->fd, buffer, size, G_SOCKET_DEFAULT_SEND_FLAGS)) < 0)
+      if ((ret = send (socket->priv->fd, (const char *)buffer, size, G_SOCKET_DEFAULT_SEND_FLAGS)) < 0)
 	{
 	  int errsv = get_socket_errno ();
 
