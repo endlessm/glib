@@ -9,6 +9,7 @@ glib2.0 (2.57.2-1) UNRELEASED; urgency=medium
       Look for it there
   * d/copyright: Update
   * d/libglib2.0-0.symbols: Update
+  * Use upstream autogen.sh for autoreconf
 
  -- Simon McVittie <smcv@debian.org>  Tue, 10 Apr 2018 23:23:44 +0100
 
