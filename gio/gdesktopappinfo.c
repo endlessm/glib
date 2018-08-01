@@ -2758,9 +2758,9 @@ g_desktop_app_info_launch_uris_with_spawn (GDesktopAppInfo            *info,
           /* Allow test suite to specify path to gio-launch-desktop */
           tmp = g_getenv ("GIO_LAUNCH_DESKTOP");
 
-          /* Fall back on usual searching in $PATH */
           if (tmp == NULL)
-            tmp = "gio-launch-desktop";
+            tmp = GIO_LIBDIR "/glib-2.0/gio-launch-desktop";
+
           g_once_init_leave (&gio_launch_desktop_path, tmp);
         }
 
