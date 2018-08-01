@@ -46,7 +46,8 @@ override_dh_clean:
 	rm -rf $(CURDIR)/debian/build \
 	       $(CURDIR)/debian/install \
 	       $(CURDIR)/debian/tmp-xdg-runtime-dir
-	dh_clean -Xorg.gtk.test.gschema.xml.orig
+	dh_clean -Xorg.gtk.test.gschema.xml.orig -Xorg.gtk.test.gschema.override.orig
+
 
 override_dh_makeshlibs:
 	dh_makeshlibs -plibglib2.0-tests -n
