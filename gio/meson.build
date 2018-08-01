@@ -1,6 +1,7 @@
 gio_c_args = [
   '-DG_LOG_DOMAIN="GLib-GIO"',
   '-DGIO_COMPILATION',
+  '-DGIO_LIBDIR="@0@"'.format(glib_libdir),
   '-DGIO_MODULE_DIR="@0@"'.format(glib_giomodulesdir),
 ]
 
