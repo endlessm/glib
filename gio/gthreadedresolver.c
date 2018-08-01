@@ -803,7 +803,9 @@ free_records (GList *records)
 
 #if defined(G_OS_UNIX)
 #ifdef __BIONIC__
+#ifndef C_IN
 #define C_IN 1
+#endif
 int res_query(const char *, int, int, u_char *, int);
 #endif
 #endif
@@ -869,13 +871,17 @@ do_lookup_records (GTask         *task,
   records = g_resolver_records_from_res_query (lrd->rrname, rrtype, answer->data, len, herr, &error);
   g_byte_array_free (answer, TRUE);
 
+#ifdef HAVE_RES_NQUERY
+
 #if defined(HAVE_RES_NDESTROY)
   res_ndestroy (&res);
 #elif defined(HAVE_RES_NCLOSE)
   res_nclose (&res);
 #elif defined(HAVE_RES_NINIT)
-#error "Your platform has res_ninit() but not res_nclose() or res_ndestroy(). Please file a bug at https://bugzilla.gnome.org/enter_bug.cgi?product=glib"
+#error "Your platform has res_ninit() but not res_nclose() or res_ndestroy(). Please file a bug at https://gitlab.gnome.org/GNOME/glib/issues/new"
 #endif
+
+#endif  /* HAVE_RES_NQUERY */
 
 #else
 

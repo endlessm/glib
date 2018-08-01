@@ -99,7 +99,7 @@ codecs.register_error('replace_and_warn', replace_and_warn)
 # glib-mkenums.py
 # Information about the current enumeration
 flags = None # Is enumeration a bitmask?
-option_underscore_name = '' # Overriden underscore variant of the enum name
+option_underscore_name = '' # Overridden underscore variant of the enum name
                             # for example to fix the cases we don't get the
                             # mixed-case -> underscorized transform right.
 option_lowercase_name = ''  # DEPRECATED.  A lower case name to use as part
@@ -218,7 +218,7 @@ def parse_entries(file, file_name):
             if options is not None:
                 options = parse_trigraph(options)
                 if 'skip' not in options:
-                    entries.append((name, value, options['nick']))
+                    entries.append((name, value, options.get('nick')))
             else:
                 entries.append((name, value))
         elif re.match(r's*\#', line):
@@ -457,7 +457,7 @@ def process_file(curfilename):
         if re.match(r'\s*typedef\s+enum.*;', line):
             continue
 
-        m = re.match(r'''\s*typedef\s+enum\s*
+        m = re.match(r'''\s*typedef\s+enum\s*[_A-Za-z]*[_A-Za-z0-9]*\s*
                ({)?\s*
                (?:/\*<
                  (([^*]|\*(?!/))*)
@@ -486,7 +486,7 @@ def process_file(curfilename):
 
             if option_lowercase_name is not None:
                 if option_underscore_name is not None:
-                    print_warning("lowercase_name overriden with underscore_name")
+                    print_warning("lowercase_name overridden with underscore_name")
                     option_lowercase_name = None
                 else:
                     print_warning("lowercase_name is deprecated, use underscore_name")
@@ -495,6 +495,8 @@ def process_file(curfilename):
             if groups[0] is None and (len(groups) < 4 or groups[3] is None):
                 while True:
                     line = curfile.readline()
+                    if not line:
+                        print_error("Syntax error when looking for opening { in enum")
                     if re.match(r'\s*\{', line):
                         break
 

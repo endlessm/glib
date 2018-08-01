@@ -224,6 +224,7 @@ static const gint month_item[2][12] =
 #define WEEKDAY_ABBR(d)       (get_weekday_name_abbr (g_date_time_get_day_of_week (d)))
 #define WEEKDAY_ABBR_IS_LOCALE FALSE
 #define WEEKDAY_FULL(d)       (get_weekday_name (g_date_time_get_day_of_week (d)))
+#define WEEKDAY_FULL_IS_LOCALE FALSE
 /* We don't yet know if nl_langinfo (MON_n) returns standalone or complete-date
  * format forms but if nl_langinfo (ALTMON_n) is not supported then we will
  * have to use MONTH_FULL as standalone.  The same if nl_langinfo () does not
@@ -1215,6 +1216,8 @@ g_date_time_new_week (GTimeZone *tz, gint year, gint week, gint week_day, gint h
 
   dt = g_date_time_new (tz, year, 1, 4, 0, 0, 0);
   g_date_time_get_week_number (dt, NULL, &jan4_week_day, NULL);
+  g_date_time_unref (dt);
+
   ordinal_day = (week * 7) + week_day - (jan4_week_day + 3);
   if (ordinal_day < 0)
     {
@@ -2566,6 +2569,24 @@ g_date_time_get_utc_offset (GDateTime *datetime)
 }
 
 /**
+ * g_date_time_get_timezone:
+ * @datetime: a #GDateTime
+ *
+ * Get the time zone for this @datetime.
+ *
+ * Returns: (transfer none): the time zone
+ * Since: 2.58
+ */
+GTimeZone *
+g_date_time_get_timezone (GDateTime *datetime)
+{
+  g_return_val_if_fail (datetime != NULL, NULL);
+
+  g_assert (datetime->tz != NULL);
+  return datetime->tz;
+}
+
+/**
  * g_date_time_get_timezone_abbreviation:
  * @datetime: a #GDateTime
  *
@@ -2746,11 +2767,11 @@ format_z (GString *outstr,
 }
 
 static void
-format_number (GString  *str,
-               gboolean  use_alt_digits,
-               gchar    *pad,
-               gint      width,
-               guint32   number)
+format_number (GString     *str,
+               gboolean     use_alt_digits,
+               const gchar *pad,
+               gint         width,
+               guint32      number)
 {
   const gchar *ascii_digits[10] = {
     "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
@@ -2888,7 +2909,7 @@ g_date_time_format_locale (GDateTime   *datetime,
   gunichar  c;
   gboolean  alt_digits = FALSE;
   gboolean  pad_set = FALSE;
-  gchar    *pad = "";
+  const gchar *pad = "";
   const gchar *name;
   const gchar *tz;
 
@@ -3176,6 +3197,7 @@ g_date_time_format_locale (GDateTime   *datetime,
 	  break;
 	case 'Z':
 	  tz = g_date_time_get_timezone_abbreviation (datetime);
+	  tmp = NULL;
 	  tmp_len = strlen (tz);
 	  if (!locale_is_utf8)
 	    {
@@ -3184,8 +3206,7 @@ g_date_time_format_locale (GDateTime   *datetime,
 		return FALSE;
 	    }
 	  g_string_append_len (outstr, tz, tmp_len);
-	  if (!locale_is_utf8)
-	    g_free (tmp);
+	  g_free (tmp);
 	  break;
 	case '%':
 	  g_string_append_c (outstr, '%');

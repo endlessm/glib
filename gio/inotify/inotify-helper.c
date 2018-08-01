@@ -158,8 +158,6 @@ ih_event_callback (ik_event_t  *event,
   gboolean interesting;
   GFileMonitorEvent event_flags;
 
-  g_assert (!file_event); /* XXX hardlink support */
-
   event_flags = ih_mask_to_EventFlags (event->mask);
 
   if (event->mask & IN_MOVE)
@@ -207,6 +205,8 @@ ih_event_callback (ik_event_t  *event,
     /* unpaired event -- no 'other' field */
     interesting = g_file_monitor_source_handle_event (sub->user_data, event_flags,
                                                       event->name, NULL, NULL, event->timestamp);
+  else
+    interesting = FALSE;
 
   if (event->mask & IN_CREATE)
     {
