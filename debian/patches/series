@@ -11,4 +11,5 @@ debian/04_homedir_env.patch
 debian/06_thread_test_ignore_prctl_fail.patch
 debian/61_glib-compile-binaries-path.patch
 debian/90_gio-modules-multiarch-compat.patch
+debian/Look-for-gio-launch-desktop-in-libdir-glib-2.0.patch
 debian/closures-test-Run-fewer-iterations-on-ARM64.patch

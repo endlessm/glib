@@ -1,0 +1,42 @@
+From: Simon McVittie <smcv@debian.org>
+Date: Wed, 1 Aug 2018 09:40:38 +0100
+Subject: Look for gio-launch-desktop in $(libdir)/glib-2.0
+
+In Debian, we install it in the shared library package to avoid
+needing a circular dependency between libglib2.0-0 and
+libglib2.0-bin.
+
+Forwarded: not-needed, Debian-specific
+---
+ gio/Makefile.am       | 1 +
+ gio/gdesktopappinfo.c | 4 ++--
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/gio/Makefile.am b/gio/Makefile.am
+index e14cad2..a493084 100644
+--- a/gio/Makefile.am
++++ b/gio/Makefile.am
+@@ -26,6 +26,7 @@ AM_CPPFLAGS = \
+ 	$(gmodule_INCLUDES)				\
+ 	$(GLIB_DEBUG_FLAGS)				\
+ 	-DGIO_COMPILATION				\
++	-DGIO_LIBDIR=\"$(libdir)\"			\
+ 	-DGIO_MODULE_DIR=\"$(GIO_MODULE_DIR)\"	
+ 
+ AM_CFLAGS = $(GLIB_WARN_CFLAGS)
+diff --git a/gio/gdesktopappinfo.c b/gio/gdesktopappinfo.c
+index d0ffbac..11b245a 100644
+--- a/gio/gdesktopappinfo.c
++++ b/gio/gdesktopappinfo.c
+@@ -2723,9 +2723,9 @@ g_desktop_app_info_launch_uris_with_spawn (GDesktopAppInfo            *info,
+           /* Allow test suite to specify path to gio-launch-desktop */
+           tmp = g_getenv ("GIO_LAUNCH_DESKTOP");
+ 
+-          /* Fall back on usual searching in $PATH */
+           if (tmp == NULL)
+-            tmp = "gio-launch-desktop";
++            tmp = GIO_LIBDIR "/glib-2.0/gio-launch-desktop";
++
+           g_once_init_leave (&gio_launch_desktop_path, tmp);
+         }
+ 
