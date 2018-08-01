@@ -586,6 +586,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_desktop_app_info_has_key@Base 2.35.8
  g_desktop_app_info_launch_action@Base 2.37.5
  g_desktop_app_info_launch_uris_as_manager@Base 2.28.0
+ g_desktop_app_info_launch_uris_as_manager_with_fds@Base 2.57.2
  g_desktop_app_info_list_actions@Base 2.37.5
  g_desktop_app_info_lookup_get_default_for_uri_scheme@Base 2.28.0
  g_desktop_app_info_lookup_get_type@Base 2.28.0
@@ -1165,8 +1166,11 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_mount_operation_get_anonymous@Base 2.16.0
  g_mount_operation_get_choice@Base 2.16.0
  g_mount_operation_get_domain@Base 2.16.0
+ g_mount_operation_get_is_tcrypt_hidden_volume@Base 2.57.2
+ g_mount_operation_get_is_tcrypt_system_volume@Base 2.57.2
  g_mount_operation_get_password@Base 2.16.0
  g_mount_operation_get_password_save@Base 2.16.0
+ g_mount_operation_get_pim@Base 2.57.2
  g_mount_operation_get_type@Base 2.16.0
  g_mount_operation_get_username@Base 2.16.0
  g_mount_operation_new@Base 2.16.0
@@ -1175,8 +1179,11 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_mount_operation_set_anonymous@Base 2.16.0
  g_mount_operation_set_choice@Base 2.16.0
  g_mount_operation_set_domain@Base 2.16.0
+ g_mount_operation_set_is_tcrypt_hidden_volume@Base 2.57.2
+ g_mount_operation_set_is_tcrypt_system_volume@Base 2.57.2
  g_mount_operation_set_password@Base 2.16.0
  g_mount_operation_set_password_save@Base 2.16.0
+ g_mount_operation_set_pim@Base 2.57.2
  g_mount_operation_set_username@Base 2.16.0
  g_mount_remount@Base 2.16.0
  g_mount_remount_finish@Base 2.16.0
@@ -1897,6 +1904,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_mount_get_device_path@Base 2.16.0
  g_unix_mount_get_fs_type@Base 2.16.0
  g_unix_mount_get_mount_path@Base 2.16.0
+ g_unix_mount_get_options@Base 2.57.2
  g_unix_mount_guess_can_eject@Base 2.16.0
  g_unix_mount_guess_icon@Base 2.16.0
  g_unix_mount_guess_name@Base 2.16.0
@@ -2078,6 +2086,17 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_atomic_pointer_or@Base 2.30.0
  g_atomic_pointer_set@Base 2.12.0
  g_atomic_pointer_xor@Base 2.30.0
+ g_atomic_rc_box_acquire@Base 2.57.2
+ g_atomic_rc_box_alloc@Base 2.57.2
+ g_atomic_rc_box_alloc0@Base 2.57.2
+ g_atomic_rc_box_dup@Base 2.57.2
+ g_atomic_rc_box_get_size@Base 2.57.2
+ g_atomic_rc_box_release@Base 2.57.2
+ g_atomic_rc_box_release_full@Base 2.57.2
+ g_atomic_ref_count_compare@Base 2.57.2
+ g_atomic_ref_count_dec@Base 2.57.2
+ g_atomic_ref_count_inc@Base 2.57.2
+ g_atomic_ref_count_init@Base 2.57.2
  g_base64_decode@Base 2.12.0
  g_base64_decode_inplace@Base 2.20.0
  g_base64_decode_step@Base 2.12.0
@@ -2172,6 +2191,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_cache_new@Base 2.12.0
  g_cache_remove@Base 2.12.0
  g_cache_value_foreach@Base 2.12.0
+ g_canonicalize_filename@Base 2.57.2
  g_chdir@Base 2.12.0
  g_checksum_copy@Base 2.16.0
  g_checksum_free@Base 2.16.0
@@ -2298,6 +2318,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_date_time_get_month@Base 2.26.0
  g_date_time_get_second@Base 2.26.0
  g_date_time_get_seconds@Base 2.26.0
+ g_date_time_get_timezone@Base 2.57.2
  g_date_time_get_timezone_abbreviation@Base 2.26.0
  g_date_time_get_utc_offset@Base 2.26.0
  g_date_time_get_week_numbering_year@Base 2.28.0
@@ -2386,6 +2407,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_get_home_dir@Base 2.35.9
  g_get_host_name@Base 2.12.0
  g_get_language_names@Base 2.12.0
+ g_get_language_names_with_category@Base 2.57.2
  g_get_locale_variants@Base 2.28.0
  g_get_monotonic_time@Base 2.28.0
  g_get_num_processors@Base 2.35.8
@@ -2430,6 +2452,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_hash_table_size@Base 2.12.0
  g_hash_table_steal@Base 2.12.0
  g_hash_table_steal_all@Base 2.12.0
+ g_hash_table_steal_extended@Base 2.57.2
  g_hash_table_unref@Base 2.12.0
  g_hmac_copy@Base 2.30.0
  g_hmac_get_digest@Base 2.30.0
@@ -2848,6 +2871,8 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_ptr_array_sized_new@Base 2.12.0
  g_ptr_array_sort@Base 2.12.0
  g_ptr_array_sort_with_data@Base 2.12.0
+ g_ptr_array_steal_index@Base 2.57.2
+ g_ptr_array_steal_index_fast@Base 2.57.2
  g_ptr_array_unref@Base 2.22.0
  g_qsort_with_data@Base 2.12.0
  g_quark_from_static_string@Base 2.12.0
@@ -2910,6 +2935,13 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_random_int@Base 2.12.0
  g_random_int_range@Base 2.12.0
  g_random_set_seed@Base 2.12.0
+ g_rc_box_acquire@Base 2.57.2
+ g_rc_box_alloc@Base 2.57.2
+ g_rc_box_alloc0@Base 2.57.2
+ g_rc_box_dup@Base 2.57.2
+ g_rc_box_get_size@Base 2.57.2
+ g_rc_box_release@Base 2.57.2
+ g_rc_box_release_full@Base 2.57.2
  g_realloc@Base 2.12.0
  g_realloc_n@Base 2.24.0
  g_rec_mutex_clear@Base 2.31.8
@@ -2917,6 +2949,16 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_rec_mutex_lock@Base 2.31.8
  g_rec_mutex_trylock@Base 2.31.8
  g_rec_mutex_unlock@Base 2.31.8
+ g_ref_count_compare@Base 2.57.2
+ g_ref_count_dec@Base 2.57.2
+ g_ref_count_inc@Base 2.57.2
+ g_ref_count_init@Base 2.57.2
+ g_ref_string_acquire@Base 2.57.2
+ g_ref_string_length@Base 2.57.2
+ g_ref_string_new@Base 2.57.2
+ g_ref_string_new_intern@Base 2.57.2
+ g_ref_string_new_len@Base 2.57.2
+ g_ref_string_release@Base 2.57.2
  g_regex_check_replacement@Base 2.14.0
  g_regex_error_quark@Base 2.14.0
  g_regex_escape_nul@Base 2.30.0
@@ -3110,6 +3152,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_source_unref@Base 2.12.0
  g_spaced_primes_closest@Base 2.12.0
  g_spawn_async@Base 2.12.0
+ g_spawn_async_with_fds@Base 2.57.2
  g_spawn_async_with_pipes@Base 2.12.0
  g_spawn_check_exit_status@Base 2.33.14
  g_spawn_close_pid@Base 2.12.0
@@ -3316,10 +3359,12 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_time_zone_adjust_time@Base 2.28.0
  g_time_zone_find_interval@Base 2.28.0
  g_time_zone_get_abbreviation@Base 2.28.0
+ g_time_zone_get_identifier@Base 2.57.2
  g_time_zone_get_offset@Base 2.28.0
  g_time_zone_is_dst@Base 2.28.0
  g_time_zone_new@Base 2.26.0
  g_time_zone_new_local@Base 2.26.0
+ g_time_zone_new_offset@Base 2.57.2
  g_time_zone_new_utc@Base 2.26.0
  g_time_zone_ref@Base 2.26.0
  g_time_zone_unref@Base 2.26.0
