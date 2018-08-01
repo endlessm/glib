@@ -5,8 +5,6 @@
 skip-broken-timer-test.patch
 0001-Fix-trashing-on-overlayfs.patch
 gwakeuptest-Be-less-parallel-unless-invoked-with-m-slow.patch
-g_test_dbus_down-Ensure-next-test-does-not-use-old-connec.patch
-tests-network-monitor-Always-use-the-dummy-proxy-res.patch
 debian/02_gettext-desktopfiles-ubuntu.patch
 debian/03_disble_glib_compile_schemas_warning.patch
 debian/04_homedir_env.patch

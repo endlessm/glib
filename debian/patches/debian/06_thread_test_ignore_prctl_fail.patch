@@ -6,22 +6,22 @@ This happens on the Debian buildds.
 
 Forwarded: no, Debian buildd specific
 ---
- glib/tests/thread.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ glib/tests/thread.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/glib/tests/thread.c b/glib/tests/thread.c
-index 5447836..734ca9b 100644
+index b9f8796..43e682e 100644
 --- a/glib/tests/thread.c
 +++ b/glib/tests/thread.c
-@@ -145,9 +145,11 @@ test_thread4 (void)
- 
+@@ -147,8 +147,11 @@ test_thread4 (void)
    getrlimit (RLIMIT_NPROC, &nl);
    nl.rlim_cur = 1;
--
-   if ((ret = prlimit (getpid(), RLIMIT_NPROC, &nl, &ol)) != 0)
--    g_error ("prlimit failed: %s\n", g_strerror (ret));
+ 
+-  if ((ret = prlimit (getpid (), RLIMIT_NPROC, &nl, &ol)) != 0)
+-    g_error ("prlimit failed: %s", g_strerror (errno));
++  if ((ret = prlimit (getpid(), RLIMIT_NPROC, &nl, &ol)) != 0)
 +    {
-+      g_debug ("prlimit failed: %s\n", g_strerror (ret));
++      g_debug ("prlimit failed: %s\n", g_strerror (errno));
 +      return;
 +    }
  

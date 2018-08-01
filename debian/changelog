@@ -2,6 +2,7 @@ glib2.0 (2.57.2-1) UNRELEASED; urgency=medium
 
   * New upstream release
   * d/watch: Look for odd-numbered releases
+  * Rebase patch series
 
  -- Simon McVittie <smcv@debian.org>  Tue, 10 Apr 2018 23:23:44 +0100
 

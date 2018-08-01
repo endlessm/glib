@@ -10,10 +10,10 @@ Forwarded: no
  3 files changed, 8 insertions(+)
 
 diff --git a/gio/tests/socket.c b/gio/tests/socket.c
-index 0835a66..74ba0b8 100644
+index 9b3adb4..4d182e6 100644
 --- a/gio/tests/socket.c
 +++ b/gio/tests/socket.c
-@@ -1683,7 +1683,9 @@ main (int   argc,
+@@ -1746,7 +1746,9 @@ main (int   argc,
    g_test_add_func ("/socket/ipv6_v4mapped", test_ipv6_v4mapped);
  #endif
    g_test_add_func ("/socket/close_graceful", test_close_graceful);
@@ -24,10 +24,10 @@ index 0835a66..74ba0b8 100644
    g_test_add_func ("/socket/address", test_sockaddr);
  #ifdef G_OS_UNIX
 diff --git a/glib/tests/mainloop.c b/glib/tests/mainloop.c
-index f5d672a..b1a81b3 100644
+index cf114fd..8730c07 100644
 --- a/glib/tests/mainloop.c
 +++ b/glib/tests/mainloop.c
-@@ -1732,11 +1732,15 @@ main (int argc, char *argv[])
+@@ -1750,11 +1750,15 @@ main (int argc, char *argv[])
  
    g_test_add_func ("/maincontext/basic", test_maincontext_basic);
    g_test_add_func ("/mainloop/basic", test_mainloop_basic);
