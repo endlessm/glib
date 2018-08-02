@@ -345,6 +345,12 @@ if host_system != 'windows'
     gio_unix_include_headers += ['gdesktopappinfo.h']
     subdir('xdgmime')
     internal_deps += [xdgmime_lib]
+
+    executable('gio-launch-desktop', 'gio-launch-desktop.c',
+      install : true,
+      c_args : gio_c_args,
+      # intl.lib is not compatible with SAFESEH
+      link_args : noseh_link_args)
   endif
 
   install_headers(gio_unix_include_headers, subdir : 'gio-unix-2.0/gio')

@@ -16,6 +16,9 @@ AM_CPPFLAGS = $(gio_INCLUDES) $(GLIB_DEBUG_FLAGS) -I$(top_builddir)/gio -I$(top_
 DEFS = -DG_LOG_DOMAIN=\"GLib-GIO\" -DTEST_SERVICES=\""$(abs_top_builddir)/gio/tests/services"\"
 AM_CFLAGS = $(GLIB_WARN_CFLAGS)
 
+AM_TESTS_ENVIRONMENT += \
+	GIO_LAUNCH_DESKTOP="$(top_builddir)/gio/gio-launch-desktop"
+
 # -----------------------------------------------------------------------------
 #  Test programs buildable on all platforms
 

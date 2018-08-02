@@ -370,6 +370,11 @@ foreach f : functions
   endif
 endforeach
 
+# Check that posix_spawn() is usable; must use header
+if cc.has_function('posix_spawn', prefix : '#include <spawn.h>')
+  glib_conf.set('HAVE_POSIX_SPAWN', 1)
+endif
+
 # Check whether strerror_r returns char *
 if have_func_strerror_r
   if cc.compiles('''#define _GNU_SOURCE
