@@ -1,6 +1,7 @@
-glib2.0 (2.57.2-1) UNRELEASED; urgency=medium
+glib2.0 (2.57.2-1) experimental; urgency=medium
 
-  * New upstream release
+  * Team upload
+  * New upstream development release
   * d/watch: Look for odd-numbered releases
   * Rebase patch series
   * Install gio-launch-desktop in libglib2.0-0's private libdir to avoid
@@ -18,7 +19,7 @@ glib2.0 (2.57.2-1) UNRELEASED; urgency=medium
     Add patch to fix autopkgtest failures without locales-all
   * d/gbp.conf: Don't number patches
 
- -- Simon McVittie <smcv@debian.org>  Thu, 02 Aug 2018 11:03:43 +0100
+ -- Simon McVittie <smcv@debian.org>  Thu, 02 Aug 2018 17:44:16 +0100
 
 glib2.0 (2.56.1-2) unstable; urgency=medium
 
