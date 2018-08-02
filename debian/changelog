@@ -1,3 +1,10 @@
+glib2.0 (2.54.2-1endless4) eos; urgency=medium
+
+  * Backport gspawn/posix_spawn improvements
+    https://phabricator.endlessm.com/T23273
+
+ -- Daniel Drake <drake@endlessm.com>  Thu, 02 Aug 2018 13:42:26 +0800
+
 glib2.0 (2.54.2-1endless3) unstable; urgency=medium
 
   * Backport new GDateTime and GTimeZone methods:
