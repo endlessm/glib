@@ -1,3 +1,4 @@
+Drop-a-questionable-test-from-the-refstring-suite.patch
 01_gettext-desktopfiles.patch
 07_disable_tests_on_slow_archs.patch
 81-skip-monitor-test-on-non-linux.patch
@@ -5,7 +6,6 @@
 skip-broken-timer-test.patch
 0001-Fix-trashing-on-overlayfs.patch
 gwakeuptest-Be-less-parallel-unless-invoked-with-m-slow.patch
-refstring-Don-t-assert-that-pointers-aren-t-reused.patch
 debian/02_gettext-desktopfiles-ubuntu.patch
 debian/03_disble_glib_compile_schemas_warning.patch
 debian/04_homedir_env.patch

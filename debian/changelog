@@ -12,7 +12,7 @@ glib2.0 (2.57.2-1) UNRELEASED; urgency=medium
   * Use upstream autogen.sh for autoreconf
   * Don't clean org.gtk.test.gschema.override.orig
   * d/gbp.conf: Use upstream/latest branch
-  * d/p/refstring-Don-t-assert-that-pointers-aren-t-reused.patch:
+  * d/p/Drop-a-questionable-test-from-the-refstring-suite.patch:
     Add patch to fix FTBFS on i386
 
  -- Simon McVittie <smcv@debian.org>  Thu, 02 Aug 2018 11:03:43 +0100
