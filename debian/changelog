@@ -16,6 +16,7 @@ glib2.0 (2.57.2-1) UNRELEASED; urgency=medium
     Add patch to fix FTBFS on i386
   * d/p/date-test-Use-g_test_skip-not-g_test_incomplete.patch:
     Add patch to fix autopkgtest failures without locales-all
+  * d/gbp.conf: Don't number patches
 
  -- Simon McVittie <smcv@debian.org>  Thu, 02 Aug 2018 11:03:43 +0100
 
