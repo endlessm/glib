@@ -6,6 +6,7 @@ Drop-a-questionable-test-from-the-refstring-suite.patch
 skip-broken-timer-test.patch
 0001-Fix-trashing-on-overlayfs.patch
 gwakeuptest-Be-less-parallel-unless-invoked-with-m-slow.patch
+date-test-Use-g_test_skip-not-g_test_incomplete.patch
 debian/02_gettext-desktopfiles-ubuntu.patch
 debian/03_disble_glib_compile_schemas_warning.patch
 debian/04_homedir_env.patch
