@@ -1,0 +1,187 @@
+From: Christoph Reiter <creiter@src.gnome.org>
+Date: Tue, 14 Aug 2018 14:20:32 +0200
+Subject: g_binding_unbind: make it more introspection friendly;
+ allow calling it multiple times. Fixes #1373
+
+g_object_bind_property() (transfer none) returns a GBinding with an existing internal
+reference which is active as long as the "binding" is. This allows to optionally use
+the binding without any memory management, as it will remove itself when it is no longer
+needed.
+
+There are currently three ways to remove the "binding" and as a result the reference:
+
+1) Either the source or target dies and we get notified by a weakref callback
+2) The user unrefs the binding until it is destroyed (which is semi-legal,
+   but worked and is used in the test suite)
+3) The user calls g_binding_unbind()
+
+In case (3) the problem was that it always calls unref even if the "binding" is already
+gone, leading to crashes when called from bindings multiple times.
+In #1373 and !197 it was noticed that a function always unrefs which would be a
+"transfer full" annotation, but the problem here is that it should only remove the
+ref when removing the "binding" and the annotation should stay "transfer none".
+
+As a side effect of this fix it is now also possible to call g_binding_unbind() multiple
+times where every call after the first is a no-op.
+
+This also adds explicit tests for case (1) and (3) - only case (3) is affected by this change.
+---
+ gobject/gbinding.c      |  7 +++--
+ gobject/tests/binding.c | 82 ++++++++++++++++++++++++++++++++++++++++++++++++-
+ 2 files changed, 86 insertions(+), 3 deletions(-)
+
+diff --git a/gobject/gbinding.c b/gobject/gbinding.c
+index 6872b96..42dcb36 100644
+--- a/gobject/gbinding.c
++++ b/gobject/gbinding.c
+@@ -373,6 +373,7 @@ g_binding_unbind_internal (GBinding *binding,
+                            gboolean  unref_binding)
+ {
+   gboolean source_is_target = binding->source == binding->target;
++  gboolean binding_was_removed = FALSE;
+ 
+   /* dispose of the transformation data */
+   if (binding->notify != NULL)
+@@ -392,6 +393,7 @@ g_binding_unbind_internal (GBinding *binding,
+ 
+       binding->source_notify = 0;
+       binding->source = NULL;
++      binding_was_removed = TRUE;
+     }
+ 
+   if (binding->target != NULL)
+@@ -404,9 +406,10 @@ g_binding_unbind_internal (GBinding *binding,
+ 
+       binding->target_notify = 0;
+       binding->target = NULL;
++      binding_was_removed = TRUE;
+     }
+ 
+-  if (unref_binding)
++  if (binding_was_removed && unref_binding)
+     g_object_unref (binding);
+ }
+ 
+@@ -748,7 +751,7 @@ g_binding_get_target_property (GBinding *binding)
+ 
+ /**
+  * g_binding_unbind:
+- * @binding: (transfer full): a #GBinding
++ * @binding: a #GBinding
+  *
+  * Explicitly releases the binding between the source and the target
+  * property expressed by @binding.
+diff --git a/gobject/tests/binding.c b/gobject/tests/binding.c
+index e088ca7..019fb28 100644
+--- a/gobject/tests/binding.c
++++ b/gobject/tests/binding.c
+@@ -460,6 +460,7 @@ binding_chain (void)
+   BindingSource *c = g_object_new (binding_source_get_type (), NULL);
+   GBinding *binding_1, *binding_2;
+ 
++  g_test_bug_base ("http://bugzilla.gnome.org/");
+   g_test_bug ("621782");
+ 
+   /* A -> B, B -> C */
+@@ -625,6 +626,83 @@ binding_unbind (void)
+   g_object_unref (source);
+ }
+ 
++/* When source or target die, so does the binding if there is no other ref */
++static void
++binding_unbind_weak (void)
++{
++  GBinding *binding;
++  BindingSource *source;
++  BindingTarget *target;
++
++  /* first source, then target */
++  source = g_object_new (binding_source_get_type (), NULL);
++  target = g_object_new (binding_target_get_type (), NULL);
++  binding = g_object_bind_property (source, "foo",
++                                    target, "bar",
++                                    G_BINDING_DEFAULT);
++  g_object_add_weak_pointer (G_OBJECT (binding), (gpointer *) &binding);
++  g_assert_nonnull (binding);
++  g_object_unref (source);
++  g_assert_null (binding);
++  g_object_unref (target);
++  g_assert_null (binding);
++
++  /* first target, then source */
++  source = g_object_new (binding_source_get_type (), NULL);
++  target = g_object_new (binding_target_get_type (), NULL);
++  binding = g_object_bind_property (source, "foo",
++                                    target, "bar",
++                                    G_BINDING_DEFAULT);
++  g_object_add_weak_pointer (G_OBJECT (binding), (gpointer *) &binding);
++  g_assert_nonnull (binding);
++  g_object_unref (target);
++  g_assert_null (binding);
++  g_object_unref (source);
++  g_assert_null (binding);
++
++  /* target and source are the same */
++  source = g_object_new (binding_source_get_type (), NULL);
++  binding = g_object_bind_property (source, "foo",
++                                    source, "bar",
++                                    G_BINDING_DEFAULT);
++  g_object_add_weak_pointer (G_OBJECT (binding), (gpointer *) &binding);
++  g_assert_nonnull (binding);
++  g_object_unref (source);
++  g_assert_null (binding);
++}
++
++/* Test that every call to unbind() after the first is a noop */
++static void
++binding_unbind_multiple (void)
++{
++  BindingSource *source = g_object_new (binding_source_get_type (), NULL);
++  BindingTarget *target = g_object_new (binding_target_get_type (), NULL);
++  GBinding *binding;
++  guint i;
++
++  g_test_bug ("1373");
++
++  binding = g_object_bind_property (source, "foo",
++                                    target, "bar",
++                                    G_BINDING_DEFAULT);
++  g_object_ref (binding);
++  g_object_add_weak_pointer (G_OBJECT (binding), (gpointer *) &binding);
++  g_assert_nonnull (binding);
++
++  /* this shouldn't crash */
++  for (i = 0; i < 50; i++)
++    {
++      g_binding_unbind (binding);
++      g_assert_nonnull (binding);
++    }
++
++  g_object_unref (binding);
++  g_assert_null (binding);
++
++  g_object_unref (source);
++  g_object_unref (target);
++}
++
+ static void
+ binding_fail (void)
+ {
+@@ -653,7 +731,7 @@ main (int argc, char *argv[])
+ {
+   g_test_init (&argc, &argv, NULL);
+ 
+-  g_test_bug_base ("http://bugzilla.gnome.org/");
++  g_test_bug_base ("https://gitlab.gnome.org/GNOME/glib/issues/");
+ 
+   g_test_add_func ("/binding/default", binding_default);
+   g_test_add_func ("/binding/bidirectional", binding_bidirectional);
+@@ -665,6 +743,8 @@ main (int argc, char *argv[])
+   g_test_add_func ("/binding/invert-boolean", binding_invert_boolean);
+   g_test_add_func ("/binding/same-object", binding_same_object);
+   g_test_add_func ("/binding/unbind", binding_unbind);
++  g_test_add_func ("/binding/unbind-weak", binding_unbind_weak);
++  g_test_add_func ("/binding/unbind-multiple", binding_unbind_multiple);
+   g_test_add_func ("/binding/fail", binding_fail);
+ 
+   return g_test_run ();
