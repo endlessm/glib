@@ -1,3 +1,10 @@
+glib2.0 (2.57.2-2) experimental; urgency=medium
+
+  * Cherry-pick g_binding_unbind-make-it-more-introspection-friendly-allo.patch
+    to fix pygobject build (LP: #1787474)
+
+ -- Jeremy Bicha <jbicha@debian.org>  Mon, 20 Aug 2018 12:54:49 -0400
+
 glib2.0 (2.57.2-1) experimental; urgency=medium
 
   * Team upload
