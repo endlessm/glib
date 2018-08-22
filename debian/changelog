@@ -17,6 +17,7 @@ glib2.0 (2.57.2-3) UNRELEASED; urgency=medium
     glib-compile-resources (Closes: #834998)
   * Invoke dh_python3 twice so that we correctly rewrite the shebang
     line for /usr/bin scripts (Closes: #876009)
+  * Don't install very old changelogs and NEWS files
 
  -- Simon McVittie <smcv@debian.org>  Wed, 22 Aug 2018 09:46:16 +0100
 
