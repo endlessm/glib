@@ -1,4 +1,5 @@
 Drop-a-questionable-test-from-the-refstring-suite.patch
+tests-Fix-a-Wbad-function-cast-warning-in-the-atomic-test.patch
 g_binding_unbind-make-it-more-introspection-friendly-allo.patch
 Revert-glocalfile-Check-that-parent-device-is-the-same-wh.patch
 Fix-trashing-on-overlayfs.patch

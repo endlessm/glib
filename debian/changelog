@@ -8,6 +8,8 @@ glib2.0 (2.57.2-3) UNRELEASED; urgency=medium
   * d/p/g_binding_unbind-make-it-more-introspection-friendly-allo.patch:
     Mark as applied upstream, and move to the beginning of d/p/series
     with the other patches that will be in the next upstream release
+  * d/p/tests-Fix-a-Wbad-function-cast-warning-in-the-atomic-test.patch:
+    Apply patch from upstream to fix FTBFS on armel
 
  -- Simon McVittie <smcv@debian.org>  Wed, 22 Aug 2018 09:46:16 +0100
 

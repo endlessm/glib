@@ -1,0 +1,29 @@
+From: Philip Withnall <withnall@endlessm.com>
+Date: Fri, 3 Aug 2018 11:08:26 +0100
+Subject: tests: Fix a -Wbad-function-cast warning in the atomic tests
+
+Assigning the gpointer return value from g_atomic_pointer_get() to a
+gsize variable was not making -Wbad-function-cast happy. Assign to an
+intermediate gpointer variable and then cast that instead.
+
+Signed-off-by: Philip Withnall <withnall@endlessm.com>
+Bug: https://gitlab.gnome.org/GNOME/glib/issues/1475
+Origin: upstream, 2.57.3, commit:21d1797a4f72b43ad2c2b71a55aa995978c47d62
+---
+ glib/tests/atomic.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/glib/tests/atomic.c b/glib/tests/atomic.c
+index 2aafe86..84c13fb 100644
+--- a/glib/tests/atomic.c
++++ b/glib/tests/atomic.c
+@@ -92,7 +92,8 @@ test_types (void)
+   g_assert (ip == 0);
+ 
+   g_atomic_pointer_set (&gs, 0);
+-  gs2 = (gsize) g_atomic_pointer_get (&gs);
++  vp2 = g_atomic_pointer_get (&gs);
++  gs2 = (gsize) vp2;
+   g_assert (gs2 == 0);
+   res = g_atomic_pointer_compare_and_exchange (&gs, 0, 0);
+   g_assert (res);
