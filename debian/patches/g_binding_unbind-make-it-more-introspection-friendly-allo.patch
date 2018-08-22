@@ -25,6 +25,8 @@ As a side effect of this fix it is now also possible to call g_binding_unbind() 
 times where every call after the first is a no-op.
 
 This also adds explicit tests for case (1) and (3) - only case (3) is affected by this change.
+
+Origin: upstream, 2.57.3, commit:0319dac01d64f9f95cf84c511a1679ba469e6cbb
 ---
  gobject/gbinding.c      |  7 +++--
  gobject/tests/binding.c | 82 ++++++++++++++++++++++++++++++++++++++++++++++++-

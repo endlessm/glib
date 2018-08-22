@@ -5,6 +5,9 @@ glib2.0 (2.57.2-3) UNRELEASED; urgency=medium
     Apply the version of d/p/0001-Fix-trashing-on-overlayfs.patch that
     will be in 2.57.3
     - d/p/0001-Fix-trashing-on-overlayfs.patch: Remove
+  * d/p/g_binding_unbind-make-it-more-introspection-friendly-allo.patch:
+    Mark as applied upstream, and move to the beginning of d/p/series
+    with the other patches that will be in the next upstream release
 
  -- Simon McVittie <smcv@debian.org>  Wed, 22 Aug 2018 09:46:16 +0100
 
