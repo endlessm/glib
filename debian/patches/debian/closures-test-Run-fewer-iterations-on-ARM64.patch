@@ -7,7 +7,7 @@ slow. Cut down the number of signal emission cycles so that builds
 won't time out while the root cause is investigated.
 
 Forwarded: no, Debian-specific hack
-Bug: https://bugzilla.gnome.org/show_bug.cgi?id=791706
+Bug: https://gitlab.gnome.org/GNOME/glib/issues/1316
 Bug-Debian: https://bugs.debian.org/880883
 Signed-off-by: Simon McVittie <smcv@debian.org>
 ---
