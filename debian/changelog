@@ -12,6 +12,9 @@ glib2.0 (2.57.2-3) UNRELEASED; urgency=medium
     Apply patch from upstream to fix FTBFS on armel
   * d/p/debian/closures-test-Run-fewer-iterations-on-ARM64.patch:
     Update metadata
+  * libglib2.0-dev-bin: Add Suggests for the packages containing
+    xmllint and gdk-pixbuf-pixdata, which are sometimes invoked by
+    glib-compile-resources (Closes: #834998)
 
  -- Simon McVittie <smcv@debian.org>  Wed, 22 Aug 2018 09:46:16 +0100
 
