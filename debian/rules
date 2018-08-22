@@ -157,7 +157,10 @@ endif
 	dh_auto_install --remaining-packages --builddirectory=debian/build/deb --destdir=debian/install/deb
 
 override_dh_python3:
+	# dh_python3 can't process both a private directory and /usr/bin
+	# in the same invocation
 	dh_python3 -plibglib2.0-dev-bin /usr/share/glib-2.0/codegen
+	dh_python3 -plibglib2.0-dev-bin
 
 override_dh_install:
 	# Unwanted bits from the .deb build
