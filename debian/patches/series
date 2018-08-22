@@ -1,10 +1,11 @@
 Drop-a-questionable-test-from-the-refstring-suite.patch
+Revert-glocalfile-Check-that-parent-device-is-the-same-wh.patch
+Fix-trashing-on-overlayfs.patch
 01_gettext-desktopfiles.patch
 07_disable_tests_on_slow_archs.patch
 81-skip-monitor-test-on-non-linux.patch
 0001-timer-test-use-volatile-for-locals.patch
 skip-broken-timer-test.patch
-0001-Fix-trashing-on-overlayfs.patch
 gwakeuptest-Be-less-parallel-unless-invoked-with-m-slow.patch
 date-test-Use-g_test_skip-not-g_test_incomplete.patch
 debian/02_gettext-desktopfiles-ubuntu.patch

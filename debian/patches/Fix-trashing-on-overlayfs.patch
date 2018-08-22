@@ -1,0 +1,110 @@
+From: Iain Lane <iainl@gnome.org>
+Date: Mon, 16 Jul 2018 16:31:10 +0100
+Subject: Fix trashing on overlayfs
+
+In order to determine whether to trash a file to the home directory, we
+compare its st_dev to our home directory's st_dev field.
+
+This is the wrong thing to do on overlayfs when deleting files, because
+st_dev contains the ID of the filesystem providing the file (which can
+be the lower or upper filesystem), but directories always return the ID
+of the overlayfs. Thus the comparison fails and we are unable to trash
+the file.
+
+Fix this by checking st_dev of the parent directory when we are deleting
+a file.
+
+Also adjust `test_trash_not_supported` for this - make its st_dev check
+look at the parent directory's `st_dev` rather than the temporary file's
+own.
+
+Fixes #1027.
+
+(cherry picked from commit 1152d99dedd8f5105c81745d8a91fa660de736c9)
+---
+ gio/glocalfile.c  | 19 +++++++++++++++++++
+ gio/tests/trash.c | 16 ++++++++++------
+ 2 files changed, 29 insertions(+), 6 deletions(-)
+
+diff --git a/gio/glocalfile.c b/gio/glocalfile.c
+index 11a201a..2d928cc 100644
+--- a/gio/glocalfile.c
++++ b/gio/glocalfile.c
+@@ -1893,6 +1893,7 @@ g_local_file_trash (GFile         *file,
+   char *original_name, *original_name_escaped;
+   int i;
+   char *data;
++  char *path;
+   gboolean is_homedir_trash;
+   char *delete_time = NULL;
+   int fd;
+@@ -1917,6 +1918,24 @@ g_local_file_trash (GFile         *file,
+ 
+   is_homedir_trash = FALSE;
+   trashdir = NULL;
++
++  /* On overlayfs, a file's st_dev will be different to the home directory's.
++   * We still want to create our trash directory under the home directory, so
++   * instead we should stat the directory that the file we're deleting is in as
++   * this will have the same st_dev.
++   */
++  if (!S_ISDIR (file_stat.st_mode))
++    {
++      path = g_path_get_dirname (local->filename);
++      /* If the parent is a symlink to a different device then it might have
++       * st_dev equal to the home directory's, in which case we will end up
++       * trying to rename across a filesystem boundary, which doesn't work. So
++       * we use g_stat here instead of g_lstat, to know where the symlink
++       * points to. */
++      g_stat (path, &file_stat);
++      g_free (path);
++    }
++
+   if (file_stat.st_dev == home_stat.st_dev)
+     {
+       is_homedir_trash = TRUE;
+diff --git a/gio/tests/trash.c b/gio/tests/trash.c
+index 2abe0aa..176c4b9 100644
+--- a/gio/tests/trash.c
++++ b/gio/tests/trash.c
+@@ -35,23 +35,26 @@ test_trash_not_supported (void)
+   GFileInfo *info;
+   GError *error = NULL;
+   gboolean ret;
+-  GStatBuf file_stat, home_stat;
++  gchar *parent_dirname;
++  GStatBuf parent_stat, home_stat;
+ 
+   /* The test assumes that tmp file is located on system internal mount. */
+   file = g_file_new_tmp ("test-trashXXXXXX", &stream, &error);
++  parent_dirname = g_path_get_dirname (g_file_peek_path (file));
+   g_assert_no_error (error);
+-  g_assert_cmpint (g_lstat (g_file_peek_path (file), &file_stat), ==, 0);
+-  g_test_message ("File: %s (dev: %" G_GUINT64_FORMAT ")",
+-                  g_file_peek_path (file), (guint64) file_stat.st_dev);
++  g_assert_cmpint (g_stat (parent_dirname, &parent_stat), ==, 0);
++  g_test_message ("File: %s (parent st_dev: %" G_GUINT64_FORMAT ")",
++                  g_file_peek_path (file), (guint64) parent_stat.st_dev);
+ 
+   g_assert_cmpint (g_stat (g_get_home_dir (), &home_stat), ==, 0);
+-  g_test_message ("Home: %s (dev: %" G_GUINT64_FORMAT ")",
++  g_test_message ("Home: %s (st_dev: %" G_GUINT64_FORMAT ")",
+                   g_get_home_dir (), (guint64) home_stat.st_dev);
+ 
+-  if (file_stat.st_dev == home_stat.st_dev)
++  if (parent_stat.st_dev == home_stat.st_dev)
+     {
+       g_test_skip ("The file has to be on another filesystem than the home trash to run this test");
+ 
++      g_free (parent_dirname);
+       g_object_unref (stream);
+       g_object_unref (file);
+ 
+@@ -85,6 +88,7 @@ test_trash_not_supported (void)
+   g_io_stream_close (G_IO_STREAM (stream), NULL, &error);
+   g_assert_no_error (error);
+ 
++  g_free (parent_dirname);
+   g_object_unref (info);
+   g_object_unref (stream);
+   g_object_unref (file);
