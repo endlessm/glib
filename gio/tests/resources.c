@@ -181,6 +181,75 @@ test_resource_data (void)
 }
 
 static void
+test_resource_data_unaligned (void)
+{
+  GResource *resource;
+  GError *error = NULL;
+  gboolean loaded_file;
+  char *content, *content_copy;
+  gsize content_size;
+  GBytes *data;
+
+  loaded_file = g_file_get_contents (g_test_get_filename (G_TEST_BUILT, "test.gresource", NULL),
+                                     &content, &content_size, NULL);
+  g_assert (loaded_file);
+
+  content_copy = g_new (char, content_size + 1);
+  memcpy (content_copy + 1, content, content_size);
+
+  data = g_bytes_new_with_free_func (content_copy + 1, content_size,
+                                     (GDestroyNotify) g_free, content_copy);
+  g_free (content);
+  resource = g_resource_new_from_data (data, &error);
+  g_bytes_unref (data);
+  g_assert (resource != NULL);
+  g_assert_no_error (error);
+
+  test_resource (resource);
+
+  g_resource_unref (resource);
+}
+
+/* Test error handling for corrupt GResource files (specifically, a corrupt
+ * GVDB header). */
+static void
+test_resource_data_corrupt (void)
+{
+  /* A GVDB header is 6 guint32s, and requires a magic number in the first two
+   * guint32s. A set of zero bytes of a greater length is considered corrupt. */
+  static const guint8 data[sizeof (guint32) * 7] = { 0, };
+  GBytes *bytes = NULL;
+  GResource *resource = NULL;
+  GError *local_error = NULL;
+
+  bytes = g_bytes_new_static (data, sizeof (data));
+  resource = g_resource_new_from_data (bytes, &local_error);
+  g_bytes_unref (bytes);
+  g_assert_error (local_error, G_RESOURCE_ERROR, G_RESOURCE_ERROR_INTERNAL);
+  g_assert_null (resource);
+
+  g_clear_error (&local_error);
+}
+
+/* Test handling for empty GResource files. They should also be treated as
+ * corrupt. */
+static void
+test_resource_data_empty (void)
+{
+  GBytes *bytes = NULL;
+  GResource *resource = NULL;
+  GError *local_error = NULL;
+
+  bytes = g_bytes_new_static (NULL, 0);
+  resource = g_resource_new_from_data (bytes, &local_error);
+  g_bytes_unref (bytes);
+  g_assert_error (local_error, G_RESOURCE_ERROR, G_RESOURCE_ERROR_INTERNAL);
+  g_assert_null (resource);
+
+  g_clear_error (&local_error);
+}
+
+static void
 test_resource_registered (void)
 {
   GResource *resource;
@@ -644,6 +713,9 @@ main (int   argc,
 
   g_test_add_func ("/resource/file", test_resource_file);
   g_test_add_func ("/resource/data", test_resource_data);
+  g_test_add_func ("/resource/data_unaligned", test_resource_data_unaligned);
+  g_test_add_func ("/resource/data-corrupt", test_resource_data_corrupt);
+  g_test_add_func ("/resource/data-empty", test_resource_data_empty);
   g_test_add_func ("/resource/registered", test_resource_registered);
   g_test_add_func ("/resource/manual", test_resource_manual);
   g_test_add_func ("/resource/manual2", test_resource_manual2);
