@@ -30,8 +30,8 @@ m4_define(glib_configure_ac)
 # <mclasen> on the unstable (ie master), interface age = 0
 
 m4_define([glib_major_version], [2])
-m4_define([glib_minor_version], [57])
-m4_define([glib_micro_version], [2])
+m4_define([glib_minor_version], [58])
+m4_define([glib_micro_version], [0])
 m4_define([glib_interface_age], [0])
 m4_define([glib_binary_age],
           [m4_eval(100 * glib_minor_version + glib_micro_version)])
@@ -142,7 +142,7 @@ case "$host" in
     case "$host" in
     x86_64-*-*)
       LIB_EXE_MACHINE_FLAG=X64
-      glib_pollfd_format='%#I64x'
+      glib_pollfd_format='%#llx'
       ;;
     esac
 
@@ -488,7 +488,6 @@ AC_CHECK_SIZEOF(long)
 AC_CHECK_SIZEOF(int)
 AC_CHECK_SIZEOF(void *)
 AC_CHECK_SIZEOF(long long)
-AC_CHECK_SIZEOF(__int64)
 
 AC_CACHE_CHECK([for sig_atomic_t], ac_cv_type_sig_atomic_t,
   [AC_TRY_LINK([#include <signal.h>
@@ -502,7 +501,7 @@ if test x$ac_cv_type_sig_atomic_t = xyes; then
      [Define if you have the 'sig_atomic_t' type.])
 fi
 
-if test x$ac_cv_sizeof_long = x8 || test x$ac_cv_sizeof_long_long = x8 || test x$ac_cv_sizeof___int64 = x8 ; then
+if test x$ac_cv_sizeof_long = x8 || test x$ac_cv_sizeof_long_long = x8 ; then
   :
 else
   AC_MSG_ERROR([
@@ -511,11 +510,11 @@ else
 ])
 fi
 
-AS_IF([test x$glib_native_win32 != xyes && test x$ac_cv_sizeof_long_long = x8], [
+AS_IF([test x$ac_cv_sizeof_long_long = x8], [
 	# long long is a 64 bit integer.
 	AC_MSG_CHECKING(for format to printf and scanf a guint64)
 	AC_CACHE_VAL(glib_cv_long_long_format,[
-		for format in ll q I64; do
+		for format in ll q; do
 		  AC_TRY_RUN([#include <stdio.h>  
 			int main()
 			{
@@ -533,12 +532,6 @@ AS_IF([test x$glib_native_win32 != xyes && test x$ac_cv_sizeof_long_long = x8], 
 	AS_IF([ test -n "$glib_cv_long_long_format"], [
 	  AC_MSG_RESULT(%${glib_cv_long_long_format}u)
 	], [AC_MSG_RESULT(none)])
-],[ test x$ac_cv_sizeof___int64 = x8], [
-	# __int64 is a 64 bit integer.
-	AC_MSG_CHECKING(for format to printf and scanf a guint64)
-	# We know this is MSVCRT.DLL, and what the formats are
-	glib_cv_long_long_format=I64
-	AC_MSG_RESULT(%${glib_cv_long_long_format}u)
 ])
 
 AC_C_CONST
@@ -720,9 +713,6 @@ case $ac_cv_sizeof_size_t in
   $ac_cv_sizeof_long_long)
       glib_size_type='long long'
       ;;
-  $ac_cv_sizeof__int64)
-      glib_size_type='__int64'
-      ;;
   *)  AC_MSG_ERROR([No type matching size_t in size])
       ;;
 esac
@@ -779,9 +769,6 @@ case $ac_cv_sizeof_ssize_t in
   $ac_cv_sizeof_long_long)
       glib_ssize_type='long long'
       ;;
-  $ac_cv_sizeof__int64)
-      glib_ssize_type='__int64'
-      ;;
   *)  AC_MSG_ERROR([No type matching ssize_t in size])
       ;;
 esac
@@ -833,6 +820,41 @@ int main ()
 ])
 
 AC_MSG_RESULT($glib_ssize_type)
+
+dnl Some platforms (Apple) hard-code int64_t to long long instead of
+dnl using long on 64-bit architectures. This can cause type mismatch
+dnl warnings when trying to interface with code using the standard
+dnl library type. Test for the warnings and set gint64 to whichever
+dnl works.
+dnl
+AS_IF([test $ac_cv_sizeof_long_long = $ac_cv_sizeof_long], [
+  GLIB_CHECK_COMPILE_WARNINGS([AC_LANG_SOURCE([[
+#if defined(_AIX) && !defined(__GNUC__)
+#pragma options langlvl=stdc99
+#endif
+#include <stdint.h>
+#include <stdio.h>
+int main ()
+{
+  int64_t i1 = 1;
+  long *i2 = &i1;
+  return 1;
+}
+    ]])],[ glib_cv_int64_t=long ],
+      [GLIB_CHECK_COMPILE_WARNINGS([AC_LANG_SOURCE([[
+#if defined(_AIX) && !defined(__GNUC__)
+#pragma options langlvl=stdc99
+#endif
+#include <stdint.h>
+#include <stdio.h>
+int main ()
+{
+  int64_t i1 = 1;
+  long long *i2 = &i1;
+  return 1;
+}
+        ]])],[ glib_cv_int64_t=long_long ])])
+])
 
 # Check for some functions
 AC_CHECK_FUNCS(lstat strsignal vsnprintf stpcpy strcasecmp strncasecmp poll vasprintf setenv unsetenv getc_unlocked readlink symlink fdwalk mkostemp link)
@@ -922,20 +944,22 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
         AC_MSG_RESULT(no)
 ])
 
-AC_MSG_CHECKING([if ip_mreq_source.imr_interface has s_addr member])
-AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
-    [[
-        #include <netinet/in.h>
-    ]],
-    [[
-        struct ip_mreq_source mc_req_src;
-        mc_req_src.imr_interface.s_addr = 0;
-    ]])], [
-        AC_MSG_RESULT(yes)
-    ], [
-        AC_MSG_RESULT(no)
-        AC_DEFINE(BROKEN_IP_MREQ_SOURCE_STRUCT, 1, [struct ip_mreq_source definition is broken on Android NDK <= r16])
-])
+# See https://bugzilla.gnome.org/show_bug.cgi?id=740791
+AS_IF([test $glib_native_android = yes], [
+  AC_MSG_CHECKING([if ip_mreq_source.imr_interface has s_addr member])
+  AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
+      [[
+          #include <netinet/in.h>
+      ]],
+      [[
+          struct ip_mreq_source mc_req_src;
+          mc_req_src.imr_interface.s_addr = 0;
+      ]])], [
+          AC_MSG_RESULT(yes)
+      ], [
+          AC_MSG_RESULT(no)
+          AC_DEFINE(BROKEN_IP_MREQ_SOURCE_STRUCT, 1, [struct ip_mreq_source definition is broken on Android NDK <= r16])
+  ])])
 
 AS_IF([test $glib_native_win32 = yes], [
   # <wspiapi.h> in the Windows SDK and in mingw-w64 has wrappers for
@@ -3016,13 +3040,25 @@ $ac_cv_sizeof_int)
   guint64_constant='(val)'
   ;;
 $ac_cv_sizeof_long)
-  gint64=long
-  gint64_modifier='"l"'
-  gint64_format='"li"'
-  guint64_format='"lu"'
-  glib_extension=
-  gint64_constant='(val##L)'
-  guint64_constant='(val##UL)'
+  if test "x$glib_cv_int64_t" = "xlong_long"; then
+    gint64='long long'
+    if test -n "$glib_cv_long_long_format"; then
+      gint64_modifier='"'$glib_cv_long_long_format'"'
+      gint64_format='"'$glib_cv_long_long_format'i"'
+      guint64_format='"'$glib_cv_long_long_format'u"'
+    fi
+    glib_extension='G_GNUC_EXTENSION '
+    gint64_constant='(G_GNUC_EXTENSION (val##LL))'
+    guint64_constant='(G_GNUC_EXTENSION (val##ULL))'
+  else
+    gint64=long
+    gint64_modifier='"l"'
+    gint64_format='"li"'
+    guint64_format='"lu"'
+    glib_extension=
+    gint64_constant='(val##L)'
+    guint64_constant='(val##UL)'
+  fi
   ;;
 $ac_cv_sizeof_long_long)
   gint64='long long'
@@ -3034,17 +3070,6 @@ $ac_cv_sizeof_long_long)
   glib_extension='G_GNUC_EXTENSION '
   gint64_constant='(G_GNUC_EXTENSION (val##LL))'
   guint64_constant='(G_GNUC_EXTENSION (val##ULL))'
-  ;;
-$ac_cv_sizeof___int64)
-  gint64='__int64'
-  if test -n "$glib_cv_long_long_format"; then
-    gint64_modifier='"'$glib_cv_long_long_format'"'
-    gint64_format='"'$glib_cv_long_long_format'i"'
-    guint64_format='"'$glib_cv_long_long_format'u"'
-  fi
-  glib_extension=
-  gint64_constant='(val##i64)'
-  guint64_constant='(val##ui64)'
   ;;
 esac
 glib_size_t=$ac_cv_sizeof_size_t
@@ -3070,9 +3095,9 @@ long)
   gsize_format='"lu"'
   glib_msize_type='LONG'
   ;;
-"long long"|__int64)
-  gsize_modifier='"I64"'
-  gsize_format='"I64u"'
+"long long")
+  gsize_modifier='"ll"'
+  gsize_format='"llu"'
   glib_msize_type='INT64'
   ;;
 esac
@@ -3093,9 +3118,9 @@ long)
   gssize_format='"li"'
   glib_mssize_type='LONG'
   ;;
-"long long"|__int64)
-  gssize_modifier='"I64"'
-  gssize_format='"I64i"'
+"long long")
+  gssize_modifier='"ll"'
+  gssize_format='"lli"'
   glib_mssize_type='INT64'
   ;;
 esac
@@ -3124,17 +3149,9 @@ $ac_cv_sizeof_long)
   ;;
 $ac_cv_sizeof_long_long)
   glib_intptr_type_define='long long'
-  gintptr_modifier='"I64"'
-  gintptr_format='"I64i"'
-  guintptr_format='"I64u"'
-  glib_gpi_cast='(gint64)'
-  glib_gpui_cast='(guint64)'
-  ;;
-$ac_cv_sizeof___int64)
-  glib_intptr_type_define=__int64
-  gintptr_modifier='"I64"'
-  gintptr_format='"I64i"'
-  guintptr_format='"I64u"'
+  gintptr_modifier='"ll"'
+  gintptr_format='"lli"'
+  guintptr_format='"llu"'
   glib_gpi_cast='(gint64)'
   glib_gpui_cast='(guint64)'
   ;;
@@ -3263,9 +3280,6 @@ $ac_cv_sizeof_long)
   ;;
 $ac_cv_sizeof_long_long)
   gint64='long long'
-  ;;
-$ac_cv_sizeof___int64)
-  gint64='__int64'
   ;;
 esac
 

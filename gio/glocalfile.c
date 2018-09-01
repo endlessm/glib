@@ -983,15 +983,20 @@ g_local_file_query_filesystem_info (GFile         *file,
   block_size = statfs_buffer.f_bsize;
   
   /* Many backends can't report free size (for instance the gvfs fuse
-     backend for backend not supporting this), and set f_bfree to 0,
-     but it can be 0 for real too. We treat the available == 0 and
-     free == 0 case as "both of these are invalid".
-   */
-#ifndef G_OS_WIN32
+   * backend for backend not supporting this), and set f_bfree to 0,
+   *  but it can be 0 for real too. We treat the available == 0 and
+   * free == 0 case as "both of these are invalid", but only on file systems
+   * which are known to not support this (otherwise we can omit metadata for
+   * systems which are legitimately full). */
+#if defined(__linux__)
   if (statfs_result == 0 &&
-      statfs_buffer.f_bavail == 0 && statfs_buffer.f_bfree == 0)
+      statfs_buffer.f_bavail == 0 && statfs_buffer.f_bfree == 0 &&
+      (/* linux/ncp_fs.h: NCP_SUPER_MAGIC == 0x564c */
+       statfs_buffer.f_type == 0x564c ||
+       /* man statfs: FUSE_SUPER_MAGIC == 0x65735546 */
+       statfs_buffer.f_type == 0x65735546))
     no_size = TRUE;
-#endif /* G_OS_WIN32 */
+#endif  /* __linux__ */
   
 #elif defined(USE_STATVFS)
   statfs_result = statvfs (local->filename, &statfs_buffer);
@@ -1677,36 +1682,21 @@ find_mountpoint_for (const char *file,
     }
 }
 
-static char *
-_g_local_file_find_topdir_for_internal (const char *file, dev_t file_dev)
+char *
+_g_local_file_find_topdir_for (const char *file)
 {
   char *dir;
   char *mountpoint = NULL;
   dev_t dir_dev;
 
   dir = get_parent (file, &dir_dev);
-  if (dir == NULL || dir_dev != file_dev)
-    {
-      g_free (dir);
-
-      return NULL;
-    }
+  if (dir == NULL)
+    return NULL;
 
   mountpoint = find_mountpoint_for (dir, dir_dev);
   g_free (dir);
 
   return mountpoint;
-}
-
-char *
-_g_local_file_find_topdir_for (const char *file)
-{
-  GStatBuf file_stat;
-
-  if (g_lstat (file, &file_stat) != 0)
-    return NULL;
-
-  return _g_local_file_find_topdir_for_internal (file, file_stat.st_dev);
 }
 
 static char *
@@ -1908,6 +1898,7 @@ g_local_file_trash (GFile         *file,
   char *original_name, *original_name_escaped;
   int i;
   char *data;
+  char *path;
   gboolean is_homedir_trash;
   char *delete_time = NULL;
   int fd;
@@ -1932,6 +1923,24 @@ g_local_file_trash (GFile         *file,
 
   is_homedir_trash = FALSE;
   trashdir = NULL;
+
+  /* On overlayfs, a file's st_dev will be different to the home directory's.
+   * We still want to create our trash directory under the home directory, so
+   * instead we should stat the directory that the file we're deleting is in as
+   * this will have the same st_dev.
+   */
+  if (!S_ISDIR (file_stat.st_mode))
+    {
+      path = g_path_get_dirname (local->filename);
+      /* If the parent is a symlink to a different device then it might have
+       * st_dev equal to the home directory's, in which case we will end up
+       * trying to rename across a filesystem boundary, which doesn't work. So
+       * we use g_stat here instead of g_lstat, to know where the symlink
+       * points to. */
+      g_stat (path, &file_stat);
+      g_free (path);
+    }
+
   if (file_stat.st_dev == home_stat.st_dev)
     {
       is_homedir_trash = TRUE;
@@ -1962,8 +1971,7 @@ g_local_file_trash (GFile         *file,
       uid = geteuid ();
       g_snprintf (uid_str, sizeof (uid_str), "%lu", (unsigned long)uid);
 
-      topdir = _g_local_file_find_topdir_for_internal (local->filename,
-                                                       file_stat.st_dev);
+      topdir = _g_local_file_find_topdir_for (local->filename);
       if (topdir == NULL)
 	{
           g_set_io_error (error,

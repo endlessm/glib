@@ -197,7 +197,8 @@ token_stream_prepare (TokenStream *stream)
       break;
 
     case 'b':
-      if (stream->stream[1] == '\'' || stream->stream[1] == '"')
+      if (stream->stream + 1 != stream->end &&
+          (stream->stream[1] == '\'' || stream->stream[1] == '"'))
         {
           for (end = stream->stream + 2; end != stream->end; end++)
             if (*end == stream->stream[1] || *end == '\0' ||
@@ -260,6 +261,9 @@ token_stream_prepare (TokenStream *stream)
   stream->this = stream->stream;
   stream->stream = end;
 
+  /* We must have at least one byte in a token. */
+  g_assert (stream->stream - stream->this >= 1);
+
   return TRUE;
 }
 
@@ -276,7 +280,8 @@ token_stream_peek (TokenStream *stream,
   if (!token_stream_prepare (stream))
     return FALSE;
 
-  return stream->this[0] == first_char;
+  return stream->stream - stream->this >= 1 &&
+         stream->this[0] == first_char;
 }
 
 static gboolean
@@ -287,7 +292,8 @@ token_stream_peek2 (TokenStream *stream,
   if (!token_stream_prepare (stream))
     return FALSE;
 
-  return stream->this[0] == first_char &&
+  return stream->stream - stream->this >= 2 &&
+         stream->this[0] == first_char &&
          stream->this[1] == second_char;
 }
 
@@ -297,7 +303,8 @@ token_stream_is_keyword (TokenStream *stream)
   if (!token_stream_prepare (stream))
     return FALSE;
 
-  return g_ascii_isalpha (stream->this[0]) &&
+  return stream->stream - stream->this >= 2 &&
+         g_ascii_isalpha (stream->this[0]) &&
          g_ascii_isalpha (stream->this[1]);
 }
 
@@ -307,10 +314,11 @@ token_stream_is_numeric (TokenStream *stream)
   if (!token_stream_prepare (stream))
     return FALSE;
 
-  return (g_ascii_isdigit (stream->this[0]) ||
-          stream->this[0] == '-' ||
-          stream->this[0] == '+' ||
-          stream->this[0] == '.');
+  return (stream->stream - stream->this >= 1 &&
+          (g_ascii_isdigit (stream->this[0]) ||
+           stream->this[0] == '-' ||
+           stream->this[0] == '+' ||
+           stream->this[0] == '.'));
 }
 
 static gboolean
