@@ -148,7 +148,7 @@ index ae3bbbc..f1475d7 100644
     */
    if (!translated_value)
 diff --git a/glib/gkeyfile.h b/glib/gkeyfile.h
-index 7849551..532da2b 100644
+index 7a10048..aef9113 100644
 --- a/glib/gkeyfile.h
 +++ b/glib/gkeyfile.h
 @@ -298,6 +298,7 @@ gboolean  g_key_file_remove_group           (GKeyFile             *key_file,

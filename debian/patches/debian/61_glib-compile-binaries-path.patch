@@ -11,12 +11,12 @@ Forwarded: not-needed, specific to Debian packaging
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/gio-2.0.pc.in b/gio-2.0.pc.in
-index 7574eb7..249ed48 100644
+index 999e1c0..25ec898 100644
 --- a/gio-2.0.pc.in
 +++ b/gio-2.0.pc.in
-@@ -4,7 +4,7 @@ libdir=@libdir@
- includedir=@includedir@
- 
+@@ -6,7 +6,7 @@ includedir=@includedir@
+ datadir=@datadir@
+ schemasdir=${datadir}/glib-2.0/schemas
  giomoduledir=@GIO_MODULE_DIR@
 -glib_compile_schemas=glib-compile-schemas
 +glib_compile_schemas=@libdir@/glib-2.0/glib-compile-schemas

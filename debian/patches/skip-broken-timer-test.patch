@@ -9,10 +9,10 @@ Forwarded: no
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/glib/tests/timer.c b/glib/tests/timer.c
-index d6938f1..dbd7790 100644
+index e4f7253..a2f05d4 100644
 --- a/glib/tests/timer.c
 +++ b/glib/tests/timer.c
-@@ -203,7 +203,7 @@ main (int argc, char *argv[])
+@@ -272,7 +272,7 @@ main (int argc, char *argv[])
  {
    g_test_init (&argc, &argv, NULL);
  
