@@ -1,5 +1,5 @@
 project('glib', 'c', 'cpp',
-  version : '2.57.2',
+  version : '2.58.0',
   meson_version : '>= 0.47.0',
   default_options : [
     'buildtype=debugoptimized',
@@ -112,6 +112,14 @@ glib_conf.set('_GNU_SOURCE', 1)
 if host_system == 'windows'
   # Poll doesn't work on devices on Windows
   glib_conf.set('BROKEN_POLL', true)
+endif
+
+if host_system == 'windows' and cc.get_id() != 'msvc'
+  # FIXME: Ideally we shouldn't depend on this on Windows and should use
+  # 64 bit capable Windows API that also works with MSVC.
+  # The autotools build did set this for mingw and while meson sets it
+  # for gcc/clang by default, it doesn't do so on Windows.
+  glib_conf.set('_FILE_OFFSET_BITS', 64)
 endif
 
 # Check for GNU visibility attributes
@@ -1065,6 +1073,39 @@ else
   ssizet_size = cc.sizeof('ssize_t')
 endif
 
+# Some platforms (Apple) hard-code int64_t to long long instead of
+# using long on 64-bit architectures. This can cause type mismatch
+# warnings when trying to interface with code using the standard
+# library type. Test for the warnings and set gint64 to whichever
+# works.
+if long_long_size == long_size
+  if cc.compiles('''#if defined(_AIX) && !defined(__GNUC__)
+                    #pragma options langlvl=stdc99
+                    #endif
+                    #pragma GCC diagnostic error "-Wincompatible-pointer-types"
+                    #include <stdint.h>
+                    #include <stdio.h>
+                    int main () {
+                      int64_t i1 = 1;
+                      long *i2 = &i1;
+                      return 1;
+                    }''', name : 'int64_t is long')
+    int64_t_typedef = 'long'
+  elif cc.compiles('''#if defined(_AIX) && !defined(__GNUC__)
+                      #pragma options langlvl=stdc99
+                      #endif
+                      #pragma GCC diagnostic error "-Wincompatible-pointer-types"
+                      #include <stdint.h>
+                      #include <stdio.h>
+                      int main () {
+                        int64_t i1 = 1;
+                        long long *i2 = &i1;
+                        return 1;
+                      }''', name : 'int64_t is long long')
+    int64_t_typedef = 'long long'
+  endif
+endif
+
 int64_m = 'll'
 char_align = cc.alignment('char')
 short_align = cc.alignment('short')
@@ -1141,7 +1182,7 @@ if int_size == 8
   gint64_constant='(val)'
   guint64_constant='(val)'
   guint64_align = int_align
-elif long_size == 8
+elif long_size == 8 and (long_long_size != long_size or int64_t_typedef == 'long')
   gint64 = 'long'
   glib_extension=''
   gint64_modifier='l'
@@ -1150,7 +1191,7 @@ elif long_size == 8
   gint64_constant='(val##L)'
   guint64_constant='(val##UL)'
   guint64_align = long_align
-elif long_long_size == 8
+elif long_long_size == 8 and (long_long_size != long_size or int64_t_typedef == 'long long')
   gint64 = 'long long'
   glib_extension='G_GNUC_EXTENSION '
   gint64_modifier=int64_m
@@ -1255,11 +1296,9 @@ glibconfig_conf.set('glongbits', long_size * 8)
 glibconfig_conf.set('gsizebits', sizet_size * 8)
 glibconfig_conf.set('gssizebits', ssizet_size * 8)
 
-# FIXME: maybe meson should tell us the libsuffix?
+# XXX: https://gitlab.gnome.org/GNOME/glib/issues/1413
 if host_system == 'windows'
   g_module_suffix = 'dll'
-elif host_system == 'darwin'
-  g_module_suffix = 'dylib'
 else
   g_module_suffix = 'so'
 endif

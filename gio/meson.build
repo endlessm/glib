@@ -152,6 +152,11 @@ if host_system != 'windows'
     glib_conf.set('HAVE_SIOCGIFADDR', '/**/')
   endif
 
+endif
+
+if host_system.contains('android')
+  # struct ip_mreq_source definition is broken on Android NDK <= r16
+  # See https://bugzilla.gnome.org/show_bug.cgi?id=740791
   if not cc.compiles('''#include <netinet/in.h>
                         int main(int argc, char ** argv) {
                           struct ip_mreq_source mc_req_src;
@@ -161,7 +166,6 @@ if host_system != 'windows'
                         name : 'ip_mreq_source.imr_interface has s_addr member')
     glib_conf.set('BROKEN_IP_MREQ_SOURCE_STRUCT', 1)
   endif
-
 endif
 
 gnetworking_h_conf.set('WSPIAPI_INCLUDE', gnetworking_h_wspiapi_include)
@@ -800,10 +804,14 @@ if giomodulesdir == ''
   giomodulesdir = join_paths('${libdir}', 'gio', 'modules')
 endif
 
+schemas_subdir = join_paths('glib-2.0', 'schemas')
+
 pkg.generate(libraries : libgio,
   libraries_private : [osx_ldflags],
   requires : ['glib-2.0', 'gobject-2.0'],
-  variables : ['bindir=' + join_paths('${prefix}', get_option('bindir')),
+  variables : ['datadir=' + join_paths('${prefix}', get_option('datadir')),
+               'schemasdir=' + join_paths('${datadir}', schemas_subdir),
+               'bindir=' + join_paths('${prefix}', get_option('bindir')),
                'giomoduledir=' + giomodulesdir,
                'glib_compile_schemas=' + join_paths('${bindir}', 'glib-compile-schemas'),
                'glib_compile_resources=' + join_paths('${bindir}', 'glib-compile-resources'),
@@ -941,7 +949,7 @@ executable('gsettings', 'gsettings-tool.c',
   link_args : noseh_link_args,
   dependencies : [libgio_dep, libgobject_dep, libgmodule_dep, libglib_dep])
 install_data('gschema.dtd',
-  install_dir : join_paths(get_option('datadir'), 'glib-2.0/schemas'))
+  install_dir : join_paths(get_option('datadir'), schemas_subdir))
 
 install_data(['gschema.loc', 'gschema.its'],
   install_dir : join_paths(get_option('datadir'), 'gettext/its'))

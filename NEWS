@@ -1,3 +1,130 @@
+Overview of changes in GLib 2.58.0
+==================================
+
+* Tarball built with `ninja dist`, so if you want to build this release with
+  autotools (which is supported), you will need to re-run autogen.sh. This
+  release, and all micro releases in the 2.58.x series, support being built
+  with Meson or autotools. See:
+  https://mail.gnome.org/archives/gtk-devel-list/2018-June/msg00012.html
+
+* Fix cancellation of g_subprocess_communicate_async() calls. See !266.
+
+* Drop support for the __int64 type, which further breaks compilation on old
+  MSVC versions (before VS2013). See #1313.
+
+* Expose GSettings schema directory in gio-2.0.pc as `schemasdir`. See !274.
+
+* Support v3 of the xdg-desktop-portal network monitor API. See !265, !279.
+
+* Fix G_MODULE_SUFFIX on macOS when GLib is built with Meson — it should be `so`
+  rather than `dylib`. Projects that use Meson and the `g_module_build_path()`
+  API such as glib-networking should pass `name_suffix:` to `shared_module()` to
+  ensure that plugins continue to be called libfoo.so on macOS. See !280.
+
+Bugs fixed:
+ !280 meson: Always set G_MODULE_SUFFIX to `so` on macOS
+ !266 subprocess: Fix communicate_cancelled signature
+ !279 Revert "Add a gnet utility" (see !265)
+ !265 Network monitor again
+ !274 gio: Provide schemas directory information in pkg-config file
+ !239 gvariant: Fix more bounds checking in GVariant text format parser
+ !195 garray: add overflow checks before expanding array
+ #1497 g_strdup_printf warns on invalid format specifier with G_GUINT64_FORMAT on Win32
+ !270 autotools: remove support for the __int64 type. See #1313
+ !267 ci: Add an autotools job
+
+* Translation updates:
+ Czech
+ Galician
+ Indonesian
+ Italian
+ Kazakh
+ Korean
+ Turkish
+
+
+Overview of changes in GLib 2.57.3
+==================================
+
+* G_GNUC_MALLOC’s definition has been tightened up to match an updated
+  definition from GCC. Many uses of G_GNUC_MALLOC which were previously
+  appropriate may cause miscompilation with newer GCC versions. Check your uses
+  of it against the updated documentation. See #1465.
+
+* Many minor documentation fixes.
+
+* Fix for gint64 and int64_t compatibility on macOS and BSD. See #972.
+
+* Fix free space metadata on some file systems (notably FAT). See #328.
+
+* Support installed-tests with our Meson build system. See #1444.
+
+* Forbid @filename@/@basename@ in glib-mkenums templates, which is a change to
+  its long-standing behaviour (which was long-standing nonsensical). See !241.
+
+* Various stat() fixes on Windows. See #1452, #1476.
+
+* MinGW-w64 ABI warning: In case you build 64 bit glib without LFS support by
+  passing --disable-largefile (not the default) and use GStatBuf, you need to
+  rebuild your application as the size of GStatBuf has changed for this case.
+  See #1476.
+
+* Improve TAP compatibility of g_test_incomplete(). See #1474.
+
+* Change fallback preferences when loading icons. See !72.
+
+Bugs fixed:
+ !263 build: Clean files left behind after gio/tests/gresource.c test
+ !262 gmem: Only evaluate pointer argument to g_clear_pointer() once
+ #1465 Many uses of G_GNUC_MALLOC are incorrect
+ #1448 g_error does not abort() as documented
+ #1494 g_clear_pointer may not use the correct calling convention with its callback
+ #972 Mismatch between gint64 and int64_t on 64-bit macOS/BSD
+ !251 gtestdbus: Fix watcher crash on FreeBSD
+ #1492 gcc-8: -Wcast-function-type: new warnings for g_list_copy_deep()
+ !252 tests: fix gnotification tests broken due to the recent icon name fallback changes
+ #328 filesystem::{free,size,used} not set for full FAT fs
+ !248 network monitor portal: update properties initially
+ #1373 Incorrect transfer annotation for g_binding_unbind.
+ #1444 the meson build doesn't support installed tests
+ #1027 Fix trashing on overlayfs
+ #1454 gvdb does not treat corrupt files as empty as promised; dconf suffers
+ !243 tests: Explicitly set TZ=UTC for g_time_val_from_iso8601() testing
+ #1488 ‘O_CLOEXEC’ undeclared (first use in this function)
+ !241 glib-mkenums: forbid @filename@/@basename@ in fhead and ftail
+ !240 gtimer: Ensure arithmetic is correctly signed for ISO 8601 parsing
+ #1452 GFileInfo: unable to retrieve correct modification time of links and mounted volumes on Windows
+ !234 DOC: Documentation fix in GTask description
+ #1363 Meson: Review cross compilation properties
+ !225 gtimer: Add overflow checks to g_time_val_from_iso8601()
+ !230 gbookmarkfile: Fix some more minor leaks when metadata elements are repeated
+ !229 Fix up g_bytes_compare() documentation
+ #1476 g_stat - possbile memory corruption causing SEGFAULT
+ !199 Update TLS documentation
+ #1474 g_test_incomplete() makes test_case_run() return FALSE
+ #1475 glib/tests/atomic.c test_types() trips -Werror=bad-function-cast on Debian armel
+ #1472 Test for BROKEN_IP_MREQ_SOURCE_STRUCT is broken on Windows / Mingw
+ !220 date test: Use g_test_skip(), not g_test_incomplete()
+ #1467 malloc difference causes refstring test to fail on FreeBSD
+ !230 gbookmarkfile: Fix some more minor leaks when metadata elements are repeated
+ #1466 Not Able to Build glib 2.57.2 in Mingw-w64 x64 bits
+ #1433 test_posix_parse: assertion failed (g_time_zone_get_abbreviation (tz, 0) == "UTC"): ("LMT" == "UTC")
+ #1446 Follow-up from "Document difference between g_assert() and g_assert_*() wrt G_DISABLE_ASSERT"
+ !206 grefstring: Avoid an unnecessary NUL assignment
+ #1458 g_volume_get_mount returns NULL value after g_volume_mount_finish is called with no error
+ !72 gio: icons should fallback to non-preferred style appropriately.
+
+* Translation updates:
+ Brazilian
+ Chinese (Taiwan)
+ French
+ German
+ Lithuanian
+ Polish
+ Romanian
+ Turkish
+
+
 Overview of changes in GLib 2.57.2
 ==================================
 
@@ -7,7 +134,7 @@ Overview of changes in GLib 2.57.2
 * Bugs fixed:
  742456 Add g_steal_pointer() convenience function to mark ownership...
  795569 MinGW CI: fix tests
- 796341 gmem.h: Use typeof() in g_steal_pointer() macro 
+ 796341 gmem.h: Use typeof() in g_steal_pointer() macro
  #1013 Support for per-session overrides
  #1360 glib-mkenums breaks if option specified but no nick
  #1175 Add names and tags to various GSources and GTasks constructed in GLib
@@ -16,11 +143,15 @@ Overview of changes in GLib 2.57.2
  #927 gio/gresource.c:do_lookup check for terminating "/"
  #976 Document difference between g_assert() and g_assert_*()...
  #1447 glib 2.57.1: test_month_names: assertion failed...
+ #1407 Update to Unicode Character Database 11
+ #1455 glib python tools have full python path in shebang, limits to 128 characters
+ #1459 Missing g_return_val_if_fail in g_async_queue_timeout_pop
 
 * Translation updates:
  Friulian
  German
  Romanian
+ Spanish
 
 
 Overview of changes in GLib 2.57.1
