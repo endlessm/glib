@@ -1,5 +1,6 @@
-glib2.0 (2.57.2-3) UNRELEASED; urgency=medium
+glib2.0 (2.58.0-1) UNRELEASED; urgency=medium
 
+  [ Simon McVittie ]
   * d/p/Revert-glocalfile-Check-that-parent-device-is-the-same-wh.patch,
     d/p/Fix-trashing-on-overlayfs.patch:
     Apply the version of d/p/0001-Fix-trashing-on-overlayfs.patch that
@@ -20,7 +21,10 @@ glib2.0 (2.57.2-3) UNRELEASED; urgency=medium
   * Don't install very old changelogs and NEWS files
   * Install README.md instead of stub README
 
- -- Simon McVittie <smcv@debian.org>  Wed, 22 Aug 2018 09:46:16 +0100
+  [ Jeremy Bicha ]
+  * New upstream release
+
+ -- Jeremy Bicha <jbicha@debian.org>  Sat, 01 Sep 2018 16:24:14 -0400
 
 glib2.0 (2.57.2-2) experimental; urgency=medium
 
