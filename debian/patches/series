@@ -1,15 +1,9 @@
-Drop-a-questionable-test-from-the-refstring-suite.patch
-tests-Fix-a-Wbad-function-cast-warning-in-the-atomic-test.patch
-g_binding_unbind-make-it-more-introspection-friendly-allo.patch
-Revert-glocalfile-Check-that-parent-device-is-the-same-wh.patch
-Fix-trashing-on-overlayfs.patch
 01_gettext-desktopfiles.patch
 07_disable_tests_on_slow_archs.patch
 81-skip-monitor-test-on-non-linux.patch
 0001-timer-test-use-volatile-for-locals.patch
 skip-broken-timer-test.patch
 gwakeuptest-Be-less-parallel-unless-invoked-with-m-slow.patch
-date-test-Use-g_test_skip-not-g_test_incomplete.patch
 debian/02_gettext-desktopfiles-ubuntu.patch
 debian/03_disble_glib_compile_schemas_warning.patch
 debian/04_homedir_env.patch

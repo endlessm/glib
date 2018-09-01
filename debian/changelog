@@ -1,16 +1,6 @@
 glib2.0 (2.58.0-1) UNRELEASED; urgency=medium
 
   [ Simon McVittie ]
-  * d/p/Revert-glocalfile-Check-that-parent-device-is-the-same-wh.patch,
-    d/p/Fix-trashing-on-overlayfs.patch:
-    Apply the version of d/p/0001-Fix-trashing-on-overlayfs.patch that
-    will be in 2.57.3
-    - d/p/0001-Fix-trashing-on-overlayfs.patch: Remove
-  * d/p/g_binding_unbind-make-it-more-introspection-friendly-allo.patch:
-    Mark as applied upstream, and move to the beginning of d/p/series
-    with the other patches that will be in the next upstream release
-  * d/p/tests-Fix-a-Wbad-function-cast-warning-in-the-atomic-test.patch:
-    Apply patch from upstream to fix FTBFS on armel
   * d/p/debian/closures-test-Run-fewer-iterations-on-ARM64.patch:
     Update metadata
   * libglib2.0-dev-bin: Add Suggests for the packages containing
@@ -23,6 +13,9 @@ glib2.0 (2.58.0-1) UNRELEASED; urgency=medium
 
   [ Jeremy Bicha ]
   * New upstream release
+  * Drop patches applied in new release:
+    - date-test-Use-g_test_skip-not-g_test_incomplete.patch
+    - g_binding_unbind-make-it-more-introspection-friendly-allo.patch:
 
  -- Jeremy Bicha <jbicha@debian.org>  Sat, 01 Sep 2018 16:24:14 -0400
 
