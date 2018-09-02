@@ -1,4 +1,11 @@
-glib2.0 (2.58.0-1) UNRELEASED; urgency=medium
+glib2.0 (2.58.0-1) unstable; urgency=medium
+
+  [ Jeremy Bicha ]
+  * New upstream release
+  * Drop patches applied in new release:
+    - date-test-Use-g_test_skip-not-g_test_incomplete.patch
+    - g_binding_unbind-make-it-more-introspection-friendly-allo.patch:
+  * Release to unstable
 
   [ Simon McVittie ]
   * d/p/debian/closures-test-Run-fewer-iterations-on-ARM64.patch:
@@ -11,13 +18,7 @@ glib2.0 (2.58.0-1) UNRELEASED; urgency=medium
   * Don't install very old changelogs and NEWS files
   * Install README.md instead of stub README
 
-  [ Jeremy Bicha ]
-  * New upstream release
-  * Drop patches applied in new release:
-    - date-test-Use-g_test_skip-not-g_test_incomplete.patch
-    - g_binding_unbind-make-it-more-introspection-friendly-allo.patch:
-
- -- Jeremy Bicha <jbicha@debian.org>  Sat, 01 Sep 2018 16:24:14 -0400
+ -- Jeremy Bicha <jbicha@debian.org>  Sun, 02 Sep 2018 08:57:46 -0400
 
 glib2.0 (2.57.2-2) experimental; urgency=medium
 
