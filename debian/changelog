@@ -1,3 +1,10 @@
+glib2.0 (2.58.0-3) unstable; urgency=medium
+
+  [ Iain Lane ]
+  * Run fewer iterations of clousures test on armhf too
+
+ -- Jeremy Bicha <jbicha@debian.org>  Fri, 07 Sep 2018 13:51:53 -0400
+
 glib2.0 (2.58.0-2) unstable; urgency=medium
 
   * Cherry-pick upstream patch to fix test_timeval_to_iso8601_overflow on
