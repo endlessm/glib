@@ -3,35 +3,35 @@ Section: libs
 Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
 Uploaders: @GNOME_TEAM@
-Build-Depends: debhelper (>= 10.3~),
+Build-Depends: dbus <!nocheck>,
+               debhelper (>= 10.3~),
+               desktop-file-utils <!nocheck>,
                dh-exec,
                dh-python,
-               pkg-config (>= 0.16.0),
+               docbook-xml,
+               docbook-xsl,
+               dpkg-dev (>= 1.17.14),
                gettext,
                gnome-pkg-tools (>= 0.11),
-               dpkg-dev (>= 1.17.14),
+               gtk-doc-tools (>= 1.20),
                libelf-dev (>= 0.142),
+               libffi-dev (>= 3.0.0),
+               libgamin-dev [!linux-any] | libfam-dev [!linux-any],
                libmount-dev (>= 2.28) [linux-any],
                libpcre3-dev (>= 1:8.35),
-               gtk-doc-tools (>= 1.20),
                libselinux1-dev [linux-any],
+               libxml2-utils,
                linux-libc-dev [linux-any],
-               libgamin-dev [!linux-any] | libfam-dev [!linux-any],
-               zlib1g-dev,
-               desktop-file-utils <!nocheck>,
-               dbus <!nocheck>,
-               shared-mime-info <!nocheck>,
-               tzdata <!nocheck>,
-               xterm <!nocheck>,
-               python3:any (>= 2.7.5-5~),
+               pkg-config (>= 0.16.0),
                python3-dbus <!nocheck>,
                python3-distutils,
                python3-gi <!nocheck>,
-               libxml2-utils,
+               python3:any (>= 2.7.5-5~),
+               shared-mime-info <!nocheck>,
+               tzdata <!nocheck>,
                xsltproc,
-               docbook-xml,
-               docbook-xsl,
-               libffi-dev (>= 3.0.0)
+               xterm <!nocheck>,
+               zlib1g-dev
 Rules-Requires-Root: no
 Standards-Version: 4.1.3
 Homepage: http://www.gtk.org/
@@ -56,9 +56,9 @@ Description: GLib library of C routines
 
 Package: libglib2.0-tests
 Architecture: any
-Depends: ${misc:Depends},
-         ${shlibs:Depends},
-         shared-mime-info
+Depends: shared-mime-info,
+         ${misc:Depends},
+         ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
 Description: GLib library of C routines - installed tests
  GLib is a library containing many useful C routines for things such
@@ -89,10 +89,10 @@ Package: libglib2.0-bin
 Section: misc
 Architecture: any
 Pre-Depends: ${misc:Pre-Depends}
-Depends: ${shlibs:Depends},
+Depends: libglib2.0-0 (= ${binary:Version}),
+         libglib2.0-data,
          ${misc:Depends},
-         libglib2.0-0 (= ${binary:Version}),
-         libglib2.0-data
+         ${shlibs:Depends}
 Multi-Arch: foreign
 Description: Programs for the GLib library
  GLib is a library containing many useful C routines for things such
@@ -106,15 +106,15 @@ Package: libglib2.0-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: ${misc:Depends},
-         ${shlibs:Depends},
-         ${python3:Depends},
-         libglib2.0-0 (= ${binary:Version}),
+Depends: libglib2.0-0 (= ${binary:Version}),
          libglib2.0-bin (= ${binary:Version}),
          libglib2.0-dev-bin (= ${binary:Version}),
          libpcre3-dev (>= 1:8.31),
          pkg-config,
-         zlib1g-dev
+         zlib1g-dev,
+         ${misc:Depends},
+         ${python3:Depends},
+         ${shlibs:Depends}
 Breaks: libglib2.0-0-dbg (<< 2.51.4-1~)
 Replaces: libglib2.0-0-dbg (<< 2.51.4-1~)
 Suggests: libglib2.0-doc
@@ -130,10 +130,10 @@ Description: Development files for the GLib library
 Package: libglib2.0-dev-bin
 Section: libdevel
 Architecture: any
-Depends: ${misc:Depends},
+Depends: python3-distutils,
+         ${misc:Depends},
          ${python3:Depends},
-         ${shlibs:Depends},
-         python3-distutils
+         ${shlibs:Depends}
 Suggests: libgdk-pixbuf2.0-bin (>= 2.36.12-2~) | libgdk-pixbuf2.0-dev,
           libxml2-utils
 Breaks: libglib2.0-bin (<< 2.54.2-5~),
@@ -178,8 +178,8 @@ Description: Documentation files for the GLib library
 
 Package: libgio-fam
 Architecture: hurd-any kfreebsd-any
-Depends: ${shlibs:Depends},
-         ${misc:Depends}
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
 Recommends: gamin
 Multi-Arch: same
 Description: GLib Input, Output and Streaming Library (fam module)
