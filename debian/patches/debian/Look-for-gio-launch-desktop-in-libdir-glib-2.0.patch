@@ -10,7 +10,8 @@ Forwarded: not-needed, Debian-specific
 ---
  gio/Makefile.am       | 1 +
  gio/gdesktopappinfo.c | 4 ++--
- 2 files changed, 3 insertions(+), 2 deletions(-)
+ gio/meson.build       | 1 +
+ 3 files changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/gio/Makefile.am b/gio/Makefile.am
 index e14cad2..a493084 100644
@@ -39,4 +40,16 @@ index d0ffbac..11b245a 100644
 +
            g_once_init_leave (&gio_launch_desktop_path, tmp);
          }
+ 
+diff --git a/gio/meson.build b/gio/meson.build
+index b83d8f5..b8b4a9f 100644
+--- a/gio/meson.build
++++ b/gio/meson.build
+@@ -1,6 +1,7 @@
+ gio_c_args = [
+   '-DG_LOG_DOMAIN="GLib-GIO"',
+   '-DGIO_COMPILATION',
++  '-DGIO_LIBDIR="@0@"'.format(get_option('libdir')),
+   '-DGIO_MODULE_DIR="@0@"'.format(glib_giomodulesdir),
+ ]
  
