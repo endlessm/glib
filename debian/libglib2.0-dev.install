@@ -1,11 +1,11 @@
 usr/include/*
-usr/lib/*/lib*.a
-usr/lib/*/libglib*.so
-usr/lib/*/libgobject*.so
-usr/lib/*/libgmodule*.so
-usr/lib/*/libgthread*.so
-usr/lib/*/libgio*.so
 usr/lib/*/glib-2.0
+usr/lib/*/lib*.a
+usr/lib/*/libgio*.so
+usr/lib/*/libglib*.so
+usr/lib/*/libgmodule*.so
+usr/lib/*/libgobject*.so
+usr/lib/*/libgthread*.so
 usr/lib/*/pkgconfig
 usr/share/gdb
 usr/share/gettext/its
