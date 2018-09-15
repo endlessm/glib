@@ -18,10 +18,10 @@ DEB_LDFLAGS_MAINT_APPEND += -Wl,-O1
 include /usr/share/dpkg/default.mk
 
 %:
-	dh $@ --with gnome,python3 --buildsystem=autoconf
+	dh $@ --with gnome,python3 --buildsystem=meson
 
 override_dh_autoreconf:
-	env NOCONFIGURE=1 dh_autoreconf ./autogen.sh
+	@:
 
 override_dh_auto_configure:
 	dh_auto_configure \
@@ -81,11 +81,11 @@ ifeq ($(DEB_HOST_ARCH_OS), linux)
 override_dh_auto_test-arch:
 	# Remove LD_PRELOAD so we don't run with fakeroot, which makes dbus-related tests fail
 	env -u LD_PRELOAD DEB_BUILD_TIME_TESTS=1 \
-	dh_auto_test --builddirectory=debian/build/deb -- -k check -j1
+	dh_auto_test --builddirectory=debian/build/deb -- -k 0 -j 1
 else
 override_dh_auto_test-arch:
 	env -u LD_PRELOAD DEB_BUILD_TIME_TESTS=1 \
-	dh_auto_test --builddirectory=debian/build/deb -- -k check -j1 || true
+	dh_auto_test --builddirectory=debian/build/deb -- -k 0 -j 1 || true
 endif
 
 # Skip build-time tests if all we are building is documentation; running
@@ -99,38 +99,41 @@ export XDG_RUNTIME_DIR=$(CURDIR)/debian/tmp-xdg-runtime-dir
 # a build fails
 export VERBOSE=1
 
+ifeq ($(DEB_HOST_ARCH_OS),linux)
+is_linux := true
+else
+is_linux := false
+endif
+
 # configure flags
 DEB_CONFIGURE_EXTRA_FLAGS := \
-			--libexecdir=\$${prefix}/lib/glib2.0 \
-			--with-python=/usr/bin/python3 \
-			--with-pcre=system
+	--libexecdir=lib/glib2.0 \
+	-Dinternal_pcre=false \
+	$(NULL)
 
 DEB_CONFIGURE_FLAGS_deb := \
-			--enable-static \
-			--enable-installed-tests \
-			--enable-always-build-tests \
-			--enable-debug=minimum
+	--default-library both \
+	-Dinstalled_tests=true \
+	-Dlibmount=$(is_linux) \
+	-Dman=true \
+	-Dselinux=$(is_linux) \
+	-Dsystemtap=true \
+	-Dxattr=true \
+	$(NULL)
 
 ifneq ($(filter libglib2.0-doc,$(binaries)),)
-DEB_CONFIGURE_FLAGS_deb += --enable-gtk-doc
+DEB_CONFIGURE_FLAGS_deb += -Dgtk_doc=true
 else
-DEB_CONFIGURE_FLAGS_deb += --disable-gtk-doc
+DEB_CONFIGURE_FLAGS_deb += -Dgtk_doc=false
 endif
-
-# libmount is available on linux only
-ifeq ($(DEB_HOST_ARCH_OS), linux)
-  DEB_CONFIGURE_FLAGS_deb += \
-			--enable-libmount
-else
-  DEB_CONFIGURE_FLAGS_deb += \
-			--disable-libmount
-endif
-
 
 DEB_CONFIGURE_FLAGS_udeb := \
-			--disable-selinux \
-			--disable-libmount \
-			--disable-gtk-doc
+	--default-library shared \
+	-Dgtk_doc=false \
+	-Dinstalled_tests=false \
+	-Dlibmount=false \
+	-Dselinux=false \
+	$(NULL)
 
 override_dh_auto_build:
 	mkdir -p debian/tmp-xdg-runtime-dir
@@ -146,7 +149,6 @@ override_dh_auto_install:
 		    debian/libglib2.0-0.$$script.in \
 		    > debian/libglib2.0-0.$$script ; \
 	done
-	dh_auto_install -plibglib2.0-tests --sourcedir=debian/build/deb
 ifneq ($(filter %-udeb,$(binaries)),)
 	dh_auto_install -plibglib2.0-udeb --builddirectory=debian/build/udeb --destdir=debian/install/udeb
 endif
@@ -160,9 +162,6 @@ override_dh_python3:
 
 override_dh_install:
 	# Unwanted bits from the .deb build
-	rm -f debian/install/deb/usr/lib/*/*.la
-	rm -f debian/install/deb/usr/lib/glib2.0/installed-tests/glib/*.la
-	rm -f debian/install/deb/usr/lib/glib2.0/installed-tests/glib/modules/*.la
 	rm -fr debian/install/deb/usr/share/glib-2.0/codegen/__pycache__
 	# https://gitlab.gnome.org/GNOME/glib/issues/1539
 	chmod -v 0644 debian/install/deb/usr/lib/glib2.0/installed-tests/glib/desktop-files/usr/applications/org.gnome.clocks.desktop
@@ -171,7 +170,6 @@ override_dh_install:
 	chmod -v 0644 debian/install/deb/usr/share/glib-2.0/codegen/codegen_main.py
 ifneq ($(filter %-udeb,$(binaries)),)
 	# Unwanted bits from the .udeb build
-	rm -f debian/install/udeb/usr/lib/*/*.la
 	rm -f debian/install/udeb/usr/lib/*/*.so
 	rm -fr debian/install/udeb/usr/share/gdb
 	rm -fr debian/install/udeb/usr/share/gettext/its
