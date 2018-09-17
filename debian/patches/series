@@ -5,6 +5,7 @@ tests-timer-Skip-test_timeval_to_iso8601_overflow-if-we-c.patch
 0001-timer-test-use-volatile-for-locals.patch
 skip-broken-timer-test.patch
 gwakeuptest-Be-less-parallel-unless-invoked-with-m-slow.patch
+Run-tests-with-tap-argument-for-more-verbose-output.patch
 debian/02_gettext-desktopfiles-ubuntu.patch
 debian/03_disble_glib_compile_schemas_warning.patch
 debian/04_homedir_env.patch
