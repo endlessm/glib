@@ -16,8 +16,6 @@ glib2.0 (2.58.0-4) UNRELEASED; urgency=medium
     - d/debian/libglib2.0-doc.maintscript: Add migration steps
   * d/p/debian/Look-for-gio-launch-desktop-in-libdir-glib-2.0.patch:
     Also patch meson build system
-  * d/p/Run-tests-with-tap-argument-for-more-verbose-output.patch:
-    Add patch to run tests with more verbose output
 
  -- Simon McVittie <smcv@debian.org>  Mon, 17 Sep 2018 09:26:49 +0100
 
