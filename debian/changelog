@@ -1,3 +1,24 @@
+glib2.0 (2.58.0-4) UNRELEASED; urgency=medium
+
+  * Adjust installation path of gdb scripts to match GLib itself.
+    We used to put libglib-2.0.so.0 in /lib/MULTIARCH, but this is no
+    longer the case since 2.56.0-5.
+  * Wrap and sort (build-)dependency lists (wrap-and-sort -a)
+  * Wrap and sort file lists (wrap-and-sort -a)
+  * Install HTML in /usr/share/gtk-doc/html with symlinks in /usr/share/doc.
+    The gtk-doc documentation is technically a functionally significant
+    part of the package (it affects cross-reference generation during build
+    of other packages) so according to Policy §12.3 it is not appropriate
+    for /usr/share/doc.
+    Using the upstream default installation path for the HTML also makes
+    it more straightforward to switch to the Meson build system, because
+    the Meson build does not have an equivalent of --with-html-dir.
+    - d/debian/libglib2.0-doc.maintscript: Add migration steps
+  * d/p/debian/Look-for-gio-launch-desktop-in-libdir-glib-2.0.patch:
+    Also patch meson build system
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 17 Sep 2018 09:26:49 +0100
+
 glib2.0 (2.58.0-3) unstable; urgency=medium
 
   [ Iain Lane ]
