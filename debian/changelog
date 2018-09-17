@@ -1,5 +1,6 @@
 glib2.0 (2.58.0-4) UNRELEASED; urgency=medium
 
+  [ Simon McVittie ]
   * Adjust installation path of gdb scripts to match GLib itself.
     We used to put libglib-2.0.so.0 in /lib/MULTIARCH, but this is no
     longer the case since 2.56.0-5.
@@ -17,7 +18,13 @@ glib2.0 (2.58.0-4) UNRELEASED; urgency=medium
   * d/p/debian/Look-for-gio-launch-desktop-in-libdir-glib-2.0.patch:
     Also patch meson build system
 
- -- Simon McVittie <smcv@debian.org>  Mon, 17 Sep 2018 09:26:49 +0100
+  [ Jeremy Bicha ]
+  * Cherry-pick Fix-g_icon_to_string-regression-doc-inconsistency.patch
+    - Have g_icon_new_for_string() go back to only returning a single name
+      when created with a single name since some apps assume that behavior.
+    (Closes: #908705)
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 17 Sep 2018 22:42:48 +0100
 
 glib2.0 (2.58.0-3) unstable; urgency=medium
 
