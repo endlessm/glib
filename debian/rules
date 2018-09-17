@@ -104,7 +104,6 @@ export VERBOSE=1
 
 # configure flags
 DEB_CONFIGURE_EXTRA_FLAGS := \
-			--with-html-dir=\$${prefix}/share/doc/libglib2.0-doc \
 			--libexecdir=\$${prefix}/lib/glib2.0 \
 			--with-python=/usr/bin/python3 \
 			--with-pcre=system

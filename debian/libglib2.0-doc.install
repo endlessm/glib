@@ -1,1 +1,3 @@
-usr/share/doc/libglib2.0-doc
+usr/share/gtk-doc/html/gio
+usr/share/gtk-doc/html/glib
+usr/share/gtk-doc/html/gobject
