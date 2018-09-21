@@ -1,5 +1,3 @@
-tests-timer-Skip-test_timeval_to_iso8601_overflow-if-we-c.patch
-Fix-g_icon_to_string-regression-doc-inconsistency.patch
 01_gettext-desktopfiles.patch
 07_disable_tests_on_slow_archs.patch
 81-skip-monitor-test-on-non-linux.patch
