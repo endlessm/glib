@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
 Uploaders: @GNOME_TEAM@
 Build-Depends: dbus <!nocheck>,
-               debhelper (>= 10.3~),
+               debhelper (>= 11),
                desktop-file-utils <!nocheck>,
                dh-exec,
                dh-python,

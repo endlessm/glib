@@ -8,7 +8,7 @@ Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
 Uploaders: Iain Lane <laney@debian.org>, Jeremy Bicha <jbicha@debian.org>, Michael Biebl <biebl@debian.org>, Tim Lunn <tim@feathertop.org>
 Build-Depends: dbus <!nocheck>,
-               debhelper (>= 10.3~),
+               debhelper (>= 11),
                desktop-file-utils <!nocheck>,
                dh-exec,
                dh-python,
