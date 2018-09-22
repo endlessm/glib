@@ -1,3 +1,9 @@
+glib2.0 (2.58.1-2) unstable; urgency=medium
+
+  * Fix dh_missing rule for arch:all build with compat 11
+
+ -- Jeremy Bicha <jbicha@debian.org>  Fri, 21 Sep 2018 23:53:00 -0400
+
 glib2.0 (2.58.1-1) unstable; urgency=medium
 
   * New upstream release
