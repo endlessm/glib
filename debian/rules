@@ -179,5 +179,7 @@ endif
 	dh_install --remaining-packages --sourcedir=debian/install/deb
 
 override_dh_missing:
-	dh_missing --sourcedir=debian/install/udeb --fail-missing
 	dh_missing --sourcedir=debian/install/deb --fail-missing
+ifneq ($(filter %-udeb,$(binaries)),)
+	dh_missing --sourcedir=debian/install/udeb --fail-missing
+endif
