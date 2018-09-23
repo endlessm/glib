@@ -106,10 +106,13 @@ Package: libglib2.0-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: libglib2.0-0 (= ${binary:Version}),
+Depends: libffi-dev (>= 3.0.0),
+         libglib2.0-0 (= ${binary:Version}),
          libglib2.0-bin (= ${binary:Version}),
          libglib2.0-dev-bin (= ${binary:Version}),
+         libmount-dev (>= 2.28) [linux-any],
          libpcre3-dev (>= 1:8.31),
+         libselinux1-dev [linux-any],
          pkg-config,
          zlib1g-dev,
          ${misc:Depends},
