@@ -164,6 +164,11 @@ override_dh_install:
 	rm -f debian/install/deb/usr/lib/glib2.0/installed-tests/glib/*.la
 	rm -f debian/install/deb/usr/lib/glib2.0/installed-tests/glib/modules/*.la
 	rm -fr debian/install/deb/usr/share/glib-2.0/codegen/__pycache__
+	# https://gitlab.gnome.org/GNOME/glib/issues/1539
+	chmod -v 0644 debian/install/deb/usr/lib/glib2.0/installed-tests/glib/desktop-files/usr/applications/org.gnome.clocks.desktop
+	chmod -v 0644 debian/install/deb/usr/lib/glib2.0/installed-tests/glib/echo-script.bat
+	chmod -v 0644 debian/install/deb/usr/share/bash-completion/completions/gio
+	chmod -v 0644 debian/install/deb/usr/share/glib-2.0/codegen/codegen_main.py
 ifneq ($(filter %-udeb,$(binaries)),)
 	# Unwanted bits from the .udeb build
 	rm -f debian/install/udeb/usr/lib/*/*.la
