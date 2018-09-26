@@ -1,0 +1,42 @@
+From: Simon McVittie <smcv@collabora.com>
+Date: Thu, 5 Apr 2018 11:21:44 +0100
+Subject: Spelling: Fix a common en_FR spelling of "information"
+
+Detected by Debian's Lintian tool.
+
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+Forwarded: GNOME/glib!354
+Applied-upstream: 2.59.0, commit:59bede934c83032405e1c3b2523efc6af44de0c4
+---
+ glib/gbookmarkfile.c | 4 ++--
+ glib/gtester.c       | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/glib/gbookmarkfile.c b/glib/gbookmarkfile.c
+index 31706ba..ffd7ea0 100644
+--- a/glib/gbookmarkfile.c
++++ b/glib/gbookmarkfile.c
+@@ -3360,8 +3360,8 @@ expand_exec_line (const gchar *exec_fmt,
+  * @stamp: (out) (optional): return location for the last registration time, or %NULL
+  * @error: return location for a #GError, or %NULL
+  *
+- * Gets the registration informations of @app_name for the bookmark for
+- * @uri.  See g_bookmark_file_set_app_info() for more informations about
++ * Gets the registration information of @app_name for the bookmark for
++ * @uri.  See g_bookmark_file_set_app_info() for more information about
+  * the returned data.
+  *
+  * The string returned in @app_exec must be freed.
+diff --git a/glib/gtester.c b/glib/gtester.c
+index 41bf877..c54221a 100644
+--- a/glib/gtester.c
++++ b/glib/gtester.c
+@@ -500,7 +500,7 @@ usage (gboolean just_version)
+   g_print ("Help Options:\n");
+   g_print ("  -h, --help                    Show this help message\n\n");
+   g_print ("Utility Options:\n");
+-  g_print ("  -v, --version                 Print version informations\n");
++  g_print ("  -v, --version                 Print version information\n");
+   g_print ("  --g-fatal-warnings            Make warnings fatal (abort)\n");
+   g_print ("  -k, --keep-going              Continue running after tests failed\n");
+   g_print ("  -l                            List paths of available test cases\n");

@@ -1,0 +1,26 @@
+From: Simon McVittie <smcv@collabora.com>
+Date: Tue, 25 Sep 2018 15:58:56 +0100
+Subject: Spelling: Fix spelling of "interpreted"
+
+Detected by Debian's Lintian tool.
+
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+Forwarded: GNOME/glib!354
+Applied-upstream: 2.59.0, commit:1830ebba9175d794d76d49b2aaf60a19a476a3cd
+---
+ docs/reference/gobject/glib-mkenums.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/docs/reference/gobject/glib-mkenums.xml b/docs/reference/gobject/glib-mkenums.xml
+index 7e0eabd..2573bb3 100644
+--- a/docs/reference/gobject/glib-mkenums.xml
++++ b/docs/reference/gobject/glib-mkenums.xml
+@@ -333,7 +333,7 @@ where section may be <literal>file-header</literal>,
+ <varlistentry>
+ <term><option>--identifier-prefix</option> <replaceable>PREFIX</replaceable></term>
+ <listitem><para>
+-Indicates what portion of the enum name should be intepreted as the
++Indicates what portion of the enum name should be interpreted as the
+ prefix (eg, the "<literal>Gtk</literal>" in
+ "<literal>GtkDirectionType</literal>"). Normally this will be figured
+ out automatically, but you may need to override the default if your

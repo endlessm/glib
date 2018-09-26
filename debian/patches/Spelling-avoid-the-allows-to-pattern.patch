@@ -1,0 +1,37 @@
+From: Simon McVittie <smcv@collabora.com>
+Date: Tue, 25 Sep 2018 15:56:47 +0100
+Subject: Spelling: avoid the "allows to" pattern
+
+This is detected by Debian's Lintian tool, which suggests
+"allows one to" as a replacement. I've rephrased the documentation
+in question to avoid both of those.
+
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+Forwarded: GNOME/glib!354
+Applied-upstream: 2.59.0, commit:ec951e9de8e06c125dc7e9f55c806f9081ddd3c9
+---
+ docs/reference/gio/gio.xml | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/docs/reference/gio/gio.xml b/docs/reference/gio/gio.xml
+index f2635d0..c348c43 100644
+--- a/docs/reference/gio/gio.xml
++++ b/docs/reference/gio/gio.xml
+@@ -374,7 +374,7 @@
+               </varlistentry>
+               <varlistentry>
+                 <term><option>-D</option>, <option>--direct=<replaceable>LOCATION</replaceable></option></term>
+-                <listitem><para>Monitor the file directly. This allows to capture changes made via hardlinks.</para></listitem>
++                <listitem><para>Monitor the file directly. This allows changes made via hardlinks to be captured.</para></listitem>
+               </varlistentry>
+               <varlistentry>
+                 <term><option>-s</option>, <option>--silent=<replaceable>LOCATION</replaceable></option></term>
+@@ -599,7 +599,7 @@
+           <arg choice="plain" rep="repeat"><replaceable>VALUE</replaceable></arg>
+         </term>
+         <listitem>
+-          <para>Allows to set a file attribute on a file.</para>
++          <para>Sets a file attribute on a file.</para>
+           <para>File attributes can be specified with their GIO name, e.g
+             standard::icon. Note that not all GIO file attributes are writable.
+             Use the --query-writable option of the info command to list

@@ -1,3 +1,11 @@
+Spelling-fix-every-time.patch
+Spelling-fix-spelling-of-specify.patch
+Spelling-Fix-a-common-en_FR-spelling-of-information.patch
+Spelling-Fix-spelling-of-similarly.patch
+Spelling-Fix-spelling-of-constructed.patch
+Spelling-Fix-spelling-of-unknown.patch
+Spelling-avoid-the-allows-to-pattern.patch
+Spelling-Fix-spelling-of-interpreted.patch
 01_gettext-desktopfiles.patch
 07_disable_tests_on_slow_archs.patch
 81-skip-monitor-test-on-non-linux.patch

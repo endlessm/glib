@@ -1,0 +1,54 @@
+From: Simon McVittie <smcv@collabora.com>
+Date: Thu, 5 Apr 2018 11:22:33 +0100
+Subject: Spelling: Fix spelling of "similarly"
+
+Detected by Debian's Lintian tool.
+
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+Forwarded: GNOME/glib!354
+Applied-upstream: 2.59.0, commit:e0a8df12eff0b2125d39323f23ac21577b592f3d
+---
+ docs/reference/gio/gdbus-codegen.xml | 2 +-
+ gio/gdbusconnection.c                | 2 +-
+ gio/gunionvolumemonitor.c            | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/docs/reference/gio/gdbus-codegen.xml b/docs/reference/gio/gdbus-codegen.xml
+index e419208..6fd091f 100644
+--- a/docs/reference/gio/gdbus-codegen.xml
++++ b/docs/reference/gio/gdbus-codegen.xml
+@@ -869,7 +869,7 @@ my_app_frobber_proxy_new_sync   (GDBusConnection     *connection,
+       subclass. For example, to handle
+       <function>HelloWorld()</function> method invocations, set the
+       vfunc for <function>handle_hello_hello_world()</function> in the
+-      <type>MyAppFrobberIface</type> structure. Similary, to handle
++      <type>MyAppFrobberIface</type> structure. Similarly, to handle
+       the <parameter>net.Corp.MyApp.Frobber:Verbose</parameter>
+       property override the <parameter>:verbose</parameter> #GObject
+       property from the subclass. To emit a signal, use
+diff --git a/gio/gdbusconnection.c b/gio/gdbusconnection.c
+index 543ca0b..7270365 100644
+--- a/gio/gdbusconnection.c
++++ b/gio/gdbusconnection.c
+@@ -3088,7 +3088,7 @@ static volatile guint _global_filter_id = 1;
+  * dispatched anywhere else - not even the standard dispatch machinery
+  * (that API such as g_dbus_connection_signal_subscribe() and
+  * g_dbus_connection_send_message_with_reply() relies on) will see the
+- * message. Similary, if a filter consumes an outgoing message, the
++ * message. Similarly, if a filter consumes an outgoing message, the
+  * message will not be sent to the other peer.
+  *
+  * If @user_data_free_func is non-%NULL, it will be called (in the
+diff --git a/gio/gunionvolumemonitor.c b/gio/gunionvolumemonitor.c
+index 8e58d18..eeb4c5f 100644
+--- a/gio/gunionvolumemonitor.c
++++ b/gio/gunionvolumemonitor.c
+@@ -621,7 +621,7 @@ _g_mount_get_for_mount_path (const gchar  *mount_path,
+  * also listen for the "removed" signal on the returned object
+  * and give up its reference when handling that signal
+  * 
+- * Similary, if implementing g_volume_monitor_adopt_orphan_mount(),
++ * Similarly, if implementing g_volume_monitor_adopt_orphan_mount(),
+  * the implementor must take a reference to @mount and return it in
+  * its g_volume_get_mount() implemented. Also, the implementor must
+  * listen for the "unmounted" signal on @mount and give up its
