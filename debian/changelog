@@ -1,3 +1,24 @@
+glib2.0 (2.58.1-3) UNRELEASED; urgency=medium
+
+  * Always generate testmarshal.h, even when cross-compiling
+    (Closes: #908334)
+  * d/p/debian/61_glib-compile-binaries-path.patch: Change the same
+    path if we build with Meson
+  * Fix static linking and make sure it won't regress, prompted by
+    comparing the Autotools and Meson builds:
+    - Add missing -dev dependencies on libffi-dev, libmount-dev,
+      libselinux1-dev
+    - d/p/Autotools-Move-libmount-from-Libs.private-to-Requires.pri.patch:
+      Add patch from upstream git master to fix static linking with libgio
+    - d/tests/build: Exercise all libraries
+    - d/tests/build-static: Exercise static linking
+  * d/rules: Fix some permissions (equivalent of #1539 upstream)
+  * d/p/Spelling-*.patch:
+    Add patches from upstream git master to fix various spelling mistakes
+    detected by Lintian
+
+ -- Simon McVittie <smcv@debian.org>  Wed, 26 Sep 2018 17:31:16 +0100
+
 glib2.0 (2.58.1-2) unstable; urgency=medium
 
   * Fix dh_missing rule for arch:all build with compat 11
