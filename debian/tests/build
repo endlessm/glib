@@ -116,15 +116,6 @@ for lib in glib gobject gio gio-unix gmodule gthread; do
         (static)
             cflags=-static
             pcflags=--static
-
-            case "$lib" in
-                (gio*)
-                    # Statically linking gio doesn't work yet, because
-                    # libmount is listed in Libs.private instead of
-                    # Requires.private. The Meson build fixes this.
-                    packages="${packages} mount"
-                    ;;
-            esac
             ;;
     esac
 
