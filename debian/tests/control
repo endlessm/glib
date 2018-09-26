@@ -1,4 +1,4 @@
-Tests: build
+Tests: build build-static
 Depends: libglib2.0-dev, build-essential
 Restrictions: allow-stderr
 

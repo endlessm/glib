@@ -9,6 +9,28 @@ set -eux
 
 mode=dynamic
 
+getopt_temp="$(getopt -o '' --long 'static' -n debian/tests/build -- "$@")"
+eval set -- "$getopt_temp"
+
+while true; do
+    case "$1" in
+        (--static)
+            mode=static
+            shift
+            continue
+            ;;
+
+        (--)
+            shift
+            break
+            ;;
+
+        (*)
+            echo "getopt: Internal error" >&2
+            exit 2
+    esac
+done
+
 WORKDIR=$(mktemp -d)
 trap "rm -rf $WORKDIR" 0 INT QUIT ABRT PIPE TERM
 cd $WORKDIR
@@ -89,6 +111,22 @@ for lib in glib gobject gio gio-unix gmodule gthread; do
     cflags=
     pcflags=
     packages="${lib}-2.0"
+
+    case "$mode" in
+        (static)
+            cflags=-static
+            pcflags=--static
+
+            case "$lib" in
+                (gio*)
+                    # Statically linking gio doesn't work yet, because
+                    # libmount is listed in Libs.private instead of
+                    # Requires.private. The Meson build fixes this.
+                    packages="${packages} mount"
+                    ;;
+            esac
+            ;;
+    esac
 
     gcc $cflags -o ${lib}-$mode ${lib}.c `pkg-config $pcflags --cflags --libs ${packages}`
     echo "build ($lib, $mode): OK"

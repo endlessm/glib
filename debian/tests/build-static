@@ -1,0 +1,2 @@
+#!/bin/sh
+exec debian/tests/build --static
