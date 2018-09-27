@@ -2,7 +2,7 @@ From: Iain Lane <laney@debian.org>
 Date: Tue, 18 Mar 2014 15:43:35 +0000
 Subject: Skip test which performs some unreliable floating point comparisons
 
-Bug: https://bugzilla.gnome.org/show_bug.cgi?id=722604
+Bug: https://gitlab.gnome.org/GNOME/glib/issues/820
 Forwarded: no
 ---
  glib/tests/timer.c | 2 +-

@@ -8,7 +8,7 @@ optimised away.
 
 Force its hand by using 'volatile' on the locals in question.
 
-Bug: https://bugzilla.gnome.org/show_bug.cgi?id=722604
+Bug: https://gitlab.gnome.org/GNOME/glib/issues/820
 Forwarded: yes
 ---
  glib/tests/timer.c | 4 ++--

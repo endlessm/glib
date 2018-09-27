@@ -10,6 +10,7 @@ of the Meson build system.
 Bug: https://gitlab.gnome.org/GNOME/glib/issues/1546
 Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=908334
 Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/362
+Applied-upstream: 2.59.0, commit:129512b67c6329528447d05c94450b2f71e82cc3
 Signed-off-by: Simon McVittie <smcv@collabora.com>
 ---
  tests/gobject/Makefile.am | 8 ++------
