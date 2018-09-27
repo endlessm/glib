@@ -12,7 +12,7 @@ Forwarded: not-needed, specific to Debian packaging
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/gio-2.0.pc.in b/gio-2.0.pc.in
-index afd3a40..cd024fe 100644
+index d67e808..768c3af 100644
 --- a/gio-2.0.pc.in
 +++ b/gio-2.0.pc.in
 @@ -7,7 +7,7 @@ datadir=@datadir@
@@ -25,10 +25,10 @@ index afd3a40..cd024fe 100644
  gdbus_codegen=${bindir}/gdbus-codegen
  
 diff --git a/gio/meson.build b/gio/meson.build
-index b83d8f5..a819b64 100644
+index fd7200b..189b493 100644
 --- a/gio/meson.build
 +++ b/gio/meson.build
-@@ -813,7 +813,7 @@ pkg.generate(libraries : libgio,
+@@ -818,7 +818,7 @@ pkg.generate(libraries : libgio,
                 'schemasdir=' + join_paths('${datadir}', schemas_subdir),
                 'bindir=' + join_paths('${prefix}', get_option('bindir')),
                 'giomoduledir=' + giomodulesdir,

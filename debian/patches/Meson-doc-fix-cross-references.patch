@@ -1,0 +1,51 @@
+From: Xavier Claessens <xavier.claessens@collabora.com>
+Date: Sun, 23 Sep 2018 16:01:48 -0400
+Subject: Meson: doc: fix cross references
+
+Origin: upstream, 2.59.0, commit:780f7c64f9c6b14755ec8140e46436081e1e1468
+---
+ docs/reference/gio/meson.build     | 4 ++--
+ docs/reference/glib/meson.build    | 1 -
+ docs/reference/gobject/meson.build | 2 +-
+ 3 files changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/docs/reference/gio/meson.build b/docs/reference/gio/meson.build
+index c7ca62a..f1880cc 100644
+--- a/docs/reference/gio/meson.build
++++ b/docs/reference/gio/meson.build
+@@ -221,8 +221,8 @@ if get_option('gtk_doc')
+     ],
+     fixxref_args: [
+       '--html-dir=' + docpath,
+-      '--extra-dir=' + join_paths(meson.current_build_dir(), '../glib/html'),
+-      '--extra-dir=' + join_paths(meson.current_build_dir(), '../gobject/html'),
++      '--extra-dir=' + join_paths('gio', '..', 'glib', 'html'),
++      '--extra-dir=' + join_paths('gio', '..', 'gobject', 'html'),
+     ],
+     install: true
+   )
+diff --git a/docs/reference/glib/meson.build b/docs/reference/glib/meson.build
+index fbe3422..f14824b 100644
+--- a/docs/reference/glib/meson.build
++++ b/docs/reference/glib/meson.build
+@@ -140,7 +140,6 @@ if get_option('gtk_doc')
+                ],
+                fixxref_args: [
+                  '--html-dir=' + docpath,
+-                 # TODO: gobject/gio extra dirs
+                ],
+                install: true)
+ endif
+diff --git a/docs/reference/gobject/meson.build b/docs/reference/gobject/meson.build
+index ac2da57..014fe54 100644
+--- a/docs/reference/gobject/meson.build
++++ b/docs/reference/gobject/meson.build
+@@ -103,7 +103,7 @@ if get_option('gtk_doc')
+     ],
+     fixxref_args: [
+       '--html-dir=' + docpath,
+-      '--extra-dir=' + join_paths(meson.current_build_dir(), '../glib/html'),
++      '--extra-dir=' + join_paths('gobject', '..', 'glib', 'html'),
+     ],
+     install: true
+   )

@@ -1,0 +1,375 @@
+From: Xavier Claessens <xavier.claessens@collabora.com>
+Date: Wed, 19 Sep 2018 16:09:55 -0400
+Subject: Meson: build and install remaining tests
+
+Origin: upstream, 2.59.0, commit:4b5bc3f459b7667bb2201858711805130c0cc8dc
+---
+ gthread/meson.build        |   2 +
+ tests/gobject/meson.build  |  86 +++++++++++++++++------------
+ tests/meson.build          | 132 +++++++++++++++++++++++++++++++++++++++++++++
+ tests/refcount/meson.build |  77 +++++++++++++++++---------
+ 4 files changed, 240 insertions(+), 57 deletions(-)
+
+diff --git a/gthread/meson.build b/gthread/meson.build
+index 6b0748f..515479b 100644
+--- a/gthread/meson.build
++++ b/gthread/meson.build
+@@ -30,3 +30,5 @@ pkg.generate(libraries : [libgthread, thread_dep],
+   name : 'GThread',
+   description : 'Thread support for GLib',
+ )
++
++libgthread_dep = declare_dependency(link_with : libgthread)
+diff --git a/tests/gobject/meson.build b/tests/gobject/meson.build
+index 4944599..4da5a7a 100644
+--- a/tests/gobject/meson.build
++++ b/tests/gobject/meson.build
+@@ -1,16 +1,3 @@
+-gobject_tests = [
+-  ['gvalue-test'],
+-  ['paramspec-test'],
+-  ['deftype'],
+-  ['defaultiface', ['defaultiface.c', 'testmodule.c']],
+-  ['dynamictype', ['dynamictype.c', 'testmodule.c']],
+-  ['override'],
+-  ['signals'],
+-  ['singleton'],
+-  ['references'],
+-  ['testgobject'],
+-]
+-
+ # We cannot use gnome.genmarshal() here
+ testmarshal_h = custom_target('testmarshal_h',
+   output : 'testmarshal.h',
+@@ -39,41 +26,74 @@ testmarshal_c = custom_target('testmarshal_c',
+   ],
+ )
+ 
+-gobject_tests += [
+-  ['accumulator', ['accumulator.c', testmarshal_c, testmarshal_h]],
+-]
++gobject_tests = {
++  'gvalue-test' : {},
++  'paramspec-test' : {},
++  'deftype' : {},
++  'defaultiface' : {
++    'extra_sources' : ['testmodule.c'],
++  },
++  'dynamictype' : {
++    'extra_sources' : ['testmodule.c'],
++  },
++  'override' : {},
++  'signals' : {},
++  'singleton' : {},
++  'references' : {},
++  'testgobject' : {},
++  'accumulator' : {
++    'extra_sources' : [testmarshal_c, testmarshal_h],
++  },
++}
++
++common_c_args = test_cargs + ['-DGLIB_DISABLE_DEPRECATION_WARNINGS']
++common_deps = [libm, thread_dep, libglib_dep, libgobject_dep]
+ 
+-foreach t : gobject_tests
+-  test_name = t.get(0)
+-  test_src = t.get(1, test_name + '.c')
+-  test_extra_cargs = t.get(2, [])
+-  test_timeout = t.get(3, 30)
+-  test_suite = test_timeout == 30 ? ['gobject'] : ['gobject', 'slow']
++foreach test_name, extra_args : gobject_tests
++  source = extra_args.get('source', test_name + '.c')
++  extra_sources = extra_args.get('extra_sources', [])
++  install = installed_tests_enabled and extra_args.get('install', true)
++
++  if install
++    test_conf = configuration_data()
++    test_conf.set('installed_tests_dir', installed_tests_execdir)
++    test_conf.set('program', test_name)
++    configure_file(
++      input: installed_tests_template,
++      output: test_name + '.test',
++      install_dir: installed_tests_metadir,
++      configuration: test_conf
++    )
++  endif
+ 
+   # FIXME? $(GLIB_DEBUG_FLAGS)
+-  exe = executable(test_name + '-gobject', test_src,
+-    c_args : test_cargs + test_extra_cargs + ['-DGLIB_DISABLE_DEPRECATION_WARNINGS'],
+-    dependencies : [libm, thread_dep, libglib_dep, libgobject_dep],
+-    install : false,
++  exe = executable(test_name, [source, extra_sources],
++    c_args : common_c_args + extra_args.get('c_args', []),
++    dependencies : common_deps + extra_args.get('dependencies', []),
++    install_dir: installed_tests_execdir,
++    install: install,
+   )
++
++  suite = ['gobject'] + extra_args.get('suite', [])
++  timeout = suite.contains('slow') ? 120 : 30
+   # FIXME? TESTS_ENVIRONMENT = LIBCHARSET_ALIAS_DIR=$(top_builddir)/glib/libcharset
+-  test(test_name, exe, env : test_env, timeout : test_timeout, suite : test_suite)
++  test(test_name, exe, env : test_env, timeout : timeout, suite : suite)
+ endforeach
+ 
+ # Don't install these ones, and keep them out of 'make check' because they take too long...
+ executable('performance', 'performance.c',
+-    c_args : test_cargs + test_extra_cargs + ['-DGLIB_DISABLE_DEPRECATION_WARNINGS'],
+-    dependencies : [libm, thread_dep, libglib_dep, libgobject_dep],
++    c_args : common_c_args,
++    dependencies : common_deps,
+     install : false)
+ 
+ executable('performance-threaded', 'performance-threaded.c',
+-    c_args : test_cargs + test_extra_cargs + ['-DGLIB_DISABLE_DEPRECATION_WARNINGS'],
+-    dependencies : [libm, thread_dep, libglib_dep, libgobject_dep],
++    c_args : common_c_args,
++    dependencies : common_deps,
+     install : false)
+ 
+ if host_system != 'windows' and host_system != 'minix'
+   executable('timeloop-closure', 'timeloop-closure.c',
+-      c_args : test_cargs + test_extra_cargs + ['-DGLIB_DISABLE_DEPRECATION_WARNINGS'],
+-      dependencies : [libm, thread_dep, libglib_dep, libgobject_dep],
++      c_args : common_c_args,
++      dependencies : common_deps,
+       install : false)
+ endif
+diff --git a/tests/meson.build b/tests/meson.build
+index 3beb4c6..162051a 100644
+--- a/tests/meson.build
++++ b/tests/meson.build
+@@ -1,12 +1,144 @@
+ # tests
+ 
++# Not entirely random of course, but at least it changes over time
++random_number = minor_version + meson.version().split('.').get(1).to_int()
++
+ test_env = environment()
+ test_env.set('G_TEST_SRCDIR', meson.current_source_dir())
+ test_env.set('G_TEST_BUILDDIR', meson.current_build_dir())
+ test_env.set('G_DEBUG', 'gc-friendly')
+ test_env.set('MALLOC_CHECK_', '2')
++test_env.set('MALLOC_PERTURB_', '@0@'.format(random_number % 256))
+ 
+ test_cargs = ['-DG_LOG_DOMAIN="GLib"']
+ 
+ subdir('gobject')
+ subdir('refcount')
++
++# FIXME: We are using list of dictionnaries until we can depend on Meson 0.48.0
++# that supports '+=' operator on dictionnaries.
++tests = [{
++  'testglib' : {},
++  'testgdate' : {},
++  'datetime' : {},
++  'atomic-test' : {},
++  'bit-test' : {},
++  'child-test' : {},
++  'completion-test' : {},
++  'dirname-test' : {},
++  'file-test' : {},
++  'env-test' : {},
++  'gio-test' : {},
++  'mainloop-test' : {},
++  'mapping-test' : {},
++  'onceinit' : {},
++  'asyncqueue-test' : {},
++  'qsort-test' : {},
++  'relation-test' : {},
++  'slice-concurrent' : {},
++  'slice-threadinit' : {
++    'dependencies' : [libgthread_dep],
++  },
++  'sources' : {},
++  'thread-test' : {},
++  'threadpool-test' : {'suite' : ['slow']},
++  'type-test' : {},
++  'unicode-caseconv' : {},
++  'unicode-encoding' : {},
++  'module-test' : {
++    'dependencies' : [libgmodule_dep],
++    'export_dynamic' : true,
++  },
++  'timeloop' : {},
++  'cxx-test' : {
++    'source' : 'cxx-test.C',
++    'include_directories' : gmoduleinc,
++    'dependencies' : [libgio_dep],
++  },
++}]
++
++test_extra_programs = {
++  'slice-test' : {
++    'extra_sources' : ['memchunks.c'],
++  },
++  'slice-color' : {
++    'extra_sources' : ['memchunks.c'],
++  },
++  'assert-msg-test' : {},
++  'unicode-collate' : {},
++}
++
++if host_machine.system() != 'windows'
++  tests += [{
++    'spawn-test' : {},
++    'iochannel-test' : {},
++  }]
++endif
++
++if installed_tests_enabled
++  install_data(
++    'iochannel-test-infile',
++    'casemap.txt',
++    'casefold.txt',
++    'utf8.txt',
++    install_dir : installed_tests_execdir,
++  )
++endif
++
++foreach module : ['moduletestplugin_a', 'moduletestplugin_b']
++  shared_module(module, 'lib@0@.c'.format(module),
++    dependencies : [libglib_dep, libgmodule_dep],
++    install_dir : installed_tests_execdir,
++    install : installed_tests_enabled
++  )
++endforeach
++
++common_c_args = test_cargs + ['-DGLIB_DISABLE_DEPRECATION_WARNINGS']
++common_deps = [libm, thread_dep, libglib_dep]
++
++foreach test_dict : tests
++  foreach test_name, extra_args : test_dict
++    source = extra_args.get('source', test_name + '.c')
++    extra_sources = extra_args.get('extra_sources', [])
++    install = installed_tests_enabled and extra_args.get('install', true)
++
++    if install
++      test_conf = configuration_data()
++      test_conf.set('installed_tests_dir', installed_tests_execdir)
++      test_conf.set('program', test_name)
++      configure_file(
++        input: installed_tests_template,
++        output: test_name + '.test',
++        install_dir: installed_tests_metadir,
++        configuration: test_conf
++      )
++    endif
++
++    # FIXME? $(GLIB_DEBUG_FLAGS)
++    exe = executable(test_name, [source, extra_sources],
++      c_args : common_c_args + extra_args.get('c_args', []),
++      dependencies : common_deps + extra_args.get('dependencies', []),
++      export_dynamic : extra_args.get('export_dynamic', false),
++      include_directories : extra_args.get('include_directories', []),
++      install_dir: installed_tests_execdir,
++      install: install,
++    )
++
++    suite = ['glib'] + extra_args.get('suite', [])
++    timeout = suite.contains('slow') ? 120 : 30
++    # FIXME? TESTS_ENVIRONMENT = LIBCHARSET_ALIAS_DIR=$(top_builddir)/glib/libcharset
++    test(test_name, exe, env : test_env, timeout : timeout, suite : suite)
++  endforeach
++endforeach
++
++foreach program_name, extra_args : test_extra_programs
++  source = extra_args.get('source', program_name + '.c')
++  extra_sources = extra_args.get('extra_sources', [])
++  install = installed_tests_enabled and extra_args.get('install', true)
++  executable(program_name, [source, extra_sources],
++      c_args : common_c_args,
++      dependencies : common_deps + extra_args.get('dependencies', []),
++      install_dir : installed_tests_execdir,
++      install : install,
++  )
++endforeach
+diff --git a/tests/refcount/meson.build b/tests/refcount/meson.build
+index afec051..3a2072d 100644
+--- a/tests/refcount/meson.build
++++ b/tests/refcount/meson.build
+@@ -1,30 +1,59 @@
+-refcount_tests = [
+- ['closures', 'closures.c', [], 90],
+- ['objects', 'objects.c', []],
+- ['objects2', 'objects2.c', [], 90],
+- ['properties', 'properties.c', []],
+- ['properties2', 'properties2.c', [], 90],
+- ['properties3', 'properties3.c', [], 90], # extra long timeout
+- ['properties4', 'properties4.c', []],
+- ['signal1', 'signals.c', ['-DTESTNUM=1']],
+- ['signal2', 'signals.c', ['-DTESTNUM=2']],
+- ['signal3', 'signals.c', ['-DTESTNUM=3']],
+- ['signal4', 'signals.c', ['-DTESTNUM=4']],
+-]
++refcount_tests = {
++  'closures' : {'suite' : ['slow']},
++  'objects' : {},
++  'objects2' : {'suite' : ['slow']},
++  'properties' : {},
++  'properties2' : {'suite' : ['slow']},
++  'properties3' : {'suite' : ['slow']},
++  'properties4' : {},
++  'signal1' : {
++    'source' : 'signals.c',
++    'c_args' : ['-DTESTNUM=1'],
++  },
++  'signal2' : {
++    'source' : 'signals.c',
++    'c_args' : ['-DTESTNUM=2'],
++  },
++  'signal3' : {
++    'source' : 'signals.c',
++    'c_args' : ['-DTESTNUM=3'],
++  },
++  'signal4' : {
++    'source' : 'signals.c',
++    'c_args' : ['-DTESTNUM=4'],
++  },
++}
+ 
+-foreach t : refcount_tests
+-  test_name = t.get(0)
+-  test_src = t.get(1)
+-  test_extra_cargs = t.get(2)
+-  test_timeout = t.get(3, 30)
+-  test_suite = test_timeout == 30 ? ['refcount'] : ['refcount', 'slow']
++common_c_args = test_cargs + ['-DGLIB_DISABLE_DEPRECATION_WARNINGS']
++common_deps = [libm, thread_dep, libglib_dep, libgobject_dep]
++
++foreach test_name, extra_args : refcount_tests
++  source = extra_args.get('source', test_name + '.c')
++  extra_sources = extra_args.get('extra_sources', [])
++  install = installed_tests_enabled and extra_args.get('install', true)
++
++  if install
++    test_conf = configuration_data()
++    test_conf.set('installed_tests_dir', installed_tests_execdir)
++    test_conf.set('program', test_name)
++    configure_file(
++      input: installed_tests_template,
++      output: test_name + '.test',
++      install_dir: installed_tests_metadir,
++      configuration: test_conf
++    )
++  endif
+ 
+   # FIXME? $(GLIB_DEBUG_FLAGS)
+-  exe = executable(test_name + '-test', test_src,
+-    c_args : test_cargs + test_extra_cargs + ['-DGLIB_DISABLE_DEPRECATION_WARNINGS'],
+-    dependencies : [libm, thread_dep, libglib_dep, libgobject_dep],
+-    install : false,
++  exe = executable(test_name, [source, extra_sources],
++    c_args : common_c_args + extra_args.get('c_args', []),
++    dependencies : common_deps + extra_args.get('dependencies', []),
++    install_dir: installed_tests_execdir,
++    install: install,
+   )
++
++  suite = ['refcount'] + extra_args.get('suite', [])
++  timeout = suite.contains('slow') ? 120 : 30
+   # FIXME? TESTS_ENVIRONMENT = LIBCHARSET_ALIAS_DIR=$(top_builddir)/glib/libcharset
+-  test(test_name, exe, env : test_env, timeout : test_timeout, suite : test_suite)
++  test(test_name, exe, env : test_env, timeout : timeout, suite : suite)
+ endforeach

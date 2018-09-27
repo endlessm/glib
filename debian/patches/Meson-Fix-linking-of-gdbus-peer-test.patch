@@ -1,0 +1,51 @@
+From: Xavier Claessens <xavier.claessens@collabora.com>
+Date: Mon, 24 Sep 2018 13:32:08 -0400
+Subject: Meson: Fix linking of gdbus-peer test
+
+Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/350
+---
+ gio/tests/gdbus-object-manager-example/meson.build | 4 ++--
+ gio/tests/meson.build                              | 6 +++++-
+ 2 files changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/gio/tests/gdbus-object-manager-example/meson.build b/gio/tests/gdbus-object-manager-example/meson.build
+index 6b27576..b737f05 100644
+--- a/gio/tests/gdbus-object-manager-example/meson.build
++++ b/gio/tests/gdbus-object-manager-example/meson.build
+@@ -16,10 +16,10 @@ gdbus_example_objectmanager_generated = custom_target('gdbus-example-objectmanag
+ 
+ libgdbus_example_objectmanager = library('gdbus-example-objectmanager',
+     gdbus_example_objectmanager_generated,
+-    c_args : gio_c_args,
++    c_args : test_c_args,
+     dependencies : [libglib_dep, libgmodule_dep, libgobject_dep, libgio_dep],
+     install : installed_tests_enabled,
+     install_dir : installed_tests_execdir)
+ 
+-libgdbus_example_objectmanager_dep = declare_dependency(sources : gdbus_example_objectmanager_generated,
++libgdbus_example_objectmanager_dep = declare_dependency(
+   link_with : libgdbus_example_objectmanager)
+diff --git a/gio/tests/meson.build b/gio/tests/meson.build
+index 801d52c..1556464 100644
+--- a/gio/tests/meson.build
++++ b/gio/tests/meson.build
+@@ -125,7 +125,10 @@ endif
+ if host_machine.system() != 'windows'
+   gio_tests += [{
+     'file' : {},
+-    'gdbus-peer' : {'dependencies' : [libgdbus_example_objectmanager_dep]},
++    'gdbus-peer' : {
++      'dependencies' : [libgdbus_example_objectmanager_dep],
++      'install_rpath' : installed_tests_execdir
++    },
+     'gdbus-peer-object-manager' : {},
+     'live-g-file' : {},
+     'socket-address' : {},
+@@ -475,6 +478,7 @@ foreach test_dict : gio_tests
+     exe = executable(test_name, [source, extra_sources],
+       c_args : test_c_args + extra_args.get('c_args', []),
+       dependencies : common_gio_tests_deps + extra_args.get('dependencies', []),
++      install_rpath : extra_args.get('install_rpath', ''),
+       install_dir: installed_tests_execdir,
+       install: install,
+     )

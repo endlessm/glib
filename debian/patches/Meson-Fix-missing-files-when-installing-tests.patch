@@ -1,0 +1,168 @@
+From: Xavier Claessens <xavier.claessens@collabora.com>
+Date: Wed, 19 Sep 2018 11:53:07 -0400
+Subject: Meson: Fix missing files when installing tests
+
+Closes #1527
+
+Origin: upstream, 2.59.0, commit:96fafcfe92d4c6936c5f328864eea51cdeea1df7
+---
+ gio/tests/gdbus-object-manager-example/meson.build |  5 +--
+ gio/tests/meson.build                              | 37 ++++++++++++++++++----
+ gio/tests/modules/meson.build                      | 14 ++++----
+ glib/tests/meson.build                             | 15 +++++++++
+ 4 files changed, 57 insertions(+), 14 deletions(-)
+
+diff --git a/gio/tests/gdbus-object-manager-example/meson.build b/gio/tests/gdbus-object-manager-example/meson.build
+index 90dcc1f..6b27576 100644
+--- a/gio/tests/gdbus-object-manager-example/meson.build
++++ b/gio/tests/gdbus-object-manager-example/meson.build
+@@ -14,11 +14,12 @@ gdbus_example_objectmanager_generated = custom_target('gdbus-example-objectmanag
+              '--generate-docbook', 'gdbus-example-objectmanager-generated',
+              '@INPUT@'])
+ 
+-libgdbus_example_objectmanager = library('libgdbus-example-objectmanager',
++libgdbus_example_objectmanager = library('gdbus-example-objectmanager',
+     gdbus_example_objectmanager_generated,
+     c_args : gio_c_args,
+     dependencies : [libglib_dep, libgmodule_dep, libgobject_dep, libgio_dep],
+-    install : false)
++    install : installed_tests_enabled,
++    install_dir : installed_tests_execdir)
+ 
+ libgdbus_example_objectmanager_dep = declare_dependency(sources : gdbus_example_objectmanager_generated,
+   link_with : libgdbus_example_objectmanager)
+diff --git a/gio/tests/meson.build b/gio/tests/meson.build
+index cefa48b..ca7391f 100644
+--- a/gio/tests/meson.build
++++ b/gio/tests/meson.build
+@@ -79,6 +79,7 @@ gio_tests = [{
+ test_extra_programs = [{
+   'gdbus-connection-flush-helper' : {},
+   'gdbus-testserver' : {},
++  'gsubprocess-testprog' : {},
+ }]
+ 
+ test_env = environment()
+@@ -253,9 +254,10 @@ if host_machine.system() != 'windows'
+ 
+   # This test is currently unreliable
+   executable('gdbus-overflow', 'gdbus-overflow.c',
+-      install : false,
+       c_args : test_c_args,
+-      dependencies : common_gio_tests_deps)
++      dependencies : common_gio_tests_deps,
++      install_dir : installed_tests_execdir,
++      install : installed_tests_enabled)
+ 
+   gio_tests += [{
+     'gdbus-connection-flush' : {
+@@ -317,7 +319,6 @@ test_extra_programs += [{
+   'gdbus-example-subtree' : {'install' : false},
+   'gdbus-example-watch-name' : {'install' : false},
+   'gdbus-example-watch-proxy' : {'install' : false},
+-  'gsubprocess-testprog' : {'install' : false},
+   'httpd' : {'install' : false},
+   'proxy' : {'install' : false},
+   'resolver' : {'install' : false},
+@@ -356,6 +357,25 @@ if host_machine.system() != 'windows'
+   }]
+ endif
+ 
++if installed_tests_enabled
++  install_data(
++    'contexts.c',
++    'g-icon.c',
++    'appinfo-test-actions.desktop',
++    'appinfo-test-gnome.desktop',
++    'appinfo-test-notgnome.desktop',
++    'appinfo-test.desktop',
++    'appinfo-test2.desktop',
++    'file.c',
++    'org.gtk.test.dbusappinfo.desktop',
++    install_dir : installed_tests_execdir,
++  )
++  install_subdir('x-content', install_dir : installed_tests_execdir)
++  install_subdir('desktop-files', install_dir : installed_tests_execdir)
++  install_subdir('thumbnails', install_dir : installed_tests_execdir)
++  install_subdir('cert-tests', install_dir : installed_tests_execdir)
++endif
++
+ if not meson.is_cross_build() or meson.has_exe_wrapper()
+ 
+   plugin_resources_c = custom_target('plugin-resources.c',
+@@ -368,9 +388,12 @@ if not meson.is_cross_build() or meson.has_exe_wrapper()
+                '--c-name', '_g_plugin',
+                '@INPUT@'])
+ 
+-  shared_module ('resourceplugin', 'resourceplugin.c', plugin_resources_c,
++  shared_module('resourceplugin', 'resourceplugin.c', plugin_resources_c,
+     link_args : export_dynamic_ldflags,
+-    dependencies : common_gio_tests_deps)
++    dependencies : common_gio_tests_deps,
++    install_dir : installed_tests_execdir,
++    install : installed_tests_enabled
++  )
+ 
+   test_gresource = custom_target('test.gresource',
+     input : 'test.gresource.xml',
+@@ -379,7 +402,9 @@ if not meson.is_cross_build() or meson.has_exe_wrapper()
+                '--target=@OUTPUT@',
+                '--sourcedir=' + meson.current_source_dir(),
+                '--sourcedir=' + meson.current_build_dir(),
+-               '@INPUT@'])
++               '@INPUT@'],
++    install_dir : installed_tests_execdir,
++    install : installed_tests_enabled)
+ 
+   test_resources2_c = custom_target('test_resources2.c',
+     input : 'test3.gresource.xml',
+diff --git a/gio/tests/modules/meson.build b/gio/tests/modules/meson.build
+index 5ae131a..fa981c4 100644
+--- a/gio/tests/modules/meson.build
++++ b/gio/tests/modules/meson.build
+@@ -1,11 +1,13 @@
+-libtestmodulea = library('testmodulea', 'test-module-a.c',
+-  install : false,
++libtestmodulea = shared_module('testmodulea', 'test-module-a.c',
+   dependencies : [libglib_dep, libgobject_dep, libgmodule_dep, libgio_dep],
+-  c_args : [ ]
++  c_args : [ ],
++  install : installed_tests_enabled,
++  install_dir : join_paths(installed_tests_execdir, 'modules'),
+ )
+ 
+-libtestmoduleb = library('testmoduleb', 'test-module-b.c',
+-  install : false,
++libtestmoduleb = shared_module('testmoduleb', 'test-module-b.c',
+   dependencies : [libglib_dep, libgobject_dep, libgmodule_dep, libgio_dep],
+-  c_args : [ ]
++  c_args : [ ],
++  install : installed_tests_enabled,
++  install_dir : join_paths(installed_tests_execdir, 'modules'),
+ )
+diff --git a/glib/tests/meson.build b/glib/tests/meson.build
+index 0af71b0..e88d3a1 100644
+--- a/glib/tests/meson.build
++++ b/glib/tests/meson.build
+@@ -129,6 +129,21 @@ glib_tests = {
+   },
+ }
+ 
++if installed_tests_enabled
++  install_data(
++    'keyfiletest.ini',
++    'pages.ini',
++    'keyfile.c',
++    'empty',
++    '4096-random-bytes',
++    'echo-script',
++    'echo-script.bat',
++    install_dir : installed_tests_execdir,
++  )
++  install_subdir('bookmarks', install_dir : installed_tests_execdir)
++  install_subdir('markups', install_dir : installed_tests_execdir)
++endif
++
+ # Not entirely random of course, but at least it changes over time
+ random_number = minor_version + meson.version().split('.').get(1).to_int()
+ 

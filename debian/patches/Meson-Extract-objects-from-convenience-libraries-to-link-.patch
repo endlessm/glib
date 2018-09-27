@@ -1,0 +1,116 @@
+From: Simon McVittie <smcv@collabora.com>
+Date: Tue, 25 Sep 2018 08:58:25 +0100
+Subject: Meson: Extract objects from convenience libraries to link them
+
+This avoids the convenience library being treated as though it was
+an installed static library (objects not included in the dependent
+static library, and convenience library being listed in the pkg-config
+metadata), both of which would make static linking impossible.
+This is a workaround for meson not having
+https://github.com/mesonbuild/meson/pull/3939 merged yet.
+
+Bug: https://gitlab.gnome.org/GNOME/glib/issues/1536
+Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/357
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+---
+ gio/meson.build  |  7 ++++++-
+ glib/meson.build | 14 ++++++++++++--
+ 2 files changed, 18 insertions(+), 3 deletions(-)
+
+diff --git a/gio/meson.build b/gio/meson.build
+index 04581b1..fd7200b 100644
+--- a/gio/meson.build
++++ b/gio/meson.build
+@@ -351,6 +351,7 @@ local_sources = files(
+ 
+ platform_deps = []
+ internal_deps = []
++internal_objects = []
+ appinfo_sources = []
+ contenttype_sources = []
+ portal_sources = []
+@@ -424,6 +425,7 @@ if host_system != 'windows'
+ 
+   subdir('xdgmime')
+   internal_deps += [xdgmime_lib]
++  internal_objects += [xdgmime_lib.extract_all_objects()]
+ 
+   install_headers(gio_unix_include_headers, subdir : 'gio-unix-2.0/gio')
+ 
+@@ -749,17 +751,20 @@ gioenumtypes_dep = declare_dependency(sources : [gioenumtypes_h])
+ if glib_conf.has('HAVE_SYS_INOTIFY_H') and have_func_inotify_init1
+   subdir('inotify')
+   internal_deps += [ inotify_lib ]
++  internal_objects += [inotify_lib.extract_all_objects()]
+ endif
+ 
+ # kevent
+ if have_func_kqueue and have_func_kevent
+   subdir('kqueue')
+   internal_deps += [ kqueue_lib ]
++  internal_objects += [kqueue_lib.extract_all_objects()]
+ endif
+ 
+ if host_system == 'windows'
+   subdir('win32')
+   internal_deps += [ giowin32_lib ]
++  internal_objects += [giowin32_lib.extract_all_objects()]
+ endif
+ 
+ if have_bash
+@@ -784,11 +789,11 @@ endif
+ libgio = library('gio-2.0',
+   gioenumtypes_h, gioenumtypes_c, gnetworking_h, gio_sources,
+   gio_dtrace_hdr, gio_dtrace_obj,
++  objects : internal_objects,
+   version : library_version,
+   soversion : soversion,
+   install : true,
+   include_directories : [configinc, gioinc],
+-  link_with : internal_deps,
+   #  '$(gio_win32_res_ldflag)',
+   dependencies : [libz_dep, libdl_dep, libmount_dep, libglib_dep,
+                   libgobject_dep, libgmodule_dep, selinux_dep, xattr_dep,
+diff --git a/glib/meson.build b/glib/meson.build
+index ea568b9..ce69ec5 100644
+--- a/glib/meson.build
++++ b/glib/meson.build
+@@ -9,8 +9,10 @@ if not use_system_pcre
+ endif
+ if have_good_vsnprintf and have_good_snprintf
+   gnulib_lib = []
++  gnulib_objects = []
+ else
+   subdir('gnulib')
++  gnulib_objects = [gnulib_lib.extract_all_objects()]
+ endif
+ 
+ glib_headers = files(
+@@ -234,17 +236,25 @@ if use_pcre_static_flag
+   pcre_static_args = ['-DPCRE_STATIC']
+ endif
+ 
++if use_system_pcre
++  pcre_deps = [pcre]
++  pcre_objects = []
++else
++  pcre_deps = []
++  pcre_objects = [libpcre.extract_all_objects()]
++endif
++
+ libglib = library('glib-2.0',
+   glib_dtrace_obj, glib_dtrace_hdr,
+   sources : [deprecated_sources, glib_sources],
++  objects : [charset_lib.extract_all_objects()] + gnulib_objects + pcre_objects,
+   version : library_version,
+   soversion : soversion,
+   install : true,
+   # intl.lib is not compatible with SAFESEH
+   link_args : [noseh_link_args, glib_link_flags, win32_ldflags],
+   include_directories : configinc,
+-  link_with : [charset_lib, gnulib_lib],
+-  dependencies : [pcre, thread_dep, libintl, librt] + libiconv + platform_deps,
++  dependencies : pcre_deps + [thread_dep, libintl, librt] + libiconv + platform_deps,
+   c_args : ['-DG_LOG_DOMAIN="GLib"', '-DGLIB_COMPILATION'] + pcre_static_args + glib_hidden_visibility_args
+ )
+ 

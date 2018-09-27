@@ -1,0 +1,41 @@
+From: Xavier Claessens <xavier.claessens@collabora.com>
+Date: Tue, 25 Sep 2018 15:14:53 -0400
+Subject: Meson: appinfo tests are racy if run in parallel
+
+Origin: upstream, 2.59.0, commit:27b5fb589298d17d22ea32634a6d52b73160d0d0
+---
+ gio/tests/meson.build | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/gio/tests/meson.build b/gio/tests/meson.build
+index 4eb4ef6..801d52c 100644
+--- a/gio/tests/meson.build
++++ b/gio/tests/meson.build
+@@ -144,9 +144,11 @@ if host_machine.system() != 'windows'
+     gio_tests += [{
+       'appinfo' : {
+         'install' : false,
++        'is_parallel' : false,
+       },
+       'desktop-app-info' : {
+         'install' : false,
++        'is_parallel' : false,
+       },
+     }]
+   endif
+@@ -479,8 +481,13 @@ foreach test_dict : gio_tests
+ 
+     suite = ['gio'] + extra_args.get('suite', [])
+     timeout = suite.contains('slow') ? 120 : 30
+-    test(test_name, exe, env : test_env, timeout : timeout, suite : suite,
+-      args : ['--tap'])
++    test(test_name, exe,
++      env : test_env,
++      timeout : timeout,
++      suite : suite,
++      args : ['--tap'],
++      is_parallel : extra_args.get('is_parallel', true),
++    )
+   endforeach
+ endforeach
+ 

@@ -1,0 +1,22 @@
+From: Xavier Claessens <xavier.claessens@collabora.com>
+Date: Sun, 23 Sep 2018 12:59:40 -0400
+Subject: Meson: define G_HAVE_GROWING_STACK to 0 or 1
+
+Origin: upstream, 2.59.0, commit:3896bc3659833ab677c116468b52d355c1695c3d
+---
+ meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index 7e668f8..f9945b4 100644
+--- a/meson.build
++++ b/meson.build
+@@ -1635,7 +1635,7 @@ else
+   growing_stack = meson.get_cross_property('growing_stack', false)
+ endif
+ 
+-glibconfig_conf.set('G_HAVE_GROWING_STACK', growing_stack)
++glibconfig_conf.set10('G_HAVE_GROWING_STACK', growing_stack)
+ 
+ # Tests for iconv
+ #
