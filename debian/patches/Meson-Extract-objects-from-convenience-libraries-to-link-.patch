@@ -11,6 +11,7 @@ https://github.com/mesonbuild/meson/pull/3939 merged yet.
 
 Bug: https://gitlab.gnome.org/GNOME/glib/issues/1536
 Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/357
+Applied-upstream: 2.59.0, commit:62af03bda8a1d649b079a0e77d3687695d0ab7d3
 Signed-off-by: Simon McVittie <smcv@collabora.com>
 ---
  gio/meson.build  |  7 ++++++-
