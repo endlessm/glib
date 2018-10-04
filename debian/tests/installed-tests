@@ -3,13 +3,13 @@
 # (C) 2013 Canonical Ltd.
 # Author: Iain Lane <iain.lane@canonical.com>
 
-set -e
+set -eu
 
 # Disable gvfs if it happens to be installed. We want to test the built-in
 # stuff
 export GIO_USE_VFS=local
 export GIO_USE_VOLUME_MONITOR=unix
 
-export XDG_RUNTIME_DIR=$ADTTMP
+export XDG_RUNTIME_DIR="$AUTOPKGTEST_TMP"
 
 dbus-run-session -- xvfb-run -a gnome-desktop-testing-runner glib
