@@ -8,10 +8,10 @@ Origin: upstream, 2.59.0, commit:3896bc3659833ab677c116468b52d355c1695c3d
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/meson.build b/meson.build
-index 7e668f8..f9945b4 100644
+index 09e12aa..a3f86f8 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -1635,7 +1635,7 @@ else
+@@ -1660,7 +1660,7 @@ else
    growing_stack = meson.get_cross_property('growing_stack', false)
  endif
  

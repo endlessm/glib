@@ -1,0 +1,32 @@
+From: =?utf-8?b?0KDRg9GB0LvQsNC9INCY0LbQsdGD0LvQsNGC0L7Qsg==?=
+ <lrn1986@gmail.com>
+Date: Thu, 20 Sep 2018 05:24:08 +0000
+Subject: tests W32: Move timeloop test to the non-Windows section
+
+It just doesn't work on Windows, and that can't be fixed with a quick patch.
+
+Origin: upstream, 2.59.0, commit:665677ce5e6d39780873e1506c20c929fb337361
+---
+ tests/meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/meson.build b/tests/meson.build
+index 7530571..b054a17 100644
+--- a/tests/meson.build
++++ b/tests/meson.build
+@@ -49,7 +49,6 @@ tests = [{
+     'dependencies' : [libgmodule_dep],
+     'export_dynamic' : true,
+   },
+-  'timeloop' : {},
+   'cxx-test' : {
+     'source' : 'cxx-test.cpp',
+     'include_directories' : gmoduleinc,
+@@ -70,6 +69,7 @@ test_extra_programs = {
+ 
+ if host_machine.system() != 'windows'
+   tests += [{
++    'timeloop' : {},
+     'spawn-test' : {},
+     'iochannel-test' : {},
+   }]

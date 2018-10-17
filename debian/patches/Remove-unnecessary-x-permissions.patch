@@ -1,0 +1,32 @@
+From: Simon McVittie <smcv@collabora.com>
+Date: Sun, 23 Sep 2018 17:01:04 +0100
+Subject: Remove unnecessary +x permissions
+
+None of these files starts with a #! line, and they are not native
+binary executables, so if a user attempts to execute them as a program,
+Unix shells will run them as /bin/sh scripts. This is not going to end
+well, since none of them are shell scripts (the gio bash completion
+is for bash, which is not a lowest-common-denominator POSIX shell, and
+in any case is designed to be sourced rather than executed).
+
+Bug: https://gitlab.gnome.org/GNOME/glib/issues/1539
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+Applied-upstream: 2.59.0, commit:fa32ee648148fd92f35a26c0a0dfe65199bfb9e6
+---
+ gio/completion/gio                                                | 0
+ gio/gdbus-2.0/codegen/codegen_main.py                             | 0
+ gio/tests/desktop-files/usr/applications/org.gnome.clocks.desktop | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+ mode change 100755 => 100644 gio/completion/gio
+ mode change 100755 => 100644 gio/gdbus-2.0/codegen/codegen_main.py
+ mode change 100755 => 100644 gio/tests/desktop-files/usr/applications/org.gnome.clocks.desktop
+
+diff --git a/gio/completion/gio b/gio/completion/gio
+old mode 100755
+new mode 100644
+diff --git a/gio/gdbus-2.0/codegen/codegen_main.py b/gio/gdbus-2.0/codegen/codegen_main.py
+old mode 100755
+new mode 100644
+diff --git a/gio/tests/desktop-files/usr/applications/org.gnome.clocks.desktop b/gio/tests/desktop-files/usr/applications/org.gnome.clocks.desktop
+old mode 100755
+new mode 100644

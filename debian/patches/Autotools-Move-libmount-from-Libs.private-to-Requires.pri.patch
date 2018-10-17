@@ -13,16 +13,17 @@ which already puts mount in Requires.private.
 Signed-off-by: Simon McVittie <smcv@collabora.com>
 Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/358
 Applied-upstream: 2.59.0, commit:59f3c1f17ad7f740114706051087dad53d1a8268
+(cherry picked from commit 55b17dccfccfe0420d91e3c421c524e0fed812fb)
 ---
  configure.ac  | 4 ++++
  gio-2.0.pc.in | 4 ++--
  2 files changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 33cb718..0b1e28e 100644
+index 2061693..5a1cab2 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1788,9 +1788,13 @@ fi
+@@ -1787,9 +1787,13 @@ fi
  ])
  
  if test x$have_libmount = xyes; then

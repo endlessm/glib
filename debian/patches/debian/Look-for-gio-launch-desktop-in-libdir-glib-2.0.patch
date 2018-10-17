@@ -14,7 +14,7 @@ Forwarded: not-needed, Debian-specific
  3 files changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/gio/Makefile.am b/gio/Makefile.am
-index e14cad2..a493084 100644
+index fc0b918..7b184e3 100644
 --- a/gio/Makefile.am
 +++ b/gio/Makefile.am
 @@ -26,6 +26,7 @@ AM_CPPFLAGS = \
@@ -42,7 +42,7 @@ index d0ffbac..11b245a 100644
          }
  
 diff --git a/gio/meson.build b/gio/meson.build
-index 189b493..b093643 100644
+index 853b2cc..5904fda 100644
 --- a/gio/meson.build
 +++ b/gio/meson.build
 @@ -1,6 +1,7 @@

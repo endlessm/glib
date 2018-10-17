@@ -1,0 +1,59 @@
+From: Simon McVittie <smcv@collabora.com>
+Date: Thu, 11 Oct 2018 12:49:56 +0100
+Subject: m4macros: Fix detection of glib-2.0 alone
+
+We unconditionally appended ">= $min_glib_version" to the modules to
+look for, even though we had already included
+"glib-2.0 >= $min_glib_version" in our list. When requesting additional
+modules, this was fine, for example
+
+    AM_PATH_GLIB_2_0([2.58], [:], [:], [gobject gio])
+
+ended up asking pkg-config for
+
+    glib-2.0 >= 2.58 gobject-2.0 gio-2.0 >= 2.58
+
+which is redundant (since they all share a version number) but
+otherwise OK.
+
+However,
+
+    AM_PATH_GLIB_2_0([2.58], [:], [:], [])
+
+ended up asking pkg-config for
+
+    glib-2.0 >= 2.58 >= 2.58
+
+which is not OK; the second ">=" was parsed as a bizarrely-named package
+to check for, and obviously few people have ">=.pc" installed.
+
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+Fixes: 4bb16f48 "m4macros: Allow information from pkg-config to be overridden"
+Forwarded: GNOME/glib!396
+Applied-upstream: 2.59.0, commit:54cbc9bccfc22f5602e2f847b5a971f8ba3c81db
+---
+ m4macros/glib-2.0.m4 | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/m4macros/glib-2.0.m4 b/m4macros/glib-2.0.m4
+index 92dbc7d..7491f1b 100644
+--- a/m4macros/glib-2.0.m4
++++ b/m4macros/glib-2.0.m4
+@@ -2,7 +2,7 @@
+ # Owen Taylor     1997-2001
+ 
+ # Increment this whenever this file is changed.
+-#serial 2
++#serial 3
+ 
+ dnl AM_PATH_GLIB_2_0([MINIMUM-VERSION, [ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND [, MODULES]]]])
+ dnl Test for GLIB, and define GLIB_CFLAGS and GLIB_LIBS, if gmodule, gobject,
+@@ -53,7 +53,7 @@ AC_ARG_ENABLE(glibtest, [  --disable-glibtest      do not try to compile and run
+   fi
+ 
+   dnl For GLIB_CFLAGS and GLIB_LIBS
+-  PKG_CHECK_MODULES([GLIB], [$pkg_config_args >= $min_glib_version], [:], [:])
++  PKG_CHECK_MODULES([GLIB], [$pkg_config_args], [:], [:])
+ 
+   dnl For the tools
+   PKG_CHECK_VAR([GLIB_GENMARSHAL], [glib-2.0], [glib_genmarshal])

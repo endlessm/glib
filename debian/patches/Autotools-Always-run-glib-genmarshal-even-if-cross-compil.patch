@@ -12,6 +12,7 @@ Bug-Debian: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=908334
 Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/362
 Applied-upstream: 2.59.0, commit:129512b67c6329528447d05c94450b2f71e82cc3
 Signed-off-by: Simon McVittie <smcv@collabora.com>
+(cherry picked from commit c9f5eefa105b7e6f44f30ecc084d59b569c3dd2f)
 ---
  tests/gobject/Makefile.am | 8 ++------
  1 file changed, 2 insertions(+), 6 deletions(-)

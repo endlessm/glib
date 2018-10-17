@@ -1,0 +1,51 @@
+From: =?utf-8?b?0KDRg9GB0LvQsNC9INCY0LbQsdGD0LvQsNGC0L7Qsg==?=
+ <lrn1986@gmail.com>
+Date: Thu, 20 Sep 2018 05:21:38 +0000
+Subject: tests W32: ugly fix for sscanf() format
+
+As we recently established, G_G*_FORMAT macros are for glib
+functions *only*. It's not guaranteed that they will work for
+C runtime printf() or scanf() variants, and indeed - in this case
+they do not (GCC thinks that MSVCRT sscanf() requires %I64 prefix
+for 64-bit values; whether that is true or not is irrelevant at this
+point - we need to make the werror go away).
+
+Origin: upstream, 2.59.0, commit:4c91334412f89623dc4be4b11549ecb194395633
+---
+ tests/type-test.c | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/tests/type-test.c b/tests/type-test.c
+index ed7cc44..43da394 100644
+--- a/tests/type-test.c
++++ b/tests/type-test.c
+@@ -120,8 +120,13 @@ main (int   argc,
+   gu64t1 = G_GINT64_CONSTANT (0xFAFAFAFAFAFAFAFA); 
+ 
+ #define FORMAT64 "%" G_GINT64_FORMAT " %" G_GUINT64_FORMAT "\n"
++#ifndef G_OS_WIN32
++#  define SCAN_FORMAT64 FORMAT64
++#else
++#  define SCAN_FORMAT64 "%I64d %I64u\n"
++#endif
+   string = g_strdup_printf (FORMAT64, gi64t1, gu64t1);
+-  sscanf (string, FORMAT64, &gi64t2, &gu64t2);
++  sscanf (string, SCAN_FORMAT64, &gi64t2, &gu64t2);
+   g_free (string);
+   g_assert (gi64t1 == gi64t2);
+   g_assert (gu64t1 == gu64t2);
+@@ -130,8 +135,13 @@ main (int   argc,
+   gst1 = 0xFAFAFAFA; 
+ 
+ #define FORMATSIZE "%" G_GSSIZE_FORMAT " %" G_GSIZE_FORMAT "\n"
++#ifndef G_OS_WIN32
++#  define SCAN_FORMATSIZE FORMATSIZE
++#else
++#  define SCAN_FORMATSIZE "%Id %Iu\n"
++#endif
+   string = g_strdup_printf (FORMATSIZE, gsst1, gst1);
+-  sscanf (string, FORMATSIZE, &gsst2, &gst2);
++  sscanf (string, SCAN_FORMATSIZE, &gsst2, &gst2);
+   g_free (string);
+   g_assert (gsst1 == gsst2);
+   g_assert (gst1 == gst2);

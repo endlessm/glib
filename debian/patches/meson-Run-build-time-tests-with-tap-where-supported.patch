@@ -7,7 +7,6 @@ and g_test_message() are printed as TAP diagnostics.
 
 Bug: https://gitlab.gnome.org/GNOME/glib/issues/1528
 Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/351
-Applied-upstream: 2.59.0, commit:cbc7fbbf7d9ffca2eb653ae8bf529adfb7758bb0
 Signed-off-by: Simon McVittie <smcv@collabora.com>
 ---
  gio/tests/meson.build      | 3 ++-
@@ -83,7 +82,7 @@ index 89b6eee..2a58766 100644
  endforeach
  
 diff --git a/tests/meson.build b/tests/meson.build
-index f4195f7..3e0d0ab 100644
+index 87110fd..778d20c 100644
 --- a/tests/meson.build
 +++ b/tests/meson.build
 @@ -102,6 +102,7 @@ foreach test_dict : tests

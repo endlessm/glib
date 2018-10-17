@@ -1,0 +1,34 @@
+From: Bernhard Walle <bernhard@bwalle.de>
+Date: Tue, 18 Sep 2018 10:27:19 +0200
+Subject: gio: automake: Add libgmodule dependency
+
+Otherwise I get following compile error:
+
+ libtool: link: /home/builduser/toolchains/linux/tc/2017-12/x86-ncp-linux-gnu/bin/i686-ncp-linux-gnu-gcc -Wall -Wstrict-prototypes -Wmisleading-indentation -Wno-bad-function-cast -Werror=declaration-after-statement -Werror=missing-prototypes -Werror=implicit-function-declaration -Werror=pointer-arith -Werror=init-self -Werror=format=2 -O2 -Wall -pipe -Wformat -g -fstack-protector-strong -fPIC -fno-strict-aliasing -Wl,-z -Wl,relro -Wl,-z -Wl,now -Wl,-rpath-link=/home/builduser/workspaces/rws_trunk_linux_x86_build_shared-fips/build/3p/linux/x86/install/zlib/lib -Wl,-rpath-link=/home/builduser/workspaces/rws_trunk_linux_x86_build_shared-fips/build/3p/linux/x86/install/libffi/lib -o .libs/gio gio-tool.o gio-tool-cat.o gio-tool-copy.o gio-tool-info.o gio-tool-list.o gio-tool-mime.o gio-tool-mkdir.o gio-tool-monitor.o gio-tool-mount.o gio-tool-move.o gio-tool-open.o gio-tool-rename.o gio-tool-remove.o gio-tool-save.o gio-tool-set.o gio-tool-trash.o gio-tool-tree.o  -L/home/builduser/workspaces/rws_trunk_linux_x86_build_shared-fips/build/3p/linux/x86/install/zlib/lib -L/home/builduser/workspaces/rws_trunk_linux_x86_build_shared-fips/build/3p/linux/x86/install/libffi/lib ./.libs/libgio-2.0.so ../gobject/.libs/libgobject-2.0.so ../glib/.libs/libglib-2.0.so -Wl,-rpath -Wl,/home/builduser/workspaces/rws_trunk_linux_x86_build_shared-fips/build/3p/linux/x86/install/glib/lib
+ /home/builduser/toolchains/linux/tc/2017-12/x86-ncp-linux-gnu/bin/../lib/gcc/i686-ncp-linux-gnu/6.3.0/../../../../i686-ncp-linux-gnu/bin/ld: warning: libgmodule-2.0.so.0, needed by ./.libs/libgio-2.0.so, not found (try using -rpath or -rpath-link)
+ ./.libs/libgio-2.0.so: undefined reference to `g_module_error'
+ ./.libs/libgio-2.0.so: undefined reference to `g_module_close'
+ ./.libs/libgio-2.0.so: undefined reference to `g_module_open'
+ ./.libs/libgio-2.0.so: undefined reference to `g_module_supported'
+ ./.libs/libgio-2.0.so: undefined reference to `g_module_symbol'
+ collect2: error: ld returned 1 exit status
+ Makefile:2300: recipe for target 'gio' failed
+
+Signed-off-by: Bernhard Walle <bernhard@bwalle.de>
+Origin: upstream, 2.59.0, commit:0d97c4d20c3088567d9beef3cdb16be5231c4d43
+---
+ gio/Makefile.am | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/gio/Makefile.am b/gio/Makefile.am
+index e14cad2..fc0b918 100644
+--- a/gio/Makefile.am
++++ b/gio/Makefile.am
+@@ -990,6 +990,7 @@ gio_SOURCES = \
+ 	$(NULL)
+ gio_LDADD = libgio-2.0.la 				\
+ 	$(top_builddir)/gobject/libgobject-2.0.la	\
++	$(top_builddir)/gmodule/libgmodule-2.0.la	\
+ 	$(top_builddir)/glib/libglib-2.0.la		\
+ 	$(NULL)
+ 

@@ -1,0 +1,49 @@
+From: Philip Withnall <withnall@endlessm.com>
+Date: Mon, 3 Sep 2018 19:36:29 +0100
+Subject: build: Drop pointless -Wformat-security warning flag
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+We already set -Wformat=2, which implies -Wformat-security, so there’s
+no need to test for and set -Wformat-security separately.
+
+The test for -Wformat-security never worked anyway, since gcc complains
+if it’s specified without also setting -Wformat to some value. The
+complaint causes configure.ac/meson.build to assume the option doesn’t
+work.
+
+Signed-off-by: Philip Withnall <withnall@endlessm.com>
+
+Bug: https://gitlab.gnome.org/GNOME/glib/issues/656
+Origin: upstream, 2.59.0, commit:c1f78a5997c69d2b9863f879c9a25c9804731af3
+---
+ configure.ac | 2 +-
+ meson.build  | 1 -
+ 2 files changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index cd66b0d..f6797a5 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -3408,7 +3408,7 @@ AS_IF([test "x$enable_compile_warnings" != xno], [
+    -Wno-bad-function-cast \
+    -Werror=declaration-after-statement \
+    -Werror=missing-prototypes -Werror=implicit-function-declaration \
+-   -Werror=pointer-arith -Werror=init-self -Werror=format-security \
++   -Werror=pointer-arith -Werror=init-self \
+    -Werror=format=2 -Werror=missing-include-dirs])
+ ])
+ AC_SUBST(GLIB_WARN_CFLAGS)
+diff --git a/meson.build b/meson.build
+index 115ba7e..a6b372b 100644
+--- a/meson.build
++++ b/meson.build
+@@ -352,7 +352,6 @@ if cc.get_id() == 'gcc' or cc.get_id() == 'clang'
+     '-Wno-bad-function-cast',
+     '-Werror=declaration-after-statement',
+     '-Werror=format=2',
+-    '-Werror=format-security',
+     '-Werror=implicit-function-declaration',
+     '-Werror=init-self',
+     '-Werror=missing-include-dirs',

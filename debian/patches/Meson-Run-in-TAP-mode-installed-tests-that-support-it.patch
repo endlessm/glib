@@ -54,7 +54,7 @@ index cc83c5f..48d2c85 100644
        install_dir: installed_tests_metadir,
        configuration: test_conf
 diff --git a/meson.build b/meson.build
-index 0a0de3c..7e668f8 100644
+index a3f86f8..87c55f4 100644
 --- a/meson.build
 +++ b/meson.build
 @@ -71,6 +71,7 @@ installed_tests_metadir = join_paths(glib_datadir, 'installed-tests', meson.proj
@@ -107,7 +107,7 @@ index 4da5a7a..28f7828 100644
        install_dir: installed_tests_metadir,
        configuration: test_conf
 diff --git a/tests/meson.build b/tests/meson.build
-index 7530571..f4195f7 100644
+index b054a17..87110fd 100644
 --- a/tests/meson.build
 +++ b/tests/meson.build
 @@ -18,7 +18,7 @@ subdir('refcount')

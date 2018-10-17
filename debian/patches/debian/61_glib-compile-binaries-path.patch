@@ -25,10 +25,10 @@ index d67e808..768c3af 100644
  gdbus_codegen=${bindir}/gdbus-codegen
  
 diff --git a/gio/meson.build b/gio/meson.build
-index fd7200b..189b493 100644
+index 7f2c08e..853b2cc 100644
 --- a/gio/meson.build
 +++ b/gio/meson.build
-@@ -818,7 +818,7 @@ pkg.generate(libraries : libgio,
+@@ -823,7 +823,7 @@ pkg.generate(libraries : libgio,
                 'schemasdir=' + join_paths('${datadir}', schemas_subdir),
                 'bindir=' + join_paths('${prefix}', get_option('bindir')),
                 'giomoduledir=' + giomodulesdir,

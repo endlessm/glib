@@ -2,8 +2,7 @@ From: Xavier Claessens <xavier.claessens@collabora.com>
 Date: Wed, 19 Sep 2018 11:53:07 -0400
 Subject: Meson: Fix missing files when installing tests
 
-Closes #1527
-
+Bug: https://gitlab.gnome.org/GNOME/glib/issues/1527
 Origin: upstream, 2.59.0, commit:96fafcfe92d4c6936c5f328864eea51cdeea1df7
 ---
  gio/tests/gdbus-object-manager-example/meson.build |  5 +--

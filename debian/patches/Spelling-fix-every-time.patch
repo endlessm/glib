@@ -15,10 +15,10 @@ Applied-upstream: 2.59.0, commit:214c991d5b3a10368684142a706bc8bc826342b3
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/configure.ac b/configure.ac
-index 37b2f48..33cb718 100644
+index f6797a5..93a8d4c 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -1855,7 +1855,7 @@ FUNC_NO_LOCALTIME_R="the 'g_date_set_time' function will not be MT-safe
+@@ -1853,7 +1853,7 @@ FUNC_NO_LOCALTIME_R="the 'g_date_set_time' function will not be MT-safe
  
  AIX_COMPILE_INFO="AIX's C compiler needs to be called by a different name, when
  		linking threaded applications. As GLib cannot do that 

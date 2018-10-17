@@ -86,7 +86,7 @@ index 0655f1b..35e379b 100644
  #include "gdbus-tests.h"
  
 diff --git a/gio/tests/meson.build b/gio/tests/meson.build
-index 0dafef1..cefa48b 100644
+index 4e5ad25..f47ebd5 100644
 --- a/gio/tests/meson.build
 +++ b/gio/tests/meson.build
 @@ -5,6 +5,10 @@ common_gio_tests_deps = [
@@ -100,7 +100,7 @@ index 0dafef1..cefa48b 100644
  subdir('gdbus-object-manager-example')
  
  gengiotypefuncs_prog = find_program('gengiotypefuncs.py')
-@@ -323,22 +327,27 @@ test_extra_programs += [{
+@@ -320,22 +324,27 @@ test_extra_programs += [{
      'extra_sources' : ['gtlsconsoleinteraction.c'],
      'install' : false,
    },
@@ -142,7 +142,7 @@ index 0dafef1..cefa48b 100644
  if host_machine.system() != 'windows'
    test_extra_programs += [{
      'gdbus-example-unix-fd-client' : {
-@@ -359,13 +368,8 @@ if not meson.is_cross_build() or meson.has_exe_wrapper()
+@@ -356,13 +365,8 @@ if not meson.is_cross_build() or meson.has_exe_wrapper()
                 '--c-name', '_g_plugin',
                 '@INPUT@'])
  

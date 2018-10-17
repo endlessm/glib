@@ -14,23 +14,28 @@ Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/357
 Applied-upstream: 2.59.0, commit:62af03bda8a1d649b079a0e77d3687695d0ab7d3
 Signed-off-by: Simon McVittie <smcv@collabora.com>
 ---
- gio/meson.build  |  7 ++++++-
- glib/meson.build | 14 ++++++++++++--
- 2 files changed, 18 insertions(+), 3 deletions(-)
+ gio/meson.build  | 12 +++++++++++-
+ glib/meson.build | 20 ++++++++++++++++++--
+ 2 files changed, 29 insertions(+), 3 deletions(-)
 
 diff --git a/gio/meson.build b/gio/meson.build
-index 04581b1..fd7200b 100644
+index 04581b1..7f2c08e 100644
 --- a/gio/meson.build
 +++ b/gio/meson.build
-@@ -351,6 +351,7 @@ local_sources = files(
+@@ -351,6 +351,12 @@ local_sources = files(
  
  platform_deps = []
  internal_deps = []
++# TODO: internal_objects is a workaround for
++# <https://github.com/mesonbuild/meson/issues/3934> and
++# <https://github.com/mesonbuild/meson/issues/3937>. When we can depend
++# on a meson version where those are fixed, revert the commit that
++# introduced this workaround.
 +internal_objects = []
  appinfo_sources = []
  contenttype_sources = []
  portal_sources = []
-@@ -424,6 +425,7 @@ if host_system != 'windows'
+@@ -424,6 +430,7 @@ if host_system != 'windows'
  
    subdir('xdgmime')
    internal_deps += [xdgmime_lib]
@@ -38,7 +43,7 @@ index 04581b1..fd7200b 100644
  
    install_headers(gio_unix_include_headers, subdir : 'gio-unix-2.0/gio')
  
-@@ -749,17 +751,20 @@ gioenumtypes_dep = declare_dependency(sources : [gioenumtypes_h])
+@@ -749,17 +756,20 @@ gioenumtypes_dep = declare_dependency(sources : [gioenumtypes_h])
  if glib_conf.has('HAVE_SYS_INOTIFY_H') and have_func_inotify_init1
    subdir('inotify')
    internal_deps += [ inotify_lib ]
@@ -59,7 +64,7 @@ index 04581b1..fd7200b 100644
  endif
  
  if have_bash
-@@ -784,11 +789,11 @@ endif
+@@ -784,11 +794,11 @@ endif
  libgio = library('gio-2.0',
    gioenumtypes_h, gioenumtypes_c, gnetworking_h, gio_sources,
    gio_dtrace_hdr, gio_dtrace_obj,
@@ -73,11 +78,19 @@ index 04581b1..fd7200b 100644
    dependencies : [libz_dep, libdl_dep, libmount_dep, libglib_dep,
                    libgobject_dep, libgmodule_dep, selinux_dep, xattr_dep,
 diff --git a/glib/meson.build b/glib/meson.build
-index ea568b9..ce69ec5 100644
+index ea568b9..6fc56da 100644
 --- a/glib/meson.build
 +++ b/glib/meson.build
-@@ -9,8 +9,10 @@ if not use_system_pcre
+@@ -7,10 +7,18 @@ subdir('libcharset')
+ if not use_system_pcre
+   subdir('pcre')
  endif
++
++# TODO: gnulib_objects, pcre_objects and pcre_deps are a workaround for
++# <https://github.com/mesonbuild/meson/issues/3934> and
++# <https://github.com/mesonbuild/meson/issues/3937>. When we can depend
++# on a meson version where those are fixed, revert the commit that
++# introduced this workaround.
  if have_good_vsnprintf and have_good_snprintf
    gnulib_lib = []
 +  gnulib_objects = []
@@ -87,7 +100,7 @@ index ea568b9..ce69ec5 100644
  endif
  
  glib_headers = files(
-@@ -234,17 +236,25 @@ if use_pcre_static_flag
+@@ -234,17 +242,25 @@ if use_pcre_static_flag
    pcre_static_args = ['-DPCRE_STATIC']
  endif
  

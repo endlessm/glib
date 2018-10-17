@@ -1,0 +1,56 @@
+From: Philip Withnall <withnall@endlessm.com>
+Date: Wed, 29 Aug 2018 11:59:47 +0100
+Subject: build: Check for bind_textdomain_codeset() properly
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Previously we weren’t checking for it in meson.build (but were checking
+for it in configure.ac, courtesy of glib-gettext.m4). Roughly emulate
+the checks from glib-gettext.m4, checking for bind_textdomain_codeset()
+in whichever libintl implementation we found ngettext() in.
+
+meson.build still doesn’t implement the full set and order of checks in
+glib-gettext.m4; there’s still a FIXME about that in meson.build.
+
+Signed-off-by: Philip Withnall <withnall@endlessm.com>
+
+Bug: https://gitlab.gnome.org/GNOME/glib/issues/1313
+Origin: upstream, 2.59.0, commit:f85c4623151bf5d710697b928c8fc42f1978121b
+---
+ meson.build | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index 1141076..64521bf 100644
+--- a/meson.build
++++ b/meson.build
+@@ -902,7 +902,6 @@ glibconfig_conf.set('GLIB_USING_SYSTEM_PRINTF',
+ 
+ 
+ # Check for nl_langinfo and CODESET
+-# FIXME: Check for HAVE_BIND_TEXTDOMAIN_CODESET
+ if cc.links('''#include <langinfo.h>
+                int main (int argc, char ** argv) {
+                  char *codeset = nl_langinfo (CODESET);
+@@ -1774,13 +1773,20 @@ endif
+ # implementations. This could be extended if issues are found in some platforms.
+ if cc.has_function('ngettext')
+   libintl = []
++  have_bind_textdomain_codeset = cc.has_function('bind_textdomain_codeset')
+ else
+   libintl = cc.find_library('intl', required : false)
+   if not libintl.found()
+     libintl = subproject('proxy-libintl').get_variable('intl_dep')
++    have_bind_textdomain_codeset = true  # proxy-libintl supports it
++  else
++    have_bind_textdomain_codeset = cc.has_function('bind_textdomain_codeset',
++                                                   dependencies : libintl)
+   endif
+ endif
+ 
++glib_conf.set('HAVE_BIND_TEXTDOMAIN_CODESET', have_bind_textdomain_codeset)
++
+ # We require gettext to always be present
+ glib_conf.set('HAVE_DCGETTEXT', 1)
+ glib_conf.set('HAVE_GETTEXT', 1)
