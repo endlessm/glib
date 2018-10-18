@@ -42,14 +42,14 @@ index d0ffbac..11b245a 100644
          }
  
 diff --git a/gio/meson.build b/gio/meson.build
-index 853b2cc..5904fda 100644
+index 853b2cc..c3b7b76 100644
 --- a/gio/meson.build
 +++ b/gio/meson.build
 @@ -1,6 +1,7 @@
  gio_c_args = [
    '-DG_LOG_DOMAIN="GLib-GIO"',
    '-DGIO_COMPILATION',
-+  '-DGIO_LIBDIR="@0@"'.format(get_option('libdir')),
++  '-DGIO_LIBDIR="@0@"'.format(glib_libdir),
    '-DGIO_MODULE_DIR="@0@"'.format(glib_giomodulesdir),
  ]
  
