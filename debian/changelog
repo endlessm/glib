@@ -1,9 +1,22 @@
-glib2.0 (2.58.1-3) UNRELEASED; urgency=medium
+glib2.0 (2.58.1-3) experimental; urgency=medium
 
+  * Team upload
+  * Upload to experimental to check that everything is OK with the
+    switch to Meson
+  * Switch build system to Meson as recommended by upstream
+    - Stop removing .la files: Meson doesn't build those
+    - d/p/debian/61_glib-compile-binaries-path.patch: Change the same
+      path if we build with Meson
+    - d/patches: Apply patches proposed for backport from master to
+      glib-2-58 in upstream MR 392. These fix various build issues,
+      mostly around Meson. Some of these patch Windows-specific code,
+      but they are likely to be in 2.58.2 and upstream asked for wider
+      testing, so I'm applying them anyway, to test the complete set.
+    - d/p/Spelling-*.patch:
+      MR 392 also applies patches from upstream git master to fix various
+      spelling mistakes detected by Lintian
   * Always generate testmarshal.h, even when cross-compiling
     (Closes: #908334)
-  * d/p/debian/61_glib-compile-binaries-path.patch: Change the same
-    path if we build with Meson
   * Fix static linking and make sure it won't regress, prompted by
     comparing the Autotools and Meson builds:
     - Add missing -dev dependencies on libffi-dev, libmount-dev,
@@ -13,11 +26,21 @@ glib2.0 (2.58.1-3) UNRELEASED; urgency=medium
     - d/tests/build: Exercise all libraries
     - d/tests/build-static: Exercise static linking
   * d/rules: Fix some permissions (equivalent of #1539 upstream)
-  * d/p/Spelling-*.patch:
-    Add patches from upstream git master to fix various spelling mistakes
-    detected by Lintian
+  * Add Lintian override for a spelling-error-in-binary false positive
+  * Add some Lintian overrides for hardening-no-fortify-functions.
+    These objects mostly don't use libc directly.
+  * Remove /usr/bin/gio-launch-desktop symlink.
+    It's an implementation detail of libgio, and isn't intended to be
+    run directly. Removing it from PATH silences a Lintian warning about
+    it not having a man page.
+  * Don't delete compiled GSettings schemas during purge if the dpkg
+    reference count is greater than 1. This avoids deleting and regenerating
+    it unnecessarily if another architecture's libglib2.0-0 is still
+    installed. (Closes: #775854)
+  * d/tests/installed-tests: Replace deprecated $ADTTMP with $AUTOPKGTEST_TMP
+  * d/tests/control: Mark build tests as superficial (see #904979)
 
- -- Simon McVittie <smcv@debian.org>  Wed, 26 Sep 2018 17:31:16 +0100
+ -- Simon McVittie <smcv@debian.org>  Thu, 18 Oct 2018 18:32:21 +0100
 
 glib2.0 (2.58.1-2) unstable; urgency=medium
 
