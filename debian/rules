@@ -78,15 +78,16 @@ unexport XDG_DATA_DIRS
 export DBUS_SESSION_BUS_ADDRESS=this-should-not-be-used-and-will-fail:
 
 ifeq ($(DEB_HOST_ARCH_OS), linux)
+handle_test_failure := exit $$?
+else
+handle_test_failure := true
+endif
+
 override_dh_auto_test-arch:
 	# Remove LD_PRELOAD so we don't run with fakeroot, which makes dbus-related tests fail
 	env -u LD_PRELOAD DEB_BUILD_TIME_TESTS=1 \
-	dh_auto_test --builddirectory=debian/build/deb -- -k 0 -j 1
-else
-override_dh_auto_test-arch:
-	env -u LD_PRELOAD DEB_BUILD_TIME_TESTS=1 \
-	dh_auto_test --builddirectory=debian/build/deb -- -k 0 -j 1 || true
-endif
+	dh_auto_test --builddirectory=debian/build/deb -- -k 0 -j 1 \
+	|| $(handle_test_failure)
 
 # Skip build-time tests if all we are building is documentation; running
 # them once per architecture is plenty
