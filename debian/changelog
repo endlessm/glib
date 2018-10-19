@@ -1,3 +1,21 @@
+glib2.0 (2.58.1-4) experimental; urgency=medium
+
+  * Team upload
+  * d/rules: Deduplicate test invocation
+  * Use `meson test` directly, instead of going via `ninja test`
+  * Multiply Meson test timeouts.
+    Use x3 timeouts for most architectures (in general the timeouts in
+    the upstream Meson build system are somewhat optimistic), x10 for
+    the mips and sparc families, and x50 for architectures known to
+    use qemu for buildds.
+  * Enable FAM support on Hurd and kFreeBSD.
+    In the Autotools build system this was auto-detected, but in Meson it
+    is off by default and must be explicitly enabled if wanted.
+  * d/p/meson-Mark-1bit-emufutex-test-as-slow.patch:
+    Increase timeout for the 1bit-emufutex test
+
+ -- Simon McVittie <smcv@debian.org>  Fri, 19 Oct 2018 09:55:19 +0100
+
 glib2.0 (2.58.1-3) experimental; urgency=medium
 
   * Team upload
