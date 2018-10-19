@@ -1,0 +1,26 @@
+From: Simon McVittie <smcv@collabora.com>
+Date: Fri, 19 Oct 2018 09:20:25 +0100
+Subject: meson: Mark 1bit-emufutex test as slow
+
+Emulated futexes are slower than real ones; if they were not, there
+would be no point in using the real futexes. On some machines they
+are sufficiently slow to cause test timeouts.
+
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/406
+---
+ glib/tests/meson.build | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/glib/tests/meson.build b/glib/tests/meson.build
+index ad0139d..2468d87 100644
+--- a/glib/tests/meson.build
++++ b/glib/tests/meson.build
+@@ -118,6 +118,7 @@ glib_tests = {
+     'source' : '1bit-mutex.c',
+     'c_args' : ['-DTEST_EMULATED_FUTEX'],
+     'install' : false,
++    'suite' : ['slow'],
+   },
+   '642026' : {
+     'suite' : ['slow'],

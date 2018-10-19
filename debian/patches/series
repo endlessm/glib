@@ -53,6 +53,7 @@ Autotools-Move-libmount-from-Libs.private-to-Requires.pri.patch
 m4macros-Allow-information-from-pkg-config-to-be-overridd.patch
 m4macros-Fix-detection-of-glib-2.0-alone.patch
 Meson-Fix-linking-of-gdbus-peer-test.patch
+meson-Mark-1bit-emufutex-test-as-slow.patch
 01_gettext-desktopfiles.patch
 07_disable_tests_on_slow_archs.patch
 81-skip-monitor-test-on-non-linux.patch
