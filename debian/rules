@@ -85,8 +85,14 @@ endif
 
 override_dh_auto_test-arch:
 	# Remove LD_PRELOAD so we don't run with fakeroot, which makes dbus-related tests fail
-	env -u LD_PRELOAD DEB_BUILD_TIME_TESTS=1 \
-	dh_auto_test --builddirectory=debian/build/deb -- -k 0 -j 1 \
+	env -u LD_PRELOAD \
+		DEB_BUILD_TIME_TESTS=1 \
+		LC_ALL=C.UTF-8 \
+		MESON_TESTTHREADS=1 \
+	meson test -C debian/build/deb \
+		--no-rebuild \
+		--num-processes 1 \
+		--verbose \
 	|| $(handle_test_failure)
 
 # Skip build-time tests if all we are building is documentation; running
