@@ -126,6 +126,12 @@ else
 is_linux := false
 endif
 
+ifneq ($(filter hurd kfreebsd,$(DEB_HOST_ARCH_OS)),)
+use_fam := true
+else
+use_fam := false
+endif
+
 # configure flags
 DEB_CONFIGURE_EXTRA_FLAGS := \
 	--libexecdir=lib/glib2.0 \
@@ -134,6 +140,7 @@ DEB_CONFIGURE_EXTRA_FLAGS := \
 
 DEB_CONFIGURE_FLAGS_deb := \
 	--default-library both \
+	-Dfam=$(use_fam) \
 	-Dinstalled_tests=true \
 	-Dlibmount=$(is_linux) \
 	-Dman=true \
