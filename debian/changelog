@@ -21,8 +21,11 @@ glib2.0 (2.58.1-5) UNRELEASED; urgency=medium
   * d/p/meson-Mark-1bit-emufutex-test-as-slow.patch,
     d/p/Meson-Fix-linking-of-gdbus-peer-test.patch:
     Mark as applied upstream
+  * d/rules: Set Meson cross properties using a modified debcrossgen.
+    This avoids embedding a local copy of GNUlib (v)(sn)printf when
+    cross-compiling. (Workaround for #912559)
 
- -- Simon McVittie <smcv@debian.org>  Thu, 01 Nov 2018 10:09:20 +0000
+ -- Simon McVittie <smcv@debian.org>  Thu, 01 Nov 2018 10:37:21 +0000
 
 glib2.0 (2.58.1-4) experimental; urgency=medium
 
