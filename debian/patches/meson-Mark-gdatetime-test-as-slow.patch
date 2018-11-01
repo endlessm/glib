@@ -1,0 +1,27 @@
+From: Simon McVittie <smcv@collabora.com>
+Date: Thu, 1 Nov 2018 19:03:16 +0000
+Subject: meson: Mark gdatetime test as slow
+
+This test isn't inherently slow, but it produces so much output that
+it can take a minute or more on hardware with weak I/O performance.
+
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+---
+ glib/tests/meson.build | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/glib/tests/meson.build b/glib/tests/meson.build
+index 7903783..d7b6a7a 100644
+--- a/glib/tests/meson.build
++++ b/glib/tests/meson.build
+@@ -23,7 +23,9 @@ glib_tests = {
+   'environment' : {},
+   'error' : {},
+   'fileutils' : {},
+-  'gdatetime' : {},
++  'gdatetime' : {
++    'suite' : ['slow'],
++  },
+   'guuid' : {},
+   'gvariant' : {
+     'suite' : ['slow'],

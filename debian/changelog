@@ -9,7 +9,8 @@ glib2.0 (2.58.1-5) UNRELEASED; urgency=medium
   * d/p/meson-Define-__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4-on-GNU-Li.patch:
     Add proposed patch to fix detection of atomic operations on armel
   * d/p/meson-Centralize-test-timeout-values.patch,
-    d/p/meson-Increase-fast-test-timeout-from-30s-to-60s.patch:
+    d/p/meson-Increase-fast-test-timeout-from-30s-to-60s.patch,
+    d/p/meson-Mark-gdatetime-test-as-slow.patch:
     Add proposed patches to increase default Meson test timeouts
   * Respect nocheck in DEB_BUILD_OPTIONS
   * Adjust test timeouts:
