@@ -8,6 +8,7 @@ are sufficiently slow to cause test timeouts.
 
 Signed-off-by: Simon McVittie <smcv@collabora.com>
 Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/406
+Applied-upstream: 2.58.2, commit:dcc12e0311150e9a6c9cbc36135c595b7f9b3e3f
 ---
  glib/tests/meson.build | 1 +
  1 file changed, 1 insertion(+)
