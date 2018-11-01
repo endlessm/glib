@@ -3,6 +3,9 @@ glib2.0 (2.58.1-5) UNRELEASED; urgency=medium
   * d/p/*:
     Update to upstream glib-2-58 branch as of 2.58.1-75-gfdf91511b,
     except for translations
+  * d/p/mainloop-test-Fix-race-conditions.patch:
+    Add patch from upstream git master to fix race conditions in
+    mainloop test
   * d/p/meson-Define-__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4-on-GNU-Li.patch:
     Add proposed patch to fix detection of atomic operations on armel
   * d/p/meson-Centralize-test-timeout-values.patch,
