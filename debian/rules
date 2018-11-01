@@ -83,17 +83,21 @@ else
 handle_test_failure := true
 endif
 
-# Many Debian architectures are slower than GLib upstream really expects
-test_timeout_multiplier = 3
+test_timeout_multiplier = 1
 
 ifneq ($(filter mips% sparc%,$(DEB_HOST_ARCH_CPU)),)
 $(info Slow architecture detected, increasing test timeout)
-test_timeout_multiplier = 10
+test_timeout_multiplier = 2
+endif
+
+ifneq ($(filter hppa,$(DEB_HOST_ARCH_CPU)),)
+$(info Very slow architecture detected, increasing test timeout)
+test_timeout_multiplier = 5
 endif
 
 ifneq ($(filter m68k riscv64 sh4,$(DEB_HOST_ARCH_CPU)),)
 $(info Architecture with qemu buildds detected, increasing test timeout a lot)
-test_timeout_multiplier = 50
+test_timeout_multiplier = 20
 endif
 
 override_dh_auto_test-arch:
