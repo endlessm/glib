@@ -55,6 +55,8 @@ m4macros-Fix-detection-of-glib-2.0-alone.patch
 Meson-Fix-linking-of-gdbus-peer-test.patch
 meson-Mark-1bit-emufutex-test-as-slow.patch
 meson-Define-__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4-on-GNU-Li.patch
+meson-Centralize-test-timeout-values.patch
+meson-Increase-fast-test-timeout-from-30s-to-60s.patch
 01_gettext-desktopfiles.patch
 07_disable_tests_on_slow_archs.patch
 81-skip-monitor-test-on-non-linux.patch

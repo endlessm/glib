@@ -1,0 +1,106 @@
+From: Simon McVittie <smcv@debian.org>
+Date: Thu, 1 Nov 2018 09:49:43 +0000
+Subject: meson: Centralize test timeout values
+
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+---
+ gio/tests/meson.build      | 2 +-
+ glib/tests/meson.build     | 2 +-
+ gobject/tests/meson.build  | 2 +-
+ meson.build                | 2 ++
+ tests/gobject/meson.build  | 2 +-
+ tests/meson.build          | 2 +-
+ tests/refcount/meson.build | 2 +-
+ 7 files changed, 8 insertions(+), 6 deletions(-)
+
+diff --git a/gio/tests/meson.build b/gio/tests/meson.build
+index 1556464..a388011 100644
+--- a/gio/tests/meson.build
++++ b/gio/tests/meson.build
+@@ -484,7 +484,7 @@ foreach test_dict : gio_tests
+     )
+ 
+     suite = ['gio'] + extra_args.get('suite', [])
+-    timeout = suite.contains('slow') ? 120 : 30
++    timeout = suite.contains('slow') ? test_timeout_slow : test_timeout
+     test(test_name, exe,
+       env : test_env,
+       timeout : timeout,
+diff --git a/glib/tests/meson.build b/glib/tests/meson.build
+index 2468d87..7903783 100644
+--- a/glib/tests/meson.build
++++ b/glib/tests/meson.build
+@@ -186,7 +186,7 @@ foreach test_name, extra_args : glib_tests
+     )
+ 
+     suite = ['glib'] + extra_args.get('suite', [])
+-    timeout = suite.contains('slow') ? 120 : 30
++    timeout = suite.contains('slow') ? test_timeout_slow : test_timeout
+     test(test_name, exe, env : test_env, timeout : timeout, suite : suite,
+       args : ['--tap'])
+   endif
+diff --git a/gobject/tests/meson.build b/gobject/tests/meson.build
+index 74521ab..2672cd6 100644
+--- a/gobject/tests/meson.build
++++ b/gobject/tests/meson.build
+@@ -88,7 +88,7 @@ foreach test_name, extra_args : gobject_tests
+   )
+ 
+   suite = ['gobject'] + extra_args.get('suite', [])
+-  timeout = suite.contains('slow') ? 120 : 30
++  timeout = suite.contains('slow') ? test_timeout_slow : test_timeout
+   test(test_name, exe, env : test_env, timeout : timeout, suite : suite,
+     args: ['--tap'])
+ endforeach
+diff --git a/meson.build b/meson.build
+index 56d1f5b..4e036c3 100644
+--- a/meson.build
++++ b/meson.build
+@@ -1962,6 +1962,8 @@ if want_systemtap and enable_dtrace
+   enable_systemtap = true
+ endif
+ 
++test_timeout = 30
++test_timeout_slow = 120
+ 
+ pkg = import('pkgconfig')
+ windows = import('windows')
+diff --git a/tests/gobject/meson.build b/tests/gobject/meson.build
+index 2a58766..43ad6ac 100644
+--- a/tests/gobject/meson.build
++++ b/tests/gobject/meson.build
+@@ -86,7 +86,7 @@ foreach test_dict : gobject_tests
+     )
+ 
+     suite = ['gobject'] + extra_args.get('suite', [])
+-    timeout = suite.contains('slow') ? 120 : 30
++    timeout = suite.contains('slow') ? test_timeout_slow : test_timeout
+     # FIXME? TESTS_ENVIRONMENT = LIBCHARSET_ALIAS_DIR=$(top_builddir)/glib/libcharset
+     test(test_name, exe, env : test_env, timeout : timeout, suite : suite,
+       args : test_command_args)
+diff --git a/tests/meson.build b/tests/meson.build
+index 778d20c..80e45d7 100644
+--- a/tests/meson.build
++++ b/tests/meson.build
+@@ -127,7 +127,7 @@ foreach test_dict : tests
+     )
+ 
+     suite = ['glib'] + extra_args.get('suite', [])
+-    timeout = suite.contains('slow') ? 120 : 30
++    timeout = suite.contains('slow') ? test_timeout_slow : test_timeout
+     # FIXME? TESTS_ENVIRONMENT = LIBCHARSET_ALIAS_DIR=$(top_builddir)/glib/libcharset
+     test(test_name, exe, env : test_env, timeout : timeout, suite : suite,
+       args : test_command_args)
+diff --git a/tests/refcount/meson.build b/tests/refcount/meson.build
+index 3a2072d..68c23cc 100644
+--- a/tests/refcount/meson.build
++++ b/tests/refcount/meson.build
+@@ -53,7 +53,7 @@ foreach test_name, extra_args : refcount_tests
+   )
+ 
+   suite = ['refcount'] + extra_args.get('suite', [])
+-  timeout = suite.contains('slow') ? 120 : 30
++  timeout = suite.contains('slow') ? test_timeout_slow : test_timeout
+   # FIXME? TESTS_ENVIRONMENT = LIBCHARSET_ALIAS_DIR=$(top_builddir)/glib/libcharset
+   test(test_name, exe, env : test_env, timeout : timeout, suite : suite)
+ endforeach

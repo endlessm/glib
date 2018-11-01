@@ -1,0 +1,27 @@
+From: Simon McVittie <smcv@collabora.com>
+Date: Thu, 1 Nov 2018 09:38:40 +0000
+Subject: meson: Increase fast test timeout from 30s to 60s
+
+This is enough for most Debian buildds, including embedded devices
+like mips and powerpcspe. It is not enough for hppa (PA-RISC), but that
+architecture is so uniquely slow that it might make more sense to
+special-case it downstream.
+
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+---
+ meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index 4e036c3..dd323f9 100644
+--- a/meson.build
++++ b/meson.build
+@@ -1962,7 +1962,7 @@ if want_systemtap and enable_dtrace
+   enable_systemtap = true
+ endif
+ 
+-test_timeout = 30
++test_timeout = 60
+ test_timeout_slow = 120
+ 
+ pkg = import('pkgconfig')
