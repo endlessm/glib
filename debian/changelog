@@ -1,7 +1,7 @@
 glib2.0 (2.58.1-5) UNRELEASED; urgency=medium
 
   * d/p/*:
-    Update to upstream glib-2-58 branch as of 2.58.1-75-gfdf91511b,
+    Update to upstream glib-2-58 branch as of 2.58.1-85-g985210849,
     except for translations
   * d/p/mainloop-test-Fix-race-conditions.patch:
     Add patch from upstream git master to fix race conditions in

@@ -61,6 +61,13 @@ build-sys-Pass-CFLAGS-to-DTRACE.patch
 Merge-branch-objectmanager-src-dep-into-master.patch
 Merge-branch-gdbus-peer-again-into-master.patch
 tests-Update-month-name-check-for-Lithuanian-locale.patch
+glocalfile-Fix-access-can-trash-if-parent-is-symlink.patch
+glocalfile-Fix-bug-uri-in-trash-test.patch
+glocalfile-Add-test-case-for-symlink-expansion.patch
+glocalfile-Return-NULL-if-symlink-expansion-fails.patch
+glocalfile-Use-MAXSYMLINKS-when-following-symlinks.patch
+gobject-genums.c-fix-flags-validation.patch
+Add-unit-test-for-flags-validation.patch
 mainloop-test-Fix-race-conditions.patch
 meson-Define-__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4-on-GNU-Li.patch
 meson-Centralize-test-timeout-values.patch

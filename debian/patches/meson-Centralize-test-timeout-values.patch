@@ -40,10 +40,10 @@ index 2468d87..7903783 100644
        args : ['--tap'])
    endif
 diff --git a/gobject/tests/meson.build b/gobject/tests/meson.build
-index 74521ab..2672cd6 100644
+index 124f492..51571c0 100644
 --- a/gobject/tests/meson.build
 +++ b/gobject/tests/meson.build
-@@ -88,7 +88,7 @@ foreach test_name, extra_args : gobject_tests
+@@ -89,7 +89,7 @@ foreach test_name, extra_args : gobject_tests
    )
  
    suite = ['gobject'] + extra_args.get('suite', [])

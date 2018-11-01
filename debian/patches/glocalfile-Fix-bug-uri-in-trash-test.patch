@@ -1,0 +1,34 @@
+From: Ondrej Holy <oholy@redhat.com>
+Date: Fri, 14 Sep 2018 14:53:30 +0200
+Subject: glocalfile: Fix bug uri in trash test
+
+Fix typo in g_test_bug_base and move g_test_bug in the concrete test.
+
+Applied-upstream: 2.58.2, commit:2daebb93fb1a2b510eaea3393b12d99556389849
+---
+ gio/tests/trash.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/gio/tests/trash.c b/gio/tests/trash.c
+index 176c4b9..b586f16 100644
+--- a/gio/tests/trash.c
++++ b/gio/tests/trash.c
+@@ -38,6 +38,8 @@ test_trash_not_supported (void)
+   gchar *parent_dirname;
+   GStatBuf parent_stat, home_stat;
+ 
++  g_test_bug ("251");
++
+   /* The test assumes that tmp file is located on system internal mount. */
+   file = g_file_new_tmp ("test-trashXXXXXX", &stream, &error);
+   parent_dirname = g_path_get_dirname (g_file_peek_path (file));
+@@ -99,8 +101,7 @@ main (int argc, char *argv[])
+ {
+   g_test_init (&argc, &argv, NULL);
+ 
+-  g_test_bug_base ("htps://gitlab.gnome.org/GNOME/glib/issues/");
+-  g_test_bug ("251");
++  g_test_bug_base ("https://gitlab.gnome.org/GNOME/glib/issues/");
+ 
+   g_test_add_func ("/trash/not-supported", test_trash_not_supported);
+ 
