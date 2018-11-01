@@ -101,6 +101,7 @@ test_timeout_multiplier = 20
 endif
 
 override_dh_auto_test-arch:
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 	# Remove LD_PRELOAD so we don't run with fakeroot, which makes dbus-related tests fail
 	env -u LD_PRELOAD \
 		DEB_BUILD_TIME_TESTS=1 \
@@ -112,6 +113,7 @@ override_dh_auto_test-arch:
 		--timeout-multiplier $(test_timeout_multiplier) \
 		--verbose \
 	|| $(handle_test_failure)
+endif
 
 # Skip build-time tests if all we are building is documentation; running
 # them once per architecture is plenty
