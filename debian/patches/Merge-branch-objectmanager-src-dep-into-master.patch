@@ -1,0 +1,27 @@
+From: Philip Withnall <philip@tecnocode.co.uk>
+Date: Thu, 25 Oct 2018 04:28:09 +0000
+Subject: Merge branch 'objectmanager-src-dep' into 'master'
+
+gio, tests: ensure objectmanager sources are generated
+
+See merge request GNOME/glib!414
+
+(cherry picked from commit 5263b54a06d6289cf8bbaa7870e1eed8b4cd8626)
+
+11e4fcca gio, tests: ensure objectmanager sources are generated
+
+Applied-upstream: 2.58.2, commit:c5ea31846f1dd00130e2710907d9d01a7036900f
+---
+ gio/tests/gdbus-object-manager-example/meson.build | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/gio/tests/gdbus-object-manager-example/meson.build b/gio/tests/gdbus-object-manager-example/meson.build
+index b737f05..6e2cb07 100644
+--- a/gio/tests/gdbus-object-manager-example/meson.build
++++ b/gio/tests/gdbus-object-manager-example/meson.build
+@@ -22,4 +22,5 @@ libgdbus_example_objectmanager = library('gdbus-example-objectmanager',
+     install_dir : installed_tests_execdir)
+ 
+ libgdbus_example_objectmanager_dep = declare_dependency(
++  sources : gdbus_example_objectmanager_generated,
+   link_with : libgdbus_example_objectmanager)

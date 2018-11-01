@@ -1,0 +1,55 @@
+From: Ondrej Holy <oholy@redhat.com>
+Date: Fri, 27 Apr 2018 10:06:23 +0200
+Subject: gunixmounts: Filter out mounts with device path that was repeated
+
+libmount-based implementation doesn't filter out mounts with device
+path that was repeated as it is done with mntent-based implementation.
+It causes problems to our volume monitors which are not able to handle
+multiple mounts for one device path properly without additional API.
+Let's filter out the same mounts as are filtered out with mntent-based
+implementation.
+
+This is intended only for stable branches to prevent current issues.
+
+Bug: https://gitlab.gnome.org/GNOME/glib/issues/1271
+Forwarded: GNOME/glib!365
+Applied-upstream: 2.58.2, commit:1161ac3bdb11cfa948a11ee6c3949aea59c9778b
+---
+ gio/gunixmounts.c | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+diff --git a/gio/gunixmounts.c b/gio/gunixmounts.c
+index 355329c..8cbd70f 100644
+--- a/gio/gunixmounts.c
++++ b/gio/gunixmounts.c
+@@ -461,6 +461,18 @@ create_unix_mount_point (const char *device_path,
+  */
+ #define PROC_MOUNTINFO_PATH "/proc/self/mountinfo"
+ 
++static int
++uniq_fs_source_cmp (struct libmnt_table *table G_GNUC_UNUSED,
++                    struct libmnt_fs *a,
++                    struct libmnt_fs *b)
++{
++  if (mnt_fs_is_pseudofs (a) || mnt_fs_is_netfs (a) ||
++      mnt_fs_is_pseudofs (b) || mnt_fs_is_netfs (b))
++    return 1;
++
++  return !mnt_fs_streq_srcpath (a, mnt_fs_get_srcpath (b));
++}
++
+ static GList *
+ _g_get_unix_mounts (void)
+ {
+@@ -482,6 +494,11 @@ _g_get_unix_mounts (void)
+       unsigned long mount_flags = 0;
+       gboolean is_read_only = FALSE;
+ 
++      /* Use only the first mount for device, see comment from _g_get_unix_mounts
++       * in #else branch.
++       */
++      mnt_table_uniq_fs (table, MNT_UNIQ_FORWARD, uniq_fs_source_cmp);
++
+       device_path = mnt_fs_get_source (fs);
+       if (g_strcmp0 (device_path, "/dev/root") == 0)
+         device_path = _resolve_dev_root ();

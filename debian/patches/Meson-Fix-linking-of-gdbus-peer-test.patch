@@ -2,6 +2,7 @@ From: Xavier Claessens <xavier.claessens@collabora.com>
 Date: Mon, 24 Sep 2018 13:32:08 -0400
 Subject: Meson: Fix linking of gdbus-peer test
 
+Applied-upstream: 2.58.2, commit:a03083ee1754122f7ae674dc0b5598d163a03495
 Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/350
 ---
  gio/tests/gdbus-object-manager-example/meson.build | 4 ++--

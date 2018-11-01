@@ -14,7 +14,7 @@ Forwarded: not-needed, Debian-specific
  3 files changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/gio/Makefile.am b/gio/Makefile.am
-index fc0b918..7b184e3 100644
+index 05b20cd..b498202 100644
 --- a/gio/Makefile.am
 +++ b/gio/Makefile.am
 @@ -26,6 +26,7 @@ AM_CPPFLAGS = \
