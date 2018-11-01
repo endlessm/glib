@@ -104,13 +104,8 @@ endif
 
 test_timeout_multiplier = 1
 
-ifneq ($(filter armel mips% sparc%,$(DEB_HOST_ARCH_CPU)),)
+ifneq ($(filter arm hppa mips% sparc%,$(DEB_HOST_ARCH_CPU)),)
 $(info Slow architecture detected, increasing test timeout)
-test_timeout_multiplier = 2
-endif
-
-ifneq ($(filter hppa,$(DEB_HOST_ARCH_CPU)),)
-$(info Very slow architecture detected, increasing test timeout)
 test_timeout_multiplier = 5
 endif
 
