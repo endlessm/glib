@@ -23,7 +23,26 @@ include /usr/share/dpkg/default.mk
 override_dh_autoreconf:
 	@:
 
+ifneq ($(filter hppa,$(DEB_HOST_ARCH_CPU)),)
+stack_grows_up = true
+else
+stack_grows_up = false
+endif
+
+export DH_MESON_CROSS_FILE = debian/cross.txt
+
+# We use our own copy of debcrossgen to work around unimplemented feature
+# request https://bugs.debian.org/912559
 override_dh_auto_configure:
+ifneq ($(DEB_HOST_ARCH),$(DEB_BUILD_ARCH))
+	debian/debcrossgen \
+		--set have_c99_snprintf=true \
+		--set have_c99_vsnprintf=true \
+		--set have_strlcpy=false \
+		--set have_unix98_printf=true \
+		--set growing_stack=$(stack_grows_up) \
+		-o debian/cross.txt
+endif
 	dh_auto_configure \
 		--builddirectory=debian/build/deb \
 		-- \
