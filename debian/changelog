@@ -14,6 +14,7 @@ glib2.0 (2.58.1-5) UNRELEASED; urgency=medium
   * Respect nocheck in DEB_BUILD_OPTIONS
   * Adjust test timeouts:
     - Reduce default timeout multiplier from x3 to x1
+    - Reduce armel timeout multiplier from x3 to x2
     - Reduce mips*, sparc* timeout multiplier from x10 to x2
     - Reduce timeout multiplier for architectures known to have qemu
       buildds from x50 to x20
