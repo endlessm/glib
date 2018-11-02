@@ -102,7 +102,9 @@ else
 handle_test_failure := true
 endif
 
-test_timeout_multiplier = 1
+# Upstream test timeouts assume an otherwise unloaded system, but that
+# isn't necessarily the case for a porterbox or multiple parallel builds
+test_timeout_multiplier = 3
 
 ifneq ($(filter arm hppa mips% sparc%,$(DEB_HOST_ARCH_CPU)),)
 $(info Slow architecture detected, increasing test timeout)

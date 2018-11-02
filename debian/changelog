@@ -14,7 +14,6 @@ glib2.0 (2.58.1-5) UNRELEASED; urgency=medium
     Add proposed patches to increase default Meson test timeouts
   * Respect nocheck in DEB_BUILD_OPTIONS
   * Adjust test timeouts:
-    - Reduce default timeout multiplier from x3 to x1
     - Increase armel, armhf, hppa timeout multiplier from x3 to x5
     - Reduce mips*, sparc* timeout multiplier from x10 to x5
     - Reduce timeout multiplier for architectures known to have qemu
