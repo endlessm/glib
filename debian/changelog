@@ -1,5 +1,6 @@
-glib2.0 (2.58.1-5) UNRELEASED; urgency=medium
+glib2.0 (2.58.1-5) experimental; urgency=medium
 
+  * Team upload
   * d/p/*:
     Update to upstream glib-2-58 branch as of 2.58.1-89-g7aa52a7d5,
     except for translations
@@ -18,7 +19,7 @@ glib2.0 (2.58.1-5) UNRELEASED; urgency=medium
     This avoids embedding a local copy of GNUlib (v)(sn)printf when
     cross-compiling. (Workaround for #912559)
 
- -- Simon McVittie <smcv@debian.org>  Thu, 01 Nov 2018 10:37:21 +0000
+ -- Simon McVittie <smcv@debian.org>  Fri, 02 Nov 2018 19:05:22 +0000
 
 glib2.0 (2.58.1-4) experimental; urgency=medium
 
