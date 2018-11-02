@@ -6,6 +6,7 @@ This test isn't inherently slow, but it produces so much output that
 it can take a minute or more on hardware with weak I/O performance.
 
 Signed-off-by: Simon McVittie <smcv@collabora.com>
+Applied-upstream: 2.58.2, commit:7aa52a7d
 ---
  glib/tests/meson.build | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)

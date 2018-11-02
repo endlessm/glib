@@ -3,6 +3,7 @@ Date: Thu, 1 Nov 2018 09:49:43 +0000
 Subject: meson: Centralize test timeout values
 
 Signed-off-by: Simon McVittie <smcv@collabora.com>
+Applied-upstream: 2.58.2, commit:7aa52a7d
 ---
  gio/tests/meson.build      | 2 +-
  glib/tests/meson.build     | 2 +-

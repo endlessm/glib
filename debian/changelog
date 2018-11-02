@@ -1,26 +1,19 @@
 glib2.0 (2.58.1-5) UNRELEASED; urgency=medium
 
   * d/p/*:
-    Update to upstream glib-2-58 branch as of 2.58.1-85-g985210849,
+    Update to upstream glib-2-58 branch as of 2.58.1-89-g7aa52a7d5,
     except for translations
   * d/p/mainloop-test-Fix-race-conditions.patch:
     Add patch from upstream git master to fix race conditions in
     mainloop test
   * d/p/meson-Define-__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4-on-GNU-Li.patch:
     Add proposed patch to fix detection of atomic operations on armel
-  * d/p/meson-Centralize-test-timeout-values.patch,
-    d/p/meson-Increase-fast-test-timeout-from-30s-to-60s.patch,
-    d/p/meson-Mark-gdatetime-test-as-slow.patch:
-    Add proposed patches to increase default Meson test timeouts
   * Respect nocheck in DEB_BUILD_OPTIONS
   * Adjust test timeouts:
     - Increase armel, armhf, hppa timeout multiplier from x3 to x5
     - Reduce mips*, sparc* timeout multiplier from x10 to x5
     - Reduce timeout multiplier for architectures known to have qemu
       buildds from x50 to x20
-  * d/p/meson-Mark-1bit-emufutex-test-as-slow.patch,
-    d/p/Meson-Fix-linking-of-gdbus-peer-test.patch:
-    Mark as applied upstream
   * d/rules: Set Meson cross properties using a modified debcrossgen.
     This avoids embedding a local copy of GNUlib (v)(sn)printf when
     cross-compiling. (Workaround for #912559)
