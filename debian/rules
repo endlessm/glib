@@ -29,6 +29,12 @@ else
 stack_grows_up = false
 endif
 
+ifneq ($(filter kfreebsd,$(DEB_HOST_ARCH_OS)),)
+have_non_stub_xattr = false
+else
+have_non_stub_xattr = true
+endif
+
 export DH_MESON_CROSS_FILE = debian/cross.txt
 
 # We use our own copy of debcrossgen to work around unimplemented feature
@@ -168,7 +174,7 @@ DEB_CONFIGURE_FLAGS_deb := \
 	-Dman=true \
 	-Dselinux=$(is_linux) \
 	-Dsystemtap=true \
-	-Dxattr=true \
+	-Dxattr=$(have_non_stub_xattr) \
 	$(NULL)
 
 ifneq ($(filter libglib2.0-doc,$(binaries)),)
@@ -183,6 +189,7 @@ DEB_CONFIGURE_FLAGS_udeb := \
 	-Dinstalled_tests=false \
 	-Dlibmount=false \
 	-Dselinux=false \
+	-Dxattr=$(have_non_stub_xattr) \
 	$(NULL)
 
 override_dh_auto_build:

@@ -6,6 +6,11 @@ glib2.0 (2.58.1-6) UNRELEASED; urgency=medium
     increase the test timeout to prevent this test from timing out on
     Cortex-A57 CPUs when building with Meson, and mark as forwarded
     upstream
+  * Disable xattr support on kFreeBSD.
+    kFreeBSD has stub implementations of getxattr() etc. which will
+    always fail. Autoconf considers these to be present, but Meson
+    detects them and treats them as absent, resulting in configuration
+    failure.
 
  -- Simon McVittie <smcv@debian.org>  Sat, 03 Nov 2018 15:41:25 +0000
 
