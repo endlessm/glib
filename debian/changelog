@@ -1,3 +1,11 @@
+glib2.0 (2.54.2-1endless5) eos; urgency=medium
+
+  * Backport GVariant/GDBus/GMarkup fuzz-testing fixes
+    This fixes several remotely exploitable heap handling problems.
+    https://phabricator.endlessm.com/T24339
+
+ -- Philip Withnall <withnall@endlessm.com>  Mon, 05 Nov 2018 13:07:00 +0000
+
 glib2.0 (2.54.2-1endless4) eos; urgency=medium
 
   * Backport gspawn/posix_spawn improvements
