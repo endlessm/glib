@@ -1,5 +1,6 @@
-glib2.0 (2.58.1-6) UNRELEASED; urgency=medium
+glib2.0 (2.58.1-6) experimental; urgency=medium
 
+  * Team upload
   * d/p/closures-test-Avoid-timeout-on-ARM64-CPUs.patch:
     Rename from
     d/p/debian/closures-test-Run-fewer-iterations-on-ARM64-and-armhf.patch,
@@ -12,7 +13,7 @@ glib2.0 (2.58.1-6) UNRELEASED; urgency=medium
     detects them and treats them as absent, resulting in configuration
     failure.
 
- -- Simon McVittie <smcv@debian.org>  Sat, 03 Nov 2018 15:41:25 +0000
+ -- Simon McVittie <smcv@debian.org>  Tue, 06 Nov 2018 14:19:18 +0000
 
 glib2.0 (2.58.1-5) experimental; urgency=medium
 
