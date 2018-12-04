@@ -12,12 +12,8 @@ DEB_LDFLAGS_MAINT_APPEND += -Wl,-z,defs
 # http://mid.gmane.org/1257999019.21780.15.camel@marzipan
 DEB_LDFLAGS_MAINT_APPEND += -Wl,--no-as-needed
 
-# Ubuntu's ppc64el defaults to -O3 but that doesn't build now
-ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
-export DEB_CFLAGS_MAINT_APPEND += -O0
-else
-export DEB_CFLAGS_MAINT_APPEND += -O2
-endif
+# Make the linker work a bit harder so dynamic loading can be done faster
+DEB_LDFLAGS_MAINT_APPEND += -Wl,-O1
 
 include /usr/share/dpkg/default.mk
 
