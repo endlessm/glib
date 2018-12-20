@@ -1,8 +1,11 @@
 glib2.0 (2.58.2-1) UNRELEASED; urgency=medium
 
   * New upstream release
+  * Drop many patches that were applied upstream
+  * Add patch from upstream to fix alignment of GVariant test data
+  * d/libglib2.0-0.symbols: Update for new ABI
 
- -- Simon McVittie <smcv@debian.org>  Thu, 20 Dec 2018 18:13:21 +0000
+ -- Simon McVittie <smcv@debian.org>  Fri, 21 Dec 2018 09:55:54 +0000
 
 glib2.0 (2.58.1-6) experimental; urgency=medium
 
