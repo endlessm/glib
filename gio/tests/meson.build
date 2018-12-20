@@ -5,6 +5,17 @@ common_gio_tests_deps = [
   libgio_dep,
 ]
 
+test_c_args = [
+  '-DG_LOG_DOMAIN="GLib-GIO"',
+  '-DTEST_SERVICES="@0@/gio/tests/services"'.format(meson.build_root()),
+  '-DGLIB_MKENUMS="@0@"'.format(glib_mkenums),
+  '-DGLIB_COMPILE_SCHEMAS="@0@"'.format(glib_compile_schemas.full_path()),
+]
+
+if host_machine.system() == 'windows'
+  common_gio_tests_deps += [iphlpapi_dep, winsock2, cc.find_library ('secur32')]
+endif
+
 subdir('gdbus-object-manager-example')
 
 gengiotypefuncs_prog = find_program('gengiotypefuncs.py')
@@ -75,6 +86,7 @@ gio_tests = [{
 test_extra_programs = [{
   'gdbus-connection-flush-helper' : {},
   'gdbus-testserver' : {},
+  'gsubprocess-testprog' : {},
 }]
 
 test_env = environment()
@@ -82,13 +94,6 @@ test_env.set('G_TEST_SRCDIR', meson.current_source_dir())
 test_env.set('G_TEST_BUILDDIR', meson.current_build_dir())
 test_env.set('GIO_MODULE_DIR', '')
 test_env.set('GIO_LAUNCH_DESKTOP', meson.build_root() + '/gio/gio-launch-desktop')
-
-test_c_args = [
-  '-DG_LOG_DOMAIN="GLib-GIO"',
-  '-DTEST_SERVICES="@0@/gio/tests/services"'.format(meson.build_root()),
-  '-DGLIB_MKENUMS="@0@"'.format(glib_mkenums),
-  '-DGLIB_COMPILE_SCHEMAS="@0@"'.format(glib_compile_schemas.full_path()),
-]
 
 # Check for libdbus1 - Optional - is only used in the GDBus test cases
 # 1.2.14 required for dbus_message_set_serial
@@ -120,7 +125,10 @@ endif
 if host_machine.system() != 'windows'
   gio_tests += [{
     'file' : {},
-    'gdbus-peer' : {'dependencies' : [libgdbus_example_objectmanager_dep]},
+    'gdbus-peer' : {
+      'dependencies' : [libgdbus_example_objectmanager_dep],
+      'install_rpath' : installed_tests_execdir
+    },
     'gdbus-peer-object-manager' : {},
     'live-g-file' : {},
     'socket-address' : {},
@@ -139,9 +147,11 @@ if host_machine.system() != 'windows'
     gio_tests += [{
       'appinfo' : {
         'install' : false,
+        'is_parallel' : false,
       },
       'desktop-app-info' : {
         'install' : false,
+        'is_parallel' : false,
       },
     }]
   endif
@@ -164,6 +174,16 @@ if host_machine.system() != 'windows'
   #  Test programs that need to bring up a session bus (requires dbus-daemon)
   have_dbus_daemon = find_program('dbus-daemon', required : false).found()
   if have_dbus_daemon
+    annotate_args = [
+      '--annotate', 'org.project.Bar', 'Key1', 'Value1',
+      '--annotate', 'org.project.Bar', 'org.gtk.GDBus.Internal', 'Value2',
+      '--annotate', 'org.project.Bar.HelloWorld()', 'Key3', 'Value3',
+      '--annotate', 'org.project.Bar::TestSignal', 'Key4', 'Value4',
+      '--annotate', 'org.project.Bar:ay', 'Key5', 'Value5',
+      '--annotate', 'org.project.Bar.TestPrimitiveTypes()[val_int32]', 'Key6', 'Value6',
+      '--annotate', 'org.project.Bar.TestPrimitiveTypes()[ret_uint32]', 'Key7', 'Value7',
+      '--annotate', 'org.project.Bar::TestSignal[array_of_strings]', 'Key8', 'Value8',
+    ]
     # Generate gdbus-test-codegen-generated.{c,h}
     gdbus_test_codegen_generated = custom_target('gdbus-test-codegen-generated',
         input :   ['test-codegen.xml'],
@@ -175,17 +195,32 @@ if host_machine.system() != 'windows'
                    '--output-directory', '@OUTDIR@',
                    '--generate-c-code', 'gdbus-test-codegen-generated',
                    '--c-generate-object-manager',
+                   '--c-generate-autocleanup', 'all',
                    '--c-namespace', 'Foo_iGen',
                    '--generate-docbook', 'gdbus-test-codegen-generated-doc',
-                   '--annotate', 'org.project.Bar', 'Key1', 'Value1',
-                   '--annotate', 'org.project.Bar', 'org.gtk.GDBus.Internal', 'Value2',
-                   '--annotate', 'org.project.Bar.HelloWorld()', 'Key3', 'Value3',
-                   '--annotate', 'org.project.Bar::TestSignal', 'Key4', 'Value4',
-                   '--annotate', 'org.project.Bar:ay', 'Key5', 'Value5',
-                   '--annotate', 'org.project.Bar.TestPrimitiveTypes()[val_int32]', 'Key6', 'Value6',
-                   '--annotate', 'org.project.Bar.TestPrimitiveTypes()[ret_uint32]', 'Key7', 'Value7',
-                   '--annotate', 'org.project.Bar::TestSignal[array_of_strings]', 'Key8', 'Value8',
+                   annotate_args,
                    '@INPUT@'])
+
+    gdbus_test_codegen_generated_interface_info = [
+      custom_target('gdbus-test-codegen-generated-interface-info-h',
+          input :   ['test-codegen.xml'],
+          output :  ['gdbus-test-codegen-generated-interface-info.h'],
+          depend_files : gdbus_codegen_built_files,
+          command : [python, gdbus_codegen,
+                     '--interface-info-header',
+                     annotate_args,
+                     '--output', '@OUTPUT@',
+                     '@INPUT@']),
+      custom_target('gdbus-test-codegen-generated-interface-info-c',
+          input :   ['test-codegen.xml'],
+          output :  ['gdbus-test-codegen-generated-interface-info.c'],
+          depend_files : gdbus_codegen_built_files,
+          command : [python, gdbus_codegen,
+                     '--interface-info-body',
+                     annotate_args,
+                     '--output', '@OUTPUT@',
+                     '@INPUT@']),
+    ]
 
     extra_sources = ['gdbus-sessionbus.c', 'gdbus-tests.c']
 
@@ -215,19 +250,22 @@ if host_machine.system() != 'windows'
       },
       'gdbus-proxy-well-known-name' : {'extra_sources' : extra_sources},
       'gdbus-test-codegen' : {
-        'extra_sources' : [extra_sources, gdbus_test_codegen_generated],
+        'extra_sources' : [extra_sources, gdbus_test_codegen_generated, gdbus_test_codegen_generated_interface_info],
       },
       'gdbus-threading' : {
         'extra_sources' : extra_sources,
         'suite' : ['slow'],
       },
-      'gmenumodel' : {'extra_sources' : extra_sources},
+      'gmenumodel' : {
+        'extra_sources' : extra_sources,
+        'suite' : ['slow'],
+      },
       'gnotification' : {
         'extra_sources' : [extra_sources, 'gnotification-server.c'],
       },
       'gdbus-test-codegen-old' : {
         'source' : 'gdbus-test-codegen.c',
-        'extra_sources' : [extra_sources, gdbus_test_codegen_generated],
+        'extra_sources' : [extra_sources, gdbus_test_codegen_generated, gdbus_test_codegen_generated_interface_info],
         'c_args' : ['-DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_36',
                     '-DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_36'],
       },
@@ -246,9 +284,10 @@ if host_machine.system() != 'windows'
 
   # This test is currently unreliable
   executable('gdbus-overflow', 'gdbus-overflow.c',
-      install : false,
       c_args : test_c_args,
-      dependencies : common_gio_tests_deps)
+      dependencies : common_gio_tests_deps,
+      install_dir : installed_tests_execdir,
+      install : installed_tests_enabled)
 
   gio_tests += [{
     'gdbus-connection-flush' : {
@@ -310,7 +349,6 @@ test_extra_programs += [{
   'gdbus-example-subtree' : {'install' : false},
   'gdbus-example-watch-name' : {'install' : false},
   'gdbus-example-watch-proxy' : {'install' : false},
-  'gsubprocess-testprog' : {'install' : false},
   'httpd' : {'install' : false},
   'proxy' : {'install' : false},
   'resolver' : {'install' : false},
@@ -320,21 +358,26 @@ test_extra_programs += [{
     'extra_sources' : ['gtlsconsoleinteraction.c'],
     'install' : false,
   },
-  # These three are manual-run tests because they need a session bus but don't bring one up themselves
-  # FIXME: these build but don't seem to work!
-  'gdbus-example-objectmanager-client' : {
-    'dependencies' : [libgdbus_example_objectmanager_dep],
-    'install' : false,
-  },
-  'gdbus-example-objectmanager-server' : {
-    'dependencies' : [libgdbus_example_objectmanager_dep],
-    'install' : false,
-  },
-  'gdbus-test-fixture' : {
-    'dependencies' : [libgdbus_example_objectmanager_dep],
-    'install' : false,
-  },
 }]
+
+if cc.get_id() != 'msvc'
+  test_extra_programs += [{
+    # These three are manual-run tests because they need a session bus but don't bring one up themselves
+    # FIXME: these build but don't seem to work!
+    'gdbus-example-objectmanager-client' : {
+      'dependencies' : [libgdbus_example_objectmanager_dep],
+      'install' : false,
+    },
+    'gdbus-example-objectmanager-server' : {
+      'dependencies' : [libgdbus_example_objectmanager_dep],
+      'install' : false,
+    },
+    'gdbus-test-fixture' : {
+      'dependencies' : [libgdbus_example_objectmanager_dep],
+      'install' : false,
+    },
+  }]
+endif
 
 if host_machine.system() != 'windows'
   test_extra_programs += [{
@@ -342,6 +385,25 @@ if host_machine.system() != 'windows'
       'install' : false,
     },
   }]
+endif
+
+if installed_tests_enabled
+  install_data(
+    'contexts.c',
+    'g-icon.c',
+    'appinfo-test-actions.desktop',
+    'appinfo-test-gnome.desktop',
+    'appinfo-test-notgnome.desktop',
+    'appinfo-test.desktop',
+    'appinfo-test2.desktop',
+    'file.c',
+    'org.gtk.test.dbusappinfo.desktop',
+    install_dir : installed_tests_execdir,
+  )
+  install_subdir('x-content', install_dir : installed_tests_execdir)
+  install_subdir('desktop-files', install_dir : installed_tests_execdir)
+  install_subdir('thumbnails', install_dir : installed_tests_execdir)
+  install_subdir('cert-tests', install_dir : installed_tests_execdir)
 endif
 
 if not meson.is_cross_build() or meson.has_exe_wrapper()
@@ -356,14 +418,12 @@ if not meson.is_cross_build() or meson.has_exe_wrapper()
                '--c-name', '_g_plugin',
                '@INPUT@'])
 
-  if host_system == 'windows'
-    resource_plugin_platform_link_args = ['-no-undefined']
-  else
-    resource_plugin_platform_link_args = []
-  endif
-  shared_module ('resourceplugin', 'resourceplugin.c', plugin_resources_c,
-    link_args : export_dynamic_ldflags + resource_plugin_platform_link_args,
-    dependencies : common_gio_tests_deps)
+  shared_module('resourceplugin', 'resourceplugin.c', plugin_resources_c,
+    link_args : export_dynamic_ldflags,
+    dependencies : common_gio_tests_deps,
+    install_dir : installed_tests_execdir,
+    install : installed_tests_enabled
+  )
 
   test_gresource = custom_target('test.gresource',
     input : 'test.gresource.xml',
@@ -372,7 +432,9 @@ if not meson.is_cross_build() or meson.has_exe_wrapper()
                '--target=@OUTPUT@',
                '--sourcedir=' + meson.current_source_dir(),
                '--sourcedir=' + meson.current_build_dir(),
-               '@INPUT@'])
+               '@INPUT@'],
+    install_dir : installed_tests_execdir,
+    install : installed_tests_enabled)
 
   test_resources2_c = custom_target('test_resources2.c',
     input : 'test3.gresource.xml',
@@ -431,7 +493,7 @@ foreach test_dict : gio_tests
       test_conf.set('installed_tests_dir', installed_tests_execdir)
       test_conf.set('program', test_name)
       configure_file(
-        input: installed_tests_template,
+        input: installed_tests_template_tap,
         output: test_name + '.test',
         install_dir: installed_tests_metadir,
         configuration: test_conf
@@ -441,13 +503,20 @@ foreach test_dict : gio_tests
     exe = executable(test_name, [source, extra_sources],
       c_args : test_c_args + extra_args.get('c_args', []),
       dependencies : common_gio_tests_deps + extra_args.get('dependencies', []),
+      install_rpath : extra_args.get('install_rpath', ''),
       install_dir: installed_tests_execdir,
       install: install,
     )
 
     suite = ['gio'] + extra_args.get('suite', [])
-    timeout = suite.contains('slow') ? 120 : 30
-    test(test_name, exe, env : test_env, timeout : timeout, suite : suite)
+    timeout = suite.contains('slow') ? test_timeout_slow : test_timeout
+    test(test_name, exe,
+      env : test_env,
+      timeout : timeout,
+      suite : suite,
+      args : ['--tap'],
+      is_parallel : extra_args.get('is_parallel', true),
+    )
   endforeach
 endforeach
 

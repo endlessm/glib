@@ -386,7 +386,7 @@ glib_probes.h: glib_probes.d
 		< $@.tmp > $@ && rm -f $@.tmp
 
 glib_probes.lo: glib_probes.d
-	$(AM_V_GEN) $(LIBTOOL) --mode=compile $(AM_V_lt) --tag=CC $(DTRACE) -G -s $< -o $@
+	$(AM_V_GEN) $(LIBTOOL) --mode=compile $(AM_V_lt) --tag=CC env CFLAGS="$(CFLAGS)" $(DTRACE) -G -s $< -o $@
 
 BUILT_SOURCES += glib_probes.h glib_probes.lo
 CLEANFILES += glib_probes.h glib_probes.h.tmp
@@ -454,24 +454,17 @@ bin_PROGRAMS += gtester
 gtester_SOURCES	 = gtester.c
 gtester_LDADD	 = libglib-2.0.la 
 
-auto_config_binscripts = gtester-report
-bin_SCRIPTS = ${auto_config_binscripts}
-EXTRA_DIST += ${auto_config_binscripts}
+bin_SCRIPTS = gtester-report
+EXTRA_DIST += gtester-report.in
 
-CONFIGVARS = \
-	"bindir"    	: "${bindir}",		\
-	"glib-version"  : "${GLIB_VERSION}"
-
-install-exec-hook:
-	for sf in ${auto_config_binscripts} ; do \
-	  mv -f "$(DESTDIR)$(bindir)/$$sf" "$(DESTDIR)$(bindir)/$$sf".tmp \
-	  && sed < "$(DESTDIR)$(bindir)/$$sf".tmp > "$(DESTDIR)$(bindir)/$$sf" \
-	    -e '1,24s|^ *#@PKGINSTALL_CONFIGVARS_IN24LINES@|  ${CONFIGVARS}|' \
-	    -e '1,1s|#! /usr/bin/env python.*|#!${PYTHON}|' \
+gtester-report: gtester-report.in Makefile
+	$(AM_V_GEN) set -e ; \
+	sed < $< > $@.tmp \
+	    -e '1,1s|#!.*|#!${PYTHON}|' \
+	    -e 's|[@]GLIB_VERSION[@]|${GLIB_VERSION}|' \
 	  || exit $$? ; \
-	  chmod a+x $(DESTDIR)$(bindir)/$$sf ; \
-	  rm -f "$(DESTDIR)$(bindir)/$$sf".tmp ; \
-	done
+	  chmod +x $@.tmp ; \
+	  mv $@.tmp $@
 
 endif
 
