@@ -1,3 +1,4 @@
+tests-Allocate-gvariant-data-from-the-heap-to-guarantee-a.patch
 mainloop-test-Fix-race-conditions.patch
 closures-test-Avoid-timeout-on-ARM64-CPUs.patch
 01_gettext-desktopfiles.patch
