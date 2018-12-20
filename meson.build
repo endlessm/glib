@@ -1,5 +1,5 @@
 project('glib', 'c', 'cpp',
-  version : '2.58.1',
+  version : '2.58.2',
   meson_version : '>= 0.47.0',
   default_options : [
     'buildtype=debugoptimized',
@@ -71,6 +71,7 @@ installed_tests_metadir = join_paths(glib_datadir, 'installed-tests', meson.proj
 installed_tests_execdir = join_paths(glib_libexecdir, 'installed-tests', meson.project_name())
 installed_tests_enabled = get_option('installed_tests')
 installed_tests_template = files('template.test.in')
+installed_tests_template_tap = files('template-tap.test.in')
 
 add_project_arguments('-D_GNU_SOURCE', language: 'c')
 
@@ -226,6 +227,7 @@ headers = [
   'poll.h',
   'pwd.h',
   'sched.h',
+  'spawn.h',
   'stdint.h',
   'stdlib.h',
   'string.h',
@@ -341,7 +343,7 @@ endforeach
 
 # Compiler flags
 if cc.get_id() == 'gcc' or cc.get_id() == 'clang'
-  test_c_args = [
+  warning_c_args = [
     '-Wall',
     '-Wduplicated-branches',
     '-Wmisleading-indentation',
@@ -352,25 +354,24 @@ if cc.get_id() == 'gcc' or cc.get_id() == 'clang'
     '-Wno-bad-function-cast',
     '-Werror=declaration-after-statement',
     '-Werror=format=2',
-    '-Werror=format-security',
     '-Werror=implicit-function-declaration',
     '-Werror=init-self',
     '-Werror=missing-include-dirs',
     '-Werror=missing-prototypes',
     '-Werror=pointer-arith',
   ]
-  test_c_link_args = [
+  warning_c_link_args = [
     '-Wl,-z,nodelete',
   ]
   if get_option('bsymbolic_functions')
-    test_c_link_args += ['-Wl,-Bsymbolic-functions']
+    warning_c_link_args += ['-Wl,-Bsymbolic-functions']
   endif
 else
-  test_c_args = []
-  test_c_link_args = []
+  warning_c_args = []
+  warning_c_link_args = []
 endif
 
-add_project_arguments(cc.get_supported_arguments(test_c_args), language: 'c')
+add_project_arguments(cc.get_supported_arguments(warning_c_args), language: 'c')
 
 # FIXME: We cannot build some of the GResource tests with -z nodelete, which
 # means we cannot use that flag in add_project_link_arguments(), and must add
@@ -378,7 +379,7 @@ add_project_arguments(cc.get_supported_arguments(test_c_args), language: 'c')
 # because that is what the autotools build did.
 # See https://github.com/mesonbuild/meson/pull/3520 for a way to eventually
 # improve this.
-glib_link_flags = cc.get_supported_link_arguments(test_c_link_args)
+glib_link_flags = cc.get_supported_link_arguments(warning_c_link_args)
 
 # Windows Support (7+)
 if host_system == 'windows'
@@ -386,7 +387,6 @@ if host_system == 'windows'
 endif
 
 functions = [
-  'alloca',
   'endmntent',
   'endservent',
   'fallocate',
@@ -739,12 +739,14 @@ if cc.compiles('''#include <fcntl.h>
 endif
 
 # Check whether there is a vsnprintf() function with C99 semantics installed.
-# AC_FUNC_VSNPRINTF_C99
+# (similar tests to AC_FUNC_VSNPRINTF_C99)
 # Check whether there is a snprintf() function with C99 semantics installed.
-# AC_FUNC_SNPRINTF_C99
-
+# (similar tests to AC_FUNC_SNPRINTF_C99)
+# Check whether there is a printf() function with Unix98 semantics installed.
+# (similar tests to AC_FUNC_PRINTF_UNIX98)
 have_good_vsnprintf = false
 have_good_snprintf = false
+have_good_printf = false
 
 if host_system == 'windows' and cc.get_id() == 'msvc'
   # Unfortunately the Visual Studio 2015+ implementations of C99-style
@@ -755,6 +757,7 @@ if host_system == 'windows' and cc.get_id() == 'msvc'
   # rigorous enough to notice, though.
   glib_conf.set('HAVE_C99_SNPRINTF', false)
   glib_conf.set('HAVE_C99_VSNPRINTF', false)
+  glib_conf.set('HAVE_UNIX98_PRINTF', false)
 else
   vsnprintf_c99_test_code = '''
 #include <stdio.h>
@@ -851,6 +854,31 @@ main(void)
       have_good_snprintf = meson.get_cross_property('have_c99_snprintf', false)
       glib_conf.set('HAVE_C99_SNPRINTF', have_good_snprintf)
   endif
+
+  printf_unix98_test_code = '''
+#include <stdio.h>
+
+int
+main (void)
+{
+  char buffer[128];
+
+  sprintf (buffer, "%2\$d %3\$d %1\$d", 1, 2, 3);
+  if (strcmp ("2 3 1", buffer) == 0)
+    exit (0);
+  exit (1);
+}'''
+
+  if cc_can_run
+    rres = cc.run(printf_unix98_test_code, name : 'Unix98 printf positional parameters')
+    if rres.compiled() and rres.returncode() == 0
+      glib_conf.set('HAVE_UNIX98_PRINTF', 1)
+      have_good_printf = true
+    endif
+  else
+      have_good_printf = meson.get_cross_property('have_unix98_printf', false)
+      glib_conf.set('HAVE_UNIX98_PRINTF', have_good_printf)
+  endif
 endif
 
 if host_system == 'windows'
@@ -859,12 +887,15 @@ else
   glib_conf.set('EXEEXT', '')
 endif
 
-if have_good_vsnprintf and have_good_snprintf
-  # Our printf is 'good' only if vsnpintf()/snprintf() supports C99 well enough
-  glib_conf.set('HAVE_GOOD_PRINTF', 1) # FIXME: Check for HAVE_UNIX98_PRINTF?
+if have_good_vsnprintf and have_good_snprintf and have_good_printf
+  # Our printf is 'good' only if vsnpintf()/snprintf()/printf() supports C99 well enough
+  glib_conf.set('HAVE_GOOD_PRINTF', 1)
 else
   glib_conf.set('HAVE_VASPRINTF', 1)
 endif
+
+glibconfig_conf.set('GLIB_USING_SYSTEM_PRINTF',
+                    have_good_vsnprintf and have_good_snprintf and have_good_printf)
 
 # Check whether the printf() family supports Unix98 %n$ positional parameters
 # AC_FUNC_PRINTF_UNIX98
@@ -872,7 +903,6 @@ endif
 
 
 # Check for nl_langinfo and CODESET
-# FIXME: Check for HAVE_BIND_TEXTDOMAIN_CODESET
 if cc.links('''#include <langinfo.h>
                int main (int argc, char ** argv) {
                  char *codeset = nl_langinfo (CODESET);
@@ -1494,11 +1524,9 @@ foreach d : inet_defines
   glibconfig_conf.set(d[1], val)
 endforeach
 
-glibconfig_conf.set('GLIB_USING_SYSTEM_PRINTF', true) # FIXME!
-
 # We need a more robust approach here...
 host_cpu_family = host_machine.cpu_family()
-if host_cpu_family == 'x86' or host_cpu_family == 'x86_64' or host_cpu_family == 's390' or host_cpu_family == 's390x' or host_cpu_family.startswith('arm') or host_cpu_family.startswith('crisv32') or host_cpu_family.startswith('etrax')
+if host_cpu_family == 'x86' or host_cpu_family == 'x86_64' or host_cpu_family == 's390' or host_cpu_family == 's390x' or host_cpu_family.startswith('arm') or host_cpu_family == 'aarch64' or host_cpu_family.startswith('crisv32') or host_cpu_family.startswith('etrax')
   glib_memory_barrier_needed = false
 elif host_cpu_family.startswith('sparc') or host_cpu_family.startswith('alpha') or host_cpu_family.startswith('powerpc') or host_cpu_family == 'ia64'
   glib_memory_barrier_needed = true
@@ -1543,8 +1571,8 @@ atomicdefine = '''
 # We know that we can always use real ("lock free") atomic operations with MSVC
 if cc.get_id() == 'msvc' or cc.links(atomictest, name : 'atomic ops')
   have_atomic_lock_free = true
-  if host_system == 'android' and not cc.compiles(atomicdefine, name : 'atomic ops define')
-    # When building for armv5 on Android, gcc 4.9 provides
+  if (host_system == 'android' or host_system == 'linux') and not cc.compiles(atomicdefine, name : 'atomic ops define')
+    # When building for armv5 on Linux, gcc provides
     # __sync_bool_compare_and_swap but doesn't define
     # __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4
     glib_conf.set('__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4', true)
@@ -1634,7 +1662,7 @@ else
   growing_stack = meson.get_cross_property('growing_stack', false)
 endif
 
-glibconfig_conf.set('G_HAVE_GROWING_STACK', growing_stack)
+glibconfig_conf.set10('G_HAVE_GROWING_STACK', growing_stack)
 
 # Tests for iconv
 #
@@ -1720,24 +1748,23 @@ endif
 
 libm = cc.find_library('m', required : false)
 libffi_dep = dependency('libffi', version : '>= 3.0.0', fallback : ['libffi', 'ffi_dep'])
-if cc.get_id() != 'msvc'
-  libz_dep = dependency('zlib', fallback : ['zlib', 'zlib_dep'])
-else
-  # MSVC: Don't use the bundled ZLib sources until we are sure that we can't
-  # find the ZLib .lib
-  libz_dep = dependency('zlib', required : false)
 
-  # MSVC: Search for the ZLib .lib, which corresponds to the results of
-  # of using ZLib's win32/makefile.msc.
-  if not libz_dep.found()
+# Don't use the bundled ZLib sources until we are sure that we can't find it on
+# the system
+libz_dep = dependency('zlib', required : false)
+if not libz_dep.found()
+  if cc.get_id() != 'msvc'
+    libz_dep = cc.find_library('z', required : false)
+  else
     libz_dep = cc.find_library('zlib1', required : false)
     if not libz_dep.found()
       libz_dep = cc.find_library('zlib', required : false)
-      if not libz_dep.found()
-        libz_dep = subproject('zlib').get_variable('zlib_dep')
-      endif
     endif
   endif
+endif
+
+if not libz_dep.found()
+  libz_dep = subproject('zlib').get_variable('zlib_dep')
 endif
 
 # First check in libc, fallback to libintl, and as last chance build
@@ -1746,12 +1773,19 @@ endif
 # implementations. This could be extended if issues are found in some platforms.
 if cc.has_function('ngettext')
   libintl = []
+  have_bind_textdomain_codeset = cc.has_function('bind_textdomain_codeset')
 else
   libintl = cc.find_library('intl', required : false)
   if not libintl.found()
     libintl = subproject('proxy-libintl').get_variable('intl_dep')
+    have_bind_textdomain_codeset = true  # proxy-libintl supports it
+  else
+    have_bind_textdomain_codeset = cc.has_function('bind_textdomain_codeset',
+                                                   dependencies : libintl)
   endif
 endif
+
+glib_conf.set('HAVE_BIND_TEXTDOMAIN_CODESET', have_bind_textdomain_codeset)
 
 # We require gettext to always be present
 glib_conf.set('HAVE_DCGETTEXT', 1)
@@ -1845,14 +1879,7 @@ python_name = 'python3'
 
 # Determine which user environment-dependent files that we want to install
 have_bash = find_program('bash', required : false).found() # For completion scripts
-have_m4 = find_program('m4', required : false).found() # For m4 macros
 have_sh = find_program('sh', required : false).found() # For glib-gettextize
-
-# FIXME: defines in config.h that are not actually used anywhere
-# (we add them for now to minimise the diff)
-glib_conf.set('HAVE_DLFCN_H', 1)
-glib_conf.set('STDC_HEADERS', 1)
-glib_conf.set('SIZEOF___INT64', 8)
 
 # FIXME: How to detect Solaris? https://github.com/mesonbuild/meson/issues/1578
 if host_system == 'sunos'
@@ -1934,6 +1961,8 @@ if want_systemtap and enable_dtrace
   enable_systemtap = true
 endif
 
+test_timeout = 60
+test_timeout_slow = 120
 
 pkg = import('pkgconfig')
 windows = import('windows')
@@ -1963,11 +1992,9 @@ if have_sh
     configuration : gettextize_conf)
 endif
 
-if have_m4
-  # Install m4 macros that other projects use
-  install_data('m4macros/glib-2.0.m4', 'm4macros/glib-gettext.m4', 'm4macros/gsettings.m4',
-    install_dir : join_paths(get_option('datadir'), 'aclocal'))
-endif
+# Install m4 macros that other projects use
+install_data('m4macros/glib-2.0.m4', 'm4macros/glib-gettext.m4', 'm4macros/gsettings.m4',
+  install_dir : join_paths(get_option('datadir'), 'aclocal'))
 
 if host_system != 'windows'
   # Install Valgrind suppression file (except on Windows,

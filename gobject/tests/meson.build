@@ -36,6 +36,7 @@ gobject_tests = {
   'binding' : {},
   'properties' : {},
   'reference' : {},
+  'flags' : {},
   'value' : {},
   'type' : {},
   'gobject-private' : {
@@ -73,7 +74,7 @@ foreach test_name, extra_args : gobject_tests
     test_conf.set('installed_tests_dir', installed_tests_execdir)
     test_conf.set('program', test_name)
     configure_file(
-      input: installed_tests_template,
+      input: installed_tests_template_tap,
       output: test_name + '.test',
       install_dir: installed_tests_metadir,
       configuration: test_conf
@@ -88,8 +89,9 @@ foreach test_name, extra_args : gobject_tests
   )
 
   suite = ['gobject'] + extra_args.get('suite', [])
-  timeout = suite.contains('slow') ? 120 : 30
-  test(test_name, exe, env : test_env, timeout : timeout, suite : suite)
+  timeout = suite.contains('slow') ? test_timeout_slow : test_timeout
+  test(test_name, exe, env : test_env, timeout : timeout, suite : suite,
+    args: ['--tap'])
 endforeach
 
 test(
