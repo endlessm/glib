@@ -12,4 +12,10 @@ export GIO_USE_VOLUME_MONITOR=unix
 
 export XDG_RUNTIME_DIR="$AUTOPKGTEST_TMP"
 
+printf "Running as: "; id -a
+printf "passwd entry: "; getent passwd "$(id -u)" || echo "(exit status $?)"
+printf "group entry: "; getent group "$(id -g)" || echo "(exit status $?)"
+echo "Environment:"
+env | LC_ALL=C sort -u
+
 dbus-run-session -- xvfb-run -a gnome-desktop-testing-runner glib
