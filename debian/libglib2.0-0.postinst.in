@@ -1,8 +1,12 @@
 #!/bin/sh
 set -e
 
-if [ "$1" = triggered ]; then
-    for trigger in $2; do
+
+handle_triggers () {
+    local trigger
+    local dirs
+
+    for trigger in "$@"; do
         if ! [ -d $trigger ]; then
             continue
         fi
@@ -29,6 +33,10 @@ if [ "$1" = triggered ]; then
             ;;
         esac
     done
+}
+
+if [ "$1" = triggered ]; then
+    handle_triggers $2
     exit 0
 fi
 
