@@ -1,11 +1,17 @@
-glib2.0 (2.58.2-1) UNRELEASED; urgency=medium
+glib2.0 (2.58.2-1) experimental; urgency=medium
 
+  * Team upload
   * New upstream release
   * Drop many patches that were applied upstream
-  * Add patch from upstream to fix alignment of GVariant test data
+  * d/p/tests-Allocate-gvariant-data-from-the-heap-to-guarantee-a.patch:
+    Add patch from upstream to fix alignment of GVariant test data
   * d/libglib2.0-0.symbols: Update for new ABI
+  * d/tests/installed-tests: Log execution environment
+  * postinst: Convert triggers into a function
+  * postinst: Quote strings with #TOKENS# to fix syntax highlighting
+  * postinst: Add a vim modeline
 
- -- Simon McVittie <smcv@debian.org>  Fri, 21 Dec 2018 09:55:54 +0000
+ -- Simon McVittie <smcv@debian.org>  Tue, 01 Jan 2019 10:59:39 +0000
 
 glib2.0 (2.58.1-6) experimental; urgency=medium
 
