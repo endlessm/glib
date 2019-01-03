@@ -260,6 +260,14 @@ test_closure_refcount (void)
   GTest *object;
   guint i, n_iterations;
 
+#if defined(__aarch64__) || defined(__arm__)
+  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") != NULL)
+    {
+      g_print ("SKIP: Test is known to be flaky on arm* (#880883, #917983)\n");
+      return 0;
+    }
+#endif
+
   object = g_object_new (G_TYPE_TEST, NULL);
   closure = g_cclosure_new (G_CALLBACK (test_signal_handler), &test_data, destroy_data);
 
