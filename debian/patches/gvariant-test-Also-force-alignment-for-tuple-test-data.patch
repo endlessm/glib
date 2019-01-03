@@ -8,6 +8,7 @@ but this additional test failed on Debian's s390x port
 
 Signed-off-by: Simon McVittie <smcv@collabora.com>
 Bug-Debian: https://bugs.debian.org/917980
+Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/569
 ---
  glib/tests/gvariant.c | 7 +++++--
  1 file changed, 5 insertions(+), 2 deletions(-)
