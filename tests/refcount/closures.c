@@ -237,6 +237,14 @@ main (int    argc,
   GTest *object;
   guint i;
 
+#if defined(__aarch64__) || defined(__arm__)
+  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") != NULL)
+    {
+      g_print ("SKIP: Test is known to be flaky on arm* (#880883, #917983)\n");
+      return 0;
+    }
+#endif
+
   g_print ("START: %s\n", argv[0]);
   g_log_set_always_fatal (G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL | g_log_set_always_fatal (G_LOG_FATAL_MASK));
 
