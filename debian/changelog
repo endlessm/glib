@@ -1,3 +1,9 @@
+glib2.0 (2.58.2-3) UNRELEASED; urgency=medium
+
+  * Standards-Version: 4.3.0 (no changes required)
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 03 Jan 2019 13:29:45 +0000
+
 glib2.0 (2.58.2-2) experimental; urgency=medium
 
   * Team upload
