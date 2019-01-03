@@ -1,0 +1,37 @@
+From: Simon McVittie <smcv@debian.org>
+Date: Thu, 3 Jan 2019 09:01:03 +0000
+Subject: closures test: Skip on arm* unless flaky tests are allowed
+
+Choosing the right number of iterations to avoid either taking literally
+hours on some hardware, or getting spurious failures when one thread
+starves another, seems to be too hard to get right in practice.
+Make this test opt-in so that its failures aren't release-critical.
+We can run it as a separate autopkgtest that is marked flaky.
+
+Signed-off-by: Simon McVittie <smcv@debian.org>
+Bug-Debian: https://bugs.debian.org/880883
+Bug-Debian: https://bugs.debian.org/917983
+Forwarded: not-needed
+---
+ tests/refcount/closures.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/tests/refcount/closures.c b/tests/refcount/closures.c
+index 1884067..e77d1c7 100644
+--- a/tests/refcount/closures.c
++++ b/tests/refcount/closures.c
+@@ -245,6 +245,14 @@ main (int    argc,
+   GTest *object;
+   guint i;
+ 
++#if defined(__aarch64__) || defined(__arm__)
++  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") != NULL)
++    {
++      g_print ("SKIP: Test is known to be flaky on arm* (#880883, #917983)\n");
++      return 0;
++    }
++#endif
++
+   g_print ("START: %s\n", argv[0]);
+   g_log_set_always_fatal (G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL | g_log_set_always_fatal (G_LOG_FATAL_MASK));
+ 

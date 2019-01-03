@@ -1,0 +1,28 @@
+#!/bin/sh
+# autopkgtest check: Run the installed-tests to verify glib works correctly
+# This part runs tests that have been marked as opt-in due to being flaky
+# on at least some architectures.
+# (C) 2013 Canonical Ltd.
+# (C) 2019 Collabora Ltd.
+
+set -eu
+NULL=
+
+export DEB_ALLOW_FLAKY_TESTS=1
+
+# Disable gvfs if it happens to be installed. We want to test the built-in
+# stuff
+export GIO_USE_VFS=local
+export GIO_USE_VOLUME_MONITOR=unix
+
+export XDG_RUNTIME_DIR="$AUTOPKGTEST_TMP"
+
+printf "Running as: "; id -a
+printf "passwd entry: "; getent passwd "$(id -u)" || echo "(exit status $?)"
+printf "group entry: "; getent group "$(id -g)" || echo "(exit status $?)"
+echo "Environment:"
+env | LC_ALL=C sort -u
+
+exec dbus-run-session -- xvfb-run -a gnome-desktop-testing-runner \
+	glib/closures.test \
+	${NULL}
