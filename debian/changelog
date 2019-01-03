@@ -1,3 +1,23 @@
+glib2.0 (2.58.2-2) UNRELEASED; urgency=medium
+
+  * d/p/gvariant-test-Also-force-alignment-for-tuple-test-data.patch:
+    Fix gvariant test failure on s390x by forcing more test data to be aligned
+    (Closes: #917980)
+  * d/p/debian/closures-test-Skip-on-arm-unless-flaky-tests-are-allowed.patch,
+    d/tests/flaky:
+    Only run closures test on arm* as part of a separate, flaky autopkgtest.
+    This test does not seem to be reliable enough for its failures to be
+    treated as release-critical, at least on arm*. If we run too many
+    iterations, it fails on CPUs where 16-bit accesses are slow; if we run
+    too few, it occasionally fails when one thread starves another.
+    (Closes: #917983)
+  * d/p/debian/Disable-some-tests-on-slow-architectures-which-keep-faili.patch,
+    d/p/debian/Skip-test-which-performs-some-unreliable-floating-point-c.patch:
+    d/tests/flaky:
+    Use g_test_skip() for flaky tests, and run them from d/tests/flaky
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 03 Jan 2019 09:33:04 +0000
+
 glib2.0 (2.58.2-1) experimental; urgency=medium
 
   * Team upload
