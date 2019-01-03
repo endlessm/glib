@@ -7,6 +7,7 @@ closures-test-Avoid-timeout-on-ARM64-CPUs.patch
 0001-timer-test-use-volatile-for-locals.patch
 skip-broken-timer-test.patch
 gwakeuptest-Be-less-parallel-unless-invoked-with-m-slow.patch
+gvariant-test-Also-force-alignment-for-tuple-test-data.patch
 debian/02_gettext-desktopfiles-ubuntu.patch
 debian/03_disble_glib_compile_schemas_warning.patch
 debian/04_homedir_env.patch

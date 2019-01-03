@@ -1,0 +1,44 @@
+From: Simon McVittie <smcv@collabora.com>
+Date: Thu, 3 Jan 2019 08:21:40 +0000
+Subject: gvariant test: Also force alignment for tuple test data
+
+glib!552 (commit 9eed22b3) fixed this for the tests that failed on i686,
+but this additional test failed on Debian's s390x port
+(IBM z/Architecture, 64-bit big-endian).
+
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+Bug-Debian: https://bugs.debian.org/917980
+---
+ glib/tests/gvariant.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/glib/tests/gvariant.c b/glib/tests/gvariant.c
+index 5ca7b96..18800f9 100644
+--- a/glib/tests/gvariant.c
++++ b/glib/tests/gvariant.c
+@@ -4926,6 +4926,7 @@ test_normal_checking_array_offsets (void)
+ static void
+ test_normal_checking_tuple_offsets (void)
+ {
++  gpointer aligned_data;
+   const guint8 data[] = {
+     0x07, 0xe5, 0x00, 0x07, 0x00, 0x07,
+     '(', 'a', 's', 'a', 's', 'a', 's', 'a', 's', 'a', 's', 'a', 's', ')',
+@@ -4934,13 +4935,15 @@ test_normal_checking_tuple_offsets (void)
+   GVariant *variant = NULL;
+   GVariant *normal_variant = NULL;
+ 
+-  variant = g_variant_new_from_data (G_VARIANT_TYPE_VARIANT, data, size,
+-                                     FALSE, NULL, NULL);
++  aligned_data = g_memdup (data, size); /* guarantee alignment */
++  variant = g_variant_new_from_data (G_VARIANT_TYPE_VARIANT, aligned_data,
++                                     size, FALSE, NULL, NULL);
+   g_assert_nonnull (variant);
+ 
+   normal_variant = g_variant_get_normal_form (variant);
+   g_assert_nonnull (normal_variant);
+ 
++  g_free (aligned_data);
+   g_variant_unref (normal_variant);
+   g_variant_unref (variant);
+ }
