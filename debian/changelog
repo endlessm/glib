@@ -1,4 +1,4 @@
-glib2.0 (2.58.2-3) UNRELEASED; urgency=medium
+glib2.0 (2.58.2-3) unstable; urgency=medium
 
   * Team upload
   * Release to unstable
@@ -10,7 +10,7 @@ glib2.0 (2.58.2-3) UNRELEASED; urgency=medium
     the autopkgtest run that must succeed. Run it from d/tests/flaky
     instead.
 
- -- Simon McVittie <smcv@debian.org>  Fri, 04 Jan 2019 08:07:14 +0000
+ -- Simon McVittie <smcv@debian.org>  Fri, 04 Jan 2019 08:43:36 +0000
 
 glib2.0 (2.58.2-2) experimental; urgency=medium
 
