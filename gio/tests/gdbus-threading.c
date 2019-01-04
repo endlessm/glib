@@ -497,6 +497,12 @@ test_threaded_singleton (void)
   guint unref_wins = 0;
   guint get_wins = 0;
 
+  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") == NULL)
+    {
+      g_test_skip ("Not reliable (glib#1515)");
+      return;
+    }
+
   if (g_test_thorough ())
     n = 100000;
   else
