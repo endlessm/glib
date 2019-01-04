@@ -2,6 +2,11 @@ From: Iain Lane <laney@debian.org>
 Date: Tue, 18 Mar 2014 15:43:35 +0000
 Subject: Skip test which performs some unreliable floating point comparisons
 
+[smcv: Modified to use g_test_skip() instead of omitting those test cases
+completely, and allow them to be re-enabled with a Debian-specific
+environment variable]
+
+Co-authored-by: Simon McVittie <smcv@debian.org>
 Bug: https://gitlab.gnome.org/GNOME/glib/issues/820
 Forwarded: no
 ---

@@ -21,6 +21,7 @@ CPUs, so check for both 32- and 64-bit ARM.
 
 Bug-Debian: https://bugs.debian.org/880883
 Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/451
+Applied-upstream: 2.59.0, commit:54549b7e4
 Co-authored-by: Iain Lane <laney@debian.org>
 Signed-off-by: Simon McVittie <smcv@debian.org>
 ---

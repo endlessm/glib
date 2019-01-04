@@ -3,6 +3,11 @@ Date: Thu, 27 Sep 2012 11:22:56 +0200
 Subject: Disable some tests on slow architectures which keep failing the
  tests
 
+[smcv: Modified to use g_test_skip() instead of omitting those test cases
+completely, and allow them to be re-enabled with a Debian-specific
+environment variable]
+
+Co-authored-by: Simon McVittie <smcv@debian.org>
 Forwarded: no
 ---
  gio/tests/socket.c    |  8 ++++++++
