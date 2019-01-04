@@ -5,6 +5,10 @@ glib2.0 (2.58.2-3) UNRELEASED; urgency=medium
   * Standards-Version: 4.3.0 (no changes required)
   * d/p/gvariant-test-Also-force-alignment-for-tuple-test-data.patch:
     Mark as forwarded
+  * debian/Skip-unreliable-test_threaded_singleton-by-default.patch:
+    Don't run test_threaded_singleton() at build-time or in the part of
+    the autopkgtest run that must succeed. Run it from d/tests/flaky
+    instead.
 
  -- Simon McVittie <smcv@debian.org>  Fri, 04 Jan 2019 08:07:14 +0000
 
