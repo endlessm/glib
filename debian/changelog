@@ -1,8 +1,12 @@
 glib2.0 (2.58.2-3) UNRELEASED; urgency=medium
 
+  * Team upload
+  * Release to unstable
   * Standards-Version: 4.3.0 (no changes required)
+  * d/p/gvariant-test-Also-force-alignment-for-tuple-test-data.patch:
+    Mark as forwarded
 
- -- Simon McVittie <smcv@debian.org>  Thu, 03 Jan 2019 13:29:45 +0000
+ -- Simon McVittie <smcv@debian.org>  Fri, 04 Jan 2019 08:07:14 +0000
 
 glib2.0 (2.58.2-2) experimental; urgency=medium
 
