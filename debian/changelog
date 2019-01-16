@@ -1,3 +1,16 @@
+glib2.0 (2.58.2-4) UNRELEASED; urgency=medium
+
+  [ Simon McVittie ]
+  * Update patch metadata
+
+  [ Iain Lane ]
+  * trash-test-Don-t-assume-that-.local-exists.patch,
+    trash-test-Don-t-rely-on-being-able-to-determine-mount-po.patch:
+    Cherry pick two patches by Simon McVittie (slightly modified by Iain Lane)
+    to fix the trash test on Launchpad autobuilders.
+
+ -- Iain Lane <laney@debian.org>  Wed, 16 Jan 2019 13:18:27 +0000
+
 glib2.0 (2.58.2-3) unstable; urgency=medium
 
   * Team upload
