@@ -1,3 +1,9 @@
+glib2.0 (2.59.0-1) UNRELEASED; urgency=medium
+
+  * New upstream release
+
+ -- Iain Lane <laney@debian.org>  Thu, 17 Jan 2019 13:14:07 +0000
+
 glib2.0 (2.58.2-4) unstable; urgency=medium
 
   [ Simon McVittie ]
