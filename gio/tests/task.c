@@ -614,6 +614,46 @@ test_priority (void)
   g_assert_cmpint (ret3, ==, 3);
 }
 
+/* Test that getting and setting the task name works. */
+static void name_callback (GObject      *object,
+                           GAsyncResult *result,
+                           gpointer      user_data);
+
+static void
+test_name (void)
+{
+  GTask *t1 = NULL;
+  gchar *name1 = NULL;
+
+  t1 = g_task_new (NULL, NULL, name_callback, &name1);
+  g_task_set_name (t1, "some task");
+  g_task_return_boolean (t1, TRUE);
+  g_object_unref (t1);
+
+  g_main_loop_run (loop);
+
+  g_assert_cmpstr (name1, ==, "some task");
+
+  g_free (name1);
+}
+
+static void
+name_callback (GObject      *object,
+               GAsyncResult *result,
+               gpointer      user_data)
+{
+  gchar **name_out = user_data;
+  GError *local_error = NULL;
+
+  g_assert_null (*name_out);
+  *name_out = g_strdup (g_task_get_name (G_TASK (result)));
+
+  g_task_propagate_boolean (G_TASK (result), &local_error);
+  g_assert_no_error (local_error);
+
+  g_main_loop_quit (loop);
+}
+
 /* test_check_cancellable: cancellation overrides return value */
 
 enum {
@@ -793,6 +833,7 @@ run_in_thread_callback (GObject      *object,
   g_assert (g_async_result_get_user_data (result) == user_data);
   g_assert (!g_task_had_error (G_TASK (result)));
   g_assert_false (g_task_get_completed (G_TASK (result)));
+  g_assert_cmpstr (g_task_get_name (G_TASK (result)), ==, "test_run_in_thread name");
 
   ret = g_task_propagate_int (G_TASK (result), &error);
   g_assert_no_error (error);
@@ -816,6 +857,7 @@ run_in_thread_thread (GTask        *task,
   g_assert (task_data == g_task_get_task_data (task));
   g_assert (cancellable == g_task_get_cancellable (task));
   g_assert_false (g_task_get_completed (task));
+  g_assert_cmpstr (g_task_get_name (task), ==, "test_run_in_thread name");
 
   g_assert (g_thread_self () != main_thread);
 
@@ -837,13 +879,13 @@ test_run_in_thread (void)
   gboolean done = FALSE;
 
   task = g_task_new (NULL, NULL, run_in_thread_callback, &done);
+  g_task_set_name (task, "test_run_in_thread name");
   g_object_weak_ref (G_OBJECT (task), task_weak_notify, (gpointer)&weak_notify_ran);
   g_signal_connect (task, "notify::completed",
                     (GCallback) completed_cb, &notification_emitted);
 
   g_task_set_task_data (task, (gpointer)&thread_ran, NULL);
   g_task_run_in_thread (task, run_in_thread_thread);
-  g_object_unref (task);
 
   g_mutex_lock (&run_in_thread_mutex);
   while (!thread_ran)
@@ -857,6 +899,10 @@ test_run_in_thread (void)
 
   g_assert (done == TRUE);
   g_assert_true (notification_emitted);
+
+  g_assert_cmpstr (g_task_get_name (task), ==, "test_run_in_thread name");
+
+  g_object_unref (task);
 
   g_mutex_lock (&run_in_thread_mutex);
   while (!weak_notify_ran)
@@ -1689,7 +1735,6 @@ test_return_on_cancel_atomic (void)
 
   g_task_set_task_data (task, (gpointer)&state, NULL);
   g_task_run_in_thread (task, return_on_cancel_atomic_thread);
-  g_object_unref (task);
 
   g_assert_cmpint (state, ==, 0);
 
@@ -1724,6 +1769,7 @@ test_return_on_cancel_atomic (void)
   g_object_unref (cancellable);
   g_mutex_unlock (&roca_mutex_1);
   g_mutex_unlock (&roca_mutex_2);
+  g_object_unref (task);
 }
 
 /* test_return_pointer: memory management of pointer returns */
@@ -1987,6 +2033,136 @@ test_legacy_error (void)
   g_assert (simple == NULL);
 }
 
+/* Various helper functions for the return tests below. */
+static void
+task_complete_cb (GObject *source,
+                  GAsyncResult *result,
+                  gpointer user_data)
+{
+  GTask *task = G_TASK (result);
+  guint *calls = user_data;
+
+  g_assert_cmpint (++*calls, <=, 1);
+
+  /* Propagate the result, so it’s removed from the task’s internal state. */
+  g_task_propagate_boolean (task, NULL);
+}
+
+static void
+return_twice (GTask *task)
+{
+  gboolean error_first = GPOINTER_TO_UINT (g_task_get_task_data (task));
+
+  if (error_first)
+    {
+      g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_UNKNOWN, "oh no");
+      g_task_return_boolean (task, TRUE);
+    }
+  else
+    {
+      g_task_return_boolean (task, TRUE);
+      g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_UNKNOWN, "oh no");
+    }
+}
+
+static gboolean
+idle_cb (gpointer user_data)
+{
+  GTask *task = user_data;
+  return_twice (task);
+  g_object_unref (task);
+
+  return G_SOURCE_REMOVE;
+}
+
+static void
+test_return_permutation (gboolean error_first,
+                         gboolean return_in_idle)
+{
+  guint calls = 0;
+  GTask *task = NULL;
+
+  g_test_bug ("https://gitlab.gnome.org/GNOME/glib/issues/1525");
+
+  task = g_task_new (NULL, NULL, task_complete_cb, &calls);
+  g_task_set_task_data (task, GUINT_TO_POINTER (error_first), NULL);
+
+  if (return_in_idle)
+    g_idle_add (idle_cb, g_object_ref (task));
+  else
+    return_twice (task);
+
+  while (calls == 0)
+    g_main_context_iteration (NULL, TRUE);
+
+  g_assert_cmpint (calls, ==, 1);
+
+  g_object_unref (task);
+}
+
+/* Test that calling g_task_return_boolean() after g_task_return_error(), when
+ * returning in an idle callback, correctly results in a critical warning. */
+static void
+test_return_in_idle_error_first (void)
+{
+  if (g_test_subprocess ())
+    {
+      test_return_permutation (TRUE, TRUE);
+      return;
+    }
+
+  g_test_trap_subprocess (NULL, 0, 0);
+  g_test_trap_assert_failed ();
+  g_test_trap_assert_stderr ("*CRITICAL*assertion '!task->ever_returned' failed*");
+}
+
+/* Test that calling g_task_return_error() after g_task_return_boolean(), when
+ * returning in an idle callback, correctly results in a critical warning. */
+static void
+test_return_in_idle_value_first (void)
+{
+  if (g_test_subprocess ())
+    {
+      test_return_permutation (FALSE, TRUE);
+      return;
+    }
+
+  g_test_trap_subprocess (NULL, 0, 0);
+  g_test_trap_assert_failed ();
+  g_test_trap_assert_stderr ("*CRITICAL*assertion '!task->ever_returned' failed*");
+}
+
+/* Test that calling g_task_return_boolean() after g_task_return_error(), when
+ * returning synchronously, correctly results in a critical warning. */
+static void
+test_return_error_first (void)
+{
+  if (g_test_subprocess ())
+    {
+      test_return_permutation (TRUE, FALSE);
+      return;
+    }
+
+  g_test_trap_subprocess (NULL, 0, 0);
+  g_test_trap_assert_failed ();
+  g_test_trap_assert_stderr ("*CRITICAL*assertion '!task->ever_returned' failed*");
+}
+
+/* Test that calling g_task_return_error() after g_task_return_boolean(), when
+ * returning synchronously, correctly results in a critical warning. */
+static void
+test_return_value_first (void)
+{
+  if (g_test_subprocess ())
+    {
+      test_return_permutation (FALSE, FALSE);
+      return;
+    }
+
+  g_test_trap_subprocess (NULL, 0, 0);
+  g_test_trap_assert_failed ();
+  g_test_trap_assert_stderr ("*CRITICAL*assertion '!task->ever_returned' failed*");
+}
 
 int
 main (int argc, char **argv)
@@ -1994,6 +2170,7 @@ main (int argc, char **argv)
   int ret;
 
   g_test_init (&argc, &argv, NULL);
+  g_test_bug_base ("");
 
   loop = g_main_loop_new (NULL, FALSE);
   main_thread = g_thread_self ();
@@ -2008,6 +2185,7 @@ main (int argc, char **argv)
   g_test_add_func ("/gtask/no-callback", test_no_callback);
   g_test_add_func ("/gtask/report-error", test_report_error);
   g_test_add_func ("/gtask/priority", test_priority);
+  g_test_add_func ("/gtask/name", test_name);
   g_test_add_func ("/gtask/check-cancellable", test_check_cancellable);
   g_test_add_func ("/gtask/return-if-cancelled", test_return_if_cancelled);
   g_test_add_func ("/gtask/run-in-thread", test_run_in_thread);
@@ -2021,6 +2199,10 @@ main (int argc, char **argv)
   g_test_add_func ("/gtask/return-pointer", test_return_pointer);
   g_test_add_func ("/gtask/object-keepalive", test_object_keepalive);
   g_test_add_func ("/gtask/legacy-error", test_legacy_error);
+  g_test_add_func ("/gtask/return/in-idle/error-first", test_return_in_idle_error_first);
+  g_test_add_func ("/gtask/return/in-idle/value-first", test_return_in_idle_value_first);
+  g_test_add_func ("/gtask/return/error-first", test_return_error_first);
+  g_test_add_func ("/gtask/return/value-first", test_return_value_first);
 
   ret = g_test_run();
 

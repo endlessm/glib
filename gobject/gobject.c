@@ -3349,10 +3349,16 @@ g_object_unref (gpointer _object)
 
           GOBJECT_IF_DEBUG (OBJECTS,
 	    {
-	      /* catch objects not chaining finalize handlers */
-	      G_LOCK (debug_objects);
-	      g_assert (!g_hash_table_contains (debug_objects_ht, object));
-	      G_UNLOCK (debug_objects);
+              gboolean was_present;
+
+              /* catch objects not chaining finalize handlers */
+              G_LOCK (debug_objects);
+              was_present = g_hash_table_remove (debug_objects_ht, object);
+              G_UNLOCK (debug_objects);
+
+              if (was_present)
+                g_critical ("Object %p of type %s not finalized correctly.",
+                            object, G_OBJECT_TYPE_NAME (object));
 	    });
           g_type_free_instance ((GTypeInstance*) object);
 	}
@@ -4109,8 +4115,8 @@ destroy_closure_array (gpointer data)
 
 /**
  * g_object_watch_closure:
- * @object: GObject restricting lifetime of @closure
- * @closure: GClosure to watch
+ * @object: #GObject restricting lifetime of @closure
+ * @closure: #GClosure to watch
  *
  * This function essentially limits the life time of the @closure to
  * the life time of the object. That is, when the object is finalized,

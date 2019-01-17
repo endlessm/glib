@@ -1,6 +1,6 @@
 project('glib', 'c', 'cpp',
-  version : '2.58.2',
-  meson_version : '>= 0.47.0',
+  version : '2.59.0',
+  meson_version : '>= 0.48.0',
   default_options : [
     'buildtype=debugoptimized',
     'warning_level=1',
@@ -45,7 +45,9 @@ binary_age = 100 * minor_version + micro_version
 soversion = 0
 # Maintain compatibility with previous libtool versioning
 # current = minor * 100 + micro
-library_version = '@0@.@1@.@2@'.format(soversion, binary_age - interface_age, interface_age)
+current = binary_age - interface_age
+library_version = '@0@.@1@.@2@'.format(soversion, current, interface_age)
+darwin_versions = [current + 1, '@0@.@1@'.format(current + 1, interface_age)]
 
 configinc = include_directories('.')
 glibinc = include_directories('glib')
@@ -346,6 +348,7 @@ if cc.get_id() == 'gcc' or cc.get_id() == 'clang'
   warning_c_args = [
     '-Wall',
     '-Wduplicated-branches',
+    '-Wimplicit-fallthrough',
     '-Wmisleading-indentation',
     '-Wstrict-prototypes',
     '-Wunused',
@@ -394,6 +397,7 @@ functions = [
   'fchown',
   'fdwalk',
   'fsync',
+  'getauxval',
   'getc_unlocked',
   'getfsstat',
   'getgrgid_r',
@@ -1761,10 +1765,9 @@ if not libz_dep.found()
       libz_dep = cc.find_library('zlib', required : false)
     endif
   endif
-endif
-
-if not libz_dep.found()
-  libz_dep = subproject('zlib').get_variable('zlib_dep')
+  if not libz_dep.found() or not cc.has_header('zlib.h')
+    libz_dep = subproject('zlib').get_variable('zlib_dep')
+  endif
 endif
 
 # First check in libc, fallback to libintl, and as last chance build
@@ -1792,8 +1795,6 @@ glib_conf.set('HAVE_DCGETTEXT', 1)
 glib_conf.set('HAVE_GETTEXT', 1)
 
 glib_conf.set_quoted('GLIB_LOCALE_DIR', join_paths(glib_datadir, 'locale'))
-# xgettext is optional (on Windows for instance)
-xgettext = find_program('xgettext', required : false)
 
 # libmount is only used by gio, but we need to fetch the libs to generate the
 # pkg-config file below
@@ -1808,9 +1809,10 @@ if host_system == 'windows'
 endif
 
 selinux_dep = []
-if host_system == 'linux' and get_option('selinux')
-  selinux_dep = [dependency('libselinux')]
-  glib_conf.set('HAVE_SELINUX', 1)
+if host_system == 'linux'
+  selinux_dep = dependency('libselinux', required: get_option('selinux'))
+
+  glib_conf.set('HAVE_SELINUX', selinux_dep.found())
 endif
 
 xattr_dep = []
@@ -1876,6 +1878,12 @@ endif
 python = import('python').find_installation('python3')
 # used for '#!/usr/bin/env <name>'
 python_name = 'python3'
+
+python_version = python.language_version()
+python_version_req = '>=3.4'
+if not python_version.version_compare(python_version_req)
+  error('Requires Python @0@, @1@ found.'.format(python_version_req, python_version))
+endif
 
 # Determine which user environment-dependent files that we want to install
 have_bash = find_program('bash', required : false).found() # For completion scripts
@@ -1971,10 +1979,13 @@ subdir('gobject')
 subdir('gthread')
 subdir('gmodule')
 subdir('gio')
-if xgettext.found()
+subdir('fuzzing')
+subdir('tests')
+
+# xgettext is optional (on Windows for instance)
+if find_program('xgettext', required : get_option('nls')).found()
   subdir('po')
 endif
-subdir('tests')
 
 # Install glib-gettextize executable, if a UNIX-style shell is found
 if have_sh

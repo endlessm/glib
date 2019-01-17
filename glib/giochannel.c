@@ -39,7 +39,6 @@
 #include "gstrfuncs.h"
 #include "gtestutils.h"
 #include "glibintl.h"
-#include "gunicodeprivate.h"
 
 
 /**
@@ -2324,7 +2323,7 @@ reconvert:
 
               /* UTF-8, just validate, emulate g_iconv */
 
-              if (!_g_utf8_validate_len (from_buf, try_len, &badchar))
+              if (!g_utf8_validate_len (from_buf, try_len, &badchar))
                 {
                   gunichar try_char;
                   gsize incomplete_len = from_buf + try_len - badchar;

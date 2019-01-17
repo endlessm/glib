@@ -240,6 +240,7 @@ test_month_substring (void)
   setlocale (LC_ALL, "");
 }
 
+
 static void
 test_month_names (void)
 {

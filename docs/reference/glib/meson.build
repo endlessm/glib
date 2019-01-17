@@ -8,6 +8,8 @@ if get_option('gtk_doc')
     'gbsearcharray.h',
     'glib-private.h',
     'gmoduleconf.h',
+    'grcboxprivate.h',
+    'gstdioprivate.h',
     'gthreadprivate.h',
     'gunibreak.h',
     'gunicomp.h',
@@ -34,6 +36,7 @@ if get_option('gtk_doc')
     'glib-init.h',
     'gconstructor.h',
     'valgrind.h',
+    'gutilsprivate.h',
     'gvalgrind.h',
   ]
 
