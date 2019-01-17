@@ -1,4 +1,4 @@
-glib2.0 (2.58.2-4) UNRELEASED; urgency=medium
+glib2.0 (2.58.2-4) unstable; urgency=medium
 
   [ Simon McVittie ]
   * Update patch metadata
@@ -9,7 +9,7 @@ glib2.0 (2.58.2-4) UNRELEASED; urgency=medium
     Cherry pick two patches by Simon McVittie (slightly modified by Iain Lane)
     to fix the trash test on Launchpad autobuilders.
 
- -- Iain Lane <laney@debian.org>  Wed, 16 Jan 2019 13:18:27 +0000
+ -- Iain Lane <laney@debian.org>  Thu, 17 Jan 2019 11:27:34 +0000
 
 glib2.0 (2.58.2-3) unstable; urgency=medium
 
