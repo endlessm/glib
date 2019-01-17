@@ -150,8 +150,10 @@ export VERBOSE=1
 
 ifeq ($(DEB_HOST_ARCH_OS),linux)
 is_linux := true
+enable_selinux := enabled
 else
 is_linux := false
+enable_selinux := disabled
 endif
 
 ifneq ($(filter hurd kfreebsd,$(DEB_HOST_ARCH_OS)),)
@@ -172,7 +174,7 @@ DEB_CONFIGURE_FLAGS_deb := \
 	-Dinstalled_tests=true \
 	-Dlibmount=$(is_linux) \
 	-Dman=true \
-	-Dselinux=$(is_linux) \
+	-Dselinux=$(enable_selinux) \
 	-Dsystemtap=true \
 	-Dxattr=$(have_non_stub_xattr) \
 	$(NULL)
@@ -188,7 +190,7 @@ DEB_CONFIGURE_FLAGS_udeb := \
 	-Dgtk_doc=false \
 	-Dinstalled_tests=false \
 	-Dlibmount=false \
-	-Dselinux=false \
+	-Dselinux=disabled \
 	-Dxattr=$(have_non_stub_xattr) \
 	$(NULL)
 
