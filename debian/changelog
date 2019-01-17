@@ -1,4 +1,4 @@
-glib2.0 (2.59.0-1) UNRELEASED; urgency=medium
+glib2.0 (2.59.0-1) experimental; urgency=medium
 
   * New upstream release
   * Update patches and drop upstreamed ones
@@ -8,7 +8,7 @@ glib2.0 (2.59.0-1) UNRELEASED; urgency=medium
   * debian/*: Update for experimental
   * debian/libglib2.0-0.symbols: Update with new symbols for this release
 
- -- Iain Lane <laney@debian.org>  Thu, 17 Jan 2019 15:20:44 +0000
+ -- Iain Lane <laney@debian.org>  Thu, 17 Jan 2019 18:43:00 +0000
 
 glib2.0 (2.58.2-4) unstable; urgency=medium
 
