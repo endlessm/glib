@@ -28,6 +28,7 @@
 #include <glib/gbytes.h>
 #include <glib/gslice.h>
 #include <glib/gmem.h>
+#include <glib/grefcount.h>
 #include <string.h>
 
 
@@ -74,7 +75,7 @@ struct _GVariant
   } contents;
 
   gint state;
-  gint ref_count;
+  gatomicrefcount ref_count;
   gsize depth;
 };
 
@@ -488,7 +489,7 @@ g_variant_alloc (const GVariantType *type,
                  (trusted ? STATE_TRUSTED : 0) |
                  STATE_FLOATING;
   value->size = (gssize) -1;
-  value->ref_count = 1;
+  g_atomic_ref_count_init (&value->ref_count);
   value->depth = 0;
 
   return value;
@@ -506,6 +507,10 @@ g_variant_alloc (const GVariantType *type,
  *
  * A reference is taken on @bytes.
  *
+ * The data in @bytes must be aligned appropriately for the @type being loaded.
+ * Otherwise this function will internally create a copy of the memory (since
+ * GLib 2.60) or (in older versions) fail and exit the process.
+ *
  * Returns: (transfer none): a new #GVariant with a floating reference
  *
  * Since: 2.36
@@ -518,13 +523,54 @@ g_variant_new_from_bytes (const GVariantType *type,
   GVariant *value;
   guint alignment;
   gsize size;
+  GBytes *owned_bytes = NULL;
+  GVariantSerialised serialised;
 
   value = g_variant_alloc (type, TRUE, trusted);
 
-  value->contents.serialised.bytes = g_bytes_ref (bytes);
-
   g_variant_type_info_query (value->type_info,
                              &alignment, &size);
+
+  /* Ensure the alignment is correct. This is a huge performance hit if it’s
+   * not correct, but that’s better than aborting if a caller provides data
+   * with the wrong alignment (which is likely to happen very occasionally, and
+   * only cause an abort on some architectures — so is unlikely to be caught
+   * in testing). Callers can always actively ensure they use the correct
+   * alignment to avoid the performance hit. */
+  serialised.type_info = value->type_info;
+  serialised.data = (guchar *) g_bytes_get_data (bytes, &serialised.size);
+  serialised.depth = 0;
+
+  if (!g_variant_serialised_check (serialised))
+    {
+#ifdef HAVE_POSIX_MEMALIGN
+      gpointer aligned_data = NULL;
+      gsize aligned_size = g_bytes_get_size (bytes);
+
+      /* posix_memalign() requires the alignment to be a multiple of
+       * sizeof(void*), and a power of 2. See g_variant_type_info_query() for
+       * details on the alignment format. */
+      if (posix_memalign (&aligned_data, MAX (sizeof (void *), alignment + 1),
+                          aligned_size) != 0)
+        g_error ("posix_memalign failed");
+
+      memcpy (aligned_data, g_bytes_get_data (bytes, NULL), aligned_size);
+
+      bytes = owned_bytes = g_bytes_new_with_free_func (aligned_data,
+                                                        aligned_size,
+                                                        free, aligned_data);
+      aligned_data = NULL;
+#else
+      /* NOTE: there may be platforms that lack posix_memalign() and also
+       * have malloc() that returns non-8-aligned.  if so, we need to try
+       * harder here.
+       */
+      bytes = owned_bytes = g_bytes_new (g_bytes_get_data (bytes, NULL),
+                                         g_bytes_get_size (bytes));
+#endif
+    }
+
+  value->contents.serialised.bytes = g_bytes_ref (bytes);
 
   if (size && g_bytes_get_size (bytes) != size)
     {
@@ -542,6 +588,8 @@ g_variant_new_from_bytes (const GVariantType *type,
     {
       value->contents.serialised.data = g_bytes_get_data (bytes, &value->size);
     }
+
+  g_clear_pointer (&owned_bytes, g_bytes_unref);
 
   return value;
 }
@@ -632,9 +680,8 @@ void
 g_variant_unref (GVariant *value)
 {
   g_return_if_fail (value != NULL);
-  g_return_if_fail (value->ref_count > 0);
 
-  if (g_atomic_int_dec_and_test (&value->ref_count))
+  if (g_atomic_ref_count_dec (&value->ref_count))
     {
       if G_UNLIKELY (value->state & STATE_LOCKED)
         g_critical ("attempting to free a locked GVariant instance.  "
@@ -668,9 +715,8 @@ GVariant *
 g_variant_ref (GVariant *value)
 {
   g_return_val_if_fail (value != NULL, NULL);
-  g_return_val_if_fail (value->ref_count > 0, NULL);
 
-  g_atomic_int_inc (&value->ref_count);
+  g_atomic_ref_count_inc (&value->ref_count);
 
   return value;
 }
@@ -710,7 +756,7 @@ GVariant *
 g_variant_ref_sink (GVariant *value)
 {
   g_return_val_if_fail (value != NULL, NULL);
-  g_return_val_if_fail (value->ref_count > 0, NULL);
+  g_return_val_if_fail (!g_atomic_ref_count_compare (&value->ref_count, 0), NULL);
 
   g_variant_lock (value);
 
@@ -767,7 +813,7 @@ GVariant *
 g_variant_take_ref (GVariant *value)
 {
   g_return_val_if_fail (value != NULL, NULL);
-  g_return_val_if_fail (value->ref_count > 0, NULL);
+  g_return_val_if_fail (!g_atomic_ref_count_compare (&value->ref_count, 0), NULL);
 
   g_atomic_int_and (&value->state, ~STATE_FLOATING);
 
@@ -1043,7 +1089,7 @@ g_variant_get_child_value (GVariant *value,
     child->state = (value->state & STATE_TRUSTED) |
                    STATE_SERIALISED;
     child->size = s_child.size;
-    child->ref_count = 1;
+    g_atomic_ref_count_init (&child->ref_count);
     child->depth = value->depth + 1;
     child->contents.serialised.bytes =
       g_bytes_ref (value->contents.serialised.bytes);

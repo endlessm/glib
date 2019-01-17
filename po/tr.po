@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: glib\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/glib/issues\n"
 "POT-Creation-Date: 2018-11-06 16:23+0000\n"
-"PO-Revision-Date: 2018-11-06 22:47+0300\n"
+"PO-Revision-Date: 2018-11-06 22:51+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Türkçe <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -300,14 +300,14 @@ msgid "Not enough space in destination"
 msgstr "Hedefte yeterli alan yok"
 
 #: gio/gcharsetconverter.c:342 gio/gdatainputstream.c:848
-#: gio/gdatainputstream.c:1261 glib/gconvert.c:454 glib/gconvert.c:883
-#: glib/giochannel.c:1558 glib/giochannel.c:1600 glib/giochannel.c:2444
-#: glib/gutf8.c:870 glib/gutf8.c:1323
+#: gio/gdatainputstream.c:1261 glib/gconvert.c:454 glib/gconvert.c:884
+#: glib/giochannel.c:1557 glib/giochannel.c:1599 glib/giochannel.c:2443
+#: glib/gutf8.c:869 glib/gutf8.c:1322
 msgid "Invalid byte sequence in conversion input"
 msgstr "Dönüşüm girdisinde geçersiz bayt dizisi"
 
-#: gio/gcharsetconverter.c:347 glib/gconvert.c:462 glib/gconvert.c:797
-#: glib/giochannel.c:1565 glib/giochannel.c:2456
+#: gio/gcharsetconverter.c:347 glib/gconvert.c:462 glib/gconvert.c:798
+#: glib/giochannel.c:1564 glib/giochannel.c:2455
 #, c-format
 msgid "Error during conversion: %s"
 msgstr "Dönüşüm sırasında hata oluştu: %s"
@@ -316,7 +316,7 @@ msgstr "Dönüşüm sırasında hata oluştu: %s"
 msgid "Cancellable initialization not supported"
 msgstr "İptal edilebilir başlatma desteklenmiyor"
 
-#: gio/gcharsetconverter.c:456 glib/gconvert.c:327 glib/giochannel.c:1386
+#: gio/gcharsetconverter.c:456 glib/gconvert.c:327 glib/giochannel.c:1385
 #, c-format
 msgid "Conversion from character set “%s” to “%s” is not supported"
 msgstr "“%s” karakter kümesinden “%s” karakter kümesine dönüşüm desteklenmiyor"
@@ -916,12 +916,16 @@ msgstr "%s için StartServiceByName çağrısında hata: "
 msgid "Unexpected reply %d from StartServiceByName(\"%s\") method"
 msgstr "StartServiceByName %d yönteminden beklenmeyen yanıt (\"%s\")"
 
-#: gio/gdbusproxy.c:2726 gio/gdbusproxy.c:2860
+#: gio/gdbusproxy.c:2734 gio/gdbusproxy.c:2869
+#, c-format
+#| msgid ""
+#| "Cannot invoke method; proxy is for a well-known name without an owner and "
+#| "proxy was constructed with the G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START flag"
 msgid ""
-"Cannot invoke method; proxy is for a well-known name without an owner and "
-"proxy was constructed with the G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START flag"
+"Cannot invoke method; proxy is for the well-known name %s without an owner, "
+"and proxy was constructed with the G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START flag"
 msgstr ""
-"Yöntem çağrılamıyor; vekil sunucu, sahibi olmayan bilindik bir ad için "
+"Yöntem çağrılamıyor; vekil sunucu, sahibi olmayan bilindik %s adı için ve "
 "G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START bayrağı ile oluşturuldu"
 
 #: gio/gdbusserver.c:708
@@ -1217,7 +1221,7 @@ msgstr "Hata: Çok fazla argüman.\n"
 msgid "Error: %s is not a valid well-known bus name.\n"
 msgstr "Hata: %s geçerli bilinen bir veri yolu adı değil\n"
 
-#: gio/gdesktopappinfo.c:2023 gio/gdesktopappinfo.c:4633
+#: gio/gdesktopappinfo.c:2023 gio/gdesktopappinfo.c:4660
 msgid "Unnamed"
 msgstr "Adlandırılmamış"
 
@@ -1433,7 +1437,7 @@ msgid "Truncate not supported on stream"
 msgstr "Akış üzerinde sonunun kesilmesi desteklenmiyor"
 
 #: gio/ghttpproxy.c:91 gio/gresolver.c:410 gio/gresolver.c:476
-#: glib/gconvert.c:1786
+#: glib/gconvert.c:1787
 msgid "Invalid hostname"
 msgstr "Geçersiz makine adı"
 
@@ -3038,7 +3042,7 @@ msgstr "Dosya içinde atlama yapılırken hata: %s"
 msgid "Error closing file: %s"
 msgstr "Dosya kapatılırken hata: %s"
 
-#: gio/glocalfilemonitor.c:854
+#: gio/glocalfilemonitor.c:856
 msgid "Unable to find default local file monitor type"
 msgstr "Öntanımlı yerel dosya izleme türü bulunamadı"
 
@@ -3191,21 +3195,27 @@ msgstr "Ağa erişilemiyor"
 msgid "Host unreachable"
 msgstr "Makineye erişilemiyor"
 
-#: gio/gnetworkmonitornetlink.c:97 gio/gnetworkmonitornetlink.c:109
-#: gio/gnetworkmonitornetlink.c:128
+#: gio/gnetworkmonitornetlink.c:99 gio/gnetworkmonitornetlink.c:111
+#: gio/gnetworkmonitornetlink.c:130
 #, c-format
 msgid "Could not create network monitor: %s"
 msgstr "Ağ izleme oluşturulamadı: %s"
 
-#: gio/gnetworkmonitornetlink.c:118
+#: gio/gnetworkmonitornetlink.c:120
 msgid "Could not create network monitor: "
 msgstr "Ağ izleme oluşturulamadı: "
 
-#: gio/gnetworkmonitornetlink.c:176
+#: gio/gnetworkmonitornetlink.c:183
 msgid "Could not get network status: "
 msgstr "Ağ durumu alınamadı: "
 
-#: gio/gnetworkmonitornm.c:322
+#: gio/gnetworkmonitornm.c:313
+#, c-format
+#| msgid "NetworkManager version too old"
+msgid "NetworkManager not running"
+msgstr "NetworkManager çalışmıyor"
+
+#: gio/gnetworkmonitornm.c:324
 #, c-format
 msgid "NetworkManager version too old"
 msgstr "NetworkManager sürümü çok eski"
@@ -4025,7 +4035,7 @@ msgstr "Dosya tanımlayıcıdan okuma hatası: %s"
 msgid "Error closing file descriptor: %s"
 msgstr "Dosya tanımlayıcı kapatılırken hata: %s"
 
-#: gio/gunixmounts.c:2606 gio/gunixmounts.c:2659
+#: gio/gunixmounts.c:2651 gio/gunixmounts.c:2704
 msgid "Filesystem root"
 msgstr "Dosya sistemi kök dizini"
 
@@ -4145,7 +4155,7 @@ msgstr "“%s” URI’si için bir yer imi zaten var"
 #: glib/gbookmarkfile.c:2968 glib/gbookmarkfile.c:3158
 #: glib/gbookmarkfile.c:3234 glib/gbookmarkfile.c:3402
 #: glib/gbookmarkfile.c:3491 glib/gbookmarkfile.c:3580
-#: glib/gbookmarkfile.c:3696
+#: glib/gbookmarkfile.c:3699
 #, c-format
 msgid "No bookmark found for URI “%s”"
 msgstr "“%s” URI’si için bir yer imi bulunamadı"
@@ -4179,8 +4189,8 @@ msgstr "Exec satırı “%s”, “%s” URI’si ile genişletilirken başarıs
 msgid "Unrepresentable character in conversion input"
 msgstr "Dönüşüm girdisi içinde temsil edilemez karakter"
 
-#: glib/gconvert.c:500 glib/gutf8.c:866 glib/gutf8.c:1078 glib/gutf8.c:1215
-#: glib/gutf8.c:1319
+#: glib/gconvert.c:500 glib/gutf8.c:865 glib/gutf8.c:1077 glib/gutf8.c:1214
+#: glib/gutf8.c:1318
 msgid "Partial character sequence at end of input"
 msgstr "Girdinin sonunda parçalı karakter dizisi"
 
@@ -4190,40 +4200,40 @@ msgid "Cannot convert fallback “%s” to codeset “%s”"
 msgstr ""
 "Geridönüş karakter kümesi “%s”, “%s” karakter kümesine dönüştürülemiyor"
 
-#: glib/gconvert.c:940
+#: glib/gconvert.c:941
 msgid "Embedded NUL byte in conversion input"
 msgstr "Dönüşüm girdisinde gömülü NUL baytı"
 
-#: glib/gconvert.c:961
+#: glib/gconvert.c:962
 msgid "Embedded NUL byte in conversion output"
 msgstr "Dönüşüm çıktısında gömülü NUL baytı"
 
-#: glib/gconvert.c:1649
+#: glib/gconvert.c:1650
 #, c-format
 msgid "The URI “%s” is not an absolute URI using the “file” scheme"
 msgstr "“%s” URI’si, “file” şemasını kullanan kesin bir URI değil"
 
-#: glib/gconvert.c:1659
+#: glib/gconvert.c:1660
 #, c-format
 msgid "The local file URI “%s” may not include a “#”"
 msgstr "Yerel dosya URI’si “%s”, “#” içeremez"
 
-#: glib/gconvert.c:1676
+#: glib/gconvert.c:1677
 #, c-format
 msgid "The URI “%s” is invalid"
 msgstr "“%s” URI’si geçersiz"
 
-#: glib/gconvert.c:1688
+#: glib/gconvert.c:1689
 #, c-format
 msgid "The hostname of the URI “%s” is invalid"
 msgstr "“%s” URI’sinin ana makine adı geçersiz"
 
-#: glib/gconvert.c:1704
+#: glib/gconvert.c:1705
 #, c-format
 msgid "The URI “%s” contains invalidly escaped characters"
 msgstr "“%s” URI’si geçersiz olarak çıkış yapılmış karakterler içeriyor"
 
-#: glib/gconvert.c:1776
+#: glib/gconvert.c:1777
 #, c-format
 msgid "The pathname “%s” is not an absolute path"
 msgstr "Yol adı “%s”, kesin bir yol değil"
@@ -4725,24 +4735,24 @@ msgstr "“%s” şablonu XXXXXX içermiyor"
 msgid "Failed to read the symbolic link “%s”: %s"
 msgstr "“%s” simgesel bağını okuma başarısız: %s"
 
-#: glib/giochannel.c:1390
+#: glib/giochannel.c:1389
 #, c-format
 msgid "Could not open converter from “%s” to “%s”: %s"
 msgstr "“%s”-“%s” dönüştürücüsü açılamıyor: %s"
 
-#: glib/giochannel.c:1735
+#: glib/giochannel.c:1734
 msgid "Can’t do a raw read in g_io_channel_read_line_string"
 msgstr "g_io_channel_read_line_string içinde okuma yapılamıyor"
 
-#: glib/giochannel.c:1782 glib/giochannel.c:2040 glib/giochannel.c:2127
+#: glib/giochannel.c:1781 glib/giochannel.c:2039 glib/giochannel.c:2126
 msgid "Leftover unconverted data in read buffer"
 msgstr "Okuma tampon belleğinde kalıntı çevrilmemiş veri"
 
-#: glib/giochannel.c:1863 glib/giochannel.c:1940
+#: glib/giochannel.c:1862 glib/giochannel.c:1939
 msgid "Channel terminates in a partial character"
 msgstr "Kanal kısmi bir karakterde sonlanıyor"
 
-#: glib/giochannel.c:1926
+#: glib/giochannel.c:1925
 msgid "Can’t do a raw read in g_io_channel_read_to_end"
 msgstr "g_io_channel_read_to_end içinde okuma başarısız"
 
@@ -4865,32 +4875,32 @@ msgstr "%s%s%s%s için eşleme oluşturulamadı: mmap() hatası: %s"
 msgid "Failed to open file “%s”: open() failed: %s"
 msgstr "“%s” dosyası açılamadı: open() başarısızlığı: %s"
 
-#: glib/gmarkup.c:398 glib/gmarkup.c:440
+#: glib/gmarkup.c:397 glib/gmarkup.c:439
 #, c-format
 msgid "Error on line %d char %d: "
 msgstr "Satır %d karakter %d hatalı: "
 
-#: glib/gmarkup.c:462 glib/gmarkup.c:545
+#: glib/gmarkup.c:461 glib/gmarkup.c:544
 #, c-format
 msgid "Invalid UTF-8 encoded text in name — not valid “%s”"
 msgstr "Adda geçersiz UTF-8 kodlu metin — geçerli olmayan “%s”"
 
-#: glib/gmarkup.c:473
+#: glib/gmarkup.c:472
 #, c-format
 msgid "“%s” is not a valid name"
 msgstr "“%s” geçerli bir ad değil"
 
-#: glib/gmarkup.c:489
+#: glib/gmarkup.c:488
 #, c-format
 msgid "“%s” is not a valid name: “%c”"
 msgstr "“%s” geçerli bir ad değil: “%c”"
 
-#: glib/gmarkup.c:613
+#: glib/gmarkup.c:612
 #, c-format
 msgid "Error on line %d: %s"
 msgstr "Satır %d hata içeriyor: %s"
 
-#: glib/gmarkup.c:690
+#: glib/gmarkup.c:689
 #, c-format
 msgid ""
 "Failed to parse “%-.*s”, which should have been a digit inside a character "
@@ -4899,7 +4909,7 @@ msgstr ""
 "Karakter referansı içinde bir rakam olması gereken “%-.*s” ayrıştırılamadı, "
 "(örneğin; &#234;) — rakam çok büyük olabilir"
 
-#: glib/gmarkup.c:702
+#: glib/gmarkup.c:701
 msgid ""
 "Character reference did not end with a semicolon; most likely you used an "
 "ampersand character without intending to start an entity — escape ampersand "
@@ -4909,23 +4919,23 @@ msgstr ""
 "özvarlık başlatmak istemeksizin “ve” işareti kullandınız — “ve” işaretini "
 "&amp; olarak kullanabilirsiniz"
 
-#: glib/gmarkup.c:728
+#: glib/gmarkup.c:727
 #, c-format
 msgid "Character reference “%-.*s” does not encode a permitted character"
 msgstr "Karakter referansı “%-.*s” izin verilen karakteri kodlamıyor"
 
-#: glib/gmarkup.c:766
+#: glib/gmarkup.c:765
 msgid ""
 "Empty entity “&;” seen; valid entities are: &amp; &quot; &lt; &gt; &apos;"
 msgstr ""
 "Boş özvarlık “&;” görüldü; geçerli ögeler: &amp; &quot; &lt; &gt; &apos;"
 
-#: glib/gmarkup.c:774
+#: glib/gmarkup.c:773
 #, c-format
 msgid "Entity name “%-.*s” is not known"
 msgstr "Varlık adı “%-.*s” bilinmiyor"
 
-#: glib/gmarkup.c:779
+#: glib/gmarkup.c:778
 msgid ""
 "Entity did not end with a semicolon; most likely you used an ampersand "
 "character without intending to start an entity — escape ampersand as &amp;"
@@ -4934,11 +4944,11 @@ msgstr ""
 "başlatmak istemeksizin “ve” işareti kullandınız — “ve” işaretini &amp; "
 "olarak kullanabilirsiniz"
 
-#: glib/gmarkup.c:1187
+#: glib/gmarkup.c:1186
 msgid "Document must begin with an element (e.g. <book>)"
 msgstr "Belge bir öge ile başlamalıdır (örneğin <kitap>)"
 
-#: glib/gmarkup.c:1227
+#: glib/gmarkup.c:1226
 #, c-format
 msgid ""
 "“%s” is not a valid character following a “<” character; it may not begin an "
@@ -4947,7 +4957,7 @@ msgstr ""
 "“<” karakterinden sonra gelen “%s” geçerli bir karakter değil; bir öge adı "
 "başlatmamalı"
 
-#: glib/gmarkup.c:1270
+#: glib/gmarkup.c:1269
 #, c-format
 msgid ""
 "Odd character “%s”, expected a “>” character to end the empty-element tag "
@@ -4955,7 +4965,7 @@ msgid ""
 msgstr ""
 "Tuhaf karakter “%s”, “%s” boş öge etiketinin sonunda “>” karakteri bekledi"
 
-#: glib/gmarkup.c:1352
+#: glib/gmarkup.c:1351
 #, c-format
 msgid ""
 "Odd character “%s”, expected a “=” after attribute name “%s” of element “%s”"
@@ -4963,7 +4973,7 @@ msgstr ""
 "Tuhaf karakter “%1$s”, “%3$s” ögesinin “%2$s” özniteliğinin sonunda “=” "
 "karakteri bekledi"
 
-#: glib/gmarkup.c:1394
+#: glib/gmarkup.c:1393
 #, c-format
 msgid ""
 "Odd character “%s”, expected a “>” or “/” character to end the start tag of "
@@ -4974,7 +4984,7 @@ msgstr ""
 "“>”, “/” karakteri veya bir öznitelik bekledi; öznitelik adında geçersiz bir "
 "karakter kullanmış olabilirsiniz"
 
-#: glib/gmarkup.c:1439
+#: glib/gmarkup.c:1438
 #, c-format
 msgid ""
 "Odd character “%s”, expected an open quote mark after the equals sign when "
@@ -4983,7 +4993,7 @@ msgstr ""
 "Tuhaf karakter “%1$s”, “%3$s” ögesindeki “%2$s” özniteliği için değer "
 "verildiğinde eşittir işaretinden sonra tırnak işareti beklendi"
 
-#: glib/gmarkup.c:1573
+#: glib/gmarkup.c:1572
 #, c-format
 msgid ""
 "“%s” is not a valid character following the characters “</”; “%s” may not "
@@ -4992,7 +5002,7 @@ msgstr ""
 "“</” karakterlerini takip eden “%s” geçerli bir karakter değildir; “%s”, öge "
 "adı ile başlamamalı"
 
-#: glib/gmarkup.c:1611
+#: glib/gmarkup.c:1610
 #, c-format
 msgid ""
 "“%s” is not a valid character following the close element name “%s”; the "
@@ -5001,27 +5011,27 @@ msgstr ""
 "“%s”, kapalı öge adı “%s” ardından gelebilecek bir karakter değil; izin "
 "verilen karakter ise “>”"
 
-#: glib/gmarkup.c:1623
+#: glib/gmarkup.c:1622
 #, c-format
 msgid "Element “%s” was closed, no element is currently open"
 msgstr "“%s” ögesi kapatılmış, hiçbir öge şu anda açık değil"
 
-#: glib/gmarkup.c:1632
+#: glib/gmarkup.c:1631
 #, c-format
 msgid "Element “%s” was closed, but the currently open element is “%s”"
 msgstr "“%s” ögesi kapatılmış, ancak “%s” şu an açık olan ögedir"
 
-#: glib/gmarkup.c:1785
+#: glib/gmarkup.c:1784
 msgid "Document was empty or contained only whitespace"
 msgstr "Belge boş veya yalnızca boşluk karakteri içeriyor"
 
-#: glib/gmarkup.c:1799
+#: glib/gmarkup.c:1798
 msgid "Document ended unexpectedly just after an open angle bracket “<”"
 msgstr ""
 "Belge, açık açı parantezi “<” işaretinden hemen sonra beklenmedik bir "
 "şekilde bitti"
 
-#: glib/gmarkup.c:1807 glib/gmarkup.c:1852
+#: glib/gmarkup.c:1806 glib/gmarkup.c:1851
 #, c-format
 msgid ""
 "Document ended unexpectedly with elements still open — “%s” was the last "
@@ -5030,7 +5040,7 @@ msgstr ""
 "Belge, ögeleri hala açıkken beklenmedik bir şekilde bitti - son açılan öge: "
 "“%s”"
 
-#: glib/gmarkup.c:1815
+#: glib/gmarkup.c:1814
 #, c-format
 msgid ""
 "Document ended unexpectedly, expected to see a close angle bracket ending "
@@ -5039,19 +5049,19 @@ msgstr ""
 "Belge beklenmedik bir şekilde bitti, etiketi bitiren kapalı açı parantezi "
 "ile biten <%s/> beklendi"
 
-#: glib/gmarkup.c:1821
+#: glib/gmarkup.c:1820
 msgid "Document ended unexpectedly inside an element name"
 msgstr "Belge bir öge adının içinde beklenmedik bir şekilde bitti"
 
-#: glib/gmarkup.c:1827
+#: glib/gmarkup.c:1826
 msgid "Document ended unexpectedly inside an attribute name"
 msgstr "Belge bir öznitelik adı içinde beklenmedik bir şekilde bitti"
 
-#: glib/gmarkup.c:1832
+#: glib/gmarkup.c:1831
 msgid "Document ended unexpectedly inside an element-opening tag."
 msgstr "Belge bir öge-açma etiketi içinde beklenmedik bir şekilde bitti."
 
-#: glib/gmarkup.c:1838
+#: glib/gmarkup.c:1837
 msgid ""
 "Document ended unexpectedly after the equals sign following an attribute "
 "name; no attribute value"
@@ -5059,24 +5069,24 @@ msgstr ""
 "Belge öznitelik adını takip eden eşittir işaretinden sonra beklenmedik bir "
 "şekilde bitti; öznitelik değeri yok"
 
-#: glib/gmarkup.c:1845
+#: glib/gmarkup.c:1844
 msgid "Document ended unexpectedly while inside an attribute value"
 msgstr "Belge bir öznitelik değeri içinde iken beklenmedik bir şekilde bitti"
 
-#: glib/gmarkup.c:1862
+#: glib/gmarkup.c:1861
 #, c-format
 msgid "Document ended unexpectedly inside the close tag for element “%s”"
 msgstr ""
 "Belge, “%s” ögesinin kapatma etiketi içinde beklenmedik bir şekilde bitti"
 
-#: glib/gmarkup.c:1866
+#: glib/gmarkup.c:1865
 msgid ""
 "Document ended unexpectedly inside the close tag for an unopened element"
 msgstr ""
 "Belge, açık olmayan bir öge için kapatma etiketi içinde beklenmedik bir "
 "şekilde bitti"
 
-#: glib/gmarkup.c:1872
+#: glib/gmarkup.c:1871
 msgid "Document ended unexpectedly inside a comment or processing instruction"
 msgstr ""
 "Belge bir yorum veya işlem talimatı içindeyken beklenmedik bir şekilde bitti"
@@ -5496,15 +5506,15 @@ msgstr "rakam beklendi"
 msgid "illegal symbolic reference"
 msgstr "geçersiz simgesel referans"
 
-#: glib/gregex.c:2582
+#: glib/gregex.c:2583
 msgid "stray final “\\”"
 msgstr "son “\\” kayıp"
 
-#: glib/gregex.c:2586
+#: glib/gregex.c:2587
 msgid "unknown escape sequence"
 msgstr "geçersiz çıkış dizisi"
 
-#: glib/gregex.c:2596
+#: glib/gregex.c:2597
 #, c-format
 msgid "Error while parsing replacement text “%s” at char %lu: %s"
 msgstr "Yerine koyma metni “%s” işlenirken karakter %lu hatalı: %s"
@@ -5678,20 +5688,20 @@ msgstr "“%s” sayısı sınırların dışındadır [%s, %s]"
 msgid "“%s” is not an unsigned number"
 msgstr "“%s” işaretsiz bir sayı değil"
 
-#: glib/gutf8.c:812
+#: glib/gutf8.c:811
 msgid "Failed to allocate memory"
 msgstr "Bellek ayrılamadı"
 
-#: glib/gutf8.c:945
+#: glib/gutf8.c:944
 msgid "Character out of range for UTF-8"
 msgstr "Karakter UTF-8 için sınırlarının dışında"
 
-#: glib/gutf8.c:1046 glib/gutf8.c:1055 glib/gutf8.c:1185 glib/gutf8.c:1194
-#: glib/gutf8.c:1333 glib/gutf8.c:1430
+#: glib/gutf8.c:1045 glib/gutf8.c:1054 glib/gutf8.c:1184 glib/gutf8.c:1193
+#: glib/gutf8.c:1332 glib/gutf8.c:1429
 msgid "Invalid sequence in conversion input"
 msgstr "Dönüşüm girdisi içinde geçersiz dizi"
 
-#: glib/gutf8.c:1344 glib/gutf8.c:1441
+#: glib/gutf8.c:1343 glib/gutf8.c:1440
 msgid "Character out of range for UTF-16"
 msgstr "Karakter UTF-16 sınırlarının dışında"
 

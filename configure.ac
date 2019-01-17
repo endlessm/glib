@@ -30,9 +30,9 @@ m4_define(glib_configure_ac)
 # <mclasen> on the unstable (ie master), interface age = 0
 
 m4_define([glib_major_version], [2])
-m4_define([glib_minor_version], [58])
-m4_define([glib_micro_version], [2])
-m4_define([glib_interface_age], [2])
+m4_define([glib_minor_version], [59])
+m4_define([glib_micro_version], [0])
+m4_define([glib_interface_age], [0])
 m4_define([glib_binary_age],
           [m4_eval(100 * glib_minor_version + glib_micro_version)])
 m4_define([glib_version],
@@ -63,7 +63,7 @@ AC_CONFIG_MACRO_DIR([m4macros])
 # Save this value here, since automake will set cflags later
 cflags_set=${CFLAGS:+set}
 
-AM_INIT_AUTOMAKE([1.13.3 -Wno-portability no-define no-dist-gzip dist-xz tar-ustar subdir-objects])
+AM_INIT_AUTOMAKE([1.13.3 -Wno-portability no-define no-dist-gzip dist-xz tar-ustar subdir-objects foreign])
 AM_MAINTAINER_MODE([enable])
 
 # Support silent build rules. Disable
@@ -338,12 +338,12 @@ AC_PROG_AWK
 # python.m4 will get the expected input
 AC_ARG_WITH(python,
             AS_HELP_STRING([--with-python=PATH],
-                           [Path to Python interpreter; searches $PATH if only a program name is given; if not given, searches for a few standard names such as "python3" or "python2"]),
+                           [Path to Python interpreter; searches $PATH if only a program name, such as "python3" or "python3.4", is given; if not given, searches for a few standard names]),
             [PYTHON="$withval"], [])
 if test x"$PYTHON" = xyes; then
   AC_MSG_ERROR([--with-python option requires a path or program argument])
 fi
-AM_PATH_PYTHON(2.7,,PYTHON="python2.7")
+AM_PATH_PYTHON(3.4,,[AC_MSG_ERROR([Requires Python >=3.4])])
 
 
 dnl ***********************
@@ -862,6 +862,7 @@ AC_CHECK_FUNCS(getmntent_r setmntent endmntent hasmntopt getfsstat getvfsstat fa
 case $host_os in aix*) ac_cv_func_splice=no ;; esac # AIX splice() is something else
 AC_CHECK_FUNCS(splice)
 AC_CHECK_FUNCS(prlimit)
+AC_CHECK_FUNCS(getauxval)
 
 # To avoid finding a compatibility unusable statfs, which typically
 # successfully compiles, but warns to use the newer statvfs interface:
@@ -2608,7 +2609,7 @@ AS_IF([ test "x$use_gcov" = "xyes"], [
     AC_MSG_ERROR([ccache must be disabled when --enable-coverage option is used. You can disable ccache by setting environment variable CCACHE_DISABLE=1.])
   fi
 
-  ltp_version_list="1.6 1.7 1.8 1.9 1.10 1.12"
+  ltp_version_list="1.6 1.7 1.8 1.9 1.10 1.12 1.13"
   AC_CHECK_PROG(LTP, lcov, lcov)
   AC_CHECK_PROG(LTP_GENHTML, genhtml, genhtml)
 

@@ -1063,7 +1063,7 @@ make_valid_utf8 (const char *name)
 {
   GString *string;
   const gchar *remainder, *invalid;
-  gint remaining_bytes, valid_bytes;
+  gsize remaining_bytes, valid_bytes;
   
   string = NULL;
   remainder = name;
@@ -1071,7 +1071,7 @@ make_valid_utf8 (const char *name)
   
   while (remaining_bytes != 0) 
     {
-      if (g_utf8_validate (remainder, remaining_bytes, &invalid))
+      if (g_utf8_validate_len (remainder, remaining_bytes, &invalid))
 	break;
       valid_bytes = invalid - remainder;
     
@@ -1867,6 +1867,12 @@ _g_local_file_info_get (const char             *basename,
 
   if (statbuf.attributes & FILE_ATTRIBUTE_SYSTEM)
     _g_file_info_set_attribute_boolean_by_id (info, G_FILE_ATTRIBUTE_ID_DOS_IS_SYSTEM, TRUE);
+
+  if (statbuf.reparse_tag == IO_REPARSE_TAG_MOUNT_POINT)
+    _g_file_info_set_attribute_boolean_by_id (info, G_FILE_ATTRIBUTE_ID_DOS_IS_MOUNTPOINT, TRUE);
+
+  if (statbuf.reparse_tag != 0)
+    _g_file_info_set_attribute_uint32_by_id (info, G_FILE_ATTRIBUTE_ID_DOS_REPARSE_POINT_TAG, statbuf.reparse_tag);
 #endif
 
   symlink_target = NULL;

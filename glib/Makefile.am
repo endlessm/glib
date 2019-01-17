@@ -191,6 +191,7 @@ libglib_2_0_la_SOURCES = 	\
 	gunicodeprivate.h	\
 	gurifuncs.c 		\
 	gutils.c		\
+	gutilsprivate.h		\
 	guuid.c			\
 	gvalgrind.h		\
 	gvariant.h		\
@@ -456,6 +457,7 @@ gtester_LDADD	 = libglib-2.0.la
 
 bin_SCRIPTS = gtester-report
 EXTRA_DIST += gtester-report.in
+CLEANFILES += gtester-report
 
 gtester-report: gtester-report.in Makefile
 	$(AM_V_GEN) set -e ; \

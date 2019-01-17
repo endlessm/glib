@@ -13,10 +13,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: glib glib-2.58\n"
+"Project-Id-Version: glib\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/glib/issues\n"
-"POT-Creation-Date: 2018-11-20 15:40+0000\n"
-"PO-Revision-Date: 2018-11-24 10:07+0100\n"
+"POT-Creation-Date: 2018-11-20 18:59+0000\n"
+"PO-Revision-Date: 2018-11-24 10:08+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: čeština <gnome-cs-list@gnome.org>\n"
 "Language: cs\n"
@@ -303,14 +303,14 @@ msgid "Not enough space in destination"
 msgstr "Cíl nemá dostatek místa"
 
 #: gio/gcharsetconverter.c:342 gio/gdatainputstream.c:848
-#: gio/gdatainputstream.c:1261 glib/gconvert.c:454 glib/gconvert.c:883
-#: glib/giochannel.c:1558 glib/giochannel.c:1600 glib/giochannel.c:2444
-#: glib/gutf8.c:870 glib/gutf8.c:1323
+#: gio/gdatainputstream.c:1261 glib/gconvert.c:454 glib/gconvert.c:884
+#: glib/giochannel.c:1557 glib/giochannel.c:1599 glib/giochannel.c:2443
+#: glib/gutf8.c:869 glib/gutf8.c:1322
 msgid "Invalid byte sequence in conversion input"
 msgstr "Neplatná posloupnost bajtů na vstupu převodu"
 
-#: gio/gcharsetconverter.c:347 glib/gconvert.c:462 glib/gconvert.c:797
-#: glib/giochannel.c:1565 glib/giochannel.c:2456
+#: gio/gcharsetconverter.c:347 glib/gconvert.c:462 glib/gconvert.c:798
+#: glib/giochannel.c:1564 glib/giochannel.c:2455
 #, c-format
 msgid "Error during conversion: %s"
 msgstr "Chyba při převodu: %s"
@@ -319,7 +319,7 @@ msgstr "Chyba při převodu: %s"
 msgid "Cancellable initialization not supported"
 msgstr "Zrušitelné spuštění není podporováno"
 
-#: gio/gcharsetconverter.c:456 glib/gconvert.c:327 glib/giochannel.c:1386
+#: gio/gcharsetconverter.c:456 glib/gconvert.c:327 glib/giochannel.c:1385
 #, c-format
 msgid "Conversion from character set “%s” to “%s” is not supported"
 msgstr "Převod ze znakové sady „%s“ do „%s“ není podporován"
@@ -504,7 +504,7 @@ msgstr "Služba dbus sezení neběží a automatické spuštění selhalo"
 msgid "Cannot determine session bus address (not implemented for this OS)"
 msgstr "Nelze určit adresu sběrnice sezení (v tomto OS neimplementováno)"
 
-#: gio/gdbusaddress.c:1662 gio/gdbusconnection.c:7142
+#: gio/gdbusaddress.c:1662 gio/gdbusconnection.c:7147
 #, c-format
 msgid ""
 "Cannot determine bus address from DBUS_STARTER_BUS_TYPE environment variable "
@@ -513,7 +513,7 @@ msgstr ""
 "Nelze určit adresu sběrnice z proměnné prostředí DBUS_STARTER_BUS_TYPE – "
 "neznámá hodnota „%s“"
 
-#: gio/gdbusaddress.c:1671 gio/gdbusconnection.c:7151
+#: gio/gdbusaddress.c:1671 gio/gdbusconnection.c:7156
 msgid ""
 "Cannot determine bus address because the DBUS_STARTER_BUS_TYPE environment "
 "variable is not set"
@@ -633,81 +633,81 @@ msgid ""
 msgstr ""
 "Nalezeny nepodporované příznaky při vytváření spojení na straně klienta"
 
-#: gio/gdbusconnection.c:4115 gio/gdbusconnection.c:4462
+#: gio/gdbusconnection.c:4120 gio/gdbusconnection.c:4467
 #, c-format
 msgid ""
 "No such interface “org.freedesktop.DBus.Properties” on object at path %s"
 msgstr ""
 "Rozhraní „org.freedesktop.DBus.Properties“ na objektu na cestě %s neexistuje"
 
-#: gio/gdbusconnection.c:4257
+#: gio/gdbusconnection.c:4262
 #, c-format
 msgid "No such property “%s”"
 msgstr "Vlastnost „%s“ neexistuje"
 
-#: gio/gdbusconnection.c:4269
+#: gio/gdbusconnection.c:4274
 #, c-format
 msgid "Property “%s” is not readable"
 msgstr "Vlastnost „%s“ není ke čtení"
 
-#: gio/gdbusconnection.c:4280
+#: gio/gdbusconnection.c:4285
 #, c-format
 msgid "Property “%s” is not writable"
 msgstr "Vlastnost „%s“ není zapisovatelná"
 
-#: gio/gdbusconnection.c:4300
+#: gio/gdbusconnection.c:4305
 #, c-format
 msgid "Error setting property “%s”: Expected type “%s” but got “%s”"
 msgstr ""
 "Chyba při nastavování vlastnosti „%s“: Očekáván typ „%s“, ale obdržen „%s“"
 
-#: gio/gdbusconnection.c:4405 gio/gdbusconnection.c:4613
-#: gio/gdbusconnection.c:6582
+#: gio/gdbusconnection.c:4410 gio/gdbusconnection.c:4618
+#: gio/gdbusconnection.c:6587
 #, c-format
 msgid "No such interface “%s”"
 msgstr "Rozhraní „%s“ neexistuje"
 
-#: gio/gdbusconnection.c:4831 gio/gdbusconnection.c:7091
+#: gio/gdbusconnection.c:4836 gio/gdbusconnection.c:7096
 #, c-format
 msgid "No such interface “%s” on object at path %s"
 msgstr "Rozhraní „%s“na objektu na cestě %s neexistuje"
 
-#: gio/gdbusconnection.c:4929
+#: gio/gdbusconnection.c:4934
 #, c-format
 msgid "No such method “%s”"
 msgstr "Metoda „%s“ neexistuje"
 
-#: gio/gdbusconnection.c:4960
+#: gio/gdbusconnection.c:4965
 #, c-format
 msgid "Type of message, “%s”, does not match expected type “%s”"
 msgstr "Typ zprávy „%s“ se neshoduje s očekávaným typem „%s“"
 
-#: gio/gdbusconnection.c:5158
+#: gio/gdbusconnection.c:5163
 #, c-format
 msgid "An object is already exported for the interface %s at %s"
 msgstr "Objekt je již exportován pro prostředí %s na %s"
 
-#: gio/gdbusconnection.c:5384
+#: gio/gdbusconnection.c:5389
 #, c-format
 msgid "Unable to retrieve property %s.%s"
 msgstr "Nelze načíst vlastnost %s.%s"
 
-#: gio/gdbusconnection.c:5440
+#: gio/gdbusconnection.c:5445
 #, c-format
 msgid "Unable to set property %s.%s"
 msgstr "Nelze nastavit vlastnost %s.%s"
 
-#: gio/gdbusconnection.c:5618
+#: gio/gdbusconnection.c:5623
 #, c-format
 msgid "Method “%s” returned type “%s”, but expected “%s”"
 msgstr "Metoda „%s“ vrátila typ „%s“, ale očekáván byl „%s“"
 
-#: gio/gdbusconnection.c:6693
+#: gio/gdbusconnection.c:6698
 #, c-format
 msgid "Method “%s” on interface “%s” with signature “%s” does not exist"
 msgstr "Metoda „%s“ na rozhraní „%s“ s podpisem „%s“ neexistuje"
 
-#: gio/gdbusconnection.c:6814
+#: gio/gdbusconnection.c:6819
 #, c-format
 msgid "A subtree is already exported for %s"
 msgstr "Podstrom je již exportován pro %s"
@@ -910,22 +910,23 @@ msgstr "Nelze získat profil hardwaru: %s"
 msgid "Unable to load /var/lib/dbus/machine-id or /etc/machine-id: "
 msgstr "Nelze načíst /var/lib/dbus/machine-id nebo /etc/machine-id: "
 
-#: gio/gdbusproxy.c:1612
+#: gio/gdbusproxy.c:1611
 #, c-format
 msgid "Error calling StartServiceByName for %s: "
 msgstr "Chyba při volání StartServiceByName pro %s: "
 
-#: gio/gdbusproxy.c:1635
+#: gio/gdbusproxy.c:1634
 #, c-format
 msgid "Unexpected reply %d from StartServiceByName(\"%s\") method"
 msgstr "Neočekávaná odpověď %d od metody StartServiceByName(„%s“)"
 
-#: gio/gdbusproxy.c:2726 gio/gdbusproxy.c:2860
+#: gio/gdbusproxy.c:2733 gio/gdbusproxy.c:2868
+#, c-format
 msgid ""
-"Cannot invoke method; proxy is for a well-known name without an owner and "
-"proxy was constructed with the G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START flag"
+"Cannot invoke method; proxy is for the well-known name %s without an owner, "
+"and proxy was constructed with the G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START flag"
 msgstr ""
-"Metodu nelze vyvolat; proxy je na dobře známý název bez vlastníka a proxy "
+"Metodu nelze vyvolat; proxy je na dobře známý název %s bez vlastníka a proxy "
 "byla vytvořena s příznakem G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START"
 
 #: gio/gdbusserver.c:708
@@ -1225,7 +1226,7 @@ msgstr "Chyba: Příliš mnoho argumentů.\n"
 msgid "Error: %s is not a valid well-known bus name.\n"
 msgstr "Chyba: %s není platným oficiálně známým názvem sběrnice.\n"
 
-#: gio/gdesktopappinfo.c:2023 gio/gdesktopappinfo.c:4633
+#: gio/gdesktopappinfo.c:2023 gio/gdesktopappinfo.c:4660
 msgid "Unnamed"
 msgstr "Bez názvu"
 
@@ -1440,7 +1441,7 @@ msgid "Truncate not supported on stream"
 msgstr "Oříznutí není v datovém proudu podporováno"
 
 #: gio/ghttpproxy.c:91 gio/gresolver.c:410 gio/gresolver.c:476
-#: glib/gconvert.c:1786
+#: glib/gconvert.c:1787
 msgid "Invalid hostname"
 msgstr "Neplatný název počítače"
 
@@ -3046,7 +3047,7 @@ msgstr "Chyba při hledání v souboru: %s"
 msgid "Error closing file: %s"
 msgstr "Chyba při zavírání souboru: %s"
 
-#: gio/glocalfilemonitor.c:854
+#: gio/glocalfilemonitor.c:856
 msgid "Unable to find default local file monitor type"
 msgstr "Nelze nalézt výchozí typ sledování místního souboru"
 
@@ -3198,21 +3199,27 @@ msgstr "Síť není dostupná"
 msgid "Host unreachable"
 msgstr "Počítač není dostupný"
 
-#: gio/gnetworkmonitornetlink.c:97 gio/gnetworkmonitornetlink.c:109
-#: gio/gnetworkmonitornetlink.c:128
+#: gio/gnetworkmonitornetlink.c:99 gio/gnetworkmonitornetlink.c:111
+#: gio/gnetworkmonitornetlink.c:130
 #, c-format
 msgid "Could not create network monitor: %s"
 msgstr "Nelze vytvořit sledování sítě: %s"
 
-#: gio/gnetworkmonitornetlink.c:118
+#: gio/gnetworkmonitornetlink.c:120
 msgid "Could not create network monitor: "
 msgstr "Nelze vytvořit sledování sítě: "
 
-#: gio/gnetworkmonitornetlink.c:176
+#: gio/gnetworkmonitornetlink.c:183
 msgid "Could not get network status: "
 msgstr "Nelze zjistit stav sítě: "
 
-#: gio/gnetworkmonitornm.c:322
+#: gio/gnetworkmonitornm.c:313
+#, c-format
+#| msgid "NetworkManager version too old"
+msgid "NetworkManager not running"
+msgstr "NetworkManager neběží"
+
+#: gio/gnetworkmonitornm.c:324
 #, c-format
 msgid "NetworkManager version too old"
 msgstr "NetworkManager je v příliš staré verzi"
@@ -4035,7 +4042,7 @@ msgstr "Chyba při čtení z popisovače souboru: %s"
 msgid "Error closing file descriptor: %s"
 msgstr "Chyba při zavírání popisovače souboru: %s"
 
-#: gio/gunixmounts.c:2606 gio/gunixmounts.c:2659
+#: gio/gunixmounts.c:2651 gio/gunixmounts.c:2704
 msgid "Filesystem root"
 msgstr "Kořen systému souborů"
 
@@ -4155,7 +4162,7 @@ msgstr "Záložka URI „%s“ již existuje"
 #: glib/gbookmarkfile.c:2968 glib/gbookmarkfile.c:3158
 #: glib/gbookmarkfile.c:3234 glib/gbookmarkfile.c:3402
 #: glib/gbookmarkfile.c:3491 glib/gbookmarkfile.c:3580
-#: glib/gbookmarkfile.c:3696
+#: glib/gbookmarkfile.c:3699
 #, c-format
 msgid "No bookmark found for URI “%s”"
 msgstr "Nebyla nalezena záložka URI „%s“"
@@ -4189,8 +4196,8 @@ msgstr "Nelze rozšířit řádek exec „%s“ pomocí URI „%s“"
 msgid "Unrepresentable character in conversion input"
 msgstr "Nereprezentovatelný znak na vstupu převodu"
 
-#: glib/gconvert.c:500 glib/gutf8.c:866 glib/gutf8.c:1078 glib/gutf8.c:1215
-#: glib/gutf8.c:1319
+#: glib/gconvert.c:500 glib/gutf8.c:865 glib/gutf8.c:1077 glib/gutf8.c:1214
+#: glib/gutf8.c:1318
 msgid "Partial character sequence at end of input"
 msgstr "Částečná posloupnost znaků na konci vstupu"
 
@@ -4199,40 +4206,40 @@ msgstr "Částečná posloupnost znaků na konci vstupu"
 msgid "Cannot convert fallback “%s” to codeset “%s”"
 msgstr "Nelze převést zálohu „%s“ do znakové sady „%s“"
 
-#: glib/gconvert.c:940
+#: glib/gconvert.c:941
 msgid "Embedded NUL byte in conversion input"
 msgstr "Vležený nulový bajt na vstupu převodu"
 
-#: glib/gconvert.c:961
+#: glib/gconvert.c:962
 msgid "Embedded NUL byte in conversion output"
 msgstr "Vložený nulový bajt na výstupu převodu"
 
-#: glib/gconvert.c:1649
+#: glib/gconvert.c:1650
 #, c-format
 msgid "The URI “%s” is not an absolute URI using the “file” scheme"
 msgstr "Adresa URI „%s“ není absolutní URI používající schéma „file“"
 
-#: glib/gconvert.c:1659
+#: glib/gconvert.c:1660
 #, c-format
 msgid "The local file URI “%s” may not include a “#”"
 msgstr "Adresa URI „%s“ místního souboru nesmí obsahovat „#“"
 
-#: glib/gconvert.c:1676
+#: glib/gconvert.c:1677
 #, c-format
 msgid "The URI “%s” is invalid"
 msgstr "Adresa URI „%s“ je neplatné"
 
-#: glib/gconvert.c:1688
+#: glib/gconvert.c:1689
 #, c-format
 msgid "The hostname of the URI “%s” is invalid"
 msgstr "Název počítače v adrese URI „%s“ je neplatný"
 
-#: glib/gconvert.c:1704
+#: glib/gconvert.c:1705
 #, c-format
 msgid "The URI “%s” contains invalidly escaped characters"
 msgstr "URI „%s“ obsahuje nesprávně změněné znaky"
 
-#: glib/gconvert.c:1776
+#: glib/gconvert.c:1777
 #, c-format
 msgid "The pathname “%s” is not an absolute path"
 msgstr "Název cesty „%s“ není absolutní cestou"
@@ -4739,36 +4746,36 @@ msgstr "Šablona „%s“ neobsahuje XXXXXX"
 msgid "Failed to read the symbolic link “%s”: %s"
 msgstr "Nelze přečíst symbolický odkaz „%s“: %s"
 
-#: glib/giochannel.c:1390
+#: glib/giochannel.c:1389
 #, c-format
 msgid "Could not open converter from “%s” to “%s”: %s"
 msgstr "Nelze otevřít převodník z „%s“ do „%s“: %s"
 
-#: glib/giochannel.c:1735
+#: glib/giochannel.c:1734
 msgid "Can’t do a raw read in g_io_channel_read_line_string"
 msgstr "Nelze přímo číst v g_io_channel_read_line_string"
 
-#: glib/giochannel.c:1782 glib/giochannel.c:2040 glib/giochannel.c:2127
+#: glib/giochannel.c:1781 glib/giochannel.c:2039 glib/giochannel.c:2126
 msgid "Leftover unconverted data in read buffer"
 msgstr "Ve vstupní vyrovnávací paměti zbyla nepřevedená data"
 
-#: glib/giochannel.c:1863 glib/giochannel.c:1940
+#: glib/giochannel.c:1862 glib/giochannel.c:1939
 msgid "Channel terminates in a partial character"
 msgstr "Kanál ukončen částí znaku"
 
-#: glib/giochannel.c:1926
+#: glib/giochannel.c:1925
 msgid "Can’t do a raw read in g_io_channel_read_to_end"
 msgstr "Nelze přímo číst v g_io_channel_read_to_end"
 
-#: glib/gkeyfile.c:788
+#: glib/gkeyfile.c:789
 msgid "Valid key file could not be found in search dirs"
 msgstr "V složkách hledání nelze najít platný soubor klíče"
 
-#: glib/gkeyfile.c:825
+#: glib/gkeyfile.c:826
 msgid "Not a regular file"
 msgstr "Není obyčejným souborem"
 
-#: glib/gkeyfile.c:1274
+#: glib/gkeyfile.c:1275
 #, c-format
 msgid ""
 "Key file contains line “%s” which is not a key-value pair, group, or comment"
@@ -4776,50 +4783,50 @@ msgstr ""
 "Soubor klíče obsahuje „%s“, což není dvojice klíč-hodnota, skupina ani "
 "komentář"
 
-#: glib/gkeyfile.c:1331
+#: glib/gkeyfile.c:1332
 #, c-format
 msgid "Invalid group name: %s"
 msgstr "Neplatný název skupiny: %s"
 
-#: glib/gkeyfile.c:1353
+#: glib/gkeyfile.c:1354
 msgid "Key file does not start with a group"
 msgstr "Soubor klíče nezačíná skupinou"
 
-#: glib/gkeyfile.c:1379
+#: glib/gkeyfile.c:1380
 #, c-format
 msgid "Invalid key name: %s"
 msgstr "Neplatný název klíče: %s"
 
-#: glib/gkeyfile.c:1406
+#: glib/gkeyfile.c:1407
 #, c-format
 msgid "Key file contains unsupported encoding “%s”"
 msgstr "Soubor klíče obsahuje nepodporované kódování „%s“"
 
-#: glib/gkeyfile.c:1649 glib/gkeyfile.c:1822 glib/gkeyfile.c:3275
-#: glib/gkeyfile.c:3338 glib/gkeyfile.c:3468 glib/gkeyfile.c:3598
-#: glib/gkeyfile.c:3742 glib/gkeyfile.c:3971 glib/gkeyfile.c:4038
+#: glib/gkeyfile.c:1650 glib/gkeyfile.c:1823 glib/gkeyfile.c:3276
+#: glib/gkeyfile.c:3339 glib/gkeyfile.c:3469 glib/gkeyfile.c:3601
+#: glib/gkeyfile.c:3747 glib/gkeyfile.c:3976 glib/gkeyfile.c:4043
 #, c-format
 msgid "Key file does not have group “%s”"
 msgstr "Soubor klíče nemá skupinu „%s“"
 
-#: glib/gkeyfile.c:1777
+#: glib/gkeyfile.c:1778
 #, c-format
 msgid "Key file does not have key “%s” in group “%s”"
 msgstr "Soubor klíče nemá klíč „%s“ ve skupině „%s“"
 
-#: glib/gkeyfile.c:1939 glib/gkeyfile.c:2055
+#: glib/gkeyfile.c:1940 glib/gkeyfile.c:2056
 #, c-format
 msgid "Key file contains key “%s” with value “%s” which is not UTF-8"
 msgstr "Soubor klíče obsahuje klíč „%s“ s hodnotou „%s“, která není v UTF-8"
 
-#: glib/gkeyfile.c:1959 glib/gkeyfile.c:2075 glib/gkeyfile.c:2517
+#: glib/gkeyfile.c:1960 glib/gkeyfile.c:2076 glib/gkeyfile.c:2518
 #, c-format
 msgid ""
 "Key file contains key “%s” which has a value that cannot be interpreted."
 msgstr ""
 "Soubor klíče obsahuje klíč „%s“, který má neinterpretovatelnou hodnotu."
 
-#: glib/gkeyfile.c:2735 glib/gkeyfile.c:3104
+#: glib/gkeyfile.c:2736 glib/gkeyfile.c:3105
 #, c-format
 msgid ""
 "Key file contains key “%s” in group “%s” which has a value that cannot be "
@@ -4828,36 +4835,36 @@ msgstr ""
 "Soubor klíče obsahuje klíč „%s“ ve skupině „%s“, který má "
 "neinterpretovatelnou hodnotu."
 
-#: glib/gkeyfile.c:2813 glib/gkeyfile.c:2890
+#: glib/gkeyfile.c:2814 glib/gkeyfile.c:2891
 #, c-format
 msgid "Key “%s” in group “%s” has value “%s” where %s was expected"
 msgstr "Klíč „%s“ ve skupině „%s“ má hodnotu „%s“, když byla očekávána „%s“"
 
-#: glib/gkeyfile.c:4278
+#: glib/gkeyfile.c:4283
 msgid "Key file contains escape character at end of line"
 msgstr "Soubor klíče obsahuje na konci řádku znak změny"
 
-#: glib/gkeyfile.c:4300
+#: glib/gkeyfile.c:4305
 #, c-format
 msgid "Key file contains invalid escape sequence “%s”"
 msgstr "Soubor klíče obsahuje neplatnou únikovou sekvenci „%s“"
 
-#: glib/gkeyfile.c:4444
+#: glib/gkeyfile.c:4449
 #, c-format
 msgid "Value “%s” cannot be interpreted as a number."
 msgstr "Hodnotu „%s“ nelze interpretovat jako číslo."
 
-#: glib/gkeyfile.c:4458
+#: glib/gkeyfile.c:4463
 #, c-format
 msgid "Integer value “%s” out of range"
 msgstr "Celočíselná hodnota „%s“ je mimo rozsah"
 
-#: glib/gkeyfile.c:4491
+#: glib/gkeyfile.c:4496
 #, c-format
 msgid "Value “%s” cannot be interpreted as a float number."
 msgstr "Hodnotu „%s“ nelze interpretovat jako reálné (plovoucí) číslo."
 
-#: glib/gkeyfile.c:4530
+#: glib/gkeyfile.c:4535
 #, c-format
 msgid "Value “%s” cannot be interpreted as a boolean."
 msgstr "Hodnotu „%s“ nelze interpretovat jako pravdivostní hodnotu."
@@ -4877,32 +4884,32 @@ msgstr "Nelze mapovat „%s%s%s%s“: mmap() selhalo: %s"
 msgid "Failed to open file “%s”: open() failed: %s"
 msgstr "Nelze otevřít soubor „%s“: open() selhalo: %s"
 
-#: glib/gmarkup.c:398 glib/gmarkup.c:440
+#: glib/gmarkup.c:397 glib/gmarkup.c:439
 #, c-format
 msgid "Error on line %d char %d: "
 msgstr "Chyba na řádku %d, znak %d: "
 
-#: glib/gmarkup.c:462 glib/gmarkup.c:545
+#: glib/gmarkup.c:461 glib/gmarkup.c:544
 #, c-format
 msgid "Invalid UTF-8 encoded text in name — not valid “%s”"
 msgstr "V názvu je neplatný text v kódování UTF-8 – platné není „%s“"
 
-#: glib/gmarkup.c:473
+#: glib/gmarkup.c:472
 #, c-format
 msgid "“%s” is not a valid name"
 msgstr "„%s“ není platným názvem"
 
-#: glib/gmarkup.c:489
+#: glib/gmarkup.c:488
 #, c-format
 msgid "“%s” is not a valid name: “%c”"
 msgstr "„%s“ není platným názvem: „%c“"
 
-#: glib/gmarkup.c:613
+#: glib/gmarkup.c:612
 #, c-format
 msgid "Error on line %d: %s"
 msgstr "Chyba na řádku %d: %s"
 
-#: glib/gmarkup.c:690
+#: glib/gmarkup.c:689
 #, c-format
 msgid ""
 "Failed to parse “%-.*s”, which should have been a digit inside a character "
@@ -4911,7 +4918,7 @@ msgstr ""
 "Nelze zpracovat „%-.*s“, což by mělo být číslo v znakové entitě (například "
 "&#234) – číslo je možná příliš velké"
 
-#: glib/gmarkup.c:702
+#: glib/gmarkup.c:701
 msgid ""
 "Character reference did not end with a semicolon; most likely you used an "
 "ampersand character without intending to start an entity — escape ampersand "
@@ -4920,24 +4927,24 @@ msgstr ""
 "Znaková entita nekončí středníkem; pravděpodobně jste použili znak & bez "
 "úmyslu začít entitu – zapište prosím ligaturu et jako &amp;"
 
-#: glib/gmarkup.c:728
+#: glib/gmarkup.c:727
 #, c-format
 msgid "Character reference “%-.*s” does not encode a permitted character"
 msgstr "Znaková entita „%-.*s“ nekóduje povolený znak"
 
-#: glib/gmarkup.c:766
+#: glib/gmarkup.c:765
 msgid ""
 "Empty entity “&;” seen; valid entities are: &amp; &quot; &lt; &gt; &apos;"
 msgstr ""
 "Nalezena prázdná entita „&;“, platnými entitami jsou: &amp; &quot; &lt; &gt; "
 "&apos;"
 
-#: glib/gmarkup.c:774
+#: glib/gmarkup.c:773
 #, c-format
 msgid "Entity name “%-.*s” is not known"
 msgstr "Název entity „%-.*s“ není znám"
 
-#: glib/gmarkup.c:779
+#: glib/gmarkup.c:778
 msgid ""
 "Entity did not end with a semicolon; most likely you used an ampersand "
 "character without intending to start an entity — escape ampersand as &amp;"
@@ -4945,18 +4952,18 @@ msgstr ""
 "Entita nekončí středníkem; pravděpodobně jste použili znak & bez úmyslu "
 "začít entitu – zapište prosím ligaturu et jako &amp;"
 
-#: glib/gmarkup.c:1187
+#: glib/gmarkup.c:1186
 msgid "Document must begin with an element (e.g. <book>)"
 msgstr "Dokument musí začínat prvkem (například: <book>)"
 
-#: glib/gmarkup.c:1227
+#: glib/gmarkup.c:1226
 #, c-format
 msgid ""
 "“%s” is not a valid character following a “<” character; it may not begin an "
 "element name"
 msgstr "„%s“ není platný znak po znaku „<“; nesmí jím začínat název prvku"
 
-#: glib/gmarkup.c:1270
+#: glib/gmarkup.c:1269
 #, c-format
 msgid ""
 "Odd character “%s”, expected a “>” character to end the empty-element tag "
@@ -4965,14 +4972,14 @@ msgstr ""
 "Nezapadající znak „%s“, byl očekáván znak „>“ k ukončení značky empty-"
 "element „%s“"
 
-#: glib/gmarkup.c:1352
+#: glib/gmarkup.c:1351
 #, c-format
 msgid ""
 "Odd character “%s”, expected a “=” after attribute name “%s” of element “%s”"
 msgstr ""
 "Nezapadající znak „%s“, po názvu atributu „%s“ prvku „%s“ bylo očekáváno „=“"
 
-#: glib/gmarkup.c:1394
+#: glib/gmarkup.c:1393
 #, c-format
 msgid ""
 "Odd character “%s”, expected a “>” or “/” character to end the start tag of "
@@ -4983,7 +4990,7 @@ msgstr ""
 "značky prvku „%s“, nebo případně atribut; pravděpodobně jste použili "
 "neplatný znak v názvu atributu"
 
-#: glib/gmarkup.c:1439
+#: glib/gmarkup.c:1438
 #, c-format
 msgid ""
 "Odd character “%s”, expected an open quote mark after the equals sign when "
@@ -4992,7 +4999,7 @@ msgstr ""
 "Nezapadající znak „%s“, po znaku rovnítka při udávání hodnoty atributu „%s“ "
 "prvku „%s“ byly očekávány uvozovky"
 
-#: glib/gmarkup.c:1573
+#: glib/gmarkup.c:1572
 #, c-format
 msgid ""
 "“%s” is not a valid character following the characters “</”; “%s” may not "
@@ -5000,7 +5007,7 @@ msgid ""
 msgstr ""
 "„%s“ není platný znak po znacích „</“; znakem „%s“ nesmí začínat název prvku"
 
-#: glib/gmarkup.c:1611
+#: glib/gmarkup.c:1610
 #, c-format
 msgid ""
 "“%s” is not a valid character following the close element name “%s”; the "
@@ -5009,25 +5016,25 @@ msgstr ""
 "„%s“ není povoleným znakem po ukončovacím názvu prvku „%s“; povoleným znakem "
 "je „>“"
 
-#: glib/gmarkup.c:1623
+#: glib/gmarkup.c:1622
 #, c-format
 msgid "Element “%s” was closed, no element is currently open"
 msgstr "Prvek „%s“ byl uzavřen, žádný prvek není momentálně otevřený"
 
-#: glib/gmarkup.c:1632
+#: glib/gmarkup.c:1631
 #, c-format
 msgid "Element “%s” was closed, but the currently open element is “%s”"
 msgstr "Prvek „%s“ byl uzavřen, ale aktuálně je otevřený prvek „%s“"
 
-#: glib/gmarkup.c:1785
+#: glib/gmarkup.c:1784
 msgid "Document was empty or contained only whitespace"
 msgstr "Dokument je prázdný nebo obsahuje pouze mezery"
 
-#: glib/gmarkup.c:1799
+#: glib/gmarkup.c:1798
 msgid "Document ended unexpectedly just after an open angle bracket “<”"
 msgstr "Dokument neočekávaně skončil ihned po otevírací značce „<“"
 
-#: glib/gmarkup.c:1807 glib/gmarkup.c:1852
+#: glib/gmarkup.c:1806 glib/gmarkup.c:1851
 #, c-format
 msgid ""
 "Document ended unexpectedly with elements still open — “%s” was the last "
@@ -5036,7 +5043,7 @@ msgstr ""
 "Dokument neočekávaně skončil s otevřenými prvky – poslední otevřený prvek "
 "byl „%s“"
 
-#: glib/gmarkup.c:1815
+#: glib/gmarkup.c:1814
 #, c-format
 msgid ""
 "Document ended unexpectedly, expected to see a close angle bracket ending "
@@ -5044,19 +5051,19 @@ msgid ""
 msgstr ""
 "Dokument neočekávaně skončil, byla očekávána uzavírací závorka značky <%s/>"
 
-#: glib/gmarkup.c:1821
+#: glib/gmarkup.c:1820
 msgid "Document ended unexpectedly inside an element name"
 msgstr "Dokument neočekávaně skončil uvnitř názvu prvku"
 
-#: glib/gmarkup.c:1827
+#: glib/gmarkup.c:1826
 msgid "Document ended unexpectedly inside an attribute name"
 msgstr "Dokument neočekávaně skončil uvnitř názvu atributu"
 
-#: glib/gmarkup.c:1832
+#: glib/gmarkup.c:1831
 msgid "Document ended unexpectedly inside an element-opening tag."
 msgstr "Dokument neočekávaně skončil ve značce otevírající prvek."
 
-#: glib/gmarkup.c:1838
+#: glib/gmarkup.c:1837
 msgid ""
 "Document ended unexpectedly after the equals sign following an attribute "
 "name; no attribute value"
@@ -5064,22 +5071,22 @@ msgstr ""
 "Dokument neočekávaně skončil po znaku přiřazení následujícím za názvem "
 "atributu; chybí hodnota atributu"
 
-#: glib/gmarkup.c:1845
+#: glib/gmarkup.c:1844
 msgid "Document ended unexpectedly while inside an attribute value"
 msgstr "Dokument neočekávaně skončil uvnitř hodnoty atributu"
 
-#: glib/gmarkup.c:1862
+#: glib/gmarkup.c:1861
 #, c-format
 msgid "Document ended unexpectedly inside the close tag for element “%s”"
 msgstr "Dokument neočekávaně skončil uvnitř uzavírací značky prvku „%s“"
 
-#: glib/gmarkup.c:1866
+#: glib/gmarkup.c:1865
 msgid ""
 "Document ended unexpectedly inside the close tag for an unopened element"
 msgstr ""
 "Dokument neočekávaně skončil uvnitř uzavírací značky neotevřeného prvku"
 
-#: glib/gmarkup.c:1872
+#: glib/gmarkup.c:1871
 msgid "Document ended unexpectedly inside a comment or processing instruction"
 msgstr ""
 "Dokument neočekávaně skončil uvnitř komentáře nebo instrukce pro zpracování"
@@ -5501,15 +5508,15 @@ msgstr "očekávána číslice"
 msgid "illegal symbolic reference"
 msgstr "nedovolený symbolický odkaz"
 
-#: glib/gregex.c:2582
+#: glib/gregex.c:2583
 msgid "stray final “\\”"
 msgstr "osamocené koncové „\\“"
 
-#: glib/gregex.c:2586
+#: glib/gregex.c:2587
 msgid "unknown escape sequence"
 msgstr "neznámá úniková sekvence"
 
-#: glib/gregex.c:2596
+#: glib/gregex.c:2597
 #, c-format
 msgid "Error while parsing replacement text “%s” at char %lu: %s"
 msgstr "Chyba při zpracování náhradního textu „%s“ na znaku %lu: %s"
@@ -5684,20 +5691,20 @@ msgstr "Číslo „%s“ je mimo meze [%s, %s]"
 msgid "“%s” is not an unsigned number"
 msgstr "„%s“ není číslo bez znaménka"
 
-#: glib/gutf8.c:812
+#: glib/gutf8.c:811
 msgid "Failed to allocate memory"
 msgstr "Nelze alokovat paměť"
 
-#: glib/gutf8.c:945
+#: glib/gutf8.c:944
 msgid "Character out of range for UTF-8"
 msgstr "Znak je mimo rozsah UTF-8"
 
-#: glib/gutf8.c:1046 glib/gutf8.c:1055 glib/gutf8.c:1185 glib/gutf8.c:1194
-#: glib/gutf8.c:1333 glib/gutf8.c:1430
+#: glib/gutf8.c:1045 glib/gutf8.c:1054 glib/gutf8.c:1184 glib/gutf8.c:1193
+#: glib/gutf8.c:1332 glib/gutf8.c:1429
 msgid "Invalid sequence in conversion input"
 msgstr "Neplatná posloupnost na vstupu převodu"
 
-#: glib/gutf8.c:1344 glib/gutf8.c:1441
+#: glib/gutf8.c:1343 glib/gutf8.c:1440
 msgid "Character out of range for UTF-16"
 msgstr "Znak je mimo rozsah UTF-16"
 

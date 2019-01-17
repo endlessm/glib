@@ -1,6 +1,6 @@
 /* GLib testing framework examples and tests
  *
- * Copyright (C) 2008-2011 Red Hat, Inc.
+ * Copyright (C) 2008-2018 Red Hat, Inc.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -933,7 +933,7 @@ check_bar_proxy (FooiGenBar *proxy,
   g_assert_cmpuint (g_strv_length ((gchar **) ret_array_of_objpaths), ==,
                     g_strv_length ((gchar **) array_of_objpaths));
   g_assert_nonnull (ret_array_of_signatures);
-  g_assert_true (g_variant_equal (ret_array_of_signatures, array_of_signatures));
+  g_assert_cmpvariant (ret_array_of_signatures, array_of_signatures);
   g_assert_nonnull (ret_array_of_bytestrings);
   g_assert_cmpuint (g_strv_length ((gchar **) ret_array_of_bytestrings), ==,
                     g_strv_length ((gchar **) array_of_bytestrings));
@@ -1768,9 +1768,9 @@ on_object_proxy_removed (GDBusObjectManagerClient  *manager,
 }
 
 static void
-property_d_changed (GObject    *object,
-		    GParamSpec *pspec,
-		    gpointer    user_data)
+property_changed (GObject    *object,
+		  GParamSpec *pspec,
+		  gpointer    user_data)
 {
   gboolean *changed = user_data;
 
@@ -1783,6 +1783,8 @@ om_check_property_and_signal_emission (GMainLoop  *loop,
                                        FooiGenBar *proxy)
 {
   gboolean d_changed = FALSE;
+  gboolean quiet_changed = FALSE;
+  gboolean quiet_too_changed = FALSE;
   guint handler;
 
   /* First PropertiesChanged */
@@ -1804,11 +1806,33 @@ om_check_property_and_signal_emission (GMainLoop  *loop,
    * notifications are serialized.
    */
   handler = g_signal_connect (proxy, "notify::d",
-			      G_CALLBACK (property_d_changed), &d_changed);
+			      G_CALLBACK (property_changed), &d_changed);
   foo_igen_bar_set_d (skeleton, 1.0);
   foo_igen_bar_set_i (skeleton, 2);
   _g_assert_property_notify (proxy, "i");
   g_assert (d_changed == FALSE);
+  g_signal_handler_disconnect (proxy, handler);
+
+  /* Verify that re-setting a property with the "EmitsChangedSignal"
+   * set to false doesn't emit a signal. */
+  handler = g_signal_connect (proxy, "notify::quiet",
+			      G_CALLBACK (property_changed), &quiet_changed);
+  foo_igen_bar_set_quiet (skeleton, "hush!");
+  foo_igen_bar_set_i (skeleton, 3);
+  _g_assert_property_notify (proxy, "i");
+  g_assert (quiet_changed == FALSE);
+  g_assert_cmpstr (foo_igen_bar_get_quiet (skeleton), ==, "hush!");
+  g_signal_handler_disconnect (proxy, handler);
+
+  /* Also verify that re-setting a property with the "EmitsChangedSignal"
+   * set to 'const' doesn't emit a signal. */
+  handler = g_signal_connect (proxy, "notify::quiet-too",
+			      G_CALLBACK (property_changed), &quiet_changed);
+  foo_igen_bar_set_quiet_too (skeleton, "hush too!");
+  foo_igen_bar_set_i (skeleton, 4);
+  _g_assert_property_notify (proxy, "i");
+  g_assert (quiet_too_changed == FALSE);
+  g_assert_cmpstr (foo_igen_bar_get_quiet_too (skeleton), ==, "hush too!");
   g_signal_handler_disconnect (proxy, handler);
 
   /* Then just a regular signal */
@@ -2152,7 +2176,7 @@ check_object_manager (void)
    * that ObjectManager.GetManagedObjects() works
    */
   om_check_get_all (c, loop,
-                    "({objectpath '/managed/first': {'com.acme.Coyote': {'Mood': <''>}}, '/managed/second': {'org.project.Bar': {'y': <byte 0x00>, 'b': <false>, 'n': <int16 0>, 'q': <uint16 0>, 'i': <0>, 'u': <uint32 0>, 'x': <int64 0>, 't': <uint64 0>, 'd': <0.0>, 's': <''>, 'o': <objectpath '/'>, 'g': <signature ''>, 'ay': <b''>, 'as': <@as []>, 'aay': <@aay []>, 'ao': <@ao []>, 'ag': <@ag []>, 'FinallyNormalName': <''>, 'ReadonlyProperty': <''>, 'unset_i': <0>, 'unset_d': <0.0>, 'unset_s': <''>, 'unset_o': <objectpath '/'>, 'unset_g': <signature ''>, 'unset_ay': <b''>, 'unset_as': <@as []>, 'unset_ao': <@ao []>, 'unset_ag': <@ag []>, 'unset_struct': <(0, 0.0, '', objectpath '/', signature '', @ay [], @as [], @ao [], @ag [])>}, 'org.project.Bat': {'force_i': <0>, 'force_s': <''>, 'force_ay': <@ay []>, 'force_struct': <(0,)>}}},)");
+                    "({objectpath '/managed/first': {'com.acme.Coyote': {'Mood': <''>}}, '/managed/second': {'org.project.Bar': {'y': <byte 0x00>, 'b': <false>, 'n': <int16 0>, 'q': <uint16 0>, 'i': <0>, 'u': <uint32 0>, 'x': <int64 0>, 't': <uint64 0>, 'd': <0.0>, 's': <''>, 'o': <objectpath '/'>, 'g': <signature ''>, 'ay': <b''>, 'as': <@as []>, 'aay': <@aay []>, 'ao': <@ao []>, 'ag': <@ag []>, 'FinallyNormalName': <''>, 'ReadonlyProperty': <''>, 'quiet': <''>, 'quiet_too': <''>, 'unset_i': <0>, 'unset_d': <0.0>, 'unset_s': <''>, 'unset_o': <objectpath '/'>, 'unset_g': <signature ''>, 'unset_ay': <b''>, 'unset_as': <@as []>, 'unset_ao': <@ao []>, 'unset_ag': <@ag []>, 'unset_struct': <(0, 0.0, '', objectpath '/', signature '', @ay [], @as [], @ao [], @ag [])>}, 'org.project.Bat': {'force_i': <0>, 'force_s': <''>, 'force_ay': <@ay []>, 'force_struct': <(0,)>}}},)");
 
   /* Set connection to NULL, causing everything to be unexported.. verify this.. and
    * then set the connection back.. and then check things still work
@@ -2164,7 +2188,7 @@ check_object_manager (void)
 
   g_dbus_object_manager_server_set_connection (manager, c);
   om_check_get_all (c, loop,
-                    "({objectpath '/managed/first': {'com.acme.Coyote': {'Mood': <''>}}, '/managed/second': {'org.project.Bar': {'y': <byte 0x00>, 'b': <false>, 'n': <int16 0>, 'q': <uint16 0>, 'i': <0>, 'u': <uint32 0>, 'x': <int64 0>, 't': <uint64 0>, 'd': <0.0>, 's': <''>, 'o': <objectpath '/'>, 'g': <signature ''>, 'ay': <b''>, 'as': <@as []>, 'aay': <@aay []>, 'ao': <@ao []>, 'ag': <@ag []>, 'FinallyNormalName': <''>, 'ReadonlyProperty': <''>, 'unset_i': <0>, 'unset_d': <0.0>, 'unset_s': <''>, 'unset_o': <objectpath '/'>, 'unset_g': <signature ''>, 'unset_ay': <b''>, 'unset_as': <@as []>, 'unset_ao': <@ao []>, 'unset_ag': <@ag []>, 'unset_struct': <(0, 0.0, '', objectpath '/', signature '', @ay [], @as [], @ao [], @ag [])>}, 'org.project.Bat': {'force_i': <0>, 'force_s': <''>, 'force_ay': <@ay []>, 'force_struct': <(0,)>}}},)");
+                    "({objectpath '/managed/first': {'com.acme.Coyote': {'Mood': <''>}}, '/managed/second': {'org.project.Bar': {'y': <byte 0x00>, 'b': <false>, 'n': <int16 0>, 'q': <uint16 0>, 'i': <0>, 'u': <uint32 0>, 'x': <int64 0>, 't': <uint64 0>, 'd': <0.0>, 's': <''>, 'o': <objectpath '/'>, 'g': <signature ''>, 'ay': <b''>, 'as': <@as []>, 'aay': <@aay []>, 'ao': <@ao []>, 'ag': <@ag []>, 'FinallyNormalName': <''>, 'ReadonlyProperty': <''>, 'quiet': <''>, 'quiet_too': <''>, 'unset_i': <0>, 'unset_d': <0.0>, 'unset_s': <''>, 'unset_o': <objectpath '/'>, 'unset_g': <signature ''>, 'unset_ay': <b''>, 'unset_as': <@as []>, 'unset_ao': <@ao []>, 'unset_ag': <@ag []>, 'unset_struct': <(0, 0.0, '', objectpath '/', signature '', @ay [], @as [], @ao [], @ag [])>}, 'org.project.Bat': {'force_i': <0>, 'force_s': <''>, 'force_ay': <@ay []>, 'force_struct': <(0,)>}}},)");
 
   /* Also check that the ObjectManagerClient returns these objects - and
    * that they are of the right GType cf. what was requested via
@@ -2428,6 +2452,42 @@ test_autocleanups (void)
 
 /* ---------------------------------------------------------------------------------------------------- */
 
+/* deprecations
+ */
+
+static void
+test_deprecations (void)
+{
+  {
+    FooiGenOldieInterface *iskel;
+    GParamSpec *pspec;
+
+    G_GNUC_BEGIN_IGNORE_DEPRECATIONS;
+    iskel = foo_igen_oldie_interface_skeleton_new ();
+    G_GNUC_END_IGNORE_DEPRECATIONS;
+
+    pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (iskel), "bat");
+    g_assert_nonnull (pspec);
+    g_assert_cmpint (pspec->flags & G_PARAM_DEPRECATED, ==, G_PARAM_DEPRECATED);
+
+    g_object_unref (iskel);
+  }
+
+  {
+    FooiGenObjectSkeleton *oskel;
+    GParamSpec *pspec;
+
+    oskel = foo_igen_object_skeleton_new ("/objects/first");
+    pspec = g_object_class_find_property (G_OBJECT_GET_CLASS (oskel), "oldie-interface");
+    g_assert_nonnull (pspec);
+    g_assert_cmpint (pspec->flags & G_PARAM_DEPRECATED, ==, G_PARAM_DEPRECATED);
+
+    g_object_unref (oskel);
+  }
+}
+
+/* ---------------------------------------------------------------------------------------------------- */
+
 static void
 assert_arg_infos_equal (GDBusArgInfo **a,
                         GDBusArgInfo **b)
@@ -2543,6 +2603,7 @@ main (int   argc,
   g_test_add_func ("/gdbus/codegen/object-manager", test_object_manager);
   g_test_add_func ("/gdbus/codegen/property-naming", test_property_naming);
   g_test_add_func ("/gdbus/codegen/autocleanups", test_autocleanups);
+  g_test_add_func ("/gdbus/codegen/deprecations", test_deprecations);
   g_test_add_func ("/gdbus/codegen/standalone-interface-info", test_standalone_interface_info);
 
   return session_bus_run ();

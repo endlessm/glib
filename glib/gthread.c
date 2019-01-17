@@ -320,6 +320,10 @@
  * simultaneous read-only access (by holding the 'reader' lock via
  * g_rw_lock_reader_lock()).
  *
+ * It is unspecified whether readers or writers have priority in acquiring the
+ * lock when a reader already holds the lock and a writer is queued to acquire
+ * it.
+ *
  * Here is an example for an array with access functions:
  * |[<!-- language="C" --> 
  *   GRWLock lock;
@@ -691,10 +695,10 @@ void
 
   g_return_if_fail (g_atomic_pointer_get (value_location) == NULL);
   g_return_if_fail (result != 0);
-  g_return_if_fail (g_once_init_list != NULL);
 
   g_atomic_pointer_set (value_location, result);
   g_mutex_lock (&g_once_mutex);
+  g_return_if_fail (g_once_init_list != NULL);
   g_once_init_list = g_slist_remove (g_once_init_list, (void*) value_location);
   g_cond_broadcast (&g_once_cond);
   g_mutex_unlock (&g_once_mutex);

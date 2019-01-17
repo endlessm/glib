@@ -36,6 +36,8 @@ IGNORE_HFILES = \
 	gbsearcharray.h		\
 	glib-private.h		\
 	gmoduleconf.h		\
+	grcboxprivate.h		\
+	gstdioprivate.h		\
 	gthreadprivate.h	\
 	gunibreak.h		\
 	gunicomp.h		\
@@ -62,6 +64,7 @@ IGNORE_HFILES = \
 	glib-init.h		\
 	gconstructor.h		\
 	valgrind.h		\
+	gutilsprivate.h		\
 	gvalgrind.h		\
 	$(NULL)
 
