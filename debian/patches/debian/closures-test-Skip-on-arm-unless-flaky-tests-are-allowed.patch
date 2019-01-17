@@ -17,10 +17,10 @@ Forwarded: not-needed
  1 file changed, 8 insertions(+)
 
 diff --git a/tests/refcount/closures.c b/tests/refcount/closures.c
-index 1884067..e77d1c7 100644
+index a4c2831..4e9bf36 100644
 --- a/tests/refcount/closures.c
 +++ b/tests/refcount/closures.c
-@@ -245,6 +245,14 @@ main (int    argc,
+@@ -237,6 +237,14 @@ main (int    argc,
    GTest *object;
    guint i;
  

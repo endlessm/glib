@@ -15,10 +15,10 @@ Applied-upstream: 2.58.3
  1 file changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/glib/tests/gvariant.c b/glib/tests/gvariant.c
-index 5ca7b96..18800f9 100644
+index 7cb685c..06a80bc 100644
 --- a/glib/tests/gvariant.c
 +++ b/glib/tests/gvariant.c
-@@ -4926,6 +4926,7 @@ test_normal_checking_array_offsets (void)
+@@ -4944,6 +4944,7 @@ test_normal_checking_array_offsets (void)
  static void
  test_normal_checking_tuple_offsets (void)
  {
@@ -26,7 +26,7 @@ index 5ca7b96..18800f9 100644
    const guint8 data[] = {
      0x07, 0xe5, 0x00, 0x07, 0x00, 0x07,
      '(', 'a', 's', 'a', 's', 'a', 's', 'a', 's', 'a', 's', 'a', 's', ')',
-@@ -4934,13 +4935,15 @@ test_normal_checking_tuple_offsets (void)
+@@ -4979,13 +4980,15 @@ test_normal_checking_empty_object_path (void)
    GVariant *variant = NULL;
    GVariant *normal_variant = NULL;
  

@@ -26,10 +26,10 @@ index 05b20cd..b498202 100644
  
  AM_CFLAGS = $(GLIB_WARN_CFLAGS)
 diff --git a/gio/gdesktopappinfo.c b/gio/gdesktopappinfo.c
-index d0ffbac..11b245a 100644
+index 9ebfce4..b0ebd61 100644
 --- a/gio/gdesktopappinfo.c
 +++ b/gio/gdesktopappinfo.c
-@@ -2723,9 +2723,9 @@ g_desktop_app_info_launch_uris_with_spawn (GDesktopAppInfo            *info,
+@@ -2741,9 +2741,9 @@ g_desktop_app_info_launch_uris_with_spawn (GDesktopAppInfo            *info,
            /* Allow test suite to specify path to gio-launch-desktop */
            tmp = g_getenv ("GIO_LAUNCH_DESKTOP");
  
@@ -42,7 +42,7 @@ index d0ffbac..11b245a 100644
          }
  
 diff --git a/gio/meson.build b/gio/meson.build
-index 853b2cc..c3b7b76 100644
+index 3b48ce6..31bb2f0 100644
 --- a/gio/meson.build
 +++ b/gio/meson.build
 @@ -1,6 +1,7 @@

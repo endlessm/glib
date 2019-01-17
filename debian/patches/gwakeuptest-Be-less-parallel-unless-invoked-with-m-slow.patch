@@ -18,7 +18,7 @@ Forwarded: no
  1 file changed, 13 insertions(+), 4 deletions(-)
 
 diff --git a/glib/tests/gwakeuptest.c b/glib/tests/gwakeuptest.c
-index 2ec29bd..2111483 100644
+index 461a7d3..2c3eccd 100644
 --- a/glib/tests/gwakeuptest.c
 +++ b/glib/tests/gwakeuptest.c
 @@ -89,6 +89,9 @@ struct context
@@ -31,7 +31,7 @@ index 2ec29bd..2111483 100644
  static struct context contexts[NUM_THREADS];
  static GThread *threads[NUM_THREADS];
  static GWakeup *last_token_wakeup;
-@@ -155,7 +158,7 @@ dispatch_token (struct token *token)
+@@ -158,7 +161,7 @@ dispatch_token (struct token *token)
        struct context *ctx;
        gint next_ctx;
  
@@ -40,7 +40,7 @@ index 2ec29bd..2111483 100644
        ctx = &contexts[next_ctx];
        token->owner = ctx;
        token->ttl--;
-@@ -212,6 +215,12 @@ test_threaded (void)
+@@ -213,6 +216,12 @@ test_threaded (void)
  {
    gint i;
  
@@ -53,7 +53,7 @@ index 2ec29bd..2111483 100644
    /* make sure we don't block forever */
    alarm (60);
  
-@@ -229,7 +238,7 @@ test_threaded (void)
+@@ -230,7 +239,7 @@ test_threaded (void)
    last_token_wakeup = g_wakeup_new ();
  
    /* create contexts, assign to threads */
@@ -62,7 +62,7 @@ index 2ec29bd..2111483 100644
      {
        context_init (&contexts[i]);
        threads[i] = g_thread_new ("test", thread_func, &contexts[i]);
-@@ -237,13 +246,13 @@ test_threaded (void)
+@@ -238,13 +247,13 @@ test_threaded (void)
  
    /* dispatch tokens */
    for (i = 0; i < NUM_TOKENS; i++)

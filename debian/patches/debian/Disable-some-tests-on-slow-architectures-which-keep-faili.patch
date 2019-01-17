@@ -84,10 +84,10 @@ index cf114fd..9beefd3 100644
    loop = g_main_loop_new (ctx, FALSE);
  
 diff --git a/glib/tests/timeout.c b/glib/tests/timeout.c
-index ce7dd09..d2729ae 100644
+index 8f44e75..430be91 100644
 --- a/glib/tests/timeout.c
 +++ b/glib/tests/timeout.c
-@@ -89,6 +89,15 @@ test_func (gpointer data)
+@@ -175,6 +175,15 @@ test_func (gpointer data)
  static void
  test_rounding (void)
  {
