@@ -64,6 +64,15 @@
  * A standard boolean type.
  * Variables of this type should only contain the value
  * %TRUE or %FALSE.
+ *
+ * Never directly compare the contents of a #gboolean variable with the values
+ * %TRUE or %FALSE. Use `if (condition)` to check a #gboolean is "true", instead
+ * of `if (condition == TRUE)`. Likewise use `if (!condition)` to check a
+ * #gboolean is "false".
+ *
+ * There is no validation when assigning to a #gboolean variable and so it could
+ * contain any value represented by a #gint. This is why the use of `if
+ * (condition)` is recommended. All non-zero values in C evaluate to "true".
  */
 
 /**
@@ -200,14 +209,6 @@
  */
 
 /**
- * G_MININT8:
- *
- * The minimum value which can be held in a #gint8.
- *
- * Since: 2.4
- */
-
-/**
  * G_MAXINT8:
  *
  * The maximum value which can be held in a #gint8.
@@ -239,14 +240,6 @@
  *
  * To print or scan values of this type, use
  * %G_GINT16_MODIFIER and/or %G_GINT16_FORMAT.
- */
-
-/**
- * G_MININT16:
- *
- * The minimum value which can be held in a #gint16.
- *
- * Since: 2.4
  */
 
 /**
@@ -329,14 +322,6 @@
  */
 
 /**
- * G_MININT32:
- *
- * The minimum value which can be held in a #gint32.
- *
- * Since: 2.4
- */
-
-/**
  * G_MAXINT32:
  *
  * The maximum value which can be held in a #gint32.
@@ -396,12 +381,6 @@
  *
  * To print or scan values of this type, use
  * %G_GINT64_MODIFIER and/or %G_GINT64_FORMAT.
- */
-
-/**
- * G_MININT64:
- *
- * The minimum value which can be held in a #gint64.
  */
 
 /**
@@ -1870,10 +1849,15 @@
  * G_ALIGNOF
  * @a: a type-name
  *
- * Return the minimum alignment required by the platform ABI for values of the given
+ * Return the minimal alignment required by the platform ABI for values of the given
  * type. The address of a variable or struct member of the given type must always be
  * a multiple of this alignment. For example, most platforms require int variables
  * to be aligned at a 4-byte boundary, so `G_ALIGNOF (int)` is 4 on most platforms.
+ *
+ * Note this is not necessarily the same as the value returned by GCC’s
+ * `__alignof__` operator, which returns the preferred alignment for a type.
+ * The preferred alignment may be a stricter alignment than the minimal
+ * alignment.
  *
  * Since: 2.60
  */

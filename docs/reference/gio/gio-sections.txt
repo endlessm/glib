@@ -125,6 +125,8 @@ g_file_query_filesystem_info
 g_file_query_filesystem_info_async
 g_file_query_filesystem_info_finish
 g_file_query_default_handler
+g_file_query_default_handler_async
+g_file_query_default_handler_finish
 g_file_measure_disk_usage
 g_file_measure_disk_usage_async
 g_file_measure_disk_usage_finish
@@ -843,6 +845,12 @@ g_output_stream_write
 g_output_stream_write_all
 g_output_stream_write_all_async
 g_output_stream_write_all_finish
+g_output_stream_writev
+g_output_stream_writev_all
+g_output_stream_writev_async
+g_output_stream_writev_finish
+g_output_stream_writev_all_async
+g_output_stream_writev_all_finish
 g_output_stream_splice
 g_output_stream_flush
 g_output_stream_close
@@ -1440,6 +1448,8 @@ g_app_info_launch
 g_app_info_supports_files
 g_app_info_supports_uris
 g_app_info_launch_uris
+g_app_info_launch_uris_async
+g_app_info_launch_uris_finish
 g_app_info_should_show
 g_app_info_can_delete
 g_app_info_delete
@@ -2124,6 +2134,7 @@ g_socket_receive_with_blocking
 g_socket_send
 g_socket_send_to
 g_socket_send_message
+g_socket_send_message_with_timeout
 g_socket_send_messages
 g_socket_send_with_blocking
 g_socket_close
@@ -3648,6 +3659,7 @@ g_pollable_output_stream_can_poll
 g_pollable_output_stream_is_writable
 g_pollable_output_stream_create_source
 g_pollable_output_stream_write_nonblocking
+g_pollable_output_stream_writev_nonblocking
 <SUBSECTION Standard>
 G_POLLABLE_OUTPUT_STREAM
 G_POLLABLE_OUTPUT_STREAM_GET_INTERFACE
@@ -3659,6 +3671,7 @@ g_pollable_output_stream_get_type
 
 <SECTION>
 <FILE>gpollableutils</FILE>
+GPollableReturn
 GPollableSourceFunc
 g_pollable_source_new
 g_pollable_source_new_full
