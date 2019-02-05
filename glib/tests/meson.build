@@ -38,6 +38,7 @@ glib_tests = {
   'keyfile' : {},
   'list' : {},
   'logging' : {},
+  'macros' : {},
   'mainloop' : {},
   'mappedfile' : {},
   'markup' : {},
@@ -131,7 +132,15 @@ if glib_conf.has('HAVE_EVENTFD')
   }
 endif
 
-if host_machine.system() != 'windows'
+if host_machine.system() == 'windows'
+  if winsock2.found()
+    glib_tests += {
+      'gpoll' : {
+        'dependencies' : [winsock2],
+      },
+    }
+  endif
+else
   glib_tests += {
     'include' : {},
     'unix' : {},
