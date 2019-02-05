@@ -10,10 +10,10 @@ Forwarded: no, specific to Debian and its derivatives
  1 file changed, 3 insertions(+)
 
 diff --git a/gio/giomodule.c b/gio/giomodule.c
-index 36c0cef..9f5f6ef 100644
+index b92162d..cdb20ca 100644
 --- a/gio/giomodule.c
 +++ b/gio/giomodule.c
-@@ -1149,6 +1149,9 @@ _g_io_modules_ensure_loaded (void)
+@@ -1206,6 +1206,9 @@ _g_io_modules_ensure_loaded (void)
  
        g_io_module_scope_free (scope);
  

@@ -1,5 +1,3 @@
-trash-test-Don-t-assume-that-.local-exists.patch
-trash-test-Don-t-rely-on-being-able-to-determine-mount-po.patch
 tests-Allocate-gvariant-data-from-the-heap-to-guarantee-a.patch
 01_gettext-desktopfiles.patch
 81-skip-monitor-test-on-non-linux.patch

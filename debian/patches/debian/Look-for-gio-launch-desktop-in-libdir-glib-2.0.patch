@@ -8,25 +8,12 @@ libglib2.0-bin.
 
 Forwarded: not-needed, Debian-specific
 ---
- gio/Makefile.am       | 1 +
  gio/gdesktopappinfo.c | 4 ++--
  gio/meson.build       | 1 +
- 3 files changed, 4 insertions(+), 2 deletions(-)
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/gio/Makefile.am b/gio/Makefile.am
-index 05b20cd..b498202 100644
---- a/gio/Makefile.am
-+++ b/gio/Makefile.am
-@@ -26,6 +26,7 @@ AM_CPPFLAGS = \
- 	$(gmodule_INCLUDES)				\
- 	$(GLIB_DEBUG_FLAGS)				\
- 	-DGIO_COMPILATION				\
-+	-DGIO_LIBDIR=\"$(libdir)\"			\
- 	-DGIO_MODULE_DIR=\"$(GIO_MODULE_DIR)\"	
- 
- AM_CFLAGS = $(GLIB_WARN_CFLAGS)
 diff --git a/gio/gdesktopappinfo.c b/gio/gdesktopappinfo.c
-index 9ebfce4..b0ebd61 100644
+index 7d7425e..36f3cfb 100644
 --- a/gio/gdesktopappinfo.c
 +++ b/gio/gdesktopappinfo.c
 @@ -2741,9 +2741,9 @@ g_desktop_app_info_launch_uris_with_spawn (GDesktopAppInfo            *info,
@@ -42,7 +29,7 @@ index 9ebfce4..b0ebd61 100644
          }
  
 diff --git a/gio/meson.build b/gio/meson.build
-index 3b48ce6..31bb2f0 100644
+index 990b1b5..84c5af1 100644
 --- a/gio/meson.build
 +++ b/gio/meson.build
 @@ -1,6 +1,7 @@

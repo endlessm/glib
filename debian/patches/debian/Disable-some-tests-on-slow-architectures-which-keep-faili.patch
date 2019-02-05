@@ -16,7 +16,7 @@ Forwarded: no
  3 files changed, 41 insertions(+)
 
 diff --git a/gio/tests/socket.c b/gio/tests/socket.c
-index 9b3adb4..e34b0d0 100644
+index 8410a3e..5eba57a 100644
 --- a/gio/tests/socket.c
 +++ b/gio/tests/socket.c
 @@ -1111,6 +1111,14 @@ test_timed_wait (void)

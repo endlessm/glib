@@ -43,7 +43,7 @@ index 8e4ffec..ec33ea6 100644
  
  <refsect2 id="setlocale">
 diff --git a/glib/gutils.c b/glib/gutils.c
-index 09c1523..5c1f64c 100644
+index 6fe4737..d5fc432 100644
 --- a/glib/gutils.c
 +++ b/glib/gutils.c
 @@ -801,7 +801,9 @@ g_build_home_dir (void)
