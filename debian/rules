@@ -125,6 +125,7 @@ endif
 override_dh_auto_test-arch:
 ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 	# Remove LD_PRELOAD so we don't run with fakeroot, which makes dbus-related tests fail
+	# First run the non-flaky tests, and fail the build if they fail (on linux)
 	env -u LD_PRELOAD \
 		DEB_BUILD_TIME_TESTS=1 \
 		LC_ALL=C.UTF-8 \
@@ -133,8 +134,21 @@ ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS)))
 		--no-rebuild \
 		--num-processes 1 \
 		--timeout-multiplier $(test_timeout_multiplier) \
+		--no-suite flaky \
 		--verbose \
 	|| $(handle_test_failure)
+	# and then run the flaky ones, but ignore them failing
+	env -u LD_PRELOAD \
+		DEB_BUILD_TIME_TESTS=1 \
+		LC_ALL=C.UTF-8 \
+		MESON_TESTTHREADS=1 \
+	meson test -C debian/build/deb \
+		--no-rebuild \
+		--num-processes 1 \
+		--timeout-multiplier $(test_timeout_multiplier) \
+		--suite flaky \
+		--verbose \
+	|| true
 endif
 
 # Skip build-time tests if all we are building is documentation; running
