@@ -28,8 +28,9 @@ glib2.0 (2.59.2-1) UNRELEASED; urgency=medium
       subclasses.
   * Refresh patches, drop trash test patches which are upstream now
   * build-time tests: Run "flaky" suite separately and non fatally
+  * debian/libglib2.0-0.symbols: Add new symbols from 2.59.{1,2}
 
- -- Iain Lane <laney@debian.org>  Wed, 06 Feb 2019 16:18:52 +0000
+ -- Iain Lane <laney@debian.org>  Wed, 06 Feb 2019 16:41:07 +0000
 
 glib2.0 (2.59.0-1) experimental; urgency=medium
 
