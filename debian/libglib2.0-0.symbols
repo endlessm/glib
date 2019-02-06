@@ -60,6 +60,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_app_info_launch_default_for_uri_async@Base 2.49.5
  g_app_info_launch_default_for_uri_finish@Base 2.49.5
  g_app_info_launch_uris@Base 2.16.0
+ g_app_info_launch_uris_async@Base 2.59.2
+ g_app_info_launch_uris_finish@Base 2.59.2
  g_app_info_monitor_get@Base 2.39.4
  g_app_info_monitor_get_type@Base 2.39.4
  g_app_info_remove_supports_type@Base 2.16.0
@@ -884,6 +886,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_poll_mountable@Base 2.22.0
  g_file_poll_mountable_finish@Base 2.22.0
  g_file_query_default_handler@Base 2.16.0
+ g_file_query_default_handler_async@Base 2.59.2
+ g_file_query_default_handler_finish@Base 2.59.2
  g_file_query_exists@Base 2.16.0
  g_file_query_file_type@Base 2.18.0
  g_file_query_filesystem_info@Base 2.16.0
@@ -1274,6 +1278,12 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_output_stream_write_bytes_async@Base 2.33.14
  g_output_stream_write_bytes_finish@Base 2.33.14
  g_output_stream_write_finish@Base 2.16.0
+ g_output_stream_writev@Base 2.59.2
+ g_output_stream_writev_all@Base 2.59.2
+ g_output_stream_writev_all_async@Base 2.59.2
+ g_output_stream_writev_all_finish@Base 2.59.2
+ g_output_stream_writev_async@Base 2.59.2
+ g_output_stream_writev_finish@Base 2.59.2
  g_password_save_get_type@Base 2.16.0
  g_permission_acquire@Base 2.26.0
  g_permission_acquire_async@Base 2.26.0
@@ -1296,6 +1306,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_pollable_output_stream_get_type@Base 2.28.0
  g_pollable_output_stream_is_writable@Base 2.28.0
  g_pollable_output_stream_write_nonblocking@Base 2.28.0
+ g_pollable_output_stream_writev_nonblocking@Base 2.59.2
+ g_pollable_return_get_type@Base 2.59.2
  g_pollable_source_new@Base 2.28.0
  g_pollable_source_new_full@Base 2.33.14
  g_pollable_stream_read@Base 2.33.14
@@ -1637,6 +1649,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_socket_receive_with_blocking@Base 2.26.0
  g_socket_send@Base 2.22.0
  g_socket_send_message@Base 2.22.0
+ g_socket_send_message_with_timeout@Base 2.59.2
  g_socket_send_messages@Base 2.43.2
  g_socket_send_to@Base 2.22.0
  g_socket_send_with_blocking@Base 2.26.0
@@ -2896,6 +2909,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_quark_to_string@Base 2.12.0
  g_quark_try_string@Base 2.12.0
  g_queue_clear@Base 2.14.0
+ g_queue_clear_full@Base 2.59.2
  g_queue_copy@Base 2.12.0
  g_queue_delete_link@Base 2.12.0
  g_queue_find@Base 2.12.0
@@ -3830,6 +3844,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_mapped_file_get_type@Base 2.39.4
  g_markup_parse_context_get_type@Base 2.35.8
  g_match_info_get_type@Base 2.30.0
+ g_normalize_mode_get_type@Base 2.59.2
  g_object_add_toggle_ref@Base 2.12.0
  g_object_add_weak_pointer@Base 2.12.0
  g_object_bind_property@Base 2.26.0
@@ -4068,6 +4083,9 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_type_set_qdata@Base 2.12.0
  g_type_test_flags@Base 2.12.0
  g_type_value_table_peek@Base 2.12.0
+ g_unicode_break_type_get_type@Base 2.59.2
+ g_unicode_script_get_type@Base 2.59.2
+ g_unicode_type_get_type@Base 2.59.2
  g_value_array_append@Base 2.12.0
  g_value_array_copy@Base 2.12.0
  g_value_array_free@Base 2.12.0
