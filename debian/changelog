@@ -1,8 +1,35 @@
 glib2.0 (2.59.2-1) UNRELEASED; urgency=medium
 
   * New upstream release
+    + Fix check on GDBusMessage size when reading it.
+    + Add async GIO API: g_file_query_default_handler_async(),
+      g_app_info_launch_uris_async()
+    + Fix some bugs in the Happy Eyeballs implementation.
+    + Install a new generated header with enum types for Unicode enums.
+    + Support the XDG trash portal.
+    + Autotools support is gone.
+    + g_format_size() now uses a no-break space to separate digits and units;
+      translations will need to be updated accordingly.
+    + New g_queue_clear_full() API.
+    + Fix argument quoting on win32 when spawning subprocesses.
+    + Allow polling more than 64 handles on win32 using g_poll().
+    + Tag various tests as ‘flaky’. These are no longer run routinely on our
+      upstream CI machines, and downstream packagers may want to not run them
+      (or not treat those test failures as package build failures) on their
+      test machines either. They are in the `flaky` test suite.
+    + Add overlay support to g_resources_get_info().
+    + Support defaults and locks in the keyfile GSettings backend. This will
+      be used for flatpaks.
+    + Accept unquoted strings in the keyfile GSettings backend to simplify
+      things for sysadmins.
+    + Update our contribution guidelines (`CONTRIBUTING.md`).
+    + Add writev() and writev_all() APIs to GOutputStream and
+      GPollableOutputStream, and provide implementations of them for many
+      subclasses.
+  * Refresh patches, drop trash test patches which are upstream now
+  * build-time tests: Run "flaky" suite separately and non fatally
 
- -- Iain Lane <laney@debian.org>  Tue, 05 Feb 2019 17:09:08 +0000
+ -- Iain Lane <laney@debian.org>  Wed, 06 Feb 2019 16:18:52 +0000
 
 glib2.0 (2.59.0-1) experimental; urgency=medium
 
