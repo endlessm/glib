@@ -1,3 +1,4 @@
+gio-tests-Install-test1.overlay-file-when-building-instal.patch
 tests-Allocate-gvariant-data-from-the-heap-to-guarantee-a.patch
 01_gettext-desktopfiles.patch
 81-skip-monitor-test-on-non-linux.patch

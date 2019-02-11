@@ -1,0 +1,24 @@
+From: Iain Lane <iainl@gnome.org>
+Date: Mon, 11 Feb 2019 10:21:13 +0000
+Subject: gio tests: Install test1.overlay file when building installed tests
+
+This is used as a GResource overlay, so it must be available to the
+test.
+
+Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/649
+---
+ gio/tests/meson.build | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/gio/tests/meson.build b/gio/tests/meson.build
+index 8bf555c..2af1446 100644
+--- a/gio/tests/meson.build
++++ b/gio/tests/meson.build
+@@ -428,6 +428,7 @@ if installed_tests_enabled
+     'appinfo-test-static.desktop',
+     'file.c',
+     'org.gtk.test.dbusappinfo.desktop',
++    'test1.overlay',
+     install_dir : installed_tests_execdir,
+   )
+   install_subdir('x-content', install_dir : installed_tests_execdir)
