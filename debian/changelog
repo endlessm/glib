@@ -1,3 +1,10 @@
+glib2.0 (2.59.2-2) experimental; urgency=medium
+
+  * Install `test1.overlay' file, which is needed for the installed tests.
+  * tests: Install the slow-connect-preload.so library and use it
+
+ -- Iain Lane <laney@debian.org>  Mon, 11 Feb 2019 10:25:27 +0000
+
 glib2.0 (2.59.2-1) experimental; urgency=medium
 
   * New upstream release
