@@ -1,3 +1,18 @@
+glib2.0 (2.59.3-1endless0) experimental; urgency=medium
+
+  * Rebase on git-based Debian packaging of glib-2.0 (T25384)
+    This obsoletes the debian-master branch. The debian/ directory will now
+    be kept in master.
+    + Reapplied patches from debian/patches/ directory.
+    + Dropped a load of patches which have since been applied upstream.
+    + Dropped “tests: disable some more slow tests on ARM”, as those tests
+      have changed upstream, our ARM builder has got faster, and Debian has
+      been doing some work on identifying slow tests.
+    + Dropped “gutils: add API to get user special directory for desktop ID”;
+      see T25445.
+
+ -- Philip Withnall <withnall@endlessm.com>>  Thu, 21 Feb 2019 14:03:00 +0000
+
 glib2.0 (2.59.3-1) experimental; urgency=medium
 
   * New upstream release
