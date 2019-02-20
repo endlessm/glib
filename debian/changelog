@@ -1,3 +1,15 @@
+glib2.0 (2.59.3-1) UNRELEASED; urgency=medium
+
+  * New upstream release
+    + Fix support for g_get_user_special_dir() on macOS, including support for
+      the Downloads directory
+    + Ensure that cancelling a GTask cannot cause its callback to be called
+      synchronously (in the same call chain as the original *_async() call)
+    + Further fixes to the Happy Eyeballs (RFC 8305) implementation
+    + Various fixes for installation of installed tests
+
+ -- Iain Lane <laney@debian.org>  Wed, 20 Feb 2019 12:26:57 +0000
+
 glib2.0 (2.59.2-2) experimental; urgency=medium
 
   * Install `test1.overlay' file, which is needed for the installed tests.
