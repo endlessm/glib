@@ -7,8 +7,12 @@ glib2.0 (2.59.3-1) UNRELEASED; urgency=medium
       synchronously (in the same call chain as the original *_async() call)
     + Further fixes to the Happy Eyeballs (RFC 8305) implementation
     + Various fixes for installation of installed tests
+  * Refresh and drop patches.
+    Drop gio-tests-Install-test1.overlay-file-when-building-instal.patch,
+         tests-Install-the-slow-connect-preload.so-library-and-use.patch,
+    fixed upstream.
 
- -- Iain Lane <laney@debian.org>  Wed, 20 Feb 2019 12:26:57 +0000
+ -- Iain Lane <laney@debian.org>  Wed, 20 Feb 2019 12:35:38 +0000
 
 glib2.0 (2.59.2-2) experimental; urgency=medium
 
