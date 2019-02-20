@@ -13,10 +13,10 @@ Applied-upstream: 2.58.3, commit:9eed22b3b8650fe98ceb85c6bd2d92b964661d7b
  1 file changed, 12 insertions(+), 3 deletions(-)
 
 diff --git a/glib/tests/gvariant.c b/glib/tests/gvariant.c
-index 33caaf0..7cb685c 100644
+index 4a3aa77..5b30075 100644
 --- a/glib/tests/gvariant.c
 +++ b/glib/tests/gvariant.c
-@@ -4788,6 +4788,7 @@ test_stack_dict_init (void)
+@@ -4820,6 +4820,7 @@ test_stack_dict_init (void)
  static void
  test_normal_checking_tuples (void)
  {
@@ -24,7 +24,7 @@ index 33caaf0..7cb685c 100644
    const guint8 data[] = {
      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00,
      'a', '(', 'a', 'o', 'a', 'o', 'a', 'a', 'o', 'a', 'a', 'o', ')'
-@@ -4796,13 +4797,15 @@ test_normal_checking_tuples (void)
+@@ -4828,13 +4829,15 @@ test_normal_checking_tuples (void)
    GVariant *variant = NULL;
    GVariant *normal_variant = NULL;
  
@@ -41,7 +41,7 @@ index 33caaf0..7cb685c 100644
    g_variant_unref (normal_variant);
    g_variant_unref (variant);
  }
-@@ -4914,6 +4917,7 @@ test_recursion_limits_array_in_variant (void)
+@@ -4946,6 +4949,7 @@ test_recursion_limits_array_in_variant (void)
  static void
  test_normal_checking_array_offsets (void)
  {
@@ -49,7 +49,7 @@ index 33caaf0..7cb685c 100644
    const guint8 data[] = {
      0x07, 0xe5, 0x00, 0x07, 0x00, 0x07, 0x00, 0x00,
      'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'g',
-@@ -4922,13 +4926,15 @@ test_normal_checking_array_offsets (void)
+@@ -4954,13 +4958,15 @@ test_normal_checking_array_offsets (void)
    GVariant *variant = NULL;
    GVariant *normal_variant = NULL;
  
@@ -66,7 +66,7 @@ index 33caaf0..7cb685c 100644
    g_variant_unref (normal_variant);
    g_variant_unref (variant);
  }
-@@ -4946,13 +4952,15 @@ test_normal_checking_tuple_offsets (void)
+@@ -4978,13 +4984,15 @@ test_normal_checking_tuple_offsets (void)
    GVariant *variant = NULL;
    GVariant *normal_variant = NULL;
  
@@ -83,7 +83,7 @@ index 33caaf0..7cb685c 100644
    g_variant_unref (normal_variant);
    g_variant_unref (variant);
  }
-@@ -4962,6 +4970,7 @@ test_normal_checking_tuple_offsets (void)
+@@ -4994,6 +5002,7 @@ test_normal_checking_tuple_offsets (void)
  static void
  test_normal_checking_empty_object_path (void)
  {

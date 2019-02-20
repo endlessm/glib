@@ -43,10 +43,10 @@ index 8e4ffec..ec33ea6 100644
  
  <refsect2 id="setlocale">
 diff --git a/glib/gutils.c b/glib/gutils.c
-index 6fe4737..d5fc432 100644
+index 2e2d457..951b634 100644
 --- a/glib/gutils.c
 +++ b/glib/gutils.c
-@@ -801,7 +801,9 @@ g_build_home_dir (void)
+@@ -797,7 +797,9 @@ g_build_home_dir (void)
    gchar *home_dir;
  
    /* We first check HOME and use it if it is set */
@@ -57,7 +57,7 @@ index 6fe4737..d5fc432 100644
  
  #ifdef G_OS_WIN32
    /* Only believe HOME if it is an absolute path and exists.
-@@ -889,6 +891,12 @@ g_build_home_dir (void)
+@@ -885,6 +887,12 @@ g_build_home_dir (void)
   * should either directly check the `HOME` environment variable yourself
   * or unset it before calling any functions in GLib.
   *
