@@ -1,4 +1,4 @@
-glib2.0 (2.59.3-1) UNRELEASED; urgency=medium
+glib2.0 (2.59.3-1) experimental; urgency=medium
 
   * New upstream release
     + Fix support for g_get_user_special_dir() on macOS, including support for
@@ -12,7 +12,7 @@ glib2.0 (2.59.3-1) UNRELEASED; urgency=medium
          tests-Install-the-slow-connect-preload.so-library-and-use.patch,
     fixed upstream.
 
- -- Iain Lane <laney@debian.org>  Wed, 20 Feb 2019 12:35:38 +0000
+ -- Iain Lane <laney@debian.org>  Wed, 20 Feb 2019 14:25:13 +0000
 
 glib2.0 (2.59.2-2) experimental; urgency=medium
 
