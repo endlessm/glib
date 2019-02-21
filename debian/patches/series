@@ -1,9 +1,7 @@
-tests-Allocate-gvariant-data-from-the-heap-to-guarantee-a.patch
 01_gettext-desktopfiles.patch
 81-skip-monitor-test-on-non-linux.patch
 0001-timer-test-use-volatile-for-locals.patch
 gwakeuptest-Be-less-parallel-unless-invoked-with-m-slow.patch
-gvariant-test-Also-force-alignment-for-tuple-test-data.patch
 debian/02_gettext-desktopfiles-ubuntu.patch
 debian/03_disble_glib_compile_schemas_warning.patch
 debian/04_homedir_env.patch
