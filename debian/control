@@ -145,9 +145,9 @@ Depends: python3-distutils,
          ${shlibs:Depends}
 Suggests: libgdk-pixbuf2.0-bin (>= 2.36.12-2~) | libgdk-pixbuf2.0-dev,
           libxml2-utils
-Breaks: libglib2.0-bin (<< 2.54.2-5~),
+Breaks: libglib2.0-bin (<< 2.59.2),
         libglib2.0-dev (<< 2.53)
-Replaces: libglib2.0-bin (<< 2.54.2-5~),
+Replaces: libglib2.0-bin (<< 2.59.2),
           libglib2.0-dev (<< 2.53)
 Multi-Arch: foreign
 Description: Development utilities for the GLib library
