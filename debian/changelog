@@ -1,3 +1,16 @@
+glib2.0 (2.59.3-1endless0) experimental; urgency=medium
+
+  * Rebase on latest Debian experimental packaging of 2.59.3 (T25384)
+    + Reapplied patches from debian/patches/ directory.
+    + Dropped a load of patches which have since been applied upstream.
+    + Dropped “tests: disable some more slow tests on ARM”, as those tests
+      have changed upstream, our ARM builder has got faster, and Debian has
+      been doing some work on identifying slow tests.
+    + Dropped “gutils: add API to get user special directory for desktop ID”;
+      see T25445.
+
+ -- Philip Withnall <withnall@endlessm.com>>  Tue, 26 Feb 2019 16:46:00 +0000
+
 glib2.0 (2.59.3-1) experimental; urgency=medium
 
   * New upstream release
