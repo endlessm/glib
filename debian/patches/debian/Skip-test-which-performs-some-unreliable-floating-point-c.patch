@@ -1,0 +1,32 @@
+From: Iain Lane <laney@debian.org>
+Date: Tue, 18 Mar 2014 15:43:35 +0000
+Subject: Skip test which performs some unreliable floating point comparisons
+
+[smcv: Modified to use g_test_skip() instead of omitting those test cases
+completely, and allow them to be re-enabled with a Debian-specific
+environment variable]
+
+Co-authored-by: Simon McVittie <smcv@debian.org>
+Bug: https://gitlab.gnome.org/GNOME/glib/issues/820
+Forwarded: no
+---
+ glib/tests/timer.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/glib/tests/timer.c b/glib/tests/timer.c
+index 4cd5fba..3c0642b 100644
+--- a/glib/tests/timer.c
++++ b/glib/tests/timer.c
+@@ -30,6 +30,12 @@ test_timer_basic (void)
+   volatile gdouble elapsed;
+   gulong micros;
+ 
++  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") == NULL)
++    {
++      g_test_skip ("Not reliable due to floating-point rounding (glib#820)");
++      return;
++    }
++
+   timer = g_timer_new ();
+ 
+   elapsed = g_timer_elapsed (timer, &micros);

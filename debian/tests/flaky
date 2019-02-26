@@ -1,9 +1,14 @@
 #!/bin/sh
 # autopkgtest check: Run the installed-tests to verify glib works correctly
+# This part runs tests that have been marked as opt-in due to being flaky
+# on at least some architectures.
 # (C) 2013 Canonical Ltd.
-# Author: Iain Lane <iain.lane@canonical.com>
+# (C) 2019 Collabora Ltd.
 
 set -eu
+NULL=
+
+export DEB_ALLOW_FLAKY_TESTS=1
 
 # Disable gvfs if it happens to be installed. We want to test the built-in
 # stuff
@@ -18,4 +23,11 @@ printf "group entry: "; getent group "$(id -g)" || echo "(exit status $?)"
 echo "Environment:"
 env | LC_ALL=C sort -u
 
-dbus-run-session -- xvfb-run -a gnome-desktop-testing-runner glib
+exec dbus-run-session -- xvfb-run -a gnome-desktop-testing-runner \
+	glib/closures.test \
+	glib/gdbus-threading.test \
+	glib/mainloop.test \
+	glib/socket.test \
+	glib/timeout.test \
+	glib/timer.test \
+	${NULL}

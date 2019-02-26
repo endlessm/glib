@@ -1,0 +1,41 @@
+From: Simon McVittie <smcv@debian.org>
+Date: Fri, 4 Jan 2019 08:37:20 +0000
+Subject: Skip unreliable test_threaded_singleton() by default
+
+This test aims to reproduce a race condition between last-unref of the
+global singleton GDBusConnection and g_bus_get_sync(). However, test
+setup intermittently times out with:
+
+    # GLib-GIO-DEBUG: run 0: refcount is 2, sleeping
+    Bail out! GLib-GIO-FATAL-ERROR: connection had too many refs
+
+The current theory upstream is that this might be a reference leak in
+test_delivery_in_thread().
+
+Demote test_threaded_singleton() to be run as one of the "flaky"
+autopkgtests, but not at build time or in the part of the autopkgtest
+run that gates progress into testing.
+
+Bug: https://gitlab.gnome.org/GNOME/glib/issues/1515
+Forwarded: no
+---
+ gio/tests/gdbus-threading.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/gio/tests/gdbus-threading.c b/gio/tests/gdbus-threading.c
+index 3e4dc92..165dbb7 100644
+--- a/gio/tests/gdbus-threading.c
++++ b/gio/tests/gdbus-threading.c
+@@ -499,6 +499,12 @@ test_threaded_singleton (void)
+   guint unref_wins = 0;
+   guint get_wins = 0;
+ 
++  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") == NULL)
++    {
++      g_test_skip ("Not reliable (glib#1515)");
++      return;
++    }
++
+   if (g_test_thorough ())
+     n = 100000;
+   else

@@ -60,6 +60,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_app_info_launch_default_for_uri_async@Base 2.49.5
  g_app_info_launch_default_for_uri_finish@Base 2.49.5
  g_app_info_launch_uris@Base 2.16.0
+ g_app_info_launch_uris_async@Base 2.59.2
+ g_app_info_launch_uris_finish@Base 2.59.2
  g_app_info_monitor_get@Base 2.39.4
  g_app_info_monitor_get_type@Base 2.39.4
  g_app_info_remove_supports_type@Base 2.16.0
@@ -124,6 +126,9 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_application_set_default@Base 2.31.8
  g_application_set_flags@Base 2.28.0
  g_application_set_inactivity_timeout@Base 2.28.0
+ g_application_set_option_context_description@Base 2.55.1
+ g_application_set_option_context_parameter_string@Base 2.55.1
+ g_application_set_option_context_summary@Base 2.55.1
  g_application_set_resource_base_path@Base 2.41.2
  g_application_unbind_busy_property@Base 2.43.91
  g_application_unmark_busy@Base 2.37.0
@@ -205,6 +210,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_content_type_get_description@Base 2.16.0
  g_content_type_get_generic_icon_name@Base 2.33.14
  g_content_type_get_icon@Base 2.16.0
+ g_content_type_get_mime_dirs@Base 2.59.0
  g_content_type_get_mime_type@Base 2.16.0
  g_content_type_get_symbolic_icon@Base 2.33.14
  g_content_type_guess@Base 2.16.0
@@ -212,6 +218,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_content_type_is_a@Base 2.16.0
  g_content_type_is_mime_type@Base 2.51.5
  g_content_type_is_unknown@Base 2.16.0
+ g_content_type_set_mime_dirs@Base 2.59.0
  g_content_types_get_registered@Base 2.16.0
  g_converter_convert@Base 2.24.0
  g_converter_flags_get_type@Base 2.24.0
@@ -317,6 +324,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_dbus_connection_flush_sync@Base 2.26.0
  g_dbus_connection_get_capabilities@Base 2.26.0
  g_dbus_connection_get_exit_on_close@Base 2.26.0
+ g_dbus_connection_get_flags@Base 2.59.0
  g_dbus_connection_get_guid@Base 2.26.0
  g_dbus_connection_get_last_serial@Base 2.33.14
  g_dbus_connection_get_peer_credentials@Base 2.26.0
@@ -574,15 +582,17 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_desktop_app_info_get_implementations@Base 2.41.0
  g_desktop_app_info_get_is_hidden@Base 2.16.0
  g_desktop_app_info_get_keywords@Base 2.31.8
+ g_desktop_app_info_get_locale_string@Base 2.55.1
  g_desktop_app_info_get_nodisplay@Base 2.30.0
  g_desktop_app_info_get_show_in@Base 2.30.0
  g_desktop_app_info_get_startup_wm_class@Base 2.33.14
  g_desktop_app_info_get_string@Base 2.35.8
+ g_desktop_app_info_get_string_list@Base 2.59.0
  g_desktop_app_info_get_type@Base 2.16.0
  g_desktop_app_info_has_key@Base 2.35.8
  g_desktop_app_info_launch_action@Base 2.37.5
  g_desktop_app_info_launch_uris_as_manager@Base 2.28.0
- g_desktop_app_info_launch_uris_as_manager_with_fds@Base 2.54.2-1endless4
+ g_desktop_app_info_launch_uris_as_manager_with_fds@Base 2.57.2
  g_desktop_app_info_list_actions@Base 2.37.5
  g_desktop_app_info_lookup_get_default_for_uri_scheme@Base 2.28.0
  g_desktop_app_info_lookup_get_type@Base 2.28.0
@@ -636,6 +646,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_dtls_connection_get_certificate@Base 2.47.5
  g_dtls_connection_get_database@Base 2.47.5
  g_dtls_connection_get_interaction@Base 2.47.5
+ g_dtls_connection_get_negotiated_protocol@Base 2.59.0
  g_dtls_connection_get_peer_certificate@Base 2.47.5
  g_dtls_connection_get_peer_certificate_errors@Base 2.47.5
  g_dtls_connection_get_rehandshake_mode@Base 2.47.5
@@ -644,6 +655,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_dtls_connection_handshake@Base 2.47.5
  g_dtls_connection_handshake_async@Base 2.47.5
  g_dtls_connection_handshake_finish@Base 2.47.5
+ g_dtls_connection_set_advertised_protocols@Base 2.59.0
  g_dtls_connection_set_certificate@Base 2.47.5
  g_dtls_connection_set_database@Base 2.47.5
  g_dtls_connection_set_interaction@Base 2.47.5
@@ -822,6 +834,9 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_io_stream_query_info_async@Base 2.22.0
  g_file_io_stream_query_info_finish@Base 2.22.0
  g_file_is_native@Base 2.16.0
+ g_file_load_bytes@Base 2.55.1
+ g_file_load_bytes_async@Base 2.55.1
+ g_file_load_bytes_finish@Base 2.55.1
  g_file_load_contents@Base 2.16.0
  g_file_load_contents_async@Base 2.16.0
  g_file_load_contents_finish@Base 2.16.0
@@ -852,6 +867,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_mount_mountable@Base 2.16.0
  g_file_mount_mountable_finish@Base 2.16.0
  g_file_move@Base 2.16.0
+ g_file_new_build_filename@Base 2.55.1
  g_file_new_for_commandline_arg@Base 2.16.0
  g_file_new_for_commandline_arg_and_cwd@Base 2.35.8
  g_file_new_for_path@Base 2.16.0
@@ -866,9 +882,12 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_file_output_stream_query_info_async@Base 2.16.0
  g_file_output_stream_query_info_finish@Base 2.16.0
  g_file_parse_name@Base 2.16.0
+ g_file_peek_path@Base 2.55.2
  g_file_poll_mountable@Base 2.22.0
  g_file_poll_mountable_finish@Base 2.22.0
  g_file_query_default_handler@Base 2.16.0
+ g_file_query_default_handler_async@Base 2.59.2
+ g_file_query_default_handler_finish@Base 2.59.2
  g_file_query_exists@Base 2.16.0
  g_file_query_file_type@Base 2.18.0
  g_file_query_filesystem_info@Base 2.16.0
@@ -1157,8 +1176,11 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_mount_operation_get_anonymous@Base 2.16.0
  g_mount_operation_get_choice@Base 2.16.0
  g_mount_operation_get_domain@Base 2.16.0
+ g_mount_operation_get_is_tcrypt_hidden_volume@Base 2.57.2
+ g_mount_operation_get_is_tcrypt_system_volume@Base 2.57.2
  g_mount_operation_get_password@Base 2.16.0
  g_mount_operation_get_password_save@Base 2.16.0
+ g_mount_operation_get_pim@Base 2.57.2
  g_mount_operation_get_type@Base 2.16.0
  g_mount_operation_get_username@Base 2.16.0
  g_mount_operation_new@Base 2.16.0
@@ -1167,8 +1189,11 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_mount_operation_set_anonymous@Base 2.16.0
  g_mount_operation_set_choice@Base 2.16.0
  g_mount_operation_set_domain@Base 2.16.0
+ g_mount_operation_set_is_tcrypt_hidden_volume@Base 2.57.2
+ g_mount_operation_set_is_tcrypt_system_volume@Base 2.57.2
  g_mount_operation_set_password@Base 2.16.0
  g_mount_operation_set_password_save@Base 2.16.0
+ g_mount_operation_set_pim@Base 2.57.2
  g_mount_operation_set_username@Base 2.16.0
  g_mount_remount@Base 2.16.0
  g_mount_remount_finish@Base 2.16.0
@@ -1253,6 +1278,12 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_output_stream_write_bytes_async@Base 2.33.14
  g_output_stream_write_bytes_finish@Base 2.33.14
  g_output_stream_write_finish@Base 2.16.0
+ g_output_stream_writev@Base 2.59.2
+ g_output_stream_writev_all@Base 2.59.2
+ g_output_stream_writev_all_async@Base 2.59.2
+ g_output_stream_writev_all_finish@Base 2.59.2
+ g_output_stream_writev_async@Base 2.59.2
+ g_output_stream_writev_finish@Base 2.59.2
  g_password_save_get_type@Base 2.16.0
  g_permission_acquire@Base 2.26.0
  g_permission_acquire_async@Base 2.26.0
@@ -1275,6 +1306,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_pollable_output_stream_get_type@Base 2.28.0
  g_pollable_output_stream_is_writable@Base 2.28.0
  g_pollable_output_stream_write_nonblocking@Base 2.28.0
+ g_pollable_output_stream_writev_nonblocking@Base 2.59.2
+ g_pollable_return_get_type@Base 2.59.2
  g_pollable_source_new@Base 2.28.0
  g_pollable_source_new_full@Base 2.33.14
  g_pollable_stream_read@Base 2.33.14
@@ -1319,12 +1352,16 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_resolver_lookup_by_name@Base 2.22.0
  g_resolver_lookup_by_name_async@Base 2.22.0
  g_resolver_lookup_by_name_finish@Base 2.22.0
+ g_resolver_lookup_by_name_with_flags@Base 2.59.0
+ g_resolver_lookup_by_name_with_flags_async@Base 2.59.0
+ g_resolver_lookup_by_name_with_flags_finish@Base 2.59.0
  g_resolver_lookup_records@Base 2.33.14
  g_resolver_lookup_records_async@Base 2.33.14
  g_resolver_lookup_records_finish@Base 2.33.14
  g_resolver_lookup_service@Base 2.22.0
  g_resolver_lookup_service_async@Base 2.22.0
  g_resolver_lookup_service_finish@Base 2.22.0
+ g_resolver_name_lookup_flags_get_type@Base 2.59.0
  g_resolver_record_type_get_type@Base 2.33.14
  g_resolver_set_default@Base 2.22.0
  g_resource_enumerate_children@Base 2.31.18
@@ -1582,7 +1619,9 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_socket_is_closed@Base 2.22.0
  g_socket_is_connected@Base 2.22.0
  g_socket_join_multicast_group@Base 2.31.18
+ g_socket_join_multicast_group_ssm@Base 2.55.1
  g_socket_leave_multicast_group@Base 2.31.18
+ g_socket_leave_multicast_group_ssm@Base 2.55.1
  g_socket_listen@Base 2.22.0
  g_socket_listener_accept@Base 2.22.0
  g_socket_listener_accept_async@Base 2.22.0
@@ -1610,6 +1649,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_socket_receive_with_blocking@Base 2.26.0
  g_socket_send@Base 2.22.0
  g_socket_send_message@Base 2.22.0
+ g_socket_send_message_with_timeout@Base 2.59.2
  g_socket_send_messages@Base 2.43.2
  g_socket_send_to@Base 2.22.0
  g_socket_send_with_blocking@Base 2.26.0
@@ -1693,6 +1733,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_task_get_check_cancellable@Base 2.35.8
  g_task_get_completed@Base 2.43.92
  g_task_get_context@Base 2.35.8
+ g_task_get_name@Base 2.59.0
  g_task_get_priority@Base 2.35.8
  g_task_get_return_on_cancel@Base 2.35.8
  g_task_get_source_object@Base 2.35.8
@@ -1716,6 +1757,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_task_run_in_thread@Base 2.35.8
  g_task_run_in_thread_sync@Base 2.35.8
  g_task_set_check_cancellable@Base 2.35.8
+ g_task_set_name@Base 2.59.0
  g_task_set_priority@Base 2.35.8
  g_task_set_return_on_cancel@Base 2.35.8
  g_task_set_source_tag@Base 2.35.8
@@ -1756,6 +1798,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_tls_backend_get_file_database_type@Base 2.30.0
  g_tls_backend_get_server_connection_type@Base 2.28.0
  g_tls_backend_get_type@Base 2.28.0
+ g_tls_backend_set_default_database@Base 2.59.0
  g_tls_backend_supports_dtls@Base 2.47.5
  g_tls_backend_supports_tls@Base 2.28.0
  g_tls_certificate_flags_get_type@Base 2.28.0
@@ -1782,6 +1825,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_tls_connection_get_certificate@Base 2.28.0
  g_tls_connection_get_database@Base 2.30.0
  g_tls_connection_get_interaction@Base 2.30.0
+ g_tls_connection_get_negotiated_protocol@Base 2.59.0
  g_tls_connection_get_peer_certificate@Base 2.28.0
  g_tls_connection_get_peer_certificate_errors@Base 2.28.0
  g_tls_connection_get_rehandshake_mode@Base 2.28.0
@@ -1791,6 +1835,7 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_tls_connection_handshake@Base 2.28.0
  g_tls_connection_handshake_async@Base 2.28.0
  g_tls_connection_handshake_finish@Base 2.28.0
+ g_tls_connection_set_advertised_protocols@Base 2.59.0
  g_tls_connection_set_certificate@Base 2.28.0
  g_tls_connection_set_database@Base 2.30.0
  g_tls_connection_set_interaction@Base 2.30.0
@@ -1876,6 +1921,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_input_stream_new@Base 2.16.0
  g_unix_input_stream_set_close_fd@Base 2.20.0
  g_unix_is_mount_path_system_internal@Base 2.16.0
+ g_unix_is_system_device_path@Base 2.55.1
+ g_unix_is_system_fs_type@Base 2.55.1
  g_unix_mount_at@Base 2.16.0
  g_unix_mount_compare@Base 2.16.0
  g_unix_mount_copy@Base 2.53.1
@@ -1885,6 +1932,8 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_unix_mount_get_device_path@Base 2.16.0
  g_unix_mount_get_fs_type@Base 2.16.0
  g_unix_mount_get_mount_path@Base 2.16.0
+ g_unix_mount_get_options@Base 2.57.2
+ g_unix_mount_get_root_path@Base 2.59.0
  g_unix_mount_guess_can_eject@Base 2.16.0
  g_unix_mount_guess_icon@Base 2.16.0
  g_unix_mount_guess_name@Base 2.16.0
@@ -2066,6 +2115,17 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_atomic_pointer_or@Base 2.30.0
  g_atomic_pointer_set@Base 2.12.0
  g_atomic_pointer_xor@Base 2.30.0
+ g_atomic_rc_box_acquire@Base 2.57.2
+ g_atomic_rc_box_alloc@Base 2.57.2
+ g_atomic_rc_box_alloc0@Base 2.57.2
+ g_atomic_rc_box_dup@Base 2.57.2
+ g_atomic_rc_box_get_size@Base 2.57.2
+ g_atomic_rc_box_release@Base 2.57.2
+ g_atomic_rc_box_release_full@Base 2.57.2
+ g_atomic_ref_count_compare@Base 2.57.2
+ g_atomic_ref_count_dec@Base 2.57.2
+ g_atomic_ref_count_inc@Base 2.57.2
+ g_atomic_ref_count_init@Base 2.57.2
  g_base64_decode@Base 2.12.0
  g_base64_decode_inplace@Base 2.20.0
  g_base64_decode_step@Base 2.12.0
@@ -2121,6 +2181,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_bookmark_file_to_data@Base 2.12.0
  g_bookmark_file_to_file@Base 2.12.0
  g_build_filename@Base 2.12.0
+ g_build_filename_valist@Base 2.55.1
  g_build_filenamev@Base 2.12.0
  g_build_path@Base 2.12.0
  g_build_pathv@Base 2.12.0
@@ -2159,7 +2220,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_cache_new@Base 2.12.0
  g_cache_remove@Base 2.12.0
  g_cache_value_foreach@Base 2.12.0
- g_canonicalize_filename@Base 2.54.2+dev29.40819e3-6bem1
+ g_canonicalize_filename@Base 2.57.2
  g_chdir@Base 2.12.0
  g_checksum_copy@Base 2.16.0
  g_checksum_free@Base 2.16.0
@@ -2175,7 +2236,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_child_watch_source_new@Base 2.12.0
  g_chmod@Base 2.12.0
  g_clear_error@Base 2.12.0
- g_clear_handle_id@Base 2.54.2-1endless2
+ g_clear_handle_id@Base 2.55.1
  g_clear_pointer@Base 2.33.14
  g_close@Base 2.35.8
  g_completion_add_items@Base 2.12.0
@@ -2229,6 +2290,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_date_clamp@Base 2.12.0
  g_date_clear@Base 2.12.0
  g_date_compare@Base 2.12.0
+ g_date_copy@Base 2.55.1
  g_date_days_between@Base 2.12.0
  g_date_free@Base 2.12.0
  g_date_get_day@Base 2.12.0
@@ -2285,7 +2347,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_date_time_get_month@Base 2.26.0
  g_date_time_get_second@Base 2.26.0
  g_date_time_get_seconds@Base 2.26.0
- g_date_time_get_timezone@Base 2.54.2-1endless3
+ g_date_time_get_timezone@Base 2.57.2
  g_date_time_get_timezone_abbreviation@Base 2.26.0
  g_date_time_get_utc_offset@Base 2.26.0
  g_date_time_get_week_numbering_year@Base 2.28.0
@@ -2295,7 +2357,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_date_time_hash@Base 2.26.0
  g_date_time_is_daylight_savings@Base 2.26.0
  g_date_time_new@Base 2.26.0
- g_date_time_new_from_iso8601@Base 2.54.2-1endless2
+ g_date_time_new_from_iso8601@Base 2.55.1
  g_date_time_new_from_timeval_local@Base 2.26.0
  g_date_time_new_from_timeval_utc@Base 2.26.0
  g_date_time_new_from_unix_local@Base 2.26.0
@@ -2374,6 +2436,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_get_home_dir@Base 2.35.9
  g_get_host_name@Base 2.12.0
  g_get_language_names@Base 2.12.0
+ g_get_language_names_with_category@Base 2.57.2
  g_get_locale_variants@Base 2.28.0
  g_get_monotonic_time@Base 2.28.0
  g_get_num_processors@Base 2.35.8
@@ -2389,7 +2452,6 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_get_user_name@Base 2.12.0
  g_get_user_runtime_dir@Base 2.28.0
  g_get_user_special_dir@Base 2.14.0
- g_get_user_special_dir_for_desktop_id@Base 2.53.6+dev11.b0bf3c8-0bem1
  g_getenv@Base 2.12.0
  g_hash_table_add@Base 2.31.8
  g_hash_table_contains@Base 2.31.8
@@ -2419,6 +2481,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_hash_table_size@Base 2.12.0
  g_hash_table_steal@Base 2.12.0
  g_hash_table_steal_all@Base 2.12.0
+ g_hash_table_steal_extended@Base 2.57.2
  g_hash_table_unref@Base 2.12.0
  g_hmac_copy@Base 2.30.0
  g_hmac_get_digest@Base 2.30.0
@@ -2520,6 +2583,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_key_file_get_integer@Base 2.12.0
  g_key_file_get_integer_list@Base 2.12.0
  g_key_file_get_keys@Base 2.12.0
+ g_key_file_get_locale_for_key@Base 2.55.2
  g_key_file_get_locale_string@Base 2.12.0
  g_key_file_get_locale_string_list@Base 2.12.0
  g_key_file_get_start_group@Base 2.12.0
@@ -2604,7 +2668,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_log_set_writer_func@Base 2.49.3
  g_log_structured@Base 2.49.3
  g_log_structured_array@Base 2.49.3
- g_log_structured_standard@Base 2.54.2-1endless1
+ g_log_structured_standard@Base 2.55.2
  g_log_variant@Base 2.49.7
  g_log_writer_default@Base 2.49.3
  g_log_writer_format_fields@Base 2.49.3
@@ -2836,6 +2900,8 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_ptr_array_sized_new@Base 2.12.0
  g_ptr_array_sort@Base 2.12.0
  g_ptr_array_sort_with_data@Base 2.12.0
+ g_ptr_array_steal_index@Base 2.57.2
+ g_ptr_array_steal_index_fast@Base 2.57.2
  g_ptr_array_unref@Base 2.22.0
  g_qsort_with_data@Base 2.12.0
  g_quark_from_static_string@Base 2.12.0
@@ -2843,6 +2909,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_quark_to_string@Base 2.12.0
  g_quark_try_string@Base 2.12.0
  g_queue_clear@Base 2.14.0
+ g_queue_clear_full@Base 2.59.2
  g_queue_copy@Base 2.12.0
  g_queue_delete_link@Base 2.12.0
  g_queue_find@Base 2.12.0
@@ -2898,6 +2965,13 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_random_int@Base 2.12.0
  g_random_int_range@Base 2.12.0
  g_random_set_seed@Base 2.12.0
+ g_rc_box_acquire@Base 2.57.2
+ g_rc_box_alloc@Base 2.57.2
+ g_rc_box_alloc0@Base 2.57.2
+ g_rc_box_dup@Base 2.57.2
+ g_rc_box_get_size@Base 2.57.2
+ g_rc_box_release@Base 2.57.2
+ g_rc_box_release_full@Base 2.57.2
  g_realloc@Base 2.12.0
  g_realloc_n@Base 2.24.0
  g_rec_mutex_clear@Base 2.31.8
@@ -2905,6 +2979,16 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_rec_mutex_lock@Base 2.31.8
  g_rec_mutex_trylock@Base 2.31.8
  g_rec_mutex_unlock@Base 2.31.8
+ g_ref_count_compare@Base 2.57.2
+ g_ref_count_dec@Base 2.57.2
+ g_ref_count_inc@Base 2.57.2
+ g_ref_count_init@Base 2.57.2
+ g_ref_string_acquire@Base 2.57.2
+ g_ref_string_length@Base 2.57.2
+ g_ref_string_new@Base 2.57.2
+ g_ref_string_new_intern@Base 2.57.2
+ g_ref_string_new_len@Base 2.57.2
+ g_ref_string_release@Base 2.57.2
  g_regex_check_replacement@Base 2.14.0
  g_regex_error_quark@Base 2.14.0
  g_regex_escape_nul@Base 2.30.0
@@ -3018,6 +3102,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_set_prgname@Base 2.12.0
  g_set_print_handler@Base 2.12.0
  g_set_printerr_handler@Base 2.12.0
+ g_set_user_dirs@Base 2.59.0
  g_setenv@Base 2.12.0
  g_shell_error_quark@Base 2.12.0
  g_shell_parse_argv@Base 2.12.0
@@ -3098,7 +3183,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_source_unref@Base 2.12.0
  g_spaced_primes_closest@Base 2.12.0
  g_spawn_async@Base 2.12.0
- g_spawn_async_with_fds@Base 2.54.2-1endless4
+ g_spawn_async_with_fds@Base 2.57.2
  g_spawn_async_with_pipes@Base 2.12.0
  g_spawn_check_exit_status@Base 2.33.14
  g_spawn_close_pid@Base 2.12.0
@@ -3214,6 +3299,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_strtod@Base 2.12.0
  g_strup@Base 2.12.0
  g_strv_contains@Base 2.43.2
+ g_strv_equal@Base 2.59.0
  g_strv_length@Base 2.12.0
  g_test_add_data_func@Base 2.16.0
  g_test_add_data_func_full@Base 2.33.14
@@ -3305,11 +3391,12 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_time_zone_adjust_time@Base 2.28.0
  g_time_zone_find_interval@Base 2.28.0
  g_time_zone_get_abbreviation@Base 2.28.0
- g_time_zone_get_identifier@Base 2.54.2-1endless3
+ g_time_zone_get_identifier@Base 2.57.2
  g_time_zone_get_offset@Base 2.28.0
  g_time_zone_is_dst@Base 2.28.0
  g_time_zone_new@Base 2.26.0
  g_time_zone_new_local@Base 2.26.0
+ g_time_zone_new_offset@Base 2.57.2
  g_time_zone_new_utc@Base 2.26.0
  g_time_zone_ref@Base 2.26.0
  g_time_zone_unref@Base 2.26.0
@@ -3441,6 +3528,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_utf8_to_ucs4_fast@Base 2.12.0
  g_utf8_to_utf16@Base 2.12.0
  g_utf8_validate@Base 2.12.0
+ g_utf8_validate_len@Base 2.59.0
  g_utime@Base 2.18.0
  g_uuid_string_is_valid@Base 2.51.2
  g_uuid_string_random@Base 2.51.2
@@ -3565,6 +3653,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_variant_ref@Base 2.24.0
  g_variant_ref_sink@Base 2.24.0
  g_variant_serialised_byteswap@Base 2.24.0
+ g_variant_serialised_check@Base 2.59.0
  g_variant_serialised_get_child@Base 2.24.0
  g_variant_serialised_is_normal@Base 2.24.0
  g_variant_serialised_n_children@Base 2.24.0
@@ -3591,7 +3680,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_variant_type_info_member_info@Base 2.24.0
  g_variant_type_info_n_members@Base 2.24.0
  g_variant_type_info_query@Base 2.24.0
- g_variant_type_info_query_depth@Base 2.54.2-1endless5
+ g_variant_type_info_query_depth@Base 2.58.2
  g_variant_type_info_query_element@Base 2.24.0
  g_variant_type_info_ref@Base 2.24.0
  g_variant_type_info_unref@Base 2.24.0
@@ -3613,7 +3702,7 @@ libglib-2.0.so.0 libglib2.0-0 #MINVER#
  g_variant_type_new_tuple@Base 2.24.0
  g_variant_type_next@Base 2.24.0
  g_variant_type_peek_string@Base 2.24.0
- g_variant_type_string_get_depth_@Base 2.54.2-1endless5
+ g_variant_type_string_get_depth_@Base 2.58.2
  g_variant_type_string_is_valid@Base 2.24.0
  g_variant_type_string_scan@Base 2.24.0
  g_variant_type_value@Base 2.24.0
@@ -3755,6 +3844,7 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_mapped_file_get_type@Base 2.39.4
  g_markup_parse_context_get_type@Base 2.35.8
  g_match_info_get_type@Base 2.30.0
+ g_normalize_mode_get_type@Base 2.59.2
  g_object_add_toggle_ref@Base 2.12.0
  g_object_add_weak_pointer@Base 2.12.0
  g_object_bind_property@Base 2.26.0
@@ -3993,6 +4083,9 @@ libgobject-2.0.so.0 libglib2.0-0 #MINVER#
  g_type_set_qdata@Base 2.12.0
  g_type_test_flags@Base 2.12.0
  g_type_value_table_peek@Base 2.12.0
+ g_unicode_break_type_get_type@Base 2.59.2
+ g_unicode_script_get_type@Base 2.59.2
+ g_unicode_type_get_type@Base 2.59.2
  g_value_array_append@Base 2.12.0
  g_value_array_copy@Base 2.12.0
  g_value_array_free@Base 2.12.0

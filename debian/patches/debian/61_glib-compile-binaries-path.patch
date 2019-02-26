@@ -1,0 +1,25 @@
+From: =?utf-8?q?Sebastian_Dr=C3=B6ge?= <slomo@debian.org>
+Date: Tue, 13 Jul 2010 14:06:28 +0200
+Subject: Adjust path to glib-compile-schemas in the pkg-config file
+
+This is because gio-querymodules and glib-compile-schemas have been put in
+a private, versioned directory in libglib2.0-0 to avoid a dependency loop.
+
+Forwarded: not-needed, specific to Debian packaging
+---
+ gio/meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gio/meson.build b/gio/meson.build
+index d7f4f3f..990b1b5 100644
+--- a/gio/meson.build
++++ b/gio/meson.build
+@@ -828,7 +828,7 @@ pkg.generate(libgio,
+                'schemasdir=' + join_paths('${datadir}', schemas_subdir),
+                'bindir=' + join_paths('${prefix}', get_option('bindir')),
+                'giomoduledir=' + giomodulesdir,
+-               'glib_compile_schemas=' + join_paths('${bindir}', 'glib-compile-schemas'),
++               'glib_compile_schemas=' + join_paths('${libdir}', 'glib-2.0', 'glib-compile-schemas'),
+                'glib_compile_resources=' + join_paths('${bindir}', 'glib-compile-resources'),
+                'gdbus_codegen=' + join_paths('${bindir}', 'gdbus-codegen')],
+   version : glib_version,

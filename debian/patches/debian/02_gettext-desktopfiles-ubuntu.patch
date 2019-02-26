@@ -1,0 +1,51 @@
+From: Martin Pitt <mpitt@debian.org>
+Date: Tue, 24 Feb 2009 16:08:05 +0100
+Subject: Provide backwards compatibility for 01_gettext-desktopfiles.patch
+ for X-{Debian,Ubuntu}-Gettext-Domain
+
+Ubuntu-specific. 01_gettext-desktopfiles.patch was changed to use
+X-GNOME-, so this is necessary until all our .desktop files are converted.
+
+Forwarded: no
+---
+ glib/gkeyfile.c | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+diff --git a/glib/gkeyfile.c b/glib/gkeyfile.c
+index e79f8ed..7b634e9 100644
+--- a/glib/gkeyfile.c
++++ b/glib/gkeyfile.c
+@@ -886,6 +886,16 @@ g_key_file_load_from_fd (GKeyFile       *key_file,
+                                                     G_KEY_FILE_DESKTOP_GROUP,
+                                                     G_KEY_FILE_DESKTOP_KEY_GETTEXT_DOMAIN,
+                                                     NULL);
++  if (!key_file->gettext_domain)
++      key_file->gettext_domain = g_key_file_get_string (key_file,
++                                                        G_KEY_FILE_DESKTOP_GROUP,
++                                                        "X-Ubuntu-Gettext-Domain",
++                                                        NULL);
++  if (!key_file->gettext_domain)
++      key_file->gettext_domain = g_key_file_get_string (key_file,
++                                                        G_KEY_FILE_DESKTOP_GROUP,
++                                                        "X-Debian-Gettext-Domain",
++                                                        NULL);
+ 
+   return TRUE;
+ }
+@@ -947,6 +957,16 @@ g_key_file_load_from_file (GKeyFile       *key_file,
+                                                     G_KEY_FILE_DESKTOP_GROUP,
+                                                     G_KEY_FILE_DESKTOP_KEY_GETTEXT_DOMAIN,
+                                                     NULL);
++  if (!key_file->gettext_domain)
++      key_file->gettext_domain = g_key_file_get_string (key_file,
++                                                        G_KEY_FILE_DESKTOP_GROUP,
++                                                        "X-Ubuntu-Gettext-Domain",
++                                                        NULL);
++  if (!key_file->gettext_domain)
++      key_file->gettext_domain = g_key_file_get_string (key_file,
++                                                        G_KEY_FILE_DESKTOP_GROUP,
++                                                        "X-Debian-Gettext-Domain",
++                                                        NULL);
+ 
+   return TRUE;
+ }

@@ -1,7 +1,9 @@
 # Cannot have #! because it is test data for fallback to passing to the shell
 libglib2.0-tests: executable-not-elf-or-script usr/lib/glib2.0/installed-tests/glib/echo-script
-# Corresponding test data for Windows
-libglib2.0-tests: executable-not-elf-or-script usr/lib/glib2.0/installed-tests/glib/echo-script.bat
+# Lots of tests don't use libc functions
+libglib2.0-tests: hardening-no-fortify-functions usr/lib/glib2.0/installed-tests/glib/*
 # Test data for content-type sniffing, never actually executed
 libglib2.0-tests: script-not-executable usr/lib/glib2.0/installed-tests/glib/x-content/unix-software/autorun.sh
 libglib2.0-tests: shell-script-fails-syntax-check usr/lib/glib2.0/installed-tests/glib/x-content/unix-software/autorun.sh
+# This is lorem ipsum in a test-case, nothing to do with the Debian Free Software Guidelines
+libglib2.0-tests: spelling-error-in-binary usr/lib/glib2.0/installed-tests/glib/utf8-pointer dsfg dfsg

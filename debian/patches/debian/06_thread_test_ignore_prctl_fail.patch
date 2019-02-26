@@ -1,0 +1,29 @@
+From: Martin Pitt <martin.pitt@ubuntu.com>
+Date: Tue, 26 Jun 2012 19:28:14 +0200
+Subject: Do not fail the /thread/thread4 test if prctrl() fails
+
+This happens on the Debian buildds.
+
+Forwarded: no, Debian buildd specific
+---
+ glib/tests/thread.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/glib/tests/thread.c b/glib/tests/thread.c
+index b9f8796..43e682e 100644
+--- a/glib/tests/thread.c
++++ b/glib/tests/thread.c
+@@ -147,8 +147,11 @@ test_thread4 (void)
+   getrlimit (RLIMIT_NPROC, &nl);
+   nl.rlim_cur = 1;
+ 
+-  if ((ret = prlimit (getpid (), RLIMIT_NPROC, &nl, &ol)) != 0)
+-    g_error ("prlimit failed: %s", g_strerror (errno));
++  if ((ret = prlimit (getpid(), RLIMIT_NPROC, &nl, &ol)) != 0)
++    {
++      g_debug ("prlimit failed: %s\n", g_strerror (errno));
++      return;
++    }
+ 
+   error = NULL;
+   thread = g_thread_try_new ("a", thread1_func, NULL, &error);

@@ -1,6 +1,11 @@
-Tests: build
+Tests: build build-static
 Depends: libglib2.0-dev, build-essential
+Restrictions: allow-stderr superficial
 
 Tests: installed-tests
 Depends: libglib2.0-tests, dbus-x11, dbus (>= 1.8), xauth, xvfb, gnome-desktop-testing
 Restrictions: allow-stderr
+
+Tests: flaky
+Depends: libglib2.0-tests, dbus-x11, dbus (>= 1.8), xauth, xvfb, gnome-desktop-testing
+Restrictions: allow-stderr flaky

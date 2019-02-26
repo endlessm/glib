@@ -1,57 +1,594 @@
-glib2.0 (2.54.2-1endless5) eos; urgency=medium
+glib2.0 (2.59.3-1) experimental; urgency=medium
 
-  * Backport GVariant/GDBus/GMarkup fuzz-testing fixes
-    This fixes several remotely exploitable heap handling problems.
-    https://phabricator.endlessm.com/T24339
+  * New upstream release
+    + Fix support for g_get_user_special_dir() on macOS, including support for
+      the Downloads directory
+    + Ensure that cancelling a GTask cannot cause its callback to be called
+      synchronously (in the same call chain as the original *_async() call)
+    + Further fixes to the Happy Eyeballs (RFC 8305) implementation
+    + Various fixes for installation of installed tests
+  * Refresh and drop patches.
+    Drop gio-tests-Install-test1.overlay-file-when-building-instal.patch,
+         tests-Install-the-slow-connect-preload.so-library-and-use.patch,
+    fixed upstream.
 
- -- Philip Withnall <withnall@endlessm.com>  Mon, 05 Nov 2018 13:07:00 +0000
+ -- Iain Lane <laney@debian.org>  Wed, 20 Feb 2019 14:25:13 +0000
 
-glib2.0 (2.54.2-1endless4) eos; urgency=medium
+glib2.0 (2.59.2-2) experimental; urgency=medium
 
-  * Backport gspawn/posix_spawn improvements
-    https://phabricator.endlessm.com/T23273
+  * Install `test1.overlay' file, which is needed for the installed tests.
+  * tests: Install the slow-connect-preload.so library and use it
 
- -- Daniel Drake <drake@endlessm.com>  Thu, 02 Aug 2018 13:42:26 +0800
+ -- Iain Lane <laney@debian.org>  Mon, 11 Feb 2019 10:25:27 +0000
 
-glib2.0 (2.54.2-1endless3) unstable; urgency=medium
+glib2.0 (2.59.2-1) experimental; urgency=medium
 
-  * Backport new GDateTime and GTimeZone methods:
-    - g_date_time_get_timezone()
-    - g_time_zone_get_identifier()
-    - See https://bugzilla.gnome.org/show_bug.cgi?id=795165
+  * New upstream release
+    + Fix check on GDBusMessage size when reading it.
+    + Add async GIO API: g_file_query_default_handler_async(),
+      g_app_info_launch_uris_async()
+    + Fix some bugs in the Happy Eyeballs implementation.
+    + Install a new generated header with enum types for Unicode enums.
+    + Support the XDG trash portal.
+    + Autotools support is gone.
+    + g_format_size() now uses a no-break space to separate digits and units;
+      translations will need to be updated accordingly.
+    + New g_queue_clear_full() API.
+    + Fix argument quoting on win32 when spawning subprocesses.
+    + Allow polling more than 64 handles on win32 using g_poll().
+    + Tag various tests as ‘flaky’. These are no longer run routinely on our
+      upstream CI machines, and downstream packagers may want to not run them
+      (or not treat those test failures as package build failures) on their
+      test machines either. They are in the `flaky` test suite.
+    + Add overlay support to g_resources_get_info().
+    + Support defaults and locks in the keyfile GSettings backend. This will
+      be used for flatpaks.
+    + Accept unquoted strings in the keyfile GSettings backend to simplify
+      things for sysadmins.
+    + Update our contribution guidelines (`CONTRIBUTING.md`).
+    + Add writev() and writev_all() APIs to GOutputStream and
+      GPollableOutputStream, and provide implementations of them for many
+      subclasses.
+  * Refresh patches, drop trash test patches which are upstream now
+  * build-time tests: Run "flaky" suite separately and non fatally
+  * debian/libglib2.0-0.symbols: Add new symbols from 2.59.{1,2}
 
- -- Philip Withnall <withnall@endlessm.com>  Thu, 12 Apr 2018 14:23:00 +0100
+ -- Iain Lane <laney@debian.org>  Wed, 06 Feb 2019 17:09:28 +0000
 
-glib2.0 (2.54.2-1endless2) unstable; urgency=medium
+glib2.0 (2.59.0-1) experimental; urgency=medium
 
-  * Backport new utility functions:
-    - g_clear_handle_id(): https://bugzilla.gnome.org/show_bug.cgi?id=788489
-    - g_date_time_new_from_iso8601():
-      https://bugzilla.gnome.org/show_bug.cgi?id=753459
+  * New upstream release
+  * Update patches and drop upstreamed ones
+  * debian/control: Update meson BD to ≥ 0.48.0 per upstream
+  * debian/rules: enable-selinux takes "enabled" or "disabled" now.
+    Not true/false.
+  * debian/*: Update for experimental
+  * debian/libglib2.0-0.symbols: Update with new symbols for this release
 
- -- Philip Withnall <withnall@endlessm.com>  Fri, 09 Mar 2018 15:05:00 +0000
+ -- Iain Lane <laney@debian.org>  Thu, 17 Jan 2019 18:43:00 +0000
 
-glib2.0 (2.54.2-1endless1) unstable; urgency=medium
+glib2.0 (2.58.2-4) unstable; urgency=medium
 
-  * Backport structured logging changes to enable -Wformat warnings again
-    https://bugzilla.gnome.org/show_bug.cgi?id=793074
+  [ Simon McVittie ]
+  * Update patch metadata
 
- -- Philip Withnall <withnall@endlessm.com>  Fri, 09 Feb 2018 16:38:00 +0000
+  [ Iain Lane ]
+  * trash-test-Don-t-assume-that-.local-exists.patch,
+    trash-test-Don-t-rely-on-being-able-to-determine-mount-po.patch:
+    Cherry pick two patches by Simon McVittie (slightly modified by Iain Lane)
+    to fix the trash test on Launchpad autobuilders.
 
-glib2.0 (2.54.2-1endless0) unstable; urgency=medium
+ -- Iain Lane <laney@debian.org>  Thu, 17 Jan 2019 11:27:34 +0000
 
-  * Rebase Endless changes on latest Debian Sid package
-    - Only difference from upstream is the
-      g_get_user_special_dir_for_desktop_id() symbol
-    - Apply all 13 patches from debian/patches/ to git and drop them from
-      the Debian directory
-    - Some of these patches were not applied in the previous Endless GLib
-      package, but I can see no reason why we had diverged from Debian;
-      they’re all unconditionally applied now
-    - Rebase the code on upstream/glib-2-54, including some patches which will
-      eventually be released in 2.54.3
+glib2.0 (2.58.2-3) unstable; urgency=medium
 
- -- Philip Withnall <withnall@endlessm.com>  Mon, 27 Nov 2017 08:56:00 +0000
+  * Team upload
+  * Release to unstable
+  * Standards-Version: 4.3.0 (no changes required)
+  * d/p/gvariant-test-Also-force-alignment-for-tuple-test-data.patch:
+    Mark as forwarded
+  * debian/Skip-unreliable-test_threaded_singleton-by-default.patch:
+    Don't run test_threaded_singleton() at build-time or in the part of
+    the autopkgtest run that must succeed. Run it from d/tests/flaky
+    instead.
+
+ -- Simon McVittie <smcv@debian.org>  Fri, 04 Jan 2019 08:43:36 +0000
+
+glib2.0 (2.58.2-2) experimental; urgency=medium
+
+  * Team upload
+  * d/p/gvariant-test-Also-force-alignment-for-tuple-test-data.patch:
+    Fix gvariant test failure on s390x by forcing more test data to be aligned
+    (Closes: #917980)
+  * d/p/debian/closures-test-Skip-on-arm-unless-flaky-tests-are-allowed.patch,
+    d/tests/flaky:
+    Only run closures test on arm* as part of a separate, flaky autopkgtest.
+    This test does not seem to be reliable enough for its failures to be
+    treated as release-critical, at least on arm*. If we run too many
+    iterations, it fails on CPUs where 16-bit accesses are slow; if we run
+    too few, it occasionally fails when one thread starves another.
+    (Closes: #917983)
+  * d/p/debian/Disable-some-tests-on-slow-architectures-which-keep-faili.patch,
+    d/p/debian/Skip-test-which-performs-some-unreliable-floating-point-c.patch:
+    d/tests/flaky:
+    Use g_test_skip() for flaky tests, and run them from d/tests/flaky
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 03 Jan 2019 09:35:04 +0000
+
+glib2.0 (2.58.2-1) experimental; urgency=medium
+
+  * Team upload
+  * New upstream release
+  * Drop many patches that were applied upstream
+  * d/p/tests-Allocate-gvariant-data-from-the-heap-to-guarantee-a.patch:
+    Add patch from upstream to fix alignment of GVariant test data
+  * d/libglib2.0-0.symbols: Update for new ABI
+  * d/tests/installed-tests: Log execution environment
+  * postinst: Convert triggers into a function
+  * postinst: Quote strings with #TOKENS# to fix syntax highlighting
+  * postinst: Add a vim modeline
+
+ -- Simon McVittie <smcv@debian.org>  Tue, 01 Jan 2019 10:59:39 +0000
+
+glib2.0 (2.58.1-6) experimental; urgency=medium
+
+  * Team upload
+  * d/p/closures-test-Avoid-timeout-on-ARM64-CPUs.patch:
+    Rename from
+    d/p/debian/closures-test-Run-fewer-iterations-on-ARM64-and-armhf.patch,
+    increase the test timeout to prevent this test from timing out on
+    Cortex-A57 CPUs when building with Meson, and mark as forwarded
+    upstream
+  * Disable xattr support on kFreeBSD.
+    kFreeBSD has stub implementations of getxattr() etc. which will
+    always fail. Autoconf considers these to be present, but Meson
+    detects them and treats them as absent, resulting in configuration
+    failure.
+
+ -- Simon McVittie <smcv@debian.org>  Tue, 06 Nov 2018 14:19:18 +0000
+
+glib2.0 (2.58.1-5) experimental; urgency=medium
+
+  * Team upload
+  * d/p/*:
+    Update to upstream glib-2-58 branch as of 2.58.1-89-g7aa52a7d5,
+    except for translations
+  * d/p/mainloop-test-Fix-race-conditions.patch:
+    Add patch from upstream git master to fix race conditions in
+    mainloop test
+  * d/p/meson-Define-__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4-on-GNU-Li.patch:
+    Add proposed patch to fix detection of atomic operations on armel
+  * Respect nocheck in DEB_BUILD_OPTIONS
+  * Adjust test timeouts:
+    - Increase armel, armhf, hppa timeout multiplier from x3 to x5
+    - Reduce mips*, sparc* timeout multiplier from x10 to x5
+    - Reduce timeout multiplier for architectures known to have qemu
+      buildds from x50 to x20
+  * d/rules: Set Meson cross properties using a modified debcrossgen.
+    This avoids embedding a local copy of GNUlib (v)(sn)printf when
+    cross-compiling. (Workaround for #912559)
+
+ -- Simon McVittie <smcv@debian.org>  Fri, 02 Nov 2018 19:05:22 +0000
+
+glib2.0 (2.58.1-4) experimental; urgency=medium
+
+  * Team upload
+  * d/rules: Deduplicate test invocation
+  * Use `meson test` directly, instead of going via `ninja test`
+  * Multiply Meson test timeouts.
+    Use x3 timeouts for most architectures (in general the timeouts in
+    the upstream Meson build system are somewhat optimistic), x10 for
+    the mips and sparc families, and x50 for architectures known to
+    use qemu for buildds.
+  * Enable FAM support on Hurd and kFreeBSD.
+    In the Autotools build system this was auto-detected, but in Meson it
+    is off by default and must be explicitly enabled if wanted.
+  * d/p/meson-Mark-1bit-emufutex-test-as-slow.patch:
+    Increase timeout for the 1bit-emufutex test
+
+ -- Simon McVittie <smcv@debian.org>  Fri, 19 Oct 2018 09:55:19 +0100
+
+glib2.0 (2.58.1-3) experimental; urgency=medium
+
+  * Team upload
+  * Upload to experimental to check that everything is OK with the
+    switch to Meson
+  * Switch build system to Meson as recommended by upstream
+    - Stop removing .la files: Meson doesn't build those
+    - d/p/debian/61_glib-compile-binaries-path.patch: Change the same
+      path if we build with Meson
+    - d/patches: Apply patches proposed for backport from master to
+      glib-2-58 in upstream MR 392. These fix various build issues,
+      mostly around Meson. Some of these patch Windows-specific code,
+      but they are likely to be in 2.58.2 and upstream asked for wider
+      testing, so I'm applying them anyway, to test the complete set.
+    - d/p/Spelling-*.patch:
+      MR 392 also applies patches from upstream git master to fix various
+      spelling mistakes detected by Lintian
+  * Always generate testmarshal.h, even when cross-compiling
+    (Closes: #908334)
+  * Fix static linking and make sure it won't regress, prompted by
+    comparing the Autotools and Meson builds:
+    - Add missing -dev dependencies on libffi-dev, libmount-dev,
+      libselinux1-dev
+    - d/p/Autotools-Move-libmount-from-Libs.private-to-Requires.pri.patch:
+      Add patch from upstream git master to fix static linking with libgio
+    - d/tests/build: Exercise all libraries
+    - d/tests/build-static: Exercise static linking
+  * d/rules: Fix some permissions (equivalent of #1539 upstream)
+  * Add Lintian override for a spelling-error-in-binary false positive
+  * Add some Lintian overrides for hardening-no-fortify-functions.
+    These objects mostly don't use libc directly.
+  * Remove /usr/bin/gio-launch-desktop symlink.
+    It's an implementation detail of libgio, and isn't intended to be
+    run directly. Removing it from PATH silences a Lintian warning about
+    it not having a man page.
+  * Don't delete compiled GSettings schemas during purge if the dpkg
+    reference count is greater than 1. This avoids deleting and regenerating
+    it unnecessarily if another architecture's libglib2.0-0 is still
+    installed. (Closes: #775854)
+  * d/tests/installed-tests: Replace deprecated $ADTTMP with $AUTOPKGTEST_TMP
+  * d/tests/control: Mark build tests as superficial (see #904979)
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 18 Oct 2018 18:32:21 +0100
+
+glib2.0 (2.58.1-2) unstable; urgency=medium
+
+  * Fix dh_missing rule for arch:all build with compat 11
+
+ -- Jeremy Bicha <jbicha@debian.org>  Fri, 21 Sep 2018 23:53:00 -0400
+
+glib2.0 (2.58.1-1) unstable; urgency=medium
+
+  * New upstream release
+  * Drop patches applied in new release:
+    - Fix-g_icon_to_string-regression-doc-inconsistency.patch
+    - tests-timer-Skip-test_timeval_to_iso8601_overflow-if-we-c.patch
+  * Refresh 61_glib-compile-binaries-path.patch
+  * Bump Standards-Version to 4.2.1
+  * Bump debhelper compat to 11
+
+ -- Jeremy Bicha <jbicha@debian.org>  Fri, 21 Sep 2018 20:11:06 -0400
+
+glib2.0 (2.58.0-4) unstable; urgency=medium
+
+  [ Simon McVittie ]
+  * Adjust installation path of gdb scripts to match GLib itself.
+    We used to put libglib-2.0.so.0 in /lib/MULTIARCH, but this is no
+    longer the case since 2.56.0-5.
+  * Wrap and sort (build-)dependency lists (wrap-and-sort -a)
+  * Wrap and sort file lists (wrap-and-sort -a)
+  * Install HTML in /usr/share/gtk-doc/html with symlinks in /usr/share/doc.
+    The gtk-doc documentation is technically a functionally significant
+    part of the package (it affects cross-reference generation during build
+    of other packages) so according to Policy §12.3 it is not appropriate
+    for /usr/share/doc.
+    Using the upstream default installation path for the HTML also makes
+    it more straightforward to switch to the Meson build system, because
+    the Meson build does not have an equivalent of --with-html-dir.
+    - d/debian/libglib2.0-doc.maintscript: Add migration steps
+  * d/p/debian/Look-for-gio-launch-desktop-in-libdir-glib-2.0.patch:
+    Also patch meson build system
+
+  [ Jeremy Bicha ]
+  * Cherry-pick Fix-g_icon_to_string-regression-doc-inconsistency.patch
+    - Have g_icon_new_for_string() go back to only returning a single name
+      when created with a single name since some apps assume that behavior.
+      (Closes: #908705)
+
+ -- Jeremy Bicha <jbicha@debian.org>  Mon, 17 Sep 2018 17:47:57 -0400
+
+glib2.0 (2.58.0-3) unstable; urgency=medium
+
+  [ Iain Lane ]
+  * Run fewer iterations of clousures test on armhf too
+
+ -- Jeremy Bicha <jbicha@debian.org>  Fri, 07 Sep 2018 13:51:53 -0400
+
+glib2.0 (2.58.0-2) unstable; urgency=medium
+
+  * Cherry-pick upstream patch to fix test_timeval_to_iso8601_overflow on
+    32-bit, fixing FTBFS there.
+
+ -- Iain Lane <laney@debian.org>  Tue, 04 Sep 2018 15:29:53 +0100
+
+glib2.0 (2.58.0-1) unstable; urgency=medium
+
+  [ Jeremy Bicha ]
+  * New upstream release
+  * Drop patches applied in new release:
+    - date-test-Use-g_test_skip-not-g_test_incomplete.patch
+    - g_binding_unbind-make-it-more-introspection-friendly-allo.patch:
+  * Release to unstable
+
+  [ Simon McVittie ]
+  * d/p/debian/closures-test-Run-fewer-iterations-on-ARM64.patch:
+    Update metadata
+  * libglib2.0-dev-bin: Add Suggests for the packages containing
+    xmllint and gdk-pixbuf-pixdata, which are sometimes invoked by
+    glib-compile-resources (Closes: #834998)
+  * Invoke dh_python3 twice so that we correctly rewrite the shebang
+    line for /usr/bin scripts (Closes: #876009)
+  * Don't install very old changelogs and NEWS files
+  * Install README.md instead of stub README
+
+ -- Jeremy Bicha <jbicha@debian.org>  Sun, 02 Sep 2018 08:57:46 -0400
+
+glib2.0 (2.57.2-2) experimental; urgency=medium
+
+  * Cherry-pick g_binding_unbind-make-it-more-introspection-friendly-allo.patch
+    to fix pygobject build (LP: #1787474)
+
+ -- Jeremy Bicha <jbicha@debian.org>  Mon, 20 Aug 2018 12:54:49 -0400
+
+glib2.0 (2.57.2-1) experimental; urgency=medium
+
+  * Team upload
+  * New upstream development release
+  * d/watch: Look for odd-numbered releases
+  * Rebase patch series
+  * Install gio-launch-desktop in libglib2.0-0's private libdir to avoid
+    a circular dependency between libglib2.0-0 and libglib2.0-bin
+    - d/p/debian/Look-for-gio-launch-desktop-in-libdir-glib-2.0.patch:
+      Look for it there
+  * d/copyright: Update
+  * d/libglib2.0-0.symbols: Update
+  * Use upstream autogen.sh for autoreconf
+  * Don't clean org.gtk.test.gschema.override.orig
+  * d/gbp.conf: Use upstream/latest branch
+  * d/p/Drop-a-questionable-test-from-the-refstring-suite.patch:
+    Add patch to fix FTBFS on i386
+  * d/p/date-test-Use-g_test_skip-not-g_test_incomplete.patch:
+    Add patch to fix autopkgtest failures without locales-all
+  * d/gbp.conf: Don't number patches
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 02 Aug 2018 17:44:16 +0100
+
+glib2.0 (2.56.1-2) unstable; urgency=medium
+
+  [ Tim Lunn ]
+  * libglib2.0-0.triggers:use interest-await trigger for schemas
+
+  [ Iain Lane ]
+  * debian/patches/tests-network-monitor-Always-use-the-dummy-proxy-res.patch:
+    Take patch from upstream to ignore the system's proxy settings for the
+    network-monitor test - it's testing an "abstract" network unrelated to the
+    system's network, and these settings interfere with that. This fixes a
+    failure in the Ubuntu autopkgtest machines, which have a proxy set.
+
+ -- Iain Lane <laney@debian.org>  Tue, 10 Apr 2018 18:12:27 +0100
+
+glib2.0 (2.56.1-1) unstable; urgency=medium
+
+  [ Tim Lunn ]
+  * New upstream release
+  * Drop patches included in new release
+  * libglib2.0-0.triggers: Use interest-noawait triggers, generating caches
+    doesn't need to block configuration. flagged by lintian
+    uses-implicit-await-trigger warning.
+
+  [ Simon McVittie ]
+  * Explicitly use autoconf build system, even with debhelper 11.2
+    (see #895174)
+
+ -- Tim Lunn <tim@feathertop.org>  Mon, 09 Apr 2018 19:03:24 +1000
+
+glib2.0 (2.56.0-6) unstable; urgency=medium
+
+  * Team upload
+  * d/p/0002-gapplication-Tighten-up-application-ID-validation.patch:
+    Transliterate commit message into ASCII so git-buildpackage doesn't
+    export it as a blob of base64
+  * d/p/g_test_dbus_down-Ensure-next-test-does-not-use-old-c.patch:
+    Add patch to address a race condition that sometimes makes D-Bus-based
+    tests fail (Closes: #894677)
+  * d/patches: Improve metadata on various patches
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 05 Apr 2018 09:24:45 +0100
+
+glib2.0 (2.56.0-5) unstable; urgency=medium
+
+  [ Simon McVittie ]
+  * Use `set -e` in the (empty) prerm to avoid a Lintian warning
+  * Add Lintian override for the empty prerm used to work around
+    #887629
+
+  [ Michael Biebl ]
+  * Stop installing libglib to /lib.
+    Late mounting of /usr is no longer supported, so this is not necessary
+    anymore.
+  * Drop maintscript migration code from pre-jessie.
+  * Drop obsolete Breaks.
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 01 Apr 2018 17:59:50 +0200
+
+glib2.0 (2.56.0-4) unstable; urgency=medium
+
+  * Fix typo: libglib2.0-dev-bin Depends on python3-distutils, not
+    distuils (Closes: #893773)
+  * Restore `set -x` in debian/tests/build
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 22 Mar 2018 09:08:05 +0000
+
+glib2.0 (2.56.0-3) unstable; urgency=medium
+
+  [ Iain Lane ]
+  * debian/tests/build: Add Restrictions: allow-stderr. We run this test with
+    `set -x', which outputs to stderr, and would like to continue doing so.
+
+  [ Jeremy Bicha ]
+  * Depend and Build-Depend on python3-distutils to fix build failures
+    since python3 no longer depends on python3-distutils (Closes: #893736)
+
+ -- Jeremy Bicha <jbicha@debian.org>  Thu, 22 Mar 2018 00:27:02 -0400
+
+glib2.0 (2.56.0-2) unstable; urgency=medium
+
+  [ Simon McVittie ]
+  * Merge from experimental to unstable
+  * d/tests/build: Don't rely on having unmerged /usr
+  * d/watch: Only watch for stable releases
+  * d/gbp.conf: Use debian/master, upstream/2.56.x branches
+  * d/control: Update Vcs-* for default branch
+
+ -- Jeremy Bicha <jbicha@debian.org>  Sat, 17 Mar 2018 08:49:26 -0400
+
+glib2.0 (2.56.0-1) experimental; urgency=medium
+
+  * Team upload
+  * New upstream stable release 2.56.0
+  * d/p/000?-gdbus-tool-*.patch:
+    Drop patches that came from upstream
+  * Refresh remaining patches
+  * d/p/0001-tests-Use-modern-test-assertions-in-GApplication-tes.patch,
+    d/p/0002-gapplication-Tighten-up-application-ID-validation.patch:
+    Cherry-pick GApplication ID fixes from upstream 2.56 branch
+    (GNOME #793400)
+
+ -- Simon McVittie <smcv@debian.org>  Tue, 13 Mar 2018 18:53:02 +0000
+
+glib2.0 (2.55.2-2) experimental; urgency=medium
+
+  * Merge changes from unstable, in particular:
+    + d/libglib2.0-dev.prerm: Add an empty prerm to make sure that we have a
+      way to recover from #887629 in stretch (Closes: #887863)
+  * d/p/0001-gdbus-tool-Ignore-unknown-options-for-the-emit-subco.patch,
+    d/p/0002-gdbus-tool-Make-dest-optional-for-emit-again.patch,
+    d/p/0003-gdbus-tool-Don-t-repeatedly-complete-signal.patch,
+    d/p/0004-gdbus-tool-Factor-out-common-GOptionContext-construc.patch:
+    Cherry-pick from upstream. Fix `gdbus emit' to not require `--dest', and
+    improve its bash completion. Should fix the dbus-test-runner autopkgtest,
+    which relied on this behaviour.
+
+ -- Iain Lane <laney@debian.org>  Thu, 22 Feb 2018 10:02:17 +0000
+
+glib2.0 (2.55.2-1) experimental; urgency=medium
+
+  * debian/control{,.in}: Update Vcs-* to specify debian/experimental branch.
+  * New upstream release 2.55.2:
+    + GFile now has API to get the path without copying
+  * debian/patches/gdbus-threading-test-Allow-even-longer-for-test_method_ca.patch,
+    debian/patches/gdatetime-Avoid-repeated-floating-point-multiplies-w.patch,
+    debian/patches/gdatetime-Mark-the-usecs-as-volatile.patch:
+    Drop, applied upstream in this release.
+  * debian/libglib2.0-0.symbols: New symbols for 2.55.2
+
+ -- Iain Lane <laney@debian.org>  Thu, 15 Feb 2018 10:23:05 +0000
+
+glib2.0 (2.55.1-1) experimental; urgency=medium
+
+  * debian/gbp.conf, debian/watch: Update for experimental
+  * New upstream development release 2.55.1
+  * debian/libglib2.0-0.symbols: Update with new symbols in this release.
+  * debian/patches/gdatetime-Avoid-repeated-floating-point-multiplies-w.patch,
+    debian/patches/gdatetime-Mark-the-usecs-as-volatile.patch: Cherry-pick two
+    patches from upstream. Fix some precision problems within GDateTime, that
+    in some cases resulted in incorrect answers on i386.
+
+ -- Iain Lane <laney@debian.org>  Mon, 15 Jan 2018 12:26:35 +0000
+
+glib2.0 (2.54.3-2) unstable; urgency=medium
+
+  * Team upload
+  * d/libglib2.0-dev.prerm: Add an empty prerm to make sure that we have
+    a way to recover from #887629 in stretch (Closes: #887863)
+  * d/p/gdbus-threading-test-Allow-even-longer-for-test_method_ca.patch:
+    Mark as applied upstream
+  * d/p/gmain-Partial-revert-of-recent-wakeup-changes-to-gmain.c.patch:
+    Apply patch from upstream glib-2-54 branch to revert GWakeup changes
+    that appear to have broken WebKit and/or LibreOffice
+    (Closes: #887492)
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 22 Jan 2018 12:39:58 +0000
+
+glib2.0 (2.54.3-1) unstable; urgency=medium
+
+  [ Simon McVittie ]
+  * Move Vcs-* to salsa.debian.org
+  * New upstream stable release
+    - Fix a race condition when a GCancellable is cancelled in another
+      thread (Closes: #884654)
+    - Drop patches for #884661, fixed upstream
+  * d/p/gdbus-peer-Skip-test-during-Debian-package-build.patch:
+    Drop. We should no longer need to skip this test now that #884654
+    is fixed.
+  * d/p/Do-not-attempt-to-autolaunch-a-session-dbus-daemon-w.patch:
+    Drop patch. It has not been necessary since 2.50.
+  * d/p/0001-Fix-trashing-on-overlayfs.patch,
+    d/p/0001-timer-test-use-volatile-for-locals.patch,
+    d/p/gdbus-threading-test-Allow-even-longer-for-test_method_ca.patch:
+    Mark as forwarded upstream
+  * d/patches: Move non-upstreamable patches (Debian-specific changes
+    and workarounds) to d/p/debian, and to the bottom of d/p/series
+  * d/watch: Only watch for the upstream stable branch
+
+  [ Iain Lane ]
+  * debian/gbp.conf: Update upstream branch to upstream/2.54.x following
+    DEP-14.
+
+ -- Iain Lane <laney@debian.org>  Tue, 09 Jan 2018 18:02:53 +0000
+
+glib2.0 (2.54.2-5) unstable; urgency=medium
+
+  * Set Rules-Requires-Root to no. This package builds successfully
+    with the same content in that mode.
+  * d/p/61_glib-compile-binaries-path.patch: Only use the multiarch
+    path for glib-compile-schemas, not for glib-compile-resources
+  * Install glib-compile-resources into PATH in libglib2.0-dev-bin,
+    not libglib2.0-bin: it is a development tool used at compile-time
+    - libglib2.0-dev-bin Breaks/Replaces older libglib2.0-bin
+  * Install the glib-compile-resources binary in libglib2.0-dev-bin,
+    not libglib2.0-0. This means we get an executable version of that
+    binary when cross-compiling (Closes: #885019)
+  * Bump Standards-Version to 4.1.3
+
+ -- Simon McVittie <smcv@debian.org>  Fri, 29 Dec 2017 22:07:56 +0000
+
+glib2.0 (2.54.2-4) unstable; urgency=medium
+
+  * Team upload
+  * d/p/closures-test-Run-fewer-iterations-on-ARM64.patch:
+    Run more iterations on ARM64 than in 2.54.2-3, but fewer than in
+    2.54.2-2. If we don't run enough iterations, we get an assertion
+    failure when the main thread starves the other threads.
+  * d/p/gmenumodel*.patch: Mark as upstreamed in 2.54.3 and 2.55.1
+  * d/rules: Set DEB_BUILD_TIME_TESTS when running dh_auto_test, so that
+    tests can distinguish between autopkgtest and `make check`
+  * d/p/gdbus-peer-Skip-test-during-Debian-package-build.patch:
+    Skip the gdbus-peer test during package build, so that its known
+    race condition does not cause intermittent FTBFS (mitigates: #884654)
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 21 Dec 2017 14:41:40 +0000
+
+glib2.0 (2.54.2-3) unstable; urgency=medium
+
+  * Team upload
+  * d/patches: Re-export with gbp pq
+  * d/patches: Use `gbp pq export`-style metadata, retrieving authors
+    and dates from d/changelog where needed
+  * d/p/closures-test-Run-fewer-iterations-on-ARM64.patch: New patch.
+    tests/refcount/closures: Run fewer iterations on ARM64
+    (mitigates: #880883)
+  * d/p/gdbus-threading-test-Allow-even-longer-for-test_method_ca.patch:
+    New patch. Allow even longer for the gdbus-threading test, and
+    re-enable it on 32-bit ARM now that the timeout is longer
+    (Closes: #884660)
+  * d/p/gmenumodel-test-If-something-goes-wrong-don-t-wait-foreve.patch,
+    d/p/gmenumodel-test-Wait-for-the-expected-events-to-happen.patch:
+    Add patches to make the GMenuModel test more patient (Closes: #884661)
+  * d/p/gwakeuptest-Be-less-parallel-unless-invoked-with-m-slow.patch:
+    Reduce number of threads and number of operations in response to
+    timeout on reproducible-builds infrastructure (mitigates: #884659)
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 18 Dec 2017 21:30:18 +0000
+
+glib2.0 (2.54.2-2) unstable; urgency=medium
+
+  * Update Vcs fields for conversion to git
+  * Add debian/gbp.conf
+  * Bump Standards-Version to 4.1.2
+
+ -- Jeremy Bicha <jbicha@debian.org>  Wed, 13 Dec 2017 21:15:13 -0500
 
 glib2.0 (2.54.2-1) unstable; urgency=medium
 
@@ -1466,7 +2003,7 @@ glib2.0 (2.38.1-1) experimental; urgency=low
   * Build-Depend on python:any. python is Multi-Arch: allowed; this BD allows
     the python from any architecture that can be executed on the builder to
     satisfy the BD, simplifying cross building of glib2.0.
-  * New upstream bugfix release 2.38.1 
+  * New upstream bugfix release 2.38.1
     + Fix error code checks when SOCK_CLOEXEC is defined but not supported
       (fix support for GNU/Hurd)
     + g_settings_list_children: only list viable schemas (fix gsettings
@@ -1488,7 +2025,7 @@ glib2.0 (2.38.0-1) experimental; urgency=low
     Cherry-pick patch from upstream to fix object path typo in gio (LP:
     #1227295)
   * Add --enable-debug=minimal explicitly to the deb build so the debugging
-    level doesn't change between pre-release and stable versions. 
+    level doesn't change between pre-release and stable versions.
 
  -- Iain Lane <laney@debian.org>  Wed, 25 Sep 2013 10:37:50 +0000
 
@@ -1496,7 +2033,7 @@ glib2.0 (2.37.93-1) experimental; urgency=low
 
   * New upstream release 2.37.93 (& .92)
     + new API g_file_measure_disk_usage() similar to du(1)
-  * Add new symbols for g_file_measure_disk_usage API added in this release. 
+  * Add new symbols for g_file_measure_disk_usage API added in this release.
 
  -- Iain Lane <laney@debian.org>  Wed, 18 Sep 2013 10:07:15 +0000
 
@@ -1511,7 +2048,7 @@ glib2.0 (2.37.7-1) experimental; urgency=low
 glib2.0 (2.37.6-1) experimental; urgency=low
 
   * New upstream release 2.37.6
-  * Update symbols file 
+  * Update symbols file
   * Merge changes from unstable, mainly for build / testsuite fixes.
 
  -- Iain Lane <laney@debian.org>  Wed, 21 Aug 2013 09:48:19 +0000
@@ -1524,16 +2061,16 @@ glib2.0 (2.37.5-1) experimental; urgency=low
       key was locked down)
     + add a new API for instance private data: G_DEFINE_TYPE_WITH_PRIVATE
     + add new D-Bus API for async property handling
-  * libglib2.0-tests: Depend on shared-mime-info required by contenttype test. 
+  * libglib2.0-tests: Depend on shared-mime-info required by contenttype test.
   * New upstream release
   * 0001-Revert-g_file_set_contents-don-t-fsync-on-ext3-4.patch: Drop, now
     upstream.
   * debian/tests/installed-tests: Add a new DEP-8 test to run the
     installed-tests.
   * Refresh patches.
-  * Update symbols file. 
+  * Update symbols file.
   * debian/patches/skip-brokwn-dbus-appinfo-test.patch: Skip a broken new
-    dbus-appinfo test which is hanging. 
+    dbus-appinfo test which is hanging.
 
  -- Iain Lane <laney@debian.org>  Fri, 02 Aug 2013 16:54:51 +0000
 
@@ -1554,13 +2091,13 @@ glib2.0 (2.37.2-1) experimental; urgency=low
       trigger a warning.
     + GApplication Support org.freedesktop.Application, including D-Bus
       activation from desktop files
-  * Refresh patches. 
-  * Update symbols file with new symbols in this release. 
-  * Enable installed tests and install into a libglib2.0-tests package. 
+  * Refresh patches.
+  * Update symbols file with new symbols in this release.
+  * Enable installed tests and install into a libglib2.0-tests package.
   * clean debian/{install,build,stamp-makefile-check} and
-    gio/gdbus-2.0/codegen/*.pyc 
+    gio/gdbus-2.0/codegen/*.pyc
   * Set $XDG_RUNTIME_DIR to a writable directory we control; now required by
-    the testsuite. 
+    the testsuite.
 
  -- Iain Lane <laney@debian.org>  Fri, 21 Jun 2013 15:28:46 +0100
 
@@ -1592,8 +2129,8 @@ glib2.0 (2.36.3-3) unstable; urgency=low
   * Use gcc-4.8 on sparc to fix misbuild causing test failure (closes: #709781).
 
   [ Josselin Mouette ]
-  * Only make the testsuite fatal on linux. Although the other 
-    architectures don’t pass, we have to keep a pair of reverse 
+  * Only make the testsuite fatal on linux. Although the other
+    architectures don’t pass, we have to keep a pair of reverse
     dependencies working.
 
  -- Josselin Mouette <joss@debian.org>  Sat, 06 Jul 2013 15:51:11 +0200
@@ -1611,9 +2148,9 @@ glib2.0 (2.36.3-2) unstable; urgency=low
 glib2.0 (2.36.3-1) unstable; urgency=low
 
   [ Josselin Mouette ]
-  * Make the testsuite fatal on all architectures. If it fails, we need 
+  * Make the testsuite fatal on all architectures. If it fails, we need
     to fix it or drop the architecture, not to ignore it.
-  * Break libgnome-desktop-3-2 < 3.4.2-2 for the thumbnails location 
+  * Break libgnome-desktop-3-2 < 3.4.2-2 for the thumbnails location
     change.
 
   [ Emilio Pozuelo Monfort ]
@@ -1632,7 +2169,7 @@ glib2.0 (2.36.1-2) unstable; urgency=low
 glib2.0 (2.36.1-1) experimental; urgency=low
 
   * New upstream release
-  * Refresh debian/patches/06_thread_test_ignore_prctl_fail.patch 
+  * Refresh debian/patches/06_thread_test_ignore_prctl_fail.patch
 
  -- Iain Lane <laney@debian.org>  Tue, 23 Apr 2013 10:20:47 +0100
 
@@ -1724,8 +2261,8 @@ glib2.0 (2.35.8-1) experimental; urgency=low
   * Refresh patches and slightly rework debian/patches/04_homedir_env.patch:
     g_get_home_dir() now respects the HOME environment variable but we'll keep
     G_HOME for now as packages in Debian rely on it.
-  * gdbus-codegen .py files have moved to /usr/share/glib-2.0 
-  * Update symbols file 
+  * gdbus-codegen .py files have moved to /usr/share/glib-2.0
+  * Update symbols file
 
   [ Martin Pitt ]
   * New upstream release 2.35.4
@@ -1786,7 +2323,7 @@ glib2.0 (2.34.1-2) experimental; urgency=low
 glib2.0 (2.34.1-1) experimental; urgency=low
 
   [ Josselin Mouette ]
-  * Require libelfg0-dev, not libelf-dev which has nothing to do with 
+  * Require libelfg0-dev, not libelf-dev which has nothing to do with
     it.
 
   [ Iain Lane ]
@@ -1795,7 +2332,7 @@ glib2.0 (2.34.1-1) experimental; urgency=low
     + Leak in glib-compile-resources
     + g_settings_bind: use canonical property name
     + Port gio tests from pygobject to pygi
-  * Switch python-gobject-2 BD to python-gi, folowing porting of tests. 
+  * Switch python-gobject-2 BD to python-gi, folowing porting of tests.
   * debian/patches/50_git_gmenuexporter_allow_null_bus_on_name_vanished.patch:
     Cherry-pick upstream patch to fix crash when GBusNameVanishedCallback is
     called with a NULL GDBusConnection. (LP: #1044322)
@@ -1843,7 +2380,7 @@ glib2.0 (2.33.14-1) experimental; urgency=low
     + gresource tests: srcdir != builddir fixes
     + tests/gvariant: Fix test on big endian architectures
     + Fix regression in g_shell_parse_argv()
-  * Dropped 07_tests_gvariant_big_endian.patch: applied upstream. 
+  * Dropped 07_tests_gvariant_big_endian.patch: applied upstream.
 
   [ Michael Biebl ]
   * Bump all 2.33.x symbol versions to 2.33.14 to ensure a tight enough
@@ -1926,7 +2463,7 @@ glib2.0 (2.33.8-1) experimental; urgency=low
       values have been changed to 2 and 15*1000, respectively.
   * debian/control{,.in}: XC-Package-Type → Package-Type, thanks to Lintian.
   * debian/libglib2.0-0.symbols: Update for new symbols in this release and
-    remove Debian revisions which aren't necessary. 
+    remove Debian revisions which aren't necessary.
 
  -- Iain Lane <laney@debian.org>  Tue, 07 Aug 2012 14:38:25 +0100
 
@@ -2008,7 +2545,7 @@ glib2.0 (2.33.3-1) experimental; urgency=low
 
 glib2.0 (2.33.2-1) experimental; urgency=low
 
-  * Track unstable versions in the experimental branch. 
+  * Track unstable versions in the experimental branch.
   * New upstream release 2.33.2
     - GLIB_VERSION_MIN_REQUIRED now defaults to the current stable version
     - GIO input and output stream classes have grown GBytes-based methods
@@ -2063,12 +2600,12 @@ glib2.0 (2.33.12+really2.32.4-3) unstable; urgency=low
 
 glib2.0 (2.33.12+really2.32.4-2) unstable; urgency=medium
 
-  * Revert link adding for gdbus-object-manager-example. While it is 
-    useful to have in /usr/share/doc as an example, it must not be 
+  * Revert link adding for gdbus-object-manager-example. While it is
+    useful to have in /usr/share/doc as an example, it must not be
     shipped with the system documentation.
-  * 20_glib-compile-resources_leak.patch: new patch. Fix a leak 
+  * 20_glib-compile-resources_leak.patch: new patch. Fix a leak
     introduced in version 2.32.4. Thanks Niels Thykier!
-  * SECURITY: add 11_CVE-2012-3524_setuid.patch from upstream. Prevents 
+  * SECURITY: add 11_CVE-2012-3524_setuid.patch from upstream. Prevents
     using DBus in a setuid binary. Fixes CVE-2012-3524.
 
  -- Josselin Mouette <joss@debian.org>  Sat, 06 Oct 2012 01:15:16 +0200
@@ -2076,7 +2613,7 @@ glib2.0 (2.33.12+really2.32.4-2) unstable; urgency=medium
 glib2.0 (2.33.12+really2.32.4-1) unstable; urgency=low
 
   * New upstream bugfix release.
-  * 10_gdbus_race.patch: stolen from upstream git. Fix a race condition 
+  * 10_gdbus_race.patch: stolen from upstream git. Fix a race condition
     that would make gnome-shell crash on startup under some conditions.
   * libglib2.0-bin.install: bash completions have moved to /usr/share.
   * libglib2.0-bin.maintscript: remove old conffiles.
@@ -2263,7 +2800,7 @@ glib2.0 (2.30.2-7) UNRELEASED; urgency=low
   * libglib2.0-0.postinst.in:
     + Encapsulate gio-querymodules calls in || true statements.
       Closes: #659588.
-    + Only run gio-querymodules on the non-multiarch path for the host 
+    + Only run gio-querymodules on the non-multiarch path for the host
       architecture.
   * rules: add substitution for #ARCH# for the above change.
 
@@ -2395,7 +2932,7 @@ glib2.0 (2.30.1-1) experimental; urgency=low
     - Refresh remaining patches.
 
   [ Josselin Mouette ]
-  * Break gtk3 < 3.0.12 because it uses an internal symbol that ceases 
+  * Break gtk3 < 3.0.12 because it uses an internal symbol that ceases
     to work with glib 2.30.
 
   [ Sjoerd Simons ]
@@ -2433,13 +2970,13 @@ glib2.0 (2.28.6-4) unstable; urgency=low
 
 glib2.0 (2.28.6-3) experimental; urgency=low
 
-  * Break gnome-session < 3.0.0-3 for the updated defaults.list taking 
+  * Break gnome-session < 3.0.0-3 for the updated defaults.list taking
     x-scheme-* into account.
   * Break gdm < 3.0.3 to avoid adding a security hole to it.
-  * 10_gdesktopappinfo_set_last_used.patch: new patch. When calling 
-    g_app_info_set_as_last_used_for_type, correctly inherit the default 
-    filled in the file from the system default. This avoids 
-    gnome-control-center breaking file associations just by opening the 
+  * 10_gdesktopappinfo_set_last_used.patch: new patch. When calling
+    g_app_info_set_as_last_used_for_type, correctly inherit the default
+    filled in the file from the system default. This avoids
+    gnome-control-center breaking file associations just by opening the
     info dialog.
 
  -- Josselin Mouette <joss@debian.org>  Sun, 04 Sep 2011 23:07:46 +0200
@@ -2504,9 +3041,9 @@ glib2.0 (2.28.1-1) unstable; urgency=low
 
 glib2.0 (2.28.0-2) unstable; urgency=low
 
-  * 20_mime_extension_point.patch: temporary revert the upstream change 
+  * 20_mime_extension_point.patch: temporary revert the upstream change
     in URI schemes handling. Closes: #612876.
-    Note for later: it must absolutely be reverted in a synchronized 
+    Note for later: it must absolutely be reverted in a synchronized
     upload with gvfs 1.8 and control-center 3.0.
 
  -- Josselin Mouette <joss@debian.org>  Fri, 18 Feb 2011 19:36:42 +0100
@@ -2781,13 +3318,13 @@ glib2.0 (2.25.11-1) experimental; urgency=low
     * debian/libglib2.0-dev.install:
       - glib-compile-schemas moved to libglib2.0-bin
     * debian/libglib2.0-dev.install:
-    - install the new gdb python macros since the gdb version is recent 
+    - install the new gdb python macros since the gdb version is recent
       enough now to use those
-  * Put gio-querymodules and glib-compile-schemas in a private, 
+  * Put gio-querymodules and glib-compile-schemas in a private,
     versioned directory in libglib2.0-0 to avoid a dependency loop.
   * Move back the triggers to libglib2.0-0.
   * Add a purge of the necessary files in the postinst.
-  * Stop recommending libglib2.0-bin since the necessary stuff is in 
+  * Stop recommending libglib2.0-bin since the necessary stuff is in
     libglib2.0-0 now.
   * Add symlinks to keep the binaries at their place in libglib2.0-bin.
   * Tighten the dependency between libglib2.0-bin and libglib2.0-0.
@@ -3087,9 +3624,9 @@ glib2.0 (2.22.1-1) unstable; urgency=low
 
 glib2.0 (2.22.0-2) unstable; urgency=low
 
-  * Don’t install Python GDB macros for now, they only work with an 
+  * Don’t install Python GDB macros for now, they only work with an
     experimental GDB branch.
-  * 30_metadata_symlinks.patch: stolen upstream. Get metadata to work 
+  * 30_metadata_symlinks.patch: stolen upstream. Get metadata to work
     with symbolic links. Closes: #548142.
 
  -- Josselin Mouette <joss@debian.org>  Wed, 30 Sep 2009 01:02:11 +0200
@@ -3097,10 +3634,10 @@ glib2.0 (2.22.0-2) unstable; urgency=low
 glib2.0 (2.22.0-1) unstable; urgency=low
 
   [ Josselin Mouette ]
-  * Move libglib-2.0.so.0 to /lib so that DeviceKit (and other potential 
+  * Move libglib-2.0.so.0 to /lib so that DeviceKit (and other potential
     sources) can work without having /usr mounted.
-  * 11_chmod_symlinks.patch: new patch. Fix potential security issue 
-    when manipulating symlink permissions. Thanks Arand Nash for the 
+  * 11_chmod_symlinks.patch: new patch. Fix potential security issue
+    when manipulating symlink permissions. Thanks Arand Nash for the
     heads up.
 
   [ Sebastian Dröge ]
@@ -3116,7 +3653,7 @@ glib2.0 (2.22.0-1) unstable; urgency=low
 glib2.0 (2.21.6-1) experimental; urgency=low
 
   [ Josselin Mouette ]
-  * 10_inotify_init1.patch: fall back on inotify_init when inotify_init1 
+  * 10_inotify_init1.patch: fall back on inotify_init when inotify_init1
     does not work, as happens with kernel versions < 2.6.27.
     Closes: #544354.
 
@@ -3165,7 +3702,7 @@ glib2.0 (2.20.4-1) unstable; urgency=low
 glib2.0 (2.20.3-1) unstable; urgency=low
 
   [ Josselin Mouette ]
-  * Only build the libgio-fam package for hurd and kfreebsd, it is 
+  * Only build the libgio-fam package for hurd and kfreebsd, it is
     totally useless under Linux.
   * Make it recommend gamin for kqueue support.
   * Make libgamin-dev the primary build-dependency. Closes: #526219.
@@ -3183,7 +3720,7 @@ glib2.0 (2.20.1-2) unstable; urgency=low
 
 glib2.0 (2.20.1-1) unstable; urgency=low
 
-  * New upstream bugfix release: 
+  * New upstream bugfix release:
     + 10_log_valist.patch, dropped.
 
  -- Sebastian Dröge <slomo@debian.org>  Sat, 11 Apr 2009 17:00:43 +0200
@@ -3191,14 +3728,14 @@ glib2.0 (2.20.1-1) unstable; urgency=low
 glib2.0 (2.20.0-3) unstable; urgency=low
 
   * Fix debug package section.
-  * 10_log_valist.patch: new patch, stolen upstream. Copy a va_list 
+  * 10_log_valist.patch: new patch, stolen upstream. Copy a va_list
     before using it twice. Closes: #520484.
 
  -- Josselin Mouette <joss@debian.org>  Thu, 09 Apr 2009 20:11:52 +0200
 
 glib2.0 (2.20.0-2) unstable; urgency=low
 
-  * Remove 02_usr_share_gnome_applications.patch, now gnome-session sets 
+  * Remove 02_usr_share_gnome_applications.patch, now gnome-session sets
     XDG_DATA_DIRS accordingly.
 
  -- Josselin Mouette <joss@debian.org>  Thu, 19 Mar 2009 22:59:34 +0100
@@ -3274,9 +3811,9 @@ glib2.0 (2.18.4-2) unstable; urgency=low
 glib2.0 (2.18.4-1) experimental; urgency=low
 
   [ Josselin Mouette ]
-  * 04_homedir_env.patch: new patch. Handle the G_HOME environment 
-    variable, to override the passwd entry. This will allow to fix 
-    various kinds of build failures due to restricted build 
+  * 04_homedir_env.patch: new patch. Handle the G_HOME environment
+    variable, to override the passwd entry. This will allow to fix
+    various kinds of build failures due to restricted build
     environments.
 
   [ Sebastian Dröge ]
@@ -3455,12 +3992,12 @@ glib2.0 (2.16.2-1) unstable; urgency=low
 glib2.0 (2.16.1-2) unstable; urgency=low
 
   [ Josselin Mouette ]
-  * 02_usr_share_gnome_applications.patch: ported from GnomeVFS. Use 
-    /usr/share/gnome/applications/defaults.list to obtain the defaults 
+  * 02_usr_share_gnome_applications.patch: ported from GnomeVFS. Use
+    /usr/share/gnome/applications/defaults.list to obtain the defaults
     for MIME mapping. Currently this file is still shipped by GnomeVFS.
     Closes: #469504.
-  * 03_blacklist-directories.patch: ported from GnomeVFS. Blacklist more 
-    FHS directories that are commonly found as Unix mount points, 
+  * 03_blacklist-directories.patch: ported from GnomeVFS. Blacklist more
+    FHS directories that are commonly found as Unix mount points,
     including those necessary for live-initramfs.
   * 04_nfs4.patch: ported from GnomeVFS. Support for nfs4 filesystems.
 
@@ -3960,7 +4497,7 @@ glib2.0 (2.12.0-1) experimental; urgency=low
     Major new features include:
     * The Unicode support has been updated to Unicode 5.
     * GBookmarkFile: a parser for files containing bookmarks
-      stored using the Desktop Bookmark specification 
+      stored using the Desktop Bookmark specification
     * Base64 encoding support
   * debian/rules:
     - updated shver number
@@ -3974,7 +4511,7 @@ glib2.0 (2.10.3-3) unstable; urgency=low
   * debian/patches/999_ia64_atomic_ops_broken.patch:
     - dropped, it's not required with the new gcc and it was breaking the build
       (Closes: #376260)
-  
+
   [ Loic Minier ]
   * Sync with overrides and set udeb's Priority to optional instead of extra.
 
@@ -3991,13 +4528,13 @@ glib2.0 (2.10.3-1) unstable; urgency=low
 
   * New upstream version:
     Bugs fixed:
-    - g_completion_complete_utf8 crashes when NULL is passed to it 
-    - update-desktop-database doesn't handle duplicate entries  
+    - g_completion_complete_utf8 crashes when NULL is passed to it
+    - update-desktop-database doesn't handle duplicate entries
       (Closes: #298668)
     - Dereferencing NULL value in g_key_file_get_group_comment
     - GKeyFile set_string_list invalid memory reads
     - The GObject tutorial say g_object_(un)ref is _not_  thread-safe
-    - Fix a memory leak in GOption   
+    - Fix a memory leak in GOption
 
  -- Sebastien Bacher <seb128@debian.org>  Sat, 27 May 2006 12:54:17 +0200
 
@@ -4045,7 +4582,7 @@ glib2.0 (2.10.2-1) unstable; urgency=low
     - use "-g" for CFLAGS, makes -dbg package useful again
     change by Fabio M. Di Nitto <fabbione@ubuntu.com> on the Ubuntu package:
     * Make sure to pass CFLAGS to configure.
-    * Generalize DEB_BUILD_ARCH.   
+    * Generalize DEB_BUILD_ARCH.
 
  -- Sebastien Bacher <seb128@debian.org>  Fri,  7 Apr 2006 23:23:14 +0200
 
@@ -4074,7 +4611,7 @@ glib2.0 (2.10.1-1) experimental; urgency=low
     in line with control.in .
 
   Josselin Mouette <joss@debian.org>:
-  * Conflict with pango < 1.10 to avoid breakage caused by the unicode 
+  * Conflict with pango < 1.10 to avoid breakage caused by the unicode
     changes.
 
  -- J.H.M. Dassen (Ray) <jdassen@debian.org>  Sat, 11 Mar 2006 13:53:16 +0100
@@ -4127,7 +4664,7 @@ glib2.0 (2.8.4-1) unstable; urgency=low
 
 glib2.0 (2.8.3-1) unstable; urgency=medium
 
-  * New upstream release (fix an error that crept in with a change to 
+  * New upstream release (fix an error that crept in with a change to
     glib-mkenums in 2.8.2, documentation improvements, translation updates).
 
  -- J.H.M. Dassen (Ray) <jdassen@debian.org>  Mon,  3 Oct 2005 20:52:26 +0200
@@ -4141,7 +4678,7 @@ glib2.0 (2.8.2-1) unstable; urgency=medium
 
 glib2.0 (2.8.1-1) unstable; urgency=medium
 
-  * New (for Debian) upstream version (bug fixes, documentation improvements, 
+  * New (for Debian) upstream version (bug fixes, documentation improvements,
     translation updates).
   * [debian/control.in] Bumped Standards-Version.
   * [debian/copyright] Updated FSF's address.
@@ -4335,7 +4872,7 @@ glib2.0 (2.4.6-1) unstable; urgency=medium
 glib2.0 (2.4.5-2) unstable; urgency=low
 
   * debian/patches/000_glib-link.patch:
-    - patch from Jurij Smakov <jurij@wooyd.org> to link with all the libs 
+    - patch from Jurij Smakov <jurij@wooyd.org> to link with all the libs
       (Closes: #263130).
 
  -- Sebastien Bacher <seb128@debian.org>  Tue,  3 Aug 2004 18:03:53 +0200
@@ -4364,9 +4901,9 @@ glib2.0 (2.4.1-2) unstable; urgency=low
   * Upload in unstable.
   * GNOME Team Upload.
   * J.H.M. Dassen (Ray) <jdassen@debian.org>:
-    + [debian/rules] Make the linker work a bit harder so dynamic loading can 
+    + [debian/rules] Make the linker work a bit harder so dynamic loading can
       be done faster; safety measure: ensure the build aborts when the library
-      still has references to undefined symbols. 
+      still has references to undefined symbols.
 
  -- Sebastien Bacher <seb128@debian.org>  Sat, 22 May 2004 14:18:23 +0200
 
@@ -4376,7 +4913,7 @@ glib2.0 (2.4.1-1) experimental; urgency=low
   * GNOME Team Upload.
   * debian/rules:
     - updated shlib version to 2.4.1.
-  
+
  -- Sebastien Bacher <seb128@debian.org>  Sun,  2 May 2004 12:47:25 +0200
 
 glib2.0 (2.4.0-2) experimental; urgency=low

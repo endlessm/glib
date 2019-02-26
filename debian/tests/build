@@ -2,26 +2,126 @@
 # autopkgtest check: Build and run a program against glib, to verify that the
 # headers and pkg-config file are installed correctly
 # (C) 2012 Canonical Ltd.
-# Author: Martin Pitt <martin.pitt@ubuntu.com>
+# (C) 2018 Simon McVittie
+# Authors: Martin Pitt <martin.pitt@ubuntu.com>, Simon McVittie
 
-set -e
+set -eux
+
+mode=dynamic
+
+getopt_temp="$(getopt -o '' --long 'static' -n debian/tests/build -- "$@")"
+eval set -- "$getopt_temp"
+
+while true; do
+    case "$1" in
+        (--static)
+            mode=static
+            shift
+            continue
+            ;;
+
+        (--)
+            shift
+            break
+            ;;
+
+        (*)
+            echo "getopt: Internal error" >&2
+            exit 2
+    esac
+done
 
 WORKDIR=$(mktemp -d)
 trap "rm -rf $WORKDIR" 0 INT QUIT ABRT PIPE TERM
 cd $WORKDIR
-cat <<EOF > glibtest.c
+cat <<EOF > glib.c
 #include <glib.h>
 
-int main()
+int main(void)
 {
     g_assert_cmpint (g_strcmp0 (NULL, "hello"), ==, -1);
-    g_assert_cmpstr (g_find_program_in_path ("bash"), ==, "/bin/bash");
+    g_assert_cmpstr (g_getenv ("foo"), ==, "bar");
+    return 0;
+}
+EOF
+cat <<EOF > gobject.c
+#include <glib-object.h>
+
+int main(void)
+{
+    g_assert_cmpuint (G_TYPE_OBJECT, !=, G_TYPE_INVALID);
+    return 0;
+}
+EOF
+cat <<EOF > gio.c
+#include <gio/gio.h>
+
+int main(void)
+{
+    g_assert_cmpuint (G_TYPE_FILE, !=, G_TYPE_INVALID);
+    return 0;
+}
+EOF
+cat <<EOF > gio-unix.c
+#include <gio/gunixfdlist.h>
+
+int main(void)
+{
+    g_assert_cmpuint (G_TYPE_UNIX_FD_LIST, !=, G_TYPE_INVALID);
+    return 0;
+}
+EOF
+cat <<EOF > gmodule.c
+#include <gmodule.h>
+
+int main(void)
+{
+    GModule *module;
+
+    g_assert_true (g_module_supported ());
+    module = g_module_open (NULL, 0);
+    g_assert_nonnull (module);
+    g_assert_true (g_module_close (module));
+    return 0;
+}
+EOF
+cat <<EOF > gthread.c
+#include <glib.h>
+
+static gpointer
+other_cb (gpointer nil)
+{
+  return "hello";
+}
+
+int main(void)
+{
+    GThread *other;
+    gpointer ret;
+
+    other = g_thread_new ("other", other_cb, NULL);
+    g_assert_nonnull (other);
+    ret = g_thread_join (other);
+    g_assert_cmpstr (ret, ==, "hello");
     return 0;
 }
 EOF
 
-gcc -o glibtest glibtest.c `pkg-config --cflags --libs glib-2.0`
-echo "build: OK"
-[ -x glibtest ]
-./glibtest
-echo "run: OK"
+for lib in glib gobject gio gio-unix gmodule gthread; do
+    cflags=
+    pcflags=
+    packages="${lib}-2.0"
+
+    case "$mode" in
+        (static)
+            cflags=-static
+            pcflags=--static
+            ;;
+    esac
+
+    gcc $cflags -o ${lib}-$mode ${lib}.c `pkg-config $pcflags --cflags --libs ${packages}`
+    echo "build ($lib, $mode): OK"
+    [ -x ${lib}-$mode ]
+    foo=bar ./${lib}-$mode
+    echo "run ($lib, $mode): OK"
+done

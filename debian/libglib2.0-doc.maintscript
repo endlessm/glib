@@ -1,0 +1,6 @@
+dir_to_symlink /usr/share/doc/libglib2.0-doc/gio ../../gtk-doc/html/gio 2.58.0-4~
+dir_to_symlink /usr/share/doc/libglib2.0-doc/glib ../../gtk-doc/html/glib 2.58.0-4~
+dir_to_symlink /usr/share/doc/libglib2.0-doc/gobject ../../gtk-doc/html/gobject 2.58.0-4~
+symlink_to_dir /usr/share/gtk-doc/html/gio ../../doc/libglib2.0-doc/gio 2.58.0-4~
+symlink_to_dir /usr/share/gtk-doc/html/glib ../../doc/libglib2.0-doc/glib 2.58.0-4~
+symlink_to_dir /usr/share/gtk-doc/html/gobject ../../doc/libglib2.0-doc/gobject 2.58.0-4~
