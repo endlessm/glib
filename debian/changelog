@@ -1,15 +1,37 @@
-glib2.0 (2.59.3-1endless0) experimental; urgency=medium
+glib2.0 (2.60.0-1) experimental; urgency=medium
 
-  * Rebase on latest Debian experimental packaging of 2.59.3 (T25384)
-    + Reapplied patches from debian/patches/ directory.
-    + Dropped a load of patches which have since been applied upstream.
-    + Dropped “tests: disable some more slow tests on ARM”, as those tests
-      have changed upstream, our ARM builder has got faster, and Debian has
-      been doing some work on identifying slow tests.
-    + Dropped “gutils: add API to get user special directory for desktop ID”;
-      see T25445.
+  * New upstream release
+    + Further fixes to the Happy Eyeballs (RFC 8305) implementation
+    + Add support for the XDG trash portal
+  * Call dh_python3 for all packages and add Depends to libglib2.0-tests.
+    The tests now ship a "static-link.py" test. While it early-exits
+    currently, we still need the right dependencies to be able to do that.
+    Call dh_python3 for libglib2.0-test's private directory, and while we're
+    here make sure that it is called for all packages too.
+  * flaky autopkgtest: `closures` has been renamed to `closure-refcount`
+  * Refresh and drop patches.
+    - d/p/flaky-socket-service-test/*: Drop, applied upstream.
+    - d/p/debian/closures-test-Skip-on-arm-unless-flaky-tests-are-allowed.patch:
+      Refresh.
 
- -- Philip Withnall <withnall@endlessm.com>>  Tue, 26 Feb 2019 16:46:00 +0000
+ -- Iain Lane <laney@debian.org>  Tue, 05 Mar 2019 15:32:41 +0000
+
+glib2.0 (2.59.3-2) experimental; urgency=medium
+
+  [ Philip Withnall ]
+  * debian: Drop GVariant alignment patches which are no longer needed.
+    The upstream 2.59.0 release contained commit
+    0f2a6c61c9c5e34d57293fb6987b21f3d1feb1cb, which automatically aligns
+    GVariants at construction time. The realignment in the tests was a
+    workaround for this.
+    See upstream issue https://gitlab.gnome.org/GNOME/glib/issues/1342.
+
+  [ Iain Lane ]
+  * Cherry-pick fixes for upstream bug #1679 to fix a flaky test.
+    This is apparently more flaky on the autopkgtest machines than elsewhere
+    - it's quite consistently failing there.
+
+ -- Iain Lane <laney@debian.org>  Wed, 27 Feb 2019 10:21:40 +0000
 
 glib2.0 (2.59.3-1) experimental; urgency=medium
 

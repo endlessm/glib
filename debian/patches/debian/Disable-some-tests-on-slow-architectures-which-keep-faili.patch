@@ -16,10 +16,10 @@ Forwarded: no
  3 files changed, 41 insertions(+)
 
 diff --git a/gio/tests/socket.c b/gio/tests/socket.c
-index 8410a3e..5eba57a 100644
+index eeebddd..77cd377 100644
 --- a/gio/tests/socket.c
 +++ b/gio/tests/socket.c
-@@ -1111,6 +1111,14 @@ test_timed_wait (void)
+@@ -1130,6 +1130,14 @@ test_timed_wait (void)
    gint64 start_time;
    gint poll_duration;
  

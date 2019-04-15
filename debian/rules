@@ -231,7 +231,8 @@ override_dh_python3:
 	# dh_python3 can't process both a private directory and /usr/bin
 	# in the same invocation
 	dh_python3 -plibglib2.0-dev-bin /usr/share/glib-2.0/codegen
-	dh_python3 -plibglib2.0-dev-bin
+	dh_python3 -plibglib2.0-tests --no-ext-rename /usr/lib/glib2.0/installed-tests/glib
+	dh_python3
 
 override_dh_install:
 	# Unwanted bits from the .deb build

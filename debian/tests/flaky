@@ -24,7 +24,7 @@ echo "Environment:"
 env | LC_ALL=C sort -u
 
 exec dbus-run-session -- xvfb-run -a gnome-desktop-testing-runner \
-	glib/closures.test \
+	glib/closure-refcount.test \
 	glib/gdbus-threading.test \
 	glib/mainloop.test \
 	glib/socket.test \

@@ -13,16 +13,16 @@ Bug-Debian: https://bugs.debian.org/880883
 Bug-Debian: https://bugs.debian.org/917983
 Forwarded: not-needed
 ---
- tests/refcount/closures.c | 8 ++++++++
+ gobject/tests/closure-refcount.c | 8 ++++++++
  1 file changed, 8 insertions(+)
 
-diff --git a/tests/refcount/closures.c b/tests/refcount/closures.c
-index a4c2831..4e9bf36 100644
---- a/tests/refcount/closures.c
-+++ b/tests/refcount/closures.c
-@@ -237,6 +237,14 @@ main (int    argc,
+diff --git a/gobject/tests/closure-refcount.c b/gobject/tests/closure-refcount.c
+index 5a92005..73185f0 100644
+--- a/gobject/tests/closure-refcount.c
++++ b/gobject/tests/closure-refcount.c
+@@ -260,6 +260,14 @@ test_closure_refcount (void)
    GTest *object;
-   guint i;
+   guint i, n_iterations;
  
 +#if defined(__aarch64__) || defined(__arm__)
 +  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") != NULL)
@@ -32,6 +32,6 @@ index a4c2831..4e9bf36 100644
 +    }
 +#endif
 +
-   g_print ("START: %s\n", argv[0]);
-   g_log_set_always_fatal (G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL | g_log_set_always_fatal (G_LOG_FATAL_MASK));
+   object = g_object_new (G_TYPE_TEST, NULL);
+   closure = g_cclosure_new (G_CALLBACK (test_signal_handler), &test_data, destroy_data);
  

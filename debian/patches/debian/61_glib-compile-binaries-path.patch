@@ -11,7 +11,7 @@ Forwarded: not-needed, specific to Debian packaging
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/gio/meson.build b/gio/meson.build
-index d7f4f3f..990b1b5 100644
+index 88575ec..9eeb318 100644
 --- a/gio/meson.build
 +++ b/gio/meson.build
 @@ -828,7 +828,7 @@ pkg.generate(libgio,
