@@ -1,3 +1,15 @@
+glib2.0 (2.60.1-1endless0) experimental; urgency=medium
+
+  * Rebase on latest Debian experimental packaging of 2.60.0 and use upstream
+    GLib 2.60.1 release (T25606)
+    + Reapplied patches from debian/patches/ directory; “closures test: Skip on
+      arm* unless flaky tests are allowed” had changed.
+    + Dropped a load of GVDB patches which have since been applied upstream.
+    + Dropped “tests: Temporarily disable gsocketclient-slow test as it’s
+      flaky”, as it had been reverted due to being fixed upstream as !688.
+
+ -- Philip Withnall <withnall@endlessm.com>>  Mon, 15 Apr 2019 13:03:00 +0100
+
 glib2.0 (2.60.0-1) experimental; urgency=medium
 
   * New upstream release
