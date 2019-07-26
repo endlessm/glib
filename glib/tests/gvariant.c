@@ -2405,6 +2405,14 @@ test_fuzzes (gpointer data)
   gdouble fuzziness;
   int i;
 
+#ifdef __mips__
+  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") == NULL)
+    {
+      g_test_skip ("Extremely slow on some mips CPUs: #932678");
+      return;
+    }
+#endif
+
   fuzziness = GPOINTER_TO_INT (data) / 100.;
 
   for (i = 0; i < 200; i++)
