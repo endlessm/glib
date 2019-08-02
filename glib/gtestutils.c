@@ -1597,6 +1597,9 @@ void
     test_built_files_dir = test_argv0_dirname;
 }
 
+#if defined(__GNUC__) && __GNUC__ >= 9 && !defined(__clang__)
+__attribute__((optimize("no-tree-pre")))
+#endif
 static void
 test_run_seed (const gchar *rseed)
 {
