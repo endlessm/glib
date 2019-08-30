@@ -6,9 +6,9 @@ Source: glib2.0
 Section: libs
 Priority: optional
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
-Uploaders: Iain Lane <laney@debian.org>, Jeremy Bicha <jbicha@debian.org>
+Uploaders: Iain Lane <laney@debian.org>
 Build-Depends: dbus <!nocheck>,
-               debhelper (>= 11),
+               debhelper-compat (= 12),
                desktop-file-utils <!nocheck>,
                dh-exec,
                dh-python,
@@ -38,7 +38,7 @@ Build-Depends: dbus <!nocheck>,
                xterm <!nocheck>,
                zlib1g-dev
 Rules-Requires-Root: no
-Standards-Version: 4.3.0
+Standards-Version: 4.4.0
 Homepage: http://www.gtk.org/
 Vcs-Browser: https://salsa.debian.org/gnome-team/glib/tree/debian/experimental
 Vcs-Git: https://salsa.debian.org/gnome-team/glib.git -b debian/experimental
@@ -61,7 +61,8 @@ Description: GLib library of C routines
 
 Package: libglib2.0-tests
 Architecture: any
-Depends: shared-mime-info,
+Depends: libglib2.0-dev-bin,
+         shared-mime-info,
          ${misc:Depends},
          ${python3:Depends},
          ${shlibs:Depends}
@@ -145,9 +146,9 @@ Depends: python3-distutils,
          ${shlibs:Depends}
 Suggests: libgdk-pixbuf2.0-bin (>= 2.36.12-2~) | libgdk-pixbuf2.0-dev,
           libxml2-utils
-Breaks: libglib2.0-bin (<< 2.59.2),
+Breaks: libglib2.0-bin (<< 2.54.2-5~),
         libglib2.0-dev (<< 2.53)
-Replaces: libglib2.0-bin (<< 2.59.2),
+Replaces: libglib2.0-bin (<< 2.54.2-5~),
           libglib2.0-dev (<< 2.53)
 Multi-Arch: foreign
 Description: Development utilities for the GLib library

@@ -1,0 +1,25 @@
+From: Simon McVittie <smcv@collabora.com>
+Date: Wed, 5 Jun 2019 10:50:07 +0100
+Subject: g_object_get_property: Document accepting G_VALUE_INIT as new API
+
+Code intended to be portable to older versions of GLib cannot rely
+on this being considered valid.
+
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+Origin: upstream, 2.61.3, commit:41d31cd4b7f287f275eb5f10aabb4e67a8c08bef
+---
+ gobject/gobject.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/gobject/gobject.c b/gobject/gobject.c
+index ea51579..895ba88 100644
+--- a/gobject/gobject.c
++++ b/gobject/gobject.c
+@@ -2573,6 +2573,7 @@ g_object_set_property (GObject	    *object,
+  *
+  *  - an empty #GValue initialized by %G_VALUE_INIT, which will be
+  *    automatically initialized with the expected type of the property
++ *    (since GLib 2.60)
+  *  - a #GValue initialized with the expected type of the property
+  *  - a #GValue initialized with a type to which the expected type
+  *    of the property can be transformed

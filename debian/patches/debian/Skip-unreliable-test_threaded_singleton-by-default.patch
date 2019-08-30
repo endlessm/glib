@@ -23,10 +23,10 @@ Forwarded: no
  1 file changed, 6 insertions(+)
 
 diff --git a/gio/tests/gdbus-threading.c b/gio/tests/gdbus-threading.c
-index 3e4dc92..165dbb7 100644
+index ffca6f3..b15dc04 100644
 --- a/gio/tests/gdbus-threading.c
 +++ b/gio/tests/gdbus-threading.c
-@@ -499,6 +499,12 @@ test_threaded_singleton (void)
+@@ -497,6 +497,12 @@ test_threaded_singleton (void)
    guint unref_wins = 0;
    guint get_wins = 0;
  

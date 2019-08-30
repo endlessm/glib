@@ -14,10 +14,10 @@ Forwarded: no
  1 file changed, 6 insertions(+)
 
 diff --git a/glib/tests/timer.c b/glib/tests/timer.c
-index 4cd5fba..3c0642b 100644
+index b7a90c2..98e82da 100644
 --- a/glib/tests/timer.c
 +++ b/glib/tests/timer.c
-@@ -30,6 +30,12 @@ test_timer_basic (void)
+@@ -33,6 +33,12 @@ test_timer_basic (void)
    volatile gdouble elapsed;
    gulong micros;
  

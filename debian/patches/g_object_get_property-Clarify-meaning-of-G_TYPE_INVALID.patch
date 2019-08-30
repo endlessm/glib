@@ -1,0 +1,28 @@
+From: Simon McVittie <smcv@collabora.com>
+Date: Wed, 5 Jun 2019 10:49:22 +0100
+Subject: g_object_get_property: Clarify meaning of G_TYPE_INVALID
+
+"Uninitialized value" is partially correct, since it has not been
+initialized with a type, but it's more precise to say
+"zero-initialized value". It is still a programming error to pass a
+pointer to uninitialized memory with arbitrary contents as the value.
+
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+Origin: upstream, 2.61.3, commit:bf8b669061295d35b4c4beb24dc2b9beff737ed4
+---
+ gobject/gobject.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gobject/gobject.c b/gobject/gobject.c
+index 3a1fbdd..ea51579 100644
+--- a/gobject/gobject.c
++++ b/gobject/gobject.c
+@@ -2607,7 +2607,7 @@ g_object_get_property (GObject	   *object,
+       
+       if (G_VALUE_TYPE (value) == G_TYPE_INVALID)
+         {
+-          /* uninitialized value */
++          /* zero-initialized value */
+           g_value_init (value, pspec->value_type);
+           prop_value = value;
+         }

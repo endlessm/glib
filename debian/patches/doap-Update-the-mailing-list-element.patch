@@ -1,0 +1,22 @@
+From: Emmanuele Bassi <ebassi@gnome.org>
+Date: Tue, 23 Jul 2019 11:14:08 +0100
+Subject: doap: Update the <mailing-list> element
+
+Origin: upstream, 2.61.3, commit:6a207c329ff1b8e1053b75e3cbfd1e25ae307c55
+---
+ glib.doap | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/glib.doap b/glib.doap
+index 8743257..a300f51 100644
+--- a/glib.doap
++++ b/glib.doap
+@@ -16,7 +16,7 @@
+   <license rdf:resource="http://usefulinc.com/doap/licenses/lgpl" />
+   <bug-database rdf:resource="https://gitlab.gnome.org/GNOME/glib/issues/new"/>
+   <download-page rdf:resource="http://download.gnome.org/sources/glib/" />
+-  <mailing-list rdf:resource="mailto:gtk-devel-list@gnome.org" />
++  <mailing-list rdf:resource="https://discourse.gnome.org/tags/glib/" />
+   <category rdf:resource="http://api.gnome.org/doap-extensions#core" />
+ 
+   <programming-language>C</programming-language>

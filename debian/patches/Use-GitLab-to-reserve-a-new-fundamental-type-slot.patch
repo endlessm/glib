@@ -1,0 +1,26 @@
+From: Emmanuele Bassi <ebassi@gnome.org>
+Date: Tue, 23 Jul 2019 11:14:49 +0100
+Subject: Use GitLab to reserve a new fundamental type slot
+
+Even though you *really* shouldn't do that at all.
+
+Origin: upstream, 2.61.3, commit:4d73e1f01446ffb839d0b6947ef25afe6cccb8f0
+---
+ gobject/gtype.h | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/gobject/gtype.h b/gobject/gtype.h
+index a4c777c..d9e5d11 100644
+--- a/gobject/gtype.h
++++ b/gobject/gtype.h
+@@ -198,7 +198,9 @@ G_BEGIN_DECLS
+ 
+ /* Reserved fundamental type numbers to create new fundamental
+  * type IDs with G_TYPE_MAKE_FUNDAMENTAL().
+- * Send email to gtk-devel-list@gnome.org for reservations.
++ *
++ * Open an issue on https://gitlab.gnome.org/GNOME/glib/issues/new for
++ * reservations.
+  */
+ /**
+  * G_TYPE_FUNDAMENTAL_SHIFT:

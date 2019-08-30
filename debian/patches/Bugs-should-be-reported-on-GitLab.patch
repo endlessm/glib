@@ -1,0 +1,24 @@
+From: Emmanuele Bassi <ebassi@gnome.org>
+Date: Tue, 23 Jul 2019 11:14:26 +0100
+Subject: Bugs should be reported on GitLab
+
+Not on mailing lists that do not exist any more.
+
+Origin: upstream, 2.61.3, commit:bcf208ba4c404c5eb698e10571036da5e049e9ad
+---
+ gobject/gsignal.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gobject/gsignal.c b/gobject/gsignal.c
+index 26fba47..951ee07 100644
+--- a/gobject/gsignal.c
++++ b/gobject/gsignal.c
+@@ -126,7 +126,7 @@
+  */
+ 
+ 
+-#define REPORT_BUG      "please report occurrence circumstances to gtk-devel-list@gnome.org"
++#define REPORT_BUG      "please report occurrence circumstances to https://gitlab.gnome.org/GNOME/glib/issues/new"
+ 
+ /* --- typedefs --- */
+ typedef struct _SignalNode   SignalNode;

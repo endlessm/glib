@@ -13,10 +13,10 @@ Forwarded: not-needed, Debian-specific
  2 files changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/gio/gdesktopappinfo.c b/gio/gdesktopappinfo.c
-index 7d7425e..36f3cfb 100644
+index a484c63..5e582f5 100644
 --- a/gio/gdesktopappinfo.c
 +++ b/gio/gdesktopappinfo.c
-@@ -2741,9 +2741,9 @@ g_desktop_app_info_launch_uris_with_spawn (GDesktopAppInfo            *info,
+@@ -2758,9 +2758,9 @@ g_desktop_app_info_launch_uris_with_spawn (GDesktopAppInfo            *info,
            /* Allow test suite to specify path to gio-launch-desktop */
            tmp = g_getenv ("GIO_LAUNCH_DESKTOP");
  
@@ -29,7 +29,7 @@ index 7d7425e..36f3cfb 100644
          }
  
 diff --git a/gio/meson.build b/gio/meson.build
-index 9eeb318..04112de 100644
+index 0a80b2c..bf8c0ae 100644
 --- a/gio/meson.build
 +++ b/gio/meson.build
 @@ -1,6 +1,7 @@

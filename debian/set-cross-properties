@@ -1,0 +1,22 @@
+#!/usr/bin/python3
+
+import sys
+
+
+def write_properties(properties):
+    for prop in properties:
+        k, v = prop.split('=', 1)
+        print('{} = {}'.format(k, v))
+
+
+if __name__ == '__main__':
+    for line in sys.stdin:
+        sys.stdout.write(line)
+
+        if line.strip() == '[properties]':
+            write_properties(sys.argv[1:])
+            done = True
+
+    if not done:
+        print('[properties]')
+        write_properties(sys.argv[1:])

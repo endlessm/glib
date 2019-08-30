@@ -1,0 +1,29 @@
+From: Philip Withnall <withnall@endlessm.com>
+Date: Mon, 29 Jul 2019 10:49:45 +0100
+Subject: gapplication: Fix a leaking GRemoteActionGroup member
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Fix prompted by Ting-Wei Lan’s similar fix for the inactivity timeout
+(!1009).
+
+Signed-off-by: Philip Withnall <withnall@endlessm.com>
+Origin: upstream, 2.61.3, commit:0f131857babb41eb443a8f7ae843e5990978a719
+---
+ gio/gapplication.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/gio/gapplication.c b/gio/gapplication.c
+index f702b6b..02ab2b0 100644
+--- a/gio/gapplication.c
++++ b/gio/gapplication.c
+@@ -1398,6 +1398,8 @@ g_application_finalize (GObject *object)
+   if (application->priv->actions)
+     g_object_unref (application->priv->actions);
+ 
++  g_clear_object (&application->priv->remote_actions);
++
+   if (application->priv->notifications)
+     g_object_unref (application->priv->notifications);
+ 

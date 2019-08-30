@@ -13,10 +13,10 @@ Forwarded: not-needed
  1 file changed, 4 insertions(+)
 
 diff --git a/gio/glib-compile-schemas.c b/gio/glib-compile-schemas.c
-index 5e1bebb..7bd8cfb 100644
+index f22265b..78fc4f1 100644
 --- a/gio/glib-compile-schemas.c
 +++ b/gio/glib-compile-schemas.c
-@@ -1233,6 +1233,9 @@ parse_state_start_schema (ParseState  *state,
+@@ -1232,6 +1232,9 @@ parse_state_start_schema (ParseState  *state,
        return;
      }
  
@@ -26,7 +26,7 @@ index 5e1bebb..7bd8cfb 100644
    if (path && (g_str_has_prefix (path, "/apps/") ||
                 g_str_has_prefix (path, "/desktop/") ||
                 g_str_has_prefix (path, "/system/")))
-@@ -1245,6 +1248,7 @@ parse_state_start_schema (ParseState  *state,
+@@ -1244,6 +1247,7 @@ parse_state_start_schema (ParseState  *state,
        g_printerr ("%s\n", message);
        g_free (message);
      }

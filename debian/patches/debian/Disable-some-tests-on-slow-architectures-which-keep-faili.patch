@@ -35,7 +35,7 @@ index eeebddd..77cd377 100644
    if (error != NULL)
      {
 diff --git a/glib/tests/mainloop.c b/glib/tests/mainloop.c
-index cf114fd..9beefd3 100644
+index a777815..913fd47 100644
 --- a/glib/tests/mainloop.c
 +++ b/glib/tests/mainloop.c
 @@ -168,6 +168,14 @@ test_timeouts (void)

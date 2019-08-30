@@ -1,14 +1,200 @@
-glib2.0 (2.60.1-1endless0) experimental; urgency=medium
+glib2.0 (2.61.2-2) experimental; urgency=medium
 
-  * Rebase on latest Debian experimental packaging of 2.60.0 and use upstream
-    GLib 2.60.1 release (T25606)
-    + Reapplied patches from debian/patches/ directory; “closures test: Skip on
-      arm* unless flaky tests are allowed” had changed.
-    + Dropped a load of GVDB patches which have since been applied upstream.
-    + Dropped “tests: Temporarily disable gsocketclient-slow test as it’s
-      flaky”, as it had been reverted due to being fixed upstream as !688.
+  * Team upload
+  * d/p/cond-test-Don-t-make-assumptions-about-struct-sigaction-m.patch:
+    Add proposed patch to fix FTBFS due to a test failure on mips*
 
- -- Philip Withnall <withnall@endlessm.com>>  Mon, 15 Apr 2019 13:03:00 +0100
+ -- Simon McVittie <smcv@debian.org>  Tue, 13 Aug 2019 10:29:29 +0100
+
+glib2.0 (2.61.2-1) experimental; urgency=medium
+
+  * Team upload
+  * New upstream release
+  * d/patches: Update to upstream git master, commit 2.61.2-23-g870b30bd7
+    - Fix regression in g_mkdir_with_permissions()
+    - Fix a memory leak
+    - Update translations: es, id, ro
+  * Merge changes from unstable
+  * Refresh patch series
+  * d/p/debian/06_thread_test_ignore_prctl_fail.patch:
+    Use g_test_skip() when skipping test
+  * d/p/GIO-tests-Don-t-do-clever-tricks-with-objcopy.patch:
+    Drop workaround for #932287, and build-depend on fixed binutils on
+    mips64el instead
+  * d/rules: Edit debcrossgen output instead of using a modified version.
+    This fixes use of CFLAGS, etc. during cross-compilation.
+    (Closes: #933560)
+  * d/libglib2.0-0.symbols: Update
+  * Remove obsolete permissions fixing.
+    Issue 1539 was fixed upstream.
+  * libglib2.0-tests: Depend on libglib2.0-dev-bin.
+    This is required for the new mkenums and genmarshal tests.
+  * d/p/debian/Disable-an-optimization-when-building-with-gcc-9.patch:
+    Disable an optimization when building with gcc-9, instead of forcing
+    gcc-8. This avoids depending on an old gcc, and should be easier to
+    deal with for cross-compilation. (Workaround for #931921)
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 12 Aug 2019 09:32:26 +0100
+
+glib2.0 (2.60.6-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream release, functionally equivalent to 2.60.5 with the
+    patches we were already applying
+    - d/p/portal-Add-a-getter-for-dconf-access.patch,
+      d/p/settings-Tweak-priorities-for-keyfile-backend.patch,
+      d/p/key-file-Handle-filename-being-NULL.patch:
+      Drop, applied upstream
+  * d/p/tests-Fix-data-race-in-gmenumodel-test.patch,
+    d/p/tests-Fix-data-race-in-task-test.patch:
+    Add patches from upstream git master to fix data races in tests.
+    In particular, the one for gmenumodel might solve an unreproducible
+    test failure on i386 (see #932678).
+  * d/p/debian/gmenumodel-test-Mark-as-flaky.patch,
+    d/p/debian/gvariant-test-Don-t-run-at-build-time-on-mips.patch:
+    Skip more tests at build-time and during the non-flaky autopkgtest.
+    The unreproducible gmenumodel test failure on i386 might in fact be
+    fixed by d/p/tests-Fix-data-race-in-gmenumodel-test.patch, but it's
+    hard to be sure about that. The gvariant fuzz test is catastrophically
+    slow on certain mips CPUs and so is impractical to run there.
+    (Closes: #932678)
+  * Standards-Version: 4.4.0 (no changes required)
+  * Use debhelper compat level 12
+    - Stop explicitly passing -V to dh_makeshlibs, it is now the default
+    - Disable dh_dwz for libglib2.0-udeb.
+      This avoids an apparent debhelper bug in which dh_dwz generates
+      multifiles for udebs, but dh_strip does not remove them from the
+      udeb's staging directory. (Workaround for #933212)
+  * Stop overriding libexecdir.
+    Since FHS 3.0 (Policy 4.1.5), /usr/libexec is considered valid,
+    and since debhelper compat level 12 it is the default.
+    In this particular package this only affects the installed-tests.
+  * Remove an obsolete Lintian override
+
+ -- Simon McVittie <smcv@debian.org>  Sat, 27 Jul 2019 16:57:55 +0100
+
+glib2.0 (2.60.5-1) unstable; urgency=medium
+
+  * Team upload
+  * Prepare GLib 2.60.x stable branch for unstable
+  * New upstream release
+  * d/p/portal-Add-a-getter-for-dconf-access.patch,
+    d/p/settings-Tweak-priorities-for-keyfile-backend.patch,
+    d/p/key-file-Handle-filename-being-NULL.patch:
+    Add post-release fixes from upstream glib-2-60 branch
+  * d/p/GIO-tests-Don-t-do-clever-tricks-with-objcopy.patch:
+    Don't do strange things with objcopy while testing GResource,
+    while we work out what is going on in mips64el builds.
+    Mitigates: #932287
+
+ -- Simon McVittie <smcv@debian.org>  Wed, 17 Jul 2019 21:36:30 +0100
+
+glib2.0 (2.61.1-2) experimental; urgency=medium
+
+  * control, rules: Build with gcc-8. See #931921 - when we're built with
+    gcc-9, some applications that use GLib might start hanging.
+
+ -- Iain Lane <laney@debian.org>  Fri, 12 Jul 2019 11:37:01 +0100
+
+glib2.0 (2.61.1-1) experimental; urgency=medium
+
+  * New upstream release
+    + `g_unichar_isxdigit()` and `g_unichar_xdigit_value()` now handle
+       full-width characters (U+FF21–U+FF26 and U+FF41–U+FF46)
+    + Deprecate `gtester` utility and its test reporting format and enable TAP
+      output by default instead — the `--tap` option to tests is now a no-op
+    + Add `g_test_summary()` to allow test authors to programmatically summarise
+      what each unit test in a test suite does
+    * Upgrade to Unicode Character Database v12.1
+    + More IPv6 Happy Eyeballs fixes to `GNetworkAddress` and `GSocketClient`
+    + Fix valgrind and gdb support for the new `GHashTable` changes
+    + Fix GTask wait times growing faster than the number of task threads
+    + Add `g_autoqueue()` helper macros, similar to `g_autolist()`
+    + Add pre-allocated link helpers for `GList` and `GQueue`:
+      - `g_list_insert_before_link()`
+      - `g_queue_insert_before_link()`
+      - `g_queue_insert_after_link()`
+    + Improve network availability detection with NetworkManager to treat lower
+      levels of connectivity as having reduced availability
+    + Add `g_clear_signal_handler()` to allow disconnecting from a `GObject`
+      signal and clearing the signal handler ID to zero in a single call
+    + Add `g_autoptr()` support for `GRWLock`
+  * 81-skip-monitor-test-on-non-linux.patch: Drop. This test was removed
+    upstream.
+  * debian/libglib2.0-0.symbols: Update
+
+ -- Iain Lane <laney@debian.org>  Fri, 05 Jul 2019 17:45:06 +0100
+
+glib2.0 (2.60.4-1) experimental; urgency=medium
+
+  * New upstream release (LP: #1832457)
+  +  Fixes to improved network status detection with NetworkManager (#1788)
+  + Leak fixes to some `glib-genmarshal` generated code
+  + Further fixes to the Happy Eyeballs (RFC 8305) implementation
+  + File system permissions fix to clamp down permissions in a small time window
+    when copying files (CVE-2019-12450)
+  + Bugs fixed:
+   - Please revert #535 gmacros: Try to use the standard __func__ first in
+     G_STRFUNC
+  * gfile-Limit-access-to-files-when-copying.patch: Drop. It's in this version
+    upstream.
+  * d/p/*: Refresh through gbp pq
+
+ -- Iain Lane <laney@debian.org>  Wed, 12 Jun 2019 09:15:11 +0100
+
+glib2.0 (2.60.3-2) experimental; urgency=medium
+
+  * Team upload
+  * d/p/gfile-Limit-access-to-files-when-copying.patch:
+    Backport patch from upstream to ensure files don't temporarily have
+    less restrictive permissions during copying
+    (Closes: #929753, CVE-2019-12450)
+  * Drop d/p/debian/04_homedir_env.patch:
+    Remove legacy support for Debian-specific G_HOME environment variable.
+    GLib has respected the HOME environment variable in the conventional
+    way since wheezy. Only two packages (pygtk and ruby-graphviz) still
+    set G_HOME without also setting HOME.
+  * Drop d/p/debian/90_gio-modules-multiarch-compat.patch:
+    Remove legacy support for loading modules from /usr/lib/gio/modules.
+    All the known packages containing GIO modules (dconf, glib-networking
+    and gvfs) migrated to /usr/lib/${DEB_HOST_MULTIARCH}/gio/modules
+    before wheezy.
+  * Register documentation in doc-base via symlinks in /usr/share/doc.
+    The doc-base specification requires this, presumably for the benefit
+    of tools that export /usr/share/doc via HTTP (see #925200), and
+    Lintian 2.12 added a warning for not doing so.
+
+ -- Simon McVittie <smcv@debian.org>  Tue, 04 Jun 2019 11:03:28 +0100
+
+glib2.0 (2.60.3-1) experimental; urgency=medium
+
+  * New upstream releases 2.60.1 2.60.2 2.60.3, fixing many bugs:
+    + build: Fix a typo in the test whether _NL_ABALTMON_n is supported
+    + Critical in g_socket_client_async_connect_complete
+    + Fix crash when displaying notifications on macOS (!786)
+    + Fix documentation for `gdbus-tool wait` to use correct units
+    + Fix typo in German translation
+    + glib/date test fails
+    + glib/gconstructor.h: Include stdlib.h for MSVC builds
+    + GNetworkAddressAddressEnumerator unsafely modifies cache in
+      GNetworkAddress
+    + gnetworkaddress: Fix parallel enumerations interfering with eachother
+    + gnetworkmonitornm: Fix network available detection
+    + GResource generation test incompatible with stable LLVM on Linux
+    + gschema.dtd: Add target attribute to alias
+    + gsocketclient: Fix a leak in the connection code
+    + Improve network status detection with NetworkManager
+    + Leaks in gsocketclient.c connection code
+    + test_month_names: assertion failed
+    + tests: Update month name check for Greek locale
+    + Update gdb pretty-printer for GHashTable
+    + Various fixes to small key/value support in `GHashTable`
+    + New GHashTable implementation confuses valgrind
+    + more GHashTable fixes
+    + GDB pretty-printer for GHashTable no longer works
+    + ghash: Disable small-arrays under valgrind
+
+ -- Iain Lane <laney@debian.org>  Thu, 23 May 2019 16:59:32 +0100
 
 glib2.0 (2.60.0-1) experimental; urgency=medium
 
@@ -113,6 +299,44 @@ glib2.0 (2.59.0-1) experimental; urgency=medium
   * debian/libglib2.0-0.symbols: Update with new symbols for this release
 
  -- Iain Lane <laney@debian.org>  Thu, 17 Jan 2019 18:43:00 +0000
+
+glib2.0 (2.58.3-3) unstable; urgency=medium
+
+  * control, rules: Build with gcc-8. See #931921 - when we're built with
+    gcc-9, some applications that use GLib might start hanging.
+
+ -- Iain Lane <laney@debian.org>  Fri, 12 Jul 2019 11:38:21 +0100
+
+glib2.0 (2.58.3-2) unstable; urgency=medium
+
+  * Team upload
+  * d/p/gfile-Limit-access-to-files-when-copying.patch:
+    Backport patch from upstream to ensure files don't temporarily have
+    less restrictive permissions during copying
+    (Closes: #929753, CVE-2019-12450)
+  * d/watch: Only watch for 2.58.x releases now that 2.60.x is out
+  * Add cross-reference to #919777 in previous changelog entry
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 03 Jun 2019 22:37:45 +0100
+
+glib2.0 (2.58.3-1) unstable; urgency=medium
+
+  * Team upload
+
+  [ Iain Lane ]
+  * debian/gbp.conf: Use upstream/2.58.x
+
+  [ Simon McVittie ]
+  * New upstream release
+    - Fix crashes related to the GUnixMount API (Closes: #919777)
+    - Make G_DEFINE_INTERFACE compatible with g++ -Wint-in-bool-context
+    - Drop patches that were applied upstream
+  * d/p/gdbusmessage-Fix-check-on-upper-limit-of-message-size.patch:
+    Add patch from upstream glib-2-58 branch to limit the maximum size of
+    D-Bus messages according to the protocol specification
+    (the limit was 256M, and is now the correct 128M)
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 07 Feb 2019 08:28:56 +0000
 
 glib2.0 (2.58.2-4) unstable; urgency=medium
 

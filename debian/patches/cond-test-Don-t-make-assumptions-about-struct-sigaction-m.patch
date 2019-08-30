@@ -1,0 +1,32 @@
+From: Simon McVittie <smcv@collabora.com>
+Date: Tue, 13 Aug 2019 08:41:09 +0100
+Subject: cond test: Don't make assumptions about struct sigaction member
+ order
+
+On x86 (and apparently most other Linux architectures), the union
+with the signal handler is the first member, but on MIPS Linux,
+the first struct member is sa_flags (possibly done to be compatible
+with IRIX). Zero out the struct and fill in the field we want by name.
+
+Signed-off-by: Simon McVittie <smcv@collabora.com>
+Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/1036
+---
+ glib/tests/cond.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/glib/tests/cond.c b/glib/tests/cond.c
+index 1680643..a487149 100644
+--- a/glib/tests/cond.c
++++ b/glib/tests/cond.c
+@@ -316,8 +316,10 @@ test_wait_until_errno (void)
+   gboolean result;
+   GMutex lock;
+   GCond cond;
++  struct sigaction act = { };
+ 
+-  struct sigaction act = { { signal_handler, } }; /* important: no SA_RESTART (we want EINTR) */
++  /* important: no SA_RESTART (we want EINTR) */
++  act.sa_handler = signal_handler;
+ 
+   g_test_summary ("Check proper handling of errno in g_cond_wait_until with a contended mutex");
+   g_test_bug_base ("https://gitlab.gnome.org/GNOME/glib/");

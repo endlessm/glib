@@ -1,0 +1,23 @@
+From: Bastien Nocera <hadess@hadess.net>
+Date: Mon, 29 Jul 2019 17:24:49 +0200
+Subject: gnetworkmonitornm: Remove unneeded ";" in
+ G_DEFINE_INTERFACE_WITH_CODE
+
+Origin: upstream, 2.61.3, commit:ef1d5b5ee03161a5a1f563e2a985afd93614ca10
+---
+ gio/gnetworkmonitor.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gio/gnetworkmonitor.c b/gio/gnetworkmonitor.c
+index d65fc2bc..f9853fc 100644
+--- a/gio/gnetworkmonitor.c
++++ b/gio/gnetworkmonitor.c
+@@ -68,7 +68,7 @@
+  */
+ 
+ G_DEFINE_INTERFACE_WITH_CODE (GNetworkMonitor, g_network_monitor, G_TYPE_OBJECT,
+-                              g_type_interface_add_prerequisite (g_define_type_id, G_TYPE_INITABLE);)
++                              g_type_interface_add_prerequisite (g_define_type_id, G_TYPE_INITABLE))
+ 
+ 
+ enum {

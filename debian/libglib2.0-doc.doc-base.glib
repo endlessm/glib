@@ -8,5 +8,5 @@ Abstract: The GLib C library is used in GTK+ and GNOME
 Section: Programming/C
 
 Format: HTML
-Index: /usr/share/gtk-doc/html/glib/index.html
-Files: /usr/share/gtk-doc/html/glib/*.html
+Index: /usr/share/doc/libglib2.0-doc/glib/index.html
+Files: /usr/share/doc/libglib2.0-doc/glib/*.html

@@ -11,5 +11,5 @@ Abstract: Most modern programming languages come with their own native object
 Section: Programming/C
 
 Format: HTML
-Index: /usr/share/gtk-doc/html/gobject/index.html
-Files: /usr/share/gtk-doc/html/gobject/*.html
+Index: /usr/share/doc/libglib2.0-doc/gobject/index.html
+Files: /usr/share/doc/libglib2.0-doc/gobject/*.html
