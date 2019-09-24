@@ -1,3 +1,11 @@
+glib2.0 (2.62.0-1endless0) experimental; urgency=medium
+
+  * Rebase on latest Debian experimental packaging of 2.62.0 (T27893)
+    + Dropped the following patch which was dropped in upstream Debian packaging:
+      - debian/patches/debian/Disable-an-optimization-when-building-with-gcc-9.patch
+
+ -- Philip Withnall <withnall@endlessm.com>  Tue, 24 Sep 2019 16:46:00 +0100
+
 glib2.0 (2.62.0-1) experimental; urgency=medium
 
   * New upstream release
