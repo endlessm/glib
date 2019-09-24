@@ -12,4 +12,3 @@ debian/Skip-test-which-performs-some-unreliable-floating-point-c.patch
 debian/Skip-unreliable-test_threaded_singleton-by-default.patch
 debian/gmenumodel-test-Mark-as-flaky.patch
 debian/gvariant-test-Don-t-run-at-build-time-on-mips.patch
-debian/Disable-an-optimization-when-building-with-gcc-9.patch

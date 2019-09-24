@@ -29,7 +29,7 @@ index a484c63..5e582f5 100644
          }
  
 diff --git a/gio/meson.build b/gio/meson.build
-index 0a80b2c..bf8c0ae 100644
+index 31e1d29..5044b01 100644
 --- a/gio/meson.build
 +++ b/gio/meson.build
 @@ -1,6 +1,7 @@

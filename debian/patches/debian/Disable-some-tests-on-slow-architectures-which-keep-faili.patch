@@ -84,7 +84,7 @@ index a777815..913fd47 100644
    loop = g_main_loop_new (ctx, FALSE);
  
 diff --git a/glib/tests/timeout.c b/glib/tests/timeout.c
-index 8f44e75..430be91 100644
+index 47f00ba..d6fad36 100644
 --- a/glib/tests/timeout.c
 +++ b/glib/tests/timeout.c
 @@ -175,6 +175,15 @@ test_func (gpointer data)

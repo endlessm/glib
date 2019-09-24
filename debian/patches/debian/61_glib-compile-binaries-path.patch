@@ -11,10 +11,10 @@ Forwarded: not-needed, specific to Debian packaging
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/gio/meson.build b/gio/meson.build
-index 987d0f4..0a80b2c 100644
+index 9a9e621..31e1d29 100644
 --- a/gio/meson.build
 +++ b/gio/meson.build
-@@ -832,7 +832,7 @@ pkg.generate(libgio,
+@@ -833,7 +833,7 @@ pkg.generate(libgio,
                 'giomoduledir=' + giomodulesdir,
                 'gio=' + join_paths('${bindir}', 'gio'),
                 'gio_querymodules=' + join_paths('${bindir}', 'gio-querymodules'),
