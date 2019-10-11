@@ -1,3 +1,19 @@
+glib2.0 (2.62.1-1endless0) unstable; urgency=medium
+
+  * Rebase on latest Debian master packaging of 2.62.1 (T28095)
+    + Added the following patch which was added in upstream Debian packaging:
+      - debian/patches/debian/mimeapps-test-Mark-as-flaky.patch
+    + Added some patches from upstream/glib-2-62 which will form part of the
+      2.62.2 release:
+      - 921471797 Fix use-after-free when calling g_dbus_connection_flush_sync()
+      - 670d6d390 build: no --export-dynamic ldflags for Solaris
+      - 8e49fba3f gunixmounts: Handle Solaris name of mnt_mntopts in place of mnt_opts
+      - 32fe7ad93 gwinhttpvfs: Handle g_get_prgname() returning NULL
+    + Added a new patch to fix the tests when building under `toolbox`,
+      forwarded upstream as https://gitlab.gnome.org/GNOME/glib/merge_requests/1168
+
+ -- Philip Withnall <withnall@endlessm.com>  Wed, 16 Oct 2019 14:55:00 +0100
+
 glib2.0 (2.62.1-1) unstable; urgency=medium
 
   * Team upload
