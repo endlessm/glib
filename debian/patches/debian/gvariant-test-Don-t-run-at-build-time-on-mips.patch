@@ -16,10 +16,10 @@ Forwarded: no
  1 file changed, 8 insertions(+)
 
 diff --git a/glib/tests/gvariant.c b/glib/tests/gvariant.c
-index ce413be..c4bf0e7 100644
+index 927ae4e..47808d6 100644
 --- a/glib/tests/gvariant.c
 +++ b/glib/tests/gvariant.c
-@@ -2365,6 +2365,14 @@ test_fuzzes (gpointer data)
+@@ -2405,6 +2405,14 @@ test_fuzzes (gpointer data)
    gdouble fuzziness;
    int i;
  

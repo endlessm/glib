@@ -1,10 +1,62 @@
-glib2.0 (2.62.0-1endless0) experimental; urgency=medium
+glib2.0 (2.62.1-1) unstable; urgency=medium
 
-  * Rebase on latest Debian experimental packaging of 2.62.0 (T27893)
-    + Dropped the following patch which was dropped in upstream Debian packaging:
-      - debian/patches/debian/Disable-an-optimization-when-building-with-gcc-9.patch
+  * Team upload
+  * d/watch: Only watch for even-numbered (stable) releases
+  * New upstream release
+    - Fix regression that made G_FILE_COPY_TARGET_DEFAULT_PERMS result in
+      private permissions rather than respecting umask (Closes: #505398)
+    - d/p/g_file_info_get_modification_date_time-Calculate-in-integ.patch,
+      d/p/Always-build-tests-if-we-enabled-installed-tests.patch:
+      Drop patches that were applied upstream
+  * d/p/debian/mimeapps-test-Mark-as-flaky.patch:
+    Mark mimeapps test as flaky (see #941550)
 
- -- Philip Withnall <withnall@endlessm.com>  Tue, 24 Sep 2019 16:46:00 +0100
+ -- Simon McVittie <smcv@debian.org>  Mon, 07 Oct 2019 09:46:24 +0100
+
+glib2.0 (2.62.0-3) unstable; urgency=medium
+
+  * Team upload
+  * Merge packaging from 2.60.x branch previously in unstable
+    - No changes since 2.62.0-2, except in d/changelog
+    - d/p/debian/Disable-an-optimization-when-building-with-gcc-9.patch:
+      Remove workaround for #931921, which turned out to be a clutter bug
+  * d/p/Always-build-tests-if-we-enabled-installed-tests.patch:
+    Add patch to fix installation of installed-tests in cross-builds
+    (Closes: #941509)
+  * d/p/g_file_info_get_modification_date_time-Calculate-in-integ.patch:
+    Add patch to fix intermittent g-file-info test failures on i386
+    (Closes: #941547)
+  * libglib2.0-dev: Suggest libgirepository1.0-dev, for the GIR files
+    (Closes: #914152)
+  * d/gbp.conf: Use debian/master branch
+  * Standards-Version: 4.4.1 (no changes required)
+
+ -- Simon McVittie <smcv@debian.org>  Wed, 02 Oct 2019 09:13:12 +0100
+
+glib2.0 (2.60.6-2) unstable; urgency=medium
+
+  * Team upload
+  * d/rules: Edit debcrossgen output instead of using a modified version.
+    This fixes use of CFLAGS, etc. during cross-compilation.
+    (Closes: #933560)
+  * Remove obsolete permissions fixing.
+    Issue 1539 was fixed upstream.
+  * d/p/debian/Disable-an-optimization-when-building-with-gcc-9.patch:
+    Disable an optimization when building with gcc-9, instead of forcing
+    gcc-8. This avoids depending on an old gcc, and should be easier to
+    deal with for cross-compilation. (Workaround for #931921)
+  * d/p/gmessages-Only-use-structured-logs-if-GLIB_VERSION_MAX_AL.patch:
+    Update to upstream glib-2-60 branch at commit 2.60.6-2-ga365528f6
+    - Don't use structured logging if GLIB_VERSION_MAX_ALLOWED < 2.56
+
+ -- Simon McVittie <smcv@debian.org>  Tue, 13 Aug 2019 10:32:40 +0100
+
+glib2.0 (2.62.0-2) unstable; urgency=medium
+
+  * Team upload.
+  * Upload to unstable. (Closes: #940161)
+
+ -- Andreas Henriksson <andreas@fatal.se>  Mon, 30 Sep 2019 12:33:16 +0200
 
 glib2.0 (2.62.0-1) experimental; urgency=medium
 

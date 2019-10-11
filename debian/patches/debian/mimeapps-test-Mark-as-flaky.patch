@@ -1,0 +1,100 @@
+From: Simon McVittie <smcv@debian.org>
+Date: Mon, 7 Oct 2019 09:13:20 +0100
+Subject: mimeapps test: Mark as flaky
+
+This test has a known race condition, tracked upstream at
+<https://gitlab.gnome.org/GNOME/glib/issues/1903>.
+
+Signed-off-by: Simon McVittie <smcv@debian.org>
+Forwarded: no
+---
+ gio/tests/mimeapps.c | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+
+diff --git a/gio/tests/mimeapps.c b/gio/tests/mimeapps.c
+index 08bcce2..9ef982c 100644
+--- a/gio/tests/mimeapps.c
++++ b/gio/tests/mimeapps.c
+@@ -118,6 +118,12 @@ setup (Fixture       *fixture,
+   gint res;
+   GError *error = NULL;
+ 
++  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") == NULL)
++    {
++      g_test_skip ("known race condition, #941550");
++      return;
++    }
++
+   /* These are already set to a temporary directory through our use of
+    * %G_TEST_OPTION_ISOLATE_DIRS below. */
+   xdgdatahome = g_get_user_data_dir ();
+@@ -211,6 +217,9 @@ test_mime_api (Fixture       *fixture,
+   GList *list;
+   const gchar *contenttype = "application/pdf";
+ 
++  if (g_test_failed ())
++    return;
++
+   /* clear things out */
+   g_app_info_reset_type_associations (contenttype);
+ 
+@@ -305,6 +314,9 @@ test_mime_file (Fixture       *fixture,
+   GList *list;
+   const gchar *contenttype = "application/pdf";
+ 
++  if (g_test_failed ())
++    return;
++
+   /* clear things out */
+   g_app_info_reset_type_associations (contenttype);
+ 
+@@ -422,6 +434,9 @@ test_mime_default (Fixture       *fixture,
+   GList *list;
+   const gchar *contenttype = "image/png";
+ 
++  if (g_test_failed ())
++    return;
++
+   /* clear things out */
+   g_app_info_reset_type_associations (contenttype);
+ 
+@@ -499,6 +514,9 @@ test_mime_default_last_used (Fixture       *fixture,
+   GList *list;
+   const gchar *contenttype = "image/bmp";
+ 
++  if (g_test_failed ())
++    return;
++
+   /* clear things out */
+   g_app_info_reset_type_associations (contenttype);
+ 
+@@ -591,6 +609,9 @@ test_scheme_handler (Fixture       *fixture,
+ {
+   GAppInfo *info, *info5;
+ 
++  if (g_test_failed ())
++    return;
++
+   info5 = (GAppInfo*)g_desktop_app_info_new ("myapp5.desktop");
+   info = g_app_info_get_default_for_uri_scheme ("ftp");
+   g_assert_true (g_app_info_equal (info, info5));
+@@ -607,6 +628,9 @@ test_mime_ignore_nonexisting (Fixture       *fixture,
+ {
+   GAppInfo *appinfo;
+ 
++  if (g_test_failed ())
++    return;
++
+   appinfo = (GAppInfo*)g_desktop_app_info_new ("nosuchapp.desktop");
+   g_assert_null (appinfo);
+ }
+@@ -617,6 +641,9 @@ test_all (Fixture       *fixture,
+ {
+   GList *all, *l;
+ 
++  if (g_test_failed ())
++    return;
++
+   all = g_app_info_get_all ();
+ 
+   for (l = all; l; l = l->next)
