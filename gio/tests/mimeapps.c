@@ -118,12 +118,6 @@ setup (Fixture       *fixture,
   gint res;
   GError *error = NULL;
 
-  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") == NULL)
-    {
-      g_test_skip ("known race condition, #941550");
-      return;
-    }
-
   /* These are already set to a temporary directory through our use of
    * %G_TEST_OPTION_ISOLATE_DIRS below. */
   xdgdatahome = g_get_user_data_dir ();
@@ -216,9 +210,6 @@ test_mime_api (Fixture       *fixture,
   GAppInfo *def;
   GList *list;
   const gchar *contenttype = "application/pdf";
-
-  if (g_test_failed ())
-    return;
 
   /* clear things out */
   g_app_info_reset_type_associations (contenttype);
@@ -313,9 +304,6 @@ test_mime_file (Fixture       *fixture,
   GAppInfo *def;
   GList *list;
   const gchar *contenttype = "application/pdf";
-
-  if (g_test_failed ())
-    return;
 
   /* clear things out */
   g_app_info_reset_type_associations (contenttype);
@@ -434,9 +422,6 @@ test_mime_default (Fixture       *fixture,
   GList *list;
   const gchar *contenttype = "image/png";
 
-  if (g_test_failed ())
-    return;
-
   /* clear things out */
   g_app_info_reset_type_associations (contenttype);
 
@@ -513,9 +498,6 @@ test_mime_default_last_used (Fixture       *fixture,
   GAppInfo *def;
   GList *list;
   const gchar *contenttype = "image/bmp";
-
-  if (g_test_failed ())
-    return;
 
   /* clear things out */
   g_app_info_reset_type_associations (contenttype);
@@ -609,9 +591,6 @@ test_scheme_handler (Fixture       *fixture,
 {
   GAppInfo *info, *info5;
 
-  if (g_test_failed ())
-    return;
-
   info5 = (GAppInfo*)g_desktop_app_info_new ("myapp5.desktop");
   info = g_app_info_get_default_for_uri_scheme ("ftp");
   g_assert_true (g_app_info_equal (info, info5));
@@ -628,9 +607,6 @@ test_mime_ignore_nonexisting (Fixture       *fixture,
 {
   GAppInfo *appinfo;
 
-  if (g_test_failed ())
-    return;
-
   appinfo = (GAppInfo*)g_desktop_app_info_new ("nosuchapp.desktop");
   g_assert_null (appinfo);
 }
@@ -640,9 +616,6 @@ test_all (Fixture       *fixture,
           gconstpointer  test_data)
 {
   GList *all, *l;
-
-  if (g_test_failed ())
-    return;
 
   all = g_app_info_get_all ();
 
