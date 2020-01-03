@@ -1,3 +1,19 @@
+glib2.0 (2.62.4-1endless0) eos; urgency=medium
+
+  * Rebase on latest Debian bullseye packaging of 2.62.4 (T29058)
+    + Apply patches recently added to Debian packaging:
+      - Add-a-test-for-GDBusServer-authentication.patch
+      - gdbus-server-auth-test-Create-temporary-directory-for-Uni.patch
+      - gdbus-server-auth-test-Include-gcredentialsprivate.h.patch
+      - Make-ld-executable-configurable.patch
+      - debian/taptestrunner-Stop-looking-like-an-executable-script.patch
+    + Remove patch recently dropped from Debian packaging:
+      - debian/patches/debian/mimeapps-test-Mark-as-flaky.patch
+    + Added a new patch to fix the tests when building under `toolbox`,
+      forwarded upstream as https://gitlab.gnome.org/GNOME/glib/merge_requests/1168
+
+ -- Daniel Drake <drake@endlessm.com>  Fri, 03 Jan 2020 13:39:39 +0800
+
 glib2.0 (2.62.4-1) unstable; urgency=medium
 
   * Team upload
