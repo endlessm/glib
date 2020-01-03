@@ -1,5 +1,5 @@
 project('glib', 'c', 'cpp',
-  version : '2.62.1',
+  version : '2.62.4',
   # NOTE: We keep this pinned at 0.49 because that's what Debian 10 ships
   meson_version : '>= 0.49.2',
   default_options : [
@@ -142,11 +142,6 @@ g_have_gnuc_visibility = cc.compiles('''
   {
   }
   void
-  __attribute__ ((visibility ("protected")))
-       f_protected (void)
-  {
-  }
-  void
   __attribute__ ((visibility ("default")))
        f_default (void)
   {
@@ -155,7 +150,6 @@ g_have_gnuc_visibility = cc.compiles('''
   {
     f_hidden();
     f_internal();
-    f_protected();
     f_default();
     return 0;
   }
