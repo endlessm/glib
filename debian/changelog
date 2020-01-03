@@ -1,18 +1,127 @@
-glib2.0 (2.62.1-1endless0) unstable; urgency=medium
+glib2.0 (2.62.4-1) unstable; urgency=medium
 
-  * Rebase on latest Debian master packaging of 2.62.1 (T28095)
-    + Added the following patch which was added in upstream Debian packaging:
-      - debian/patches/debian/mimeapps-test-Mark-as-flaky.patch
-    + Added some patches from upstream/glib-2-62 which will form part of the
-      2.62.2 release:
-      - 921471797 Fix use-after-free when calling g_dbus_connection_flush_sync()
-      - 670d6d390 build: no --export-dynamic ldflags for Solaris
-      - 8e49fba3f gunixmounts: Handle Solaris name of mnt_mntopts in place of mnt_opts
-      - 32fe7ad93 gwinhttpvfs: Handle g_get_prgname() returning NULL
-    + Added a new patch to fix the tests when building under `toolbox`,
-      forwarded upstream as https://gitlab.gnome.org/GNOME/glib/merge_requests/1168
+  * Team upload
 
- -- Philip Withnall <withnall@endlessm.com>  Wed, 16 Oct 2019 14:55:00 +0100
+  [ Steve Langasek ]
+  * debian/tests/build: Make cross-test friendly (Closes: #946355)
+
+  [ Iain Lane ]
+  * debian/tests/build: Style fixes
+
+  [ Simon McVittie ]
+  * New upstream release
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 30 Dec 2019 13:01:04 +0000
+
+glib2.0 (2.62.3-2) unstable; urgency=medium
+
+  * Team upload
+  * Rename pkg.glib2.0.noinsttest build profile to noinsttest.
+    This is now registered on <https://wiki.debian.org/BuildProfileSpec>.
+
+ -- Simon McVittie <smcv@debian.org>  Sun, 01 Dec 2019 16:05:01 +0000
+
+glib2.0 (2.62.3-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream release
+    - Drop patches that were applied upstream
+  * Don't build libglib2.0-tests under pkg.glib2.0.noinsttest build profile.
+    This is a prototype of the proposed standard build profile noinsttest.
+    If the build profiles include both nocheck and pkg.glib2.0.noinsttest,
+    we can drop the libdbus-1-dev build-dependency without harming test
+    coverage or altering the contents of binary packages.
+  * d/gbp.conf: Use upstream/2.62.x branch
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 25 Nov 2019 08:47:58 +0000
+
+glib2.0 (2.62.2-3) unstable; urgency=medium
+
+  * Team upload
+
+  [ Iain Lane ]
+  * control: Drop `debian/experimental` from Vcs-*
+
+  [ Simon McVittie ]
+  * Build-depend on libdbus-1-dev for better test coverage
+  * Update to upstream commit 2.62.2-28-g3cf25070e:
+    - d/p/goption-Relax-assertion-to-avoid-being-broken-by-kdeinit5.patch:
+      Fix assertion failure when called from a process that overwrites its
+      argv, such as kdeinit5
+    - d/p/gdbus-peer-Specifically-listen-on-127.0.0.1.patch:
+      Improve reliability of gdbus-peer test in some container environments
+    - d/p/gdbusserver-Delete-socket-and-nonce-file-when-stopping-se.patch,
+      d/p/gdbusserver-Keep-a-strong-reference-to-the-server-in-call.patch,
+      d/p/gdbusauthmechanismsha1-Remove-unnecessary-g_warning-calls.patch,
+      d/p/gdbusauthmechanismsha1-Create-.dbus-keyrings-directory-re.patch,
+      d/p/tests-Move-main-loop-and-test-GUID-into-test-functions-in.patch,
+      d/p/tests-Isolate-directories-in-gdbus-peer-test.patch,
+      d/p/gdbus-peer-test-Improve-diagnostics-if-g_rmdir-fails.patch,
+      d/p/gdbus-peer-test-Stop-GDBusServer-before-tearing-down-temp.patch,
+      d/p/gdbus-peer-test-Use-unix-dir-address-if-exact-format-does.patch,
+      d/p/gdbus-server-auth-test-Create-temporary-directory-for-Uni.patch:
+      Mark as applied upstream in 2.62.x branch
+  * d/p/gdbus-server-auth-test-Include-gcredentialsprivate.h.patch:
+    Apply patch from 2.63.x to fix missing coverage in test for #941018
+  * d/p/Make-ld-executable-configurable.patch:
+    Apply patch from 2.63.x to use cross ld where necessary
+  * d/p/gdbus-server-auth-test-Create-temporary-directory-for-Uni.patch:
+    Mark as applied upstream in 2.63.x branch
+  * Improve patch metadata: use more URLs for bug references
+
+ -- Simon McVittie <smcv@debian.org>  Wed, 06 Nov 2019 09:02:14 +0000
+
+glib2.0 (2.62.2-2) unstable; urgency=medium
+
+  * Team upload
+  * Update to upstream commit 2.62.2-14-gfcbb88823:
+    - d/p/gdesktopappinfo-Allocate-DesktopFileDir-structs-dynamical.patch,
+      d/p/gdesktopappinfo-Cancel-file-monitor-when-resetting-a-Desk.patch,
+      d/p/glocalfilemonitor-Keep-a-weak-ref-to-the-monitor-in-GFile.patch:
+      Fix intermittent test failures for GDesktopAppInfo (Closes: #941550)
+    - d/p/gvariant-Limit-recursion-in-g_variant_parse.patch:
+      Ensure that parsing a text-format GVariant does not run out of stack
+      space
+    - d/p/tests-Use-objcopy-from-the-cross-compilation-file-if-conf.patch,
+      d/p/docs-Add-objcopy-to-example-cross-compilation-file.patch:
+      Use the appropriate architecture's objcopy when cross-compiling
+    - d/p/gtestutils-Add-additional-non-NULL-check-in-g_assert_cmpm.patch:
+      Avoid false positive NULL dereference warnings in g_assert_cmpmem()
+    - d/p/gspawn-Port-to-g_poll-from-select.patch:
+      Fix launching subprocesses when a very large number of fds are open
+    - d/p/gcredentialsprivate-Document-the-various-private-macros.patch,
+      d/p/credentials-Invalid-Linux-struct-ucred-means-no-informati.patch,
+      d/p/GDBus-prefer-getsockopt-style-credentials-passing-APIs.patch:
+      Ensure libdbus clients can authenticate with a GDBusServer like the
+      one in ibus (Closes: #941018)
+  * d/p/gdbusserver-Delete-socket-and-nonce-file-when-stopping-se.patch,
+    d/p/gdbusserver-Keep-a-strong-reference-to-the-server-in-call.patch,
+    d/p/Add-a-test-for-GDBusServer-authentication.patch:
+    Backport regression test for #941018 from upstream git master
+  * d/p/gdbusauthmechanismsha1-Remove-unnecessary-g_warning-calls.patch,
+    d/p/gdbusauthmechanismsha1-Create-.dbus-keyrings-directory-re.patch,
+    d/p/tests-Move-main-loop-and-test-GUID-into-test-functions-in.patch,
+    d/p/tests-Isolate-directories-in-gdbus-peer-test.patch:
+    Backport reliability fixes for gdbus-peer test from upstream git master
+  * d/p/gdbus-peer-test-Improve-diagnostics-if-g_rmdir-fails.patch,
+    d/p/gdbus-peer-test-Stop-GDBusServer-before-tearing-down-temp.patch,
+    d/p/gdbus-peer-test-Use-unix-dir-address-if-exact-format-does.patch,
+    d/p/gdbus-server-auth-test-Create-temporary-directory-for-Uni.patch:
+    Add some proposed patches to improve GDBus unit tests
+  * d/p/debian/mimeapps-test-Mark-as-flaky.patch:
+    Drop patch, hopefully no longer needed with #941550 fixed
+  * d/p/debian/taptestrunner-Stop-looking-like-an-executable-script.patch:
+    Make taptestrunner non-executable to avoid a Lintian warning
+
+ -- Simon McVittie <smcv@debian.org>  Wed, 30 Oct 2019 08:45:56 +0000
+
+glib2.0 (2.62.2-1) unstable; urgency=medium
+
+  * New upstream release
+    + Fixes use after free when calling g_dbus_connection_flush_sync() in a
+      dedicated thread (LP: #1848202)
+
+ -- Iain Lane <laney@debian.org>  Fri, 25 Oct 2019 10:54:42 +0100
 
 glib2.0 (2.62.1-1) unstable; urgency=medium
 

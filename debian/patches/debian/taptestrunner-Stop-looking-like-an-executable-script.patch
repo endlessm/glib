@@ -1,0 +1,24 @@
+From: Simon McVittie <smcv@debian.org>
+Date: Wed, 30 Oct 2019 08:44:52 +0000
+Subject: taptestrunner: Stop looking like an executable script
+
+This file is installed as non-executable but starts with the #! that
+indicates an executable script, causing warnings from Debian's Lintian
+tool. In fact it is imported as a Python module rather than being run
+as an executable, so there is no need for the #! line.
+
+Signed-off-by: Simon McVittie <smcv@debian.org>
+Forwarded: no
+---
+ gobject/tests/taptestrunner.py | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/gobject/tests/taptestrunner.py b/gobject/tests/taptestrunner.py
+index 2614961..7baceb5 100644
+--- a/gobject/tests/taptestrunner.py
++++ b/gobject/tests/taptestrunner.py
+@@ -1,4 +1,3 @@
+-#!/usr/bin/env python
+ # coding=utf-8
+ 
+ # Copyright (c) 2015 Remko Tronçon (https://el-tramo.be)

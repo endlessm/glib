@@ -13,10 +13,10 @@ Forwarded: not-needed, Debian-specific
  2 files changed, 3 insertions(+), 2 deletions(-)
 
 diff --git a/gio/gdesktopappinfo.c b/gio/gdesktopappinfo.c
-index a484c63..5e582f5 100644
+index f1e2fdd..2eda604 100644
 --- a/gio/gdesktopappinfo.c
 +++ b/gio/gdesktopappinfo.c
-@@ -2758,9 +2758,9 @@ g_desktop_app_info_launch_uris_with_spawn (GDesktopAppInfo            *info,
+@@ -2785,9 +2785,9 @@ g_desktop_app_info_launch_uris_with_spawn (GDesktopAppInfo            *info,
            /* Allow test suite to specify path to gio-launch-desktop */
            tmp = g_getenv ("GIO_LAUNCH_DESKTOP");
  

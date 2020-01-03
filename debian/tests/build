@@ -1,7 +1,7 @@
 #!/bin/sh
 # autopkgtest check: Build and run a program against glib, to verify that the
 # headers and pkg-config file are installed correctly
-# (C) 2012 Canonical Ltd.
+# (C) 2012,2019 Canonical Ltd.
 # (C) 2018 Simon McVittie
 # Authors: Martin Pitt <martin.pitt@ubuntu.com>, Simon McVittie
 
@@ -32,8 +32,15 @@ while true; do
 done
 
 WORKDIR=$(mktemp -d)
-trap "rm -rf $WORKDIR" 0 INT QUIT ABRT PIPE TERM
-cd $WORKDIR
+trap 'rm -rf "${WORKDIR}"' 0 INT QUIT ABRT PIPE TERM
+cd "${WORKDIR}"
+
+if [ -n "${DEB_HOST_GNU_TYPE:-}" ]; then
+    CROSS_COMPILE="${DEB_HOST_GNU_TYPE}-"
+else
+    CROSS_COMPILE=
+fi
+
 cat <<EOF > glib.c
 #include <glib.h>
 
@@ -119,7 +126,8 @@ for lib in glib gobject gio gio-unix gmodule gthread; do
             ;;
     esac
 
-    gcc $cflags -o ${lib}-$mode ${lib}.c `pkg-config $pcflags --cflags --libs ${packages}`
+    # shellcheck disable=SC2046
+    ${CROSS_COMPILE}gcc $cflags -o ${lib}-$mode ${lib}.c $(${CROSS_COMPILE}pkg-config $pcflags --cflags --libs ${packages})
     echo "build ($lib, $mode): OK"
     [ -x ${lib}-$mode ]
     foo=bar ./${lib}-$mode
