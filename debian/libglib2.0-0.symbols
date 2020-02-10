@@ -1818,7 +1818,6 @@ libgio-2.0.so.0 libglib2.0-0 #MINVER#
  g_tls_certificate_new_from_file@Base 2.28.0
  g_tls_certificate_new_from_files@Base 2.28.0
  g_tls_certificate_new_from_pem@Base 2.28.0
- g_tls_certificate_new_from_pkcs11_uris@Base 2.63.1
  g_tls_certificate_request_flags_get_type@Base 2.39.4
  g_tls_certificate_verify@Base 2.28.0
  g_tls_client_connection_copy_session_state@Base 2.45.1

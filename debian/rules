@@ -165,10 +165,10 @@ export XDG_RUNTIME_DIR=$(CURDIR)/debian/tmp-xdg-runtime-dir
 export VERBOSE=1
 
 ifeq ($(DEB_HOST_ARCH_OS),linux)
-is_linux := true
+enable_libmount := enabled
 enable_selinux := enabled
 else
-is_linux := false
+enable_libmount := disabled
 enable_selinux := disabled
 endif
 
@@ -187,7 +187,7 @@ DEB_CONFIGURE_FLAGS_deb := \
 	--default-library both \
 	-Dfam=$(use_fam) \
 	-Dinstalled_tests=true \
-	-Dlibmount=$(is_linux) \
+	-Dlibmount=$(enable_libmount) \
 	-Dman=true \
 	-Dselinux=$(enable_selinux) \
 	-Dsystemtap=true \
@@ -204,7 +204,7 @@ DEB_CONFIGURE_FLAGS_udeb := \
 	--default-library shared \
 	-Dgtk_doc=false \
 	-Dinstalled_tests=false \
-	-Dlibmount=false \
+	-Dlibmount=disabled \
 	-Dselinux=disabled \
 	-Dxattr=$(have_non_stub_xattr) \
 	$(NULL)

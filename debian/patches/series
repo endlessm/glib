@@ -1,6 +1,7 @@
 01_gettext-desktopfiles.patch
 0001-timer-test-use-volatile-for-locals.patch
 gwakeuptest-Be-less-parallel-unless-invoked-with-m-slow.patch
+0001-docs-Don-t-install-object-manager-example-separately.patch
 debian/02_gettext-desktopfiles-ubuntu.patch
 debian/03_disble_glib_compile_schemas_warning.patch
 debian/06_thread_test_ignore_prctl_fail.patch
@@ -13,5 +14,3 @@ debian/Skip-unreliable-test_threaded_singleton-by-default.patch
 debian/gmenumodel-test-Mark-as-flaky.patch
 debian/gvariant-test-Don-t-run-at-build-time-on-mips.patch
 debian/taptestrunner-Stop-looking-like-an-executable-script.patch
-tests-Skip-GMemoryMonitor-tests-if-the-dbusmock-template-.patch
-tests-optional-portal.patch
