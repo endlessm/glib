@@ -23,7 +23,7 @@ Forwarded: no
  1 file changed, 6 insertions(+)
 
 diff --git a/gio/tests/gdbus-threading.c b/gio/tests/gdbus-threading.c
-index ffca6f3..b15dc04 100644
+index dd20530..b9033ea 100644
 --- a/gio/tests/gdbus-threading.c
 +++ b/gio/tests/gdbus-threading.c
 @@ -497,6 +497,12 @@ test_threaded_singleton (void)

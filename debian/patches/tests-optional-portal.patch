@@ -1,0 +1,34 @@
+From 422e86163346c4959e70d663c686765fb17c504a Mon Sep 17 00:00:00 2001
+From: Sebastien Bacher <seb128@ubuntu.com>
+Date: Wed, 22 Jan 2020 10:19:03 +0200
+Subject: [PATCH] tests: Skip GMemoryMonitor tests if xdg-desktop-portal is not
+ available
+
+It's useful to have glib tests passing even if you don't have a full
+desktop stack available
+
+Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/1338
+---
+ gio/tests/memory-monitor-portal.py.in | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/gio/tests/memory-monitor-portal.py.in b/gio/tests/memory-monitor-portal.py.in
+index cd7d741b1..ae6d59d12 100755
+--- a/gio/tests/memory-monitor-portal.py.in
++++ b/gio/tests/memory-monitor-portal.py.in
+@@ -51,7 +51,11 @@ class TestLowMemoryMonitorPortal(dbusmock.DBusTestCase):
+         fcntl.fcntl(self.p_mock.stdout, fcntl.F_SETFL, flags | os.O_NONBLOCK)
+         self.last_warning = -1
+         self.dbusmock = dbus.Interface(self.obj_lmm, dbusmock.MOCK_IFACE)
+-        self.xdp = subprocess.Popen([XDG_DESKTOP_PORTAL_PATH])
++        try:
++            self.xdp = subprocess.Popen([XDG_DESKTOP_PORTAL_PATH])
++        except FileNotFoundError:
++            raise unittest.SkipTest("xdg-desktop-portal not available")
++
+         try:
+             self.wait_for_bus_object('org.freedesktop.portal.Desktop',
+                                      '/org/freedesktop/portal/desktop')
+-- 
+2.24.0
+

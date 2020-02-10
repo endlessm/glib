@@ -38,7 +38,7 @@ Rules-Requires-Root: no
 Standards-Version: 4.4.1
 Homepage: http://www.gtk.org/
 Vcs-Browser: https://salsa.debian.org/gnome-team/glib
-Vcs-Git: https://salsa.debian.org/gnome-team/glib.git
+Vcs-Git: https://salsa.debian.org/gnome-team/glib.git -b debian/experimental
 
 Package: libglib2.0-0
 Architecture: any
@@ -59,11 +59,16 @@ Description: GLib library of C routines
 Package: libglib2.0-tests
 Build-profiles: <!noinsttest>
 Architecture: any
-Depends: libglib2.0-dev-bin,
+Depends: gir1.2-glib-2.0,
+         libglib2.0-dev-bin,
+         python3-dbus,
+         python3-dbusmock,
+         python3-gi,
          shared-mime-info,
          ${misc:Depends},
          ${python3:Depends},
          ${shlibs:Depends}
+Recommends: xdg-desktop-portal,
 Pre-Depends: ${misc:Pre-Depends}
 Description: GLib library of C routines - installed tests
  GLib is a library containing many useful C routines for things such

@@ -1,0 +1,55 @@
+From: Iain Lane <iain.lane@canonical.com>
+Date: Wed, 18 Dec 2019 09:41:31 +0000
+Subject: tests: Skip GMemoryMonitor tests if the dbusmock template is not
+ available
+
+This template is not currently in any released version of dbusmock.
+
+This patch can be dropped once python-dbusmock in Debian contains the
+template. At that point, bump the version of the dependency to ensure
+the template is always there.
+
+Forwarded: https://gitlab.gnome.org/GNOME/glib/merge_requests/1296
+---
+ gio/tests/memory-monitor-dbus.py.in   | 8 ++++++--
+ gio/tests/memory-monitor-portal.py.in | 8 ++++++--
+ 2 files changed, 12 insertions(+), 4 deletions(-)
+
+diff --git a/gio/tests/memory-monitor-dbus.py.in b/gio/tests/memory-monitor-dbus.py.in
+index b1bae7c..89906f4 100755
+--- a/gio/tests/memory-monitor-dbus.py.in
++++ b/gio/tests/memory-monitor-dbus.py.in
+@@ -38,8 +38,12 @@ class TestLowMemoryMonitor(dbusmock.DBusTestCase):
+         klass.dbus_con = klass.get_dbus(True)
+ 
+     def setUp(self):
+-        (self.p_mock, self.obj_lmm) = self.spawn_server_template(
+-            'low_memory_monitor', {}, stdout=subprocess.PIPE)
++        try:
++            (self.p_mock, self.obj_lmm) = self.spawn_server_template(
++                'low_memory_monitor', {}, stdout=subprocess.PIPE)
++        except ModuleNotFoundError:
++            raise unittest.SkipTest("Low memory monitor dbusmock template not "
++                                    "found. Requires dbusmock ≥ 0.18.4.")
+         # set log to nonblocking
+         flags = fcntl.fcntl(self.p_mock.stdout, fcntl.F_GETFL)
+         fcntl.fcntl(self.p_mock.stdout, fcntl.F_SETFL, flags | os.O_NONBLOCK)
+diff --git a/gio/tests/memory-monitor-portal.py.in b/gio/tests/memory-monitor-portal.py.in
+index 35f5462..cd7d741 100755
+--- a/gio/tests/memory-monitor-portal.py.in
++++ b/gio/tests/memory-monitor-portal.py.in
+@@ -40,8 +40,12 @@ class TestLowMemoryMonitorPortal(dbusmock.DBusTestCase):
+         klass.start_session_bus()
+ 
+     def setUp(self):
+-        (self.p_mock, self.obj_lmm) = self.spawn_server_template(
+-            'low_memory_monitor', {}, stdout=subprocess.PIPE)
++        try:
++            (self.p_mock, self.obj_lmm) = self.spawn_server_template(
++                'low_memory_monitor', {}, stdout=subprocess.PIPE)
++        except ModuleNotFoundError:
++            raise unittest.SkipTest("Low memory monitor dbusmock template not "
++                                    "found. Requires dbusmock ≥ 0.18.4.")
+         # set log to nonblocking
+         flags = fcntl.fcntl(self.p_mock.stdout, fcntl.F_GETFL)
+         fcntl.fcntl(self.p_mock.stdout, fcntl.F_SETFL, flags | os.O_NONBLOCK)

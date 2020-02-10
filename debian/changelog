@@ -1,41 +1,73 @@
-glib2.0 (2.62.4-1endless0) eos; urgency=medium
+glib2.0 (2.63.3-3) experimental; urgency=medium
 
-  * Rebase on latest Debian bullseye packaging of 2.62.4 (T29058)
-    + Apply patches recently added to Debian packaging:
-      - Add-a-test-for-GDBusServer-authentication.patch
-      - gdbus-server-auth-test-Create-temporary-directory-for-Uni.patch
-      - gdbus-server-auth-test-Include-gcredentialsprivate.h.patch
-      - Make-ld-executable-configurable.patch
-      - debian/taptestrunner-Stop-looking-like-an-executable-script.patch
-    + Remove patch recently dropped from Debian packaging:
-      - debian/patches/debian/mimeapps-test-Mark-as-flaky.patch
-    + Added a new patch to fix the tests when building under `toolbox`,
-      forwarded upstream as https://gitlab.gnome.org/GNOME/glib/merge_requests/1168
+  * debian/control.in:
+    - lower the libglib2.0-tests Depends on xdg-desktop-portal to a
+      Recommends since the portal is not available on some architectures
+  * debian/patches/tests-optional-portal.patch:
+    - skip the new memory monitor tests if the portal is not available,
+      that allows the tests to be still successful on architectures were
+      the portal is not available (e.g Ubuntu/i386)
 
- -- Daniel Drake <drake@endlessm.com>  Fri, 03 Jan 2020 13:39:39 +0800
+ -- Sebastien Bacher <seb128@ubuntu.com>  Wed, 22 Jan 2020 09:36:27 +0200
 
-glib2.0 (2.62.4-1) unstable; urgency=medium
+glib2.0 (2.63.3-2) experimental; urgency=medium
 
-  * Team upload
+  * debian/control.in:
+    - libglib2.0-tests Depends on xdg-desktop-portal, it's required by the
+      new low memory tests (and got enabled by the new python-dbusmock)
 
-  [ Steve Langasek ]
-  * debian/tests/build: Make cross-test friendly (Closes: #946355)
+ -- Sebastien Bacher <seb128@ubuntu.com>  Thu, 16 Jan 2020 10:28:46 +0100
+
+glib2.0 (2.63.3-1) experimental; urgency=medium
 
   [ Iain Lane ]
-  * debian/tests/build: Style fixes
-
-  [ Simon McVittie ]
   * New upstream release
+    + Add a `--glib-min-version` argument to `gdbus-codegen` which controls
+      breaks in the API of generated code
+    + Add `g_clear_list()` API to clear `GList`s to `NULL`
+    + Add a `GMemoryMonitor` API to be notified of memory pressure situations
+      using the low-memory-monitor project
+    + Add support for dispose functions for `GSource` implementations
+    + Tighten up validation of GObject signal and property names, allowing
+      performance improvements
+  * debian/tests/build: Style fixes, thanks to shellcheck.
+  * d/p/d/Disable-some-tests-on-slow-architectures-which-keep-faili.patch:
+    Rebase. Upstream have disabled these tests by default too (unless slow
+    mode is enabled), so we don't need to add a patch to do a similar thing.
+  * debian/libglib2.0-0.symbols: New symbols for 2.63.3
+  * d/p/tests-Skip-GMemoryMonitor-tests-if-the-dbusmock-template-.patch: Add.
+    We don't have a new enough dbusmock in Debian at the minute (one is not
+    released yet). Skip the test if the required template isn't available.
+  * control: Add Depends for the new memory-monitor tests.
+    There are new tests, written in python, for GMemoryMonitor. They require
+    dbus-python, pygobject, and the GI bindings for GLib and GIO.
 
- -- Simon McVittie <smcv@debian.org>  Mon, 30 Dec 2019 13:01:04 +0000
+  [ Steve Langasek ]
+  * debian/tests/build: Make cross-test friendly
+    autopkgtest is soon to get a `-a ARCHITECTURE` switch, which will
+    cross-test autopkgtests. This is to be detected by the presence of the
+    `dpkg-architecture`-style family of variables being set in the
+    environment.
+    For build tests like `glib2.0`'s `build` test, this means that we should
+    test "${DEB_HOST_ARCH}" and invoke the cross toolchain as necessary.
+    (Closes: #946355)
 
-glib2.0 (2.62.3-2) unstable; urgency=medium
+ -- Iain Lane <laney@debian.org>  Wed, 18 Dec 2019 14:02:00 +0000
+
+glib2.0 (2.63.2-1) experimental; urgency=medium
 
   * Team upload
+  * Merge packaging changes from unstable
+    - Support for pkg.glib2.0.noinsttest build profile
+  * d/control.in: Refer to debian/experimental branch.
+    This avoids false-positive warnings from vcswatch.
+  * New upstream release
+    - Drop patches that were applied upstream
   * Rename pkg.glib2.0.noinsttest build profile to noinsttest.
     This is now registered on <https://wiki.debian.org/BuildProfileSpec>.
+  * Update symbols file
 
- -- Simon McVittie <smcv@debian.org>  Sun, 01 Dec 2019 16:05:01 +0000
+ -- Simon McVittie <smcv@debian.org>  Sat, 30 Nov 2019 10:55:48 +0000
 
 glib2.0 (2.62.3-1) unstable; urgency=medium
 
@@ -50,6 +82,42 @@ glib2.0 (2.62.3-1) unstable; urgency=medium
   * d/gbp.conf: Use upstream/2.62.x branch
 
  -- Simon McVittie <smcv@debian.org>  Mon, 25 Nov 2019 08:47:58 +0000
+
+glib2.0 (2.63.1-2) experimental; urgency=medium
+
+  * d/p/Revert-glocalfileinfo-Only-return-file-mode-not-type-as-U.patch:
+    Revert "glocalfileinfo: Only return file mode, not type, as UNIX_MODE
+    attribute" This reverts commit bfdc5fc4fc84ef8518d2d1a328c8482cf5a38e98.
+    This commit changes the semantics of the `unix::mode` attribute, which
+    some things (the one we've noticed is ostree) rely on.
+  * d/p/test_copy_preserve_mode-Adjust-for-revert-semantics.patch:
+    test_copy_preserve_mode: Adjust for revert semantics. Now we're returning
+    the file type again, we need to mask it out to compare with the mode.
+
+ -- Iain Lane <laney@debian.org>  Mon, 18 Nov 2019 13:59:35 +0000
+
+glib2.0 (2.63.1-1) experimental; urgency=medium
+
+  * New upstream release
+    - Add `g_array_steal()`, `g_ptr_array_steal()` and `g_byte_array_steal()`
+      APIs
+    - Add `g_get_os_info()` API
+    - Add `GMainContextPusher` API
+    - Add `g_warning_once()` API
+    - Allow passing empty `GValue`s to `g_param_value_set_default()`
+    - Always resolve `localhost` to loopback address in `GResolver`
+    - Escape header guards generated by `gdbus-codegen` better
+    - Fix crash in `g_spawn()` with high FD numbers due to use of `select()`
+      rather than `poll()`
+    - Limit recursion in `g_variant_parse()`
+    - Several usability improvements to command line `gio` tool
+  * debian/libglib2.0-0.symbols: Add new symbols for this release
+  * debian/patches/*:
+    - Drop backports we had which are in this release.
+    - Update to upstream master at cc1b53f74. There are several test fixes
+      that we might as well grab now.
+
+ -- Iain Lane <laney@debian.org>  Wed, 06 Nov 2019 16:37:24 +0000
 
 glib2.0 (2.62.2-3) unstable; urgency=medium
 
