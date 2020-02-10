@@ -1,3 +1,24 @@
+glib2.0 (2.63.3-3endless0) experimental; urgency=medium
+
+  * Rebase on latest Debian experimental packaging of 2.63.3 (T29303)
+    + Apply patches recently added to Debian packaging:
+      - tests-Skip-GMemoryMonitor-tests-if-the-dbusmock-template-.patch
+      - tests-optional-portal.patch
+    + Remove patches recently dropped from Debian packaging or applied
+      upstream:
+      - Add-a-test-for-GDBusServer-authentication.patch
+      - Make-ld-executable-configurable.patch
+      - gdbus-server-auth-test-Create-temporary-directory-for-Uni.patch
+      - gdbus-server-auth-test-Include-gcredentialsprivate.h.patch
+    + Remove commits applied upstream:
+      - gdatetime: Handle leap seconds in ISO8601 dates
+      - gdbusmessage: Move variable initialisation to declaration time
+      - tests: Tidy up test case naming in gdbus-serialization test
+      - gdbusmessage: Limit recursion of variants in D-Bus messages
+      - taptestrunner: Stop looking like an executable script
+
+ -- Philip Withnall <withnall@endlessm.com>  Mon, 10 Feb 2020 12:59:00 +0000
+
 glib2.0 (2.63.3-3) experimental; urgency=medium
 
   * debian/control.in:
