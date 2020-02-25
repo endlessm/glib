@@ -21,6 +21,12 @@ setup (Fixture       *fixture,
   gchar *path = NULL;
   GError *local_error = NULL;
 
+  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") == NULL)
+    {
+      g_test_skip ("https://gitlab.gnome.org/GNOME/glib/issues/1634");
+      return;
+    }
+
   path = g_dir_make_tmp ("gio-test-testfilemonitor_XXXXXX", &local_error);
   g_assert_no_error (local_error);
 
@@ -37,7 +43,9 @@ teardown (Fixture       *fixture,
 {
   GError *local_error = NULL;
 
-  g_file_delete (fixture->tmp_dir, NULL, &local_error);
+  if (fixture->tmp_dir != NULL)
+    g_file_delete (fixture->tmp_dir, NULL, &local_error);
+
   g_assert_no_error (local_error);
   g_clear_object (&fixture->tmp_dir);
 }
@@ -360,6 +368,10 @@ test_atomic_replace (Fixture       *fixture,
   GError *error = NULL;
   TestData data;
 
+  /* respect g_test_skip() during setup() */
+  if (g_test_failed ())
+    return;
+
   data.step = 0;
   data.events = NULL;
 
@@ -464,6 +476,10 @@ test_file_changes (Fixture       *fixture,
 {
   GError *error = NULL;
   TestData data;
+
+  /* respect g_test_skip() during setup() */
+  if (g_test_failed ())
+    return;
 
   data.step = 0;
   data.events = NULL;
@@ -582,6 +598,10 @@ test_dir_monitor (Fixture       *fixture,
   GError *error = NULL;
   TestData data;
 
+  /* respect g_test_skip() during setup() */
+  if (g_test_failed ())
+    return;
+
   data.step = 0;
   data.events = NULL;
 
@@ -678,6 +698,10 @@ test_dir_non_existent (Fixture       *fixture,
 {
   TestData data;
   GError *error = NULL;
+
+  /* respect g_test_skip() during setup() */
+  if (g_test_failed ())
+    return;
 
   data.step = 0;
   data.events = NULL;
@@ -787,6 +811,10 @@ test_cross_dir_moves (Fixture       *fixture,
 {
   GError *error = NULL;
   TestData data[2];
+
+  /* respect g_test_skip() during setup() */
+  if (g_test_failed ())
+    return;
 
   data[0].step = 0;
   data[0].events = NULL;
@@ -956,6 +984,10 @@ test_file_hard_links (Fixture       *fixture,
 {
   GError *error = NULL;
   TestData data;
+
+  /* respect g_test_skip() during setup() */
+  if (g_test_failed ())
+    return;
 
   g_test_bug ("755721");
 
