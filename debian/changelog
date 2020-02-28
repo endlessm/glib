@@ -1,3 +1,17 @@
+glib2.0 (2.64.0-1endless1) eos; urgency=medium
+
+  * Rebase on latest Debian experimental packaging of 2.64.0 (T29304)
+    + Apply patches recently added to Debian packaging:
+      - Skip-unreliable-gdbus-threading-tests--by-default.patch
+      - testfilemonitor-Skip-if-we-are-avoiding-flaky-tests.patch
+    + Remove patches recently dropped from Debian packaging or applied
+      upstream:
+      - 0001-docs-Don-t-install-object-manager-example-separately.patch
+      - Look-for-gio-launch-desktop-in-libdir-glib-2.0.patch
+      - Skip-unreliable-test_threaded_singleton-by-default.patch
+
+ -- Philip Withnall <withnall@endlessm.com>  Fri, 28 Feb 2020 11:50:00 +0000
+
 glib2.0 (2.64.0-1) UNRELEASED; urgency=medium
 
   * New upstream release
