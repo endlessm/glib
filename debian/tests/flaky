@@ -29,6 +29,7 @@ exec dbus-run-session -- xvfb-run -a gnome-desktop-testing-runner \
 	glib/gmenumodel.test \
 	glib/mainloop.test \
 	glib/socket.test \
+	glib/testfilemonitor.test \
 	glib/timeout.test \
 	glib/timer.test \
 	${NULL}

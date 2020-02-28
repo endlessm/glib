@@ -1,43 +1,58 @@
-glib2.0 (2.63.5-0endless0) unreleased; urgency=medium
+glib2.0 (2.64.0-1) UNRELEASED; urgency=medium
 
-  * Update to latest upstream release, 2.63.5 (T29303)
-    + Remove patches applied upstream:
-      - tests-Skip-GMemoryMonitor-tests-if-the-dbusmock-template-.patch
-      - tests-optional-portal.patch
-  * Rework libmount Meson argument as it’s now a feature; see !1344
+  * New upstream release
+    - Fixes a vulnerability where GSocketClient sometimes forgot to use
+      a configured proxy (CVE-2020-6750, Closes: #948554)
+    - Stop installing gio-launch-desktop, which no longer exists
+    - d/p/debian/Look-for-gio-launch-desktop-in-libdir-glib-2.0.patch:
+      Drop, no longer necessary
+    - d/p/docs-Don-t-install-object-manager-example-separately.patch:
+      Drop, applied upstream
+  * d/p/debian/testfilemonitor-Skip-if-we-are-avoiding-flaky-tests.patch:
+    Treat testfilemonitor as a flaky test
+  * Standards-Version: 4.5.0 (no changes required)
+  * New upstream release
+
+ -- Simon McVittie <smcv@debian.org>  Fri, 28 Feb 2020 09:16:50 +0000
+
+glib2.0 (2.63.5-2) experimental; urgency=medium
+
+  * Skip-unreliable-gdbus-threading-tests--by-default.patch: Skip all of
+    gdbus-threading test_method_calls_in_thread() has become (more?)
+    unreliable too. When skipped, the test bus doesn't get torn down properly
+    - it times out. Let's stop running these tests for now, until they are
+    made reliable.
+
+ -- Iain Lane <laney@debian.org>  Wed, 19 Feb 2020 17:16:16 +0000
+
+glib2.0 (2.63.5-1) experimental; urgency=medium
+
+  [ Iain Lane ]
+  * New upstream release
+
+  [ Philip Withnall ]
+  * Rework 01_gettext-desktopfiles.patch to not add new public API.
+    Downstreams should not be adding new public API to GLib. From some code
+    searching, this doesn’t appear to be used in more than one or two places,
+    so won’t be too inconvenient to drop.  The original patch should either be
+    upstreamed (I’d be open to some form of it, if there’s still evidence it’s
+    useful) or dropped. If it’s upstreamed, the new keys should be
+    standardised.  The alternative to this was to document the added public
+    API; its addition was causing the new gtk-doc tests in GLib to fail.
+  * Bump gtk-doc-tools dependency to >= 1.32-4 as GLib requires some fixes
+    pushed to gtk-doc after its 1.32 release.
+  * control: Bump Meson dependency to >= 0.52.0 for building the documentation
   * Drop PKCS#11 APIs added in 2.63.1 (not stable yet)
-    + g_tls_certificate_new_from_pkcs11_uris()
-  * Bump Meson dependency to >= 0.52.0 for building the documentation
-  * Bump gtk-doc-tools dependency to >= 1.32-3endless1 as GLib requires some
-    fixes pushed to gtk-doc after its 1.32 release
-  * Rework d/p/01_gettext-desktopfiles.patch to not add new public API; it was
-    causing the new gtk-doc tests in GLib to fail, as they test that all public
-    API is documented
-  * Add d/p/0001-docs-Don-t-install-object-manager-example-separately.patch from
-    upstream to disable incorrect installation of some example documentation
+      - g_tls_certificate_new_from_pkcs11_uris()
+  * Remove patches applied upstream:
+    - tests-Skip-GMemoryMonitor-tests-if-the-dbusmock-template-.patch
+    - tests-optional-portal.patch
+  * d/p/docs-Don-t-install-object-manager-example-separately.patch: Add patch
+    from upstream to disable incorrect installation of some example
+    documentation
+  * Rework libmount Meson argument as it’s now a feature; see !1344 upstream
 
- -- Philip Withnall <withnall@endlessm.com>  Tue, 11 Feb 2020 09:54:00 +0000
-
-glib2.0 (2.63.3-3endless0) experimental; urgency=medium
-
-  * Rebase on latest Debian experimental packaging of 2.63.3 (T29303)
-    + Apply patches recently added to Debian packaging:
-      - tests-Skip-GMemoryMonitor-tests-if-the-dbusmock-template-.patch
-      - tests-optional-portal.patch
-    + Remove patches recently dropped from Debian packaging or applied
-      upstream:
-      - Add-a-test-for-GDBusServer-authentication.patch
-      - Make-ld-executable-configurable.patch
-      - gdbus-server-auth-test-Create-temporary-directory-for-Uni.patch
-      - gdbus-server-auth-test-Include-gcredentialsprivate.h.patch
-    + Remove commits applied upstream:
-      - gdatetime: Handle leap seconds in ISO8601 dates
-      - gdbusmessage: Move variable initialisation to declaration time
-      - tests: Tidy up test case naming in gdbus-serialization test
-      - gdbusmessage: Limit recursion of variants in D-Bus messages
-      - taptestrunner: Stop looking like an executable script
-
- -- Philip Withnall <withnall@endlessm.com>  Mon, 10 Feb 2020 12:59:00 +0000
+ -- Iain Lane <laney@debian.org>  Mon, 17 Feb 2020 17:47:17 +0000
 
 glib2.0 (2.63.3-3) experimental; urgency=medium
 

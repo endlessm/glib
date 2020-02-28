@@ -1,4 +1,3 @@
-From b97863f77900e5aa41e56c2ec9c5af9edbffff37 Mon Sep 17 00:00:00 2001
 From: Philip Withnall <withnall@endlessm.com>
 Date: Thu, 23 Nov 2017 18:48:58 +0000
 Subject: [PATCH] Call gettext if .desktop file does not have inline
@@ -10,15 +9,15 @@ Vincent Untz appear to be the main authors.
 Reworked slightly by Philip Withnall to avoid exposing new public API
 for the non-standard keys.
 
-Bug: http://bugzilla.gnome.org/show_bug.cgi?id=569829
+Bug: https://bugzilla.gnome.org/show_bug.cgi?id=569829
 Bug-Ubuntu: https://launchpad.net/bugs/3935
 Applied-upstream: no, rejected because "this will be solved soon" (in 2013)
 ---
- glib/gkeyfile.c | 83 +++++++++++++++++++++++++++++++++++++++++++++++++
+ glib/gkeyfile.c | 83 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  1 file changed, 83 insertions(+)
 
 diff --git a/glib/gkeyfile.c b/glib/gkeyfile.c
-index dc80ce5d4..661c2ed7d 100644
+index dc80ce5..661c2ed 100644
 --- a/glib/gkeyfile.c
 +++ b/glib/gkeyfile.c
 @@ -488,6 +488,17 @@
@@ -167,6 +166,3 @@ index dc80ce5d4..661c2ed7d 100644
    /* Fallback to untranslated key
     */
    if (!translated_value)
--- 
-2.24.1
-

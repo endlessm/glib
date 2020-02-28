@@ -12,10 +12,10 @@ Forwarded: no, Debian buildd specific
  1 file changed, 8 insertions(+), 1 deletion(-)
 
 diff --git a/glib/tests/thread.c b/glib/tests/thread.c
-index b9f8796..4a9766c 100644
+index 579ce1f..3f1959d 100644
 --- a/glib/tests/thread.c
 +++ b/glib/tests/thread.c
-@@ -148,7 +148,14 @@ test_thread4 (void)
+@@ -142,7 +142,14 @@ test_thread4 (void)
    nl.rlim_cur = 1;
  
    if ((ret = prlimit (getpid (), RLIMIT_NPROC, &nl, &ol)) != 0)
